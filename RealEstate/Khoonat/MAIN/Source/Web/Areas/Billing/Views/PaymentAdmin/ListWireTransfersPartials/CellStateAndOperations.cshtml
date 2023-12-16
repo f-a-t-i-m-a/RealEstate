@@ -1,0 +1,24 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Util.Resources
+@model UserWireTransferPayment
+
+<strong>
+    @Model.BillingState.Label(DomainEnumResources.ResourceManager)
+</strong>
+
+@if (Model.BillingState == BillingSourceEntityState.Pending)
+{
+    <br />
+    <span data-ajax-modal="@Url.Action("Reviewwiretransferpopup","PaymentAdmin",new { id = Model.ID })">
+        بازبینی <span class="glyphicon glyphicon-backward"></span>
+    </span>
+}
+
+@if (Model.BillingState == BillingSourceEntityState.Applied)
+{
+    <br />
+    <span data-ajax-modal="@Url.Action("ReverseWireTransferPopup","PaymentAdmin",new { id = Model.ID })">
+        معکوس <span class="glyphicon glyphicon-backward"></span>
+    </span>
+}

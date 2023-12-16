@@ -1,0 +1,64 @@
+﻿@using JahanJooy.Common.Util.Text
+@model JahanJooy.RealEstate.Web.Models.Shared.PaginationLinksModel
+
+
+
+<div class="row">
+	<div class="col-xs-12 text-center">
+		<nav>
+			<ul class="pagination">
+				<li class="@("disabled".If(Model.CurrentPageNumber <= 1))"><a rel="prev" href="@Model.UrlFunction(Model.CurrentPageNumber - 1)"><span aria-hidden="true">&laquo;</span></a></li>
+				@if (Model.CurrentPageNumber > 3)
+				{
+					<li><a href="@Model.UrlFunction(1)" rel="prev">1</a></li>
+				}
+				@if (Model.CurrentPageNumber > 4)
+				{
+					<li><span>...</span></li>
+				}
+				@for (int page = Math.Max(1, Model.CurrentPageNumber - 2); page <= Math.Min(Model.TotalNumberOfPages, Model.CurrentPageNumber + 2); page++)
+				{
+					if (page == Model.CurrentPageNumber)
+					{
+						<li class="active">
+							<span>
+								صفحه @Model.CurrentPageNumber
+								<span class="hidden-xs hidden-sm">
+									@if (Model.IndexOfFirstRecord.HasValue && Model.IndexOfLastRecord.HasValue)
+									{
+										@: ، سطر @Model.IndexOfFirstRecord.Value تا @Model.IndexOfLastRecord.Value
+									if (Model.TotalNumberOfRecords.HasValue)
+									{
+										@: از @Model.TotalNumberOfRecords
+									}
+									}
+								</span>
+							</span>
+						</li>
+					}
+					else
+					{
+						if (page < Model.CurrentPageNumber)
+						{
+							<li><a rel="prev" href="@Model.UrlFunction(page)">@page</a></li>
+						}
+						else
+						{
+							<li><a rel="next" href="@Model.UrlFunction(page)">@page</a></li>
+						}
+					}
+				}
+				@if (Model.CurrentPageNumber < Model.TotalNumberOfPages - 3)
+				{
+					<li><span>...</span></li>
+				}
+
+				@if (Model.CurrentPageNumber < Model.TotalNumberOfPages - 2)
+				{
+					<li><a rel="next" href="@Model.UrlFunction(Model.TotalNumberOfPages)">@Model.TotalNumberOfPages</a></li>
+				}
+				<li class="@("disabled".If(Model.CurrentPageNumber >= Model.TotalNumberOfPages))"><a rel="next" href="@Model.UrlFunction(Model.CurrentPageNumber + 1)"><span aria-hidden="true">&raquo;</span></a></li>
+			</ul>
+		</nav>
+	</div>
+</div>

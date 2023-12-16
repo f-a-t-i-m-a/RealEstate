@@ -1,0 +1,11 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@model bool
+<tr class="warning" data-link-url="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)">
+	<td colspan="7" class="text-center">
+		<span class="label label-warning">
+			<span class="glyphicon glyphicon-chevron-@(Model ? "up" : "down")" aria-hidden="true"></span>
+			&nbsp;&nbsp;&nbsp;املاک ویژه&nbsp;&nbsp;&nbsp;
+			<span class="glyphicon glyphicon-chevron-@(Model ? "up" : "down")" aria-hidden="true"></span>
+		</span>
+	</td>
+</tr>

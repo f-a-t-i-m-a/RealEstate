@@ -1,0 +1,26 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Messages
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model OutgoingSmsMessage
+
+<div class="fr">
+    @IconsHelper.Tristate(Url, 
+        Model.State == OutgoingSmsMessageState.Delivered ? true :
+            (Model.State == OutgoingSmsMessageState.NotDelivered || Model.State == OutgoingSmsMessageState.ErrorInTransmission ? (bool?)false : 
+                null))
+</div>
+
+@if (Model.RetryIndex > 0)
+{
+    @IconsHelper.Return16(Url)
+    @: تلاش @NumericStringUtils.FullyTextualOrdinalNumber(Model.RetryIndex + 1) برای @Model.RetryForMessageID
+    <br/>
+}
+
+@Model.State.Label(DomainEnumResources.ResourceManager)
+<br/>
+
+@Model.StateDate.ToLocalizedDateString() @Model.StateDate.ToLocalizedTimeString()

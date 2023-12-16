@@ -1,0 +1,49 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileContactMethodVerificationModel
+
+
+<div class="modal-content" id="addPhoneNumberRoot">
+    <div class="modal-header">
+        <h4 class="modal-title">
+            @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+            زیر به پروفایل شما اضافه شد
+        </h4>
+    </div>
+    <div class="modal-body">
+        <p>
+            @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager):
+            @HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.ContactMethod.ContactMethodText)
+        </p>
+        <p>
+            قابل مشاهده توسط:
+            @Model.VerificationInfo.ContactMethod.Visibility.Label(DomainEnumResources.ResourceManager)
+        </p>
+
+        @if (!Model.VerificationInfo.ContactMethod.IsVerifiable)
+        {
+            <p>
+                چون ما نمی تونیم به این
+                @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+                پیام بفرستیم، قابلیت اعتبار سنجی خودکار براش وجود نداره.
+                اگر می خواهید این
+                @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+                به صورت تایید شده توی پروفایل تون نمایش داده بشه، لطفاً با ما تماس بگیرید.
+            </p>
+        }
+        else
+        {
+            @(Model.VerificationInfo.ValidationForVerificationStart.IsValid ?
+                  Html.Partial("ContactMethodVerificationPartials/ContactPopupVerificationPartial", Model) :
+                  Html.Partial("ContactMethodVerificationPartials/UnableToVerifyPartial", Model))
+        }
+
+    </div>
+    <div class="modal-footer">
+        @if (!Model.VerificationInfo.ContactMethod.IsVerifiable)
+        {
+            <button type="button" class="btn btn-default" data-dismiss="modal">باشه</button>
+        }
+    </div>
+</div>

@@ -1,0 +1,13 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminSessions.AdminSessionsSessionModel
+
+<div style='display: inline-block;'>
+	<a href="@Url.Action("List", "AdminVisitors", new {IdFilter = Model.UniqueVisitorID})" style="float: left; margin-right: 3px;">
+		@IconsHelper.Xlink16(Url)
+	</a>
+	<a style="display: inline-block;" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("IdFilter", "").Set("ApplyVisitorIdFilter", "true").Set("VisitorIdFilter", Model.UniqueVisitorID.ToString(CultureInfo.InvariantCulture)))">
+		@Model.UniqueVisitorID
+	</a>
+</div>

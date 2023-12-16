@@ -1,0 +1,22 @@
+﻿@model JahanJooy.RealEstate.Web.Models.Agency.AgencyNewAgencyModel
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome") 
+    &gt; 
+    @Html.ActionLink("مشاورین املاک", "List", "AdminAgency")
+    &gt;
+    @Html.ActionLink("مشاور املاک " + @Model.Agency.Name, "ViewDetails", new {id = Model.AgencyID})
+    &gt;
+    ویرایش
+</h2>
+
+@using (Html.BeginForm("EditAgency", "AdminAgency"))
+{
+     <div >@Html.Partial("_Agency/AgencyPartial")</div>
+    <div>
+        <input id="btnContinue" class="button" type="submit" value="ذخیره >>"/>
+        &nbsp;&nbsp;&nbsp;
+        @Html.ActionLink("بازگشت >>", "ViewDetails", new {id = Model.AgencyID})
+    </div>
+
+}

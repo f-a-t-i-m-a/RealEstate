@@ -1,0 +1,38 @@
+﻿@using JahanJooy.RealEstate.Domain.Billing
+@model  UserRefundRequest
+@if (Model.BillingState == BillingSourceEntityState.Applied && !Model.ReviewedByUserID.HasValue)
+{
+    <strong>در انتظار بازبینی</strong>
+    <br />
+    <span data-ajax-modal="@Url.Action("ReviewRequestPopup", new {id = Model.ID})">
+        <span class="glyphicon glyphicon-backward"></span>بازبینی
+    </span>
+}
+else if (Model.BillingState == BillingSourceEntityState.Applied && Model.ReviewedByUserID.HasValue && !Model.ClearedByUserID.HasValue)
+{
+    <strong >در انتظار پرداخت</strong>
+    <br />
+    <span data-ajax-modal="@Url.Action("PerformPaymentPopUp", new {id = Model.ID})">
+        <span class="glyphicon glyphicon-backward"></span> پرداخت
+    </span>
+
+    <br/>
+    <span data-ajax-modal="@Url.Action("ReviewRequestPopup", new {id = Model.ID})">
+        <span class="glyphicon glyphicon-backward"></span>بازبینی
+    </span>
+}
+
+else if (Model.BillingState == BillingSourceEntityState.Applied && Model.ReviewedByUserID.HasValue && Model.ClearedByUserID.HasValue)
+{
+    <strong>پرداخت شده</strong>
+    <br />
+}
+
+else if (Model.BillingState == BillingSourceEntityState.Reversed)
+{
+    <strong>رد شده</strong>
+}
+else
+{
+    <strong>نامشخض</strong>
+}

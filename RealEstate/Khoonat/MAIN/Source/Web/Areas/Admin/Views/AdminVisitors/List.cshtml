@@ -1,0 +1,75 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminVisitors.AdminVisitorsListModel
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>بازدید کنندگان</a></li>
+}
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Visitors, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>اولین بازدید</th>
+			<th>آخرین بازدید</th>
+			<th>شناسه</th>
+			<th>تعداد جلسات</th>
+			<th>تنوع کاربران</th>
+			<th>اولین User Agent</th>
+		</tr>
+	</thead>
+	@foreach (var visitor in Model.Visitors)
+	{
+		<tr>
+			<td class="td">@visitor.ID</td>
+			<td class="td"><small>@((visitor.CreationDate - DateTime.Now).ToLocalizedRelativeString(1))</small></td>
+			<td class="td"><small>@((visitor.LastVisitDate - DateTime.Now).ToLocalizedRelativeString(1))</small></td>
+			<td class="td"><span dir="ltr" title="@visitor.UniqueIdentifier">@visitor.UniqueIdentifier.Truncate(8)</span></td>
+			<td class="td"><a href="@Url.Action("List", "AdminSessions", new {VisitorIdFilter = visitor.ID})" style="float: left; margin-right: 3px;">@IconsHelper.Xlink16(Url)</a>@visitor.SessionCount</td>
+			<td class="td">@visitor.UniqueUsers</td>
+			<td class="td"><span dir="ltr" title="@visitor.FirstUserAgent">@visitor.FirstUserAgent.Truncate(50)</span></td>
+		</tr>
+	}
+</table>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Visitors, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+	<p>فیلتر های پر استفاده:</p>
+	<ul>
+		<li>@Html.ActionLink("همه موارد (بدون فیلتر)", "List")</li>
+	</ul>
+	<br /><hr />
+
+	@using (Html.BeginForm("List", "AdminVisitors", FormMethod.Get))
+	{
+		<div style="width: 200px;">
+			@Html.LabelFor(m => m.IdFilter):
+			@Html.TextBoxFor(m => m.IdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.UserIdFilter):
+			@Html.TextBoxFor(m => m.UserIdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.UniqueIdentifierFilter):
+			@Html.TextBoxFor(m => m.UniqueIdentifierFilter)
+			<br/>
+			<br/>
+
+			<button name="submit" value="btnRefresh" class="btn btn-primary btn-block" type="submit">اعمال فیلتر</button>
+		</div>
+	 
+	 
+	}
+}

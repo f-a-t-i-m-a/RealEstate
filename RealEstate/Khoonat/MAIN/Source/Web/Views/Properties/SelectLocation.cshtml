@@ -1,0 +1,43 @@
+﻿@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Properties
+@model PropertiesSelectLocationModel
+
+<div style="width: 650px; height: 380px; margin: 10px;">
+	@using (Html.BeginForm("SelectLocationDone", "Properties", FormMethod.Post, new { id = "locationSelectionForm" }))
+ {
+		@Html.HiddenFor(m => m.Query)
+		@Html.HiddenFor(m => m.SelectedSubmit)
+
+      <div >
+            <div class="tr">
+                <div class="td" style="width: 130px;">محله ها:</div>
+                <div class="td"> @Html.VicinitySelector(false, "VicinityIDsCsv", null, 20)</div>
+            </div>
+        </div>
+     <table style="width: 630px;">
+         <tr>
+	            <td colspan="5" style="text-align: left; padding: 8px;">
+	                <a rel="nofollow" id="submitAll" class="button" style="width: 70px;" href="#">@IconsHelper.Search16White(Url) بگرد</a>
+	                <a rel="nofollow" class="button qtipCancel" style="width: 70px;" href="#">@IconsHelper.Close16White(Url) بی خیال</a>
+	            </td>
+	        </tr>
+	    </table>
+      
+ }
+</div>
+
+<script type="text/javascript">setupChosen();</script>
+
+<script type="text/javascript">
+	$('.qtipCancel').click(function () {
+		$('.qtip:visible').qtip('hide');
+	});
+
+	$("#submitAll").click(function() {
+		$("#SelectedSubmit").val("");
+		$("#locationSelectionForm").submit();
+	});
+
+</script>
+
+

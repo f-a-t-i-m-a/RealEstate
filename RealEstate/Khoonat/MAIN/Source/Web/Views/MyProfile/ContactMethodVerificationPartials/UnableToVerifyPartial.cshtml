@@ -1,0 +1,36 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Controllers
+@using JahanJooy.RealEstate.Web.Resources.Controllers.Account
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileContactMethodVerificationModel
+
+
+<p >
+    <strong>دقت کنید: </strong>
+    هنوز این
+    @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+    برای ارتباط سیستم با شما قابل استفاده نیست.
+    برای استفاده از این
+    @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+    برای دریافت اطلاعات از سایت یا بازیابی کلمه عبور، باید مالکیت اون رو تایید کنید.
+    <a  target="_blank" href="@Url.Action("Page", "Home", new { id = HomeController.ContentPage.WhyVerifyContactMethod })">(چرا؟)</a>
+</p>
+
+<div class="validation-summary-errors">
+    <p>
+        اعتبار سنجی این
+        @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+        در این لحظه به دلیل زیر ممکن نیست:
+    </p>
+
+    <ul>
+        @foreach (var err in Model.VerificationInfo.ValidationForVerificationStart.Errors)
+        {
+            <li>@AccountValidationErrors.ResourceManager.GetString(err.ErrorKey)</li>
+        }
+    </ul>
+</div>
+
+<div >
+    <button id="btnCancel" type="button" class="btn btn-default" data-dismiss="modal">باشه</button>
+</div>

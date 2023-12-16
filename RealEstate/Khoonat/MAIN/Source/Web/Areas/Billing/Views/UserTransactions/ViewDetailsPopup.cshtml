@@ -1,0 +1,165 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Ad
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Domain.SavedSearch
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.UserTransactions.UserTransactionsViewDetailsModel
+
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">جزئیات اطلاعات تراکنش</h4>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"><h3 class="panel-title">تاثیر تراکنش</h3></div>
+					<div class="panel-body">
+						<table style="width: 100%;">
+							<tr>
+								<td class="bold">تاریخ:</td>
+								<td>@Model.Transaction.TransactionTime.ToLocalizedDateString()</td>
+							</tr>
+							<tr>
+								<td class="bold">ساعت:</td>
+								<td>
+									@Model.Transaction.TransactionTime.ToLocalizedTimeString()
+									@if (Model.Transaction.IsPartial)
+									{
+										@: (موقت)
+									}
+								</td>
+							</tr>
+							<tr><td colspan="2"><hr style="margin: 20px 0;" /></td></tr>
+							<tr>
+								<td class="bold">تغییر نقد:</td>
+								<td>@BillingPresentationHelper.Delta(Model.Transaction.CashDelta)</td>
+							</tr>
+							<tr>
+								<td class="bold">مانده نقدی:</td>
+								<td class="bold">@BillingPresentationHelper.Balance(Model.Transaction.CashBalance)</td>
+							</tr>
+							<tr><td colspan="2"><hr style="margin: 20px 0;" /></td></tr>
+							<tr>
+								<td class="bold">تغییر تخفیف:</td>
+								<td>@BillingPresentationHelper.Delta(Model.Transaction.BonusDelta)</td>
+							</tr>
+							<tr>
+								<td class="bold">مانده تخفیف:</td>
+								<td class="bold">@BillingPresentationHelper.Balance(Model.Transaction.BonusBalance)</td>
+							</tr>
+							<tr><td colspan="2"><hr style="margin: 20px 0;" /></td></tr>
+							<tr>
+								<td colspan="2" class="bold">جمع گردش مالی بعد از تراکنش:</td>
+							</tr>
+							<tr>
+								<td colspan="2">@BillingPresentationHelper.Turnover(Model.Transaction.CashTurnover + Model.Transaction.BonusTurnover)</td>
+							</tr>
+							@if (Model.Transaction.IsPartial)
+							{
+								<tr><td colspan="2"><hr style="margin: 20px 0;" /></td></tr>
+								<tr>
+									<td colspan="2">
+										<span class="bold">در حال تکمیل؛</span>
+										این تراکنش ممکن است پیش از نهایی شدن، تغییر کند
+									</td>
+								</tr>
+							}
+							else if (Model.Transaction.HasPartialInHistory)
+							{
+								<tr><td colspan="2"><hr style="margin: 20px 0;" /></td></tr>
+								<tr>
+									<td colspan="2">
+										<span class="bold">مانده تراکنش موقت است؛</span>
+										تراکنش های قبلی نهایی نشده اند.
+									</td>
+								</tr>
+							}
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"><h3 class="panel-title">موضوع تراکنش</h3></div>
+					<div class="panel-body">
+						<div>
+							@Model.Transaction.SourceType.Label(DomainEnumResources.ResourceManager)
+							@if (Model.Transaction.IsReverse)
+							{
+								<span class="bold">؛ تراکنش معکوس</span>
+							}
+						</div>
+
+						<br />
+						<br />
+						<hr />
+
+						@if (Model.Source != null)
+						{
+							if (Model.Source is UserWireTransferPayment)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/UserWireTransferPayment", Model.Source as UserWireTransferPayment)
+							}
+							else if (Model.Source is UserElectronicPayment)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/UserElectronicPayment", Model.Source as UserElectronicPayment)
+							}
+							else if (Model.Source is PromotionalBonus)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/PromotionalBonus", Model.Source as PromotionalBonus)
+							}
+							else if (Model.Source is PromotionalBonusCoupon)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/PromotionalBonusCoupon", Model.Source as PromotionalBonusCoupon)
+							}
+							else if (Model.Source is SavedSearchSmsNotificationBilling)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/SavedSearchSmsNotificationBilling", Model.Source as SavedSearchSmsNotificationBilling)
+							}
+							else if (Model.Source is SavedPropertySearchPromotionalSms)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/SavedPropertySearchPromotionalSms", Model.Source as SavedPropertySearchPromotionalSms)
+							}
+							else if (Model.Source is UserRefundRequest)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/UserRefundRequest", Model.Source as UserRefundRequest)
+							}
+							else if (Model.Source is SavedPropertySearchPromotionalSmsNotDeliveredReturn)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/SavedPropertySearchPromotionalSmsNotDeliveredReturn", Model.Source as SavedPropertySearchPromotionalSmsNotDeliveredReturn)
+							}
+							else if (Model.Source is UserBalanceAdministrativeChange)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/UserBalanceAdministrativeChange", Model.Source as UserBalanceAdministrativeChange)
+							}
+							else if (Model.Source is SponsoredEntityImpressionBilling)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/SponsoredEntityImpressionBilling", Model.Source as SponsoredEntityImpressionBilling)
+							}
+							else if (Model.Source is SponsoredEntityClickBilling)
+							{
+								@Html.Partial("ViewDetailsSourcePartials/SponsoredEntityClickBilling", Model.Source as SponsoredEntityClickBilling)
+							}
+							else
+							{
+								@Html.Partial("ViewDetailsSourcePartials/NotSupportedSourceType", Model)
+							}
+						}
+						else
+						{
+							@Html.Partial("ViewDetailsSourcePartials/NotSupportedSourceType", Model)
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" data-dismiss="modal">باشه</button>
+	</div>
+</div>
+

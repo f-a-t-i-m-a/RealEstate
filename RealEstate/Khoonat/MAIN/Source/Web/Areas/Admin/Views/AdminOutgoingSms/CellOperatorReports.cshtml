@@ -1,0 +1,14 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@model JahanJooy.RealEstate.Domain.Messages.OutgoingSmsMessage
+
+<span dir="ltr">
+    Tx: @Model.ErrorCode.IfHasValue(i => i.ToString(CultureInfo.InvariantCulture), "-") 
+    ;
+    Dv: @Model.LastDeliveryCode.IfHasValue(i => i.ToString(CultureInfo.InvariantCulture), "-")
+</span>
+<br/>
+<span dir="ltr">
+    Op. ID:
+    @Model.OperatorAssignedID.IfNotNull(s => s, "---")
+</span>

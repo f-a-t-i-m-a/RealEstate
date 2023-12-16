@@ -1,0 +1,122 @@
+﻿@using System.Globalization
+@using Compositional.Composer.Web
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Directory
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Models.AdminAgency.AdminAgencyListModel
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray;">
+    <a href="@Url.Action("NewAgency", "AdminAgency")">@IconsHelper.Add16(Url) مشاور املاک جدید</a>
+</div>
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") 
+    &gt; 
+    مشاورین املاک
+</h2>
+
+@if (Model.Agencies.Any())
+{
+    <p>
+        تعداد مشاورین املاک: @Model.Agencies.Count()
+    </p>
+
+    @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Agencies, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+    <table class="table table-hover">
+	    <thead>
+			<tr>
+				<th>نام</th>
+				<th>کد</th>
+				<th>نام مدیر</th>
+				<th>تاریخ ثبت</th>
+				<th>محل</th>
+				<th>تلفن ثابت</th>
+				<th>Geo</th>
+				<th>وضعیت</th>
+			</tr>
+	    </thead>
+
+        @foreach (var agency in Model.Agencies)
+        {
+            AgencyBranch branch = null;
+            if (agency.AgencyBranches != null)
+            {
+                branch = agency.AgencyBranches.OrderBy(ab => ab.DeleteTime).ThenByDescending(ab => ab.IsMainBranch).FirstOrDefault();
+            }
+            <tr class=" tr">
+               
+                <td> <a  href="@Url.Action("ViewDetails", "AdminAgency", new {id = agency.ID})" 
+                                       style="@(agency.DeleteTime.HasValue ? "text-decoration: line-through; " : "")"
+                                       data-qtip-enabled="true" data-qtip-content-selector=".helpTip[data-listing-id=&quot;@agency.ID&quot;]" data-qtip-position-my="right bottom" data-qtip-position-at="left center" data-qtip-style-classes="qtip-white"> @agency.GetContent().Name @IconsHelper.Xlink16(Url)</a> </td>
+                <td> @agency.GetContent().Code </td>
+                <td> @agency.GetContent().ManagerName </td>
+                <td> @agency.CreationTime.ToLocalizedDateString() @agency.CreationTime.ToLocalizedTimeString() </td>
+                <td>
+                    @if (branch != null)
+                    {
+                        <span style="@(branch.DeleteTime.HasValue ? "text-decoration: line-through; " : "")" >
+                            @propertyPresentationHelper.BuildRegion(branch.GetContent().VicinityID)
+                        </span>
+                    }
+                    @if (agency.AgencyBranches != null && agency.AgencyBranches.Count > 1)
+                    {
+                        <b><br/>و @(agency.AgencyBranches.Count - 1) شعبه دیگر </b>
+                    }
+                </td>
+                <td>
+                    @if (branch != null)
+                    {
+                        @branch.GetContent().Phone1
+                        <br/>
+                        @branch.GetContent().Phone2
+                    }
+                </td>
+                <td>
+                    @IconsHelper.Tristate(Url, branch.GetContent().IfNotNull(b => b.GeographicLocation != null))
+                </td>
+
+               
+                <td>
+                    @(agency.Approved.HasValue ? (agency.Approved.Value ? "تایید شده" : "مردود") : "انجام نشده")
+                    <br/>
+                    @PopupHelper.AjaxModal(
+                        @<span>@IconsHelper.GoLeft16(Url) بازبینی</span>,
+                        Url.Action("Review", new {id = agency.ID}))
+                </td>
+            </tr>
+        }
+    </table>
+
+    @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Agencies, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+}
+else
+{
+    <p>
+        تا به حال هیچ مشاور املاکی ثبت نشده است  
+    </p>
+}
+
+@section SideBar
+{
+	 
+    @using (Html.BeginForm("List", "AdminAgency", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.CheckBoxFor(m => m.IsIncludeDeletedAgencies)
+            شامل مشاورین املاک حذف شده
+            <br/>
+            <br/>
+
+            <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

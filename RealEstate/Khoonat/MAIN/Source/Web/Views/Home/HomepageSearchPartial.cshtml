@@ -1,0 +1,23 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSearchPartialModel
+
+@using (Html.BeginForm("SearchPostback", "Properties", FormMethod.Post, new { id = "frmSearch", @class = "form-horizontal" }))
+{
+    <div class="form-group">
+@*
+        <div class="col-md-6 col-xs-12" style="margin-top: 5px;">@SelectorHtmlHelper.VicinitySelector(Html, "VicinityIDsCsv", null, 20, Model.VicinityIDsCsv)</div>
+*@
+        <div class="col-md-6 col-xs-12" style="margin-top: 5px;">@Html.VicinitySelector(true, "VicinityIDsCsv", null, 20, Model.VicinityIDsCsv)</div>
+        <div class="col-md-3 col-sm-6 col-xs-12" style="margin-top: 10px;">@Html.DropDownListFor(m => m.PropertyType, Model.PropertyType.EnumSelectList(DomainEnumResources.ResourceManager), "هر نوع ملک", new {@class = "propertyType form-control"})</div>
+        <div class="col-md-3 col-sm-6 col-xs-12" style="margin-top: 10px;">@Html.DropDownListFor(m => m.IntentionOfOwner, Model.IntentionOfOwner.EnumSelectList(DomainEnumResources.ResourceManager), "هر نوع قرارداد", new { @class = "intentionOfOwner form-control" })</div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-12 text-left">
+            <button name="btnSearch" value="btnSearch" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> جستجو</button>
+            <a class="btn btn-default" href="#" data-ajax-modal="@Url.Action("SearchPartial", "Properties", AreaRouteValue.Main)"><span class="glyphicon glyphicon-new-window"></span> امکانات بیشتر</a>
+        </div>
+    </div>
+}

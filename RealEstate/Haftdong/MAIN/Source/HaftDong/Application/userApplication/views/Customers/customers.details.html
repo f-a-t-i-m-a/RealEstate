@@ -1,0 +1,330 @@
+﻿<div class="container detailCustomerView" ng-show="$state.current.name === 'customers.details'">
+<div class="page-header">
+    <h1>جزئیات مشتری<span ng-if="customer.IsArchived">-(آرشیو شده)</span></h1>
+</div>
+<div class="row">
+<div class="col-md-1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" licensed>
+                <button class="btn btn-success btn-block editButton" ui-sref="customers.details.edit" restrict-to="RealEstateAgent"><i class="fa fa-pencil"></i> ویرایش</button>
+            </div>
+            <div class="row" licensed>
+                <button class="btn btn-success btn-block newPropertyButton" ui-sref="files.new({customerId : customer.ID})" restrict-to="RealEstateAgent"><i class="fa fa-plus-circle"></i> ملک</button>
+            </div>
+            <div class="row" licensed>
+                <button class="btn btn-success btn-block newRequestButton" ui-sref="requests.new({customerId : customer.ID})" restrict-to="RealEstateAgent"><i class="fa fa-plus-circle"></i> درخواست</button>
+            </div>
+            <div class="row" ng-if="!customer.IsArchived" licensed>
+                <button class="btn btn-block btn-warning archiveButton" restrict-to="RealEstateAgent" ng-click="onArchivedClick()"><i class="fa fa-archive"></i> آرشیو</button>
+            </div>
+            <div class="row" ng-if="customer.IsArchived" licensed>
+                <button class="btn btn-block btn-warning unArchiveButton" ng-click="onUnArchivedClick()" restrict-to="RealEstateAgent"><i class="fa fa-archive"></i>حذف آرشیو</button>
+            </div>
+            <div class="row" licensed>
+                <button class="btn btn-block btn-danger deleteButton" ng-click="onDeleteClick()" restrict-to="RealEstateAgent"><i class="fa fa-trash-o"></i> حذف</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-block btn-default backButton" ng-click="onBackToListClick()"><i class="fa fa-arrow-left"></i> بازگشت</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-9">
+<tabset>
+<tab>
+    <tab-heading><i class="fa fa-user"></i> مشتری</tab-heading>
+    <div class="well content">
+        <div class="row" ng-if="customer.DeletionTime != null">
+            <div class="col-md-12">
+                <span style="color: red">(حذف شده)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 control-label">نام:</div>
+                    <div class="col-md-8">
+                        <strong>
+                            {{customer.DisplayName}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 control-label">متأهل:</div>
+                    <div class="col-md-8">
+                        <strong>
+                            {{customer.IsMarried | boolean }}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 control-label">سن:</div>
+                    <div class="col-md-8">
+                        <strong>
+                            {{customer.Age}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 control-label">توضیحات:</div>
+                    <div class="col-md-8">
+                        <strong>
+                            {{customer.Description}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-xs-6 col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <label>
+                                        اطلاعات تماس
+                                    </label>
+                                </th>
+                                <th>
+                                    <label>
+                                        نوع
+                                    </label>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="number in customer.Contact.Phones">
+                                <td class="persian-number">{{number.NormalizedValue}}</td>
+                                <td ng-if="number.CanReceiveSms">
+                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                </td>
+                                <td ng-if="!number.CanReceiveSms">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="email in customer.Contact.Emails">
+                                <td class="persian-number">{{email.NormalizedValue}}</td>
+                                <td>
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="address in customer.Contact.Addresses">
+                                <td>{{address.NormalizedValue}}</td>
+                                <td>
+                                    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-list"></i> جزئیات</tab-heading>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a ng-click="moreInfo = !moreInfo">جزئیات بیشتر <i class="fa fa-caret-down"></i></a>
+            </h3>
+        </div>
+        <div collapse="!moreInfo">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 control-label">فرزند:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.NameOfFather}}
+                        </strong>
+                    </div>
+                    <div class="col-md-3 control-label">شماره شناسنامه:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.Identification}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 control-label">صادره از:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.IssuedIn}}
+                        </strong>
+                    </div>
+                    <div class="col-md-3 control-label">کدملی:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.SocialSecurityNumber}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 control-label">تاریخ تولد:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.DateOfBirth |jalaali}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 control-label">آدرس:</div>
+                    <div class="col-md-9">
+                        <strong>
+                            {{customer.Address}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a ng-click="hasDeputy = !hasDeputy">با وکالت/قيمومت/ولايت/وصايت <i class="fa fa-caret-down"></i></a>
+            </h3>
+        </div>
+        <div collapse="!hasDeputy">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 control-label">نام:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.Deputy.DisplayName}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 control-label">فرزند:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.Deputy.NameOfFather}}
+                        </strong>
+                    </div>
+                    <div class="col-md-3 control-label">شماره شناسنامه:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.Deputy.Identification}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 control-label">تاریخ تولد:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.Deputy.DateOfBirth |jalaali}}
+                        </strong>
+                    </div>
+                    <div class="col-md-3 control-label">کدملی:</div>
+                    <div class="col-md-3">
+                        <strong>
+                            {{customer.Deputy.SocialSecurityNumber}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-home"></i> فایل ها</tab-heading>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" ng-show="Supplies.length > 0">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>نوع ملک</th>
+                        <th>کاربری</th>
+                        <th>متراژ</th>
+                        <th>نوع معامله</th>
+                        <th>قیمت</th>
+                        <th>آخرین ویرایش</th>
+                        <th>وضعیت</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="supply in Supplies">
+                        <td>
+                            <a ui-sref="files.details({ id: supply.Property.ID })">{{supply.Property.PropertyType | PropertyType}}</a>
+                        </td>
+                        <td>
+                            {{supply.Property.UsageType | UsageType}}
+                        </td>
+                        <td>
+                            <span ng-show="supply.Property.EstateArea != null">زمین: {{supply.Property.EstateArea}} متر</span>
+                            <span ng-show="supply.Property.UnitArea != null">بنا: {{supply.Property.UnitArea}} متر</span>
+                        </td>
+                        <td>
+                            {{supply.IntentionOfOwner | IntentionOfOwner}}
+                        </td>
+                        <td ng-show="supply.IntentionOfOwner === 2">قیمت کل: {{computePrice(supply) | number}}</td>
+                        <td class="col-md-2" ng-show="supply.IntentionOfOwner === 5 || supply.IntentionOfOwner === 6">ارزش کل: {{computePrice(supply) | number}}</td>
+                        <td ng-show="supply.IntentionOfOwner === 3">ودیعه: {{supply.Mortgage | number}}</td>
+                        <td ng-show="supply.IntentionOfOwner === 1">ودیعه: {{supply.Mortgage | number}}، اجاره ماهانه: {{supply.Rent | number}}</td>
+                        <td ng-show="supply.IntentionOfOwner === 4">اجاره روزانه: {{supply.Rent | number}}</td>
+                        <td>{{supply.LastModificationTime |jalaali}}</td>
+                        <td>{{supply.State | SupplyState}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="well" ng-show="Supplies.length == 0">
+                فایلی وجود ندارد.
+            </div>
+        </div>
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-file-text-o"></i> درخواست ها</tab-heading>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" ng-show="Requests.length > 0">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>نوع ملک</th>
+                        <th>کاربری</th>
+                        <th>نوع معامله</th>
+                        <th>بودجه</th>
+                        <th>ودیعه</th>
+                        <th>اجاره</th>
+                        <th>آخرین ویرایش</th>
+                        <th>وضعیت</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="request in Requests">
+                        <td>
+                            <a ui-sref="requests.details({id:request.ID})">
+                                <div ng-repeat="propertyID in request.PropertyTypes">
+                                    {{propertyID | PropertyType}}
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            {{request.UsageType | UsageType}}
+                        </td>
+                        <td>
+                            {{request.IntentionOfCustomer | IntentionOfCustomer}}
+                        </td>
+                        <td>{{request.TotalPrice| number}}</td>
+                        <td>{{request.Mortgage |number}}</td>
+                        <td>{{request.Rent | number}}</td>
+                        <td>{{request.LastModificationTime |jalaali}}</td>
+                        <td>{{request.State | RequestState}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="well" ng-show="Requests.length == 0">
+                درخواستی وجود ندارد.
+            </div>
+        </div>
+    </div>
+</tab>
+</tabset>
+</div>
+<div class="col-md-2">
+</div>
+</div>
+</div>
+<div ui-view autoscroll="false"></div>

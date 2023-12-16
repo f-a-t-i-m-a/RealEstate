@@ -1,0 +1,365 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Domain.Enums;
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@*  
+********************************************************************************
+**** Location properties
+*@
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading"><h3 class="panel-title">موقعیت جغرافیایی</h3></div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-6 col-md-push-6">
+				<div id="mapCanvas" class="mapCanvas" style="width: 100%; height: 400px;">
+				</div>
+				@Html.HiddenFor(m => m.GeographicLocationType)
+				@Html.HiddenFor(m => m.UserPointLat)
+				@Html.HiddenFor(m => m.UserPointLng)
+			</div>
+			<div class="col-md-6 col-md-pull-6">
+
+				<div class="grayed">
+					برای مشخص کردن موقعیت جغرافیایی، هم می تونید با اسم جستجو کنید، و هم روی نقشه کلیک کنید.
+				</div>
+				<hr />
+				<div>
+					<span id="unselectVicinity" class="pull-left none">@IconsHelper.Close16(Url)</span>
+					محل انتخاب شده:
+				</div>
+				<div id="divLinkParent">
+					@if (Model.Vicinity != null)
+					{
+						foreach (var hierarchy in Model.Vicinity.GetParentsInclusive().Reverse())
+						{
+							<a href="#" class="selectedLocationHierarchyNode">
+								@if (hierarchy.ShowTypeInTitle)
+								{
+									@: @hierarchy.Type.Label(DomainEnumResources.ResourceManager) @hierarchy.Name</>
+                    }
+								else
+								{
+									@: @hierarchy.Name
+                    }
+								&gt;
+							</a>
+							<br class="selectedLocationHierarchyNode" />
+						}
+					}
+				</div>
+				<hr />
+				<div id="divSelect2">
+					@Html.VicinitySelector(false, "VicinityID")
+					@Html.HiddenFor(m => m.SelectedVicinityID)
+				</div>
+				<div class="none displayForVicinity" style="margin-top: 10px;">
+					@Html.LabelFor(m => m.Address)
+				</div>
+				<div class="none displayForVicinity">
+					@Html.TextBoxFor(m => m.Address, new { maxlength = 150 })
+					@Html.ValidationMessageFor(m => m.Address)
+				</div>
+				<div class="none displayForVicinity" style="margin-top: 10px;">
+					@Html.LabelFor(m => m.AdditionalAddressInfo)
+					@Html.TextAreaFor(m => m.AdditionalAddressInfo, new { maxlength = 1000, rows = "3" })
+					@Html.ValidationMessageFor(m => m.AdditionalAddressInfo)
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-footer">
+		محله مورد نظرتون اینجا نیست؟
+		<button class="btn btn-default" type="button" data-ajax-modal="@Url.Action("RequestNeighborhood", "UserFeedback")">درخواست ثبت محله</button>
+	</div>
+</div>
+
+
+@this.ScriptBlock(@<script src="https://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyDlE2V9O9FzosTGXcX6SPQatAukHsQwP6U&sensor=false&language=fa&region=IR" type="text/javascript"></script>)
+@this.ScriptBlock(@<script type="text/javascript">
+
+
+    var defaultMarkerOptions = {
+        draggable: true,
+        clickable: false
+    };
+
+    $(document).ready(function() {
+        var center = new google.maps.LatLng(@(Model.UserPointLat ?? 32.5), @(Model.UserPointLng ?? 52.5));
+        var mapProp = {
+            center: center,
+            zoom: 5,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false,
+            scaleControl: true,
+            draggable: true,
+            overviewMapControl: false,
+            styles: [
+                {
+                    "featureType": "poi",
+                    "stylers": [
+                        { "visibility": "off" }
+                    ]
+                }
+            ]
+        };
+
+        var map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
+
+        if("geolocation" in navigator)
+            navigator.geolocation.getCurrentPosition(onPositionUpdate);
+        else
+            alert("navigator.geolocation is not available");
+
+        setSelectedVicinityIdOnSelect2();
+
+        $("#VicinityID").on("select2-selecting", function(e) {
+            rebuildVicinityHierarchy(e.val, e.object, map, userPointMarker);
+            updateViewOnVicinitySelected(e.object.CanContainPropertyRecords, e.object.HasChildren, true);
+            getVicinityBounds(e.val, map);
+        });
+
+        function setSelectedVicinityIdOnSelect2() {
+            if ($("#SelectedVicinityID").val()) {
+                searchScope = $("#SelectedVicinityID").val();
+                $.ajax({
+                    url: '@Url.Action("Get", "VicinitySelector")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:
+                        {
+                            id: $("#SelectedVicinityID").val()
+                        }
+                    }).done(function(data) {
+                            rebuildVicinityHierarchy(data.ID, data, map, userPointMarker);
+                            updateViewOnVicinitySelected(data.CanContainPropertyRecords, data.HasChildren, false);
+                        }
+                    );
+                } else {
+                    rebuildVicinityHierarchy(null, null, map, userPointMarker);
+                    updateViewOnVicinitySelected(false, true, false);
+                }
+            }
+
+            var cursorMarker;
+            var userPointMarker = new google.maps.Marker({
+                map: map,
+                clickable: false,
+            });
+            var userpointLat;
+            var userpointLng;
+
+
+            function onPositionUpdate(position)
+            {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+
+                center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                map.setCenter(center);
+
+                map.setZoom(15);
+                updateViewOnVicinitySelected(true, true, false);
+                //userPointMarker.setPosition(center);
+                //userPointMarker.setMap(map);
+
+                //these lines are added from addListenerForClick by ff
+                userPointMarker.setPosition(center);
+                userPointMarker.setMap(map);
+                userpointLat = center.Lat;
+                userpointLng = center.lng;
+                $("#GeographicLocationType").val('@GeographicLocationSpecificationType.UserSpecifiedExact');
+                $("#UserPointLat").val(userpointLat);
+                $("#UserPointLng").val(userpointLng);
+                $.ajax({
+                    url: '@Url.Action("FindUserPointVicinity", "Map", new {area = AreaNames.Main})',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "userPoint": {
+                            "Lat": center.lat(),
+                            "Lng": center.lng()
+                        },
+                        "currentVicinityId": $("#SelectedVicinityID").val()
+                    })
+
+                }).done(function(data) {
+                    if ($("#SelectedVicinityID").val() != data) {
+                        $("#SelectedVicinityID").val(data);
+                        setSelectedVicinityIdOnSelect2();
+                    }
+                });
+
+            }
+
+            function placeUserPointMarker(location) {
+                cursorMarker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    clickable: false,
+                });
+            }
+
+            google.maps.event.addListener(map, 'mouseover', function(event) {
+                placeUserPointMarker(event.latLng);
+                cursorMarker.setMap(map);
+            });
+            google.maps.event.addListener(map, 'mouseout', function(event) {
+                if (cursorMarker)
+                    cursorMarker.setVisible(false);
+            });
+
+            google.maps.event.addListener(map, 'mousemove', function(event) {
+                if (cursorMarker)
+                    cursorMarker.setPosition(event.latLng);
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                $('input').blur();
+
+                userPointMarker.setPosition(event.latLng);
+                userPointMarker.setMap(map);
+                userpointLat = event.latLng.lat();
+                userpointLng = event.latLng.lng();
+
+                $("#GeographicLocationType").val('@GeographicLocationSpecificationType.UserSpecifiedExact');
+                $("#UserPointLat").val(userpointLat);
+                $("#UserPointLng").val(userpointLng);
+
+                $.ajax({
+                    url: '@Url.Action("FindUserPointVicinity", "Map", new {area = AreaNames.Main})',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "userPoint": {
+                            "Lat": event.latLng.lat(),
+                            "Lng": event.latLng.lng()
+                        },
+                        "currentVicinityId": $("#SelectedVicinityID").val()
+                    })
+                }).done(function(data) {
+                    if ($("#SelectedVicinityID").val() != data) {
+                        $("#SelectedVicinityID").val(data);
+                        setSelectedVicinityIdOnSelect2();
+                    }
+                });
+            });
+
+    if ($("#UserPointLat").val() != 0 && $("#UserPointLng").val() != 0 && $("#GeographicLocationType").val() == '@GeographicLocationSpecificationType.UserSpecifiedExact') {
+        var location = new google.maps.LatLng($("#UserPointLat").val(), $("#UserPointLng").val());
+        userPointMarker.setPosition(location);
+        userPointMarker.setMap(map);
+    };
+
+    $("#unselectVicinity").click(function() {
+        userPointMarker.setMap(null);
+        $("#GeographicLocationType").val(null);
+        rebuildVicinityHierarchy(null, null, map, userPointMarker);
+        updateViewOnVicinitySelected(false, true, false);
+    });
+    });
+
+    function createVicinityHierarchyNode(name, id, hasChildren, canContainPropertyRecords, typeLabel, showTypeInTitle, map, userPointMarker, link) {
+        var displayedTypeLabel = "";
+        if (showTypeInTitle)
+            displayedTypeLabel = typeLabel;
+
+        var elementText = "<span>";
+        if (link)
+            elementText = "<a>";
+
+        var result = $(elementText, {
+            "class": 'selectedLocationHierarchyNode',
+            text: displayedTypeLabel + ' ' + name + ' > ',
+            style: 'white-space: nowrap;',
+        });
+
+        if (link) {
+            result.attr('href', '#');
+            result.click(function() {
+                $(this).nextAll().remove();
+                searchScope = id;
+                $("#SelectedVicinityID").val(id);
+                updateViewOnVicinitySelected(canContainPropertyRecords, hasChildren, true);
+                getVicinityBounds(id, map);
+                userPointMarker.setMap(null);
+                $("#GeographicLocationType").val(null);
+            });
+        }
+
+        return result;
+    }
+
+    function rebuildVicinityHierarchy(selectedValue, selectedObject, map, userPointMarker) {
+        searchScope = selectedValue;
+        $("#SelectedVicinityID").val(selectedValue);
+        $('.selectedLocationHierarchyNode').remove();
+
+        if (selectedObject) {
+            $("#unselectVicinity").show();
+            var selectedLocationLink = createVicinityHierarchyNode(
+                selectedObject.Name, selectedValue, selectedObject.HasChildren,
+                selectedObject.CanContainPropertyRecords,
+                selectedObject.TypeLabel, selectedObject.ShowTypeInTitle, map, userPointMarker, false);
+
+            selectedLocationLink.appendTo($("#divLinkParent"));
+
+            $.each(selectedObject.Hierarchy, function(index, value) {
+                var parentLocationLink = createVicinityHierarchyNode(value.Name, value.ID, true, value.CanContainPropertyRecords, value.TypeLabel, value.ShowTypeInTitle, map, userPointMarker, true);
+                $("<br class='selectedLocationHierarchyNode'/>").prependTo($("#divLinkParent"));
+                parentLocationLink.prependTo($("#divLinkParent"));
+            });
+        } else {
+            $("#unselectVicinity").hide();
+        }
+    }
+
+    function updateViewOnVicinitySelected(canContainPropertyRecords, hasChildren, changeFocus) {
+        if (canContainPropertyRecords)
+            $('.displayForVicinity').show();
+        else
+            $('.displayForVicinity').hide();
+
+        if (!hasChildren) {
+            $("#divSelect2").hide();
+            if (changeFocus)
+                $('#Address').focus();
+        } else {
+            $("#divSelect2").show();
+            setTimeout(function() {
+                $("#VicinityID").select2("data", null);
+                if (changeFocus) {
+                    $("#VicinityID").select2('focus');
+                    $("#VicinityID").select2('open');
+                }
+            }, 1);
+        }
+    }
+
+    function getVicinityBounds(id, map) {
+        $.ajax({
+            url: '@Url.Action("GetVicinityBounds", "Map", new {area = AreaNames.Main})',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "vicinityID": id
+            })
+        }).done(function(data) {
+            if (data) {
+                var southWest = new google.maps.LatLng(data.SouthWest.Lat, data.SouthWest.Lng);
+                var northEast = new google.maps.LatLng(data.NorthEast.Lat, data.NorthEast.Lng);
+                var bounds = new google.maps.LatLngBounds(southWest, northEast);
+                map.fitBounds(bounds);
+            }
+        });
+    }
+                    </script>
+      )

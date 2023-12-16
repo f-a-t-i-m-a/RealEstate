@@ -1,0 +1,163 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Helpers
+
+<h2>
+	@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") &gt;
+	عملیات
+</h2>
+
+<br /><br /><br />
+
+<h3 style="border: 2px solid #777; border-style: dotted; margin-top: 10px; padding: 15px;">
+	عملیات نگهداری
+</h3>
+
+<div>
+	<ul>
+		<li>
+			<div class="textHighlight" style="padding: 20px; border: 2px solid green;">
+				@IconsHelper.Tick32(Url)
+				اجرای عملیات زیر برای نگهداری روزمره سامانه بدون خطر هستند.
+			</div>
+			<hr/>
+		</li>
+		<li>
+			@using (Html.BeginForm("RefreshCache", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>بازسازی حافظه موقت مناطق</span>
+			}
+			<hr />
+		</li>
+	</ul>
+</div>
+
+<br/><br/><br/>
+
+<h3 data-extender-trigger="indexOperations" style="border: 2px solid #777; border-style: dotted; margin-top: 10px; padding: 15px;">
+	<span data-extender-content="indexOperations" data-extender-speed="0">@IconsHelper.ExtenderCollapsed32(Url)</span>
+	<span class="hidden" data-extender-content="indexOperations" data-extender-speed="0">@IconsHelper.ExtenderExtended32(Url)</span>
+	بازسازی ایندکس ها
+</h3>
+
+<div class="hidden" data-extender-content="indexOperations">
+	<ul>
+		<li>
+			<div class="textHighlight" style="padding: 20px; border: 2px solid red;">
+				@IconsHelper.Warning32(Url)
+				<span class="bold large">اخطار</span>
+				عملیات زیر، باعث می شوند همه موجودیت های مورد نظر، در صف ایندکس گذاری مجدد قرار گیرند.
+				در نتیجه هنگام اجرای عملیات زمان بندی شده، همه آنها از بانک داده خوانده و ایندکس گذاری می شوند و
+				ممکن است بار غیر معفول و زیاد به سرویس دهنده تحمیل کنند، و باعث کند شدن نرم افزار شوند.
+			</div>
+			<hr />
+		</li>
+		<li>
+			@using (Html.BeginForm("RebuildAgencyIndex", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>بازسازی ایندکس آژانس ها (شامل شعبه ها)</span>
+			}
+			<hr />
+		</li>
+		<li>
+			@using (Html.BeginForm("RebuildPropertyListingIndex", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>بازسازی ایندکس املاک</span>
+			}
+			<hr />
+		</li>
+		<li>
+			@using (Html.BeginForm("RebuildPropertyRequestIndex", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>بازسازی ایندکس درخواست ها</span>
+			}
+			<hr />
+		</li>
+	</ul>
+</div>
+
+<br /><br /><br />
+
+<h3 data-extender-trigger="administrativeOperations" style="border: 2px solid #777; border-style: dotted; margin-top: 10px; padding: 15px;">
+	<span data-extender-content="administrativeOperations" data-extender-speed="0">@IconsHelper.ExtenderCollapsed32(Url)</span>
+	<span class="hidden" data-extender-content="administrativeOperations" data-extender-speed="0">@IconsHelper.ExtenderExtended32(Url)</span>
+	عملیات اصلاح داده ها
+</h3>
+
+<div class="hidden" data-extender-content="administrativeOperations">
+	<ul>
+		<li>
+			<div class="textHighlight" style="padding: 20px; border: 2px solid red;">
+				@IconsHelper.Warning32(Url)
+				<span class="bold large">اخطار</span>
+				عملیات زیر برای اصلاح مشکلات استثنایی در داده ها هستند، که از مشکلات برنامه نویسی ناشی شده اند می باشند.
+				بدون هماهنگی با تیم برنامه نویسی، هیچ کدام از این موارد را اجرا نکنید.
+			</div>
+			<hr/>
+		</li>
+		<li>
+			@using (Html.BeginForm("RebuildPropertyListingsVicinityHierarchyString", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>بازسازی فیلد توالی همسایگی ها در لیست املاک</span>
+			}
+			<hr />
+		</li>
+		<li>
+			@using (Html.BeginForm("UpdatePropertyListingsGeoLocationFromVicinities", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>بروزرسانی موقعیت جغرافیایی املاک بر اساس همسایگی</span>
+			}
+			<hr />
+		</li>
+		<li>
+			@using (Html.BeginForm("RecalculateUserTransactions", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>محاسبه مجدد تراکنش های یک کاربر</span>
+			}
+			<hr />
+		</li>
+		<li>
+			@using (Html.BeginForm("RebuildPropertyListingPhotos", "AdminOperations"))
+			{
+				<input type="submit" value="اجرا" />
+				<span>ساخت مجدد عکس ها</span>
+			}
+			<hr />
+		</li>
+	</ul>
+</div>
+
+<br /><br /><br />
+
+<h3 data-extender-trigger="migrationOperations" style="border: 2px solid #777; border-style: dotted; margin-top: 10px; padding: 15px;">
+	<span data-extender-content="migrationOperations" data-extender-speed="0">@IconsHelper.ExtenderCollapsed32(Url)</span>
+	<span class="hidden" data-extender-content="migrationOperations" data-extender-speed="0">@IconsHelper.ExtenderExtended32(Url)</span>
+	عملیات مهاجرت داده ها
+</h3>
+
+<div class="hidden" data-extender-content="migrationOperations">
+	<ul>
+		<li>
+			<div class="textHighlight" style="padding: 20px; border: 2px solid red;">
+				@IconsHelper.Warning32(Url)
+				<span class="bold large" style="color: red;">اخطار بسیار مهم!</span>
+				عملیات زیر برای انتقال داده ها از ساختار قدیمی به ساختار جدید هستند، و عموماً تنها یک بار باید اجرا شوند.
+				<br/>
+				<span class="bold">اجرای این عملیات می تواند تاثیر مخرب روی داده های سیستم داشته باشد، و قسمتی از داده های کاربران را پاک کند.</span><br/>
+				به هیچ عنوان بدون هماهنگی با تیم برنامه نویسی این عملیات را اجرا نکنید.
+			</div>
+			<hr/>
+		</li>
+		<li>
+			هیچ موردی در این قسمت در دسترس نیست.
+			<hr />
+		</li>
+	</ul>
+</div>
+

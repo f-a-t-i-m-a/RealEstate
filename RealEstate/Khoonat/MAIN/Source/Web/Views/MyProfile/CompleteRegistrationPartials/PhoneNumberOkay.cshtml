@@ -1,0 +1,18 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.UserContactMethodVerificationInfo
+
+<div id="completeRegistrationPhoneRoot">
+    <div>
+        @IconsHelper.Tick32(Url)
+        
+        @HtmlPresentationHelper.LeftToRight(Model.ContactMethod.ContactMethodText)
+         فعال سازی شد.
+    </div>
+</div>
+
+@(this.ScriptBlock(@<script>
+                        phoneVerified = true;
+                        updateFooterMessage();
+                    </script>))

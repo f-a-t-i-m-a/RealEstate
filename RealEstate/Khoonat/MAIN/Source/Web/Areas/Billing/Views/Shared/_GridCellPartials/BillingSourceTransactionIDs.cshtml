@@ -1,0 +1,24 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Billing.IBillingSourceEntity
+
+
+Fw: @Model.ForwardTransactionID.IfHasValue(id => id.ToString(CultureInfo.InvariantCulture), "-")
+@if (@Model.ForwardTransactionID != null)
+{
+    <span data-ajax-modal="@Url.Action("ViewDetailsPopup","UserTransactions" ,new { id = Model.ForwardTransactionID })">
+        <span>@IconsHelper.Xlink16(Url) </span>
+    </span>
+}
+ 
+ 
+<br/>
+Rv: @Model.ReverseTransactionID.IfHasValue(id => id.ToString(CultureInfo.InvariantCulture), "-")
+@if (@Model.ReverseTransactionID != null)
+{
+    <span data-ajax-modal="@Url.Action("ViewDetailsPopup", "UserTransactions", new { id = Model.ReverseTransactionID })">
+        <span>@IconsHelper.Xlink16(Url) </span>
+    </span>
+}
+ 

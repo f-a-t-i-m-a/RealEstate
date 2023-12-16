@@ -1,0 +1,173 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.Account.AccountSignUpModel
+
+@{
+    ViewBag.Title = "ثبت نام کاربران و مشاورین املاک در سایت";
+    ViewBag.MetaDescription = "فرم ثبت نام رایگان اشخاص حقیقی و مشاورین املاک در سایت خونه ت دات کام، برای استفاده از امکانات ثبت ملک، درج آگهی و جستجو در بانک اطلاعات املاک";
+}
+
+<div class="page-header">
+	<h1>ایجاد حساب کاربری</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "لطفاً موارد زیر را رفع کنید و دوباره تلاش فرمایید:", new {style = "color:red;"})
+
+    <h2>شناسه حساب <small>(اجباری)</small></h2>
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="col-xs-5 col-sm-2"><span class="icon-required"></span> @Html.LabelFor(m => m.LoginName):</div>
+			<div class="col-xs-7 col-sm-4">@Html.TextBoxFor(m => m.LoginName, new { autofocus = "autofocus" })</div>
+			<div class="col-xs-12 col-sm-5">
+				@Html.ValidationMessageFor(m => m.LoginName)
+				<div id="loginNameIsOkay" class="none bg-success col-xs-1"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </div>
+				<div id="loginNameAlreadyExists" class="none bg-danger">شناسه کاربری تکراری است </div>
+			</div>
+		</div>
+		<div class="form-group">
+            <div class="col-xs-5 col-sm-2"><span class="icon-required"></span> @Html.LabelFor(m => m.Password):</div>
+            <div class="col-xs-7 col-sm-4">@Html.PasswordFor(m => m.Password)</div>
+            <div class="col-xs-12 col-sm-5">@Html.ValidationMessageFor(m => m.Password)</div>
+		</div>
+	    <div class="form-group">
+	        <div class="col-xs-5 col-sm-2"><span class="icon-required"></span> @Html.LabelFor(m => m.ConfirmPassword):
+	        </div>
+	        <div class="col-xs-7 col-sm-4">@Html.PasswordFor(m => m.ConfirmPassword)</div>
+	        <div class="col-xs-12 col-sm-5">@Html.ValidationMessageFor(m => m.ConfirmPassword)</div>
+	    </div>
+        <div class="form-group">
+            <div class="col-xs-5 col-sm-2"><span class="icon-required"></span>@Html.LabelFor(m => m.Mobile):</div>
+            <div class="col-xs-7 col-sm-4">@Html.TextBoxFor(m => m.Mobile, new { style = "direction:ltr;" })</div>
+            <div class="col-xs-12 col-sm-5">@Html.ValidationMessageFor(m => m.Mobile)</div>
+        </div>
+	    <div class="form-group">
+	        <div class="col-xs-5 col-sm-2"><span class="icon-required"></span> @Html.LabelFor(m => m.FullName):
+	        </div>
+	        <div class="col-xs-7 col-sm-4">@Html.TextBoxFor(m => m.FullName)</div>
+	        <div class="col-xs-12 col-sm-5">@Html.ValidationMessageFor(m => m.FullName)</div>
+	    </div>
+        <div class="form-group">
+            <div class="col-xs-5 col-sm-2">@Html.LabelFor(m => m.Email):</div>
+            <div class="col-xs-7 col-sm-4">@Html.TextBoxFor(m => m.Email, new { style = "direction:ltr;" })</div>
+        </div>
+		<div class="checkbox">
+			@Html.CheckBoxFor(m => m.DisplayNameSameAsFullName) @Html.LabelFor(m => m.DisplayNameSameAsFullName)
+		</div>
+	    <div class="form-group none" id="displayNameDetails">
+	        <div class="col-xs-3 col-md-2"><span class="icon-required"></span> @Html.LabelFor(m => m.DisplayName):
+	        </div>
+	        <div class="col-xs-5 col-md-3">@Html.TextBoxFor(m => m.DisplayName)</div>
+	        <div class="col-xs-4 col-md-7">@Html.ValidationMessageFor(m => m.DisplayName)</div>
+	    </div>
+       
+		<hr/>
+		<div class="checkbox">
+			@Html.CheckBoxFor(m => m.Realtor) @Html.LabelFor(m => m.Realtor)
+		</div>
+	    <div class="form-group none showOnRealtor">
+	        <div class="radio-inline">
+	            @Html.RadioButtonFor(m => m.IndependentAgent, "true", new {@id = "IndependentAgent"})
+	            <label for="IndependentAgent">شخصی کار می کنم</label>
+	        </div>
+	        <div class="radio-inline">
+	            @Html.RadioButtonFor(m => m.IndependentAgent, "false", new {@id = "IndependentAgencyMember"})
+	            <label for="IndependentAgencyMember">عضو آژانس املاک هستم</label>
+	        </div>
+	    </div>
+        <div class="row">
+            <div class="form-group none showOnIndependentAgencyMember showOnRealtor">
+                <div class="col-xs-3 col-md-2">
+                    <span class="icon-required"></span> آژانس املاک:
+                </div>
+                <div class="col-xs-5 col-md-3">@Html.AgencySelector("AgencyID")</div>
+                <div class="col-xs-4 col-md-7">@Html.ValidationMessageFor(m => m.AgencyID)</div>
+            </div>
+        </div>
+		<div class="row none showOnIndependentAgencyMember showOnRealtor">
+			<div class="col-xs-9 col-md-10 col-xs-offset-3 col-md-offset-2 small">
+				اگر آژانس شما ثبت نشده، گزینه «شخصی کار می کنم» رو انتخاب کنید تا بعداً توی فهرست آژانس ها اطلاعات رو ثبت کنید.
+			</div>
+		</div>
+	</div>
+	
+	<hr/>
+   
+    @Html.CaptchaErrorMessage()
+    @Html.ScriptCaptchaToken()
+    this.ScriptText(Html.ScriptCaptchaScript());
+
+    <div>
+		<button name="submit" value="btnCreateUser" class="btn btn-primary btn-lg" type="submit">ایجاد حساب >></button>
+    </div>
+}
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function OnDisplayNameSameAsFullNameChanged() {
+                           if (this.checked) $("#displayNameDetails").hide(400);
+                           else $("#displayNameDetails").show(400);
+                       }
+
+                       $("#DisplayNameSameAsFullName").change(OnDisplayNameSameAsFullNameChanged);
+                       $("#DisplayNameSameAsFullName").trigger("change");
+
+                       $("#FullName").change(function() {
+                           if ($("#DisplayNameSameAsFullName")[0].checked)
+                               $("#DisplayName").val($(this).val());
+                       });
+
+                       $("#LoginName").focus(function() {
+                           $("#loginNameIsOkay").hide();
+                           $("#loginNameAlreadyExists").hide();
+                       });
+
+                       $("#LoginName").blur(function() {
+                           var loginName = this.value;
+
+                           $("#loginNameIsOkay").hide();
+                           $("#loginNameAlreadyExists").hide();
+
+                           if ($("#LoginName").valid()) {
+                               $.getJSON("@Url.Action("CheckLoginName", "Account")",
+                                   { loginName: loginName },
+                                   function(data) {
+                                       if (data)
+                                           $("#loginNameIsOkay").show(400);
+                                       else
+                                           $("#loginNameAlreadyExists").show(400);
+                                   });
+                           }
+                       });
+
+                       function displayRealtor() {
+                           if ($('#Realtor').is(':checked')) {
+                               $(".showOnRealtor").show(400);
+                               if ($('#IndependentAgencyMember').is(':checked')) {
+                                   $(".showOnIndependentAgencyMember").show();
+                               } else {
+                                   $(".showOnIndependentAgencyMember").hide();
+                               }
+                               if ($('#IndependentAgent').is(':checked')) {
+                                   $(".showOnIndependentAgencyMember").hide();
+                               } else {
+                                   $(".showOnIndependentAgencyMember").show();
+                               }
+                           } else {
+                               $(".showOnRealtor").hide();
+                           }
+                         
+                       }
+
+                       $('#IndependentAgencyMember').change(displayRealtor);
+                       $('#IndependentAgent').change(displayRealtor);
+                       $("#Realtor").change(displayRealtor);
+                       displayRealtor();
+
+                   </script>
+    )

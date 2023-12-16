@@ -1,0 +1,350 @@
+﻿<div class="container" ng-show="$state.current.name === 'useractivities'">
+<div class="well well-sm">
+<button class="btn btn-default" type="button" ng-click="isCollapse = !isCollapse">
+    پنل جستجو
+</button>
+<hr/>
+<div collapse="isCollapse">
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">نوع برنامه:</label>
+            <div class="col-md-8">
+                <jj-select-application-type model="ApplicationTypeFilter" jj-allow-clear="true" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="" class="col-md-8 control-label">همه فعالیت ها:</label>
+                <div class="col-md-4 control-label ">
+                    <label class="pull-right">
+                        <input type="checkbox" ng-model="AllActivity">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">CorrelationID:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" ng-model="CorrelationIdFilter"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="" class="col-md-8 control-label">از جنس گردش کار:</label>
+                <div class="col-md-4 control-label ">
+                    <label class="pull-right">
+                        <input type="checkbox" ng-model="HasTargetStateFilter">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="" class="col-md-8 control-label">دارای نظر:</label>
+                <div class="col-md-4 control-label ">
+                    <label class=" pull-right">
+                        <input type="checkbox" ng-model="HasCommentFilter">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">کاربر اعمال کننده:</label>
+            <div class="col-md-8">
+                <ui-select ng-model="$parent.UserFilter" data-placeholder="Pick a List" title="Choose a List" theme="bootstrap">
+                    <ui-select-match placeholder="کاربر مورد نظر انتخاب کنید" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="opt in UserListOptions">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">نقش:</label>
+            <div class="col-md-8">
+                <ui-select ng-model="$parent.UserRoleFilter" data-placeholder="Pick a List" title="Choose a List" theme="bootstrap">
+                    <ui-select-match placeholder="نقش مورد نظر انتخاب کنید" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="opt in UserRoleListOptions">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">کنترلر:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" ng-model="ControllerFilter"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">عملیات:</label>
+            <div class="col-md-8">
+                <input type="text" ng-model="ActionNameFilter" class="form-control"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">موجودیت:</label>
+            <div class="col-md-8">
+                <jj-select-entity-type model="TargetTypeFilter" jj-allow-clear="true"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">ID موجودیت:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" ng-model="TargetIDFilter"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">وضعیت موجودیت:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" ng-model="TargetStateFilter"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">نتیجه:</label>
+            <div class="col-md-8">
+                <ui-select ng-model="$parent.IsSuccessfulFilter" data-placeholder="Pick a List" title="Choose a List" theme="bootstrap">
+                    <ui-select-match placeholder="لیست مورد نظر انتخاب کنید" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="opt.id as opt in SuccessListOptions">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">فعالیت:</label>
+            <div class="col-md-8">
+                <jj-select-user-activity-type model="UserActivityTypeFilter" jj-allow-clear="true"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">زیر فعالیت:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" ng-model="UserActivitySubTypeFilter"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">نوع والد:</label>
+            <div class="col-md-8">
+                <jj-select-entity-type model="ParentTypeFilter" jj-allow-clear="true"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">ID والد:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" ng-model="ParentIDFilter"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">نوع جزء:</label>
+            <div class="col-md-8">
+                <jj-select-entity-type model="DetailTypeFilter" jj-allow-clear="true"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">ID جزء:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" ng-model="DetailIDFilter"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">از تاریخ:</label>
+            <div class="col-md-8">
+                <jj-jalaali-datepicker-popup jj-model="FromActivityTimeFilter" class="datepicker"></jj-jalaali-datepicker-popup>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">ساعت:</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" ng-model="FromActivityTimeMinuteFilter" ng-pattern="/\d\d/" placeholder="--"/>
+            </div>
+            <div class="col-md-1">
+                :
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" ng-model="FromActivityTimeHourFilter" ng-pattern="/\d\d/" placeholder="--"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">تا تاریخ:</label>
+            <div class="col-md-8">
+                <jj-jalaali-datepicker-popup jj-model="ToActivityTimeFilter" class="datepicker" min-date="FromActivityTimeFilter"></jj-jalaali-datepicker-popup>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">ساعت:</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" ng-model="ToActivityTimeMinuteFilter" ng-pattern="/\d\d/" placeholder="--"/>
+            </div>
+            <div class="col-md-1">
+                :
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" ng-model="ToActivityTimeHourFilter" ng-pattern="/\d\d/" placeholder="--"/>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-9">
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-success btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> جستجو</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row" ng-show="userActivities != null && userActivities.length != 0">
+    <div class="col-md-12">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-2">
+                        <jj-sortable-header title="'زمان فعالیت'" sort-column-name="'ActivityTime'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                    </th>
+                    <th class="hidden-xs col-md-2">
+                        <label>
+                            CorrelationID
+                        </label>
+                    </th>
+                    <th class="hidden-xs col-md-1">
+                        <label>
+                            کاربر
+                        </label>
+                    </th>
+                    <th class="col-md-1">
+                        <label>
+                            فعالیت
+                        </label>
+                    </th>
+                    <th class="col-md-2">
+                        <label>
+                            موجودیت
+                        </label>
+                    </th>
+                    <th class="hidden-xs col-md-1">
+                        <label>
+                            وضعیت
+                        </label>
+                    </th>
+                    <th class="hidden-xs col-md-1">
+                        <label>
+                            زیر فعالیت
+                        </label>
+                    </th>
+                    <th class="hidden-xs col-md-1">
+                        <label>
+                            والد
+                        </label>
+                    </th>
+                    <th class="hidden-xs col-md-1">
+                        <label>
+                            جزء
+                        </label>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="activity in userActivities">
+                    <td class="col-md-2">
+                        <span class="pull-right had-margin" ng-switch="activity.ApplicationType">
+                            <span ng-switch-when="1">
+                                <img class="tiny-logo" ng-src="Content/images/HaftdongLogo.png" alt="هفت دنگ">
+                            </span>
+                            <span ng-switch-when="4">
+                                <img class="tiny-logo" ng-src="Content/images/SheshdongLogo.png" alt="شش دنگ">
+                            </span>
+                            <span ng-switch-default></span>
+                        </span>
+                        {{activity.ActivityTime | jalaali: 'jYYYY/jMM/jDD HH:mm'}}
+                    </td>
+                    <td class="hidden-xs col-md-2">
+                        <a ui-sref="useractivities.details({correlationid: activity.CorrelationID})">{{activity.CorrelationID}}</a>
+                    </td>
+                    <td class="hidden-xs col-md-1">{{activity.User.UserName}}</td>
+                    <td class="col-md-1"><span jj-tristate="activity.Succeeded"></span> {{activity.ActivityType | UserActivityType}}</td>
+                    <td class="col-md-2">{{activity.TargetType | EntityType}}</td>
+                    <td class="hidden-xs col-md-1">{{activity.TargetState}}</td>
+                    <td class="hidden-xs col-md-1">{{activity.ActivitySubType}}</td>
+                    <td class="hidden-xs col-md-1">{{activity.ParentType | EntityType}}</td>
+                    <td class="hidden-xs col-md-1">{{activity.DetailType | EntityType}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <jj-pagination page-number="PageNumber" number-of-pages="NumberOfPages" total-number-of-items="TotalNumberOfItems" page-size="PageSize" on-change-page-click="onSearch(page)"></jj-pagination>
+    </div>
+</div>
+</div>
+<div ui-view autoscroll="false">
+</div>

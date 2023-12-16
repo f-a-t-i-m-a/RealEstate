@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CompositionInfo xmlns="http://www.compositional.net/schema/compositionXml.1.0.xsd">
+  <RegisterAssembly fullName="JahanJooy.Common.Util"/>
+  <RegisterAssembly fullName="AppsOn.Automation.LibraryBuffer"/>
+  <RegisterAssembly fullName="JahanJooy.RealEstateAgency.Util"/>
+  <RegisterAssembly fullName="JahanJooy.RealEstateAgency.Domain"/>
+  <RegisterAssembly fullName="JahanJooy.RealEstateAgency.Naroon"/>
+</CompositionInfo>

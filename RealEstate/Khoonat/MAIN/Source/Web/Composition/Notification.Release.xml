@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CompositionInfo xmlns="http://www.compositional.net/schema/compositionXml.1.0.xsd">
+
+	<UsingAssembly fullName="JahanJooy.RealEstate.Core.Impl"/>
+
+	<RegisterComponent type="JahanJooy.RealEstate.Core.Impl.Notification.Email.SmtpEmailTransmitter"/>
+	<RegisterComponent type="JahanJooy.RealEstate.Core.Impl.Notification.Sms.FarapayamakSmsTransmitter" />
+
+</CompositionInfo>

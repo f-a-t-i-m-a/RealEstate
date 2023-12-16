@@ -1,0 +1,90 @@
+﻿@using JahanJooy.RealEstateAgency.Util.Templates.Email
+@functions {
+    private ContactMethodVerificationModel _model;
+    public override void SetModel(object model)
+    {
+        _model = (ContactMethodVerificationModel) model;
+    }
+}
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<table width="95%" style="width: 95%; direction: rtl; font-size: 20px;">
+			<tr><td style="background-color: #dddddd;">
+				    <table width="100%" style="width: 100%; font-size: 20px; font-weight: bold;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>فعال سازی آدرس ایمیل در مشخصات کاربر</td>
+						    <td style="text-align: left;"><a href="http://6.haftdong.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">شش دنگ</a></td>
+					    </tr>
+				    </table>
+			    </td></tr>
+			<tr><td>
+				    <table width="100%" style="width: 100%; font-size: 14px;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>
+							    شما این ایمیل را به این دلیل دریافت کرده اید که کاربر 
+							     @_model.User.DisplayName 
+							    در سایت «شیش دنگ» - 
+                                www.shishdong.com - 
+							    آدرس ایمیل
+							    <span style="direction: ltr;">@_model.ContactMethodText</span>
+							     را به پروفایل شخصی خود اضافه کرده است. 
+							    <br/>
+							    در صورتی که شما این کاربر نیستید یا تمایلی به اضافه شدن این آدرس
+							    به پروفایلتان ندارید، این ایمیل رو نادیده بگیرید. در صورت تکرار این پیغام می توانید با مسئولین سایت تماس
+							    بگیرید و مشکل رو مطرح کنید.
+						    </td>
+						    <td style="direction: ltr;">
+							    You are receiving this email because the user "@_model.User.DisplayName" had added 
+								the email address "@_model.ContactMethodText" to his / her personal profile in www.shishdong.com website.
+							    <br/>
+							    If you are not the mentioned user, or you do not want the email address to be added to your profile,
+							    simply ignore this message. If you get this message repeatedly, you may contact www.shishdong.com administrators
+							    for a follow up.
+						    </td>
+					    </tr>
+				    </table>
+				    
+			    </td></tr>
+			<tr><td>
+				    <br/>
+				    <p>
+					    کاربر گرامی، 
+					    @_model.User.DisplayName،
+				    </p>
+				    <p>
+					    برای تایید اضافه شدن آدرس ایمیل
+					    <span style="direction: ltr;">@_model.ContactMethodText</span>
+				        به پروفایل کاربری تان، لطفاً رمز زیر را داخل فرمی که در سایت به شما نمایش داده شده کپی کنید
+@*                         یا به صورت دستی وارد کنید:*@
+				    </p>
+			        <p style="background-color: #ffffaa; border: dashed 1px darkgray; padding: 10px;">
+			            رمز فعال سازی:
+			            <span style="direction: ltr;">@_model.VerificationSecret</span>
+			        </p>
+@*			    <p>*@
+@*                    لینک فعال سازی:*@
+@*			        			               <a href="https://shishdong.com/MyProfile/VerifyEmailDirectLink?verificationSecret=@_model.VerificationSecret&contactMethodID=@_model.ContactMethod.ID&contactMethodText=@_model.ContactMethod.ContactMethodText&VerifyEmailDirectLink">لینک فعال سازی</a>                  *@
+@*			    </p>*@
+				    <p>
+					    از اینکه از خدمات این سایت استفاده می کنید سپاس گزاریم؛
+					    <br/>
+					   شیش دنگ
+				    </p>
+			    </td></tr>
+			<tr><td style="font-size: 20px; text-align: center; background-color: #dddddd; padding: 10px">
+				    <a href="http://www.shishdong.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">www.shishdong.com</a>
+			    </td></tr>
+			<tr><td style="width: 100%; font-size: 14px;">
+				    <br/><br/>   
+				    این پیغام توسط سیستم تولید شده است و در صورتی که به آن پاسخ دهید به دست ما نخواهد رسید.
+				    اگر در خصوص این پیغام یا هر موضوع دیگری تمایل دارید با مسئولین سایت در تماس باشید، لطفاً
+				    از صفحه «تماس با ما» در سایت استفاده کنید.
+			    </td></tr>
+		</table>
+	</body>
+</html>

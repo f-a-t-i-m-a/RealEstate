@@ -1,0 +1,15 @@
+﻿@using JahanJooy.RealEstate.Web.Resources.Helpers.Properties
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSavedSearchesModel.SavedPropertySearchModel
+
+@if (Model.FullSearchTitleParts != null && Model.FullSearchTitleParts.Any())
+{
+	foreach (var part in Model.FullSearchTitleParts)
+	{
+		@part
+		<br/>
+	}
+}
+else
+{
+	@PropertySearchTitleResources.AllProperties
+}

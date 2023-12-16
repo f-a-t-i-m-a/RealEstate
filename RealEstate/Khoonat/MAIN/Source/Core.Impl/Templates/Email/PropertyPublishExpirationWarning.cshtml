@@ -1,0 +1,113 @@
+﻿@using System
+@using JahanJooy.Common.Util.Localization
+@using Compositional.Composer
+@using JahanJooy.RealEstate.Core.Impl.Templates.Email
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@functions {
+    private PropertyPublishExpirationWarningModel _model;
+
+    [ComponentPlug]
+    public PropertyPresentationHelper PropertyPresentationHelper { get; set; }
+
+    public override void SetModel(object model)
+    {
+        _model = (PropertyPublishExpirationWarningModel)model;
+    }
+}
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+        <style type="text/css">
+            .bold { font-weight: bold; }
+            .probTbl { width: 100%; font-size: 18px; }
+            .probTbl tr td { padding: 10px; background-color: #ddb; }
+        </style>
+	</head>
+	<body>
+        <table width="95%" style="width: 95%; direction: rtl; font-size: 20px;">
+            <tr>
+                <td style="background-color: #dddddd;">
+                    <table width="100%" style="width: 100%; font-size: 20px; font-weight: bold;" cellpadding="10" cellspacing="5">
+                        <tr>
+                            <td> اتمام زمان آگهی ملک</td>
+                            <td style="text-align: left;"><a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">خونه ت دات کام</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <p>
+                        کاربر گرامی،
+                        @_model.OwnerName،
+                    </p>
+                    <p>
+                        به اطلاع می رساند
+                        <span style="color: darkred;">مدت زمان نمایش</span>
+                        آگهی ثبت شده توسط شما برای
+                        @PropertyPresentationHelper.BuildTitle(_model.ListingSummary)
+                        واقع شده در
+                        @PropertyPresentationHelper.BuildRegion(_model.ListingSummary)
+                        با مساحت
+                        @PropertyPresentationHelper.BuildArea(_model.ListingSummary)
+                        <span style="color: darkred;">به زودی به پایان خواهد رسید</span>.
+                    </p>
+                    <ul style="color: red;">
+                        <li>تاریخ اتمام زمان آگهی: @_model.Listing.PublishEndDate.ToLocalizedDateString()</li>
+                    </ul>
+                    <p>
+                        در صورتی که مورد ملکی هنوز موجود است، می توانید با مراجعه به سایت خونه ت،
+                        <span style="color: darkred;">آگهی را به صورت کاملاً رایگان تمدید کنید</span>.
+                    </p>
+                    @if (!_model.ListingSummary.OwnerUserID.HasValue)
+                    {
+                        <p>
+                            برای تمدید زمان آگهی، از اطلاعات زیر استفاده کنید:
+                        </p>
+                        <ul style="color: darkred;">
+                            <li>کد خونه ت: @_model.ListingSummary.Code</li>
+                            <li>رمز برای ویرایش: @_model.Listing.EditPassword</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>
+                            برای تمدید آگهی، با کاربر خود در سایت وارد شوید، و به صفحه اطلاعات ملک کد
+                            @_model.ListingSummary.Code
+                            مراجعه کنید.
+                        </p>
+                    }
+                    
+                    <p>
+                        لینک دسترسی مستقیم به صفحه اطلاعات ملک:
+                        <br/>
+                        <a href="http://khoonat.com/p/@(_model.ListingSummary.Code)">http://khoonat.com/p/@(_model.ListingSummary.Code)</a>
+                        <br/><br/>
+                    </p>
+
+                    <p>
+                        از اینکه از خدمات این سایت استفاده می کنید سپاس گزاریم؛
+                        <br />
+                        خونه ت دات کام
+                    </p>
+            </td></tr>
+            <tr>
+                <td style="font-size: 20px; text-align: center; background-color: #dddddd; padding: 10px">
+                    <a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">www.khoonat.com</a>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; font-size: 14px;">
+                    <br /><br />
+                    این پیام را سیستم تولید کرده. چنانچه به آن پاسخ دهید به دست ما نخواهد رسید.
+                    اگر درباره این پیغام یا هر موضوع دیگری میخواهید با ما در تماس باشید، لطفاً
+                    از صفحه «تماس با ما» در سایت استفاده کنید.
+                </td>
+            </tr>
+        </table>
+
+	</body>
+</html>

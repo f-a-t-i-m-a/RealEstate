@@ -1,0 +1,86 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminOutgoingSms.AdminOutgoingSmsNewAdvertisementModel
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome")
+    &gt;
+    @Html.ActionLink("پیامک های ارسالی", "List", "AdminOutgoingSms")
+    &gt;
+    ارسال تبلیغاتی
+</h2>
+
+<div style="direction: ltr;">
+    @Html.ValidationSummary(false)
+</div>
+
+@using (Html.BeginForm("NewAdvertisement", "AdminOutgoingSms"))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class=" col-sm-2">
+                متن پیامک:
+                <span id="messageTextLength">-</span>
+            </div>
+            <div class=" col-sm-6">
+                @Html.TextAreaFor(m => m.MessageText, 3, 70, new { style = "height: 60px;" })
+            </div>
+            <div class=" col-sm-4"> @Html.ValidationMessageFor(m => m.MessageText)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2">شماره های مقصد:</div>
+            <div class="col-sm-6">@Html.TextAreaFor(m => m.TargetNumbers, 14, 20, null)</div>
+            <div class="col-sm-4">@Html.ValidationMessageFor(m => m.TargetNumbers)</div>
+        </div>
+
+        <div>
+            <button name="submit" value="btnContinue" class="btn btn-primary " type="submit">ادامه>></button>
+            <a href="@Url.Action("List")" class="btn btn-default">بازگشت>></a>
+        </div>
+    </div>
+
+}
+
+@this.CssBlock(@<style>
+                    .usefulMessageTexts li {
+                        padding: 10px 0;
+                        border-bottom: 2px dotted gray;
+                    }
+    </style>)
+
+@section SideBar
+{
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">متون عمومی برای استفاده</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="usefulMessageTexts">
+                <li><a href="#" class="textShortcut">فروش یا اجاره ملک تون رو رایگان در «خونه ت» آگهی کنید. www.khoonat.com</a></li>
+                <li><a href="#" class="textShortcut">در سایت «خونه ت» برای ملک تون آلبوم عکس رایگان درست کنید. khoonat.com</a></li>
+                <li><a href="#" class="textShortcut">مشاورین محترم املاک، سایت khoonat.com ابزاری برای کسب و کار شما بوده و استفاده از آن برای شما کاملا رایگان و بدون محدودیت می باشد.</a></li>
+                <li><a href="#" class="textShortcut">بلافاصله پس از ثبت ملک مورد نظر خود، با پیامک مطلع شوید؛ در khoonat.com</a></li>
+            </ul>
+        </div>
+        </div>
+}
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+    function updateMessageTextLength() {
+        $('#messageTextLength').text($('#MessageText').val().length);
+    }
+
+    $(document).ready(function () {
+
+        $('.textShortcut').click(function () {
+            $('#MessageText').text($(this).text());
+            updateMessageTextLength();
+        });
+
+        $('#MessageText').change(updateMessageTextLength);
+        $('#MessageText').keyup(updateMessageTextLength);
+        $('#MessageText').blur(updateMessageTextLength);
+    });
+            </script>)
+

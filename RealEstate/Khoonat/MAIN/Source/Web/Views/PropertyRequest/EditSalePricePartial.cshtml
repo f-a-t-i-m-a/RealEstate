@@ -1,0 +1,226 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Resources.Views.NewEntry
+@model JahanJooy.RealEstate.Web.Models.PropertyRequest.PropertyRequestEditModel
+
+@*
+    ********************************************************************************
+    **** Sale price
+*@
+
+<div class="displayPerIntention  showForSale none">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                قیمت فروش
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                @* Row for laying out calculated price on the left *@
+                <div class="col-xs-12 col-md-8">
+
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.PriceSpecificationType):
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="field-validation-container">
+                                @Html.ValidationMessageFor(m => m.PriceSpecificationType)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            @Html.RadioButtonFor(m => m.PriceSpecificationType, SalePriceSpecificationType.Total, new { @id = "PriceSpecificationType_Total" })
+                            @Html.Label("PriceSpecificationType_Total", DomainEnumResources.PriceSpecificationType_Total)
+                        </div>
+                        <div class="col-xs-8">
+                            <div id="pricingTotal" class="none">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Price, "{0:#.##}", new { style = "direction:ltr;text-align:center;", @class = "digitGrouping" })
+                                    <span class="input-group-addon">@GeneralResources.Tomans</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="field-validation-container">
+
+                                @Html.ValidationMessageFor(m => m.Price)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group displayPerType showForLand showForGarden showForHouse showForVilla">
+                        <div class="col-xs-4">
+                            @Html.RadioButtonFor(m => m.PriceSpecificationType, SalePriceSpecificationType.PerEstateArea, new { @id = "PriceSpecificationType_PerEstateArea" })
+                            @Html.Label("PriceSpecificationType_PerEstateArea", DomainEnumResources.PriceSpecificationType_PerEstateArea)
+                        </div>
+                        <div class="col-xs-8">
+                            <div id="pricingPerEstateArea" class="none">
+                                <div class=" input-group">
+                                    @Html.TextBoxFor(m => m.PricePerEstateArea, "{0:#.##}", new { style = "direction:ltr;", @class = "digitGrouping text-center" })
+                                    <span class="input-group-addon">@GeneralResources.Tomans</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="displayPerType showForLand  showForGarden showForHouse showForVilla field-validation-container">
+                                @Html.ValidationMessageFor(m => m.PricePerEstateArea)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group displayPerType showForHouse showForVilla showForApartment showForPenthouse showForShop">
+                        <div class="col-xs-4">
+                            @Html.RadioButtonFor(m => m.PriceSpecificationType, SalePriceSpecificationType.PerUnitArea, new { @id = "PriceSpecificationType_PerUnitArea" })
+                            @Html.Label("PriceSpecificationType_PerUnitArea", DomainEnumResources.PriceSpecificationType_PerUnitArea)
+                        </div>
+                        <div class="col-xs-8">
+                            <div id="pricingPerUnitArea" class="none">
+                                <div class=" input-group">
+                                    @Html.TextBoxFor(m => m.PricePerUnitArea, "{0:#.##}", new { style = "direction:ltr;", @class = "digitGrouping text-center" })
+                                    <span class="input-group-addon">@GeneralResources.Tomans</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="displayPerType showForHouse  showForVilla showForApartment  showForPenthouse showForShop field-validation-container">
+                                @Html.ValidationMessageFor(m => m.PricePerUnitArea)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+
+                            @Html.CheckBoxFor(m => m.HasTransferableLoan)
+                            @Html.LabelFor(m => m.HasTransferableLoan)
+                        </div>
+                    </div>
+                    <div class=" form-group none" id="transferableLoanDetails">
+                        <div class="col-xs-4">
+                            @Html.LabelFor(m => m.TransferableLoanAmount):
+                        </div>
+                        <div class="col-xs-8">
+
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.TransferableLoanAmount, "{0:#.##}", new { style = "direction:ltr;", @class = "digitGrouping text-center" })
+                                <span class="input-group-addon">@GeneralResources.Tomans</span>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12">
+                            <div>
+                                @Html.ValidationMessageFor(m => m.TransferableLoanAmount)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-info" id="calculated">
+                        @* Calculated price panel *@
+                        <div class="panel-heading">
+                            <h3 class="panel-title">قیمت محاسبه شده</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    @QuickCreatePropertyResources.Label_Calculated_Price
+                                </div>
+                                <div class="col-xs-7">
+                                    <span id="calculatedPriceTotal">0.0</span>
+                                    <span>@GeneralResources.Tomans</span>
+                                </div>
+                            </div>
+                            <div class="row displayPerType showForLand showForGarden showForHouse showForVilla">
+                                <div class="col-xs-5">
+                                    @QuickCreatePropertyResources.Label_Calculated_PricePerEstateArea
+                                </div>
+                                <div class="col-xs-7">
+                                    <span id="calculatedPricePerEstateArea">0.0</span>
+                                    <span>@GeneralResources.Tomans</span>
+                                </div>
+                            </div>
+                            <div class="row displayPerType showForHouse showForVilla showForApartment showForPenthouse showForShop">
+                                <div class="col-xs-5">
+                                    @QuickCreatePropertyResources.Label_Calculated_PricePerUnitArea
+                                </div>
+                                <div class="col-xs-7">
+                                    <span id="calculatedPricePerUnitArea">0.0</span>
+                                    <span>@GeneralResources.Tomans</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> @*  Calculated price panel  *@
+                </div>
+            </div>@* Row for laying out calculated price on the left *@
+        </div>
+    </div>
+</div>
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+    function OnPriceSpecificationTypeChanged() {
+        if ($("#PriceSpecificationType_Total")[0].checked) $("#pricingTotal").show(400);
+        else $("#pricingTotal").hide(400);
+        if ($("#PriceSpecificationType_PerEstateArea")[0].checked) $("#pricingPerEstateArea").show(400);
+        else $("#pricingPerEstateArea").hide(400);
+        if ($("#PriceSpecificationType_PerUnitArea")[0].checked) $("#pricingPerUnitArea").show(400);
+        else $("#pricingPerUnitArea").hide(400);
+
+        $("#priceValidationErrors .field-validation-error").empty();
+        $("#Price").attr('disabled', !($("#PriceSpecificationType_Total")[0].checked));
+        $("#PricePerEstateArea").attr('disabled', !($("#PriceSpecificationType_PerEstateArea")[0].checked));
+        $("#PricePerUnitArea").attr('disabled', !($("#PriceSpecificationType_PerUnitArea")[0].checked));
+        RecalculatePrices();
+    }
+
+    function OnHasTransferableLoanChanged() {
+        if (this.checked) $("#transferableLoanDetails").show(400);
+        else $("#transferableLoanDetails").hide(400);
+        $("#TransferableLoanAmountM").attr("disabled", !this.checked);
+    }
+
+    function RecalculatePrices() {
+
+        // Extract total price
+
+        var estateArea = parseFormattedFloat($("#EstateArea").val());
+        var unitArea = parseFormattedFloat($("#UnitArea").val());
+        var totalPrice = NaN;
+
+        if ($("#PriceSpecificationType_Total")[0].checked)
+            totalPrice = parseFormattedFloat($("#Price").val());
+        else if ($("#PriceSpecificationType_PerEstateArea")[0].checked)
+            totalPrice = parseFormattedFloat($("#PricePerEstateArea").val()) * estateArea;
+        else if ($("#PriceSpecificationType_PerUnitArea")[0].checked)
+            totalPrice = parseFormattedFloat($("#PricePerUnitArea").val()) * unitArea;
+
+        // Update calculated price display
+
+        var perEstateAreaPrice = totalPrice / estateArea;
+        var perUnitAreaPrice = totalPrice / unitArea;
+
+        $("#calculatedPriceTotal").text(isFinite(totalPrice) ? shortNumericString(totalPrice) : "-");
+        $("#calculatedPricePerEstateArea").text(isFinite(perEstateAreaPrice) ? shortNumericString(perEstateAreaPrice) : "-");
+        $("#calculatedPricePerUnitArea").text(isFinite(perUnitAreaPrice) ? shortNumericString(perUnitAreaPrice) : "-");
+    }
+
+    $("#PriceSpecificationType_Total").change(OnPriceSpecificationTypeChanged);
+    $("#PriceSpecificationType_PerEstateArea").change(OnPriceSpecificationTypeChanged);
+    $("#PriceSpecificationType_PerUnitArea").change(OnPriceSpecificationTypeChanged);
+    $("#Price").change(RecalculatePrices).keyup(RecalculatePrices);
+    $("#PricePerEstateArea").change(RecalculatePrices).keyup(RecalculatePrices);
+    $("#PricePerUnitArea").change(RecalculatePrices).keyup(RecalculatePrices);
+    $("#EstateArea").change(RecalculatePrices).keyup(RecalculatePrices);
+    $("#UnitArea").change(RecalculatePrices).keyup(RecalculatePrices);
+    $("#HasTransferableLoan").change(OnHasTransferableLoanChanged);
+
+    OnPriceSpecificationTypeChanged();
+    RecalculatePrices();
+
+    $("#HasTransferableLoan").trigger("change");
+    </script>
+    )

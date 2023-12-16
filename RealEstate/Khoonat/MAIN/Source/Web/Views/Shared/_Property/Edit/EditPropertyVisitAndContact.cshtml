@@ -1,0 +1,377 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Scripts
+@model PropertyContactModel
+
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendars)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendarsPickerFa)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendarsPersian)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendarsPerisanFa)
+
+@this.StyleLibrary(StyleLibraries.JQueryCalendarsPicker)
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">شرایط بازدید</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.AppropriateVisitTimes):
+                    </div>
+                    <div class="col-xs-8 col-sm-6">
+                        @Html.TextBoxFor(m => m.AppropriateVisitTimes)
+                        @Html.ValidationMessageFor(m => m.AppropriateVisitTimes)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.InappropriateVisitTimes):
+                    </div>
+                    <div class="col-xs-8 col-sm-6">
+                        @Html.TextBoxFor(m => m.InappropriateVisitTimes)
+                        @Html.ValidationMessageFor(m => m.InappropriateVisitTimes)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-9">
+                        @Html.CheckBoxFor(m => m.ShouldCoordinateBeforeVisit)
+                        @Html.LabelFor(m => m.ShouldCoordinateBeforeVisit)
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div id="coordinationBeforeVisitDetails" class="none">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(m => m.HowToCoordinateBeforeVisit):
+                        </div>
+                        <div class="col-xs-8 col-sm-6">
+                            @Html.TextBoxFor(m => m.HowToCoordinateBeforeVisit)
+                            @Html.ValidationMessageFor(m => m.HowToCoordinateBeforeVisit)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">وضعیت و موعد تحویل</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(m => m.PropertyStatus):
+                    </div>
+                    <div class="col-xs-8 col-sm-6">
+                        @Html.DropDownListFor(m => m.PropertyStatus, Model.PropertyStatus.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.SelectOne, new {@class = "select2 form-control"})
+                        @Html.ValidationMessageFor(m => m.PropertyStatus)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="rentedPropertyDetails" class="none">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(m => m.RenterContractEndDate):
+                        </div>
+                        <div class="col-xs-8 col-sm-6">
+                            @Html.EditorFor(m => m.RenterContractEndDate)
+                            @Html.ValidationMessageFor(m => m.RenterContractEndDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(m => m.DeliveryDateSpecificationType):
+                    </div>
+             
+                </div>
+                <div class="col-md-10">
+                    @foreach (var item in @Html.RadioButtonListFor(m => m.DeliveryDateSpecificationType, Model.DeliveryDateSpecificationType.EnumSelectList(DomainEnumResources.ResourceManager)))
+                    {
+                        @item.Input@item.Label
+                        <br />
+                    }
+                    @Html.ValidationMessageFor(m => m.DeliveryDateSpecificationType)
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="deliveryAbsolute" class="none">
+            <div class="row">
+                <div class=" col-md-8">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            @Html.LabelFor(m => m.AbsoluteDeliveryDate):
+                        </div>
+                        <div class="col-xs-8 col-sm-6">
+                            @Html.EditorFor(m => m.AbsoluteDeliveryDate)
+                            @Html.ValidationMessageFor(m => m.AbsoluteDeliveryDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="deliveryRelative" class="none">
+            <div class="row">
+                <div class=" col-md-10">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(m => m.DeliveryDaysAfterContract):
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <div class="col-xs-5">
+                                    @Html.TextBoxFor(m => m.DeliveryDaysAfterContract, new {maxlength = 4, style = "direction:ltr;text-align:center;"})
+                                </div>
+                                <div class="col-xs-7">
+                                    روز پس از عقد قرارداد
+                                    @Html.ValidationMessageFor(m => m.DeliveryDaysAfterContract)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">اطلاعات تماس</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        <span class="icon-required"></span>
+                        @Html.LabelFor(m => m.ContactName):
+                    </div>
+                    <div class="col-xs-7">
+                        @Html.TextBoxFor(m => m.ContactName)
+                        @Html.ValidationMessageFor(m => m.ContactName)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        <span class="icon-required"></span>
+                        @Html.LabelFor(m => m.ContactPhone1):
+                    </div>
+                    <div class="col-xs-7">
+                        @Html.TextBoxFor(m => m.ContactPhone1, new {style = "direction:ltr;"})
+                        @Html.ValidationMessageFor(m => m.ContactPhone1)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        @Html.LabelFor(m => m.ContactPhone2):
+                    </div>
+                    <div class="col-xs-7">
+                        @Html.TextBoxFor(m => m.ContactPhone2, new {style = "direction:ltr;"})
+                        @Html.ValidationMessageFor(m => m.ContactPhone2)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        @Html.LabelFor(m => m.ContactEmail):
+                    </div>
+                    <div class="col-xs-7">
+                        @Html.TextBoxFor(m => m.ContactEmail, new {style = "direction:ltr;"})
+                        @Html.ValidationMessageFor(m => m.ContactEmail)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        @if (Model.IsAgencyListing)
+        {
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-3">
+                            @Html.LabelFor(m => m.AgencyName):
+                        </div>
+                        <div class="col-xs-9">
+                            @Html.TextBoxFor(m => m.AgencyName)
+                            @Html.ValidationMessageFor(m => m.AgencyName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.AgencyAddress):
+                        </div>
+                        <div class="col-xs-7">
+                            @Html.TextBoxFor(m => m.AgencyAddress)
+                            @Html.ValidationMessageFor(m => m.AgencyAddress)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    @Html.CheckBoxFor(m => m.DirectContactIsPossible)
+                    @Html.LabelFor(m => m.DirectContactIsPossible)
+                </div>
+            </div>
+
+            <div id="ownerDetails" class="none">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.OwnerName):
+                            </div>
+                            <div class="col-xs-7">
+                                @Html.TextBoxFor(m => m.OwnerName)
+                                @Html.ValidationMessageFor(m => m.OwnerName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.OwnerPhone1):
+                            </div>
+                            <div class="col-xs-7">
+                                @Html.TextBoxFor(m => m.OwnerPhone1, new {style = "direction:ltr;"})
+                                @Html.ValidationMessageFor(m => m.OwnerPhone1)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.OwnerPhone2):
+                            </div>
+                            <div class="col-xs-7">
+                                @Html.TextBoxFor(m => m.OwnerPhone2, new {style = "direction:ltr;"})
+                                @Html.ValidationMessageFor(m => m.OwnerPhone2)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.OwnerEmail):
+                            </div>
+                            <div class="col-xs-7">
+                                @Html.TextBoxFor(m => m.OwnerEmail, new {style = "direction:ltr;"})
+                                @Html.ValidationMessageFor(m => m.OwnerEmail)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function OnShouldCoordinateBeforeVisitChanged() {
+                           if (this.checked) $("#coordinationBeforeVisitDetails").show(400);
+                           else $("#coordinationBeforeVisitDetails").hide(400);
+                           $("#HowToCoordinateBeforeVisit").attr("disabled", !this.checked);
+                       }
+
+                       function OnPropertyStatusChanged() {
+                           if (this.value == "OccupiedByRenter") $("#rentedPropertyDetails").show(400);
+                           else $("#rentedPropertyDetails").hide(400);
+                           $("#RenterContractEndDate").attr("disabled", this.value != "OccupiedByRenter");
+                       }
+
+                       function OnDeliveryDateSpecificationTypeChanged() {
+                           if ($("#DeliveryDateSpecificationType_DaysFromContract")[0].checked) $("#deliveryRelative").show(400);
+                           else $("#deliveryRelative").hide(400);
+                           if ($("#DeliveryDateSpecificationType_Absolute")[0].checked) $("#deliveryAbsolute").show(400);
+                           else $("#deliveryAbsolute").hide(400);
+
+                           $("#AbsoluteDeliveryDate").attr("disabled", !($("#DeliveryDateSpecificationType_Absolute")[0].checked));
+                           $("#DeliveryDaysAfterContract").attr("disabled", !($("#DeliveryDateSpecificationType_DaysFromContract")[0].checked));
+                       }
+
+                       function OnDirectContactIsPossibleChanged() {
+                           var directContactPossible = this.checked;
+                           if (directContactPossible) $("#ownerDetails").show(400);
+                           else $("#ownerDetails").hide(400);
+
+                           $("#OwnerName").attr("disabled", !directContactPossible);
+                           $("#OwnerPhone1").attr("disabled", !directContactPossible);
+                           $("#OwnerPhone2").attr("disabled", !directContactPossible);
+                           $("#OwnerEmail").attr("disabled", !directContactPossible);
+                       }
+
+                       $("#ShouldCoordinateBeforeVisit").change(OnShouldCoordinateBeforeVisitChanged);
+                       $("#PropertyStatus").change(OnPropertyStatusChanged);
+                       $("#DeliveryDateSpecificationType_Immidiately").change(OnDeliveryDateSpecificationTypeChanged);
+                       $("#DeliveryDateSpecificationType_DaysFromContract").change(OnDeliveryDateSpecificationTypeChanged);
+                       $("#DeliveryDateSpecificationType_Absolute").change(OnDeliveryDateSpecificationTypeChanged);
+                       $("#DirectContactIsPossible").change(OnDirectContactIsPossibleChanged);
+
+                       $("#AbsoluteDeliveryDate").calendarsPicker({ calendar: $.calendars.instance('persian', 'fa'), minDate: "+1d", maxDate: "+5y" });
+                       $("#RenterContractEndDate").calendarsPicker({ calendar: $.calendars.instance('persian', 'fa'), minDate: "+1d", maxDate: "+5y" });
+
+                       $("#ShouldCoordinateBeforeVisit").trigger("change");
+                       $("#PropertyStatus").trigger("change");
+                       $("#DirectContactIsPossible").trigger("change");
+                       OnDeliveryDateSpecificationTypeChanged();
+
+                   </script>
+    )

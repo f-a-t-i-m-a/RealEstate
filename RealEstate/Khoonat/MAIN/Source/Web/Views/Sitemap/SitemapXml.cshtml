@@ -1,0 +1,12 @@
+﻿@using JahanJooy.RealEstate.Web.Helpers.Sitemap
+@model JahanJooy.RealEstate.Web.Models.Sitemap.SitemapModel
+@{
+	Layout = null;
+	Response.ContentType = "text/xml";
+}<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	@foreach (var item in Model.Items)
+	{
+		<url><loc>http://www.khoonat.com@(item.Url)</loc>@(SitemapHelper.LastModTag(item.LastModification))@(SitemapHelper.ChangeFreqTag(item.ChangeFrequency))@(SitemapHelper.PriorityTag(item.Priority))</url>
+	}
+</urlset>

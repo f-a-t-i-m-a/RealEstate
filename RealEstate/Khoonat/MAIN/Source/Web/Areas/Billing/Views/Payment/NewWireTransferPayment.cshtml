@@ -1,0 +1,140 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Payment.PaymentNewWireTransferPaymentModel
+
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendars)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendarsPickerFa)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendarsPersian)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryCalendarsPerisanFa)
+
+@this.StyleLibrary(StyleLibraries.JQueryCalendarsPicker)
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+		<a href="@Url.Action("IncreaseCredit", "BillingHome", AreaRouteValue.Billing)">افزایش اعتبار</a>:
+		<a href="@Url.Action("NewPayment", "Payment", AreaRouteValue.Billing)">پرداخت</a>:
+		اعلام واریز وجه
+	</h1>
+</div>
+
+<p>
+    افزایش اعتبار از طریق واریز وجه با مراحل زیر انجام میشه:
+</p>
+
+<div class="panel panel-primary">
+	<div class="panel-heading"><h3 class="panel-title">مرحله اول: واریز وجه</h3></div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<p>
+					لطفاً اول وجه مورد نظرتون رو به حساب زیر واریز کنید:
+				</p>
+				@Html.Partial("BankAccountPartial")
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<p>
+					برای واریز به حساب، می تونید از هر کدوم از این راه ها اقدام کنید:
+					<ul>
+						<li>واریز به حساب به صورت حضوری در بانک</li>
+						<li>انتقال وجه با خود پرداز</li>
+						<li>انتقال وجه با اینترنت بانک</li>
+						<li>انتقال وجه با موبایل بانک</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+@using (Html.BeginForm())
+{
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h3 class="panel-title">مرحله دوم: اعلام واریز وجه</h3></div>
+		<div class="panel-body">
+			<p>
+				بعد از واریز وجه، فرم زیر رو پر کنید و روی گزینه ثبت کلیک کنید تا ما از پرداخت شما مطلع بشیم:
+			</p>
+
+			<table class="dataEntryTable">
+				<tr>
+					<td style="width: 260px;"><span class="icon-required"></span> @Html.LabelFor(m => m.Amount):</td>
+					<td style="width: 150px;">@Html.TextBoxFor(m => m.Amount, "{0:0.##}", new { maxlength = 11, style = "direction: ltr; text-align: center;", @class = "digitGrouping", autofocus = "autofocus" })</td>
+					<td style="width: 35px;">@GeneralResources.Rials</td>
+				</tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.Amount)</td></tr>
+				<tr>
+					<td><span class="icon-required"></span> @Html.LabelFor(m => m.SourceBank):</td>
+					<td>@Html.DropDownListFor(m => m.SourceBank, Model.SourceBank.EnumSelectList(DomainBillingEnumResources.ResourceManager), GeneralResources.NotSelected, new { @class="form-control" })</td>
+				</tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.SourceBank)</td></tr>
+				<tr>
+					<td><span class="icon-required"></span> @Html.LabelFor(m => m.UserEnteredDate):</td>
+					<td>@Html.EditorFor(m => m.UserEnteredDate)</td>
+				</tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.UserEnteredDate)</td></tr>
+				<tr>
+					<td><span class="icon-required"></span> @Html.LabelFor(m => m.UserEnteredTimeOfDay):</td>
+					<td>@Html.DropDownListFor(m => m.UserEnteredTimeOfDay, SelectHtmlExtensions.BuildTimeOfDayList(15), new { @class = "form-control"})</td>
+				</tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.UserEnteredTimeOfDay)</td></tr>
+				<tr>
+					<td>@Html.LabelFor(m => m.SourceCardNumberLastDigits):</td>
+					<td>@Html.TextBoxFor(m => m.SourceCardNumberLastDigits, new { maxlength = 10 })</td>
+				</tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.SourceCardNumberLastDigits)</td></tr>
+				<tr>
+					<td>@Html.LabelFor(m => m.SourceAccountHolderName):</td>
+					<td colspan="2">@Html.TextBoxFor(m => m.SourceAccountHolderName, new { maxlength = 80 })</td>
+				</tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.SourceAccountHolderName)</td></tr>
+				<tr>
+					<td>@Html.LabelFor(m => m.FollowUpNumber):</td>
+					<td colspan="2">@Html.TextBoxFor(m => m.FollowUpNumber, new { maxlength = 50 })</td>
+				</tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.FollowUpNumber)</td></tr>
+				<tr><td>@Html.LabelFor(m => m.UserEnteredDescription):</td><td colspan="2">@Html.TextAreaFor(m => m.UserEnteredDescription)</td></tr>
+				<tr><td></td><td colspan="2">@Html.ValidationMessageFor(m => m.SourceCardNumberLastDigits)</td></tr>
+			</table>
+
+			@Html.CaptchaErrorMessage()
+			@Html.ScriptCaptchaToken()
+			@this.ScriptText(Html.ScriptCaptchaScript())
+		</div>
+		<div class="panel-footer">
+			<button name="submit" value="btnSave" class="btn btn-primary" style="width: 150px;" type="submit">ثبت پرداخت</button>
+		</div>
+	</div>
+}
+
+<div class="panel panel-primary">
+	<div class="panel-heading"><h3 class="panel-title">مرحله سوم: تایید پرداخت</h3></div>
+	<div class="panel-body">
+		<p>
+			بعد از اینکه اطلاعات پرداختتون رو ثبت کردید، یکی از اپراتورهای سایت پرداخت تون رو بررسی و تایید می کنه.
+			<br />
+			بعد از تایید اپراتور مبلغ پرداختی تون به اعتبار حسابتون اضافه میشه.
+		</p>
+
+		<p>
+			لطفاً دقت بفرمایید:
+			<ul>
+				<li>بررسی و تایید پرداخت ها در ساعت های کاری انجام میشه.</li>
+				<li>لطفاً مطمئن باشید که آدرس ایمیل و شماره تلفن ثبت شده توی حسابتون درسته، تا اگر لازم شد بتونیم با شما تماس بگیریم.</li>
+				<li>اگر نیاز به پیگیری برای پرداختتون داشتید، <a href="@Url.Action("ContactUs", "UserFeedback", AreaRouteValue.Main)">با ما تماس بگیرید</a>.</li>
+			</ul>
+		</p>
+	</div>
+</div>
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+                       applyDigitGrouping();
+                       $("#UserEnteredDate").calendarsPicker({ calendar: $.calendars.instance('persian', 'fa'), minDate: "-3m", maxDate: "+0d" });
+                   </script>
+    )

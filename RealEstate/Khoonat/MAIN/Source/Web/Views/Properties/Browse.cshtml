@@ -1,0 +1,99 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Web.Helpers.Properties
+@using JahanJooy.RealEstate.Web.Models.Properties
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model PropertiesBrowseModel
+
+@{
+    var searchTitle = ComposerWebUtil.ComponentContext.GetComponent<PropertySearchHelper>().GetShortTitle(Model.Search);
+
+    ViewBag.Title = string.IsNullOrWhiteSpace(Model.SeoCanonicalSearch.Query) ?
+        "آگهی های معاملات املاک، اطلاعات و قیمت ملک - جستجو" :
+        "اطلاعات و قیمت " + searchTitle + " - جستجو";
+    ViewBag.MetaDescription = "فهرست آگهی های معاملات " + searchTitle + " همراه با اطلاعات ملک و قیمت، و امکان مشاهده رایگان همه جزئیات و اطلاعات تماس و جستجوی پیشرفته ملک";
+    ViewBag.CanonicalUrl = Url.Action("Browse", new {q = Model.SeoCanonicalSearch.Query, page = Model.RequestedPageNumber});
+}
+
+@section FullRowTop
+{
+@*
+	<div class="row">
+		<div class="col-xs-12">@Html.Partial("BrowsePartials/SearchBreadcrumb")</div>
+	</div>
+*@
+	<div class="row">
+		<div class="col-xs-12">@Html.Partial("BrowsePartials/SearchMenu")</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-4 col-lg-3 col-md-push-8 col-lg-push-9">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">@Html.Partial("BrowsePartials/AdvancedSearchPanel")</div>
+                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">@Html.Partial("BrowsePartials/SavedSearchesPanel")</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-8 col-lg-9 col-md-pull-4 col-lg-pull-3">
+			
+			@if (Model.SearchResult.PageResults != null && Model.SearchResult.PageResults.Any())
+			{
+				@Html.Partial("_PaginationLinks", new PaginationLinksModel
+				{
+					UrlFunction = p => Url.Action("Browse", new { q = Model.Search.Query, page = p }),
+					CurrentPageNumber = Model.RequestedPageNumber,
+					TotalNumberOfPages = Model.TotalNumberOfPages,
+					IndexOfFirstRecord = Model.SearchResult.IndexOfFirstResult + 1,
+					IndexOfLastRecord = Model.SearchResult.IndexOfLastResult + 1,
+					TotalNumberOfRecords = Model.SearchResult.TotalNumberOfRecords
+				})
+
+
+				<div>
+					<table class="table table-hover">
+						@Html.Partial("_Property/Grid/TableHeader")
+						@Html.Partial("_Property/Grid/SponsoredRows", Model.SearchResult.SponsoredResults)
+
+						@for (int i = 0; i < Model.SearchResult.PageResults.Count; i++)
+						{
+							var listing = Model.SearchResult.PageResults[i];
+							var indexInSearch = Model.SearchResult.IndexOfFirstResult + i;
+
+							<tr data-link-url="@Url.Action("ViewDetails", "Property", new PropertyViewDetailsParamsModel {ID = listing.ID, Origin = PropertyViewDetailsOrigin.Search, OriginQuery = Model.Search.Query, OriginIndex = indexInSearch, OriginCount = Model.SearchResult.TotalNumberOfRecords})"
+								data-toggle="tooltip" data-placement-xs="top" data-placement-md="left" title="@listing.NumberOfPhotos عکس، @((listing.CreationDate - DateTime.Now).ToLocalizedRelativeString(1))، @listing.Visits بار بازدید شده، @listing.Searches بار در جستجو ظاهر شده">
+								@Html.Partial("_Property/Grid/RowCells", listing)
+							</tr>
+						}
+					</table>
+				</div>
+
+				@Html.Partial("_PaginationLinks", new PaginationLinksModel
+				{
+					UrlFunction = p => Url.Action("Browse", new { q = Model.Search.Query, page = p }),
+					CurrentPageNumber = Model.RequestedPageNumber,
+					TotalNumberOfPages = Model.TotalNumberOfPages,
+					IndexOfFirstRecord = Model.SearchResult.IndexOfFirstResult + 1,
+					IndexOfLastRecord = Model.SearchResult.IndexOfLastResult + 1,
+					TotalNumberOfRecords = Model.SearchResult.TotalNumberOfRecords
+				})
+			}
+			else
+			{
+				<p>&nbsp;</p>
+				<p>هیچ ملکی با مشخصات مورد نظر شما یافت نشد. در صورت تمایل، می توانید با کاستن از شرایط جستجو با استفاده از منوی بالا و سمت چپ، به سایر رکورد ها دسترسی پیدا کنید.</p>
+				<p>&nbsp;</p>
+			}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			@Html.Partial("BrowsePartials/SaveSearchPanel")
+		</div>
+	</div>
+}
+
+
+
+
+
+
+

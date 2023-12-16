@@ -1,0 +1,54 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.UserRefundRequest
+
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="row">
+            شناسه:
+            @Model.ID
+            <br />
+
+            مبلغ:
+            @BillingPresentationHelper.Amount(Model.RequestedAmount)
+            <br />
+
+            تاریخ درخواست:
+            @Model.CreationTime.ToLocalizedDateString() @Model.CreationTime.ToLocalizedTimeString()
+            <br />
+
+            شماره کارت مقصد:
+            @Model.TargetCardNumber
+            <br />
+
+            شماره شبا:
+            @Model.TargetShebaNumber
+            <br />
+
+            به بانک:
+            @Model.TargetBank.Label(DomainBillingEnumResources.ResourceManager)
+            <br />
+
+
+            نام صاحب حساب:
+            @Model.TargetAccountHolderName
+            <br />
+
+
+            چرا می خواهد پول را پس بگیرد :
+            @Model.UserEnteredReason
+            <br />
+
+            توضیحات کاربر:
+            @Model.UserEnteredDescription
+            <br />
+
+            کاربر:
+            @Model.TargetUserID
+            <br />
+
+        </div>
+    </div>
+</div>

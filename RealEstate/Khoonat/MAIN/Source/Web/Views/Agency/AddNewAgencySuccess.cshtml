@@ -1,0 +1,25 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@{
+    ViewBag.Title = "آژانس املاک ثبت شد";
+}
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("List", "Agency", AreaRouteValue.Main)">مشاورین املاک</a>:
+		ثبت اطلاعات مشاورین املاک
+	</h1>
+</div>
+
+<p class="lead text-warning">
+   آژانس املاک با موفقیت ثبت شد.
+</p>
+<p>
+	اطلاعات ثبت شده، 
+	<span class="text-danger">پس از بازبینی</span>
+	در فهرست املاک اضافه خواهد شد.
+	<br/>
+	از اینکه در تکمیل داده های سایت ما رو یاری می کنید، سپاس گزاریم.
+</p>
+
+<a class="btn btn-primary" href="@Url.Action("List", "Agency", AreaRouteValue.Main)">بازگشت به فهرست مشاورین</a>
+

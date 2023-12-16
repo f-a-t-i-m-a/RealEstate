@@ -1,0 +1,25 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Models.Property
+@model ViewPropertyDetailsContactInfoTabModel
+
+<div class="panel panel-default">
+	<div class="panel-heading" role="tab">
+
+		@if (Model.IsOwner || User.IsOperator)
+		{
+			<div class="pull-left">
+				<a href="@Url.Action("EditVisitAndContact", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">
+					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> ویرایش
+				</a>
+			</div>
+		}
+
+		<h4 class="panel-title">
+			<span class="caret"></span> اطلاعات بازدید و تماس
+		</h4>
+	</div>
+	<div class="panel-body">
+		@Html.Partial("_Property/View/ViewPropertyVisitAndContact", PropertyContactModel.CreateFromDto(Model.Listing, Model.IsOwner))
+	</div>
+</div>
+

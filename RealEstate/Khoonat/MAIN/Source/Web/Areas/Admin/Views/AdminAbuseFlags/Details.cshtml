@@ -1,0 +1,78 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Audit.AbuseFlag
+
+@section NavbarRightExtra
+{
+	<li><a href="@Url.Action("List", "AdminAbuseFlags", AreaRouteValue.Admin)">شکایت ها</a></li>
+	<li class="active"><a>شکایت @Model.ID</a></li>
+}
+
+<table>
+	<tr>
+		<td >تایید</td>
+		<td >@IconsHelper.Tristate(Url, Model.Approved)</td>
+	</tr>
+	<tr >
+		<td>ID</td>
+		<td>@Model.ID</td>
+	</tr>
+	<tr >
+		<td>موضوع</td>
+		<td><a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ReasonFilter", Model.Reason.ToString()))">@Model.Reason</a></td>
+	</tr>
+	<tr>
+		<td >توضیحات</td>
+		<td >@Model.Comments</td>
+	</tr>
+	<tr>
+		<td >زمان گزارش</td>
+		<td >@Model.ReportDate.ToLocalizedDateString() @Model.ReportDate.ToLocalizedTimeString() <br/><span style="font-size: 80%">@((Model.ReportDate - DateTime.Now).ToLocalizedRelativeString())</span></td>
+	</tr>
+	<tr>
+		<td >کاربر گزارش دهنده</td>
+		<td >@Html.Partial("CellUserPartial", Model)</td>
+	</tr>
+	<tr>
+		<td>جلسه گزارش</td>
+		<td>@Html.Partial("CellSessionPartial", Model)</td>
+	</tr>
+	<tr>
+		<td>موجودیت</td>
+		<td>@Html.Partial("CellEntityPartial", Model)</td>
+	</tr>
+</table>
+
+@**************************************************************@
+@*** Side bar *************************************************@
+@**************************************************************@
+
+@section SideBar
+{
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h3 class="panel-title">بازبینی</h3></div>
+		<div class="panel-body">
+			@using (Html.BeginForm("ReviewAction", "AdminAbuseFlags", new { id = Model.ID }, FormMethod.Post))
+			{
+				<div class="row">
+					@if (Model.Approved != null)
+					{
+						<div class="col-xs-12"><button name="btnClearApproval" value="btnClearApproval" type="submit" class="btn btn-warning btn-block" style="width: 98%;">پاک کردن بازبینی</button></div>
+					}
+					else
+					{
+						<div class="col-xs-6"><button name="btnApprove" value="btnApprove" type="submit" class="btn btn-success btn-block">@IconsHelper.Tick32(Url) درست</button></div>
+						<div class="col-xs-6"><button name="btnReject" value="btnReject" type="submit" class="btn btn-danger btn-block">@IconsHelper.Cross32(Url) بیخود</button></div>
+					}
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-xs-6"><button name="btnPrevious" value="btnPrevious" type="submit" class="btn btn-default btn-block"><span class="glyphicon glyphicon-arrow-down"></span> قبلی</button></div>
+					<div class="col-xs-6"><button name="btnNext" value="btnNext" type="submit" class="btn btn-default btn-block">بعدی <span class="glyphicon glyphicon-arrow-up"></span></button></div>
+				</div>
+			}
+		</div>
+	</div>
+}

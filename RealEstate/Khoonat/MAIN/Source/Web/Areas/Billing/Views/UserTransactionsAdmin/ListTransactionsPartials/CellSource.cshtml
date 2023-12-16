@@ -1,0 +1,8 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Billing.UserBillingTransaction
+
+<a href="#">@IconsHelper.Xlink16(Url)</a>
+<a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("SourceTypeFilter", Model.SourceType.ToString()))">@Model.SourceType</a>:
+<a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("SourceTypeFilter", Model.SourceType.ToString()).Set("SourceIDFilter", Model.SourceID.ToString(CultureInfo.InvariantCulture)))">@Model.SourceID</a>

@@ -1,0 +1,23 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+@if (!Model.OwnerUserID.HasValue)
+{
+	@HtmlPresentationHelper.Disabled(GeneralResources.Anonymous)
+	<a class="pull-left" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyOwnerUserIdFilter", "true").Set("OwnerUserIdFilter", ""))">
+		<span class="glyphicon glyphicon-filter"></span>
+	</a>
+}
+else
+{
+	<div data-link-url="@Url.Action("Details", "AdminUsers", new {id = Model.OwnerUserID.Value})">
+		<span class="glyphicon glyphicon-link"></span>
+		@Model.OwnerUserID.Value
+		<a class="pull-left" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyOwnerUserIdFilter", "true").Set("OwnerUserIdFilter", Model.OwnerUserID.Value.ToString(CultureInfo.InvariantCulture)))">
+			<span class="glyphicon glyphicon-filter"></span>
+		</a>
+	</div>
+}

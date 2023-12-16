@@ -1,0 +1,175 @@
+﻿@using JahanJooy.RealEstate.Core.Search
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared
+
+@* ** Top Menu ********* *@
+
+@if (User.IsOperator)
+{
+	<li><a href="@Url.Action("Index", "AdminHome", new {area = AreaNames.Admin})">مدیریت</a></li>
+}
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">املاک <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="@Url.Action("LogOn", "Account", new {returnUrl = Url.Action("QuickCreate", "Property", AreaRouteValue.Main)})">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            @LayoutResources.NewPropertyListing
+                            <span class="label label-success">@LayoutResources.Free</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+
+                    <li>
+                        <a href="@Url.Action("QuickCreate", "Property", AreaRouteValue.Main)">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            @LayoutResources.NewPropertyListing
+                            <span class="label label-success">@LayoutResources.Free</span>
+                        </a>
+                    </li>
+                }
+        @if (User.IsAuthenticated)
+                    {
+            <li>
+                <a href="@Url.Action("View", "MyProfile", new {area = AreaNames.Main, activeTab = "AllPropertyListings"})">
+                    همه املاک من
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = PropertySearchOptions.OptionUserIsOwner})">
+                    املاک عمومی من
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("List", "SponsoredProperty", AreaRouteValue.Ad)" class="larger bold">
+					آگهی های ویژه من
+                    <span class="glyphicon glyphicon-certificate"></span>
+				</a>
+			</li>
+		}
+        <li class="divider"></li>
+        <li>
+			<a href="#" data-ajax-modal="@Url.Action("SearchPartial", "Properties", AreaRouteValue.Main)">
+				<span class="glyphicon glyphicon-search"></span> جستجو...
+			</a>
+        </li>
+        @if (User.IsAuthenticated)
+                {
+            <li>
+                <a href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = PropertySearchOptions.OptionUserHasStarred})">
+                    <span class="glyphicon glyphicon-bookmark"></span> نشان شده ها
+                </a>
+			</li>
+			<li>
+				<a href="@Url.Action("SavedSearches", "Properties", new {area = AreaNames.Main})">
+					<span class="glyphicon glyphicon-open"></span> جستجو های ذخیره شده
+                </a>
+			</li>
+		}
+    </ul>
+</li>
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">فهرست ها <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a href="@Url.Action("List", "Agency", new {q = "", area = AreaNames.Main})" >
+                مشاورين املاک
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li>
+    <a href="@Url.Action("ShowMap", "Map", new {area = AreaNames.Main})">نقشه</a>
+</li>
+
+
+
+
+
+
+
+@**@
+@*<div id="headerMenusNear">*@
+@*    <ul>*@
+@**@
+@*        <li id="headerMenuPropertiesDropdownTrigger"><span>املاک @IconsHelper.TriangleDown12White(Url)</span></li>*@
+@*        @PopupHelper.Menu(this, "#headerMenuPropertiesDropdownTrigger", "#headerMenuPropertiesDropdown")*@
+@**@
+@**@
+@*    </ul>*@
+@*</div>*@
+@**@
+@*<div id="headerMenusFar">*@
+@*    <ul>*@
+@*        <li>*@
+@*            <a href="@Url.Action("QuickCreate", "Property", new {area = AreaNames.Main})" style="direction: ltr;">*@
+@*                @LayoutResources.NewPropertyListing*@
+@*                <span class="tag">@LayoutResources.Free</span>*@
+@*            </a>*@
+@*        </li>*@
+@*        @ApplicationEnvironmentUtil.DevelopmentOnly(@<li>*@
+@*                                                         <a href="@Url.Action("Create", "PropertyRequest", new {area = AreaNames.Main})" style="direction: ltr;">*@
+@*                                                             @LayoutResources.NewPropertyRequest*@
+@*                                                             <span class="tag">@LayoutResources.Free</span>*@
+@*                                                         </a>*@
+@*                                                     </li>)*@
+@*        @if (User.Identity.IsAuthenticated)*@
+@*        {*@
+@*            <li id="headerMenuMyPropertiesDropdownTrigger"><span>املاک من @IconsHelper.TriangleDown12White(Url)</span></li>*@
+@*            @PopupHelper.Menu(this, "#headerMenuMyPropertiesDropdownTrigger", "#headerMenuMyPropertiesDropDown", PopupPosition.BottomLeftAlign)*@
+@*        }*@
+@*    </ul>*@
+@*</div>*@
+@**@
+@*$1$ ** Sub Menus ********* #1#*@
+@**@
+@*<div class="hidden" id="headerMenuPropertiesDropdown">*@
+@*    <div class="darkBk" style="width: 220px; background-color: #666; padding: 6px;">*@
+@**@
+@*        <a href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = ""})" class="bold" style="display: block; padding: 8px; margin-bottom: 4px; background-color: #555;">*@
+@*            فهرست همه املاک*@
+@*        </a>*@
+@*        <a href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = "ppt201-ioo2"})" style="display: block; padding: 8px; margin-bottom: 4px; background-color: #555;">*@
+@*            آپارتمان برای فروش*@
+@*        </a>*@
+@*        <a href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = "ppt201-ioo1"})" style="display: block; padding: 8px; margin-bottom: 4px; background-color: #555;">*@
+@*            آپارتمان برای رهن یا اجاره*@
+@*        </a>*@
+@*        <a href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = "ppt1-ioo2"})" style="display: block; padding: 8px; background-color: #555;">*@
+@*            زمین برای فروش*@
+@*        </a>*@
+@*    </div>*@
+@*</div>*@
+@**@
+@*@if (User.Identity.IsAuthenticated)*@
+@*{*@
+@*    <div id="headerMenuMyPropertiesDropDown" class="hidden">*@
+@*        <div class="darkBk" style="width: 200px; background-color: #666; padding: 4px;">*@
+@*            <a href="@Url.Action("View", "MyProfile", new {area = AreaNames.Main, activeTab = "AllPropertyListings"})" style="display: block; padding: 8px; margin-bottom: 4px; background-color: #555;">*@
+@*                همه املاک ثبت شده توسط من*@
+@*            </a>*@
+@*            <a href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = PropertySearchOptions.OptionUserHasStarred})" style="display: block; padding: 8px; background-color: #555;">*@
+@*                املاک برگزیده (ستاره دار)*@
+@*            </a>*@
+@*            <a href="@Url.Action("List", "SponsoredProperty", AreaRouteValue.Ad)" class="larger bold" style="display: block; padding: 12px; background-color: #555; margin-top: 20px;">*@
+@*                آگهی های ویژه من*@
+@*            </a>*@
+@*        </div>*@
+@*    </div>*@
+@*}*@
+@**@
+@*@ApplicationEnvironmentUtil.DevelopmentOnly(@<div id="headerMenuAgenciesDropdown" class="hidden">*@
+@*                                                 <div class="darkBk" style="width: 200px; background-color: #666; padding: 4px;">*@
+@*                                                     <a href="@Url.Action("List", "Agency", new {q = ""})" style="display: block; padding: 8px; margin-bottom: 4px; background-color: #555;">*@
+@*                                                         مشاورين املاک*@
+@*                                                     </a>*@
+@*                                                 </div>*@
+@*                                             </div>)*@

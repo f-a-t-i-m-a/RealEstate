@@ -1,0 +1,24 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Property.PropertyListingUpdateHistory
+
+@if (!Model.UserID.HasValue)
+{
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyUserIdFilter", "true").Set("UserIdFilter", ""))">
+		@HtmlPresentationHelper.Disabled(GeneralResources.Anonymous)
+	</a>
+}
+else
+{
+	<div style='display: inline-block;'>
+		<a href="@Url.Action("Details", "AdminUsers", new {id = Model.UserID.Value})" style="float: left; margin-right: 3px;">
+			@IconsHelper.Xlink16(Url)
+		</a>
+		<a style="display: inline-block;" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyUserIdFilter", "true").Set("UserIdFilter", Model.UserID.Value.ToString(CultureInfo.InvariantCulture)))">
+			@Model.UserID.Value
+		</a>
+	</div>
+}

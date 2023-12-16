@@ -1,0 +1,22 @@
+﻿@model long
+
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">جستجو</h4>
+	</div>
+	<div class="modal-body">
+		با اجرای این دستور، این عکس از اطلاعات ملک 
+		<mark>حذف می شود</mark>.
+		<br />
+		<span class="bold">آیا مطمئنید؟</span>
+	</div>
+	<div class="modal-footer">
+		@using (Html.BeginForm("DeletePostback", "PropertyPhoto", new { id = Model }, FormMethod.Post))
+		{
+			<button name="btnSearch" value="btnSearch" type="submit" class="btn btn-danger">بله؛ حذف شود</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">نه؛ بی خیال</button>
+		}
+	</div>
+</div>
+

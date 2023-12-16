@@ -1,0 +1,59 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.BillingHome.BillingHomeIndexModel
+
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">درخواست های بازپرداخت</h3>
+	</div>
+	<div class="panel-body">
+		<table style="border-spacing: 15px; border-collapse: separate; margin-right: 20px;">
+			<tr>
+				<td style="width: 100px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 30px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 30px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 150px;"></td>
+			</tr>
+			<tr>
+				@if (Model.NumberOfPendingRefundRequests > 0 || Model.NumberOfCompletedRefundRequests > 0 || Model.NumberOfCancelledRefundRequests > 0)
+				{
+					<td colspan="3">
+						تعداد
+						@(Model.NumberOfPendingRefundRequests + Model.NumberOfCompletedRefundRequests + Model.NumberOfCancelledRefundRequests)
+						درخواست بازپرداخت ثبت شده:
+						<ul>
+							<li>@Model.NumberOfPendingRefundRequests مورد در انتظار پردازش</li>
+							<li>@Model.NumberOfCompletedRefundRequests مورد پرداخت شده</li>
+							<li>@Model.NumberOfCancelledRefundRequests مورد لغو شده</li>
+						</ul>
+					</td>
+					<td colspan="3">
+						کل مبلغ درخواست شده: @BillingPresentationHelper.Balance(Model.TotalNonCancelledRefundRequestsAmount) ریال
+						<br />
+						<br />
+						کل مبلغ پرداخت شده: @BillingPresentationHelper.Balance(Model.TotalClearedRefundRequestsAmount) ریال
+					</td>
+				}
+				else
+				{
+					<td colspan="6">شما تا کنون درخواست بازپرداخت ثبت نکرده اید.</td>
+				}
+			</tr>
+		</table>
+	</div>
+	<div class="panel-footer">
+		<div class="row">
+			<div class="col-xs-4">
+				<a class="btn btn-warning" href="@Url.Action("NewRequest", "Refund", AreaRouteValue.Billing)">ثبت درخواست</a>
+			</div>
+			<div class="col-xs-8 text-left">
+				<a class="btn btn-info" href="@Url.Action("ViewRequests", "Refund", AreaRouteValue.Billing)">فهرست درخواست های بازپرداخت</a>
+			</div>
+		</div>
+	</div>
+</div>
+

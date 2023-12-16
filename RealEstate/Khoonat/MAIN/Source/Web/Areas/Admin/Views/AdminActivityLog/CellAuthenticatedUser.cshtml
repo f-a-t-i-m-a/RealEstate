@@ -1,0 +1,24 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.Audit.ActivityLogDisplayInfo
+
+@if (!Model.AuthenticatedUserID.HasValue)
+{
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyAuthenticatedUserIdFilter", "true").Set("AuthenticatedUserIdFilter", ""))">
+		@HtmlPresentationHelper.Disabled(GeneralResources.Anonymous)
+	</a>
+}
+else
+{
+	<div style='display: inline-block;'>
+		<a href="@Url.Action("Details", "AdminUsers", new {id = Model.AuthenticatedUserID})" style="float: left; margin-right: 3px;">
+			@IconsHelper.Xlink32(Url)
+		</a>
+		<a style="display: inline-block;" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyAuthenticatedUserIdFilter", "true").Set("AuthenticatedUserIdFilter", Model.AuthenticatedUserID.Value.ToString(CultureInfo.InvariantCulture)))">
+			ID @Model.AuthenticatedUserID.Value<br/><span style="font-size: 80%;">@Model.AuthenticatedUserLoginName</span>
+		</a>
+	</div>
+}

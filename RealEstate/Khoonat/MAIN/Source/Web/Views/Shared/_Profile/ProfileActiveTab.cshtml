@@ -1,0 +1,28 @@
+﻿@using JahanJooy.RealEstate.Web.Models.Shared.Profile
+@using JahanJooy.RealEstate.Web.Models.Shared.Profile.Tabs
+@model ProfileModel
+
+@switch (Model.ActiveTab)
+{
+	case ProfileModel.ProfileActiveTab.General:
+		@Html.Partial("_Profile/Tabs/General", new ProfileTabGeneralModel { User = Model.User, EnableAdmin = Model.EnableAdmin, EnableEdit = Model.EnableEdit })
+		break;
+		
+	case ProfileModel.ProfileActiveTab.PublishedPropertyListings:
+	case ProfileModel.ProfileActiveTab.AllPropertyListings:
+		@Html.Partial("_Profile/Tabs/PropertyListings", new ProfileTabPropertyListingModel { PropertyListings = Model.PropertyListings, PaginationUrlTemplate = Model.PaginationUrlTemplate, ActiveTab = Model.ActiveTab, EnableEdit = Model.EnableEdit} )
+		break;
+		
+	case ProfileModel.ProfileActiveTab.PublishHistory:
+		@Html.Partial("_Profile/Tabs/PublishHistory", new ProfileTabPublishHistoryModel {PropertyPublishes = Model.PropertyPublishes, PaginationUrlTemplate = Model.PaginationUrlTemplate} )
+		break;
+
+	case ProfileModel.ProfileActiveTab.Searches:
+		@Html.Partial("_Profile/Tabs/Searches", new ProfileTabSearchesModel {Searches = Model.Searches, PaginationUrlTemplate = Model.PaginationUrlTemplate} )
+		break;
+		
+	case ProfileModel.ProfileActiveTab.SecurityInfo:
+		@Html.Partial("_Profile/Tabs/SecurityInfo", new ProfileTabSecurityInfoModel { Sessions = Model.Sessions, PaginationUrlTemplate = Model.PaginationUrlTemplate, LatestLoginNameQueries = Model.LatestLoginNameQueries, LatestPasswordResets = Model.LatestPasswordResets, AdministrativeView = Model.EnableAdmin} )
+		break;
+		
+}

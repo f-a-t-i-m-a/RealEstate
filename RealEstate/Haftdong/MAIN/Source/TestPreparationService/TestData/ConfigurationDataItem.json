@@ -1,0 +1,72 @@
+﻿[
+    {
+        "ID": "576f6be0b6152102c4b81fb7",
+        "Identifier": "SmtpEmailTransmitter.Server.Host",
+        "Value": "mail.khoonat.com"
+    },
+    {
+        "ID": "576f6be9b6152102c4b81fb9",
+        "Identifier": "SmtpEmailTransmitter.Server.Port",
+        "Value": "25"
+    },
+    {
+        "ID": "576f6bfcb6152102c4b81fbb",
+        "Identifier": "SmtpEmailTransmitter.Credentials.LoginName",
+        "Value": "notifications@khoonat.com"
+    },
+    {
+        "ID": "576f6c07b6152102c4b81fbd",
+        "Identifier": "SmtpEmailTransmitter.Credentials.Password",
+        "Value": "atH3c!P$a"
+    },
+    {
+        "ID": "576f6c19b6152102c4b81fbf",
+        "Identifier": "SmtpEmailTransmitter.Credentials.UseDefault",
+        "Value": "false"
+    },
+    {
+        "ID": "576f6c20b6152102c4b81fc1",
+        "Identifier": "SmtpEmailTransmitter.UseSSL",
+        "Value": "true"
+    },
+    {
+        "ID": "576f6c32b6152102c4b81fc3",
+        "Identifier": "SmtpEmailTransmitter.FromAddress",
+        "Value": "khoonat.com <notifications@khoonat.com>"
+    },
+    {
+        "ID": "576f6c41b6152102c4b81fc5",
+        "Identifier": "Farapayamak.Username",
+        "Value": "9394408400"
+    },
+    {
+        "ID": "576f6c4cb6152102c4b81fc7",
+        "Identifier": "Farapayamak.Password",
+        "Value": "zyaB@o52vA"
+    },
+    {
+        "ID": "576f6c54b6152102c4b81fc9",
+        "Identifier": "Farapayamak.From",
+        "Value": "300012304009"
+    },
+    {
+        "ID": "576facb3b6152933e028e361",
+        "Identifier": "DevelopmentEmailTransmitter.OutputDirectory",
+        "Value": "C:\\TestLila\\Email"
+    },
+    {
+        "ID": "576facbeb6152933e028e363",
+        "Identifier": "DevelopmentSmsTransmitter.OutputDirectory",
+        "Value": "C:\\TestLila\\SMS"
+    }
+
+
+
+
+
+
+
+
+
+
+]

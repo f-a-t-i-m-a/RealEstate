@@ -1,0 +1,19 @@
+﻿@using JahanJooy.Common.Util.Text
+@model JahanJooy.RealEstate.Web.Models.Property.ViewPropertyDetailsMapTabModel
+
+<div class="row">
+	<div class="col-xs-12">
+		@if (Model.Url.HasText())
+		{
+			<div class="text-center">
+				<img class="img-responsive mapCanvas" src="@Model.Url">
+			</div>
+		}
+		else
+		{
+			<div class="alert alert-warning text-center">
+				نقشه برای این ملک قابل نمایش نیست
+			</div>
+		}
+	</div>
+</div>

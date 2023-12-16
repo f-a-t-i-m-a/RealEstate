@@ -1,0 +1,6 @@
+﻿<label ng-click="sortColumn = sortColumnName; sortDirection = !sortDirection">
+    {{title}}
+    <span class="sort-icon" ng-class="{'desc' : sortColumn == sortColumnName && !sortDirection,
+           'asc' : sortColumn == sortColumnName && sortDirection,
+          'disabled' : sortColumn != sortColumnName}"></span>
+</label>

@@ -1,0 +1,415 @@
+﻿@using JahanJooy.Common.Util.Spatial
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Map
+@model MapShowMapModel
+
+@section FullRowTop
+{
+	<nav class="navbar navbar-default">
+		<div class="col-xs-12 col-md-6">
+			<ul class="nav navbar-nav">
+				@Html.Partial("ShowMapPartials/MapMenuListingType")
+				@Html.Partial("ShowMapPartials/MapMenuPropertyType")
+				@Html.Partial("ShowMapPartials/MapMenuSpecifications")
+			</ul>
+		</div>
+	    <div class="col-xs-12 col-md-6">
+	        <div style="margin: 12px;">
+	            @Html.VicinitySelector(false, "VicinityID")
+	        </div>
+	    </div>
+	</nav>
+	
+	<div>
+		<div class="alert alert-warning none" id="ReachedMaxResult"></div>
+	</div>
+	<div style="width: 100%; height: 600px; position: relative;">
+		<div id="loadingInformation" style="position: absolute; left: 0; right: 0; top: 20px; z-index: 1000; text-align: center;">
+			<div class="alert alert-info center-block" style="width: 250px;">
+				در حال جستجو...
+			</div>
+		</div>
+		<div id="mapCanvas" class="mapCanvas" style="width: 100%; height: 600px;">
+		</div>
+	</div>
+
+	<br/>
+	<br/>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<a data-toggle="collapse" href="#clspHelp" aria-expanded="true" aria-controls="clspHelp">راهنما <span class="caret"></span></a>
+			</h3>
+		</div>
+		<div id="clspHelp" class="panel-collapse collapse">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+						<div class="span" style="padding: 8px;"><img style="vertical-align: middle;" src="~/Content/markers/property-for-rent.png" /></div>
+						<div class="span" style="">ملک برای رهن / اجاره</div>
+					</div>
+					<div class="col-xs-6 col-md-3">
+						<div class="span" style="padding: 8px;"><img style="vertical-align: middle;" src="~/Content/markers/property-for-sale.png" /></div>
+						<div class="span">ملک برای فروش</div>
+					</div>
+					<div class="col-xs-6 col-md-3">
+						<div class="span" style="padding: 8px;"><img style="vertical-align: middle;" src="~/Content/markers/agency.png" /></div>
+						<div class="span">آژانس مشاورین املاک</div>
+					</div>
+					<div class="col-xs-6 col-md-3">
+						<div class="span" style="padding-right: 4px;"><img style="vertical-align: middle;" src="~/Content/markers/item-group.png" /></div>
+						<div class="span">مجموعه چند ملک</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+
+
+@this.ScriptLibrary(new ScriptLibrary("https://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyDlE2V9O9FzosTGXcX6SPQatAukHsQwP6U&sensor=false&language=fa&region=IR", null))
+@this.ScriptBlock(@<script type="text/javascript"> applyDigitGrouping(); </script>)
+@this.ScriptBlock(
+	@<script type="text/javascript">
+
+    var hrefTemplate = '@Url.Action("ViewDetails", "Property", new {id = "__id__", area = AreaNames.Main})';
+    var hrefVicinityTemplate = '@Url.Action("Browse", "Properties", new {q = "srt1-vid-__id__", area = AreaNames.Main})';
+    var hrefAgencyTemplate = '@Url.Action("ViewDetails", "Agency", new { id = "__id__", area = AreaNames.Main })';
+
+    var ajaxRequest;
+    var rentMarker;
+    var saleMarker;
+    var groupMarker;
+    var agencyMarkerIcon;
+
+    var existingAgencyMarkers = [];
+    var existingPropertyMarkers = [];
+    var existingVicinityMarkers = [];
+
+    function initializeMarkerIcons() {
+        rentMarker = {
+            url: '../Content/markers/property-for-rent.png',
+            size: new google.maps.Size(22, 22),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(11, 11),
+            scaledSize: new google.maps.Size(22, 22)
+        };
+
+        saleMarker = {
+            url: '../Content/markers/property-for-sale.png',
+            size: new google.maps.Size(22, 22),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(11, 11),
+            scaledSize: new google.maps.Size(22, 22)
+        };
+
+        groupMarker = {
+            url: '../Content/markers/item-group.png',
+            size: new google.maps.Size(32, 32),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(16, 16),
+            scaledSize: new google.maps.Size(32, 32)
+        };
+
+        agencyMarkerIcon = {
+            url: '../Content/markers/agency.png',
+            size: new google.maps.Size(22, 22),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(11, 11),
+            scaledSize: new google.maps.Size(22, 22)
+        };
+    }
+
+    function initializeVicinitySearch(map) {
+        $("#VicinityID").on("select2-selecting", function(e) {
+
+            $.ajax({
+                url: '@Url.Action("GetVicinityBounds", "Map", new {area = AreaNames.Main})',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "vicinityID": e.val
+                })
+            }).done(function(data) {
+                var southWest = new google.maps.LatLng(data.SouthWest.Lat, data.SouthWest.Lng);
+                var northEast = new google.maps.LatLng(data.NorthEast.Lat, data.NorthEast.Lng);
+                var bounds = new google.maps.LatLngBounds(southWest, northEast);
+                map.fitBounds(bounds);
+                $("#VicinityID").select2("val", "");
+
+            });
+        });
+    }
+
+    function bindRefreshEvents(map) {
+        var refreshFunction = function() {
+            refreshMarkers(map);
+        };
+
+        google.maps.event.addListener(map, 'idle', refreshFunction);
+
+        $(document).on('click', '.radioPropertyType', refreshFunction);
+        $(document).on('click', '.radioIntentionOfOwner', refreshFunction);
+
+        $(document).on('keyup', '#beds-Max', refreshFunction);
+        $(document).on('keyup', '#beds-Min', refreshFunction);
+        $(document).on('keyup', '#sale-Price-Max', refreshFunction);
+        $(document).on('keyup', '#sale-Price-Min', refreshFunction);
+        $(document).on('keyup', '#sale-Price-PerUnitArea-Max', refreshFunction);
+        $(document).on('keyup', '#sale-Price-PerUnitArea-Min', refreshFunction);
+        $(document).on('keyup', '#sale-Price-PerEstateArea-Max', refreshFunction);
+        $(document).on('keyup', '#sale-Price-PerEstateArea-Min', refreshFunction);
+        $(document).on('keyup', '#rent-Max', refreshFunction);
+        $(document).on('keyup', '#rent-Min', refreshFunction);
+        $(document).on('keyup', '#rent-Mortgage-Max', refreshFunction);
+        $(document).on('keyup', '#rent-Mortgage-Min', refreshFunction);
+        $(document).on('keyup', '#unit-Area-Min', refreshFunction);
+        $(document).on('keyup', '#unit-Area-Max', refreshFunction);
+        $(document).on('keyup', '#estate-Area-Min', refreshFunction);
+        $(document).on('keyup', '#estate-Area-Max', refreshFunction);
+
+        $(document).on('click', "[data-tag]", refreshFunction);
+        $(document).on('click', '.chbAgencyBranches', refreshFunction);
+    }
+
+    function initializeMap() {
+        var mapProp = {
+            center: @((Model.CenterPoint.ToLatLng() ?? new LatLng {Lat = 33, Lng = 53.2}).ToGoogleApi()),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false,
+            scaleControl: true
+        };
+        var map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
+        initializeMarkerIcons();
+        initializeVicinitySearch(map);
+        bindRefreshEvents(map);
+    }
+
+    function extractSearchQuery(map) {
+
+        var mapBounds = map.getBounds();
+        var searchQuery = {
+            "ShowAgencyBranches": true,
+            "Tags": [],
+            "Bounds": {
+                "NorthEast": {
+                    "Lat": mapBounds.getNorthEast().lat(),
+                    "Lng": mapBounds.getNorthEast().lng()
+                },
+                "SouthWest": {
+                    "Lat": mapBounds.getSouthWest().lat(),
+                    "Lng": mapBounds.getSouthWest().lng()
+                }
+            }
+        };
+
+        $.each($(".radioPropertyType"), function(n, m) {
+            if (m.checked) {
+                searchQuery.PropertyTypes = $(this).attr("data-id");
+            }
+        });
+        $.each($(".radioIntentionOfOwner"), function(n, m) {
+            if (m.checked) {
+                searchQuery.IntentionOfOwners = $(this).attr("data-id");
+            }
+        });
+        $.each($("[data-tag]"), function(n, m) {
+            if (m.checked) {
+                searchQuery.Tags.push($(this).attr("data-tag"));
+            }
+        });
+
+        searchQuery.NumberOfRoomsMinimum = $(".beds-Min").val();
+        searchQuery.NumberOfRoomsMaximum = $(".beds-Max").val();
+        searchQuery.SalePriceMinimum = $(".sale-Price-Min").val();
+        searchQuery.SalePriceMaximum = $(".sale-Price-Max").val();
+        searchQuery.SalePricePerUnitAreaMinimum = $(".sale-Price-PerUnitArea-Min").val();
+        searchQuery.SalePricePerUnitAreaMaximum = $(".sale-Price-PerUnitArea-Max").val();
+        searchQuery.SalePricePerEstateAreaMinimum = $(".sale-Price-PerEstateArea-Min").val();
+        searchQuery.SalePricePerEstateAreaMaximum = $(".sale-Price-PerEstateArea-Max").val();
+        searchQuery.RentMaximum = $(".rent-Max").val();
+        searchQuery.RentMinimum = $(".rent-Min").val();
+        searchQuery.RentMortgageMinimum = $(".rent-Mortgage-Min").val();
+        searchQuery.RentMortgageMaximum = $(".rent-Mortgage-Max").val();
+        searchQuery.UnitAreaMinimum = $(".unit-Area-Min").val();
+        searchQuery.UnitAreaMaximum = $(".unit-Area-Max").val();
+        searchQuery.EstateAreaMinimum = $(".estate-Area-Min").val();
+        searchQuery.EstateAreaMaximum = $(".estate-Area-Max").val();
+
+        if ($(".chbAgencyBranches").size() > 0) {
+            searchQuery.ShowAgencyBranches = $(".chbAgencyBranches")[0].checked;
+        }
+        if ($(".chbShouldHaveParking").size() > 0) {
+            searchQuery.ShouldHaveParking = $(".chbShouldHaveParking")[0].checked;
+        }
+
+
+        return searchQuery;
+
+    }
+
+    function refreshMarkers(map) {
+
+        var infoWindow = new google.maps.InfoWindow();
+
+        var searchQuery = extractSearchQuery(map);
+
+        $("#loadingInformation").show();
+
+        if (ajaxRequest != null) {
+            ajaxRequest.abort();
+        }
+
+        ajaxRequest = $.ajax({
+            url: '@Url.Action("Search", "Map", new {area = AreaNames.Main})',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(searchQuery)
+        }).done(function(data) {
+            ajaxRequest = null;
+            $("#loadingInformation").hide();
+            if (data.ReachedMaxResult) {
+                $("#ReachedMaxResult").text('فقط ' + data.PageSize + ' ملک نمایش داده شده است . برای محدود کردن از زوم یا فیلترهای جستجو استفاده کنید');
+                $("#ReachedMaxResult").show();
+            } else {
+                $("#ReachedMaxResult").hide();
+            }
+
+            refreshAgencyMarkers(map, data.AgencyBranches, infoWindow);
+            refreshPropertyListingMarkers(map, data.PropertyListings, infoWindow);
+            refreshVicinityMarkers(map, data.Vicinities, infoWindow);
+        });
+    }
+
+    function refreshAgencyMarkers(map, agencies, infoWindow) {
+        var oldAgencyMarkers = existingAgencyMarkers;
+        existingAgencyMarkers = [];
+
+        if (agencies && agencies.length > 0) {
+            $.each(agencies, function(i, v) {
+                if (!(v.AgencyID) || !(v.Point) || (v.Point.Lat == 0 && v.Point.Lng == 0))
+                    return;
+
+                var markerAgency = new google.maps.Marker({
+                    title: v.Title,
+                    position: new google.maps.LatLng(v.Point.Lat, v.Point.Lng),
+                    icon: agencyMarkerIcon
+                });
+
+                markerAgency.setMap(map);
+
+                google.maps.event.addListener(markerAgency, 'click', function() {
+                    infoWindow.close();
+                    infoWindow.setContent(getAgencyInfoWindowContent(v));
+                    infoWindow.open(map, markerAgency);
+                });
+
+
+                existingAgencyMarkers.push(markerAgency);
+            });
+        }
+
+        for (var j = 0; j < oldAgencyMarkers.length; j++) {
+            oldAgencyMarkers[j].setMap(null);
+        }
+    }
+
+    function refreshPropertyListingMarkers(map, listings, infoWindow) {
+        var oldPropertyMarkers = existingPropertyMarkers;
+        existingPropertyMarkers = [];
+
+        if (listings && listings.length > 0) {
+            $.each(listings, function(i, v) {
+                if (!(v.ID) || !(v.Point) || (v.Point.Lat == 0 && v.Point.Lng == 0))
+                    return;
+
+                var marker = new google.maps.Marker({
+                    title: v.Title,
+                    position: new google.maps.LatLng(v.Point.Lat, v.Point.Lng),
+                    icon: v.IntentionOfOwner == 2 ? saleMarker : rentMarker
+                });
+                marker.setMap(map);
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infoWindow.close();
+                    infoWindow.setContent(getPropertyListingInfoWindowContent(v));
+                    infoWindow.open(map, marker);
+                });
+
+                existingPropertyMarkers.push(marker);
+            });
+        }
+
+        for (var j = 0; j < oldPropertyMarkers.length; j++) {
+            oldPropertyMarkers[j].setMap(null);
+        }
+    }
+
+    function refreshVicinityMarkers(map, vicinities, infoWindow) {
+        var oldVicinityMarkers = existingVicinityMarkers;
+        existingVicinityMarkers = [];
+
+        if (vicinities && vicinities.length > 0) {
+            $.each(vicinities, function(i, v) {
+                if (!(v.Point) || (v.Point.Lat == 0 && v.Point.Lng == 0))
+                    return;
+                var circleMarker = new google.maps.Marker({
+                    title: v.NumberOfPropertyListings.toString() + ' ملک',
+                    position: new google.maps.LatLng(v.Point.Lat, v.Point.Lng),
+                    icon: groupMarker
+                });
+                circleMarker.setMap(map);
+                google.maps.event.addListener(circleMarker, 'click', function() {
+                    infoWindow.close();
+                    infoWindow.setContent(getVicinityInfoWindowContent(v));
+                    infoWindow.open(map, circleMarker);
+                });
+
+                existingVicinityMarkers.push(circleMarker);
+            });
+        }
+
+        for (var k = 0; k < oldVicinityMarkers.length; k++) {
+            oldVicinityMarkers[k].setMap(null);
+        }
+    }
+
+    function getPropertyListingInfoWindowContent(listing) {
+        return '<span id="content">' + 'کد: ' + listing.Code + '</br> ' + 'محل: ' + listing.Region + '</br> ' + 'ملک: ' + listing.Title + '</br> ' +
+            'مساحت: ' + listing.Area + '</br> ' + 'قیمت: ' + listing.PriceAndPricePerArea +
+            ' <a class="bold" target="_blank" href="' + hrefTemplate.replace('__id__', listing.ID) + '">جزییات</a> ' + '</span>';
+    }
+
+    function getVicinityInfoWindowContent(vicinity) {
+        return '<span id="content">' + 'محله:' + vicinity.Hierarchy + '</br>' + 'تعداد املاک ثبت شده:' + vicinity.NumberOfPropertyListings + '</br>' +
+            ' <a class="bold" target="_blank" href="' + hrefVicinityTemplate.replace('__id__', vicinity.VicinityID) + '">جزییات</a> ' + '</span>';
+    }
+
+    function getAgencyInfoWindowContent(agencies) {
+        return '<span id="content">' + 'نام آژانس: ' + agencies.Title + '</br> ' + 'محل: ' + (agencies.Address ? agencies.Address :"-") + '</br> ' +
+             
+            'تلفن: ' +(agencies.Phone1 ? agencies.Phone1 :"-") + '</br> ' +
+ 				' <a class="bold" target="_blank" href="' + hrefAgencyTemplate.replace('__id__', agencies.AgencyID) + '">جزییات</a> ' + '</span>';
+    }
+
+ 	</script>)
+
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+	                   $(document).ready(function() {
+	                       if (google) {
+	                           initializeMap();
+	                       } else {
+	                           alert('Failed to load Google Maps');
+	                       }
+
+	                   });
+                   </script>)

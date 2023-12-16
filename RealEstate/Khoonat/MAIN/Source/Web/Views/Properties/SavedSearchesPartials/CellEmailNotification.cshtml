@@ -1,0 +1,29 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.SavedSearch.SavedPropertySearch
+
+@IconsHelper.Tristate(Url, Model.SendNotificationEmails)
+
+@(Model.SendNotificationEmails ? GeneralResources.Enabled : "")
+@(!Model.SendNotificationEmails ? HtmlPresentationHelper.Disabled(GeneralResources.Disabled) : new HtmlString(""))
+
+@if (Model.SendNotificationEmails)
+{
+	<br/>
+	
+	if (Model.EmailNotificationTarget != null && Model.EmailNotificationTarget.IsVerified && !Model.EmailNotificationTarget.IsDeleted)
+	{
+		<small>
+			به:
+			@HtmlPresentationHelper.LeftToRight(Model.EmailNotificationTarget.ContactMethodText)
+		</small>
+    }
+    else
+    {
+        <span class="glyphicon  glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+	    <small>
+	        آدرس ایمیل مشخص نشده
+	    </small>
+    }
+}

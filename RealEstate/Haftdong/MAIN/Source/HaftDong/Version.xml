@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CompositionInfo xmlns="http://www.compositional.net/schema/compositionXml.1.0.xsd">
+
+	<SetVariable name="app.version" string="2.1.3" />
+	<SetVariable name="api.version" string="2.1.3" />
+
+</CompositionInfo>

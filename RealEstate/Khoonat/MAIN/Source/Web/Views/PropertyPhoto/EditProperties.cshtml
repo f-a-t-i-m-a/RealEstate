@@ -1,0 +1,78 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.PropertyPhoto.PropertyPhotoEditPropertiesModel
+
+<div class="editPhotoRoot row" data-photo-id="@Model.Photo.ID">
+	
+	<div class="col-xs-10">
+		<form>
+			<div style="display: inline-block; width: 380px; text-align: right;">
+				<table class="dataEntryTable">
+					<tr>
+						<td style="width: 70px;">@Html.LabelFor(m => m.Subject):</td>
+						<td style="width: 280px;">@Html.DropDownListFor(m => m.Subject, Model.Subject.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSpecified, new { @class = "form-control"})</td>
+					</tr>
+					<tr>
+						<td colspan="2">@Html.ValidationMessageFor(m => m.Subject)</td>
+					</tr>
+					<tr>
+						<td>@Html.LabelFor(m => m.Title):</td>
+						<td>@Html.TextBoxFor(m => m.Title)</td>
+					</tr>
+					<tr>
+						<td colspan="2">@Html.ValidationMessageFor(m => m.Title)</td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<a target="_blank" href="@Url.Action("GetFullSizeImage", "PropertyPhoto", new { id = Model.Photo.ID })">
+					<img class="img-responsive" src="@Url.Action("GetMediumSizeImage", "PropertyPhoto", new { id = Model.Photo.ID})" />
+				</a>
+			</div>
+			<div style="display: inline-block; width: 500px; text-align: right;">
+				<table class="dataEntryTable">
+					<tr>
+						<td style="width: 70px;">@Html.LabelFor(m => m.Description):</td>
+						<td style="width: 400px;">@Html.TextAreaFor(m => m.Description, 3, 100, null)</td>
+					</tr>
+					<tr>
+						<td colspan="2">@Html.ValidationMessageFor(m => m.Description)</td>
+					</tr>
+				</table>
+			</div>
+		</form>
+	</div>
+	
+	<div class="col-xs-2">
+		<div class="returnCmd btn btn-default btn-block btn-lg">
+			<span class="glyphicon glyphicon-step-backward"></span>
+			<small class="hidden-xs hidden-sm">بازگشت</small>
+		</div>
+
+		<div class="saveCmd btn btn-success btn-block btn-lg">
+			<span class="glyphicon glyphicon-ok"></span>
+			<span class="hidden-xs hidden-sm">ذخیره</span>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$('.editPhotoRoot[data-photo-id="@Model.Photo.ID"] .returnCmd').click(function () {
+			$.ajax({
+				url: "@Url.Action("ViewMediumSize", "PropertyPhoto", new { id = Model.Photo.ID})",
+				type: 'POST'
+			}).done(function (html) {
+				$('.editPhotoRoot[data-photo-id="@Model.Photo.ID"]').replaceWith(html);
+			});
+		});
+		
+		$('.editPhotoRoot[data-photo-id="@Model.Photo.ID"] .saveCmd').click(function () {
+			$.ajax({
+				url: "@Url.Action("EditPropertiesPostback", "PropertyPhoto", new { id = Model.Photo.ID})",
+				data: $('.editPhotoRoot[data-photo-id="@Model.Photo.ID"] form').serialize(),
+				type: 'POST'
+			}).done(function(html) {
+				$('.editPhotoRoot[data-photo-id="@Model.Photo.ID"]').replaceWith(html);
+			});
+		});
+	</script>
+</div>

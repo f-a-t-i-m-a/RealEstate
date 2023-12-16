@@ -1,0 +1,8 @@
+﻿@model JahanJooy.RealEstate.Core.Components.Dto.UserBillingBalance
+
+<span class="bold">@Model.User.DisplayName</span>
+@if (!Model.User.DisplayName.Equals(Model.User.FullName))
+{
+    <br /><span class="small">@Model.User.FullName</span>    
+}
+

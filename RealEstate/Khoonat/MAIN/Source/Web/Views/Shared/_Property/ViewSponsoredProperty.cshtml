@@ -1,0 +1,16 @@
+﻿@model JahanJooy.RealEstate.Core.Services.Dto.SponsoredPropertyListingSummary
+
+<table class="table table-hover">
+	@Html.Partial("_Property/Grid/TableHeader")
+	@Html.Partial("_Property/Grid/SponsoredRowsBoundary", false)
+
+	<tr class="warning sponsored">
+		@Html.Partial("_Property/Grid/RowCells", Model.PropertyListingSummary)
+	</tr>
+	<tr class="warning sponsored custom-caption-row">
+		<td colspan="7" style="border-top: 0;"><small class="custom-caption-text">@Model.SponsoredPropertyListing.CustomCaption</small></td>
+	</tr>
+
+	@Html.Partial("_Property/Grid/SponsoredRowsBoundary", true)
+</table>
+

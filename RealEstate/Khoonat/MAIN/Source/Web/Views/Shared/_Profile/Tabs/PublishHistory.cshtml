@@ -1,0 +1,40 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Models.Shared.Profile.Tabs.ProfileTabPublishHistoryModel
+
+<br />
+<br />
+
+@if (Model.PropertyPublishes.Any())
+{
+    @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.PropertyPublishes, Model.PaginationUrlTemplate))
+}
+
+<table class="table table-hover">
+    <tr class="active">
+        <td>شناسه انتشار</td>
+        <td>شناسه ملک</td>
+        <td>تاریخ انتشار</td>
+        <td>مدت انتشار (روز)</td>
+        <td>زمان انتشار قبلی</td>
+        <td>مدت انتشار قبلی</td>
+    </tr>
+    @foreach (var pub in Model.PropertyPublishes)
+    {
+        <tr>
+            <td>@pub.ID</td>
+            <td>@pub.PropertyListingID</td>
+            <td>@pub.PublishDate.ToLocalizedDateString() @pub.PublishDate.ToLocalizedTimeString() <br /> (@((pub.PublishDate - DateTime.Now).ToLocalizedRelativeString()))</td>
+            <td>@pub.PublishDays</td>
+            <td>@((pub.PreviousPublishDate - pub.PublishDate).ToLocalizedRelativeString())</td>
+            <td>@((pub.PreviousPublishEndDate - pub.PreviousPublishDate).ToLocalizedDurationString())</td>
+        </tr>
+    }
+</table>
+
+@if (Model.PropertyPublishes.Any())
+{
+    @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.PropertyPublishes, Model.PaginationUrlTemplate))
+}
+
+

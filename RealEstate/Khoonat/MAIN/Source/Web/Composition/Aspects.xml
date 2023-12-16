@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CompositionInfo xmlns="http://www.compositional.net/schema/compositionXml.1.0.xsd">
+
+	<RegisterCompositionListener name="transaction" objectType="JahanJooy.RealEstate.Core.Impl.Data.ServiceInterceptor.ServiceTransactionCompositionListener, JahanJooy.RealEstate.Core.Impl">
+		<Property name="Composer">
+			<ComponentContext/>
+		</Property>
+	</RegisterCompositionListener>
+	
+</CompositionInfo>

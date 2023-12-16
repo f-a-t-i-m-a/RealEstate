@@ -1,0 +1,95 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Domain.Cms.ArticleRevision
+
+
+@this.StyleLibrary(StyleLibraries.MarkdownDeep)
+@this.ScriptLibrary(JavaScriptLibraries.MarkdownDeep)
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome", AreaRouteValue.Admin, null) 
+    &gt; 
+    @Html.ActionLink("رده نوشته", "List", "AdminArticleCategory") 
+    &gt;
+    @Html.ActionLink("لیست نوشته ها", "List", new {ArticleCategoryID = Model.Article.CategoryID})
+    &gt;ویرایش
+</h2>
+
+@{
+    Html.EnableClientValidation(false);
+}
+@Html.ValidationSummary()
+
+@using (Html.BeginForm("Edit", "AdminArticle", new {ArticleID = Model.ArticleID, ID = Model.ID}))
+{
+    <table>
+        <tr>
+            <td>
+                Linked Text :
+            </td>
+            <td style="width: 500px">
+                @Html.TextBoxFor(m => m.LinkText)
+            </td>
+            <td style="width: 30px"></td>
+            <td>
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Linked Text :
+            </td>
+            <td style="width: 500px">
+                @Html.TextBoxFor(m => m.Title)
+            </td>
+            <td></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Linked Text :
+            </td>
+            <td style="width: 500px">
+                @Html.TextAreaFor(m => m.Description)
+            </td>
+            <td></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                markdown :
+            </td>
+            <td style="width: 500px">
+                <div class="mdd_toolbar"></div>
+                @Html.TextAreaFor(m => m.Markdown)
+                <div class="mdd_resizer"></div>
+                
+            </td>
+            <td></td>
+            <td>
+                <div class="mdd_preview"></div>
+            </td>
+        </tr>
+      
+        <tr>
+            <td colspan="2">
+                <input id="btnContinue" class="button" type="submit" value="ذخیره"/>
+                &nbsp;&nbsp;&nbsp;
+            </td>
+        </tr>
+    </table>
+}
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+                       $(function() {
+                           $("#Markdown").MarkdownDeep({
+                               help_location: "/Scripts/mdd_help.htm",
+                               ExtraMode: true
+                           });
+                       });
+
+                   </script>)

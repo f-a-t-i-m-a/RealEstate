@@ -1,0 +1,158 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminLogs.AdminLogsIndexModel
+
+@this.ScriptLibrary(JavaScriptLibraries.JQueryUI)
+@this.StyleLibrary(StyleLibraries.JQueryUiAll)
+
+<h2>
+    <a href="@Url.Action("Index", "AdminHome")">مدیریت سایت</a> &gt;
+    لاگ ها
+</h2>
+
+    <h2 class="textSection">Files</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Op</th>
+                <th>Size</th>
+                <th>Name</th>
+                <th>Modified</th>
+                <th>Created</th>
+            </tr>
+            </thead>
+            @foreach (var logFile in Model.LogFiles)
+            {
+                <tr>
+                    <td>
+                        @if (logFile.CanBeArchived)
+                        {
+                            <a href="#" data-archive-file="@logFile.Name">@IconsHelper.GoRight16(Url) Archive</a>
+                        }
+                        @if (logFile.CanBeDeleted)
+                        {
+                            <a href="#" data-delete-file="@logFile.Name">@IconsHelper.Cross16(Url) Delete</a>
+                        }
+                    </td>
+                    <td>@NumericStringUtils.BytesToString(logFile.Size)</td>
+                    <td>
+                        @logFile.Name
+                        <a href="@Url.Action("ViewLogFile", "AdminLogs", new {id = logFile.Name})" target="_blank">@IconsHelper.Xlink16(Url)</a>
+                    </td>
+                    <td>
+                        @((logFile.LastWriteTime - DateTime.Now).ToLocalizedRelativeString(1))
+                        <br/>
+                        <span class="smaller">@logFile.LastWriteTime.ToLocalizedDateString() @logFile.LastWriteTime.ToLocalizedTimeString()</span>
+                    </td>
+                    <td>
+                        @((logFile.CreationTime - DateTime.Now).ToLocalizedRelativeString(1))
+                        <br/>
+                        <span class="smaller">@logFile.CreationTime.ToLocalizedDateString() @logFile.CreationTime.ToLocalizedTimeString()</span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
+    <h2 class="textSection">Loggers</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Level</th>
+                <th>Append to Debug</th>
+                <th>Name</th>
+                <th>Additivity</th>
+            </tr>
+            </thead>
+            @foreach (var logger in Model.Loggers)
+            {
+                <tr>
+                    <td>
+                        <span class="bold larger">@logger.EffectiveLevel</span>
+                        @if (logger.CanChangeLevelAndAssociation)
+                        {
+                            <br/>
+                            <span class="smaller">
+                                @if (logger.IsDebugEnabled)
+                                {
+                                    <a href="#" data-disable-debug-logger="@logger.Name">Disable Debug</a>
+                                }
+                                else
+                                {
+                                    <a href="#" data-enable-debug-logger="@logger.Name">Enable Debug</a>
+                                }
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        <span class="bold larger">@(logger.AssociatedToDebugAppender ? "YES" : "-")</span>
+                        @if (logger.CanChangeLevelAndAssociation)
+                        {
+                            <br/>
+                            <span class="smaller">
+                                @if (logger.AssociatedToDebugAppender)
+                                {
+                                    <a href="#" data-disconnect-logger="@logger.Name">Disconnect</a>
+                                }
+                                else
+                                {
+                                    <a href="#" data-connect-logger="@logger.Name">Connect</a>
+                                }
+                            </span>
+                        }
+                    </td>
+                    <td>@logger.Name</td>
+                    <td>@IconsHelper.Tristate(Url, logger.Additivity)</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function setLoggerDebug(data) {
+                           $.ajax({
+                               url: "@Url.Action("SetLoggerDebug", "AdminLogs")",
+                               type: 'POST',
+                               data: data
+                           }).success(function() {
+                               setTimeout(function() { location.reload(true); }, 5);
+                           });
+                       }
+
+                       function setLoggerAssociation(data) {
+                           $.ajax({
+                               url: "@Url.Action("SetLoggerAssociation", "AdminLogs")",
+                               type: 'POST',
+                               data: data
+                           }).success(function() {
+                               setTimeout(function() { location.reload(true); }, 5);
+                           });
+                       }
+
+                       $(document).ready(function() {
+                           $('a[data-delete-file]').click(function() {
+                               $('<div></div>').load('@Url.Action("DeleteLogFile")', { 'id': $(this).attr('data-delete-file') }, function() {
+                               }).dialog({ modal: true, width: 400 });
+                           });
+
+                           $('a[data-archive-file]').click(function() {
+                               $('<div></div>').load('@Url.Action("ArchiveLogFile")', { 'id': $(this).attr('data-archive-file') }, function() {
+                               }).dialog({ modal: true, width: 400 });
+                           });
+
+                           $('a[data-disable-debug-logger]').click(function() { setLoggerDebug({ logger: $(this).attr('data-disable-debug-logger'), enabled: 'false' }); });
+                           $('a[data-enable-debug-logger]').click(function() { setLoggerDebug({ logger: $(this).attr('data-enable-debug-logger'), enabled: 'true' }); });
+                           $('a[data-disconnect-logger]').click(function() { setLoggerAssociation({ logger: $(this).attr('data-disconnect-logger'), enabled: 'false' }); });
+                           $('a[data-connect-logger]').click(function() { setLoggerAssociation({ logger: $(this).attr('data-connect-logger'), enabled: 'true' }); });
+                       });
+                   </script>)

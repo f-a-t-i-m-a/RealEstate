@@ -1,0 +1,190 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Resources.Views.Properties
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSearchPartialModel
+
+<div class="modal-content" data-partial-id="searchPropertyListings">
+	@using (Html.BeginForm("SearchPostback", "Properties", FormMethod.Post, new { id = "frmSearch", @class = "form-horizontal" }))
+	{
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">جستجو</h4>
+		</div>
+	    <div class="modal-body">
+	        @Html.HiddenFor(m => m.SearchQuery)
+
+	        <div class="form-group">
+	            <div class="col-sm-2 col-xs-4" style="margin-bottom:10px">@Html.LabelFor(m => m.PropertyType):</div>
+	            <div class="col-sm-4 col-xs-8">@Html.DropDownListFor(m => m.PropertyType, Model.PropertyType.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.AllItems, new {@class = "propertyType form-control"})</div>
+	            <div class="clearfix visible-xs-block"></div>
+	            <div class="col-sm-2 col-xs-4">@Html.LabelFor(m => m.IntentionOfOwner):</div>
+	            <div class="col-sm-4 col-xs-8">@Html.DropDownListFor(m => m.IntentionOfOwner, Model.IntentionOfOwner.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.AllItems, new {@class = "intentionOfOwner form-control"})</div>
+	        </div>
+	        <div class="form-group">
+	            <div class="col-sm-3 col-xs-4">@Html.LabelFor(m => m.VicinityIDs):</div>
+	            <div class="col-sm-9 col-xs-8">@Html.VicinitySelector(false, "VicinityIDsCsv", null, 20, Model.VicinityIDsCsv)</div>
+	        </div>
+
+	        <div class="form-group">
+	            <div class="col-sm-3 col-xs-4">@Html.LabelFor(m => m.AgencyListing):</div>
+	            <div class="col-sm-9 col-xs-8">
+	                @Html.DropDownListFor(m => m.AgencyListing, Model.AgencyListing.EnumSelectList(PropertiesSearchPartialResources.ResourceManager), PropertiesSearchPartialResources.PropertyAgencyListingSearchType_NotSelected, new {@class = "form-control"})
+	            </div>
+	        </div>
+
+	        <hr/>
+
+	        <div class=" displayForUnit none">
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.UnitAreaMinimum):
+	                @Html.TextBoxFor(m => m.UnitAreaMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.UnitAreaMinimum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.SquareMeter</div>
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.UnitAreaMaximum):
+	                @Html.TextBoxFor(m => m.UnitAreaMaximum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.UnitAreaMaximum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.SquareMeter</div>
+	        </div>
+	        <div class="clearfix"></div>
+	        
+            <div class=" displayForEstate none">
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.EstateAreaMinimum):
+	                @Html.TextBoxFor(m => m.EstateAreaMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.EstateAreaMinimum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.SquareMeter</div>
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.EstateAreaMaximum):
+	                @Html.TextBoxFor(m => m.EstateAreaMaximum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.EstateAreaMaximum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.SquareMeter</div>
+	        </div>
+	        <div class="clearfix"></div>
+	        
+            <div class="displayForUnit none">
+                <div class="col-xs-12 col-sm-6">
+                    @Html.LabelFor(m => m.NumberOfRoomsMinimum):
+                    @Html.TextBoxFor(m => m.NumberOfRoomsMinimum, new { maxlength = 3, style = "direction:ltr;text-align:center;" })
+                    @Html.ValidationMessageFor(m => m.NumberOfRoomsMinimum)
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                    @Html.LabelFor(m => m.NumberOfRoomsMaximum):
+                    @Html.TextBoxFor(m => m.NumberOfRoomsMaximum, new { maxlength = 3, style = "direction:ltr;text-align:center;" })
+                    @Html.ValidationMessageFor(m => m.NumberOfRoomsMaximum)
+                </div>
+	        </div>
+	        <div class="clearfix"></div>
+	        
+            <div class=" displayForRent none">
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.RentMinimum):
+	                @Html.TextBoxFor(m => m.RentMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.RentMinimum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.RentMaximum):
+	                @Html.TextBoxFor(m => m.RentMaximum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.RentMaximum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	        </div>
+	        <div class="clearfix"></div>
+            <div class=" displayForRent none">
+	            <div class="col-xs-8 col-sm-4">
+                    @Html.LabelFor(m => m.RentMortgageMinimum):
+	                @Html.TextBoxFor(m => m.RentMortgageMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                    @Html.ValidationMessageFor(m => m.RentMortgageMinimum)
+	            </div>
+                <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.RentMortgageMaximum):
+	                @Html.TextBoxFor(m => m.RentMortgageMaximum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                    @Html.ValidationMessageFor(m => m.RentMortgageMaximum)
+	            </div>
+	            <div col-xs-2>@GeneralResources.Tomans</div>
+	        </div>
+	        <div class="clearfix"></div>
+	        
+            <div class=" displayForSale none">
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.SalePriceMinimum):
+	                @Html.TextBoxFor(m => m.SalePriceMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                    @Html.ValidationMessageFor(m => m.SalePriceMinimum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.SalePriceMaximum):
+                    @Html.TextBoxFor(m => m.SalePriceMaximum, new { style = "direction:ltr;text-align:center;", @class = "digitGrouping" })
+                    @Html.ValidationMessageFor(m => m.SalePriceMaximum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	        </div>
+	        <div class="clearfix"></div>
+	        
+            <div class=" displayForEstateSale none">
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.SalePricePerEstateAreaMinimum):
+	                @Html.TextBoxFor(m => m.SalePricePerEstateAreaMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                    @Html.ValidationMessageFor(m => m.SalePricePerEstateAreaMinimum)
+	            </div>
+                <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.SalePricePerEstateAreaMaximum):
+	                @Html.TextBoxFor(m => m.SalePricePerEstateAreaMaximum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                    @Html.ValidationMessageFor(m => m.SalePricePerEstateAreaMaximum)
+                </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	        </div>
+	        <div class="clearfix"></div>
+
+	        <div class=" displayForUnitSale none">
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.SalePricePerUnitAreaMinimum):
+	                @Html.TextBoxFor(m => m.SalePricePerUnitAreaMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.SalePricePerUnitAreaMinimum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	            <div class="col-xs-8 col-sm-4">
+	                @Html.LabelFor(m => m.SalePricePerUnitAreaMaximum):
+	                @Html.TextBoxFor(m => m.SalePricePerUnitAreaMaximum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+	                @Html.ValidationMessageFor(m => m.SalePricePerUnitAreaMaximum)
+	            </div>
+	            <div class="col-xs-4 col-sm-2">@GeneralResources.Tomans</div>
+	        </div>
+        </div>
+        <div class="clearfix"></div>
+	    <div class="displayForNoPropertyType none " style="color: #888;">
+	        @IconsHelper.Idea16(Url)
+	        برای تعیین محدوده برای مساحت یا تعداد اتاق، لطفاً ابتدا نوع ملک را انتخاب کنید.
+	    </div>
+        <div class="clearfix"></div>
+        <div class="displayForNoIntention none " style="color: #888;">
+            @IconsHelper.Idea16(Url)
+            برای تعیین محدوده برای قیمت، لطفاً ابتدا نوع قرارداد را انتخاب کنید.
+        </div>
+
+		<div style="height: 30px;"></div>
+	    <div class="displayForUnit none">
+	        <div style="display: inline-block; padding: 0 10px;">@Html.CheckBoxFor(m => m.ShouldHaveParking)@Html.LabelFor(m => m.ShouldHaveParking)</div>
+	        <div style="display: inline-block; padding: 0 10px;">@Html.CheckBoxFor(m => m.ShouldHaveElevator)@Html.LabelFor(m => m.ShouldHaveElevator)</div>
+	        <div style="display: inline-block; padding: 0 10px;">@Html.CheckBoxFor(m => m.ShouldHaveStorageRoom)@Html.LabelFor(m => m.ShouldHaveStorageRoom)</div>
+	    </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12">@Html.CheckBoxFor(m => m.ShouldHavePhotos)@Html.LabelFor(m => m.ShouldHavePhotos)</div>
+        <div class="clearfix"></div>
+		<div class="modal-footer">
+			<button name="btnSearchOnMap" value="btnSearchOnMap" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> نقشه</button>
+			<button name="btnSearch" value="btnSearch" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> فهرست</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		</div>
+    }
+</div>
+

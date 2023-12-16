@@ -1,0 +1,47 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Configuration
+
+<p>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <a href="https://telegram.me/khoonat">
+                <img src="~/Content/images/telegram_24px.png" alt="تلگرام"/>
+            </a>
+            <a href="https://www.instagram.com/Khoonat">
+                <img src="~/Content/images/Instagram.png" class="social-network-icon"/>
+            </a>
+        </div>
+    </div>
+    <div class="row top-buffer ">
+        <div class="col-md-4 col-md-offset-4 text-center ">
+            <a href="https://cafebazaar.ir/app/com.khoonat.khoonat/?l=fa">
+                <img src="~/Content/images/google-play-badge-bazar.png" alt="کافه بازار" />
+            </a>
+            @* <a href="">
+        <img src="~/Content/images/google-play-badge.png" alt="گوگل پلی"/>
+    </a>
+    <a href="">
+        <img src="~/Content/images/appstore.png" alt="اپ استور" />
+    </a>*@
+
+        </div>
+    </div>
+</p>
+<p>
+    نسخه نرم افزار:
+    @(ComposerWebUtil.ComponentContext.GetComponent<ApplicationRevisionInfo>().VersionString)
+    -
+    API.@(ComposerWebUtil.ComponentContext.GetComponent<ApplicationRevisionInfo>().ApiVersionString)
+    -
+    @*کلیه حقوق سایت متعلق به شرکت سامانه های اطلاعاتی جهان جوی می باشد.*@
+    استفاده از نام و نشان های تجاری این سایت مجاز نیست.
+    ذکر مطالب به شرط قید منبع بلامانع است.
+    کاربران در استفاده از این سایت ملزم به رعایت قوانین رسمی ایران می باشند.
+    مسؤولیت مطالب ارسالی از طرف کاربران سایت متوجه خود ایشان است.
+</p>
+<p>
+    طبق ماده 3 آیین نامه اجرایی ماده 7 قانون حمایت از مصرف کنندگان مسئولیت تبلیغ خلاف واقع بر عهده سفارش دهنده و سازنده آگهی است.
+</p>
+<div id="layout-footer-logo">
+	<img src="~/Content/images/footer-smiley.png"/>
+</div>

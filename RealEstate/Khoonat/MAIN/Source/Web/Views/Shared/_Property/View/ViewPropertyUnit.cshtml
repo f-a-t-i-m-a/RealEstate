@@ -1,0 +1,99 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Property
+@model PropertyUnitModel
+
+<div class="row">
+	@PropertyViewHelper.SimpleAttribute(true, "", StringUtils.JoinNonEmpty(GeneralResources.Comma,
+																	ViewPropertyUnitResources.UsageType.FormatIfNotEmpty(Model.UsageType.Label(DomainEnumResources.ResourceManager)),
+																	ViewPropertyUnitResources.UsefulArea.FormatIfNotNull(Model.UsefulArea),
+																	ViewPropertyUnitResources.Duplex.If(Model.IsDuplex),
+																	ViewPropertyUnitResources.Furnished.If(Model.IsFurnished),
+																	ViewPropertyUnitResources.HalfFloorInside.If(Model.HasHalfFloorInside),
+																	ViewPropertyUnitResources.FloorNumber.FormatIfNotNull(Model.FloorNumber)
+												), nullReplacement: ViewPropertyUnitResources.UnitPropertiesNotSet)
+	@PropertyViewHelper.SimpleAttribute(true, "", ViewPropertyUnitResources.UnitIncludes.FormatIfNotEmpty(
+									StringUtils.JoinNonEmpty(GeneralResources.Comma,
+															ViewPropertyUnitResources.NumberOfRooms.FormatIfNotNull(Model.NumberOfRooms),
+															ViewPropertyUnitResources.NumberOfKitchens.FormatIfNotNull(Model.NumberOfKitchens),
+															ViewPropertyUnitResources.NumberOfLavatories.FormatIfNotNull(Model.NumberOfLavatories),
+															ViewPropertyUnitResources.NumberOfBathrooms.FormatIfNotNull(Model.NumberOfBathrooms),
+															ViewPropertyUnitResources.NumberOfClosets.FormatIfNotNull(Model.NumberOfClosets),
+															ViewPropertyUnitResources.NumberOfBalconies.FormatIfNotNull(Model.NumberOfBalconies),
+															ViewPropertyUnitResources.NumberOfParkings.FormatIfNotNull(Model.NumberOfParkings)
+										)), nullReplacement: ViewPropertyUnitResources.NumberOfRoomsNotSpecified)
+</div>
+
+<div class="row">
+	@PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_StorageRoomArea, ViewPropertyUnitResources.StorageRoomArea, Model.StorageRoomArea)
+	@PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_BalconyArea, ViewPropertyUnitResources.BalconyArea, Model.BalconyArea)
+	@PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_KitchenArea, ViewPropertyUnitResources.KitchenArea, Model.KitchenArea)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_KitchenCabinetBodyType, Model.KitchenCabinetBodyType)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_KitchenCabinetTopType, Model.KitchenCabinetTopType)
+	@PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_CurrentMonthlyChargeAmount, ViewPropertyUnitResources.CurrentMonthlyChargeAmount, NumericStringUtils.ShortNumericString(Model.CurrentMonthlyChargeAmount))
+
+	@if (!string.IsNullOrWhiteSpace(Model.AdditionalSpecialFeatures) || Model.ShowAllAttributes)
+	{
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div>@IconsHelper.Tick16(Url)&nbsp;<strong>@PropertyUnitResources.Label_AdditionalSpecialFeatures:</strong></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.AdditionalSpecialFeatures)</div>
+			</div>
+		</div>
+	}
+</div>
+
+<div class="row">
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_IsDuplex, Model.IsDuplex)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasIranianLavatory, Model.HasIranianLavatory)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasForeignLavatory, Model.HasForeignLavatory)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasSeparateLivingRoom, Model.HasSeparateLivingRoom)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasPrivatePatio, Model.HasPrivatePatio)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasSecuritySystem, Model.HasSecuritySystem)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasOpenKitchen, Model.HasOpenKitchen)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasFurnishedKitchen, Model.HasFurnishedKitchen)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasPrivateGarden, Model.HasPrivateGarden)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_WindowType, Model.WindowType)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_MainDaylightDirection, Model.MainDaylightDirection)
+</div>
+
+<div class="row">
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_LivingRoomFloor, Model.LivingRoomFloor)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_LivingRoomWalls, Model.LivingRoomWalls)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_RoomsFloor, Model.RoomsFloor)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_RoomsWall, Model.RoomsWall)
+</div>
+
+<div class="row">
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_HeatingSystem, Model.HeatingSystem)
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyUnitResources.Label_CoolingSystem, Model.CoolingSystem)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasIndependentHeatingPackage, Model.HasIndependentHeatingPackage)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasIndependentCoolingPackage, Model.HasIndependentCoolingPackage)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasFireplace, Model.HasFireplace)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_WindowsHasDoubleGlass, Model.WindowsHasDoubleGlass)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasInsulatedWalls, Model.HasInsulatedWalls)
+	@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasIndependentGasometer, Model.HasIndependentGasometer)
+	@if (!string.IsNullOrWhiteSpace(Model.AdditionalHeatingAndCoolingInformation) || Model.ShowAllAttributes)
+	{
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div>@IconsHelper.Tick16(Url)&nbsp;<strong>@PropertyUnitResources.Label_AdditionalHeatingAndCoolingInformation:</strong></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.AdditionalHeatingAndCoolingInformation)</div>
+			</div>
+		</div>
+	}
+	</div>
+
+	<div class="row">
+		@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_HasBeenReconstructed, Model.HasBeenReconstructed)
+		@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_NeedsReconstruction, Model.NeedsReconstruction)
+		@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_NeedsPainting, Model.NeedsPainting)
+		@PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyUnitResources.Label_NeedsDestruction, Model.NeedsDestruction)
+	</div>
+

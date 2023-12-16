@@ -1,0 +1,118 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Models.MyProfile
+@model MyProfileVerifyModel
+
+@* Global javascript variables *@
+@(this.ScriptBlock(@<script>
+                        var phoneVerified = false;
+                        var emailVerified = false;
+
+                        function updateFooterMessage() {
+                            if (phoneVerified && emailVerified) {
+                                if (document.readyState === "complete") {
+                                    $("#signupCompletedFooter").slideDown(400);
+                                    $("#signupIncompleteFooter").slideUp(400);
+                                } else {
+                                    $("#signupCompletedFooter").show();
+                                    $("#signupIncompleteFooter").hide();
+                                }
+                            } else {
+                                $("#signupCompletedFooter").hide();
+                                $("#signupIncompleteFooter").show();
+                            }
+                        }
+
+                        $(document).ready(updateFooterMessage);
+                    </script>))
+
+<div class="page-header">
+	<h1>
+		ثبت نام:
+		تکمیل اطلاعات پروفایل
+	</h1>
+</div>
+
+<h2>
+    به سایت @SitePresentationHelper.QuotedSiteName() خوش اومدین.
+</h2>
+
+<p>
+    ثبت نام اولیه شما با موفقیت انجام شد.
+</p>
+
+<p>
+    اما 
+    <strong>برای استفاده از امکانات کامل سایت باید ثبت نامتون رو کامل کنید.</strong>
+    
+</p>
+@if (((Model.VerifiedEmail != "" || Model.VerifiedEmail != null) && Model.IsSuccessful == true))
+{
+    <div id="EmailVarification" style="padding: 20px; background-color: green;">
+        آدرس ایمیل
+        @HtmlPresentationHelper.LeftToRight(Model.VerifiedEmail)
+        با موفقیت فعال سازی شده و قابل استفاده است. سپاسگزاریم
+    </div>
+}
+
+@if (((Model.VerifiedEmail != "" || Model.VerifiedEmail != null) && Model.IsSuccessful == false))
+{
+    <div id="NotVerified " style="padding: 20px; background-color: green;">
+        رمز اعتبار سنجی وارد شده صحیح نبود.
+    </div>
+}
+
+
+<div style="margin: 20px 0; border: 2px solid orange; padding: 15px;">
+    <h3 class="textSection">تلفن همراه:</h3>
+    @if (Model.PhoneVerificationInfo == null)
+    {
+        @Html.Partial("CompleteRegistrationPartials/AddPhoneNumber", new MyProfileAddPhoneNumberModel {Visibility = VisibilityLevel.Everybody})
+    }
+    else if (Model.PhoneVerificationInfo.ContactMethod.IsVerified)
+    {
+        @Html.Partial("CompleteRegistrationPartials/PhoneNumberOkay", Model.PhoneVerificationInfo)
+    }
+    else
+    {
+        @Html.Partial("CompleteRegistrationPartials/VerifyPhoneNumber", new MyProfileContactMethodVerificationModel {VerificationInfo = Model.PhoneVerificationInfo, ContactMethodID = Model.PhoneVerificationInfo.ContactMethod.ID})
+    }
+</div>
+
+<div style="margin: 20px 0; border: 2px solid orange; padding: 15px;">
+    <h3 class="textSection">آدرس ایمیل:</h3>
+    @if (Model.EmailVerificationInfo == null)
+    {
+        @Html.Partial("CompleteRegistrationPartials/AddEmailAddress", new MyProfileAddEmailModel {Visibility = VisibilityLevel.Everybody})
+    }
+    else if (Model.EmailVerificationInfo.ContactMethod.IsVerified)
+    {
+        @Html.Partial("CompleteRegistrationPartials/EmailAddressOkay", Model.EmailVerificationInfo)
+    }
+    else
+    {
+        @Html.Partial("CompleteRegistrationPartials/VerifyEmailAddress", new MyProfileContactMethodVerificationModel {VerificationInfo = Model.EmailVerificationInfo, ContactMethodID = Model.EmailVerificationInfo.ContactMethod.ID})
+    }
+</div>
+
+<div id="signupCompletedFooter" class="none" style="padding: 20px; background-color: #afa;">
+    <div class="pull-left">
+        <a class="btn btn-primary" style="width: 150px;" href="@Url.Action("Index", "Home", new {area = AreaNames.Main})">صفحه اول سایت</a>
+        <a class="btn btn-primary" style="width: 150px;" href="@Url.Action("View", "MyProfile", new {area = AreaNames.Main})">پروفایل کاربری</a>
+    </div>
+    <div style="padding: 4px;">
+		<span class='tristate-tick lead'></span>
+        سپاس گزاریم! ثبت نام شما کامل شده .
+    </div>
+</div>
+
+@if (Model.PhoneVerificationInfo!= null && Model.PhoneVerificationInfo.ContactMethod.IsVerified)
+{
+    <div class="pull-left">
+        <a class="btn btn-warning" style="width: 150px;" href="@Url.Action("Index", "Home", new {area = AreaNames.Main})">باشه برای بعد...</a>
+        <a class="btn btn-primary" style="width: 150px;" href="@Url.Action("View", "MyProfile", new {area = AreaNames.Main})">پروفایل کاربری</a>
+    </div>
+}
+

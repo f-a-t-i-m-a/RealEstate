@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="All" xml:space="preserve">
+    <value>همه</value>
+  </data>
+  <data name="Apartment" xml:space="preserve">
+    <value>آپارتمان</value>
+  </data>
+  <data name="CheapestFirst" xml:space="preserve">
+    <value>ارزان ترین</value>
+  </data>
+  <data name="ForRent" xml:space="preserve">
+    <value>رهن و اجاره</value>
+  </data>
+  <data name="ForSale" xml:space="preserve">
+    <value>خرید / فروش</value>
+  </data>
+  <data name="Garden" xml:space="preserve">
+    <value>باغ</value>
+  </data>
+  <data name="House" xml:space="preserve">
+    <value>خانه دربست</value>
+  </data>
+  <data name="Land" xml:space="preserve">
+    <value>زمین</value>
+  </data>
+  <data name="LargestFirst" xml:space="preserve">
+    <value>بزرگ ترین</value>
+  </data>
+  <data name="MoreExpensiveFirst" xml:space="preserve">
+    <value>گران ترین</value>
+  </data>
+  <data name="MostPopularFirst" xml:space="preserve">
+    <value>پربیننده ترین</value>
+  </data>
+  <data name="NewestFirst" xml:space="preserve">
+    <value>جدید ترین</value>
+  </data>
+  <data name="Penthouse" xml:space="preserve">
+    <value>پنت هاوس</value>
+  </data>
+  <data name="property_EstateAreaMaximum" xml:space="preserve">
+    <value>حداکثر مساحت زمین: {0} متر</value>
+  </data>
+  <data name="property_EstateAreaMinimum" xml:space="preserve">
+    <value>حداقل مساحت زمین: {0} متر</value>
+  </data>
+  <data name="property_NumberOfParkingsMinimum" xml:space="preserve">
+    <value>حداقل تعداد پارکینگ: {0}</value>
+  </data>
+  <data name="property_NumberOfRoomsMinimum" xml:space="preserve">
+    <value>حداقل تعداد اتاق: {0}</value>
+  </data>
+  <data name="property_RentMaximum" xml:space="preserve">
+    <value>حداکثر اجاره: {0:#,###} تومان</value>
+  </data>
+  <data name="property_RentMortgageMaximum" xml:space="preserve">
+    <value>حداکثر رهن: {0:#,###} تومان</value>
+  </data>
+  <data name="property_RentMortgageMinimum" xml:space="preserve">
+    <value>حداقل رهن: {0:#,###} تومان</value>
+  </data>
+  <data name="property_SalePriceMaximum" xml:space="preserve">
+    <value>قیمت کل &lt; {0:#,###} ت</value>
+  </data>
+  <data name="property_SalePricePerEstateAreaMaximum" xml:space="preserve">
+    <value>زمین متری &lt; {0:#,###} ت</value>
+  </data>
+  <data name="property_SalePricePerUnitAreaMaximum" xml:space="preserve">
+    <value>بنا متری &lt; {0:#,###} ت</value>
+  </data>
+  <data name="property_UnitAreaMaximum" xml:space="preserve">
+    <value>حداکثر مساحت واحد: {0} متر</value>
+  </data>
+  <data name="property_UnitAreaMinimum" xml:space="preserve">
+    <value>حداقل مساحت واحد: {0} متر</value>
+  </data>
+  <data name="SmallestFirst" xml:space="preserve">
+    <value>کوچک ترین</value>
+  </data>
+  <data name="Unspecified" xml:space="preserve">
+    <value>نامشخص</value>
+  </data>
+  <data name="Villa" xml:space="preserve">
+    <value>ویلا / خانه ویلایی</value>
+  </data>
+  <data name="option_isempty" xml:space="preserve">
+    <value>کلید نخورده یا تخلیه</value>
+  </data>
+  <data name="option_isongroundfloor" xml:space="preserve">
+    <value>در طبقه همکف یا اول واقع شده</value>
+  </data>
+  <data name="option_isresidential" xml:space="preserve">
+    <value>دارای کاربری مسکونی</value>
+  </data>
+  <data name="option_isduplex" xml:space="preserve">
+    <value>دوبلکس است</value>
+  </data>
+  <data name="option_hasiranianlavatory" xml:space="preserve">
+    <value>دارای توالت ایرانی</value>
+  </data>
+  <data name="option_hasforeignlavatory" xml:space="preserve">
+    <value>دارای توالت فرنگی</value>
+  </data>
+  <data name="option_hasprivatepatio" xml:space="preserve">
+    <value>دارای پاسیوی خصوصی</value>
+  </data>
+  <data name="option_hasopenkitchen" xml:space="preserve">
+    <value>دارای آشپزخانه باز (اپن)</value>
+  </data>
+  <data name="option_hasmdftypekitchen" xml:space="preserve">
+    <value>دارای آشپزخانه ام دی اف</value>
+  </data>
+  <data name="option_hassouthdaylight" xml:space="preserve">
+    <value>دارای نور جنوب</value>
+  </data>
+  <data name="option_hasparking" xml:space="preserve">
+    <value>دارای پارکینگ</value>
+  </data>
+  <data name="option_hasstorageroom" xml:space="preserve">
+    <value>دارای انباری</value>
+  </data>
+  <data name="option_hasupvcwindows" xml:space="preserve">
+    <value>دارای پنجره های یو پی وی سی</value>
+  </data>
+  <data name="option_hasindependentheatingpackage" xml:space="preserve">
+    <value>دارای پکیج مستقل گرمایش</value>
+  </data>
+  <data name="option_hasindependentcoolingpackage" xml:space="preserve">
+    <value>دارای پکیج مستقل سرمایش</value>
+  </data>
+  <data name="option_hasfireplace" xml:space="preserve">
+    <value>دارای شومینه</value>
+  </data>
+  <data name="option_hasduallayerwindows" xml:space="preserve">
+    <value>دارای پنجره دوجداره</value>
+  </data>
+  <data name="option_hasbeenreconstructed" xml:space="preserve">
+    <value>بازسازی شده</value>
+  </data>
+  <data name="option_isnotinconstruction" xml:space="preserve">
+    <value>در حال ساخت نیست</value>
+  </data>
+  <data name="option_buildinghaslessthan5units" xml:space="preserve">
+    <value>ساختمان حداکثر 5 واحدی</value>
+  </data>
+  <data name="option_buildinghaslessthan10units" xml:space="preserve">
+    <value>ساختمان حداکثر 10 واحدی</value>
+  </data>
+  <data name="option_buildinghasmorethan10units" xml:space="preserve">
+    <value>ساختمان حداقل 10 واحدی</value>
+  </data>
+  <data name="option_issingleunitperfloor" xml:space="preserve">
+    <value>دارای طبقات تک واحدی</value>
+  </data>
+  <data name="option_hasjanitorunit" xml:space="preserve">
+    <value>دارای واحد سرایداری</value>
+  </data>
+  <data name="option_hasentrancelobby" xml:space="preserve">
+    <value>دارای لابی ورودی</value>
+  </data>
+  <data name="option_hasstoneface" xml:space="preserve">
+    <value>دارای نمای سنگی</value>
+  </data>
+  <data name="option_hascompositepanelface" xml:space="preserve">
+    <value>دارای نمای پانل کامپوزیت</value>
+  </data>
+  <data name="option_structureisironbeam" xml:space="preserve">
+    <value>دارای اسکلت فلزی است</value>
+  </data>
+  <data name="option_structureisconcrete" xml:space="preserve">
+    <value>دارای اسکلت بتونی است</value>
+  </data>
+  <data name="option_haselevator" xml:space="preserve">
+    <value>دارای آسانسور</value>
+  </data>
+  <data name="option_hasfurnitureelevator" xml:space="preserve">
+    <value>دارای آسانسور بار</value>
+  </data>
+  <data name="option_hascentraltelevisionantenna" xml:space="preserve">
+    <value>دارای آنتن مرکزی تلویزیون</value>
+  </data>
+  <data name="option_hascentralinternetconnection" xml:space="preserve">
+    <value>دارای ارتباط اینترنت</value>
+  </data>
+  <data name="option_hasguestparking" xml:space="preserve">
+    <value>دارای پارکینگ مهمان</value>
+  </data>
+  <data name="option_hascentralboiler" xml:space="preserve">
+    <value>دارای سیستم حرارت مرکزی</value>
+  </data>
+  <data name="option_hascentralchiller" xml:space="preserve">
+    <value>دارای سیستم چیلر مرکزی</value>
+  </data>
+  <data name="option_hascentralvacuum" xml:space="preserve">
+    <value>دارای جاروبرقی مرکزی</value>
+  </data>
+  <data name="option_hasgatheringhall" xml:space="preserve">
+    <value>دارای سالن اجتماعات</value>
+  </data>
+  <data name="option_hasautomaticparkingdoor" xml:space="preserve">
+    <value>دارای درب ریموتی</value>
+  </data>
+  <data name="option_hasvideoeyephone" xml:space="preserve">
+    <value>دارای آیفون تصویری</value>
+  </data>
+  <data name="option_hascarwash" xml:space="preserve">
+    <value>دارای کارواش</value>
+  </data>
+  <data name="option_haswaterwells" xml:space="preserve">
+    <value>دارای چاه آب</value>
+  </data>
+  <data name="option_hasaccessibilityfeatures" xml:space="preserve">
+    <value>قابل استفاده توسط معلولین</value>
+  </data>
+  <data name="option_hasgreengarden" xml:space="preserve">
+    <value>دارای باغچه سرسبز</value>
+  </data>
+  <data name="option_hasswimmingpool" xml:space="preserve">
+    <value>دارای استخر</value>
+  </data>
+  <data name="option_hassauna" xml:space="preserve">
+    <value>دارای سونا</value>
+  </data>
+  <data name="option_hasjacuzzi" xml:space="preserve">
+    <value>دارای جکوزی</value>
+  </data>
+  <data name="option_hasgym" xml:space="preserve">
+    <value>دارای سالن با امکانات ورزشی</value>
+  </data>
+  <data name="option_hasguardian" xml:space="preserve">
+    <value>دارای نگهبان</value>
+  </data>
+  <data name="option_estatedirectionisnorth" xml:space="preserve">
+    <value>زمین شمالی</value>
+  </data>
+  <data name="option_estatedirectionissouth" xml:space="preserve">
+    <value>زمین جنوبی</value>
+  </data>
+  <data name="option_estatedirectionisboth" xml:space="preserve">
+    <value>زمین دو کله</value>
+  </data>
+  <data name="option_estatevouchertypeisnormal" xml:space="preserve">
+    <value>زمین دارای سند منگوله دار</value>
+  </data>
+  <data name="option_estatehastwosidesminimum" xml:space="preserve">
+    <value>زمین حداقل 2 بر</value>
+  </data>
+  <data name="option_estatehasthreesidesminimum" xml:space="preserve">
+    <value>زمین حداقل 3 بر</value>
+  </data>
+  <data name="option_isindeadend" xml:space="preserve">
+    <value>در بن بست واقع شده</value>
+  </data>
+  <data name="option_isnotindeadend" xml:space="preserve">
+    <value>در بن بست واقع نشده است</value>
+  </data>
+  <data name="option_isnotclosetohighway" xml:space="preserve">
+    <value>نزدیک بزرگ راه نیست</value>
+  </data>
+  <data name="option_isonmainpassage" xml:space="preserve">
+    <value>درگذر اصلی واقع شده است</value>
+  </data>
+  <data name="option_isnotonmainpassage" xml:space="preserve">
+    <value>در گذر اصلی واقع نشده است</value>
+  </data>
+  <data name="option_isongreenpassage" xml:space="preserve">
+    <value>در گذر مشجر واقع شده است</value>
+  </data>
+  <data name="option_isclosetopark" xml:space="preserve">
+    <value>در نزدیکی پارک واقع شده است</value>
+  </data>
+  <data name="option_estatehaslowslope" xml:space="preserve">
+    <value>زمین کم شیب</value>
+  </data>
+  <data name="OtherFilters" xml:space="preserve">
+    <value>سایر شرایط</value>
+  </data>
+  <data name="AllProperties" xml:space="preserve">
+    <value>همه املاک</value>
+  </data>
+  <data name="option_hasphotos" xml:space="preserve">
+    <value>فقط املاک دارای عکس</value>
+  </data>
+  <data name="option_userisowner" xml:space="preserve">
+    <value>فقط املاک ثبت شده توسط من</value>
+  </data>
+  <data name="option_userhasstarred" xml:space="preserve">
+    <value>فقط املاک برگزیده توسط من</value>
+  </data>
+  <data name="property_NumberOfRoomsMaximum" xml:space="preserve">
+    <value>حداکثر تعداد اتاق: {0}</value>
+  </data>
+  <data name="property_RentMinimum" xml:space="preserve">
+    <value>حداقل اجاره: {0:#,###} تومان</value>
+  </data>
+  <data name="property_SalePriceMinimum" xml:space="preserve">
+    <value>قیمت کل &gt; {0:#,###} ت</value>
+  </data>
+  <data name="property_SalePricePerEstateAreaMinimum" xml:space="preserve">
+    <value>زمین متری &gt; {0:#,###} ت</value>
+  </data>
+  <data name="property_SalePricePerUnitAreaMinimum" xml:space="preserve">
+    <value>بنا متری &gt; {0:#,###} ت</value>
+  </data>
+  <data name="PropertyType" xml:space="preserve">
+    <value>نوع ملک: {0}</value>
+  </data>
+  <data name="IntentionOfOwner" xml:space="preserve">
+    <value>نوع قرارداد: {0}</value>
+  </data>
+  <data name="Neighborhood" xml:space="preserve">
+    <value>در محله: {0}</value>
+  </data>
+  <data name="Neighborhoods" xml:space="preserve">
+    <value>در {0} محله ا نتخاب شده</value>
+  </data>
+  <data name="CityRegion" xml:space="preserve">
+    <value>در منطقه شهرداری: {0}</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>در شهر: {0}</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>در استان: {0}</value>
+  </data>
+  <data name="option_noagencylisting" xml:space="preserve">
+    <value>فقط آگهی بی واسطه</value>
+  </data>
+  <data name="option_agencyactivityallowed" xml:space="preserve">
+    <value>قابل کار توسط بنگاه املاک</value>
+  </data>
+  <data name="Shop" xml:space="preserve">
+    <value>مغازه</value>
+  </data>
+  <data name="Vicinities" xml:space="preserve">
+    <value>موقعیت : {0}</value>
+  </data>
+  <data name="Vicinity" xml:space="preserve">
+    <value>موقعیت : {0}</value>
+  </data>
+</root>

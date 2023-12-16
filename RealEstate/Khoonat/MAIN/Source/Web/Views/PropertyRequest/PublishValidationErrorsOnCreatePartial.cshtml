@@ -1,0 +1,35 @@
+﻿@using JahanJooy.RealEstate.Web.Resources.Controllers.Property
+@model JahanJooy.Common.Util.Validation.ValidationResult
+
+@if (Model != null && !Model.IsValid)
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">از آنجا که مشخصات این ملک عمومی است، به دلیل خطاهای زیر امکان ذخیره سازی وجود ندارد</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-1 text-danger lead">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                </div>
+                <div class="col-xs-11">
+                    <div class="row">
+                        <ul>
+                            @foreach (var error in Model.Errors)
+                            {
+                                <li>@PublishValidationErrors.ResourceManager.GetString(error.FullResourceKey)</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            لطفاً برای ذخیره سازی تغییرات خود، ابتدا خطاهای فوق را رفع کنید، و یا اطلاعات ملک را از حالت عمومی خارج نمایید
+        </div>
+    </div>
+
+
+}
+

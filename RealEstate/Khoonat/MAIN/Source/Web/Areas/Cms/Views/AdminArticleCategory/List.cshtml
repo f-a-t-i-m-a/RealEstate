@@ -1,0 +1,45 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Cms.Models.AdminArticleCategory
+@using JahanJooy.RealEstate.Web.Helpers
+@model AdminArticleCategoryListModel
+
+
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray;">
+    <a href="@Url.Action("NewArticleCategory", "AdminArticleCategory")">@IconsHelper.Add16(Url) ایجاد رده جدید</a>
+</div>
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome", AreaRouteValue.Admin, null) 
+    &gt; 
+   رده نوشته
+   
+</h2>
+
+@if (Model.ArticleCategories.Any())
+{
+    <div class="tbl" style="width: 100%; text-align: center;">
+        <div class="tr" style="font-weight: bold; background-color: #ddb; border-bottom: 1px dotted #000;">
+            <div class="td" style="width: 70px;">نام</div>
+            <div class="td" style="width: 70px;"> نوع نمایش</div>
+
+        </div>
+
+        @foreach (var articleCategory in Model.ArticleCategories)
+        {
+            <div class="tr" >
+                <div class="td">
+                    <a href="@Url.Action("list", "AdminArticle", new {ArticleCategoryID = articleCategory.ID})"> @articleCategory.Name </a>
+                </div>
+                <div class="td"> @articleCategory.DefaultDisplayType.Label(DomainEnumResources.ResourceManager) </div>
+                
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>
+        تا به حال هیچ  نوعی ثبت نشده است  
+    </p>
+}

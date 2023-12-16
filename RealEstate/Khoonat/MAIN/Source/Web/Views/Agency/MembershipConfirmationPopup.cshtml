@@ -1,0 +1,31 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@model long
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">عضویت در آژانس</h4>
+    </div>
+    <div class="modal-body">
+        <p>در صورت عضویت در آژانس:</p>
+        <ul>
+            <li>نام و مشخصات آژانس در پروفایل کاربری شما نمایش داده میشه</li>
+            <li>اسم شما در فهرست اعضای آژانس اضافه میشه</li>
+            <li>نوع کاربر شما به «مشاور عضو آژانس» تغییر می کنه</li>
+        </ul>
+
+    </div>
+    <div class="modal-footer">
+        @if (Model != null)
+        {
+
+            using (Html.BeginForm("MembershipConfirmationPostBack", "Agency", new {agencyId = Model, area = AreaNames.Main}))
+            {
+
+                <button name="btnConfirm" value="btnConfirm" type="submit" class="btn btn-primary"> بله؛ اسمم رو اضافه کن</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+            }
+        }
+    </div>
+</div>
+
+

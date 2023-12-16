@@ -1,0 +1,70 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+@{
+	var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="modal-content">
+	@using (Html.BeginForm("PublishPostback", "Property", new {id = Model.ID}, FormMethod.Post))
+	{
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">تغییر مدت آگهی</h4>
+		</div>
+		<div class="modal-body">
+			<p>
+				ملک زیر تا تاریخ
+				&lrm;@Model.PublishEndDate.ToLocalizedDateString()
+				در فهرست املاک عمومی قرار دارد:
+			</p>
+			<table style="border-spacing: 10px; border-collapse: separate;">
+				<tr>
+					<td>شناسه:</td>
+					<td>@Model.ID</td>
+				</tr>
+				<tr>
+					<td>محل:</td>
+					<td>@propertyPresentationHelper.BuildRegion(Model)</td>
+				</tr>
+				<tr>
+					<td>ملک:</td>
+					<td>@propertyPresentationHelper.BuildTitle(Model)</td>
+				</tr>
+				<tr>
+					<td>مساحت:</td>
+					<td>@propertyPresentationHelper.BuildArea(Model)</td>
+				</tr>
+				<tr>
+					<td>قیمت:</td>
+					<td>@propertyPresentationHelper.BuildPriceAndPricePerArea(Model)</td>
+				</tr>
+			</table>
+
+			<p>
+				شما می توانید مدت زمان عمومی بودن این رکورد را نسبت به تاریخ امروز تغییر دهید.
+			</p>
+			<p>
+				مدت زمان انتشار جدید:
+				<select id="selPublishDays" name="publishDays" style="width: 200px;" class="form-control">
+					<option value="2">دو روز</option>
+					<option value="4">چهار روز</option>
+					<option value="7">یک هفته</option>
+					<option value="14">دو هفته</option>
+					<option value="21">سه هفته</option>
+					<option value="30">یک ماه</option>
+					<option value="60">دو ماه</option>
+					<option value="90" selected="selected">سه ماه</option>
+					<option value="120">چهار ماه</option>
+					<option value="150">پنج ماه</option>
+				</select>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button name="btnPublish" value="btnPublish" type="submit" class="btn btn-primary">بروزرسانی</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		</div>
+	}
+</div>

@@ -1,0 +1,16 @@
+﻿@model  JahanJooy.RealEstate.Domain.Property.SponsoredPropertyListing
+@using (Html.BeginForm("EditPostBack", "SponsoredPropertyAdmin", new {id = Model.ListingID}, FormMethod.Post))
+{
+    <div>
+        <div class="td"> متن سطر اول: </div>
+        <div class="td"> @Html.TextBoxFor(m => m.CustomCaption, new {maxlength = 200})</div>
+    </div>
+    <br/>
+   
+    <span  class="small">
+        <h3 style="margin: 0;">ذخیره:</h3>
+         <br/>
+        <button name="EditCustomCaption" value="EditCustomCaption" type="submit" class="button" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;">ذخیره</button>
+        <input id="btnCancel" name="btnCancel" class="button" type="button" value="بی خیال" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;" onclick=" $('.qtip:visible').qtip('hide'); " />
+    </span>
+}

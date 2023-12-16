@@ -1,0 +1,103 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@{
+    ViewBag.Title = "ثبت، درج و انتشار رایگان آگهی فروش یا اجاره ملک";
+    ViewBag.MetaDescription = "فرم ثبت رایگان اطلاعات املاک و درج آگهی در سایت برای خرید و فروش، یا رهن و اجاره و انتشار آن. اطلاعات ملک ثبت شده به رایگان در اختیار عموم قرار خواهد گرفت";
+}
+
+@this.StyleLibrary(StyleLibraries.JQueryCalendarsPicker)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryUI)
+
+@this.ScriptBlock(@<script type="text/javascript">applyDigitGrouping(); </script>)
+@this.ScriptBlock(@<script type="text/javascript">setupChosen(); </script>)
+
+<div class="page-header">
+	<h1>ثبت اطلاعات ملک جدید</h1>
+</div>
+
+@Html.Partial("PublishValidationErrorsOnCreatePartial")
+@using (Html.BeginForm("QuickCreate", "Property", FormMethod.Post, new {id = "frmProperty", @class = "form-horizontal"}))
+{
+    <text>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.Partial("Summary/EditMainPropertiesPartial", Model)
+                @Html.Partial("Summary/EditAgencyListingFlagPartial", Model)
+            </div>
+        </div>
+        @Html.Partial("Summary/EditLocationPartial", Model)
+        @Html.Partial("Summary/EditBuildingAndUnitPartial", Model)
+        @Html.Partial("Summary/EditEstatePartial", Model)
+        @Html.Partial("Summary/EditAdditionalSpecsPartial", Model)
+        @Html.Partial("Summary/EditSalePricePartial", Model)
+        @Html.Partial("Summary/EditRentPricePartial", Model)
+        @Html.Partial("Summary/EditContactInfoPartial", Model)
+    </text>
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">ثبت و آگهی کردن
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                شما می تونید برای مدت زمان دلخواه، اطلاعات ملکتون رو به صورت عمومی در دسترس همه کاربران قرار بدید، یا اینکه فقط برای استفاده شخصی (غیر قابل جستجو و مشاهده برای بقیه) ثبت کنید. هر زمانی که خواستید،
+                <strong>می تونید عمومی بودن اطلاعات رو تمدید کنید، اطلاعات رو ویرایش کنید، یا اونها رو از حالت عمومی خارج کنید</strong>.
+            </p>
+            <br/>
+            <div class="form-group">
+                <div class="col-md-4">@Html.LabelFor(m => m.PublishDuration):</div>
+                <div class="col-md-4">@Html.DropDownListFor(m => m.PublishDuration, Model.PublishDuration.EnumSelectList(PropertySummaryResources.ResourceManager), "هیچ - فقط در دسترس خودم باشد و عمومی نشود", new {@class = "form-control"})</div>
+            </div>
+            <br/>
+            <br/>
+            <div class="panel panel-info" id="publishInfo">
+                <div class="panel-body">
+                    <ul>
+                        @*<li>با عمومی کردن ملک، اطلاعات اون برای همه افراد قابل دسترسی و مشاهده می شه. مسئولیت انتشار این اطلاعات به صورت عمومی به عهده شماست.</li>*@
+                        <li> کاربر گرامی مسؤولیت آگهی های عمومی املاک بر عهده ی آگهی دهنده است. از درستی اطلاعات مطمئن شوید.</li>
+                        @*<li>لطفاً قبل از عمومی کردن، از درستی اطلاعات مطمئن بشید تا بقیه کاربران به اشتباه نیفتند. اگر در موردی شک دارید، از راهنما استفاده کنید یا با ما تماس بگیرید.</li>*@
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-warning" id="unpublishInfo">
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-warning-sign text-warning" aria-hidden="true"></span>
+                    با این انتخاب، اطلاعات ملک به صورت خصوصی برای شما ثبت شده، در جستجو ظاهر نمی شود و سایر کاربران به آن دسترسی نخواهند داشت.
+                    برای عمومی کردن ملک پس از ثبت، می توانید از داخل صفحه جزئیات ملک این کار را انجام دهید.
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button name="submit" value="btnSave" class="btn btn-primary btn-md" type="submit"> ثبت >></button>
+        </div>
+    </div>
+
+
+    this.ScriptBlock(@<script type="text/javascript">
+
+                          $("#PublishDuration").change(function() {
+                              if (this.value) {
+                                  $("#publishInfo").show(400);
+                                  $("#unpublishInfo").hide(400);
+                              } else {
+                                  $("#publishInfo").hide(400);
+                                  $("#unpublishInfo").show(400);
+                              }
+                          });
+
+                          $("#PublishDuration").change();
+
+                      </script>);
+
+    @Html.CaptchaErrorMessage()
+    @Html.ScriptCaptchaToken()
+    this.ScriptText(Html.ScriptCaptchaScript());
+}

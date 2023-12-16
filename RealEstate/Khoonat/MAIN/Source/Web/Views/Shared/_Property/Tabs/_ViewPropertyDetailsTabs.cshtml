@@ -1,0 +1,66 @@
+﻿@using JahanJooy.RealEstate.Web.Models.Property
+@model PropertyViewDetailsModel
+
+<div role="tabpanel">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active" data-toggle="tooltip" title="همه جزئیات اطلاعاتی که در مورد ملک ثبت شده است">
+			<a href="#tbDetails" role="tab" data-toggle="tab">
+				<h4>
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>جزئیات</span>
+				</h4>
+			</a>
+		</li>
+		<li role="presentation" data-toggle="tooltip" title="شماره تلفن، ایمیل و سایر جزئیات تماس">
+			<a href="#tbContactInfo" role="tab" data-toggle="tab"
+			   data-ajax-content-url="@Url.Action("ContactInfoTab", "Property", new { id = Model.Listing.ID, Area = "" })">
+				<h4>
+					<span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+					<span>تماس</span>
+				</h4>
+			</a>
+		</li>
+		<li role="presentation" data-toggle="tooltip" title="تصاویری که از این ملک ثبت شده است">
+			<a href="#tbPhotos" role="tab" data-toggle="tab"
+			   data-ajax-content-url="@Url.Action("Tab", "PropertyPhoto", new {id = Model.Listing.ID, Area = ""})">
+				<h4>
+					<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+					<span>@Model.Listing.NumberOfPhotos عکس</span>
+				</h4>
+			</a>
+		</li>
+		<li role="presentation" data-toggle="tooltip" title="نقشه اطراف ملک و موقعیت ملک">
+			<a href="#tbMap" role="tab" data-toggle="tab"
+			   data-ajax-content-url="@Url.Action("Map", "Property", new { id = Model.Listing.ID, Area = "" })">
+				<h4>
+					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+					<span>نقشه</span>
+				</h4>
+			</a>
+		</li>
+		<li role="presentation" data-toggle="tooltip" title="تعداد دفعات نمایش و زمان های ثبت و ویرایش">
+			<a href="#tbStats" role="tab" data-toggle="tab">
+				<h4>
+					<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+					<span>آمار</span>
+				</h4>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="tab-content" style="padding-top: 15px;">
+	<div role="tabpanel" class="tab-pane fade in active" id="tbDetails">
+		@Html.Partial("_Property/Tabs/Details", new ViewPropertyDetailsDetailsTabModel { Listing = Model.Listing, IsOwner = Model.IsOwner })
+	</div>
+	<div role="tabpanel" class="tab-pane fade" id="tbContactInfo">
+	</div>
+	<div role="tabpanel" class="tab-pane fade" id="tbPhotos">
+	</div>
+	<div role="tabpanel" class="tab-pane fade" id="tbMap">
+	</div>
+	<div role="tabpanel" class="tab-pane fade" id="tbStats">
+		@Html.Partial("_Property/Tabs/Stats", Model)
+	</div>
+</div>
+		

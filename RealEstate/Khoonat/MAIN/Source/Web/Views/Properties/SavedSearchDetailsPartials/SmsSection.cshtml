@@ -1,0 +1,63 @@
+﻿@using System.Globalization
+@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Core.Services.Billing
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+@{
+    var tarrifService = ComposerWebUtil.ComponentContext.GetComponent<ITarrifService>();
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+	    <div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SendPromotionalSmsMessages)
+						ثبت کننده ملکی که با شرایط من مطابقت دارد اجازه دارد به صورت پیامک به من اطلاع رسانی کند
+						<span class="label label-success">رایگان</span>
+					</label>
+				</div>
+			</div>
+	    </div>
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SendPaidSmsMessages)
+						اطلاع رسانی املاک ثبت شده از طریق پیامک
+						<span class="label label-warning">(هر پیامک @tarrifService.GetTarrif(User.CoreIdentity.UserId).SavedPropertySearchSmsNotificationBase ریال)</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div id="anySmsDetails" class="none">
+			@if (Model.UserSmsContactMethods.Any())
+			{
+				<div class="form-group">
+					<div class="col-xs-6 control-label">@Html.LabelFor(m => m.SmsNotificationTargetID):</div>
+					<div class="col-xs-6">@Html.DropDownListFor(m => m.SmsNotificationTargetID, Model.UserSmsContactMethods.SelectListItems(cm => cm.ContactMethodText, cm => cm.ID.ToString(CultureInfo.InvariantCulture)), new { style = "direction:ltr;", @class = "form-control" })</div>
+				</div>
+			}
+			else
+			{
+				<br />
+				<p>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					شما هیچ <strong>شماره تلفن معتبر و فعال شده</strong> ای توی پروفایلتون ثبت نکرده اید.
+					قبل از اینکه سیستم بتونه اطلاعات املاک رو به صورت پیامک براتون بفرسته،
+					باید یه شماره همراه معتبر ثبت کنید و فعالش کنید.
+				</p>
+				<p>
+					می تونید اول شماره تلفن اضافه کنید و دوباره امتحان کنید.
+					برای این کار لطفاً به <a href="@Url.Action("View", "MyProfile")"><strong>صفحه پروفایل</strong></a> مراجعه کنید.
+				</p>
+				<p>
+					همینطور می تونید این جستجو رو ذخیره کنید و بعداً شماره تلفن رو اضافه کنید.
+					پیغام ها به اولین شماره تلفن فعال سازی شده ای که توی پروفایلتون ثبت کنید فرستاده میشن.
+				</p>
+			}
+		</div>
+	</div>
+</div>

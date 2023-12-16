@@ -1,0 +1,45 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Cms.Models.AdminArticle
+@model AdminArticleModel
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome") 
+ 
+   
+</h2>
+
+<div style="direction: rtl;">
+    @Html.ValidationSummary(false)
+</div>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <table>
+            <tr>
+                <td>نام:</td>
+                <td>@Html.TextBoxFor(m => m.Name)</td>
+                <td>@Html.ValidationMessageFor(m => m.Name)</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td> نوع نمایش:</td>
+                <td>@Html.DropDownListFor(m => m.DisplayType, Model.DisplayType.EnumSelectList(DomainEnumResources.ResourceManager))
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input id="btnSubmit" class="button" type="submit" value="ثبت >>" />
+                    &nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <input id="btnContinue" class="button" type="submit" value="ادامه >>"/>
+        &nbsp;&nbsp;&nbsp;
+        @*        @Html.ActionLink("بازگشت >>", "List")*@
+    </div>
+}

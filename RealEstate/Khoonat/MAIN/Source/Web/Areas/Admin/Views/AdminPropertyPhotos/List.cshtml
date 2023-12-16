@@ -1,0 +1,144 @@
+﻿@using System.Globalization
+@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Core.Cache
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminPropertyPhotos
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@using JahanJooy.Common.Util
+@model AdminPropertyPhotosListModel
+
+@{
+	var vicinityCache = ComposerWebUtil.ComponentContext.GetComponent<IVicinityCache>();
+}
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>عکس های املاک</a></li>
+}
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Photos, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>تایید</th>
+			<th>تصویر</th>
+			<th>ID</th>
+			<th>ID ملک</th>
+			<th>کد ملک</th>
+			<th>ملک</th>
+			<th>موضوع</th>
+			<th>حجم</th>
+			<th>ایحاد</th>
+			<th>جلسه</th>
+			<th>کاربر</th>
+		</tr>
+	</thead>
+	@foreach (var photo in Model.Photos)
+	{
+		<tr style="@(photo.DeleteTime.HasValue ? "text-decoration: line-through; " : "")">
+			<td>@IconsHelper.Tristate(Url, photo.Approved)</td>
+			<td>
+				<a href="@Url.Action("Details", new { id = photo.ID })">
+					<img src="@Url.Action("GetThumbnailImage", "PropertyPhoto", new { Area = "", id = photo.ID})"/>
+				</a>
+			</td>
+			<td data-link-url="@Url.Action("Details", new { id = photo.ID })">@photo.ID @IconsHelper.Xlink32(Url)</td>
+			<td>
+				<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ListingIdFilter", photo.PropertyListingID.ToString(CultureInfo.InvariantCulture)))">@photo.PropertyListingID</a>
+				<a href="@Url.Action("Details", "AdminProperties", new { id = photo.PropertyListingID })">@IconsHelper.Xlink32(Url)</a>
+			</td>
+			<td>
+				<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ListingIdFilter", photo.PropertyListingID.ToString(CultureInfo.InvariantCulture)))">@photo.PropertyListing.Code</a>
+				<a href="@Url.Action("Details", "AdminProperties", new { id = photo.PropertyListingID })">@IconsHelper.Xlink32(Url)</a>
+			</td>
+			<td>
+				@HtmlPresentationHelper.IfNotSpecified(photo.PropertyListing.PropertyType.Label(DomainEnumResources.ResourceManager), "؟") - 
+				@HtmlPresentationHelper.IfNotSpecified(photo.PropertyListing.VicinityID.IfHasValue(vid => vicinityCache[vid].Name), "؟")
+			</td>
+			<td>
+				@HtmlPresentationHelper.IfNotSpecified(photo.Subject.Label(DomainEnumResources.ResourceManager), "-")<br/>
+				<span style="font-size: 80%">@HtmlPresentationHelper.IfNotSpecified(photo.Title.Truncate(20), "-")</span>
+			</td>
+			<td style="direction: ltr;">@NumericStringUtils.BytesToString(photo.UntouchedLength + photo.FullSizeLength + photo.MediumSizeLength + photo.ThumbnailLength)</td>
+			<td>@photo.CreationTime.ToLocalizedDateString() @photo.CreationTime.ToLocalizedTimeString() <br/><span style="font-size: 80%">@((photo.CreationTime - DateTime.Now).ToLocalizedRelativeString(1))</span></td>
+			<td>
+				<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("SessionIdFilter", photo.CreatorSessionID.SafeToString()))">@photo.CreatorSessionID.SafeToString("-")</a>
+				<a href="">@IconsHelper.Xlink16(Url)</a>
+			</td>
+			<td>
+				<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyUserIdFilter", "true").Set("UserIdFilter", photo.CreatorUserID.HasValue ? photo.CreatorUserID.Value.ToString(CultureInfo.InvariantCulture) : ""))">@photo.CreatorUserID</a>
+				<a href="">@IconsHelper.Xlink16(Url)</a>
+			</td>
+		</tr>
+	}
+</table>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Photos, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+	<p>فیلتر های پر استفاده:</p>
+	<ul>
+		<li><a href="@Url.Action("List", new { ApprovalStatusFilter = PropertyListingPhotoApprovalStatus.NotApproved, DeletedFilter = false })">صف بررسی</a></li>
+		<li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+		<li><a href="@Url.Action("List", new { ApprovalStatusFilter = PropertyListingPhotoApprovalStatus.Approved, DeletedFilter = false })">عکس های عمومی</a></li>
+		<li><a href="@Url.Action("List", new { ApprovalStatusFilter = PropertyListingPhotoApprovalStatus.Rejected })">عکس های مردود</a></li>
+		<li><a href="@Url.Action("List", new { DeletedFilter = true })">عکس های حذف شده</a></li>
+	</ul>
+	 
+	<br /><hr/>
+	 
+	@using (Html.BeginForm("List", "AdminPropertyPhotos", FormMethod.Get))
+	{
+		<div style="width: 200px;">
+			@Html.LabelFor(m => m.IdFilter):
+			@Html.TextBoxFor(m => m.IdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.ListingIdFilter):
+			@Html.TextBoxFor(m => m.ListingIdFilter)
+			<br/>
+			<br/>
+
+			@Html.CheckBoxWithoutHiddenField("ApplyUserIdFilter", Model.ApplyUserIdFilter)
+			@Html.LabelFor(m => m.ApplyUserIdFilter)
+			<br/>
+			<br/>
+		
+			@Html.LabelFor(m => m.UserIdFilter):
+			@Html.TextBoxFor(m => m.UserIdFilter)
+			<br/>
+			<br/>
+
+			@Html.CheckBoxWithoutHiddenField("ApplyOwnerUserIdFilter", Model.ApplyOwnerUserIdFilter)
+			@Html.LabelFor(m => m.ApplyOwnerUserIdFilter)
+			<br/>
+			<br/>
+		
+			@Html.LabelFor(m => m.OwnerUserIdFilter):
+			@Html.TextBoxFor(m => m.OwnerUserIdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.ApprovalStatusFilter):
+			@Html.DropDownListFor(m => m.ApprovalStatusFilter, Model.ApprovalStatusFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.DeletedFilter):
+			@Html.DropDownListFor(m => m.DeletedFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.NotSelected, new { @class = "form-control" })
+			<br/>
+			<br/>
+
+			<button name="submit" value="btnRefresh" class="button" style="width: 150px;" type="submit">اعمال فیلتر</button>
+		</div>
+	}
+}

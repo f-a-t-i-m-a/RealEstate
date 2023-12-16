@@ -1,0 +1,29 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.SavedSearch.SavedPropertySearch
+
+@IconsHelper.Tristate(Url, Model.SendNotificationEmails)، @IconsHelper.Tristate(Url, Model.SendPromotionalSmsMessages)، @IconsHelper.Tristate(Url, Model.SendPaidSmsMessages)
+<br/>
+
+@if (Model.SendNotificationEmails || Model.SendPaidSmsMessages || Model.SendPromotionalSmsMessages)
+{
+    if (Model.SendNotificationsUntil.HasValue)
+    {
+        if (Model.SendNotificationsUntil.Value < DateTime.Now)
+        {
+            <span class="glyphicon glyphicon-warning-sign "></span>
+			<span class="bold">گذشته:</span>
+			@HtmlPresentationHelper.Disabled((Model.SendNotificationsUntil - DateTime.Now).ToLocalizedRelativeString())
+		}
+		else
+		{
+			@((Model.SendNotificationsUntil - DateTime.Now).ToLocalizedRelativeString())
+		}
+	}
+	else
+	{
+		@("همیشه")
+	}
+}
+

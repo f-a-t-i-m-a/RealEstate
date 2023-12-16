@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Label_AdditionalHeatingAndCoolingInformation" xml:space="preserve">
+    <value>سایر اطلاعات گرمایش و سرمایش</value>
+  </data>
+  <data name="Label_BalconyArea" xml:space="preserve">
+    <value>مجموع مساحت بالکن ها</value>
+  </data>
+  <data name="Label_CoolingSystem" xml:space="preserve">
+    <value>سیستم سرمایش</value>
+  </data>
+  <data name="Label_FloorNumber" xml:space="preserve">
+    <value>طبقه ای که واحد در آن واقع شده است</value>
+  </data>
+  <data name="Label_HasBeenReconstructed" xml:space="preserve">
+    <value>باز سازی شده است</value>
+  </data>
+  <data name="Label_HasFireplace" xml:space="preserve">
+    <value>شومینه دارد</value>
+  </data>
+  <data name="Label_HasForeignLavatory" xml:space="preserve">
+    <value>دستشویی فرنگی دارد</value>
+  </data>
+  <data name="Label_HasIndependentCoolingPackage" xml:space="preserve">
+    <value>پکیج سرمایش دارد</value>
+  </data>
+  <data name="Label_HasIndependentHeatingPackage" xml:space="preserve">
+    <value>پکیج گرمایش دارد</value>
+  </data>
+  <data name="Label_HasIranianLavatory" xml:space="preserve">
+    <value>دستشویی ایرانی دارد</value>
+  </data>
+  <data name="Label_HasOpenKitchen" xml:space="preserve">
+    <value>دارای آشپزخانه باز (اپن) است</value>
+  </data>
+  <data name="Label_HasFurnishedKitchen" xml:space="preserve">
+    <value>آشپزخانه مبله (شامل تجهیزات) است</value>
+  </data>
+  <data name="Label_HasPrivatePatio" xml:space="preserve">
+    <value>پاسیوی اختصاصی دارد</value>
+  </data>
+  <data name="Label_HasPrivateGarden" xml:space="preserve">
+    <value>حیاط در اختیار واحد است</value>
+  </data>
+  <data name="Label_HasSecuritySystem" xml:space="preserve">
+    <value>دزدگیر الکترونیکی دارد</value>
+  </data>
+  <data name="Label_HasSeparateLivingRoom" xml:space="preserve">
+    <value>دارای هال خصوصی مجزا است</value>
+  </data>
+  <data name="Label_HeatingSystem" xml:space="preserve">
+    <value>سیستم گرمایش</value>
+  </data>
+  <data name="Label_IsDuplex" xml:space="preserve">
+    <value>واحد دوبلکس است</value>
+  </data>
+  <data name="Label_IsFurnished" xml:space="preserve">
+    <value>واحد به طور کامل مبله است</value>
+  </data>
+  <data name="Label_HasHalfFloorInside" xml:space="preserve">
+    <value>دارای نیم طبقه در داخل است</value>
+  </data>
+  <data name="Label_KitchenArea" xml:space="preserve">
+    <value>مجموع مساحت آشپزخانه ها</value>
+  </data>
+  <data name="Label_KitchenCabinetTopType" xml:space="preserve">
+    <value>جنس سطح کابینت های آشپزخانه</value>
+  </data>
+  <data name="Label_KitchenCabinetBodyType" xml:space="preserve">
+    <value>جنس بدنه کابینت های آشپزخانه</value>
+  </data>
+  <data name="Label_AdditionalSpecialFeatures" xml:space="preserve">
+    <value>سایر ویژگی ها و امتیازات واحد</value>
+  </data>
+  <data name="Label_MainDaylightDirection" xml:space="preserve">
+    <value>جهت اصلی نور واحد</value>
+  </data>
+  <data name="Label_LivingRoomFloor" xml:space="preserve">
+    <value>پوشش کف پذیرایی</value>
+  </data>
+  <data name="Label_LivingRoomWalls" xml:space="preserve">
+    <value>پوشش دیوار پذیرایی</value>
+  </data>
+  <data name="Label_NeedsPainting" xml:space="preserve">
+    <value>به نقاشی نیاز دارد</value>
+  </data>
+  <data name="Label_NeedsReconstruction" xml:space="preserve">
+    <value>به بازسازی نیاز دارد</value>
+  </data>
+  <data name="Label_NeedsDestruction" xml:space="preserve">
+    <value>کلنگی است</value>
+  </data>
+  <data name="Label_NumberOfBalconies" xml:space="preserve">
+    <value>تعداد بالکن ها</value>
+  </data>
+  <data name="Label_NumberOfBathrooms" xml:space="preserve">
+    <value>تعداد حمام</value>
+  </data>
+  <data name="Label_NumberOfClosets" xml:space="preserve">
+    <value>تعداد کمد ها</value>
+  </data>
+  <data name="Label_NumberOfKitchens" xml:space="preserve">
+    <value>تعداد آشپزخانه</value>
+  </data>
+  <data name="Label_NumberOfLavatories" xml:space="preserve">
+    <value>تعداد دستشویی</value>
+  </data>
+  <data name="Label_NumberOfParkings" xml:space="preserve">
+    <value>تعداد پارکینگ ها</value>
+  </data>
+  <data name="Label_NumberOfRooms" xml:space="preserve">
+    <value>تعداد اتاق ها</value>
+  </data>
+  <data name="Label_RoomsFloor" xml:space="preserve">
+    <value>پوشش کف اتاق ها</value>
+  </data>
+  <data name="Label_RoomsWall" xml:space="preserve">
+    <value>پوشش دیوار اتاق ها</value>
+  </data>
+  <data name="Label_StorageRoomArea" xml:space="preserve">
+    <value>مجموع مساحت انباری ها</value>
+  </data>
+  <data name="Label_CurrentMonthlyChargeAmount" xml:space="preserve">
+    <value>شارژ ماهانه فعلی</value>
+  </data>
+  <data name="Label_UsageType" xml:space="preserve">
+    <value>نوع کاربری واحد:</value>
+  </data>
+  <data name="Label_UsefulArea" xml:space="preserve">
+    <value>زیربنای مفید واحد</value>
+  </data>
+  <data name="Label_WindowsHasDoubleGlass" xml:space="preserve">
+    <value>پنجره دو جداره دارد</value>
+  </data>
+  <data name="Label_HasInsulatedWalls" xml:space="preserve">
+    <value>دیوارهای عایق (مبحث 19) دارد</value>
+  </data>
+  <data name="Label_HasIndependentGasometer" xml:space="preserve">
+    <value>کنتور گاز مستقل دارد</value>
+  </data>
+  <data name="Label_WindowType" xml:space="preserve">
+    <value>نوع پنجره ها</value>
+  </data>
+  <data name="Validation_BalconyArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_BalconyArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_FloorNumber_Numeric" xml:space="preserve">
+    <value>شماره طبقه را باید به صورت عددی وارد نمایید.</value>
+  </data>
+  <data name="Validation_FloorNumber_Range" xml:space="preserve">
+    <value>عدد وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_KitchenArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_KitchenArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfBalconies_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfBalconies_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfBathrooms_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfBathrooms_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfClosets_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfClosets_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfKitchens_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfKitchens_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfLavatories_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfLavatories_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfParkings_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfParkings_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfRooms_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfRooms_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_StorageRoomArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_CurrentMonthlyChargeAmount_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_StorageRoomArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_CurrentMonthlyChargeAmount_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_UsefulArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_UsefulArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+</root>

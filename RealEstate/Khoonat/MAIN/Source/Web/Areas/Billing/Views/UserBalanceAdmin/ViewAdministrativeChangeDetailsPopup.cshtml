@@ -1,0 +1,26 @@
+﻿@model JahanJooy.RealEstate.Domain.Billing.UserBalanceAdministrativeChange
+
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="row">
+
+            ID: @Model.ID
+            <br />
+
+            Created by User: @Model.CreatedByUserID
+            <br />
+
+            Reviewed by User: @Model.ReviewedByUserID
+            <br />
+
+            Description: @Model.Description
+            <br />
+
+            Administrative notes: @Model.AdministrativeNotes
+            <br />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+    </div>
+</div>

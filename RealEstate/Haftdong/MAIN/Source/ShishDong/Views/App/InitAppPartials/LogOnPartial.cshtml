@@ -1,0 +1,28 @@
+﻿<li class="dropdown logindropdown" dropdown ng-show="currentUserEmail">
+    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">
+        <span ng-show="currentUserEmail">
+            <i class="fa fa-user"></i>
+            <span>{{currentUserEmail}}</span>
+            <span class="caret"></span>
+        </span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a ui-sref="profile">
+                <span class="hidden-sm"> صفحه شخصی</span>
+            </a>
+        </li>
+        <li>
+            <a ng-click="showChangePassword()">تغییر رمز</a>
+        </li>
+        <li>
+            <a ng-click="logout()">
+                <i class="fa fa-sign-out"></i><span class="hidden-sm"> خروج</span>
+            </a>
+        </li>
+    </ul>
+</li>
+<div class="loginbutton" ng-hide="currentUserEmail">
+    <button type="submit" class="btn btn-success" ng-click="showLogin()">ورود</button>
+    <button type="button" class="btn btn-primary" ng-click="signUp()">ثبت نام</button>
+</div>

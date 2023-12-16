@@ -1,0 +1,18 @@
+﻿@using JahanJooy.RealEstate.Web.Application.DomainModel
+@model JahanJooy.RealEstate.Domain.Directory.AgencyBranch
+
+<h2>حذف شعبه</h2>
+
+آیا مطمئنید که می خواهید شعبه  
+@Model.GetContent().BranchName
+را حذف کنید؟
+
+@using (Html.BeginForm("ConfirmDeletingAgencyBranch", "AdminAgency", Model, FormMethod.Post))
+{
+<div style="text-align: center; margin: 40px;">
+	@Html.Hidden("agencyId", Model.AgencyID)
+	@Html.Hidden("branchId", Model.ID)
+	<input id="btnOK" class="button" type="submit" value="بله؛ حذف شود" style="width: 120px;"/>
+	<input id="btnCancel" class="button" type="button" value="نه؛ بی خیال" style="width: 120px;" onclick=" $('.qtip:visible').qtip('hide'); "/>
+</div>
+}

@@ -1,0 +1,137 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@model PropertyContactModel
+
+<div class="row">
+	@if (Model.AppropriateVisitTimes.HasText() || Model.ShowAllAttributes)
+	{
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div>@IconsHelper.Tick16(Url)&nbsp;<strong>@PropertyContactResources.Label_AppropriateVisitTimes:</strong></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.AppropriateVisitTimes)</div>
+			</div>
+		</div>
+	}
+
+	@if (Model.InappropriateVisitTimes.HasText() || Model.ShowAllAttributes)
+	{
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div>@IconsHelper.Cross16(Url)&nbsp;<strong>@PropertyContactResources.Label_InappropriateVisitTimes:</strong></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.InappropriateVisitTimes)</div>
+			</div>
+		</div>
+	}
+
+	@if (Model.ShouldCoordinateBeforeVisit)
+	{
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div><strong>@PropertyContactResources.Label_HowToCoordinateBeforeVisit:</strong></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.HowToCoordinateBeforeVisit)</div>
+			</div>
+		</div>
+	}
+</div>
+
+<div class="row">
+	@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_PropertyStatus, Model.PropertyStatus)
+
+	@if (Model.PropertyStatus.HasValue && Model.PropertyStatus.Value == PropertyStatus.OccupiedByRenter)
+	{
+		@PropertyViewHelper.SimpleAttribute(true, PropertyContactResources.Label_RenterContractEndDate, HtmlPresentationHelper.LeftToRight(Model.RenterContractEndDate.ToLocalizedDateString()))
+	}
+
+	@if (Model.DeliveryDateSpecificationType.HasValue && Model.DeliveryDateSpecificationType.Value == DeliveryDateSpecificationType.Absolute)
+	{
+		@PropertyViewHelper.SimpleAttribute(true, ViewPropertyVisitAndContactResources.Delivery, ViewPropertyVisitAndContactResources.Delivery_Absolute.FormatAndEncodeIfNotEmpty(HtmlPresentationHelper.IfNotSpecified(HtmlPresentationHelper.LeftToRight(Model.AbsoluteDeliveryDate.ToLocalizedDateString()))))
+	}
+	else if (Model.DeliveryDateSpecificationType.HasValue && Model.DeliveryDateSpecificationType.Value == DeliveryDateSpecificationType.DaysFromContract)
+	{
+		@PropertyViewHelper.SimpleAttribute(true, ViewPropertyVisitAndContactResources.Delivery, ViewPropertyVisitAndContactResources.Delivery_AfterContract.FormatAndEncodeIfNotEmpty(HtmlPresentationHelper.IfNotSpecified(Model.DeliveryDaysAfterContract)))
+	}
+	else if (Model.DeliveryDateSpecificationType.HasValue && Model.DeliveryDateSpecificationType.Value == DeliveryDateSpecificationType.Immidiately)
+	{
+		@PropertyViewHelper.SimpleAttribute(true, ViewPropertyVisitAndContactResources.Delivery, ViewPropertyVisitAndContactResources.Delivery_Immidiately)
+	}
+	else
+	{
+		@PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, ViewPropertyVisitAndContactResources.Delivery, null)
+	}
+</div>
+
+
+@if (Model.IsAgencyListing)
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong>اطلاعات تماس با بنگاه معاملات ملکی:</strong></div>
+				<div class="panel-body">
+					@PropertyViewHelper.SimpleAttribute(true, PropertyContactResources.Label_AgencyName, Model.AgencyName)
+					@PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_AgencyAddress, Model.AgencyAddress)
+					@PropertyViewHelper.SimpleAttribute(true, PropertyContactResources.Label_ContactName, Model.ContactName)
+                    <a href="mailto:@Model.ContactEmail">
+                        @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_ContactEmail, HtmlPresentationHelper.LeftToRight(Model.ContactEmail))
+                    </a>
+                    <a href="tel:@Model.ContactPhone1">
+                        @PropertyViewHelper.SimpleAttribute(true, PropertyContactResources.Label_ContactPhone1, HtmlPresentationHelper.LeftToRight(Model.ContactPhone1))
+                    </a>
+                    <a href="tel:@Model.ContactPhone2">
+                        @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_ContactPhone2, HtmlPresentationHelper.LeftToRight(Model.ContactPhone2))
+                    </a>
+                </div>
+			</div>
+		</div>
+		@if (Model.DirectContactIsPossible)
+		{
+			<div class="col-xs-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading"><strong>@IconsHelper.Tick16(Url)&nbsp;@PropertyContactResources.Label_DirectContactIsPossible</strong></div>
+					<div class="panel-body">
+						@PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_OwnerName, Model.OwnerName)
+						<a href="mailto:@Model.OwnerEmail">
+                            @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_OwnerEmail, HtmlPresentationHelper.LeftToRight(Model.OwnerEmail))
+                        </a>
+                        <a href="tel:@Model.OwnerPhone1">
+                            @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_OwnerPhone1, HtmlPresentationHelper.LeftToRight(Model.OwnerPhone1))
+                        </a>
+                        <a href="tel:@Model.OwnerPhone2">
+                            @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_OwnerPhone2, HtmlPresentationHelper.LeftToRight(Model.OwnerPhone2))
+                        </a>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+}
+else
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><strong>اطلاعات تماس با مالک:</strong></div>
+				<div class="panel-body">
+					@PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_ContactName, Model.ContactName)
+					<a href="mailto:@Model.ContactEmail">
+                        @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_ContactEmail, HtmlPresentationHelper.LeftToRight(Model.ContactEmail))
+                    </a>
+                    <a href="tel:@Model.ContactPhone1">
+                        @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_ContactPhone1, HtmlPresentationHelper.LeftToRight(Model.ContactPhone1))
+                    </a>
+                    <a href="tel:@Model.ContactPhone2">
+                        @PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyContactResources.Label_ContactPhone2, HtmlPresentationHelper.LeftToRight(Model.ContactPhone2))
+                    </a>
+                </div>
+			</div>
+		</div>
+	</div>
+}
+

@@ -1,0 +1,68 @@
+﻿
+@using JahanJooy.Common.Util.Web.Captcha
+@model JahanJooy.RealEstate.Web.Models.Account.AccountForgotLoginNameModel
+
+@{
+	ViewBag.Title = "بازیابی نام کاربری";
+	ViewBag.MetaDescription = "امکانات بازیابی نام کاربری برای کاربران سایت خونه ت دات کام، در مواردی که قبلاً ثبت نام کرده اند اما نام کاربری خود را فراموش کرده اند.";
+}
+
+<div class="page-header">
+	<h1>بازیابی نام کاربری</h1>
+</div>
+
+<img src="~/Content/images/forgot.png" style="float: left;"/>
+<p>
+    شما می توانید با استفاده از تلفن همراه / آدرس ایمیل خود که در زمان فعال سازی حساب خود معرفی کرده اید، نام کاربری خود را دریافت کنید.
+    برای جلوگیری از سو استفاده از حساب شما، نام کاربری در سایت نمایش داده نشده و تنها از طریق تلفن همراه / پست الکترونیکی برای شخص شما ارسال می گردد.
+</p>
+
+@using (Html.BeginForm())
+{
+	<p>قبل از هر کاری، نشان دهید که یک ربات نیستید! عدد شش رقمی نمایش داده شده در تصویر زیر را در فیلد کنار آن وارد کنید.</p>
+	@Html.Action("ViewImage", "Captcha")
+	@Html.CaptchaErrorMessage()
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h2 class="panel-title">استفاده از پیام کوتاه</h2></div>
+		<div class="panel-body">
+			<p>
+				در صورتی که هنگام فعال سازی حساب خود، شماره تلفن همراه خود را وارد کرده و رمز فعال سازی را از طریق پیام کوتاه دریافت کرده اید، این شماره
+				را مججداً در این قسمت وارد کنید و گزینه «درخواست نام کاربری» را انتخاب کنید.
+			</p>
+
+			<table style="border-spacing: 10px;">
+				<tr>
+					<td style="width: 140px;">@Html.LabelFor(m => m.VerificationPhoneNumber):</td>
+					<td style="width: 200px;">@Html.TextBoxFor(m => m.VerificationPhoneNumber, new { style = "direction: ltr;", autofocus = "autofocus" })</td>
+					<td style="width: 200px; text-align: left;"><input id="btnQueryUsernameBySms" name="btnQueryUsernameBySms" class="btn btn-primary" style="width: 160px;" type="submit" value="درخواست نام کاربری" /></td>
+				</tr>
+				<tr>
+					<td colspan="3">@Html.ValidationMessageFor(m => m.VerificationPhoneNumber)</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h2 class="panel-title>">استفاده از پست الکترونیکی</h2></div>
+		<div class="panel-body">
+			<p>
+				در صورتی که هنگام فعال سازی حساب خود، آدرس ایمیل خود را وارد کرده و رمز فعال سازی را در یک نامه الکترونیکی دریافت کرده اید، آدرس ایمیل خود
+				را مجدداً در این قسمت وارد کنید و گزینه «درخواست نام کاربری» را انتخاب کنید.
+			</p>
+
+			<table style="border-spacing: 10px;">
+				<tr>
+					<td style="width: 140px;">@Html.LabelFor(m => m.VerificationEmailAddress):</td>
+					<td style="width: 200px;">@Html.TextBoxFor(m => m.VerificationEmailAddress, new { style = "direction: ltr;" })</td>
+					<td style="width: 200px; text-align: left;"><input id="btnQueryUsernameByEmail" name="btnQueryUsernameByEmail" class="btn btn-primary" style="width: 160px;" type="submit" value="درخواست نام کاربری" /></td>
+				</tr>
+				<tr>
+					<td colspan="3">@Html.ValidationMessageFor(m => m.VerificationEmailAddress)</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+}
+

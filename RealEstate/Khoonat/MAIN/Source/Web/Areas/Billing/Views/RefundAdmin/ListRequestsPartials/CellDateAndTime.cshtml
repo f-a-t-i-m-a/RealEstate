@@ -1,0 +1,19 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Domain.Billing.UserRefundRequest
+
+ثبت:
+@*@Model.CreationTime.ToLocalizedDateString()
+@Model.CreationTime.ToLocalizedTimeString()*@
+
+<br/>
+
+بررسی:
+@if (Model.CompletionTime.HasValue)
+{
+    @Model.CompletionTime.Value.ToLocalizedDateString()
+    @Model.CompletionTime.Value.ToLocalizedTimeString()
+}
+else
+{
+    @: انجام نشده
+}

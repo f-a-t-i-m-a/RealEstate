@@ -1,0 +1,37 @@
+﻿@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">آمار اطلاع رسانی</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                تعداد ایمیل ارسال شده:
+            </div>
+            <div class="col-xs-12 col-sm-2">
+                @Model.SavedSearch.NumberOfNotificationEmailsSent
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                تعداد پیامک  تبلیغاتی:
+                <br /><small>ارسال شده توسط ثبت کننده ملک، رایگان</small>
+            </div>
+            <div class="col-xs-12 col-sm-2">
+                @Model.SavedSearch.NumberOfPromotionalSmsMessagesSent
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                تعداد پیامک درخواستی:
+                <br /><small>درخواست شده توسط شما، دارای هزینه</small>
+            </div>
+            <div class="col-xs-12 col-sm-2">
+                @Model.SavedSearch.NumberOfPaidSmsMessagesSent
+            </div>
+        </div>
+    </div>
+</div>
+

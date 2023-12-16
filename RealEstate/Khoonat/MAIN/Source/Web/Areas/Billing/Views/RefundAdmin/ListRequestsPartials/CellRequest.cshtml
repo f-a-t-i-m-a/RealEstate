@@ -1,0 +1,22 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Domain.Billing.UserRefundRequest
+
+مبلغ:
+@BillingPresentationHelper.Delta(Model.RequestedAmount)
+<br/>
+
+زمان:
+@Model.CreationTime.ToLocalizedDateString()
+@Model.CreationTime.ToLocalizedTimeString()
+
+<br/>
+قابل پرداخت:
+@if (@Model.PayableAmount == null)
+{
+    
+    <span>نامشخص</span>
+}
+else{
+    @Model.PayableAmount}

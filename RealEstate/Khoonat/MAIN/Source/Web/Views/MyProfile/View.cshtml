@@ -1,0 +1,44 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Web.Models.Shared.Profile
+@model ProfileModel
+
+@{
+	ViewBag.Title = "پروفایل شخصی حساب کاربری";
+}
+
+<div class="well">پروفایل شخصی: اطلاعات تماس و مشخصات کاربر - @Model.User.DisplayName</div>
+
+<br/>
+<br/>
+
+@Html.Partial("_Profile/ProfileGeneralInfo", Model.User)
+
+<br/>
+<br/>
+<br/>
+<br/>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.General))"><a href="@Url.Action("View", new {activetab="General" , page="" })">مشخصات</a></li>
+    <li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.AllPropertyListings))"><a href="@Url.Action("View", new { activeTab = "AllPropertyListings", page = "" })">املاک ثبت شده</a></li>
+    <li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.PublishedPropertyListings))"><a href="@Url.Action("View", new { activeTab = "PublishedPropertyListings", page = "" })">املاک منتشر شده</a></li>
+    <li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.PublishHistory))"><a href="@Url.Action("View", new { activeTab = "PublishHistory", page = "" })">تاریخچه انتشار</a></li>
+    <li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.SecurityInfo))"><a href="@Url.Action("View", new { activeTab = "SecurityInfo", page = "" })">اطلاعات امنیتی</a></li>
+</ul>
+
+@Html.Partial("_Profile/ProfileActiveTab", Model)
+
+@section SideBar
+{
+	@if (User.Identity.IsAuthenticated && Model.User.ID == User.CoreIdentity.UserId)
+    {
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">پروفایل عمومی</h3>
+            </div>
+            <div class="panel-body">
+                <p>این صفحه <strong>پروفایل شخصی شما</strong> رو نشون می ده. بقیه کاربران فقط می تونن قسمتی از این اطلاعات رو ببینن.</p>
+                <p>اگه خواستید می توانید <a href="@Url.Action("View", "PublicProfile", new {loginName = Model.User.LoginName, Area = ""})">صفحه پروفایل عمومی خودتون رو ببینید.</a></p>
+            </div>
+        </div>
+	}
+}

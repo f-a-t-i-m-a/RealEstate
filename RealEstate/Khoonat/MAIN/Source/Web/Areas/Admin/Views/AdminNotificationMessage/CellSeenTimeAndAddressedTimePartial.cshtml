@@ -1,0 +1,6 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Domain.Messages.NotificationMessage
+
+@Model.SeenTime.ToLocalizedDateString() @Model.SeenTime.ToLocalizedTimeString()
+<br/>
+@Model.AddressedTime.ToLocalizedDateString() @Model.AddressedTime.ToLocalizedTimeString()

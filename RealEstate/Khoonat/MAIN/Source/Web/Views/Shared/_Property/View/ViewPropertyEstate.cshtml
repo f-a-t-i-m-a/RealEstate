@@ -1,0 +1,38 @@
+﻿@using JahanJooy.RealEstate.Web.Helpers.Property
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@model PropertyEstateModel
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_Area, ViewPropertyEstateResources.Area, Model.Area),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_PassageEdgeLength, ViewPropertyEstateResources.PassageEdgeLength, Model.PassageEdgeLength),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_PassageWidth, ViewPropertyEstateResources.PassageWidth, Model.PassageWidth),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_Direction, Model.Direction),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_VoucherType, Model.VoucherType),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_Sides, ViewPropertyEstateResources.Sides, Model.Sides),
+
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_SlopeAmount, Model.SlopeAmount),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyEstateResources.Label_SurfaceType, Model.SurfaceType)
+)
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_IsInDeadEnd, Model.IsInDeadEnd, showIcon: false),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_IsCloseToHighway, Model.IsCloseToHighway, showIcon: false),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_IsOnMainPassage, Model.IsOnMainPassage, showIcon: false),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_IsOnGreenPassage, Model.IsOnGreenPassage, showIcon: false),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_IsCloseToPark, Model.IsCloseToPark, showIcon: false)
+)
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasElectricity, Model.HasElectricity),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasThreePhaseElectricity, Model.HasThreePhaseElectricity),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasIndustrialElectricity, Model.HasIndustrialElectricity),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasDrinkingWater, Model.HasDrinkingWater),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasCultivationWater, Model.HasCultivationWater),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasGasPiping, Model.HasGasPiping),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasSewerExtension, Model.HasSewerExtension),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasWaterWells, Model.HasWaterWells),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasWaterWellsPrivilege, Model.HasWaterWellsPrivilege),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyEstateResources.Label_HasNiches, Model.HasNiches)
+)

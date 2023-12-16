@@ -1,0 +1,55 @@
+﻿
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.PropertyRequest.PropertyRequestEditModel
+
+@*
+    ********************************************************************************
+    **** Main properties
+*@
+
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <div class="col-xs-3">
+                <span class="icon-required"></span>
+                @Html.LabelFor(m => m.PropertyType):
+            </div>
+            <div class="col-xs-9">
+                @Html.DropDownListFor(m => m.PropertyType, Model.PropertyType.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new { autofocus = "autofocus", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PropertyType)
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <div class="col-xs-3">
+                <span class="icon-required"></span>
+                @Html.LabelFor(m => m.IntentionOfRequester):
+            </div>
+            <div class="col-xs-9">
+                @Html.DropDownListFor(m => m.IntentionOfRequester, Model.IntentionOfRequester.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.IntentionOfRequester)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+    $("#IntentionOfCustomer").change(function () {
+        $(".displayPerIntention.show" + this.value).show(400);
+        $(".displayPerIntention:not(.show" + this.value + ")").hide(400);
+    });
+
+    $("#PropertyType").change(function() {
+        $(".displayPerType.showFor" + this.value).show(400);
+        $(".displayPerType:not(.showFor" + this.value + ")").hide(400);
+    });
+
+    $("#IntentionOfCustomer").change();
+    $("#PropertyType").change();
+
+</script>)

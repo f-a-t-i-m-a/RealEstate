@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="fa" ng-app="haftdong">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width" />
+
+	<title>هفت دنگ</title>
+	<base href="@Request.ApplicationPath">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	@Styles.Render("~/bundles/css")
+	@Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="splash" ng-cloak>
+        <i class="fa fa-refresh fa-spin"></i>
+        <p>لطفاً چند لحظه تامل کنید تا نرم افزار آماده استفاده شود</p>
+    </div>
+    <div ng-cloak>
+        @Html.Partial("InitAdminAppPartials/EnvironmentNotification")
+
+        <div ng-class="{ 'none': inProgressRequests <= 0 }">
+            <div class="loading-dot loading-dot-1"></div>
+            <div class="loading-dot loading-dot-2"></div>
+        </div>
+
+        <nav id="layout-main-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" ng-init="navbarCollapsed = true" ng-click="navbarCollapsed = !navbarCollapsed">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand homeLink" href="/adminapp/">
+                        <img class="logo" src="@Url.Content("~/Content/images/header-logo.png")" alt="صفحه نخست">
+                    </a>
+                </div>
+
+                <div ng-controller="NavBarController">
+                    <div class="collapse navbar-collapse" id="layout-main-navbar-collapse" collapse="navbarCollapsed">
+                        <ul class="nav navbar-nav">
+                            @Html.Partial("InitAdminAppPartials/HeaderMenuPartial")
+                        </ul>
+                        <ul class="nav navbar-nav navbar-left">
+                            @Html.Partial("InitAdminAppPartials/LogOnPartial")
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="layout-content-root" ui-i18n="fa">
+            @* View root *@
+            <div ui-view autoscroll="false">
+            </div>
+        </div>
+
+        <div id="layout-footer">
+            <div class="container small">
+                <div id="layout-footer-copyright">@Html.Partial("InitAdminAppPartials/FooterCopyrightPartial")</div>
+            </div>
+        </div>
+
+        @Scripts.Render("~/bundles/js")
+        @Scripts.Render("~/bundles/admin")
+        <script src="@Url.Action("TranslationsJs", "App")"></script>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

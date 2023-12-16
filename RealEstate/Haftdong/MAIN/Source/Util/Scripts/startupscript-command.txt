@@ -1,0 +1,1 @@
+﻿load("D:\\TFS\\TFSRoot\\JahanJooy\\RealEstateAgency\\MAIN\\Source\\Util\\Scripts\\startupscript.js")

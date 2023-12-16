@@ -1,0 +1,21 @@
+﻿<div class="btn-group btn-block" dropdown>
+    <button type="button" class="col-xs-2 col-sm-2 col-md-9 btn btn-default btn-block" ng-click="print(null, 'pdf', 'pdf')"><i class="fa fa-print"></i> چاپ</button>
+    <button type="button" class="col-xs-1 col-sm-1 col-md-3 btn btn-default dropdown-toggle" dropdown-toggle>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="rt in templates">
+            <div>
+                <a ng-click="print(rt.ID, 'pdf', 'pdf')"><i class="fa fa-file-pdf-o fa-2x"></i></a>
+                &nbsp;
+                <a ng-click="print(rt.ID, 'xps', 'xps')"><i class="fa fa-file-text-o fa-2x"></i></a>
+                &nbsp;
+                <a ng-click="print(rt.ID, 'word2007', 'docx')" ng-show="showOfficeType"><i class="fa fa-file-word-o fa-2x"></i></a>
+                &nbsp;
+                <a ng-click="print(rt.ID, 'excel2007', 'xlsx')" ng-show="showOfficeType"><i class="fa fa-file-excel-o fa-2x"></i></a>
+                &nbsp;
+                <span>{{ rt.Name }}</span>
+            </div>
+        </li>
+    </ul>
+</div>

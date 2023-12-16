@@ -1,0 +1,58 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+@{
+	var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">لغو آگهی</h4>
+	</div>
+	<div class="modal-body">
+		<p>
+			ملک زیر تا تاریخ
+			&lrm;@Model.PublishEndDate.ToLocalizedDateString()
+			در فهرست املاک عمومی قرار دارد:
+		</p>
+		<table style="border-spacing: 10px; border-collapse: separate;">
+			<tr>
+				<td>شناسه:</td>
+				<td>@Model.ID</td>
+			</tr>
+			<tr>
+				<td>محل:</td>
+				<td>@propertyPresentationHelper.BuildRegion(Model)</td>
+			</tr>
+			<tr>
+				<td>ملک:</td>
+				<td>@propertyPresentationHelper.BuildTitle(Model)</td>
+			</tr>
+			<tr>
+				<td>مساحت:</td>
+				<td>@propertyPresentationHelper.BuildArea(Model)</td>
+			</tr>
+			<tr>
+				<td>قیمت:</td>
+				<td>@propertyPresentationHelper.BuildPriceAndPricePerArea(Model)</td>
+			</tr>
+		</table>
+		<p>
+			لغو عمومی بودن، اطلاعات فوق را از سیستم حذف نخواهد کرد، بلکه آن را از دسترس عموم خارج خواهد نمود.
+			پس از لغو عمومی بودن، هر زمان که بخواهید می توانید مجدداً رکورد فوق را عمومی کنید.
+			آیا می خواهید هم اکنون ملک فوق را از فهرست املاک عمومی خارج کنید؟
+		</p>
+	</div>
+	<div class="modal-footer">
+		@using (Html.BeginForm("UnPublishPostback", "Property", new { id = Model.ID }, FormMethod.Post))
+		{
+			<button name="btnPublish" value="btnPublish" type="submit" class="btn btn-danger">بله؛ انتشار خاتمه یابد</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		}
+	</div>
+</div>
+
+

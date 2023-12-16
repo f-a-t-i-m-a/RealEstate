@@ -1,0 +1,33 @@
+﻿@using JahanJooy.Common.Util.Text
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.BillingAdminHome.BillingAdminHomeStatisticsModel
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>مالی</a></li>
+}
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="list-group">
+			<div class="list-group-item active">موجودیت های مالی</div>
+			<a class="list-group-item @("list-group-item-danger".If(Model.AdministrativeChangesQueueLength > 0))" href="@Url.Action("ListAdministrativeChanges", "UserBalanceAdmin")">تغییرات مدیریتی مانده حساب<span class="badge">@Model.AdministrativeChangesQueueLength</span></a>
+			<a class="list-group-item @("list-group-item-danger".If(Model.WireTransferPaymentsQueueLength > 0))" href="@Url.Action("ListWireTransfers", "PaymentAdmin")">پرداخت های کارت به کارت<span class="badge">@Model.WireTransferPaymentsQueueLength</span></a>
+			<a class="list-group-item disabled @("list-group-item-danger".If(Model.ElectronicPaymentsQueueLenth > 0))" href="#">پرداخت های الکترونیکی<span class="badge">@Model.ElectronicPaymentsQueueLenth</span></a>
+			<a class="list-group-item @("list-group-item-danger".If(Model.RefundRequestQueueLength > 0))" href="@Url.Action("ListRequests", "RefundAdmin")">درخواست های بازپرداخت<span class="badge">@Model.RefundRequestQueueLength</span></a>
+			<a class="list-group-item" href="@Url.Action("ListBonuses", "PromotionalBonusAdmin")">جوایز تبلیغاتی</a>
+			<a class="list-group-item disabled" href="#">کپن های تبلیغاتی</a>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="list-group">
+			<div class="list-group-item active">گزارش ها</div>
+			<a class="list-group-item" href="@Url.Action("ListUsers", "UserBalanceAdmin")">مانده کاربران</a>
+			<a class="list-group-item" href="@Url.Action("ListTransactions", "UserTransactionsAdmin")">تراکنش ها</a>
+		</div>
+	</div>
+</div>
+
+
+
+

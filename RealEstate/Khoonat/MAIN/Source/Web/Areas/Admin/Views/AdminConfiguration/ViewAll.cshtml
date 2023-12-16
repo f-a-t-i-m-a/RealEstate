@@ -1,0 +1,58 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminConfiguration.AdminConfigurationViewAllModel
+
+@this.ScriptLibrary(JavaScriptLibraries.JQueryUI)
+@this.StyleLibrary(StyleLibraries.JQueryUiAll)
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") &gt; پیکربندی</h2>
+
+@this.CssBlock(@<style>
+                    #tblConfig {
+                        direction: ltr;
+                        width: 100%;
+                    }
+
+                        #tblConfig tr td {
+                            padding: 10px;
+                            text-align: left;
+                        }
+    </style>)
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>عملیات</th>
+                <th>کلید</th>
+                <th>مقدار</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Items)
+            {
+            <tr>
+                <td>
+                    <a href="#" data-edit-id="@item.Key">@IconsHelper.Edit24(Url)</a>
+                    <a href="#" data-delete-id="@item.Key">@IconsHelper.Delete24(Url)</a>
+                </td>
+                <td>@item.Key</td>
+                <td>@item.Value</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@this.ScriptBlock(@<script type="text/javascript">
+    $(document).ready(function () {
+        $('a[data-delete-id]').click(function () {
+            $('<div style="width: 600px;"></div>').load('@Url.Action("DeleteConfiguration")', { 'key': $(this).attr('data-delete-id') }, function () {
+            }).dialog({ modal: true, width: 600 });
+        });
+        $('a[data-edit-id]').click(function () {
+            $('<div></div>').load('@Url.Action("EditConfiguration")', { 'key': $(this).attr('data-edit-id') }, function () {
+            }).dialog({ modal: true, width: 600 });
+        });
+    });
+    </script>)

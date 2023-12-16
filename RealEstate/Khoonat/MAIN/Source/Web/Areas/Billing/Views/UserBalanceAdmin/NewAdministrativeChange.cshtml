@@ -1,0 +1,59 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Billing.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.UserBalanceAdmin.UserBalanceAdminAdministrativeChangeModel
+
+
+<div class="page-header">
+    <h2>
+        <a href="@Url.Action("Index", "AdminHome", new {area = AreaNames.Admin})">مدیریت سایت</a>:
+        <a href="@Url.Action("Index", "BillingAdminHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+        <a href="@Url.Action("ListAdministrativeChanges", "UserBalanceAdmin", new { area = AreaNames.Billing })">تغییرات مدیریتی مانده حساب</a>:
+        تغییر جدید
+    </h2>
+</div>
+<div >
+    @Html.ValidationSummary(false)
+</div>
+
+@using (Html.BeginForm())
+{
+    
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-3 col-md-2">توضیحات:</div>
+            <div class="col-sm-5 col-md-6">@Html.TextAreaFor(m => m.Description, 3, 70, new { style = "height: 60px;" })</div>
+            <div class="col-sm-4 col-md-4">@Html.ValidationMessageFor(m => m.Description)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 col-md-2">یادداشت:</div>
+            <div class="col-sm-5 col-md-6">@Html.TextAreaFor(m => m.AdministrativeNotes, 3, 70, new { style = "height: 60px;" })</div>
+            <div class="col-sm-4 col-md-4">@Html.ValidationMessageFor(m => m.AdministrativeNotes)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 col-md-2">تغییر مانده نقدی:</div>
+            <div class="col-sm-5 col-md-6">@Html.TextBoxFor(m => m.CashDelta)</div>
+            <div class="col-sm-4 col-md-4">@Html.ValidationMessageFor(m => m.CashDelta)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 col-md-2">تغییر مانده جایزه:</div>
+            <div class="col-sm-5 col-md-6">@Html.TextBoxFor(m => m.BonusDelta)</div>
+            <div class="col-sm-4 col-md-4">@Html.ValidationMessageFor(m => m.BonusDelta)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 col-md-2">کاربر:</div>
+            <div class="col-sm-5 col-md-6">@Html.AdminUserSelector("TargetUserID")</div>
+            <div class="col-sm-4 col-md-4">@Html.ValidationMessageFor(m => m.TargetUserID)</div>
+        </div>
+    </div>
+    <div>
+    <button name="submit" value="btnCreateUser" class="btn btn-primary " type="submit">ایجاد  >></button>
+        <a href="@Url.Action("ListAdministrativeChanges", new { area = AreaNames.Billing })">بازگشت>></a>
+    </div>
+
+}
+
+@section SideBar
+{
+}
+
+

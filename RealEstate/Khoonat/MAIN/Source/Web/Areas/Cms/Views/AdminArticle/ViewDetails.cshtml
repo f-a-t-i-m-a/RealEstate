@@ -1,0 +1,18 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Cms.Models.AdminArticle.AdminArticleViewDetailsModel
+
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", AreaRouteValue.Admin, null)
+     &gt; 
+     @Html.ActionLink("رده نوشته", "List", "AdminArticleCategory") 
+    &gt;
+    @Html.ActionLink("لیست نوشته ها", "List", new {ArticleCategoryID = Model.ArticleCategoryID}) 
+    &gt;
+    مشاهده نوشته
+</h2>
+
+
+<div>
+    @Html.Raw(Model.Html)
+</div>

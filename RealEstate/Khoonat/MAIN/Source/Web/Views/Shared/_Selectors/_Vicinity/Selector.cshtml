@@ -1,0 +1,74 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Models.VicinitySelector.VicinitySelectorConfiguration
+
+
+@{
+    string inputId;
+    if (Model.FromHomePage)
+    {
+        inputId = Model.Name.Replace('.', '_') + "_1";
+    }
+    else
+    {
+        inputId = Model.Name.Replace('.', '_');
+    }
+}
+
+<input id="@inputId" name="@Model.Name" value="@Model.InitialValue" type="hidden" style="width: 100%;" /><br />
+
+@this.ScriptBlock(@<script type="text/javascript">
+                       var searchScope = @Model.SearchScope.IfHasValue(ss => ss.ToString(CultureInfo.InvariantCulture), "null");
+                       $("#@inputId").select2({
+                           minimumInputLength: 1,
+                           maximumSelectionSize: @Model.MaxNumberOfSelections,
+                           multiple: @(Model.MaxNumberOfSelections > 1 ? "true" : "false"),
+                           placeholder: 'نام محله / منطقه / شهر / استان / کشور',
+                           ajax: {
+                               url: '@Url.Action("Search", "VicinitySelector", new { area = AreaNames.Main, includeDisabled = Model.IncludeDisabled })',
+                               dataType: 'json',
+                               quietMillis: 0,
+                               data: function(term, page, context) {
+                                   return {
+                                       query: term,
+                                       page: page,
+                                       pageLength: 20,
+                                       searchScope: searchScope
+                                   };
+                               },
+                               results: function(data, page) {
+                                   return {
+                                       results: data.Items,
+                                       more: data.More,
+                                   };
+                               }
+                           },
+                           formatResult: function(object, container, query, escapeMarkup) {
+                               return "<div style='padding: 5px;'><span class='f1'>" + object.TypeLabel + ": </span>" + "<span class='f1 bold '>" + object.Name + "</span><br/><span class='f1 small'>" + object.HierarchyString + "</span></div>";
+                           },
+                           formatSelection: function(object, container, escapeMarkup) {
+                               return object.FullName;
+                           },
+                           id: function(input) {
+                               return input.ID;
+                           },
+                           initSelection : function (element, callback) {
+                               var ids = element.val();
+                                   $.ajax({
+                                       url: '@Url.Action("GetMany", "VicinitySelector", AreaRouteValue.Main)',
+                                       type: 'POST',
+                                       dataType: 'json',
+                                       data:
+                                       {
+                                           ids: ids
+                                       }
+                                   }).done(function(data) {
+                                       if (data)
+                                            callback(data@(Model.MaxNumberOfSelections > 1 ? "" : "[0]"));
+                                   });
+                           }
+                       });
+
+                   </script>)

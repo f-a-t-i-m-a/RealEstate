@@ -1,0 +1,48 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileAddEmailModel
+
+<div id="completeRegistrationEmailRoot">
+    <div>
+        <p>
+             پیشنهاد میکنیم حتما آدرس ایمیلتون رو وارد کنید تا اگر اطلاعات حسابتون رو از دست دادید بتونید بازیابیش کنید
+        </p>
+        @using (Ajax.BeginForm("CompleteRegistrationAddEmailAddress", "MyProfile", null, new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "completeRegistrationEmailRoot"}, new {id = "frmAddEmailAddress"}))
+        {
+            <br />
+            <strong>آدرس ایمیل جدید</strong>
+            <br />
+            <br />
+
+            @Html.ValidationSummary()
+
+            <table>
+                <tr>
+                    <td style="width: 160px;">@Html.LabelFor(m => m.Email)</td>
+                    <td style="width: 220px;">@Html.TextBoxFor(m => m.Email, new {@class = "ltr", autofocus = "autofocus"})</td>
+                    <td rowspan="2">&nbsp;&nbsp;&nbsp;</td>
+                    <td rowspan="2"><input id="btnOK" class="btn btn-success" type="submit" value="ثبت و فعال سازی" style="width: 150px;" /></td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.Visibility)</td>
+                    <td>@Html.DropDownListFor(m => m.Visibility, Model.Visibility.EnumSelectList(DomainEnumResources.ResourceManager))</td>
+                </tr>
+                <tr>
+                    <td colspan="2">@Html.ValidationMessageFor(m => m.Visibility)</td>
+                </tr>
+            </table>
+
+            <text>
+                @Html.ScriptCaptchaToken()
+                @this.ScriptText(Html.ScriptCaptchaScript())
+                @Html.CaptchaErrorMessage()
+            </text>
+        }
+    </div>
+    
+    @(this.ScriptBlock(@<script type="text/javascript">
+                            $.validator.unobtrusive.parse("#frmAddEmailAddress");
+                        </script>))
+
+</div>

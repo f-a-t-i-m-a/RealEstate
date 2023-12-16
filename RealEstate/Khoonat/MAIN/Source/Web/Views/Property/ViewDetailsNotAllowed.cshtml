@@ -1,0 +1,46 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyViewDetailsModel
+
+<h1 style="text-align: center">
+	جزئیات اطلاعات ملک
+</h1>
+<h2 style="text-align: center">
+	اطلاعات این ملک به صورت عمومی در دسترس نیست.
+</h2>
+
+@if (Model.Listing.PublishEndDate.HasValue)
+{
+	if (Model.Listing.PublishEndDate.Value < DateTime.Now)
+	{
+		<p>
+			مدت زمان عمومی بودن اطلاعات این ملک در تاریخ
+			@Model.Listing.PublishEndDate.ToLocalizedDateString()
+			-
+			@((Model.Listing.PublishEndDate - DateTime.Now).ToLocalizedRelativeString())
+			-
+			به اتمام رسیده است.
+		</p>
+	}
+	else if (!Model.Listing.Approved.HasValue)
+	{
+		<p>
+			این ملک توسط ثبت کننده عمومی شده است و در انتظار تایید اپرتور می باشد و به زودی در دسترس خواهد بود.
+		</p>
+	} 
+	else if (!Model.Listing.Approved.Value)
+	{
+		<p>
+			این آگهی مردود شده است. لطفا مشکلات آن را برطرف فرمایید تا بتوانید آن را عمومی کنید.
+		</p>
+	}
+}
+else
+{
+	<p>
+		اطلاعات ملک مورد نظر شما توسط ثبت کننده، عمومی نشده است.
+	</p>
+}
+
+<div class="darkBk" style="background-color: #932; margin: 20px; padding: 20px; border: 3px solid black;">
+	@Html.Partial("EnableEdit", Model.Listing)
+</div>

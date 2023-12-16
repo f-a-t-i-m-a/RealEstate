@@ -1,0 +1,87 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Ad.Models.ImpressionAdmin.ImpressionAdminListImpressionsModel
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", new {area = AreaNames.Admin}, null)
+    &gt;
+    @Html.ActionLink("سامانه تبلیغات", "Index", "AdAdminHome")
+    &gt;
+    لیست نمایش ها
+
+</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Impressions, p => Url.Action("ListImpressions", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID / GUID </th>
+            <th>زمان ایجاد</th>
+            <th>مبلغ</th>
+            <th>SponsoredEntityID</th>
+            <th>ContentOwnerUserID</th>
+            <th>HttpSessionID</th>
+            <th>BillingEntityID</th>
+        </tr>
+        </thead>
+        @foreach (var impression in Model.Impressions)
+        {
+            <tr>
+                <td>
+                    @impression.ID
+                    <br/>
+                    @impression.GUID
+                </td>
+                <td>
+                    @impression.CreationTime.ToLocalizedDateString() @impression.CreationTime.ToLocalizedTimeString()
+                </td>
+                <td>
+                    @BillingPresentationHelper.Amount(impression.BidAmount)
+                </td>
+                <td>
+                    @impression.SponsoredEntityID
+                </td>
+                <td>
+                    @impression.ContentOwnerUserID
+                </td>
+                <td>
+                    @impression.HttpSessionID
+                </td>
+                <td>
+                    @impression.BillingEntityID
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Impressions, p => Url.Action("ListImpressions", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li>
+            <a href="@Url.Action("ListImpressions")">همه موارد (بدون فیلتر)</a>
+        </li>
+    </ul>
+
+    <br/><hr/>
+
+    @using (Html.BeginForm("ListImpressions", "ImpressionAdmin", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            SponsoredEntityIDFilter:
+            @Html.TextBoxFor(m => m.SponsoredEntityIDFilter)
+            <br/>
+            <br/>
+            <button name="submit" value="btnRefresh" class="button" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

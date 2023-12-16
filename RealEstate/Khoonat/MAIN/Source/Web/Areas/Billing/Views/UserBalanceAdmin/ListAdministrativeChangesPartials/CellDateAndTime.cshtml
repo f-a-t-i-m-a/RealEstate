@@ -1,0 +1,19 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Domain.Billing.UserBalanceAdministrativeChange
+
+ایجاد:
+@Model.CreationTime.ToLocalizedDateString()
+@Model.CreationTime.ToLocalizedTimeString()
+
+<br/>
+
+تکمیل:
+@if (Model.CompletionTime.HasValue)
+{
+    @: @Model.CreationTime.ToLocalizedDateString()
+    @: @Model.CreationTime.ToLocalizedTimeString()
+}
+else
+{
+    @: -
+}

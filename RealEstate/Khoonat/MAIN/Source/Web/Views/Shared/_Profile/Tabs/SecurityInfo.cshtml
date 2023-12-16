@@ -1,0 +1,128 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Models.Shared.Profile.Tabs.ProfileTabSecurityInfoModel
+
+<br />
+<br />
+@if (Model.LatestLoginNameQueries.Any())
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                درخواست های دریافت نام کاربری
+            </h3>
+        </div>
+        <div class="panel-body">
+            @if (!Model.AdministrativeView)
+            {
+                <p>
+                    در تاریخ های زیر، با شماره تلفن / آدرس ایمیل شما، درخواست ارسال نام کاربری
+                    ثبت شده است (با استفاده از قابلیت «نام کاربری خود را فراموش کرده ام»).
+                    در صورتی که شما درخواست کننده این موارد نبوده اید، لطفاً اقدامات امنیتی لازم را
+                    انجام دهید.
+                </p>
+            }
+            <ul>
+                @foreach (var query in Model.LatestLoginNameQueries)
+                {
+                    <li>@query.QueryTime.ToLocalizedDateString() @query.QueryTime.ToLocalizedTimeString() - @((query.QueryTime - DateTime.Now).ToLocalizedRelativeString())</li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+@if (Model.LatestPasswordResets.Any())
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                درخواست های تنظیم مجدد کلمه عبور
+            </h3>
+        </div>
+        <div class="panel-body">
+            @if (!Model.AdministrativeView)
+            {
+                <p>
+                    در تاریخ های زیر، برای نام کاربری شما درخواست تنظیم مجدد کلمه عبور ثبت شده است
+                    (با استفاده از قابلیت «رمز عبور خود را فراموش کرده ام»).
+                    در صورتی که درخواست کننده این موارد خود شما نبوده اید، لطفاً اقدامات امنیتی لازم را انجام دهید.
+                </p>
+            }
+            <ul>
+                @foreach (var reset in Model.LatestPasswordResets)
+                {
+                    <li>
+                        @reset.StartTime.ToLocalizedDateString() @reset.StartTime.ToLocalizedTimeString() -
+                        @((reset.StartTime - DateTime.Now).ToLocalizedRelativeString()) -
+                        @if (reset.CompletionTime.HasValue)
+                        {
+                            <span>تنظیم مجدد @((reset.CompletionTime.Value - reset.StartTime).ToLocalizedRelativeString()) انجام شده</span>
+                        }
+                        else
+                        {
+                            @(reset.ExpirationTime > DateTime.Now ? "تکمیل نشده" : "منقضی شده")
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+   
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            جلسات استفاده از سیستم
+        </h3>
+    </div>
+    <div class="panel-body">
+        @if (!Model.AdministrativeView)
+        {
+            <p>
+                فهرست زیر، استفاده های اخیر شما از سیستم را نمایش می دهد. در صورتی که در این فهرست موردی وجود دارد
+                که نسبت به آن مشکوک هستید، لطفاً اقدامات امنیتی لازم را انجام دهید.
+            </p>
+        }
+
+
+        @if (Model.AdministrativeView)
+        {
+            @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Sessions, Model.PaginationUrlTemplate))
+        }
+
+        <table class="table table-hover">
+            <tr class="active">
+                <td>شروع جلسه</td>
+                <td>طول جلسه</td>
+                @if (Model.AdministrativeView)
+                {
+                    <td>شناسه سیستم</td>
+                    <td>شناسه HTTP</td>
+                    <td>علت خاتمه</td>
+                    <td>آدرس شبکه</td>
+                }
+            </tr>
+            @foreach (var session in Model.Sessions)
+            {
+                <tr>
+                    <td>@session.Start.ToLocalizedDateString() @session.Start.ToLocalizedTimeString() <br /> (@((session.Start - DateTime.Now).ToLocalizedRelativeString()))</td>
+                    <td>@((session.End - session.Start).ToLocalizedDurationString())</td>
+                    @if (Model.AdministrativeView)
+                    {
+                        <td>@session.ID</td>
+                        <td>@session.HttpSessionID</td>
+                        <td>@session.EndReason</td>
+                        <td>@session.ClientAddress</td>
+                    }
+                </tr>
+            }
+        </table>
+
+
+        @if (Model.AdministrativeView)
+        {
+        @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Sessions, Model.PaginationUrlTemplate))
+        }
+    </div>
+</div>

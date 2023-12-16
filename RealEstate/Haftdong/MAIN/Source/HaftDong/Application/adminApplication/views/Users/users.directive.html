@@ -1,0 +1,91 @@
+﻿<div class="container">
+    <div class="page-header">
+        <h1 ng-show="!inEditMode">کاربر جدید</h1>
+        <h1 ng-show="inEditMode">ویرایش کاربر</h1>
+    </div>
+    <form name="frmUser" class="form-horizontal" novalidate>
+        <div class="well">
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> نوع کاربر:</label>
+                <div class="col-md-4">
+                    <ui-select ng-model="$parent.user.Type" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="لطفا انتخاب کنید" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                        <ui-select-choices repeat="opt.id as opt in allUserTypes">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> نام کاربری:</label>
+                <div class="col-md-4">
+                    <input type="text" dir="ltr" ng-model="user.UserName" ng-minlength="4" ng-maxlength="50"
+                            ng-required="true" ng-pattern="/^(?=.{4,50}$)(?![_.])(?!.*[_.-]{2})[a-zA-Z0-9._-]+$/"/>
+                </div>
+                <div class="col-md-5">
+                    <label class="label-info">نام کاربری تنها میتواند شامل حروف، اعداد، نقطه، - و _ باشد</label>
+                </div>
+            </div>
+            <div class="row" ng-if="!inEditMode">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> کلمه عبور:</label>
+                <div class="col-md-4 password">
+                    <input type="password" ng-model="user.Password" ng-required="true"
+                            ng-change="checkPassword()" ng-hide="eyeClick"/>
+                    <input type="text" dir="ltr" ng-model="user.Password" ng-show="eyeClick"/>
+                    <i class="fa fa-eye eyeicon" ng-show="showIcon"
+                        ng-mousedown="eyeClick = true" ng-mouseup="eyeClick = false" ng-mouseleave="eyeClick = false"></i>
+                </div>
+                <div class="col-md-5">
+                    <label class="label-danger" ng-show="PasswordLengthMinimumRequirement">طول کلمه ی عبور باید حداقل 6 حرف باشد</label>
+                </div>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> مجوز: </label>
+                <div class="col-md-4">
+                    <jj-select-license-type model="user.LicenseType" jj-allow-clear="true" jj-required="true"/>
+                </div>
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> تاریخ اتمام مجوز تا:</label>
+                <div class="col-md-4">
+                    <jj-jalaali-datepicker-popup jj-model="user.LicenseActivationTime" class="datepicker" required="true"></jj-jalaali-datepicker-popup>
+                </div>
+            </div>
+            </div>
+        <div class="well">
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> نام کامل:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="user.DisplayName" ng-required="true"/>
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label">ایمیل:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="contact.email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" />
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label">تلفن:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="contact.mobileNumber"  class="persian-number"/>
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label">آدرس:</label>
+                <div class="col-md-4">
+                    <textarea ng-model="contact.address" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label"> آدرس سایت:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="user.WebSiteUrl"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button class="btn btn-success saveButton" ng-show="!inEditMode" ng-disabled="frmUser.$invalid" ng-click="onSave()" restrict-to="Administrator"><i class="fa fa-floppy-o"></i> ایجاد حساب</button>
+    <button class="btn btn-success saveButton" ng-show="inEditMode" ng-disabled="frmUser.$invalid" ng-click="onSave()" restrict-to="Administrator"><i class="fa fa-floppy-o"></i> ثبت تغییرات</button>
+    <button class="btn btn-default" ng-click="onBackClick()" restrict-to="Administrator">انصراف</button>
+</div>

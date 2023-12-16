@@ -1,0 +1,199 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Helpers
+@using System.Linq
+@model JahanJooy.RealEstate.Web.Models.PropertyPhoto.PropertyPhotoTabModel
+
+
+@if (Model.IsOwner || User.IsOperator)
+{
+	<div style="border: 2px dashed #666; margin-bottom: 15px; padding: 10px;">
+		<div style="position: relative;">
+		
+			<div id="uploadBtn" class="clickable" style="text-align: center;"
+				 data-qtip-enabled="true" data-qtip-content-selector="#addPhotoTipContent" data-qtip-position-my="bottom center" data-qtip-position-at="top center" data-qtip-style-classes="qtip-white">
+				
+				<div style="direction: rtl; background-color: #039; border: 1px solid black; color: white; padding: 5px;">
+					<span class="glyphicon glyphicon-plus-sign"></span>
+					اضافه کردن عکس جدید
+				</div>
+
+			</div>
+
+			<div id="hiddenUploadBtn">
+			</div>
+			
+			<div id="addPhotoTipContent" class="hidden">
+				<div style="padding: 5px; background-color: white; border: 3px solid #fa0;">
+					<p style="margin: 5px 0;">@IconsHelper.Idea32White(Url) برای اضافه کردن عکس جدید:</p>
+					<ul style="margin: 0 0 10px 0;">
+						<li>انواع فایل مورد قبول: gif, tif, png, jpg</li>
+						<li>حداکثر حجم هر عکس، 8 مگابایت.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="uploadPhoto">
+			</div>
+		</div>
+
+		<div id="newUploadedPhotosContainerParent" style="display: none;">
+			<hr/>
+			<div style="background-color: #222; color: white; padding: 8px; margin: 10px 0;">
+				این عکس ها اضافه شده اند؛ اگر بخواهید می تونید اینجا براشون عنوان و توضیحات مشخص کنید.
+			</div>
+		</div>
+		<div id="newUploadedPhotosContainer" style="text-align: center;"></div>
+	</div>
+
+	<text>
+		@this.ScriptBlock(@<script type="text/javascript">
+		                   	$("#uploadPhoto").fineUploader({
+		                   		button: $("#hiddenUploadBtn"),
+		                   		maxConnections: 2,
+		                   		request: {
+		                   			endpoint: "@Url.Action("Upload", "PropertyPhoto", new {id = Model.Listing.ID})"
+                   				},
+                   				validation: {
+                   					allowedExtensions: ['jpe', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff'],
+                   					sizeLimit: 8388608
+                   				},
+                   				text: {
+                   					uploadButton: "اضافه کردن عکس جدید",
+                   					cancelButton: "بی خیال",
+                   					retry: "تلاش مجدد",
+                   					failUpload: "در ارسال یا پردازش این تصویر خطا پیش آمد",
+                   					dragZone: "برای اضافه کردن عکس، می توانید فایل را اینجا بیندازید",
+                   					dropProcessing: "در حال پردازش درخواست...",
+                   					formatProgress: "در حال ارسال: {percent} درصد از {total_size} ارسال شده...",
+                   					waitingForResponse: "در حال پردازش تصویر..."
+                   				},
+                   				messages: {
+                   					typeError: "نوع فایل انتخاب شده تصویر نیست، یا توسط سیستم پشتیبانی نمی شود.",
+                   					sizeError: "فایل انتخاب شده بزرگ تر از حداکثر حجم قابل ارسال است.",
+                   					noFilesError: "فایلی برای ارسال وجود ندارد.",
+                   					onLeave: "تصاویر در حال ارسال به سرویس دهنده می باشند. اگر از این صفحه خارج شوید ارسال لغو خواهد شد."
+                   				},
+		                   		dragAndDrop: {
+		                   			hideDropzones: false,
+		                   			disableDefaultDropzone: true
+		                   		}
+                   			}).on('complete', function (event, id, name, response) {
+                   				if (response.success == true) {
+                   					var itemElement = $(this).fineUploader('getItemByFileId', id);
+                   					window.setTimeout(function () { $(itemElement).fadeOut(2000); }, 4000);
+
+                   					$.ajax({
+                   						url: "@Url.Action("EditProperties", "PropertyPhoto")/" + response.PropertyListingPhotoID,
+                   						type: 'POST'
+                   					}).done(function (html) {
+                   						$("#newUploadedPhotosContainerParent").show();
+                   						$("#newUploadedPhotosContainer").append('<hr/><div style="margin: 10px; background-color: #888;">' + html + '</div>');
+                   					});
+
+								   }
+                   			});
+
+		                   	$("#uploadBtn").click(function() {
+		                   		$("#hiddenUploadBtn input").click();
+		                   	});
+                   		</script>)
+	</text>
+}
+
+
+@if (Model.Photos.Any())
+{
+	<div id="thumbnailGalleryContainer" style="position: relative;">
+		<div id="thumbnailGalleryRight" class="btn btn-default btn-lg" style="position: absolute; right: 0; top: 0; height: 80px; width: 32px; background-color: #aaa; padding: 24px 0;"
+			 title="مشاهده عکس های قبلی" data-toggle="tooltip"><span class="glyphicon glyphicon-forward"></span></div>
+		<div id="thumbnailGalleryLeft" class="btn btn-default btn-lg" style="position: absolute; left: 0; top: 0; height: 80px; width: 32px; background-color: #aaa; padding: 24px 0;"
+			 title="مشاهده عکس های بعدی" data-toggle="tooltip"><span class="glyphicon glyphicon-backward"></span></div>
+		<div id="thumbnailGallery" style="height: 90px; white-space: nowrap; overflow: hidden; margin: 0 38px; direction: ltr; text-align: right;">
+			@foreach (var photo in Enumerable.Reverse(Model.Photos))
+			{
+				<div class="photoThumbnail thumbnail @(Model.SelectedPhotoID.HasValue && Model.SelectedPhotoID.Value == photo.ID ? "selected" : "")" data-photo-id="@photo.ID"
+					 title="@PropertyPhotoHelper.BuildPhotoTitle(photo)" data-toggle="tooltip">
+					<img class="img-circle" src="@Url.Action("GetThumbnailImage", "PropertyPhoto", new {id = photo.ID})" />
+				</div>
+			}
+		</div>
+	</div>
+
+	<div style="position: relative;">
+		<div id="galleryItemRight" class="btn btn-default btn-lg" style="position: absolute; right: 0; top: 0; height: 100%; padding: 0; width: 32px;"
+			 title="مشاهده عکس قبلی" data-toggle="tooltip">
+			<div style="margin-top: 24px;"><span class="glyphicon glyphicon-step-forward"></span></div>
+		</div>
+		<div id="galleryItemLeft" class="btn btn-default btn-lg" style="position: absolute; left: 0; top: 0; height: 100%; padding: 0; width: 32px;"
+			 title="مشاهده عکس بعدی" data-toggle="tooltip">
+			<div style="margin-top: 24px;"><span class="glyphicon glyphicon-step-backward"></span></div>
+		</div>
+		<div id="galleryItemDetails" class="well" style="min-height: 505px; margin: 0 38px; padding: 15px; text-align: center;"></div>
+	</div>
+}
+else
+{
+	<p>
+		هیچ عکسی برای این ملک ثبت نشده است.
+	</p>
+}
+
+@this.CssBlock(@<style>
+	                .photoThumbnail {
+		                display: inline-block;
+		                width: 80px;
+		                height: 80px;
+		                cursor: pointer;
+		                padding: 5px;
+	                }
+
+	                .photoThumbnail.selected { background-color: #349796; }
+
+                </style>)
+
+@this.ScriptBlock(@<script type="text/javascript">
+	                   $(".photoThumbnail").click(function() {
+		                   if ($("#galleryItemDetails form").length > 0) {
+			                   if (!confirm("وقتی در حالت ویرایش عکس دیگه ای انتخاب کنید، تغییرات روی عکس قبلی از بین میرن. آیا می خواهید تغییرات رو بی خیال بشید؟")) {
+				                   return;
+			                   }
+		                   }
+
+		                   $(".photoThumbnail").removeClass("selected");
+		                   $(this).addClass("selected");
+
+		                   var targetOffset = $("#thumbnailGallery").offset().left + ($("#thumbnailGallery").width() / 2) - ($(this).width() / 2);
+		                   var scrollDelta = $(this).offset().left - targetOffset;
+
+		                   if ((scrollDelta > 200) || (scrollDelta < -200))
+			                   $("#thumbnailGallery").animate({ scrollLeft: $("#thumbnailGallery").scrollLeft() + scrollDelta });
+
+		                   var photoId = $(this).attr("data-photo-id");
+
+		                   $.ajax({
+			                   url: "@Url.Action("ViewMediumSize", "PropertyPhoto")" + "/" + photoId,
+			                   type: 'POST'
+		                   }).done(function(html) {
+			                   $("#galleryItemDetails").html(html);
+		                   });
+
+	                   });
+
+	                   $("#thumbnailGalleryRight").click(function() {
+		                   $("#thumbnailGallery").animate({ scrollLeft: $("#thumbnailGallery").scrollLeft() + $("#thumbnailGallery").width() / 1.6 });
+	                   });
+
+	                   $("#thumbnailGalleryLeft").click(function() {
+		                   $("#thumbnailGallery").animate({ scrollLeft: $("#thumbnailGallery").scrollLeft() - $("#thumbnailGallery").width() / 1.6 });
+	                   });
+
+	                   $("#galleryItemRight").click(function() {
+		                   $(".photoThumbnail.selected").next().click();
+	                   });
+	                   $("#galleryItemLeft").click(function() {
+		                   $(".photoThumbnail.selected").prev().click();
+	                   });
+
+	                   $(".photoThumbnail.selected").click();
+                   </script>)
+

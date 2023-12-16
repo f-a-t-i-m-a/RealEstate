@@ -1,0 +1,123 @@
+﻿<div class="container contractView" ng-show="$state.current.name === 'contracts'">
+    <div class="well well-lg">
+        <div class="row">
+            <div class="col-md-3">
+                <ui-select ng-model="$parent.searchInput.UsageType" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="همه کاربری ها" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="opt.id as opt in allUsageTypes">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-3">
+                <ui-select ng-model="$parent.searchInput.PropertyType" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="همه املاک" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="opt.id as opt in allPropertyTypes">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-3">
+                <ui-select ng-model="$parent.searchInput.IntentionOfOwner" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="نوع معامله" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="opt.id as opt in allIntentionOfOwners">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-3">
+                <jj-select-contract-state model="searchInput.State" jj-allow-clear="true"></jj-select-contract-state>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <label for="" class="col-md-2 control-label">از:</label>
+                    <div class="col-md-10">
+                        <jj-jalaali-datepicker-popup jj-model="searchInput.FromDate" class="datepicker"></jj-jalaali-datepicker-popup>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <label for="" class="col-md-2 control-label">تا:</label>
+                    <div class="col-md-10">
+                        <jj-jalaali-datepicker-popup jj-model="searchInput.ToDate" class="datepicker"></jj-jalaali-datepicker-popup>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 text-left">
+            </div>
+            <div class="col-md-2 text-left">
+                <button class="btn btn-success btn-sm searchButton" ng-click="onSearch()"><i class="fa fa-search"></i> جستجو</button>
+            </div>
+<!--            <div class="col-md-2 text-left">-->
+<!--                <jj-print-button source-type="6" endpoint="/api/web/contracts/print" show-office-type="true" filename="لیست قراردادها" search-input="searchInput" ids="ids"></jj-print-button>-->
+<!--            </div>-->
+        </div>
+    </div>
+    <div class="row" ng-show="Contracts != null && Contracts.length != 0">
+        <div class="col-md-12">
+            <table class="table table-hover searchResult">
+                <thead>
+                <tr>
+                    <th class="col-md-1">
+                        <input type="checkbox" ng-model="selectAllContracts" />
+                    </th>
+                    <th class="col-md-1">
+                        جزئیات
+                    </th>
+                    <th class="col-md-2">
+                        تاریخ قرارداد
+                    </th>
+                    <th class="col-md-2">
+                        فروشنده
+                    </th>
+                    <th class="col-md-2">
+                        خریدار
+                    </th>
+                    <th class="col-md-2">نوع ملک</th>
+                    <th class="col-md-1">نوع معامله</th>
+                    <th class="hidden-xs col-md-1">وضعیت</th>
+                    <th class="hidden-xs col-md-1" restrict-to="Administrator">
+                        <label>
+                            ثبت کننده
+                        </label>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="contract in Contracts">
+                    <td class="col-md-1">
+                        <input type="checkbox" ng-model="contract.Selected" ng-click="resetIdsList(contract)" />
+                    </td>
+                    <td class="col-md-1">
+                        <a ui-sref="contracts.details({id:contract.ID})">مشاهده</a>
+                    </td>
+                    <td class="col-md-2">
+                        {{contract.ContractDate | jalaali}}
+                    </td>
+                    <td class="col-md-2">
+                        <a ui-sref="customers.details({id:contract.Seller.ID})">{{contract.Seller.DisplayName}}</a>
+                    </td>
+                    <td class="col-md-2">
+                        <a ui-sref="customers.details({id:contract.Buyer.ID})">{{contract.Buyer.DisplayName}}</a>
+                    </td>
+                    <td class="col-md-2">
+                        <a ui-sref="files.details({ id: contract.PropertySummary.ID })">{{contract.PropertySummary.PropertyType | PropertyType}}</a>
+
+                    </td>
+                    <td class="col-md-1">{{contract.SupplySummary.IntentionOfOwner| IntentionOfOwner}}</td>
+                    <td class="hidden-xs col-md-1">{{contract.State| ContractState}}</td>
+                    <td class="hidden-xs col-md-1" restrict-to="Administrator">{{contract.CreatorFullName}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+            <jj-pagination page-number="PageNumber" number-of-pages="NumberOfPages" total-number-of-items="TotalNumberOfItems" page-size="PageSize" on-change-page-click="getDataDown(page)"></jj-pagination>
+        </div>
+    </div>
+</div>
+<div ui-view autoscroll="false"></div>

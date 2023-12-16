@@ -1,0 +1,223 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@* 
+********************************************************************************
+**** Building and Unit properties
+*@
+
+<div class="none displayPerType showForHouse showForVilla showForApartment showForPenthouse showForShop">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">مشخصات واحد و ساختمان</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.UnitArea):
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.UnitArea, "{0:0.##}", new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                                <span class="input-group-addon">متر مربع</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.UnitArea)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.UnitUsageType):
+                        </div>
+                        <div class="col-xs-7">
+                            @Html.DropDownListFor(m => m.UnitUsageType, Model.UnitUsageType.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.SelectOne, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.UnitUsageType)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row displayPerType showForHouse showForVilla showForApartment showForPenthouse">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.NumberOfRooms):
+                        </div>
+                        <div class="col-xs-7">
+                            @Html.TextBoxFor(m => m.NumberOfRooms, new {maxlength = 3, style = "direction:ltr;text-align:center;"})
+
+                            <div class="field-validation-container">
+                                @Html.ValidationMessageFor(m => m.NumberOfRooms)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.StorageRoomArea):
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group ">
+                                @Html.TextBoxFor(m => m.StorageRoomArea, "{0:0.##}", new {maxlength = 3, style = "direction:ltr;text-align:center;"})
+                                <span class="input-group-addon">@GeneralResources.SquareMeter</span>
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.StorageRoomArea)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row ">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.NumberOfParkings):
+                        </div>
+                        <div class="col-xs-7">
+                            @Html.TextBoxFor(m => m.NumberOfParkings, new {maxlength = 3, style = "direction:ltr;text-align:center;"})
+                            <div class="field-validation-container">
+                                @Html.ValidationMessageFor(m => m.NumberOfParkings)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.BuildingAgeYears):
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group ">
+                                @Html.TextBoxFor(m => m.BuildingAgeYears, new {maxlength = 3, style = "direction:ltr;text-align:center;"})
+                                <span class="input-group-addon">سال</span>
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.BuildingAgeYears)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row displayPerType showForHouse showForVilla showForApartment showForPenthouse">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.UnitFloorNumber):
+                        </div>
+                        <div class="col-xs-7">
+                            @Html.TextBoxFor(m => m.UnitFloorNumber, new {maxlength = 3, style = "direction:ltr;text-align:center;"})
+                            <div class="field-validation-container">
+                                @Html.ValidationMessageFor(m => m.UnitFloorNumber)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.TotalNumberOfUnits):
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group ">
+                                @Html.TextBoxFor(m => m.TotalNumberOfUnits, new {maxlength = 5, style = "direction:ltr;text-align:center;"})
+                                <span class="input-group-addon">واحد</span>
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.TotalNumberOfUnits)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row displayPerType showForHouse showForVilla showForApartment showForPenthouse">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.NumberFloorsAboveGround):
+                        </div>
+                        <div class="col-xs-7">
+                            @Html.TextBoxFor(m => m.NumberFloorsAboveGround, new {maxlength = 3, style = "direction:ltr;text-align:center;"})
+                            <div class="field-validation-container">
+                                @Html.ValidationMessageFor(m => m.NumberFloorsAboveGround)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.NumberOfUnitsPerFloor):
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group ">
+                                @Html.TextBoxFor(m => m.NumberOfUnitsPerFloor, new {maxlength = 3, style = "direction:ltr;text-align:center;"})
+                                <span class="input-group-addon">واحد</span>
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.NumberOfUnitsPerFloor)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+            <div class="row displayPerType showForShop">
+	            <div class="col-md-6">
+		            <div class="form-group">
+			            <div class="col-xs-5">
+				            @Html.LabelFor(m => m.HasIranianLavatory)@GeneralResources.QuestionMark @Html.ValidationMessageFor(m => m.HasIranianLavatory)
+			            </div>
+						@foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.ShopHasIranianLavatory, SelectHtmlExtensions.BuildBooleanList()))
+						{
+							<div class="col-xs-2">
+								@item.Input
+								@item.Label
+							</div>
+						}
+		            </div>
+	            </div>
+	            <div class="col-md-6">
+					<div class="form-group">
+						<div class="col-xs-5">
+							@Html.LabelFor(m => m.HasForeignLavatory)@GeneralResources.QuestionMark @Html.ValidationMessageFor(m => m.HasForeignLavatory)
+						</div>
+						@foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.ShopHasForeignLavatory, SelectHtmlExtensions.BuildBooleanList()))
+						{
+							<div class="col-xs-2">
+								@item.Input
+								@item.Label
+							</div>
+						}
+					</div>
+	            </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    @Html.LabelFor(m => m.AdditionalSpecialFeatures):
+                </div>
+                <div class="col-xs-12 col-md-8">
+                    @Html.TextAreaFor(m => m.AdditionalSpecialFeatures)
+                    @Html.ValidationMessageFor(m => m.AdditionalSpecialFeatures)
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>

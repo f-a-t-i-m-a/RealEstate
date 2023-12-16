@@ -1,0 +1,19 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@model string
+
+<div id="captchaImageRoot">
+	
+	<div id="captchaImageBox" style="border: 1px solid darkgrey; padding: 12px; width: 330px;">
+		<img src="@Url.Action("GetImageBytes", "Captcha", new {code = Model})" width="180" height="50" style="float: left;" />
+
+		مقدار نمایش داده شده:
+		<input type="text" name="@CaptchaConstants.ImageCaptchaDefaultInputFieldName" maxlength="6" style="width: 100px; margin: 10px;" autofocus=""/>
+		<input type="hidden" name="@CaptchaConstants.ImageCaptchaDefaultTokenFieldName" value="@Model"/>
+		<p style="text-align: center; margin: 0">
+			تصویر قابل خوندن نیست؟
+			@Ajax.ActionLink("یکی دیگه!", "ViewImage", "Captcha", new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "captchaImageRoot", HttpMethod = "POST"})
+		</p>
+		
+	</div>
+
+</div>

@@ -1,0 +1,375 @@
+﻿<div class="container" ng-show="$state.current.name === 'welcome'">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<ul class="nav nav-tabs">
+    <li role="presentation" name="firstTab" id="search" class="active">
+        <a ng-click="onFirstTabClick('search')"><i class="fa fa-search"></i> جستجوی سریع ملک</a>
+    </li>
+    <li role="presentation" name="firstTab" id="property">
+        <a ng-click="onFirstTabClick('property')"><i class="fa fa-home"></i> سپردن سریع ملک</a>
+    </li>
+    <li role="presentation" name="firstTab" id="request">
+        <a ng-click="onFirstTabClick('request')"><i class="fa fa-file-text-o"></i> درخواست</a>
+    </li>
+</ul>
+<div class="tab-content">
+<div ng-show="showFirstTab == 'search'">
+    <img src="/Content/images/searchtab.jpg" class="firstpage-image"/>
+    <div class="well well-sm tab-in-tab">
+        <ul class="nav nav-tabs">
+            <li role="presentation" name="secondTab" id="all" class="active">
+                <a ng-click="onSecondTabClick('all')">همه</a>
+            </li>
+            <li role="presentation" name="secondTab" id="sale">
+                <a ng-click="onSecondTabClick('sale')">فروش</a>
+            </li>
+            <li role="presentation" name="secondTab" id="rent">
+                <a ng-click="onSecondTabClick('rent')">اجاره</a>
+            </li>
+            <li role="presentation" name="secondTab" id="fullmortgage">
+                <a ng-click="onSecondTabClick('fullmortgage')">رهن کامل</a>
+            </li>
+            <li role="presentation" name="secondTab" id="dailyrent">
+                <a ng-click="onSecondTabClick('dailyrent')">اجاره روزانه</a>
+            </li>
+<!--            <li role="presentation" name="secondTab" id="exchange">-->
+<!--                <a ng-click="onSecondTabClick('exchange')">معاوضه</a>-->
+<!--            </li>-->
+<!--            <li role="presentation" name="secondTab" id="cooperate">-->
+<!--                <a ng-click="onSecondTabClick('cooperate')">مشارکت</a>-->
+<!--            </li>-->
+        </ul>
+        <div class="tab-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <ui-select ng-model="$parent.searchInput.UsageType" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="همه کاربری ها" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allUsageTypes">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4">
+                    <ui-select ng-model="$parent.searchInput.PropertyType" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="همه املاک" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in propertyTypeOptions">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showEstateAreaSearch">
+                    <ui-select ng-model="$parent.searchInput.EstateArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="متراژ زمین" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allEstateAreaRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showUnitAreaSearch">
+                    <ui-select ng-model="$parent.searchInput.UnitArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="متراژ بنا" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allUnitAreaRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showNumberOfRoomsSearch">
+                    <ui-select ng-model="$parent.searchInput.NumberOfRooms" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="تعداد اتاق ها" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allNumberOfRoomRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showMortgageSearch">
+                    <ui-select ng-model="$parent.searchInput.Mortgage" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="مبلغ ودیعه" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allMortgageRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showRentSearch">
+                    <ui-select ng-model="$parent.searchInput.Rent" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="مبلغ اجاره ماهانه" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allRentRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showDailyRentSearch">
+                    <ui-select ng-model="$parent.searchInput.Rent" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="مبلغ اجاره روزانه" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allDailyRentRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showPriceSearch">
+                    <ui-select ng-model="$parent.searchInput.Price" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="قیمت کل" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allPriceRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showPricePerEstateAreaSearch">
+                    <ui-select ng-model="$parent.searchInput.PricePerEstateArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="قیمت هر متر زمین" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allPricePerEstateAreaRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-4" ng-show="showPricePerUnitAreaSearch">
+                    <ui-select ng-model="$parent.searchInput.PricePerUnitArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                        <ui-select-match placeholder="قیمت هر متر بنا" allow-clear="true" class="ui-select-match">
+                            {{$select.selected.text}}
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allPricePerUnitAreaRanges">
+                            {{opt.text}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-8">
+                    <jj-select-vicinity model="searchInput.Vicinity" jj-allow-clear="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success btn-md searchButton" ui-sref="welcome.files"><i class="fa fa-search"></i> جستجو</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="showFirstTab == 'property'">
+    <img src="/Content/images/propertytab.jpg" class="firstpage-image"/>
+    <div class="well well-sm tab-in-tab">
+        <ul class="nav nav-tabs">
+            <li role="presentation" name="propertysecondTab" id="propertysale" class="active">
+                <a ng-click="onPropertySecondTabClick('propertysale')">فروش</a>
+            </li>
+            <li role="presentation" name="propertysecondTab" id="propertyrent">
+                <a ng-click="onPropertySecondTabClick('propertyrent')">اجاره</a>
+            </li>
+            <li role="presentation" name="propertysecondTab" id="propertyfullmortgage">
+                <a ng-click="onPropertySecondTabClick('propertyfullmortgage')">رهن کامل</a>
+            </li>
+            <li role="presentation" name="propertysecondTab" id="propertydailyrent">
+                <a ng-click="onPropertySecondTabClick('propertydailyrent')">اجاره روزانه</a>
+            </li>
+<!--            <li role="presentation" name="propertysecondTab" id="propertyexchange">-->
+<!--                <a ng-click="onPropertySecondTabClick('propertyexchange')">معاوضه</a>-->
+<!--            </li>-->
+<!--            <li role="presentation" name="propertysecondTab" id="propertycooperate">-->
+<!--                <a ng-click="onPropertySecondTabClick('propertycooperate')">مشارکت</a>-->
+<!--            </li>-->
+        </ul>
+        <div class="tab-content" restrict-to="VerifiedUser">
+            <form name="frmProperty" novalidate>
+                <div class="row">
+                    <div class="col-md-4">
+                        <jj-select-usage-type model="property.UsageType" jj-allow-clear="true" jj-required="true"/>
+                    </div>
+                    <div class="col-md-4">
+                        <ui-select ng-model="$parent.property.PropertyType" theme="bootstrap" search-enabled="false" title="" class="no-search mamad" ng-required="true"
+                                   ng-disabled="property.UsageType == null">
+                            <ui-select-match placeholder="نوع ملک" allow-clear="true" class="ui-select-match">
+                                {{$select.selected.text}}
+                            </ui-select-match>
+                            <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in propertyTypeOptions">
+                                {{opt.text}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="col-md-4" ng-show="showEstatePanel">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.EstateArea" placeholder="متراژ زمین" jj-format="number" jj-allow-float="true"/>
+                            <span class="input-group-addon">متر مربع</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="showUnitPanel">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.UnitArea" placeholder="متراژ بنا" jj-format="number" jj-allow-float="true"/>
+                            <span class="input-group-addon">متر مربع</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="showIndustryPanel">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.UnitArea" placeholder="متراژ بنا" jj-format="number" jj-allow-float="true"/>
+                            <span class="input-group-addon">متر مربع</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="showShopPanel">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.UnitArea" placeholder="متراژ بنا" jj-format="number" jj-allow-float="true"/>
+                            <span class="input-group-addon">متر مربع</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="showSalePanel">
+                        <ui-select ng-model="$parent.property.PriceSpecificationType" theme="bootstrap" search-enabled="false" title="" class="no-search" on-select="clearPrice()">
+                            <ui-select-match placeholder="شیوه مشخص کردن قیمت" allow-clear="true" class="ui-select-match">
+                                {{$select.selected.text}}
+                            </ui-select-match>
+                            <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in priceSpecificationTypeOptions">
+                                {{opt.text}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="col-md-4" ng-show="showSalePanel">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.Price" jj-format="number" placeholder="قیمت"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="showRentPanel">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.Mortgage" jj-format="number" placeholder="رهن"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="showRentPanel && property.IntentionOfOwner !== 3">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.Rent" jj-format="number" placeholder="اجاره"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="showDailyRentPanel">
+                        <div class="input-group">
+                            <input type="text" ng-model="property.Rent" jj-format="number" placeholder="اجاره روزانه"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <jj-jalaali-datepicker-popup jj-model="property.ExpirationTime" class="datepicker" required="true"></jj-jalaali-datepicker-popup>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success btn-md savePropertyButton" ng-disabled="frmProperty.$invalid" ng-click="onSavePropertyClick()">
+                            <i class="fa fa-floppy-o"></i> ذخیره
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div ng-show="showFirstTab == 'request'">
+    <img src="/Content/images/requesttab.jpg" class="firstpage-image"/>
+    <div class="well well-sm tab-in-tab">
+        <ul class="nav nav-tabs">
+            <li role="presentation" name="requestsecondTab" id="requestbuy" class="active">
+                <a ng-click="onRequestSecondTabClick('requestbuy')">خرید</a>
+            </li>
+            <li role="presentation" name="requestsecondTab" id="requestrent">
+                <a ng-click="onRequestSecondTabClick('requestrent')">اجاره</a>
+            </li>
+            <li role="presentation" name="requestsecondTab" id="requestfullmortgage">
+                <a ng-click="onRequestSecondTabClick('requestfullmortgage')">رهن کامل</a>
+            </li>
+            <li role="presentation" name="requestsecondTab" id="requestdailyrent">
+                <a ng-click="onRequestSecondTabClick('requestdailyrent')">اجاره روزانه</a>
+            </li>
+<!--            <li role="presentation" name="requestsecondTab" id="requestexchange">-->
+<!--                <a ng-click="onRequestSecondTabClick('requestexchange')">معاوضه</a>-->
+<!--            </li>-->
+<!--            <li role="presentation" name="requestsecondTab" id="requestcooperate">-->
+<!--                <a ng-click="onRequestSecondTabClick('requestcooperate')">مشارکت</a>-->
+<!--            </li>-->
+        </ul>
+        <div class="tab-content" restrict-to="VerifiedUser">
+            <form name="frmRequest" novalidate>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <jj-select-usage-type model="request.UsageType" jj-allow-clear="request.ID == null" jj-required="true" jj-disabled="request.ID != null"/>
+                        </div>
+                        <div class="col-md-4" ng-show="showRequestBuyPanel">
+                            <div class="input-group">
+                                <input type="text" ng-model="request.TotalPrice" jj-format="number" placeholder="قیمت"/>
+                                <span class="input-group-addon">تومان</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-show="showRequestRentPanel">
+                            <div class="input-group">
+                                <input type="text" ng-model="request.Mortgage" jj-format="number" placeholder="رهن"/>
+                                <span class="input-group-addon">تومان</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-show="showRequestRentPanel">
+                            <div class="input-group">
+                                <input type="text" ng-model="request.Rent" jj-format="number" placeholder="اجاره"/>
+                                <span class="input-group-addon">تومان</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-show="showRequestFullMortgagePanel">
+                            <div class="input-group">
+                                <input type="text" ng-model="request.Mortgage" jj-format="number" placeholder="رهن"/>
+                                <span class="input-group-addon">تومان</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-show="showRequestDailyRentPanel">
+                            <div class="input-group">
+                                <input type="text" ng-model="request.Rent" jj-format="number" placeholder="اجاره روزانه"/>
+                                <span class="input-group-addon">تومان</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <jj-jalaali-datepicker-popup jj-model="request.ExpirationTime" class="datepicker" required="true"></jj-jalaali-datepicker-popup>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8" ng-show="request.UsageType != null">
+                            <label for="" class=" col-md-8 control-label">نوع ملک:</label>
+                            <div ng-repeat="item in propertyTypeItems">
+                                <div class="col-md-6 control-label">
+                                    <label><input type="checkbox" ng-model="item.isSelected" value="item.id"> {{item.text}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-success btn-md saveRequestButton" ng-disabled="frmRequest.$invalid" ng-click="onSaveRequestClick()">
+                                <i class="fa fa-floppy-o"></i> ذخیره
+                            </button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="col-md-1"></div>
+</div>
+</div>
+<div ui-view autoscroll="false"></div>

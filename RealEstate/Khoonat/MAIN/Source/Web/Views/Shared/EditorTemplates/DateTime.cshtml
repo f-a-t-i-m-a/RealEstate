@@ -1,0 +1,3 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model DateTime?
+@Html.TextBox("", Model.HasValue ? Model.Value.ToLocalizedDateString() : "", new { maxlength = 10, style = "direction: ltr; text-align: center;" })

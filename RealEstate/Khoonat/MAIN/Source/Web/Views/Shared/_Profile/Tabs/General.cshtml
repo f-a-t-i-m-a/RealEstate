@@ -1,0 +1,242 @@
+﻿@using JahanJooy.Common.Util.Collections
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.Shared.Profile.Tabs.ProfileTabGeneralModel
+  
+<br/>
+
+@if (Model.EnableEdit && !User.IsVerified)
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+                <span class=" text-danger"><strong>توجه کنید</strong></span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                برای اینکه بتونید از همه امکانات سایت استفاده کنید، لطفاً ثبت نام تون رو تکمیل کنید.
+                کافیه که یک شماره تلفن همراه و یک آدرس ایمیل ثبت کنید و اعتبار سنجی کنید.<br />
+                می تونید توی صفحه <a href="@Url.Action("CompleteRegistration", "MyProfile", new {area = AreaNames.Main})">تکمیل ثبت نام</a> به سادگی این کار رو انجام بدید.
+            </p>
+        </div>
+    </div>
+}
+
+  
+<div class="row">
+    <div class="col-xs-12 col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">مشخصات اصلی</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <strong>شناسه ورود:</strong>
+                    @Model.User.LoginName
+                </p>
+                @if (Model.EnableAdmin || Model.EnableEdit)
+                {
+                    <p>
+                        <strong>نام کامل:</strong>
+                        @Model.User.FullName
+                    </p>
+
+                    <p>
+                        <strong>ثبت نام تکمیل شده:</strong>
+                        @Model.User.IsVerified.Label(GeneralResources.ResourceManager)
+                    </p>
+
+                    <p>
+                        <strong>خطا در ورود:</strong>
+                        @Model.User.FailedLoginAttempts
+                    </p>
+
+                    <p>
+                        <strong >وضعیت حساب:</strong>
+                        @(Model.User.IsEnabled ? "قابل استفاده" : "مسدود")
+                    </p>
+                }
+            </div>
+			@if (Model.EnableEdit)
+			{
+				<div class="panel-footer">
+					<a href="@Url.Action("Edit", "MyProfile")" type="button" class="btn btn-info btn-sm btn-block">
+						ویرایش مشخصات
+					</a>
+					<a href="@Url.Action("ChangePassword", "Account")" type="button" class="btn btn-info btn-sm btn-block">
+						تغییر کلمه عبور
+					</a>
+				</div>
+			}
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">روش های تماس</h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.User.ContactMethods.IsNullOrEmptyEnumerable())
+                {
+                    <p>هیچ روش تماسی برای این کاربر ثبت نشده یا قابل مشاهده نیست.</p>
+                }
+                else
+                {
+                    foreach (UserContactMethod contactMethod in Model.User.ContactMethods)
+                    {
+                        <div>
+                            @IconsHelper.Tristate(Url, contactMethod.IsVerified ? true : (bool?) null)
+                            <strong>@contactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager):</strong>
+                            <br/>
+                            @HtmlPresentationHelper.LeftToRight(contactMethod.ContactMethodText)
+                            @if (Model.EnableEdit)
+                            {
+                                <div class="pull-left">
+                                    @if (contactMethod.IsVerifiable && !contactMethod.IsVerified)
+                                    {
+                                        <button data-ajax-modal="@Url.Action("VerificationPopup", "MyProfile", new {id = contactMethod.ID, area = AreaNames.Main}) " type="button" class="btn btn-default btn-xs">
+                                            فعال سازی
+                                        </button>
+                                        <br/>
+                                    }
+
+                                    <button type="button" class="btn btn-default btn-xs" data-ajax-modal="@Url.Action("DeleteContactMethod", "MyProfile", new {id = contactMethod.ID})">
+                                        حذف
+                                    </button>
+                                </div>
+                                <br />
+                                <small>قابل مشاهده توسط: @contactMethod.Visibility.Label(DomainEnumResources.ResourceManager)</small>
+                            }
+                            <br />
+                            @if (Model.EnableAdmin)
+                            {
+                                if (!contactMethod.IsVerified)
+                                {
+                                    <button data-ajax-modal="@Url.Action("ContactMethodVerificationPopup", "AdminUsers", new {id = contactMethod.ID, area = AreaNames.Admin})" type="button" class="btn btn-default btn-xs pull-left">
+                                        فعال سازی
+                                    </button>
+                                }
+                                <button data-ajax-modal="@Url.Action("DeleteContactMethod", "AdminUsers", new {contactMethodId = contactMethod.ID, AreaNames = AreaNames.Admin}) " type="button" class="btn btn-default btn-xs pull-left">
+                                    حذف
+                                </button>
+                                if (contactMethod.IsVerifiable && contactMethod.ContactMethodType == ContactMethodType.Phone)
+                                {
+                                    <button data-ajax-modal="@Url.Action("NewSingle", "AdminOutgoingSms", new {targetNumber = contactMethod.ContactMethodText, area = AreaNames.Admin})" type="button" class="btn btn-default btn-xs pull-left">
+                                        ارسال پیامک
+                                    </button>
+                                }
+                                <br />
+                                <small>قابل مشاهده توسط: @contactMethod.Visibility.Label(DomainEnumResources.ResourceManager)</small>
+                                <br />
+                            }
+                            <br />
+                        </div>
+                    }
+                }
+            </div>
+			@if (Model.EnableEdit)
+            {
+		        <div class="panel-footer">
+                    <button type="button" class="btn btn-info btn-sm btn-block" data-ajax-modal="@Url.Action("AddPhoneNumberPopup", "MyProfile")">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;&nbsp;شماره تلفن
+                    </button>
+                    <button type="button" class="btn btn-info btn-sm btn-block" data-ajax-modal="@Url.Action("AddEmailPopup", "MyProfile")">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;&nbsp;آدرس پست الکترونیکی
+                    </button>
+	            </div>
+			}
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+        @if (Model.User.Agency != null)
+        {
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">مشخصات مشاورین املاک</h3>
+                </div>
+                <div class="panel-body">
+                           
+                    @foreach (var branch in Model.User.Agency.AgencyBranches.EmptyIfNull())
+                    {
+                        if (branch.IsMainBranch)
+                        {
+                            <p>
+                                <strong>مشاور املاک:</strong>
+                                @branch.GetContent().BranchName
+                            </p>
+
+                            <p>
+                                <strong>آدرس:</strong>
+                                @HtmlPresentationHelper.IfNotSpecified(@branch.GetContent().FullAddress, "-")
+                            </p>
+                            <p>
+                                <strong>تلفن:</strong>
+                                @HtmlPresentationHelper.IfNotSpecified(@branch.GetContent().Phone1, "-")
+                            </p>
+                        }
+                    }
+                            
+                </div>
+                <div class="panel-footer">
+                    @foreach (var branch in Model.User.Agency.AgencyBranches.EmptyIfNull())
+                    {
+                        if (branch.IsMainBranch)
+                        {
+                            <a class="btn btn-info btn-sm btn-block" href="@Url.Action("ViewDetails", "Agency", new {id = branch.AgencyID})">
+                                مشاهده جزئیات
+                            </a>
+                        }
+                    }
+                    @if (Model.EnableEdit)
+                    {
+                        <button type="button" class="btn btn-info btn-sm btn-block" data-ajax-modal="@Url.Action("UnsubscribeFromAgencyPopup", "Agency", AreaRouteValue.Main)">
+                            خروج از آژانس املاک @Model.User.Agency.GetContent().Name
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+	@if (Model.EnableAdmin)
+    {
+		<div class="col-xs-12 col-md-4">
+            @using (Html.BeginForm())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">مدیریت</h3>
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.User.FailedLoginAttempts > 0)
+                        {
+                            <button name="btnResetFailedLoginAttempts" value="btnResetFailedLoginAttempts" type="submit" class="btn btn-info btn-sm btn-block">پاک کردن خطای ورود</button>
+                        }
+
+                        @if (Model.User.IsEnabled)
+                        {
+                            <button name="btnMarkAsDisabled" value="btnMarkAsDisabled" type="submit" class="btn btn-info btn-sm btn-block">انسداد</button>
+                        }
+                        else
+                        {
+                            <button name="btnMarkAsEnabled" value="btnMarkAsEnabled" type="submit" class="btn btn-info btn-sm btn-block">رفع انسداد</button>
+                        }
+						<button type="button" class="btn btn-info btn-sm btn-block" data-ajax-modal="@Url.Action("ChangePasswordAdministratively", "AdminUsers", new { id = Model.User.ID })">
+							تغییر کلمه عبور کاربر
+						</button>
+                    </div>
+                   
+                </div>
+            }
+	    </div>
+	}
+</div>
+
+

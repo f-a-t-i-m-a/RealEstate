@@ -1,0 +1,38 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Ad.SponsoredEntityImpressionBilling
+
+
+
+<p >
+<div class="bold">
+    عنوان:
+</div>
+@Model.SponsoredEntity.Title
+</p>
+<br/>
+
+<table style="width: 100%;">
+    <tr>
+        <td class ="bold">نوع نمایش:</td>
+        <td> @Model.SponsoredEntity.EntityType.Label(DomainAdEnumResources.ResourceManager)</td>
+    </tr>
+    <tr>
+        <td class="bold">تاریخ نمایش:</td>
+        <td>@Model.ImpressionsDate.ToLocalizedDateString()
+        </td>
+    </tr>
+    <tr>
+        <td class="bold">تعداد نمایش:</td>
+        <td>@Model.NumberOfImpressions
+        </td>
+    </tr>
+    <tr>
+        <td class="bold">کل مبلغ:</td>
+        <td>@Model.TotalAmount
+        </td>
+    </tr>
+</table>
+<hr/>
+

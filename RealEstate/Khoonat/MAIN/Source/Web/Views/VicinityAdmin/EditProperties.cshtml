@@ -1,0 +1,135 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Vicinity
+
+<div class="page-header">
+	<h2>
+		@Html.ActionLink("مدیریت سایت", "Index", "AdminHome", AreaRouteValue.Admin, null) &gt;
+		@Html.ActionLink("همسایگی", "List", "VicinityAdmin") &gt;
+		ویرایش همسایگی
+	</h2>
+</div>
+
+@{
+    Html.EnableClientValidation(false);
+}
+@Html.ValidationSummary()
+
+@using (Html.BeginForm("EditProperties", "VicinityAdmin", new {id = Model.ID, ParentID=Model.ParentID}))
+{
+    <table>
+        <tr>
+            <td>
+                نوع:
+            </td>
+            <td >
+                @Html.DropDownListFor(m => m.Type, Model.Type.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new {style = "width:205px"})
+            </td>
+            <td>
+                @IconsHelper.RequiredOne16(Url)
+            
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 110px">
+                نام:
+            </td>
+            <td style="width: 210px">
+                @Html.TextBoxFor(m => m.Name, new {style = "width:200px"})
+            </td>
+            <td>
+                @IconsHelper.RequiredOne16(Url)
+             
+            </td>
+        </tr>
+        <tr>
+            <td>
+                نمایش نوع در عنوان:
+            </td>
+            <td>
+                @Html.CheckBoxFor(m => m.ShowTypeInTitle)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                سایر نام ها :
+            </td>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.AlternativeNames, new {style = "width:200px"})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                متن جستجو:
+            </td>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.AdditionalSearchText, new {style = "width:200px"})
+            </td>
+        </tr>
+        <tr>
+            <td >
+                توضیحات:
+            </td>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.Description, new {style = "width:200px"})
+            </td>
+        </tr>
+        <tr>
+            <td >
+                یادداشت مدیریتی:
+            </td>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.AdministrativeNotes, new {style = "width:200px"})
+            </td>
+        </tr>
+        <tr>
+            <td >
+                فعال:
+            </td>
+            <td colspan="2">
+                @Html.CheckBoxFor(m => m.Enabled)
+            </td>
+        </tr>
+        <tr>
+            <td >
+                ترتیب:
+            </td>
+            <td colspan="2">
+                @Html.TextBoxFor(m => m.Order, new {style = "width:200px"})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                محدوده شناسایی:
+            </td>
+            <td colspan="2">
+                @Html.DropDownListFor(m => m.WellKnownScope, Model.Type.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new {style = "width:205px"})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                نمایش در خلاصه:
+            </td>
+            <td colspan="2">
+                @Html.CheckBoxFor(m => m.ShowInSummary)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                امکان ثبت ملک:
+            </td>
+            <td colspan="2">
+                @Html.CheckBoxFor(m => m.CanContainPropertyRecords)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input id="btnContinue" class="btn btn-success" type="submit" value="ذخیره"/>
+                &nbsp;&nbsp;&nbsp;
+				<a class="btn btn-default" href="@Url.Action("List", new {parentID=Model.ParentID})">بازگشت</a>
+            </td>
+        </tr>
+    </table>
+}

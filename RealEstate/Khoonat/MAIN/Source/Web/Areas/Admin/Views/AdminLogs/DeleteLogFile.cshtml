@@ -1,0 +1,17 @@
+﻿@model string
+
+پرونده لاگ با نام زیر حذف خواهد شد:
+<br/>
+<br/>
+
+<span dir="ltr">@Model</span>
+
+<br/>
+<br/>
+
+آیا مطمئنید؟
+
+@using (Html.BeginForm("DeleteLogFileConfirmed", "AdminLogs", new { id = Model }))
+{
+	<input type="submit" value="بله"/>
+}

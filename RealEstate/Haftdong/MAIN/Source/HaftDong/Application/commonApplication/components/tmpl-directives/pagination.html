@@ -1,0 +1,51 @@
+﻿<div class="row">
+    <div class="col-xs-12 text-center">
+        <div class="paginationdiv">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <ul class="pagination" ng-repeat="page in NumberOfPagesArray track by $index">
+                        <li ng-show="$index + 1 === 1">
+                            <a ng-click="showFirst()" aria-label="Previous">
+                                <span aria-hidden="true">اول</span>
+                            </a>
+                        </li>
+                        <li ng-show="$index + 1 === 1 && $index + 1 !== pageNumber">
+                            <a ng-click="showPrevious()" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="disabled" ng-show="$index + 1 === 1 && $index + 1 === pageNumber">
+                            <a ng-click="showPrevious()" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li ng-if="($index + 1) >= MinPageNumberToShow && ($index + 1) <= MaxPageNumberToShow && ($index + 1) !== pageNumber">
+                            <a ng-click="onChangePageClick({page:$index + 1})">{{$index + 1}}</a>
+                        </li>
+                        <li class="active hidden-xs" ng-if="($index + 1) >= MinPageNumberToShow && ($index + 1) <= MaxPageNumberToShow && ($index + 1) === pageNumber">
+                            <a ng-click="onChangePageClick({page:$index + 1})">صفحه {{$index + 1}} ، سطر {{(pageNumber - 1) * pageSize + 1}} تا {{TotalNumberPerPage}} از {{totalNumberOfItems}}</a>
+                        </li>
+                        <li class="active hidden-sm hidden-md hidden-lg" ng-if="($index + 1) >= MinPageNumberToShow && ($index + 1) <= MaxPageNumberToShow && ($index + 1) === pageNumber">
+                            <a ng-click="onChangePageClick({page:$index + 1})">{{$index + 1}}</a>
+                        </li>
+                        <li ng-show="$index + 1 === numberOfPages && $index + 1 !== pageNumber">
+                            <a ng-click="showNext()" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="disabled" ng-show="$index + 1 === numberOfPages && $index + 1 === pageNumber">
+                            <a ng-click="showNext()" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li ng-show="$index + 1 === numberOfPages">
+                            <a ng-click="showLast()" aria-label="Next">
+                                <span aria-hidden="true">آخر</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>

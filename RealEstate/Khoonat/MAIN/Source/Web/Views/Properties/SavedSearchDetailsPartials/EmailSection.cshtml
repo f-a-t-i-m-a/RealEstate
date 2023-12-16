@@ -1,0 +1,50 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Extensions
+@Model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+<div class="panel panel-default">
+    <div class="panel-body">
+	    <div class="form-group">
+		    <div class="col-xs-12">
+			    <div class="checkbox">
+				    <label>
+						@Html.CheckBoxFor(m => m.SendNotificationEmails)
+						با ایمیل خبرم کن
+						<span class="label label-success">رایگان</span>
+				    </label>
+			    </div>
+		    </div>
+	    </div>
+		<div id="notificationEmailDetails">
+			@if (Model.UserEmailContactMethods.Any())
+			{
+				<div class="form-group">
+					<div class="col-xs-6 control-label">@Html.LabelFor(m => m.EmailNotificationTargetID):</div>
+					<div class="col-xs-6">@Html.DropDownListFor(m => m.EmailNotificationTargetID, Model.UserEmailContactMethods.SelectListItems(cm => cm.ContactMethodText, cm => cm.ID.ToString(CultureInfo.InvariantCulture)), new { style = "direction:ltr;", @class = "form-control" })</div>
+				</div>
+			}
+			else
+			{
+				<br />
+				<p>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					شما هیچ <strong>آدرس ایمیل معتبر و فعال شده</strong> ای توی پروفایلتون ثبت نکرده اید.
+					قبل از اینکه سیستم بتونه اطلاعات املاک رو به صورت ایمیل براتون بفرسته،
+					باید یه آدرس ایمیل معتبر ثبت کنید و فعالش کنید.
+				</p>
+				<p>
+					می تونید اول آدرس ایمیل ثبت کنید و دوباره امتحان کنید.
+					برای این کار لطفاً به <a class="btn btn-default" href="@Url.Action("View", "MyProfile")">صفحه پروفایل</a> مراجعه کنید.
+				</p>
+				<p>
+					همینطور می تونید این جستجو رو ذخیره کنید و بعداً آدرس ایمیل رو اضافه کنید.
+					پیغام ها به اولین شماره تلفن فعال سازی شده ای که توی پروفایلتون ثبت کنید فرستاده میشن.
+				</p>
+			}
+		</div>
+    </div>
+</div>
+
+
+
+

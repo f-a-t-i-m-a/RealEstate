@@ -1,0 +1,12 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Core.Components.Dto.UserBillingBalance
+
+@if (Model.LastTransaction != null)
+{
+    @((Model.LastTransaction.TransactionTime - DateTime.Now).ToLocalizedRelativeString())<br/>
+    <span class="small">
+        نقد: @BillingPresentationHelper.Delta(Model.LastTransaction.CashDelta) ؛
+        تخفیف: @BillingPresentationHelper.Delta(Model.LastTransaction.BonusDelta)
+    </span>
+}

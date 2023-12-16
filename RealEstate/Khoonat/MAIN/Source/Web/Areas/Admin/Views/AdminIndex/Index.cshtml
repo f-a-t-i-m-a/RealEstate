@@ -1,0 +1,57 @@
+﻿@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminIndex.AdminIndexIndexModel
+
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>ایندکس ها</a></li>
+}
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th class="td">شناسه</th>
+			<th class="td">خطا</th>
+			<th class="td">Search</th>
+			<th class="td">Write</th>
+			<th class="td">Commit</th>
+		</tr>
+	</thead>
+
+    @if (Model.LuceneIndexStatistics != null)
+    {
+        foreach (var index in Model.LuceneIndexStatistics)
+        {
+            <tr data-link-url="@Url.Action("IndexDetails", "AdminIndex", new {indexId = index.IndexID})">
+                <td class="td">@index.IndexID</td>
+                <td class="td">
+	                @if (index.HasErrors)
+					{
+						<span>@IconsHelper.Error16Red(Url) @index.NumberOfErrors خطا</span>
+					}
+					else
+					{
+						<span>@IconsHelper.Tick16(Url) بدون خطا</span>
+					}
+                </td>
+                <td class="td">
+                    @index.TimesSearcherAcquiredAfterInitialization بار
+                    <br />
+                    @((index.IndexSearcherLastUsedTimeUtc - DateTime.UtcNow).IfHasValue(ts => ts.ToLocalizedRelativeString(1)))
+                </td>
+                <td class="td">
+                    @index.TimesWriterAcquiredAfterInitialization بار
+                    <br />
+                    @((index.IndexWriterLastUsedTimeUtc - DateTime.UtcNow).IfHasValue(ts => ts.ToLocalizedRelativeString(1)))
+                </td>
+                <td class="td">
+                    @index.TimesCommittedAfterInitialization بار
+                    <br />
+                    @((index.LastCommitTimeUtc - DateTime.UtcNow).IfHasValue(ts => ts.ToLocalizedRelativeString(1)))
+                </td>
+            </tr>
+        }
+    }
+</table>

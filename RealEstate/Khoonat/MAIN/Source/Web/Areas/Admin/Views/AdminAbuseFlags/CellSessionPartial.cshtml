@@ -1,0 +1,15 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Web.Routing
+@model JahanJooy.RealEstate.Domain.Audit.AbuseFlag
+
+<div data-link-url="@Url.Action("List", "AdminSessions", new {IdFilter = Model.ReportedInSessionID})">
+	<span class="glyphicon glyphicon-link"></span>
+	@Model.ReportedInSessionID.SafeToString("-")
+	<br/>
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("SessionIdFilter", Model.ReportedInSessionID.IfHasValue(sid => sid.ToString(CultureInfo.InvariantCulture))))">
+		<span class="glyphicon glyphicon-filter"></span>
+	</a>
+</div>
+
+

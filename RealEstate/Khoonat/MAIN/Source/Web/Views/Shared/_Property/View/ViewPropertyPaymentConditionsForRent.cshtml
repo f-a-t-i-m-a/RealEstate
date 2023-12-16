@@ -1,0 +1,35 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@model PropertyRentPaymentModel
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.MeasuredAttribute(true, PropertyRentPaymentResources.Label_Mortgage, ViewPropertyPaymentConditionsForRentResources.Mortgage, NumericStringUtils.ShortNumericString(Model.Mortgage)),
+	PropertyViewHelper.MeasuredAttribute(true, PropertyRentPaymentResources.Label_Rent, ViewPropertyPaymentConditionsForRentResources.Rent, NumericStringUtils.ShortNumericString(Model.Rent)),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyRentPaymentResources.Label_IsDischargeGuaranteeChequeRequired, Model.IsDischargeGuaranteeChequeRequired, showIcon: false),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyRentPaymentResources.Label_DiscountOnBulkPayment, Model.DiscountOnBulkPayment),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyRentPaymentResources.Label_MinimumContractDuration, Model.MinimumContractDuration),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyRentPaymentResources.Label_MaximumContractDuration, Model.MaximumContractDuration)
+)
+
+@if (Model.MortgageAndRentConvertible || Model.ShowAllAttributes)
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div style="margin: 5px;">@IconsHelper.Tristate(Url, Model.MortgageAndRentConvertible)&nbsp;<span class="bold">@PropertyRentPaymentResources.Label_MortgageAndRentConvertible</span></div>
+			</div>
+		</div>
+		@if (Model.MortgageAndRentConvertible)
+		{
+			@PropertyViewHelper.MeasuredAttribute(true, PropertyRentPaymentResources.Label_MinimumMortgage, ViewPropertyPaymentConditionsForRentResources.MinimumMortgage, NumericStringUtils.ShortNumericString(Model.MinimumMortgage))
+			@PropertyViewHelper.MeasuredAttribute(true, PropertyRentPaymentResources.Label_MinimumRent, ViewPropertyPaymentConditionsForRentResources.MinimumMortgage, NumericStringUtils.ShortNumericString(Model.MinimumRent))
+		}
+	</div>
+}
+
+
+

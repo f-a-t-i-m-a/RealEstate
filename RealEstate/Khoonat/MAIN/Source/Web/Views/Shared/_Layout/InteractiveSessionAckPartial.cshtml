@@ -1,0 +1,15 @@
+﻿@using JahanJooy.Common.Util.Web.Robots
+
+@if (SessionInfo != null && SessionInfo.Record != null && !SessionInfo.IsCrawler && !SessionInfo.Record.GotInteractiveAck)
+{
+	<script type="text/javascript">
+		$(function() {
+			setTimeout(function() {
+				$.ajax({
+					url: "@Url.Action("AcknowledgeInteractiveSession", "Home", new { Area = "", token = InteractiveSessionAckUtil.GenerateToken()})",
+					type: "post"
+				});
+			}, @InteractiveSessionAckUtil.MinValidateDelayMilliSeconds);
+		});
+	</script>
+}

@@ -1,0 +1,136 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Agency
+@model AgencyListModel
+
+@section FullRowTop
+{
+	<div class="row">
+		<div class="col-xs-12 col-md-9">
+			<div id="viewroot">
+				<div id="ajaxCallInProgress">
+					<div class="grayed"><p class="text-center">لطفاً چند لحظه صبر کنید...</p></div>
+				</div>
+
+				<div id="listView" class="none">
+					<div class="well">مشاورین املاک </div>
+					<div class="col-xs-6 col-md-5">
+						@Html.VicinitySelector(false, "VicinityID")
+					</div>
+					<div class="col-xs-2 col-md-2">
+						<button type="button" id="showAllAgencies" class="btn btn-primary">نمایش همه</button>
+					</div>
+					<div class="col-xs-12 col-md-12" id="agencyListPartial">
+					</div>
+				</div>
+
+
+				<div id="agencyView" class="none">
+					<div class="col-xs-12 col-md-12" id="agencyViewDetailsPartial">
+					</div>
+					<div>
+						<button type="button" id="return" class="btn btn-primary">بازگشت >></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-3">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">ثبت آژانس املاک</h3>
+				</div>
+				<div class="panel-body">
+					<p>
+						اگر اطلاعات آژانس شما اینجا نیست، می تونید:
+					</p>
+					<div class="text-center">
+						<a href="@Url.Action("NewAgency", "Agency")"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> یک آژانس ثبت کنید</a>
+					</div>
+					<hr />
+					<small>
+						توجه کنید: ثبت، نمایش و جستجوی آژانس های املاک
+						<span class="text-danger">کاملاً رایگانه</span>.
+					</small>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@this.ScriptBlock(
+    @<script type="text/javascript">
+
+        var agencyListModel = { pageNum: 1, vicinityId: null };
+
+        $(document).ready(function () {
+            refreshList(null);
+
+            $(document).on('click', "a[data-pageNum]", function () {
+               var dataPageNumStr = $(this).attr("data-pageNum");
+                agencyListModel.pageNum = dataPageNumStr.split("=")[1];
+                refreshList();
+            });
+
+            $(document).on('click', "tr[data-id]", function () {
+                showAgencyDetails($(this).attr("data-id"));
+            });
+
+            $("#return").click(function () {
+                showList();
+            });
+
+            $("#showAllAgencies").click(function () {
+                agencyListModel.vicinityId = null;
+                $("#VicinityID").select2("data", null);
+                refreshList();
+            });
+
+            $("#VicinityID").on("select2-selecting", function (e) {
+                agencyListModel.vicinityId = e.val;
+                agencyListModel.pageNum = 1;
+                refreshList();
+            });
+        });
+
+        function showList() {
+            $("#agencyView").fadeOut(50, function () {
+                $("#listView").fadeIn(200);
+            });
+        }
+
+        function refreshList() {
+            $("#ajaxCallInProgress").show();
+            $.ajax({
+                url: '@Url.Action("Search", "Agency", new {area = AreaNames.Main})',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "vicinityID": agencyListModel.vicinityId,
+                    "pageNum": agencyListModel.pageNum
+                })
+            }).done(function (data) {
+                $("#ajaxCallInProgress").hide();
+                $("#agencyListPartial").html(data);
+                showList();
+            });
+        }
+
+        function showAgencyDetails(agencyId) {
+            $("#ajaxCallInProgress").show();
+            $("#listView").fadeOut(50);
+            $.ajax({
+                url: '@Url.Action("AgencyDetails", "Agency", new {area = AreaNames.Main})',
+                type: 'Post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "agencyID": agencyId
+                })
+            }).done(function (data) {
+                $("#ajaxCallInProgress").hide();
+                $("#listView").hide();
+                $("#agencyViewDetailsPartial").html(data);
+                $("#agencyView").fadeIn(200);
+            });
+        }
+    </script>)

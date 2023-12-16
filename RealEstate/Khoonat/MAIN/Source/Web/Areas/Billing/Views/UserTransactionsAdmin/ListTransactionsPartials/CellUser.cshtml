@@ -1,0 +1,21 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Billing.UserBillingTransaction
+
+@if (Model.User != null)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.User.ID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("UserIDFilter", Model.User.ID.ToString(CultureInfo.InvariantCulture)))">
+        @Model.User.ID:
+        @Model.User.LoginName
+    </a>
+}
+else
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.UserID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("UserIDFilter", Model.UserID.ToString(CultureInfo.InvariantCulture)))">
+        @Model.UserID
+    </a>
+}

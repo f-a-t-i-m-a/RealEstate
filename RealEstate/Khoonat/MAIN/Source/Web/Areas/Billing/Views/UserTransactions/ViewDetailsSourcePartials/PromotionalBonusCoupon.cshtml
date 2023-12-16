@@ -1,0 +1,12 @@
+﻿@model JahanJooy.RealEstate.Domain.Billing.PromotionalBonusCoupon
+
+<p>
+    <span class="bold">شماره کارت:</span><br/>
+    @Model.CouponNumber
+</p>
+
+<p>
+    <span class="bold">ایجاد شده توسط:</span><br/>
+    @(Model.CreatedByUser != null ? Model.CreatedByUser.DisplayName : "نامشخص")
+</p>
+

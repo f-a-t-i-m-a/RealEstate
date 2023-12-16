@@ -1,0 +1,309 @@
+﻿<div class="container">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">اطلاعات مشتری</h3>
+    </div>
+    <div class="panel-body content">
+        <div class="row">
+            <form name="frmCustomer" novalidate>
+                <label for="" class="col-md-1 control-label"><i class="fa fa-star text-danger"></i> نام:</label>
+                <div class="col-md-5">
+                    <input type="text" ng-model="customer.DisplayName" ng-required="true" tabindex="1"/>
+                </div>
+            </form>
+            <label for="" class="col-md-1 control-label">سن:</label>
+            <div class="col-md-3">
+                <input type="text" ng-model="customer.Age" tabindex="2"/>
+            </div>
+            <div class="col-md-2">
+                <label>متأهل: <input type="checkbox" ng-model="customer.IsMarried" tabindex="3"/> </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div ng-repeat="phone in customer.Contact.Phones">
+                    <div class="row">
+                        <label for="" ng-show="$index == 0" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> تلفن: </label>
+                        <label for="" ng-show="$index != 0" class="col-md-2 control-label"></label>
+                        <div class="col-md-8">
+                            <input type="text" class="text-left" ng-model="phone.Value" ng-pattern="/^\+?\d+$/" ng-minlength="7" ng-maxlength="15" placeholder="شماره تلفن" tabindex="3" auto-next />
+                        </div>
+                        <div class="col-md-2" ng-show="$index == 0">
+                            <button class="btn btn-success btn-sm addPhoneNumberButton" ng-click="onAddPhoneNumbers()" tabindex="4">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-2" ng-show="$index != 0">
+                            <button class="btn btn-default btn-sm deletePhoneNumber" ng-click="onDeletePhoneNumber($index)" restrict-to="RealEstateAgent">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div ng-repeat="email in customer.Contact.Emails">
+                    <div class="row">
+                        <label for="" ng-show="$index == 0" class="col-md-2 control-label">ایمیل: </label>
+                        <label for="" ng-show="$index != 0" class="col-md-2 control-label"></label>
+                        <div class="col-md-8">
+                            <input type="text" class="text-left" ng-model="email.Value" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="آدرس ایمیل" tabindex="5" auto-next />
+                        </div>
+                        <div class="col-md-2" ng-show="$index == 0">
+                            <button class="btn btn-success btn-sm addEmailButton" ng-click="onAddEmails()" tabindex="6">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-2" ng-show="$index != 0">
+                            <button class="btn btn-default btn-sm deleteEmail" ng-click="onDeleteEmail($index)" restrict-to="RealEstateAgent">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="row">-->
+<!--            <form name="frmCustomerPhoneNumbers" novalidate>-->
+<!--                <label for="" class="col-md-1 control-label">تلفن: </label>-->
+<!--                <div class="col-md-4">-->
+<!--                    <input type="text" class="text-left" ng-model="customer.Number" ng-pattern="/^\+?\d+$/" ng-minlength="7" ng-maxlength="15" placeholder="شماره تلفن" tabindex="4" auto-next/>-->
+<!--                </div>-->
+<!--                <div class="col-md-1">-->
+<!--                    <button class="btn btn-success btn-sm addPhoneNumberButton" ng-click="onAddPhoneNumbers()" ng-disabled="frmCustomerPhoneNumbers.$invalid || customer.Number == ''" tabindex="5">-->
+<!--                        <i class="fa fa-plus"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--            <form name="frmCustomerEmails" novalidate>-->
+<!--                <label for="" class="col-md-1 control-label">ایمیل: </label>-->
+<!--                <div class="col-md-4">-->
+<!--                    <input type="text" class="text-left" ng-model="customer.Email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="آدرس ایمیل" tabindex="6" auto-next />-->
+<!--                </div>-->
+<!--                <div class="col-md-1">-->
+<!--                    <button class="btn btn-success btn-sm addEmailButton" ng-click="onAddEmails()" ng-disabled="frmCustomerEmails.$invalid || customer.Email == ''" tabindex="7">-->
+<!--                        <i class="fa fa-plus"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-xs-6 col-md-5 col-md-offset-1">-->
+<!--                <div ng-show="customer.PhoneNumbers.length > 0">-->
+<!--                    <table class="table table-hover">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>-->
+<!--                                    شماره تلفن-->
+<!--                                </label>-->
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                <label>-->
+<!--                                    حذف-->
+<!--                                </label>-->
+<!--                            </th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr ng-repeat="number in customer.PhoneNumbers">-->
+<!--                            <td class="persian-number">{{number.Value}}</td>-->
+<!--                            <td>-->
+<!--                                <button class="btn btn-default btn-sm deletePhoneNumber" ng-click="onDeletePhoneNumber(number.Value)" restrict-to="RealEstateAgent">-->
+<!--                                    <i class="fa fa-trash"></i>-->
+<!--                                </button>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-xs-6 col-md-5 col-md-offset-1">-->
+<!--                <div ng-show="customer.Emails.length > 0">-->
+<!--                    <table class="table table-hover">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>-->
+<!--                                    ایمیل-->
+<!--                                </label>-->
+<!--                            </th>-->
+<!--                            <th>-->
+<!--                                <label>-->
+<!--                                    حذف-->
+<!--                                </label>-->
+<!--                            </th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr ng-repeat="email in customer.Emails">-->
+<!--                            <td>{{email.Value}}</td>-->
+<!--                            <td>-->
+<!--                                <button class="btn btn-default btn-sm deleteEmail" ng-click="onDeleteEmail(email.Value)" restrict-to="RealEstateAgent">-->
+<!--                                    <i class="fa fa-trash"></i>-->
+<!--                                </button>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="row">
+            <label for="" class="col-md-1 control-label">توضیحات:</label>
+            <div class="col-md-11">
+                <textarea type="text" rows="3" ng-model="customer.Description" tabindex="8"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="moreInfo = !moreInfo">جزئیات بیشتر <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="moreInfo">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">فرزند:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.NameOfFather"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">شماره شناسنامه:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.Identification"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">صادره از:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.IssuedIn"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">کدملی:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.SocialSecurityNumber"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">تاریخ تولد:</label>
+                    <div class="col-md-10">
+                        <jj-jalaali-datepicker-popup jj-model="customer.DateOfBirth" class="datepicker"></jj-jalaali-datepicker-popup>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-repeat="address in customer.Contact.Addresses">
+                    <div class="row">
+                        <label for="" ng-show="$index == 0" class="col-md-1 control-label">آدرس: </label>
+                        <label for="" ng-show="$index != 0" class="col-md-1 control-label"></label>
+                        <div class="col-md-9">
+                            <input type="text" ng-model="address.Value" tabindex="7" auto-next />
+                        </div>
+                        <div class="col-md-1" ng-show="$index == 0">
+                            <button class="btn btn-success btn-sm addAddressButton" ng-click="onAddAddresses()" tabindex="4">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-1" ng-show="$index != 0">
+                            <button class="btn btn-default btn-sm deleteAddress" ng-click="onDeleteAddress($index)" restrict-to="RealEstateAgent">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="row">-->
+<!--                    <label for="" class="col-md-1">آدرس:</label>-->
+<!--                    <div class="col-md-11">-->
+<!--                        <textarea type="text" rows="3" ng-model="customer.Address"></textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="hasDeputy = !hasDeputy">با وکالت/قيمومت/ولايت/وصايت <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="hasDeputy">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">نام:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.Deputy.DisplayName"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">فرزند:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.Deputy.NameOfFather"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">شماره شناسنامه:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.Deputy.Identification"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">تاریخ تولد:</label>
+                    <div class="col-md-10">
+                        <jj-jalaali-datepicker-popup jj-model="customer.Deputy.DateOfBirth" class="datepicker"></jj-jalaali-datepicker-popup>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-2">کدملی:</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="customer.Deputy.SocialSecurityNumber"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <button class="btn btn-success saveButton" ng-click="onSave()" ng-disabled="frmCustomer.$invalid" restrict-to="RealEstateAgent"><i class="fa fa-floppy-o"></i> ذخیره</button>
+    <button class="btn btn-default" ng-click="onBackClick()" restrict-to="RealEstateAgent">انصراف</button>
+</div>
+</div>

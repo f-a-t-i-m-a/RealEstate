@@ -1,0 +1,46 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.UserContactMethod
+
+
+
+
+<div class="modal-content">
+    @using (Html.BeginForm("DeleteContactMethodConfirmed", "MyProfile", new {id = Model.ID}, FormMethod.Post))
+    {
+        <div class="modal-header">
+            <h4 class="modal-title">حذف&nbsp;@Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)&nbsp;@HtmlPresentationHelper.LeftToRight(Model.ContactMethodText)</h4>
+        </div>
+        <div class="modal-body">
+            <p>
+                آیا مطمئنید که می خواهید این
+                @Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+                را حذف کنید؟
+            </p>
+            @if (Model.IsVerified)
+            {
+                <p>
+                    <strong>توجه کنید:</strong>
+                    برای تکمیل ثبت نام هر کاربر، باید یک شماره تلفن همراه تایید شده و یک آدرس ایمیل
+                    تایید شده در پروفایل کاربری ثبت شده باشد. اگر با حذف این
+                    @Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+                    شرط فوق نقض می شود، ثبت حساب کاربری شما دوباره به حالت ناتمام بر می گردد
+                    تا زمانی که این مورد را اصلاح کنید.
+                </p>
+
+                <p>
+                    برای اطلاعات بیشتر در این مورد، صفحه
+                    @Html.ActionLink("درباره فعال سازی", "AboutVerification", "MyProfile")
+                    را مشاهده کنید.
+                </p>
+            }
+
+        </div>
+        <div class="modal-footer">
+            <button name="btnOK" value="btnOK" type="submit" class="btn btn-primary">حذف کن</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+        </div>
+    }
+</div>
+

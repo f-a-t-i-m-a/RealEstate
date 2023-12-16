@@ -1,0 +1,16 @@
+﻿@using System.Globalization
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Resources.AdminActivityLog
+@model JahanJooy.RealEstate.Core.Services.Dto.Audit.ActivityLogDisplayInfo
+
+@if (!Model.DetailEntity.HasValue)
+{
+	<text>@HtmlPresentationHelper.Disabled("---")</text>
+}
+else
+{
+	@(ActivityLogEntityTypeResources.ResourceManager.GetString("DetailEntity_" + Model.DetailEntity.ToString()) ?? Model.DetailEntity.ToString())
+	<br/><span style="font-size: 80%;">@(Model.DetailEntityID.HasValue ? "ID " + Model.DetailEntityID.Value.ToString(CultureInfo.InvariantCulture) : GeneralResources.Unknown)</span>
+}
+

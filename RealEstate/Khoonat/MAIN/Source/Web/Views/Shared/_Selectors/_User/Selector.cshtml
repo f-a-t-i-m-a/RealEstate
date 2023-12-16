@@ -1,0 +1,46 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.AdminUserSelector.AdminUserSelectorConfiguration
+
+<div class="select2-rtl" style="width: 500px;">
+    <input id="@Model.Name" name="@Model.Name" type="hidden" style="width: 100%;" /><br />
+</div>
+
+@this.ScriptBlock(@<script type="text/javascript">
+                       $("#@Model.Name").select2({
+                           minimumInputLength: 1,
+                           maximumSelectionSize: @Model.MaxNumberOfSelections,
+                           multiple: @(Model.MaxNumberOfSelections > 1 ? "true" : "false"),
+                           placeholder: 'برای انتخاب کاربر، اینجا جستجو کنید...',
+                           ajax: {
+                               url: '@Url.Action("Search", "AdminUserSelector", new { area = AreaNames.Billing })',
+                               dataType: 'json',
+                               quietMillis: 0,
+                               data: function(term, page, context) {
+                                   return {
+                                       query: term,
+                                       page: page,
+                                       pageLength: 10
+                                   };
+                               },
+                               results: function(data, page) {
+                                   return {
+                                       results: data.Items,
+                                       more: data.More
+                                   };
+                               }
+                           },
+                           initSelection: function(element, callback) {
+                               // TODO
+                           },
+                           formatResult: function(object, container, query, escapeMarkup) {
+                               return "<div style='padding: 5px;'><span class='smaller'>ID: " + object.ID + "</span><span class='fl smaller'>کد: " + object.Code + "</span><br/><span class='fl'>شناسه: " + object.LoginName + "</span>" + object.DisplayName + "</div>";
+                           },
+                           formatSelection: function (object, container, escapeMarkup) {
+                               return object.ID + ": " + object.LoginName;
+                           },
+                           id: function(input) {
+                               return input.ID;
+                           }
+                       })
+                   </script>)

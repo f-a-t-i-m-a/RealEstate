@@ -1,0 +1,194 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Messages
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Controllers
+@using JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminOutgoingSms
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model AdminOutgoingSmsListModel
+
+
+<div class="well">
+    <a href="@Url.Action("NewSingle", "AdminOutgoingSms")">
+        <span class="glyphicon glyphicon-plus"></span>
+         ارسال تکی
+    </a>
+    -
+    <a href="@Url.Action("NewAdvertisement", "AdminOutgoingSms")">
+        <span class="glyphicon glyphicon-plus"></span>
+      ارسال تبلیغاتی (گروهی)
+    </a>
+</div>
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") &gt; پیامک های ارسالی</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Messages, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+
+<div class="table-responsive">
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>تاریخ</th>
+                <th>کاربر</th>
+                <th>زمان بندی</th>
+                <th> وضعیت</th>
+                <th>موضوع</th>
+                <th>از / به</th>
+                <th>کد بازگشتی</th>
+                <th>Op</th>
+            </tr>
+        </thead>
+        @foreach (OutgoingSmsMessage message in Model.Messages)
+        {
+            <tr class="@AdminOutgoingSmsController.GetRowBackgroundColor(message)">
+                <td>@message.ID</td>
+                <td>@Html.Partial("CellDateAndTimePartial", message)</td>
+                <td>@Html.Partial("CellTargetUser", message)</td>
+                <td>@Html.Partial("CellSchedule", message)</td>
+                <td>@Html.Partial("CellState", message)</td>
+                <td>@Html.Partial("CellSubject", message)</td>
+                <td>@Html.Partial("CellSenderAndTarget", message)</td>
+                <td>@Html.Partial("CellOperatorReports", message)</td>
+                <td>
+                    @if (message.State == OutgoingSmsMessageState.Transmitting || message.State == OutgoingSmsMessageState.ErrorInTransmission)
+                    {
+                        <a href="#" data-reset-message-id="@message.ID">Reset</a>
+                    }
+                    @if ((message.State == OutgoingSmsMessageState.InQueue || message.State == OutgoingSmsMessageState.Transmitting || message.State == OutgoingSmsMessageState.AwaitingDelivery) &&
+                         (!message.ExpirationDate.HasValue || message.ExpirationDate.Value > DateTime.Now))
+                    {
+                        <a href="#" data-cancel-message-id="@message.ID">Cancel</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Messages, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@(this.ScriptBlock(@<script type="text/javascript">
+
+                        function setLoggerDebug(data) {
+                            $.ajax({
+                                url: "@Url.Action("SetLoggerDebug", "AdminLogs")",
+                                type: 'POST',
+                                data: data
+                            }).success(function() {
+                                setTimeout(function() { location.reload(true); }, 5);
+                            });
+                        }
+
+                        $(document).ready(function() {
+                            $('a[data-reset-message-id]').click(function() {
+                                $.ajax({
+                                    url: "@Url.Action("ResetMessage", "AdminOutgoingSms")",
+                                    type: 'POST',
+                                    data: { id: $(this).attr('data-reset-message-id') }
+                                }).success(function() {
+                                    setTimeout(function() { location.reload(true); }, 5);
+                                });
+                            });
+                            $('a[data-cancel-message-id]').click(function() {
+                                $.ajax({
+                                    url: "@Url.Action("CancelMessage", "AdminOutgoingSms")",
+                                    type: 'POST',
+                                    data: { id: $(this).attr('data-cancel-message-id') }
+                                }).success(function() {
+                                    setTimeout(function() { location.reload(true); }, 5);
+                                });
+                            });
+                        });
+                    </script>))
+
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("List", new AdminOutgoingSmsListModel {StateFilter = OutgoingSmsMessageState.InQueue})">صف ارسال</a></li>
+        <li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+    </ul>
+	 
+    <br /><hr/>
+	 
+    @using (Html.BeginForm("List", "AdminOutgoingSms", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.OutgoingSmsIdFilter):
+            @Html.TextBoxFor(m => m.OutgoingSmsIdFilter)
+            <br/>
+            <br/>
+
+            @Html.CheckBoxWithoutHiddenField("ApplyTargetUserIdFilter", Model.ApplyTargetUserIdFilter)
+            @Html.LabelFor(m => m.ApplyTargetUserIdFilter)
+            <br/>
+            <br/>
+		
+            @Html.LabelFor(m => m.TargetUserIdFilter):
+            @Html.TextBoxFor(m => m.TargetUserIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.ReasonFilter):
+            @Html.DropDownListFor(m => m.ReasonFilter, Model.ReasonFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.StateFilter):
+            @Html.DropDownListFor(m => m.StateFilter, Model.StateFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.SourceEntityTypeFilter):
+            @Html.DropDownListFor(m => m.SourceEntityTypeFilter, Model.SourceEntityTypeFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.SourceEntityIdFilter):
+            @Html.TextBoxFor(m => m.SourceEntityIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.RetryIndexFilter):
+            @Html.TextBoxFor(m => m.RetryIndexFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.TargetNumberFilter):
+            @Html.TextBoxFor(m => m.TargetNumberFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.MessageTextFilter):
+            @Html.TextBoxFor(m => m.MessageTextFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.SenderNumberFilter):
+            @Html.TextBoxFor(m => m.SenderNumberFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.ErrorCodeFilter):
+            @Html.TextBoxFor(m => m.ErrorCodeFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.LastDeliveryCodeFilter):
+            @Html.TextBoxFor(m => m.LastDeliveryCodeFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.OperatorAssignedIdFilter):
+            @Html.TextBoxFor(m => m.OperatorAssignedIdFilter)
+            <br/>
+            <br/>
+
+            <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

@@ -1,0 +1,125 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminIndex.AdminIndexIndexDetailsModel
+
+@section NavbarRightExtra
+{
+	<li><a href="@Url.Action("Index", "Adminindex")">ایندکس ها</a></li>
+	<li class="active"><a>جزئیات</a></li>
+}
+
+
+<div class="page-header">
+	<h2>
+		جزیات ایندکس @Model.LuceneIndexStatistics.IndexID
+	</h2>
+</div>
+
+<table>
+    <tr>
+        <td class="bold" >حجم کل:</td>
+        <td><span dir="ltr">@NumericStringUtils.BytesToString(Model.LuceneIndexStatistics.TotalSizeBytes)</span></td>
+    </tr>
+    <tr>
+        <td class="bold">تعداد سند:</td>
+        <td >@Model.LuceneIndexStatistics.TotalNumberOfDocuments </td>
+    </tr>
+	<tr>
+		<td colspan="2"><hr/></td>
+	</tr>
+    <tr>
+        <td class="bold">فایل ها:</td>
+        <td>
+            <table style="text-align: left; direction: ltr;">
+                @foreach (var file in Model.LuceneIndexStatistics.FileSizes)
+                {
+                    <tr>
+						<td style="padding: 5px;"> @file.Key</td>
+						<td style="padding: 5px;"> @NumericStringUtils.BytesToString(file.Value)</td>
+                    </tr>
+                }
+            </table>
+        </td>
+    </tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+    <tr>
+        <td class="bold">شروع به کار:</td>
+        <td class="td">@((Model.LuceneIndexStatistics.InitializationTimeUtc - DateTime.UtcNow).ToLocalizedRelativeString()) </td>
+    </tr>
+    <tr>
+        <td class="bold">استفاده از جستجو کننده:</td>
+        <td>
+	        @Model.LuceneIndexStatistics.TimesSearcherAcquiredAfterInitialization بار؛
+			آخرین بار @((Model.LuceneIndexStatistics.IndexSearcherLastUsedTimeUtc - DateTime.UtcNow).ToLocalizedRelativeString())
+        </td>
+    </tr>
+    <tr>
+        <td class="bold">استفاده از ایندکس کننده:</td>
+        <td>
+	        @Model.LuceneIndexStatistics.TimesWriterAcquiredAfterInitialization بار؛
+			آخرین بار @((Model.LuceneIndexStatistics.IndexWriterLastUsedTimeUtc - DateTime.UtcNow).ToLocalizedRelativeString())
+        </td>
+    </tr>
+    <tr>
+        <td class="bold">Commit:</td>
+        <td>
+	        @Model.LuceneIndexStatistics.TimesCommittedAfterInitialization بار؛
+			آخرین بار @((Model.LuceneIndexStatistics.LastCommitTimeUtc - DateTime.UtcNow).ToLocalizedRelativeString())
+        </td>
+    </tr>
+    <tr>
+        <td class="bold">بهینه سازی:</td>
+        <td>
+	        @Model.LuceneIndexStatistics.TimesOptimizedAfterInitialization بار؛
+			آخرین بار @((Model.LuceneIndexStatistics.LastOptimizationTimeUtc - DateTime.UtcNow).ToLocalizedRelativeString())
+        </td>
+    </tr>
+    <tr>
+        <td class="bold">بازگشایی:</td>
+        <td>
+	        @Model.LuceneIndexStatistics.TimesReopenedAfterInitialization بار؛
+			آخرین بار @((Model.LuceneIndexStatistics.LastReopenTimeUtc - DateTime.UtcNow).ToLocalizedRelativeString())
+        </td>
+    </tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+    <tr>
+        <td class="bold">در حال جستجو:</td>
+        <td>@Model.LuceneIndexStatistics.CurrentSearcherRefCount استفاده کننده</td>
+    </tr>
+    <tr>
+        <td class="bold">در حال ایندکس:</td>
+        <td>@Model.LuceneIndexStatistics.CurrentWriterRefCount استفاده کننده</td>
+    </tr>
+    <tr>
+        <td class="bold">تغییرات Commit نشده:</td>
+        <td>@Model.LuceneIndexStatistics.CurrentOutstandingChanges مورد</td>
+    </tr>
+	<tr>
+		<td colspan="2"><hr /></td>
+	</tr>
+    @if (Model.LuceneIndexStatistics.HasErrors )
+    {
+        <tr>
+            <td class="bold">@IconsHelper.Error32Red(Url) خطاها</td>
+            <td style="text-align: left;">
+	            <ul style="direction: ltr; text-align: left;">
+					@foreach (var error in Model.Errors)
+					{
+						<li>@error.Message</li>
+					}
+				</ul>
+            </td>
+        </tr>
+	}
+	else
+	{
+		<tr>
+			<td class="bold" colspan="2">@IconsHelper.Tick32(Url) بدون خطا</td>
+		</tr>
+	}
+</table>

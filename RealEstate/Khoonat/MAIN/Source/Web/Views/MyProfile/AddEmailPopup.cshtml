@@ -1,0 +1,48 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileAddEmailModel
+
+
+<div class="modal-content" id="addContactMethodRoot">
+    <div class="form-horizontal">
+        @using (Ajax.BeginForm("AddEmailPostback", new { }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "addContactMethodRoot" }, new { id = "frmAddContactMethod" }))
+        {
+            <div class="modal-header">
+                <h4 class="modal-title">آدرس پست الکترونیکی جدید</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    @Html.ValidationSummary()
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-6 col-md-4">@Html.LabelFor(m => m.Email)</div>
+                    <div class="col-xs-6 col-md-6">@Html.TextBoxFor(m => m.Email, new { style = "direction:ltr;", autofocus = "autofocust" })</div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6 col-md-4">@Html.LabelFor(m => m.Visibility)</div>
+                    <div class="col-xs-6 col-md-6">@Html.DropDownListFor(m => m.Visibility, Model.Visibility.EnumSelectList(DomainEnumResources.ResourceManager), new { @class = "form-control" })</div>
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(m => m.Visibility)
+                </div>
+                <div>
+                    @Html.ScriptCaptchaToken()
+                    @Html.ScriptCaptchaScript()
+                    @Html.CaptchaErrorMessage()
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button name="btnOK" value="btnOK" type="submit" class="btn btn-primary">اضافه کن</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+            </div>
+        }
+
+    </div>
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse("#frmAddContactMethod");
+    </script>
+
+</div>
+

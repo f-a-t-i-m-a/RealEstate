@@ -1,0 +1,23 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyViewDetailsModel
+
+<div class="row">
+	<div class="col-xs-12 col-md-6">
+		<ul class="list-group">
+			<li class="list-group-item active">تعداد دفعات نمایش</li>
+			<li class="list-group-item">@string.Format(GeneralResources.TimesFormat, Model.Listing.NumberOfSearches) در جستجو</li>
+			<li class="list-group-item">@string.Format(GeneralResources.TimesFormat, Model.Listing.NumberOfVisits) نمایش جزئیات</li>
+			<li class="list-group-item">@string.Format(GeneralResources.TimesFormat, Model.Listing.NumberOfContactInfoRetrievals) نمایش راه تماس</li>
+		</ul>
+	</div>
+	<div class="col-xs-12 col-md-6">
+		<ul class="list-group">
+			<li class="list-group-item active">زمان ها</li>
+			<li class="list-group-item">ثبت: @((Model.Listing.CreationDate - DateTime.Now).ToLocalizedRelativeString(1))</li>
+			<li class="list-group-item">آخرین تغییر: @((Model.Listing.ModificationDate - DateTime.Now).ToLocalizedRelativeString(1))</li>
+			<li class="list-group-item">آخرین انتشار: @((Model.Listing.PublishDate - DateTime.Now).ToLocalizedRelativeString(1))</li>
+			<li class="list-group-item">انقضای انتشار: @((Model.Listing.PublishEndDate - DateTime.Now).ToLocalizedRelativeString(1))</li>
+		</ul>
+	</div>
+</div>

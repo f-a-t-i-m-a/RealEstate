@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F97DF3F-7842-414F-B2AB-7AF7D98EF5CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JahanJooy.RealEstate.Domain</RootNamespace>
+    <AssemblyName>JahanJooy.RealEstate.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ad\ISponsoredEntityRelated.cs" />
+    <Compile Include="Ad\SponsoredEntity.cs" />
+    <Compile Include="Ad\SponsoredEntityClickBilling.cs" />
+    <Compile Include="Ad\SponsoredEntityImpressionBilling.cs" />
+    <Compile Include="Ad\SponsoredEntityClick.cs" />
+    <Compile Include="Ad\SponsoredEntityImpression.cs" />
+    <Compile Include="Ad\SponsoredEntityBillingMethod.cs" />
+    <Compile Include="Ad\SponsoredEntityType.cs" />
+    <Compile Include="ApiUser.cs" />
+    <Compile Include="Audit\AbuseFlag.cs" />
+    <Compile Include="Audit\AbuseFlagEnums.cs" />
+    <Compile Include="Audit\ActivityLog.cs" />
+    <Compile Include="Audit\ActivityLogEnums.cs" />
+    <Compile Include="Audit\PasswordResetRequest.cs" />
+    <Compile Include="Audit\LoginNameQuery.cs" />
+    <Compile Include="Audit\UniqueVisitor.cs" />
+    <Compile Include="Audit\UserContactMethodVerification.cs" />
+    <Compile Include="Billing\BillingSourceEntityState.cs" />
+    <Compile Include="Billing\IBillingSourceEntity.cs" />
+    <Compile Include="Billing\IranianBank.cs" />
+    <Compile Include="Billing\PaymentGatewayProvider.cs" />
+    <Compile Include="Billing\PromotionalBonus.cs" />
+    <Compile Include="Billing\PromotionalBonusCoupon.cs" />
+    <Compile Include="Billing\PromotionalBonusReason.cs" />
+    <Compile Include="Billing\UserBalanceAdministrativeChange.cs" />
+    <Compile Include="Billing\UserBillingSourceType.cs" />
+    <Compile Include="Billing\UserBillingTransaction.cs" />
+    <Compile Include="Billing\UserElectronicPayment.cs" />
+    <Compile Include="Billing\UserWireTransferPayment.cs" />
+    <Compile Include="Billing\UserRefundRequest.cs" />
+    <Compile Include="Cms\Article.cs" />
+    <Compile Include="Cms\ArticleCategory.cs" />
+    <Compile Include="Cms\ArticleDisplayType.cs" />
+    <Compile Include="Cms\ArticleRevision.cs" />
+    <Compile Include="Cms\ArticleSet.cs" />
+    <Compile Include="Directory\Agency.cs" />
+    <Compile Include="Directory\AgencyBranch.cs" />
+    <Compile Include="Directory\AgencyBranchContent.cs" />
+    <Compile Include="Directory\AgencyContent.cs" />
+    <Compile Include="Messages\NotificationSeverity.cs" />
+    <Compile Include="Messages\NotificationSourceEntityType.cs" />
+    <Compile Include="Messages\NotificationReason.cs" />
+    <Compile Include="Messages\OutgoingSmsMessageState.cs" />
+    <Compile Include="Enums\SessionType.cs" />
+    <Compile Include="Property\Building.cs" />
+    <Compile Include="ConfigurationDataItem.cs" />
+    <Compile Include="Enums\ContactMethodType.cs" />
+    <Compile Include="Enums\GeographicLocationSpecificationType.cs" />
+    <Compile Include="Enums\KitchenCabinetBodyType.cs" />
+    <Compile Include="Enums\KitchenCabinetTopType.cs" />
+    <Compile Include="Enums\PropertyListingPhotoSubject.cs" />
+    <Compile Include="Enums\PropertySearchSortOrder.cs" />
+    <Compile Include="Enums\SavedPropertySearchEmailNotificationType.cs" />
+    <Compile Include="Enums\SavedPropertySearchSmsNotificationPart.cs" />
+    <Compile Include="Enums\SessionEndReason.cs" />
+    <Compile Include="Enums\VisibilityLevel.cs" />
+    <Compile Include="Property\PropertyListingContent.cs" />
+    <Compile Include="Property\PropertyListingPublishHistory.cs" />
+    <Compile Include="Property\PropertyListingUpdateHistory.cs" />
+    <Compile Include="Audit\PropertySearchHistory.cs" />
+    <Compile Include="Property\PropertyRequest.cs" />
+    <Compile Include="Property\PropertyRequestContent.cs" />
+    <Compile Include="Property\SponsoredPropertyListing.cs" />
+    <Compile Include="SavedSearch\SavedPropertySearchPromotionalSms.cs" />
+    <Compile Include="SavedSearch\SavedPropertySearchPromotionalSmsNotDeliveredReturn.cs" />
+    <Compile Include="SavedSearch\SavedSearchSmsNotificationBilling.cs" />
+    <Compile Include="SavedSearch\SavedPropertySearchUpdateHistory.cs" />
+    <Compile Include="Messages\ChatMessage.cs" />
+    <Compile Include="Messages\NotificationMessage.cs" />
+    <Compile Include="Property\PropertyListingContactInfo.cs" />
+    <Compile Include="Enums\BuildingFaceType.cs" />
+    <Compile Include="Enums\BuildingRoofCoverType.cs" />
+    <Compile Include="Enums\BuildingStructureType.cs" />
+    <Compile Include="Enums\ContractDuration.cs" />
+    <Compile Include="Enums\CoolingSystemType.cs" />
+    <Compile Include="Enums\DaylightDirection.cs" />
+    <Compile Include="Enums\DebtGuaranteeType.cs" />
+    <Compile Include="Enums\DeliveryDateSpecificationType.cs" />
+    <Compile Include="Enums\EstateDirection.cs" />
+    <Compile Include="Enums\EstateSlopeAmount.cs" />
+    <Compile Include="Enums\EstateSurfaceType.cs" />
+    <Compile Include="Enums\EstateVoucherType.cs" />
+    <Compile Include="Enums\FloorCoverType.cs" />
+    <Compile Include="Enums\GeographicDirection.cs" />
+    <Compile Include="Enums\HeatingSystemType.cs" />
+    <Compile Include="Enums\IntentionOfOwner.cs" />
+    <Compile Include="Enums\IntentionOfRequester.cs" />
+    <Compile Include="Enums\PropertyStatus.cs" />
+    <Compile Include="Enums\SalePriceSpecificationType.cs" />
+    <Compile Include="Enums\UnitUsageType.cs" />
+    <Compile Include="Enums\WallCoverType.cs" />
+    <Compile Include="Enums\WindowType.cs" />
+    <Compile Include="Property\Estate.cs" />
+    <Compile Include="Messages\OutgoingSmsMessage.cs" />
+    <Compile Include="Permissions\GeneralPermission.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property\PropertyListing.cs" />
+    <Compile Include="Enums\PropertyType.cs" />
+    <Compile Include="Property\PropertyListingPhoto.cs" />
+    <Compile Include="Property\RentConditions.cs" />
+    <Compile Include="Audit\HttpSession.cs" />
+    <Compile Include="SavedSearch\SavedPropertySearch.cs" />
+    <Compile Include="SavedSearch\SavedPropertySearchEmailNotification.cs" />
+    <Compile Include="SavedSearch\SavedPropertySearchGeographicRegion.cs" />
+    <Compile Include="SavedSearch\SavedPropertySearchSmsNotification.cs" />
+    <Compile Include="ScheduledTask.cs" />
+    <Compile Include="Property\Unit.cs" />
+    <Compile Include="Property\SaleConditions.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserContactMethod.cs" />
+    <Compile Include="Property\UserFavoritePropertyListing.cs" />
+    <Compile Include="UserType.cs" />
+    <Compile Include="Vicinity.cs" />
+    <Compile Include="VicinityType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Util\Common.Util.csproj">
+      <Project>{94157E4D-2F2A-4D26-B8C0-CA21D5C2B715}</Project>
+      <Name>Common.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

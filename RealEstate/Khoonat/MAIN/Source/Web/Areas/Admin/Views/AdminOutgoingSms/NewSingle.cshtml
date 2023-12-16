@@ -1,0 +1,93 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminOutgoingSms.AdminOutgoingSmsNewSingleModel
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome") 
+    &gt; 
+    @Html.ActionLink("پیامک های ارسالی", "List", "AdminOutgoingSms")
+    &gt;
+    ارسال تکی
+</h2>
+
+<div style="direction: ltr;">
+    @Html.ValidationSummary(false)
+</div>
+
+@using (Html.BeginForm("NewSingle", "AdminOutgoingSms"))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class=" col-sm-2">متن پیامک:
+                <span id="messageTextLength">-</span>
+            </div>
+            <div class=" col-sm-6">
+                @Html.TextAreaFor(m => m.MessageText, 3, 70, new {style = "height: 60px;"})
+            </div>
+            <div class=" col-sm-4"> @Html.ValidationMessageFor(m => m.MessageText)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2">شماره مقصد:</div>
+            <div class="col-sm-6">@Html.TextBoxFor(m => m.TargetNumber)</div>
+            <div class="col-sm-4">@Html.ValidationMessageFor(m => m.TargetNumber)</div>
+        </div>
+        <div class="form-group">
+            <div >@Html.CheckBoxFor(m => m.AllowTransmissionOnAnyTimeOfDay)
+                @Html.LabelFor(m => m.AllowTransmissionOnAnyTimeOfDay, "در هر ساعت شبانه روز قابل ارسال است")</div>
+        </div>
+        <div class="form-group">
+            <div>
+                @Html.CheckBoxFor(m => m.IsFlash)
+                @Html.LabelFor(m => m.IsFlash, "به صورت فلش ارسال شود")
+            </div>
+        </div>
+        <div>
+            <button name="submit" value="btnContinue" class="btn btn-primary " type="submit">ادامه>></button>
+            <a href="@Url.Action("List")" class="btn btn-default">بازگشت>></a>
+        </div>
+    </div>
+}
+
+@(this.CssBlock(@<style>
+                     .usefulMessageTexts li {
+                         border-bottom: 2px dotted gray;
+                         padding: 10px 0;
+                     }
+                 </style>))
+
+@section SideBar
+{
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">متون عمومی برای استفاده</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="usefulMessageTexts">
+                <li><a href="#" class="textShortcut">آدرس سایت خونه ت: khoonat.com - با بازدید از سایت سرافرازمان می کنید.</a></li>
+                <li><a href="#" class="textShortcut">خونه ت: از اینکه با ما تماس گرفتید ممنونیم.</a></li>
+                <li><a href="#" class="textShortcut">با تشکر از تماس شما، منطقه 000000000000000000 در khoonat.com اضافه شد.</a></li>
+                <li><a href="#" class="textShortcut">ملک کد 00000 در سایت khoonat.com دارای رمز ویرایش 000000 است.</a></li>
+            </ul>
+        </div>
+    </div>
+   
+}
+
+@(this.ScriptBlock(@<script type="text/javascript">
+
+                        function updateMessageTextLength() {
+                            $('#messageTextLength').text($('#MessageText').val().length);
+                        }
+
+                        $(document).ready(function() {
+
+                            $('.textShortcut').click(function() {
+                                $('#MessageText').text($(this).text());
+                                updateMessageTextLength();
+                            });
+
+                            $('#MessageText').change(updateMessageTextLength);
+                            $('#MessageText').keyup(updateMessageTextLength);
+                            $('#MessageText').blur(updateMessageTextLength);
+                        });
+                    </script>))

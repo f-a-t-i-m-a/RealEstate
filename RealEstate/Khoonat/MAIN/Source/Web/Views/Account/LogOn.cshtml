@@ -1,0 +1,82 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.Account.AccountLogOnModel
+
+@{
+	ViewBag.Title = "ورود به سیستم و دسترسی به اطلاعات شخصی املاک";
+	ViewBag.MetaDescription = "فرم احراز هویت و ورود به سیستم جهت کاربران سایت خونه ت دات کام، برای استفاده از امکانات ثبت ملک، درج آگهی و جستجو در بانک اطلاعات املاک";
+}
+
+<div class="page-header">
+	<h1>ورود به سیستم</h1>
+</div>
+
+<p>
+	با ارائه شناسه کاربری و رمز عبور، می توانید خود را به سامانه شناسایی کنید.<br/>
+@*	در صورتی که قبلاً در سامانه ثبت نام نکرده اید، از طریق *@
+@*	@Html.ActionLink("صفحه ثبت نام", "Register")*@
+@*	می توانید در کمتر از یک دقیقه برای خود حساب کاربری ایجاد کنید.*@
+</p>
+
+@Html.ValidationSummary(true, "ورود به سیستم موفق نبود. لطفاً اطلاعات را با دقت کنترل کنید و مجدداً تلاش کنید.", new { style = "color: red;" })
+
+<img src="~/Content/images/fingerprint.png" class="pull-right" style="float: right; margin-left: 15px;"/>
+@using (Html.BeginForm()) 
+{
+	<table class="dataEntryTable" style="margin: 30px 0;">
+		<tr>
+			<td style="width: 100px; vertical-align: top;"><span class="icon-required"></span> @Html.LabelFor(m => m.LoginName):</td>
+			<td style="width: 200px; vertical-align: top;">@Html.TextBoxFor(m => m.LoginName, new { autofocus = "autofocus"})</td>
+			<td>@Html.ValidationMessageFor(m => m.LoginName)</td>
+		</tr>
+		<tr>
+			<td><span class="icon-required"></span> @Html.LabelFor(m => m.Password):</td>
+			<td>@Html.PasswordFor(m => m.Password)</td>
+			<td>@Html.ValidationMessageFor(m => m.Password)</td>
+		</tr>
+		<tr>
+			<td colspan="3">@Html.CheckBoxFor(m => m.RememberMe) @Html.LabelFor(m => m.RememberMe)</td>
+		</tr>
+
+		@if (SessionInfo != null && SessionInfo.OwnedProperties != null && SessionInfo.OwnedProperties.Count > 0)
+		{
+			<tr>
+				<td colspan="3">
+					<hr/>
+					@Html.CheckBoxFor(m => m.AcquireOwnedProperties) @Html.LabelFor(m => m.AcquireOwnedProperties)
+					<p style="font-size: 85%;">
+						شما در این جلسه تعداد @SessionInfo.OwnedProperties.Count ملک ثبت کرده اید یا رمز ویرایش آنها را وارد کرده اید.
+						با انتخاب گزینه فوق، پس از ورود به سیستم این املاک به حساب کاربری شما تخصیص پیدا می کنند.
+					</p>
+				</td>
+			</tr>
+		}
+		<tr>
+			<td colspan="2">
+				<button name="submit" value="btnLogin" class="btn btn-primary pull-left" type="submit">
+					<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> ورود به سامانه
+				</button>
+			</td>
+		</tr>
+	</table>
+
+	@Html.CaptchaErrorMessage()
+	@Html.ScriptCaptchaToken()
+	this.ScriptText(Html.ScriptCaptchaScript());
+
+}
+
+<hr/>
+
+<div class="pull-right" style="margin-top: 15px;">@IconsHelper.Forgot64(Url)</div>
+<p>
+    عضو نیستم
+    <a href="@Url.Action("Register")" class="btn btn-default">ثبت نام</a>
+</p>
+<div>
+    <a href="@Url.Action("ForgotPassword")" class="btn btn-default">رمز عبور خود را فراموش کرده ام</a>
+
+@*	<a href="@Url.Action("ForgotLoginName")" class="btn btn-default">نام کاربری خود را فراموش کرده ام</a>*@
+</div>
+

@@ -1,0 +1,4 @@
+﻿@using JahanJooy.Common.Util.Text
+@model JahanJooy.RealEstate.Web.Areas.Ad.Models.AdAdminHome.AdAdminHomeStatisticsModel
+
+<a class="list-group-item @("list-group-item-danger".If(Model.TotalQueueLength > 0))" href="@Url.Action("Index", "AdAdminHome")">زیر سیستم تبلیغات<span class="badge">@Model.TotalQueueLength</span></a>

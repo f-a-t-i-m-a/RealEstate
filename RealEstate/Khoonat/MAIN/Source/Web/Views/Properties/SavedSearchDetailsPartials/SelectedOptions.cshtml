@@ -1,0 +1,18 @@
+﻿@using JahanJooy.RealEstate.Web.Resources.Views.Properties
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+<ul class="list-group">
+    @foreach (var option in Model.SelectedOptions)
+    {
+        <li class="list-group-item">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            @string.Format(PropertiesBrowseResources.ResourceManager.GetString(option.Label) ?? option.Label, option.LabelParam)
+        </li>
+    }
+    @if (!Model.SelectedOptions.Any())
+    {
+        <p>
+            هیچ شرطی انتخاب نشده. نتیجه جستجو <strong>شامل همه املاک میشه</strong>، یعنی هر ملکی که ثبت بشه به شما اطلاع داده میشه.
+        </p>
+    }
+</ul>

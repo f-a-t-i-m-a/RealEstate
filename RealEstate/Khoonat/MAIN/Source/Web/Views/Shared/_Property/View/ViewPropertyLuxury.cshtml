@@ -1,0 +1,38 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@model PropertyLuxuryModel
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyLuxuryResources.Label_NumberOfMasterBedrooms, ViewPropertyLuxuryResources.NumberOfMasterBedrooms, Model.NumberOfMasterBedrooms),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyLuxuryResources.Label_CeilingHeight, ViewPropertyLuxuryResources.CeilingHeight, Model.CeilingHeight),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasAllSideView, Model.HasAllSideView),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasAllSideBalcony, Model.HasAllSideBalcony),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasPrivatePool, Model.HasPrivatePool),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasPrivateElevator, Model.HasPrivateElevator),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasInUnitParking, Model.HasInUnitParking),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasOpenningCeiling, Model.HasOpenningCeiling),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasMobileWall, Model.HasMobileWall),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasGardenInBalcony, Model.HasGardenInBalcony),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasRemoteControlledCurtains, Model.HasRemoteControlledCurtains),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasBuildingManagementSystem, Model.HasBuildingManagementSystem),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasPrivateJanitorUnit, Model.HasPrivateJanitorUnit),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyLuxuryResources.Label_HasGuestSuite, Model.HasGuestSuite)
+)
+
+@if (Model.AdditionalLuxuryFeatures.HasText() || Model.ShowAllAttributes)
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div>@IconsHelper.Tick16(Url)&nbsp;<strong>@PropertyLuxuryResources.Label_AdditionalLuxuryFeatures:</strong></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.AdditionalLuxuryFeatures)</div>
+			</div>
+		</div>
+	</div>
+}
+

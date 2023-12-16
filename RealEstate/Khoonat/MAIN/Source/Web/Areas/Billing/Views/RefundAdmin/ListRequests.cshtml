@@ -1,0 +1,76 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Billing.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.RefundAdmin.RefundAdminListRequestsModel
+
+
+<div class="page-header">
+    <h2>
+        <a href="@Url.Action("Index", "AdminHome", new {area = AreaNames.Admin})">مدیریت سایت</a>:
+        <a href="@Url.Action("Index", "BillingAdminHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+        باز پرداخت ها
+    </h2>
+</div>
+
+@*@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Payments, p => Url.Action("ListWireTransfers", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))*@
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>کاربر</th>
+                <th>درخواست</th>
+                <th>مقصد</th>
+                <th>وضعیت</th>
+                <th>کد تراکنش</th>
+            </tr>
+        </thead>
+        @foreach (UserRefundRequest request in Model.Requests)
+        {
+            <tr class="@BillingSourceEntityHelper.StateBackgroundColor(request)">
+                <td>@request.ID</td>
+                <td >@Html.Partial("ListRequestsPartials/CellUser", request)</td>
+                <td >@Html.Partial("ListRequestsPartials/CellRequest", request)</td>
+                <td>@Html.Partial("ListRequestsPartials/CellSource", request)</td>
+                <td >@Html.Partial("ListRequestsPartials/CellStateAndOperations", request)</td>
+                <td >@Html.Partial("_GridCellPartials/BillingSourceTransactionIDs", request)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Requests, p => Url.Action("ListRequests", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("ListRequests")">همه موارد (بدون فیلتر)</a></li>
+    </ul>
+
+    <br /><hr />
+
+    @using (Html.BeginForm("ListRequests", "RefundAdmin", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.TargetUserIDFilter):
+            @Html.TextBoxFor(m => m.TargetUserIDFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.BillingStateFilter):
+            @Html.DropDownListFor(m => m.BillingStateFilter, Model.BillingStateFilter.EnumSelectList(), GeneralResources.NotSelected, new {@class = "form-control"})
+            <br />
+            <br />
+
+            <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

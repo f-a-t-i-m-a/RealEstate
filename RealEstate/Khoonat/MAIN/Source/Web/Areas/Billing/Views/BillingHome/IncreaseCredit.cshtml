@@ -1,0 +1,205 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Core.Services.Billing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model dynamic
+
+@{
+    var tarrifService = ComposerWebUtil.ComponentContext.GetComponent<ITarrifService>();
+}
+
+@section FullRowTop
+{
+	<div class="page-header">
+		<h1>
+			<a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+			افزایش اعتبار
+		</h1>
+	</div>
+
+    <div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">پرداخت</h3></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>
+                            شما می تونید با پرداخت ریالی، اعتبار حسابتون رو اضافه کنید.
+                        </p>
+
+                        <p>
+                            برای این کار می تونید مبلغ مورد نظرتون رو:
+                        </p>
+                        <ul>
+                            <li><a href="@Url.Action("NewElectronicPayment", "Payment", AreaRouteValue.Billing)">از درگاه پرداخت الکترونیکی روی سایت استفاده کنید</a></li>
+                            <li><a href="@Url.Action("NewWireTransferPayment", "Payment", AreaRouteValue.Billing)">به حساب ما واریز کنید</a></li>
+                            <li><a href="@Url.Action("NewWireTransferPayment", "Payment", AreaRouteValue.Billing)">به صورت کارت به کارت به حساب ما بریزید</a></li>
+                        </ul>
+
+                        <p>
+                            واریز به حساب یا انتقال به کارت رو می تونید به صورت حضوری در بانک، با خودپرداز، موبایل بانک یا اینترنت بانک انجام بدید.
+                            <br />
+                            کافیه که
+                            <a href="@Url.Action("NewWireTransferPayment", "Payment", AreaRouteValue.Billing)">بعد از انتقال وجه، اطلاعاتش رو به ما اعلام کنید</a>.
+                        </p>
+
+                        @*<p>
+                                برای اطلاعات کامل در مورد نحوه انجام این کار، به
+                                <a class="btn btn-primary" href="@Url.Action("NewPayment", "Payment", AreaRouteValue.Billing)">صفحه پرداخت</a>
+                                مراجعه کنید.
+                            </p>*@
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">بازپرداخت مبلغ باقی مانده حساب</div>
+                            <div class="panel-body">
+                                <p>
+                                    شما همیشه می تونید باقی مونده مبلغی که به ما پرداخت کرده اید، ولی استفاده نکرده اید رو پس بگیرید.
+                                    کافیه که یه
+                                    <a href="@Url.Action("NewRequest", "Refund", AreaRouteValue.Billing)">درخواست بازپرداخت ثبت کنید</a>
+                                    و شماره کارتی که می خواهید باقی مونده پولتون به اون واریز بشه
+                                    به ما بگید.
+                                </p>
+                                <p>
+                                    مثلاً فرض کنید که برای استفاده از پیامک، 100،000 ریال به ما پرداخت کردید، ولی موفق شدید زود ملک
+                                    مورد نظرتون رو پیدا کنید و فقط معادل 20،000 ریال پیامک از سایت دریافت کردید و 80،000 ریال توی حسابتون موند.
+                                    ما با خوشحالی،
+                                    <span class="bold">تا ریال آخر باقی مونده رو به شما بر می گردونیم</span>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-primary">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-6">
+							<p>
+								اعتبار حساب شما می تونه از طریق هرکدوم از راه های زیر افزایش پیدا کنه:
+							</p>
+							<ul>
+								<li><strong>پرداخت</strong> الکترونیکی یا واریز به حساب</li>
+								<li>اعتبار <strong>هدیه ثبت نام</strong> و فعال سازی</li>
+								<li>دریافت کارت <strong>هدیه تبلیغاتی</strong></li>
+								<li>دریافت <strong>تخفیف هدیه</strong> از طرف بخش فروش</li>
+							</ul>
+
+							<p>توضیحات کامل در مورد هرکدوم از این روش ها رو می تونید توی قسمت مربوطش بخونید.</p>
+						</div>
+						<div class="col-xs-6">
+							<div class="panel panel-success">
+								<div class="panel-heading">قبل از پرداخت، دقت کنید!</div>
+								<div class="panel-body">
+									<p>
+										<strong>همه خدمات پایه</strong>
+										سایت @SitePresentationHelper.QuotedSiteName()، مثل ثبت اطلاعات ملک، جستجوی املاک و تماس با مالک،
+										<strong><mark>کاملاً رایگانه</mark></strong>
+										و همیشه رایگان خواهد بود.
+										<br />
+										برای استفاده از این خدمات، هیچ وقت لازم نیست پولی پرداخت کنید.
+									</p>
+									<p>
+										افزایش اعتبار ریالی فقط برای
+										<strong>استفاده از خدمات خاص</strong>
+										سایت مثل دریافت پیامک، تبلیغات توی سایت، ارسال پیامک تبلیغاتی، یا آگهی ویژه لازمه.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><h3 class="panel-title">اعتبار هدیه ثبت نام و فعال سازی</h3></div>
+				<div class="panel-body">
+					<p>
+						وقتی شما در سایت ثبت نام می کنید، بعد از اینکه ثبت نام کامل شد، مبلغ
+						@BillingPresentationHelper.Amount(tarrifService.GetTarrif(null).NewAccountVerificationPromotionalBonus)
+						ریال به عنوان هدیه به اعتبار حساب شما اضافه میشه.
+						<br />
+						این مبلغ، هدیه ناچیزیه از طرف ما برای تشکر از اینکه از سایت ما استفاده می کنید. با این مبلغ می تونید
+						بعضی از خدمات رو (مثل پیامک اطلاع رسانی) قبل از اینکه واقعاً پولی بپردازید، آزمایش کنید.
+					</p>
+
+					<p>
+						این هدیه در شرایط زیر به حساب شما تعلق می گیره:
+						<ul>
+							<li>ثبت نام حساب شما کامل شده باشه، یعنی یک آدرس ایمیل و یک شماره تلفن همراه تایید شده از شما توی سایت ثبت شده باشه</li>
+							<li>شماره تلفن همراهی که توی حسابتون ثبت کردید، قبلاً برای حساب دیگه ای ثبت و اعتبار سنجی نشده باشه</li>
+							<li>به هر حساب کاربری فقط یک بار این هدیه تعلق می گیره</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><h3 class="panel-title">کارت هدیه تبلیغاتی</h3></div>
+				<div class="panel-body">
+					<p>
+						اگر از یکی از بازاریاب های ما که به صورت حضوری با شما ملاقات کرده کارت تخفیف تبلیغاتی گرفته باشید، می تونید
+						با وارد کردن شماره و رمز کارت اعتبار حسابتون رو زیاد کنید.
+					</p>
+
+					<p>
+						در صورتی که از این کارتها دارید و هنوز ازش استفاده نکرده اید، توی صفحه
+						ثبت کارت تخفیف
+						اطلاعاتش رو وارد کنید. مبلغ کارت بلافاصله به اعتبار حسابتون اضافه میشه.
+					</p>
+
+					<p>
+						دقت کنید:
+						<ul>
+							<li>از هر کارت فقط یک بار و فقط برای یک حساب کاربری می تونید استفاده کنید.</li>
+							<li>کارت هدیه تبلیغاتی معادل وجه نقد <span class="bold">نیست</span>. مبلغ این کارت ها رو نمی تونید با درخواست بازپرداخت پس بگیرید.</li>
+							<li>
+								هیچ وقت نباید کسی در ازای این کارت ها از شما مبلغی دریافت کرده باشه. اگر این طور بوده،
+								<a href="@Url.Action("ContactUs", "UserFeedback", AreaRouteValue.Main)">لطفاً با ما در میون بذارید</a>
+								تا جلوی این کار رو بگیریم.
+							</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><h3 class="panel-title">تخفیف از طرف بخش فروش</h3></div>
+				<div class="panel-body">
+					<p>
+						اگه می خواهید از یکی از قابلیت های سایت استفاده کنید اما شک دارید که اگر پرداخت انجام بدید براتون مفید خواهد بود یا نه،
+						<a href="@Url.Action("ContactUs", "UserFeedback", AreaRouteValue.Main)">با ما در میون بذارید</a>.
+					</p>
+
+					<p>
+						بر اساس سابقه فعالیت های شما و نیازی که دارید، ما سعی می کنیم بهتون کمک کنیم که با اطمینان انتخاب کنید.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+

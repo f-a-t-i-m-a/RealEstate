@@ -1,0 +1,87 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Models.Shared
+@using JahanJooy.RealEstate.Web.Models.Shared.Profile
+@model JahanJooy.RealEstate.Web.Models.Shared.Profile.Tabs.ProfileTabPropertyListingModel
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<br/>
+<br/>
+
+@if (Model.PropertyListings.Any() && !string.IsNullOrWhiteSpace(Model.PaginationUrlTemplate))
+{
+    @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.PropertyListings, Model.PaginationUrlTemplate))
+}
+
+@if (Model.PropertyListings.Any())
+{
+    <div>
+        <table class="table table-hover">
+            <tr class="active">
+                <td>کد</td>
+                <td></td>
+                <td>محل</td>
+                <td>ملک</td>
+                <td>مساحت</td>
+                <td>قیمت</td>
+                <td>انتشار تا</td>
+                <td>بازدید<br /><small>جستجو</small></td>
+            </tr>
+            @foreach (var listing in Model.PropertyListings)
+            {
+                <tr data-link-url="@Url.Action("ViewDetails", "Property", new {id = listing.ID, Area = ""})"
+                    data-toggle="tooltip" data-placement-xs="top" data-placement-md="left" title="@listing.NumberOfPhotos عکس،@((listing.CreationDate - DateTime.Now).ToLocalizedRelativeString(1)) ثبت شده،@((listing.ModificationDate - DateTime.Now).ToLocalizedRelativeString(1)) آخرین تغییر">
+                    <td>@listing.Code</td>
+                    <td>@IconsHelper.Photos16(Url).If(listing.NumberOfPhotos > 0)</td>
+
+                    <td>@propertyPresentationHelper.BuildRegion(listing)</td>
+                    <td>@propertyPresentationHelper.BuildTitle(listing)</td>
+                    <td>@propertyPresentationHelper.BuildArea(listing)</td>
+                    <td>@propertyPresentationHelper.BuildPriceAndPricePerArea(listing)</td>
+                    <td>@PropertyPresentationHelper.BuildStatus(listing)</td>
+                    <td><strong>@listing.Visits</strong><br /><small>@listing.Searches</small></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+}
+else if (Model.EnableEdit)
+{
+    if (Model.ActiveTab == ProfileModel.ProfileActiveTab.AllPropertyListings)
+    {
+        <div>
+            شما هنوز هیچ ملکی ثبت نکرده اید. برای ثبت اولین ملک
+            @Html.ActionLink("اینجا کلیک کنید", "QuickCreate", "Property").
+        </div>
+    }
+    else
+    {
+        <div>
+            شما در حال حاضر هیچ ملک منتشر شده ای ندارید. برای اینکه ملک مورد نظر خود را منتشر کنید:
+            <ul>
+                <li>اگر هنوز ملک مورد نظر خود را ثبت نکرده اید، @Html.ActionLink("آن را ثبت کنید", "QuickCreate", "Property").</li>
+                <li>اگر ملک مورد نظر را ثبت کرده اید ولی هنوز آن را منتشر نکرده اید، به قسمت <a href="@Url.Action("View", "MyProfile", new {activeTab = "AllPropertyListings", page = ""})">املاک ثبت شده</a> مراجعه کنید تا آن را منتشر کنید.</li>
+                <li>اگر ملک مورد نظر قبلاً منتشر شده اما مهلت انتشار آن پایان یافته، در صفحه <a href="@Url.Action("View", "MyProfile", new {activeTab = "AllPropertyListings", page = ""})">املاک ثبت شده</a> آن را پیدا کنید و مجدداً منتشر کنید.</li>
+            </ul>
+        </div>
+    }
+}
+else
+{
+    <div>
+        هیچ ملکی در این قسمت وجود ندارد.
+    </div>
+}
+
+@if (Model.PropertyListings.Any() && !string.IsNullOrWhiteSpace(Model.PaginationUrlTemplate))
+{
+    @Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.PropertyListings, Model.PaginationUrlTemplate))
+}

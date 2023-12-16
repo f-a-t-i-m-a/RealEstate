@@ -1,0 +1,169 @@
+﻿<div class="container detailUserView" ng-if="$state.current.name === 'useractivities.details'">
+    <div class="page-header">
+        <h1>جزئیات فعالیت: {{useractivity.ActivityType | UserActivityType}} {{useractivity.TargetType | EntityType}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>CorrelationID:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.CorrelationID}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>موجودیت:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.TargetType | EntityType}}
+                    </div>
+                    <div class="col-md-2">
+                        <b>ID موجودیت:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.TargetID}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>فعالیت:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <span jj-tristate="useractivity.Succeeded"></span> {{useractivity.ActivityType | UserActivityType}}
+                    </div>
+                    <div class="col-md-2">
+                        <b>تغییر وضعیت:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.TargetState}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>زیر فعالیت:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.ActivitySubType}}
+                    </div>
+                    <div class="col-md-2">
+                        <b>زمان فعالیت:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.ActivityTime | jalaali}}
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>کاربر:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.User.UserName}}
+                    </div>
+                    <div class="col-md-2">
+                        <b>ID کاربر:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.User.Id}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>Controller:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.ControllerName}}
+                    </div>
+                    <div class="col-md-2">
+                        <b>Action:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.ActionName}}
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>والد:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.ParentType | EntityType}}
+                    </div>
+                    <div class="col-md-2">
+                        <b>ID والد:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.ParentID}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>جزء:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.DetailType | EntityType}}
+                    </div>
+                    <div class="col-md-2">
+                        <b>ID جزء:</b>
+                    </div>
+                    <div class="col-md-4">
+                        {{useractivity.DetailID}}
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>نظر:</b>
+                    </div>
+                    <div class="col-md-10">
+                        {{useractivity.Comment}}
+                    </div>
+                </div>
+                <hr ng-if="useractivity.RelativeActivities != null && useractivity.RelativeActivities.length != 0"/>
+                <div class="row" ng-if="useractivity.RelativeActivities != null && useractivity.RelativeActivities.length != 0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2">
+                                    فعالیت
+                                </th>
+                                <th class="col-md-2">
+                                    موجودیت
+                                </th>
+                                <th class="col-md-2">
+                                    ID
+                                </th>
+                                <th class="hidden-xs col-md-2">
+                                    تغییر وضعیت
+                                </th>
+                                <th class="hidden-xs col-md-2">
+                                    زیر فعالیت
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat-start="activity in useractivity.RelativeActivities">
+                                <td class="col-md-2"><span jj-tristate="activity.Succeeded"></span> {{activity.ActivityType | UserActivityType}}</td>
+                                <td class="col-md-2">{{activity.TargetType | EntityType}}</td>
+                                <td class="col-md-2">{{activity.ID}}</td>
+                                <td class="hidden-xs col-md-2">{{activity.TargetState}}</td>
+                                <td class="hidden-xs col-md-2">{{activity.ActivitySubType}}</td>
+                            </tr>
+                            <tr class="second-line" ng-repeat-end ng-if="activity.Comment != null && activity.Comment != ''">
+                                <td class="col-md-12" colspan="6">نظر: {{activity.Comment}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+<div ui-view autoscroll="false"></div>

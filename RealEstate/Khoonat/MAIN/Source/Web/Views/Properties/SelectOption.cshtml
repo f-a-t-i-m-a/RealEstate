@@ -1,0 +1,77 @@
+﻿@using JahanJooy.RealEstate.Web.Resources.Views.Properties
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSelectOptionModel
+
+<div class="modal-content" data-partial-id="selectOption">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">مشخصه مورد نظر رو انتخاب کنید</h4>
+    </div>
+    <div class="modal-body">
+        @if (Model.UnitOptions.Any())
+        {
+            <h2><span class="text-danger">مشخصات واحد</span></h2>
+            <div class="row">
+                @foreach (var option in Model.UnitOptions)
+                {
+                    <div class="col-xs-12 col-sm-6">
+                        <a href="@Url.Action("Browse", new {q = option.Query})" rel="nofollow" class="btn btn-default btn-block ">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                            @PropertiesBrowseResources.ResourceManager.GetString(option.Label)
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.BuildingOptions.Any())
+        {
+            <h2><span class="text-danger">مشخصات ساختمان</span></h2>
+            <div class="row">
+                @foreach (var option in Model.BuildingOptions)
+                {
+                    <div class="col-xs-12 col-sm-6">
+                        <a href="@Url.Action("Browse", new {q = option.Query})" rel="nofollow" class="btn btn-default btn-block">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                            @PropertiesBrowseResources.ResourceManager.GetString(option.Label)
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.EstateOptions.Any())
+        {
+            <h2><span class="text-danger">مشخصات زمین</span></h2>
+            <div class="row">
+                @foreach (var option in Model.EstateOptions)
+                {
+                    <div class="col-xs-12 col-sm-6">
+                        <a href="@Url.Action("Browse", new {q = option.Query})" rel="nofollow" class="btn btn-default btn-block">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                            @PropertiesBrowseResources.ResourceManager.GetString(option.Label)
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+
+        @if (Model.OtherOptions.Any())
+        {
+            <h2><span class="text-danger">سایر مشخصات</span></h2>
+            <div class="row">
+                @foreach (var option in Model.OtherOptions)
+                {
+                    <div class="col-xs-12 col-sm-6">
+                        <a href="@Url.Action("Browse", new {q = option.Query})" rel="nofollow" class="btn btn-default btn-block">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                            @PropertiesBrowseResources.ResourceManager.GetString(option.Label)
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+
+      
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+    </div>
+</div>

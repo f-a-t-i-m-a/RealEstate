@@ -1,0 +1,14 @@
+﻿@model string[]
+
+@if (Model != null && Model.Any())
+{
+	foreach (var part in Model)
+	{
+		@part
+		<br/>
+	}
+}
+else
+{
+	@: بدون شرط - همه املاک
+}

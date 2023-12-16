@@ -1,0 +1,80 @@
+﻿@using System.Globalization
+@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Collections
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Directory
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Models.Agency.AgencyListPartialModel
+
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+
+@if (Model.Agencies != null && Model.Agencies.PageItems.SafeAny())
+{
+    @Html.Partial("_AjaxPaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Agencies, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+    <table class="table table-hover">
+        <tr class="active">
+        <td>نام</td>
+        <td class="hidden-xs hidden-sm">کد</td>
+        <td>نام مدیر</td>
+        <td>محل</td>
+        <td>تلفن ثابت</td>
+
+        @foreach (var agency in Model.Agencies.PageItems)
+        {
+            if (agency != null)
+            {
+                AgencyBranch branch = null;
+                if (agency.AgencyBranches != null)
+                {
+                    branch = agency.AgencyBranches.Where(ab => !ab.DeleteTime.HasValue).OrderByDescending(ab => ab.IsMainBranch).FirstOrDefault();
+                }
+
+                <tr data-link-url="#" data-id="@agency.ID">
+                    <td>@agency.GetContent().Name</td>
+					<td class="hidden-xs hidden-sm">@agency.GetContent().Code </td>
+                    <td>@agency.GetContent().ManagerName</td>
+                    <td>
+                        @if (branch != null)
+                        {
+                            @propertyPresentationHelper.BuildRegion(branch.GetContent().VicinityID)
+
+                            var branchCount = agency.AgencyBranches.Count(ab => !ab.DeleteTime.HasValue);
+                            if (branchCount > 1)
+                            {
+                                <b><br />و @(branchCount - 1) شعبه دیگر </b>
+                            }
+                        }
+                    </td>
+                    <td >
+                        @if (branch != null)
+                        {
+                            @branch.GetContent().Phone1
+                            <br />
+                            @branch.GetContent().Phone2
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+}
+else
+{
+    <p>
+        هیچ آژانس املاکی با این مشخصات ثبت نشده است.
+    </p>
+
+    <p>
+        اگر شما یک آژانس املاک می شناسید که اطلاعاتش ثبت نشده، می تونید
+        <a href="@Url.Action("NewAgency", "Agency")">خودتون اطلاعات رو ثبت کنید</a>
+        تا در اختیار همه کاربرای سایت قرار بگیره.
+    </p>
+}
+

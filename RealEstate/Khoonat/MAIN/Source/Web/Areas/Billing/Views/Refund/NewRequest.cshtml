@@ -1,0 +1,154 @@
+﻿@using System.Web.Mvc.Html
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Refund.RefundNewRequestModel
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+		<a href="@Url.Action("ViewRequests", "Refund", AreaRouteValue.Billing)">درخواست های بازپرداخت</a>:
+		ثبت درخواست جدید
+	</h1>
+</div>
+
+<p>
+    شما با استفاده از درخواست بازپرداخت می تونید تمام یا قسمتی از مبلغ باقی مانده نقدی اعتبارتون رو دریافت کنید.
+    کافیه که شماره کارت بانکی خودتون که عضو شبکه شتاب باشه، یا شماره شبای حساب بانکی تون رو به ما بدید و ما این مبلغ رو براتون واریز می کنیم.
+</p>
+
+<p>
+    در خصوص درخواست بازپرداخت لطفاً به این نکات توجه داشته باشین:
+    <ul>
+        <li>با درخواست بازپرداخت، همه باقی مانده اعتبار تخفیف شما از بین میره.</li>
+        <li>اگر موقع افزایش اعتبار حسابتون، بانک مبلغی رو به عنوان کارمزد کسر کرده باشه، اون هزینه از مبلغ پرداخت شده به شما کم میشه.</li>
+        <li>اگر برای پرداخت مبلغ به شما کارمزدی از طرف بانک دریافت بشه، اون مبلغ رو از مبلغ پرداخت شده کم می کنیم.</li>
+    </ul>
+</p>
+
+<p>
+    دقت کنید که
+    <strong>هیچ گونه کارمزد یا کسر مبلغی</strong>
+    از طرف ما وجود نداره، و ما فقط هزینه های بانکی رو که خودمون پرداخت می کنیم از این مبلغ کم می کنیم.
+</p>
+
+<hr/>
+
+<p>
+    لطفاً فرم زیر رو پر کنید، و دلیل اینکه می خواهید پولتون رو پس بگیرید به ما بگید:
+</p>
+
+@using (Html.BeginForm())
+{
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h3 class="panel-title">فرم درخواست بازپرداخت</h3></div>
+		<div class="panel-body">
+			<table>
+				<tr>
+					<td colspan="2"><span class="icon-required"></span>مبلغ مورد نظر:</td>
+				</tr>
+				<tr>
+					<td>@Html.RadioButtonFor(m => m.RequestedMaximumAmount, "true", new {id = "maximumAmount"}) </td>
+					<td style="width: 150px">@Html.Label("maximumAmount", "کل مانده نقدی:") </td>
+					<td>
+						<div id="maximumAmountDetails" class="none">
+							@BillingPresentationHelper.Balance(Model.Balance.CashBalance)
+							@Html.ValidationMessageFor(m => m.RequestedMaximumAmount)
+							ریال
+						</div>
+					</td>
+
+				</tr>
+				<tr>
+					<td> @Html.RadioButtonFor(m => m.RequestedMaximumAmount, "false", new {id = "partOfAmount"})</td>
+					<td style="width: 150px">@Html.Label("partOfAmount", "قسمتی از مانده نقدی:")</td>
+					<td>
+						<div id="amountDetails" class="none">
+							<table>
+								<tr>
+									<td>@Html.TextBoxFor(m => m.Amount, "{0:0.##}", new {maxlength = 11, style = "direction:ltr;text-align:center; width: 157px", @class = "digitGrouping", autofocus = "autofocus"})</td>
+									<td>@GeneralResources.Rials</td>
+									<td style="padding: 0 10px;">@Html.ValidationMessageFor(m => m.Amount)</td>
+									<td style="padding: 0 10px;">
+										حداکثر مبلغ:
+										@BillingPresentationHelper.Balance(Model.Balance.CashBalance)
+										ریال
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<table class="dataEntryTable">
+
+				<tr>
+					<td style="width: 160px;">@Html.LabelFor(m => m.TargetCardNumber):</td>
+					<td>@Html.TextBoxFor(m => m.TargetCardNumber, new {maxlength = 25})</td>
+					<td style="width: 250px">@Html.ValidationMessageFor(m => m.TargetCardNumber)</td>
+				</tr>
+
+				<tr>
+					<td>@Html.LabelFor(m => m.TargetShebaNumber):</td>
+					<td>@Html.TextBoxFor(m => m.TargetShebaNumber, new {maxlength = 35})</td>
+					<td style="width: 250px">@Html.ValidationMessageFor(m => m.TargetShebaNumber)</td>
+				</tr>
+
+				<tr>
+					<td><span class="icon-required"></span> @Html.LabelFor(m => m.TargetAccountHolderName):</td>
+					<td>@Html.TextBoxFor(m => m.TargetAccountHolderName, new {maxlength = 80})</td>
+				</tr>
+
+				<tr>
+					<td><span class="icon-required"></span> @Html.LabelFor(m => m.TargetBank):</td>
+					<td>@Html.DropDownListFor(m => m.TargetBank, Model.TargetBank.EnumSelectList(DomainBillingEnumResources.ResourceManager), GeneralResources.NotSelected, new { @class = "form-control"})</td>
+				</tr>
+
+				<tr>
+					<td>@Html.LabelFor(m => m.UserEnteredReason)</td>
+					<td colspan="2">@Html.TextAreaFor(m => m.UserEnteredReason, new {maxlength = 500, style = "height: 100px;"})</td>
+				</tr>
+
+				<tr>
+					<td>@Html.LabelFor(m => m.UserEnteredDescription):</td>
+					<td colspan="2">@Html.TextAreaFor(m => m.UserEnteredDescription, new {maxlength = 500, style = "height: 100px;"})</td>
+				</tr>
+
+			</table>
+		
+		</div>
+		<div class="panel-footer">
+			<button name="submit" value="btnSave" class="btn btn-primary" type="submit">ثبت درخواست</button>
+		</div>
+	</div>
+}
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+	                   function OnMaximumAmountChanged() {
+		                   if ($("#maximumAmount")[0].checked) {
+			                   $("#maximumAmountDetails").fadeIn(400);
+		                   } else {
+			                   $("#maximumAmountDetails").fadeOut(400);
+		                   }
+
+		                   if ($("#partOfAmount")[0].checked) {
+			                   $("#amountDetails").fadeIn(400);
+		                   } else {
+			                   $("#amountDetails").fadeOut(400);
+		                   }
+	                   }
+
+                       $("#maximumAmount").change(OnMaximumAmountChanged);
+                       $("#maximumAmount").trigger("change");
+                       $("#partOfAmount").change(OnMaximumAmountChanged);
+                       $("#partOfAmount").trigger("change");
+
+                   </script>
+    )
+
+@this.ScriptBlock(@<script type="text/javascript">
+                       applyDigitGrouping();
+                   </script>)

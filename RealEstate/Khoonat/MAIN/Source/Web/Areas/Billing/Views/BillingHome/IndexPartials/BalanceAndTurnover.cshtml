@@ -1,0 +1,65 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.BillingHome.BillingHomeIndexModel
+
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">موجودی و گردش مالی</h3>
+	</div>
+	<div class="panel-body">
+		<table style="border-spacing: 15px; border-collapse: separate; margin-right: 20px;">
+			<tr>
+				<td class="bold" style="width: 100px;">مانده اعتبار:</td>
+				<td style="width: 220px;">@BillingPresentationHelper.Balance(Model.Balance.CashBalance) ریال نقدی</td>
+				<td style="width: 30px;">+</td>
+				<td style="width: 220px;">@BillingPresentationHelper.Balance(Model.Balance.BonusBalance) ریال تخفیف</td>
+				<td style="width: 30px;">=</td>
+				<td class="bold" style="width: 220px;">در مجموع @BillingPresentationHelper.Balance(Model.Balance.TotalBalance) ریال</td>
+				<td style="width: 150px;"></td>
+			</tr>
+			<tr><td colspan="7"><hr /></td></tr>
+			<tr>
+				<td colspan="6">در حساب شما تا کنون <span class="bold"> جمعاً @Model.NumberOfTransactions تراکنش مالی</span> ثبت شده است.</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>آخرین تراکنش:</td>
+				<td colspan="6">
+					@if (Model.LastTransaction != null)
+					{
+						@: @Model.LastTransaction.SourceType.Label(DomainEnumResources.ResourceManager)؛
+						@: @((Model.LastTransaction.TransactionTime - DateTime.Now).ToLocalizedRelativeString())
+		            }
+					else
+					{
+						@: ---
+				    }
+				</td>
+			</tr>
+			<tr>
+				<td class="bold">گردش مالی:</td>
+				<td>@BillingPresentationHelper.Turnover(Model.Balance.CashTurnover) ریال گردش نقدی</td>
+				<td>+</td>
+				<td>@BillingPresentationHelper.Turnover(Model.Balance.BonusTurnover) ریال گردش تخفیف</td>
+				<td>=</td>
+				<td colspan="2" class="bold">@BillingPresentationHelper.Turnover(Model.Balance.TotalTurnover) ریال مجموع گردش مالی</td>
+			</tr>
+		</table>
+	</div>
+	<div class="panel-footer">
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="btn btn-warning" href="@Url.Action("NewElectronicPayment", "Payment", new { area = AreaNames.Billing })">افزایش اعتبار</a>
+			</div>
+			<div class="col-xs-6 text-left">
+				<a class="btn btn-info" href="@Url.Action("ViewReport", "UserTransactions", new { area = AreaNames.Billing })">گزارش تراکنش ها</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+

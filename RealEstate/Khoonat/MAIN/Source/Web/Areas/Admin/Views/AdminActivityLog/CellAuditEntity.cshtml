@@ -1,0 +1,31 @@
+﻿@using System.Globalization
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Helpers.AdminAcvityLog
+@using JahanJooy.RealEstate.Web.Areas.Admin.Resources.AdminActivityLog
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.Audit.ActivityLogDisplayInfo
+
+@{
+	var shortcutUrl = Url.ActivityLogAuditShortcutHref(Model.AuditEntity, Model.AuditEntityID);
+}
+
+
+@if (!Model.AuditEntity.HasValue)
+{
+	<text>@HtmlPresentationHelper.Disabled("---")</text>
+}
+else
+{
+	<div style='display: inline-block;'>
+		@if (!string.IsNullOrEmpty(shortcutUrl))
+		{
+			<a href="@shortcutUrl" style="float: left; margin-right: 3px;">
+				@IconsHelper.Xlink32(Url)
+			</a>
+		}
+		@(ActivityLogEntityTypeResources.ResourceManager.GetString("AuditEntity_" + Model.AuditEntity.ToString()) ?? Model.AuditEntity.ToString())
+		<br/><span style="font-size: 80%;">@(Model.AuditEntityID.HasValue ? "ID " + Model.AuditEntityID.Value.ToString(CultureInfo.InvariantCulture) : GeneralResources.Unknown)</span>
+	</div>
+}
+

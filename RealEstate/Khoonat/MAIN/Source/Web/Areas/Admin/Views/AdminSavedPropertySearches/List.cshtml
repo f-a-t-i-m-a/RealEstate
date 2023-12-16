@@ -1,0 +1,118 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminSavedPropertySearches
+@using JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminSessions
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model AdminSavedPropertySearchesListModel
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") &gt; جستجو های ذخیره شده</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.SavedSearchInfos, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>خطا</th>
+                <th>ID</th>
+                <th>شرایط</th>
+                <th>عنوان</th>
+                <th>اطلاع رسانی<br />ایمیل، تبلیغ، پیامک</th>
+                <th>تعداد ارسال<br />ایمیل، تبلیغ، پیام</th>
+                <th>جلسه</th>
+                <th>کاربر</th>
+            </tr>
+        </thead>
+        @foreach (var savedSearchInfo in Model.SavedSearchInfos)
+        {
+            <tr style="@(savedSearchInfo.SavedSearch.DeleteTime.HasValue ? "text-decoration: line-through; " : "")">
+                <td>@if (savedSearchInfo.HasNotificationTargetError)
+                    {
+                        <span class="glyphicon glyphicon-exclamation-sign text-danger"></span>
+                    }
+                </td>
+                <td><a href="@Url.Action("Details", new { id = savedSearchInfo.SavedSearch.ID })">@savedSearchInfo.SavedSearch.ID @IconsHelper.Xlink32(Url)</a></td>
+                <td ><div style="margin: 10px 0;">@Html.Partial("CellSearchConditionsPartial", savedSearchInfo.CriteriaTextParts)</div></td>
+                <td>@HtmlPresentationHelper.IfNotSpecified(savedSearchInfo.SavedSearch.Title) <br /> @savedSearchInfo.SavedSearch.CreationTime.ToLocalizedDateString() @savedSearchInfo.SavedSearch.CreationTime.ToLocalizedTimeString()</td>
+                <td>@Html.Partial("CellNotificationsPartial", savedSearchInfo.SavedSearch)</td>
+                <td>@savedSearchInfo.SavedSearch.NumberOfNotificationEmailsSent + @savedSearchInfo.SavedSearch.NumberOfPromotionalSmsMessagesSent + @savedSearchInfo.SavedSearch.NumberOfPaidSmsMessagesSent</td>
+                <td>
+                    <a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("CreatorSessionIdFilter", savedSearchInfo.SavedSearch.CreatorSessionID.SafeToString()))">@savedSearchInfo.SavedSearch.CreatorSessionID.SafeToString("-")</a>
+                    <a href="@Url.Action("List", "AdminSessions", new AdminSessionsListModel { IdFilter = savedSearchInfo.SavedSearch.CreatorSessionID})">@IconsHelper.Xlink16(Url)</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("UserIdFilter", savedSearchInfo.SavedSearch.UserID.ToString(CultureInfo.InvariantCulture)))">@savedSearchInfo.SavedSearch.UserID</a>
+                    <a href="@Url.Action("Details", "AdminUsers", new { id = savedSearchInfo.SavedSearch.UserID })">@IconsHelper.Xlink16(Url)</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.SavedSearchInfos, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+        <li><a href="@Url.Action("List", new AdminSavedPropertySearchesListModel { DeletedFilter = false})">حذف نشده ها</a></li>
+        <li><a href="@Url.Action("List", new AdminSavedPropertySearchesListModel { DeletedFilter = false, NotificationFilter = SavedPropertySearchNotificationFilterType.None })">بدون اطلاع رسانی</a></li>
+        <li><a href="@Url.Action("List", new AdminSavedPropertySearchesListModel { DeletedFilter = false, NotificationFilter = SavedPropertySearchNotificationFilterType.PaidSms })">اطلاع رسانی پیامکی پولی</a></li>
+        <li><a href="@Url.Action("List", new AdminSavedPropertySearchesListModel { DeletedFilter = false, NotificationTargetErrorFilter = true})">دارای خطا در اطلاع رسانی</a></li>
+        <li><a href="@Url.Action("List", new AdminSavedPropertySearchesListModel { DeletedFilter = true })">حذف شده ها</a></li>
+    </ul>
+
+    <br />
+    <hr />
+
+    @using (Html.BeginForm("List", "AdminSavedPropertySearches", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.IdFilter):
+            @Html.TextBoxFor(m => m.IdFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.UserIdFilter):
+            @Html.TextBoxFor(m => m.UserIdFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.CreatorSessionIdFilter):
+            @Html.TextBoxFor(m => m.CreatorSessionIdFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.DeletedFilter):
+            @Html.DropDownListFor(m => m.DeletedFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.NotificationFilter):
+            @Html.DropDownListFor(m => m.NotificationFilter, Model.NotificationFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.NotificationTargetFilter):
+            @Html.TextBoxFor(m => m.NotificationTargetFilter)
+            <br />
+            <br />
+
+            @Html.CheckBoxWithoutHiddenField("NotificationTargetErrorFilter", Model.NotificationTargetErrorFilter)
+            @Html.LabelFor(m => m.NotificationTargetErrorFilter)
+            <br />
+            <br />
+            
+            <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

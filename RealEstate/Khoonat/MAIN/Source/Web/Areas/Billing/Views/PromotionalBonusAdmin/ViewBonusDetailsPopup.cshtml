@@ -1,0 +1,30 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.PromotionalBonus
+
+
+<div class="modal-content">
+    <div class="modal-title">
+        <h2>جایزه تبلیغاتی @Model.ID</h2>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            شناسه: @Model.ID
+            <br /><hr />
+
+            ایجاد کننده: @(Model.CreatedByUserID.HasValue ? Model.CreatedByUserID.Value.ToString(CultureInfo.InvariantCulture) : "سیستم")
+            <br /><hr />
+
+            موضوع: @Model.Reason.Label(DomainEnumResources.ResourceManager)
+            <br /><hr />
+
+            توضیحات: @Model.Description
+            <br />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+    </div>
+</div>
+

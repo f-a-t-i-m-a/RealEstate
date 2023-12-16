@@ -1,0 +1,64 @@
+﻿@using System.Web.Mvc.Html
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.VicinityAdmin.VicinityAdminNewVicinityModel
+
+@using (Html.BeginForm("NewVicinity", "VicinityAdmin",new{Model.CurrentVicinityID}, FormMethod.Post, new { @class = "form-horizontal"}))
+{
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h2 class="panel-title">ایجاد همسایگی جدید</h2></div>
+		<div class="panel-body">
+			<div style="display: inline-block; width: 30px;">نوع:</div>
+			<div style="display: inline-block; width: 170px;">@Html.DropDownListFor(m => m.Type, Model.AllowedVicinityTypes.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected)</div>
+			<br />
+
+
+			<div style="display: inline-block; width: 30px;">نام:</div>
+			<div style="display: inline-block; width: 170px;">@Html.EditorFor(m => m.Name)</div>
+			<br /><br />
+
+
+			@Html.CheckBoxFor(m => m.ShowTypeInTitle)
+			نمایش نوع در عنوان
+			<br /><br />
+
+
+			<hr /><br />
+
+
+			سایر نام ها:
+			<br />
+			<div style="display: inline-block; width: 200px;">
+				@Html.EditorFor(m => m.AlternativeNames)
+			</div>
+			<br />
+
+
+			متن جستجو:
+			<br />
+			<div style="display: inline-block; width: 200px;">
+				@Html.EditorFor(m => m.AdditionalSearchText)
+			</div>
+			<br />
+
+
+			محدوده شناسایی:
+			<div style="display: inline-block; width: 150px;">
+				@Html.DropDownListFor(m => m.WellKnownScope, Model.WellKnownScope.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected)
+			</div>
+			<br /><br />
+
+
+			@Html.CheckBoxFor(m => m.ShowInSummary)
+			نمایش در خلاصه
+			<br />
+			@Html.CheckBoxFor(m => m.CanContainPropertyRecords)
+			قابلیت ثبت ملک
+			<br />
+
+		</div>
+		<div class="panel-footer text-left">
+			<input id="btnSave" class="btn btn-success" type="submit" value="ایجاد" />
+		</div>
+	</div>
+}

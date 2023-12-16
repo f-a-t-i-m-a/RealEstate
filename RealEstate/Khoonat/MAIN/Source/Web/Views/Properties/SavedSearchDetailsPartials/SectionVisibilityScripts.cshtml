@@ -1,0 +1,18 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+
+@this.ScriptBlock(@<script>
+	                   
+	                   function updateNotificationDetails() {
+		                   $("#notificationEmailDetails").toggleClass('none', !$("#SendNotificationEmails")[0].checked);
+		                   $("#anySmsDetails").toggleClass('none', !($("#SendPromotionalSmsMessages")[0].checked || $("#SendPaidSmsMessages")[0].checked));
+		                   $("#paidSmsDetails").toggleClass('none', !$("#SendPaidSmsMessages")[0].checked);
+		                   $("#anyNotificationDetails").toggleClass('none', !($("#SendPromotionalSmsMessages")[0].checked || $("#SendPaidSmsMessages")[0].checked || $("#SendNotificationEmails")[0].checked));
+	                   }
+
+	                   $("#SendNotificationEmails").change(updateNotificationDetails);
+	                   $("#SendPromotionalSmsMessages").change(updateNotificationDetails);
+	                   $("#SendPaidSmsMessages").change(updateNotificationDetails);
+
+	                   updateNotificationDetails();
+
+                   </script>)

@@ -1,0 +1,110 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.UserTransactionsAdmin.UserTransactionsAdminListTransactionsModel
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", new { area = AreaNames.Admin }, null)
+    &gt;
+    @Html.ActionLink("سامانه مالی", "Index", "BillingAdminHome")
+    &gt;
+    تراکنش ها
+</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Transactions, p => Url.Action("ListTransactions", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="td">ID</th>
+                <th class="td">م؟</th>
+                <th class="td">کاربر</th>
+                <th class="td">زمان</th>
+                <th class="td">نقد</th>
+                <th class="td">تخفیف</th>
+                <th class="td">مبدا</th>
+            </tr>
+        </thead>
+        @foreach (var tx in Model.Transactions)
+        {
+            <tr>
+                <td>
+                    @PopupHelper.AjaxModal(@<span>@IconsHelper.Xlink16(Url) </span>, Url.Action("ViewDetailsPopup", "UserTransactions", new { id = tx.ID }))
+                @tx.ID
+            </td>
+            <td>@IconsHelper.Return16(Url).If(tx.IsReverse)</td>
+            <td>@Html.Partial("ListTransactionsPartials/CellUser", tx)</td>
+            <td>@tx.TransactionTime.ToLocalizedDateString()<br />@tx.TransactionTime.ToLocalizedTimeString()</td>
+            <td>@BillingPresentationHelper.Delta(tx.CashDelta)<br />= @BillingPresentationHelper.Balance(tx.CashBalance)</td>
+            <td>@BillingPresentationHelper.Delta(tx.BonusDelta)<br />= @BillingPresentationHelper.Balance(tx.BonusBalance)</td>
+            <td>@Html.Partial("ListTransactionsPartials/CellSource", tx)</td>
+        </tr>
+        }
+    </table>
+    </div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Transactions, p => Url.Action("ListTransactions", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("ListTransactions")">همه موارد (بدون فیلتر)</a></li>
+    </ul>
+
+    <br /><hr />
+
+    @using (Html.BeginForm("ListTransactions", "UserTransactionsAdmin", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.UserIDFilter):
+            @Html.TextBoxFor(m => m.UserIDFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.SourceTypeFilter):
+            @Html.DropDownListFor(m => m.SourceTypeFilter, Model.SourceTypeFilter.EnumSelectList(), GeneralResources.NotSelected)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.SourceIDFilter):
+            @Html.TextBoxFor(m => m.SourceIDFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.IsReverseFilter):
+            @Html.DropDownListFor(m => m.IsReverseFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.NotSelected)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.MinCashDeltaFilter):
+            @Html.TextBoxFor(m => m.MinCashDeltaFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.MaxCashDeltaFilter):
+            @Html.TextBoxFor(m => m.MaxCashDeltaFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.MinBonusDeltaFilter):
+            @Html.TextBoxFor(m => m.MinBonusDeltaFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.MaxBonusDeltaFilter):
+            @Html.TextBoxFor(m => m.MaxBonusDeltaFilter)
+            <br />
+            <br />
+
+            <button name="submit" value="btnRefresh" class="button" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

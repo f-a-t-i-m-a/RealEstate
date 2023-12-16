@@ -1,0 +1,56 @@
+﻿@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+@{
+    ViewBag.Title = "ذخیره جستجو و اطلاع رسانی";
+}
+
+@section FullRowTop
+{
+	<div class="page-header">
+		<h1>ذخیره جستجو و اطلاع رسانی ثبت اطلاعات املاک</h1>
+	</div>
+	
+	<br/>
+}
+
+@using (Html.BeginForm(@Url.Action("SaveSearch")))
+{
+    @Html.HiddenFor(m => m.SearchString)
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">شرایط انتخاب شده</h3>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("SavedSearchDetailsPartials/SelectedOptions", Model)
+                </div>
+            </div>
+               
+        </div>
+        <div class="col-xs-12 col-lg-9">
+            <div class="form-horizontal">
+                @Html.Partial("SavedSearchDetailsPartials/TitleSection", Model)
+                @Html.Partial("SavedSearchDetailsPartials/EmailSection", Model)
+                @Html.Partial("SavedSearchDetailsPartials/SmsSection", Model)
+                @Html.Partial("SavedSearchDetailsPartials/SmsPartsSelection", Model)
+                @Html.Partial("SavedSearchDetailsPartials/NotificationValidityTimeInitialSpecification", Model)
+
+                @Html.Partial("SavedSearchDetailsPartials/SectionVisibilityScripts")
+            </div>
+                
+            <div class="text-center" style="margin-bottom: 30px;">
+                <button name="btnSave" value="btnSave" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> تایید و ذخیره</button>
+                <a href="@Url.Action("Browse", new {q = Model.Search.Query})" class="btn btn-default" role="button"> بازگشت به جستجو&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> </a>
+            </div>
+        </div>
+    </div>
+}
+
+@section SideBar
+{
+    @Html.Partial("SavedSearchDetailsPartials/HelpTips")
+}
+
+

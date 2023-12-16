@@ -1,0 +1,71 @@
+﻿@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Models.Shared.AgencyUnSubscribeFromAgencyPopupModel
+           
+<div class="modal-content">
+    @using (Html.BeginForm("UnsubscribeFromAgencyPostback", "Agency", AreaRouteValue.Main))
+    {
+        <div class="modal-header">
+            <h4 class="modal-title">انصراف از عضویت مشاورین املاک&nbsp;<strong>@Model.Agency.GetContent().Name</strong> </h4>
+        </div>
+        <div class="modal-body">
+            <div>
+                <p>
+                    شما الان عضو مشاورین املاک
+                    @Model.Agency.GetContent().Name
+                    هستید. در صورت خروج از این آژانس:
+                </p>
+                <ul>
+                    <li>نوع کاربر شما به «مشاور مستقل» تبدیل می شه</li>
+                    <li>نام و مشخصات آژانس از پروفایل کاربری شما حذف میشه</li>
+                    <li>اسم شما از فهرست اعضای آژانس حذف میشه</li>
+                </ul>
+            </div>
+          <hr />
+            <div>
+                آیا مطمئن هستید که می خواهید از عضویت مشاورین املاک
+                @Model.Agency.GetContent().Name
+                انصراف بدید؟
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button name="btnConfirm" value="btnConfirm" type="submit" class="btn btn-primary">بله؛ خارج می شوم</button>
+            <button type="button" id="btnCancel" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+        </div>
+    }
+</div>
+
+
+@*<div>*@
+@*    <p>*@
+@*        شما الان عضو مشاورین املاک  *@
+@*        @Model.Agency.GetContent().Name*@
+@*        هستید. در صورت خروج از این آژانس:*@
+@*    </p>*@
+@*    <ul>*@
+@*        <li>نوع کاربر شما به «مشاور مستقل» تبدیل می شه</li>*@
+@*        <li>نام و مشخصات آژانس از پروفایل کاربری شما حذف میشه</li>*@
+@*        <li>اسم شما از فهرست اعضای آژانس حذف میشه</li>*@
+@*    </ul>*@
+@*</div>*@
+@*<br /><hr/><br/>*@
+@*<div>*@
+@*    آیا مطمئن هستید که می خواهید از عضویت مشاورین املاک*@
+@*    @Model.Agency.GetContent().Name*@
+@*    انصراف بدید؟*@
+@*</div>*@
+@**@
+@*@using (Html.BeginForm("UnsubscribeFromAgencyPostback", "Agency", AreaRouteValue.Main))*@
+@*{*@
+@*    <div style="text-align: center; margin: 40px;">*@
+@*        <input id="btnConfirm" name="btnConfirm" class="button" type="submit" value="بله؛ خارج می شوم" style="width: 180px;" />*@
+@*        <input id="btnCancel" name="btnCancel" class="button cancel" type="button" value="بی خیال" style="width: 180px;" onclick=" $('.qtip:visible').qtip('hide'); " />*@
+@*    </div>*@
+@**@
+@*    <script type="text/javascript">*@
+@*        $('.cancel').click(function() {*@
+@*            $('.qtip:visible').qtip('hide');*@
+@*        })*@
+@*    </script>*@
+@*}*@

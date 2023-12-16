@@ -1,0 +1,38 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Domain.Billing.UserRefundRequest
+
+<p>
+    <span class="bold">زمان ایجاد:</span><br />
+    @Model.CreationTime.ToLocalizedDateString()
+    @Model.CreationTime.ToLocalizedTimeString()
+</p>
+
+
+<p>
+    <span class="bold">بازبینی شده توسط:</span><br />
+    @(Model.ReviewedByUser != null ? Model.ReviewedByUser.DisplayName : "هنوز بازبینی نشده")
+</p>
+
+<p>
+    <span class="bold">پرداخت شده توسط:</span><br />
+    @(Model.ClearedByUser != null ? Model.ClearedByUser.DisplayName : "هنوز پرداخت نشده")
+</p>
+
+<p>
+    <span class="bold">مبلغ کسر شده بابت هزینه های تراکنش بانکی:</span><br />
+    @BillingPresentationHelper.Amount(Model.DeductibleBankTransactionFee)
+</p>
+
+<p>
+    <span class="bold">مبلغ قابل پرداخت:</span><br />
+    @BillingPresentationHelper.Amount(Model.PayableAmount)
+</p>
+
+<p>
+    <span class="bold">مقصد پرداخت:</span><br />
+    کارت @(Model.TargetCardNumber ?? "-") <br/>
+    شبا @(Model.TargetShebaNumber ?? "-") <br/>
+    بنام @(Model.TargetAccountHolderName ?? "-")
+</p>
+

@@ -1,0 +1,25 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Content
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminAgency.AdminAgencyBranchModel
+
+@this.ScriptBlock(@<script type="text/javascript"> setupChosen(); </script>)
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome") 
+    &gt; 
+    @Html.ActionLink("مشاورین املاک", "List", "AdminAgency")
+    &gt;
+    @Html.ActionLink("مشاور املاک شناسه " + Model.AgencyID, "ViewDetails", new {id = Model.AgencyID})
+    &gt;
+    شعبه جدید
+</h2>
+
+@using (Html.BeginForm("NewAgencyBranch", "AdminAgency", FormMethod.Post, new {id = "frmNewAgencyBranch"}))
+{
+    <div >@Html.Partial("_Agency/BranchPartial")</div>
+    <div>
+        <input id="btnContinue" class="button" type="submit" value="ادامه >>"/>
+        &nbsp;&nbsp;&nbsp;
+        @Html.ActionLink("بازگشت >>", "ViewDetails", new {id = Model.AgencyID})
+    </div>
+}

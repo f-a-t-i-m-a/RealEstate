@@ -1,0 +1,97 @@
+﻿
+// We're using fixed navbar on top
+body {
+	background-color: #e5e5e5;
+}
+
+#layout-content-root {
+	padding-top: @navbar-height + 20;
+	padding-bottom: 60px;
+	background-color: white;
+}
+
+#layout-main-navbar .navbar-brand {
+	padding: 0;
+}
+
+#layout-footer {
+	border-top: 1px solid #ccc;
+	padding-top: 40px;
+    background-repeat: no-repeat;
+    background-position: center -135px;
+    min-height: 300px;
+}
+
+#layout-footer-copyright {
+	padding-top: 20px;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+[ng-cloak].splash {
+    display: block !important;
+}
+.splash {
+    display: none;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    min-height: 600px;
+    padding-top: 25px;
+    padding-left: 15px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.splash p {
+    margin-top: 400px;
+}
+
+.loading-dot {
+    position: fixed;
+    top: 49px;
+    left: 0;
+    z-index: 1040;
+    background: #444;
+    width: 3px;
+    height: 3px;
+    animation: loading-dot-move 2.5s ease-in-out alternate infinite;
+    -webkit-animation: loading-dot-move 2.5s ease-in-out alternate infinite;
+}
+
+.loading-dot-1 {
+    animation-delay: 0;
+    -webkit-animation-delay: 0;
+}
+
+.loading-dot-2 {
+    animation-delay: 0.15s;
+    -webkit-animation-delay: 0.15s;
+}
+
+.loading-dot-3 {
+    animation-delay: 0.3s;
+    -webkit-animation-delay: 0.3s;
+}
+
+.loading-dot-4 {
+    animation-delay: 0.45s;
+    -webkit-animation-delay: 0.45s;
+}
+
+.loading-dot-5 {
+    animation-delay: 0.6s;
+    -webkit-animation-delay: 0.6s;
+}
+
+@-webkit-keyframes loading-dot-move {
+    from {left: 0;}
+    to {left: 100%;}
+}
+
+@keyframes loading-dot-move {
+    from {left: 0;}
+    to {left: 100%;}
+}
+

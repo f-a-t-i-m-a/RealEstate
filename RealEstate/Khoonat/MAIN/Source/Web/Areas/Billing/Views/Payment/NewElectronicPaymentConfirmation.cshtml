@@ -1,0 +1,49 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Payment.NewElectronicPaymentConfirmationModel
+
+
+<div class="page-header">
+    <h1>
+        <a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+        <a href="@Url.Action("IncreaseCredit", "BillingHome", AreaRouteValue.Billing)">افزایش اعتبار</a>:
+        سبد خرید
+    </h1>
+</div>
+
+<form id="Form2" method="post" action="https://pep.shaparak.ir/gateway.aspx">
+    <input type="hidden" name="invoiceNumber" value="@Model.InvoiceNumber" />
+    <input type="hidden" name="invoiceDate" value="@Model.InvoiceDate" />
+    <input type="hidden" name="amount" value="@Model.Amount" />
+    <input type="hidden" name="terminalCode" value="@Model.TerminalCode" />
+    <input type="hidden" name="merchantCode" value="@Model.MerchantCode" />
+    <input type="hidden" name="redirectAddress" value="@Model.RedirectAddress" />
+    <input type="hidden" name="timeStamp" value="@Model.TimeStamp" />
+    <input type="hidden" name="action" value="@Model.Action" />
+    <input type="hidden" name="sign" value="@Model.Sign" />
+    <div class="col-xs-12 col-sm-6">
+        <ul class="list-group">
+
+            <li class="list-group-item active"><h3 class="panel-title">از درستی اطلاعات مطمین شوید</h3>
+            
+            </li>
+
+            <li class="list-group-item">
+                مبلغ:
+                @Model.Amount
+                @GeneralResources.Rials
+            </li>
+            <li class="list-group-item">
+                  بانک:
+                @if (Model.PaymentGatewayProvider == PaymentGatewayProvider.Pasargad)
+                {
+                    <span> پاسارگاد</span>
+                }
+
+            </li>
+            <li class="list-group-item"><button type="submit" class="btn btn-primary" style="margin: 10px">تایید و ورود به درگاه بانک</button></li>
+        </ul>
+    </div>
+</form>

@@ -1,0 +1,14 @@
+﻿@model JahanJooy.RealEstate.Web.Areas.Billing.Models.BillingHome.BillingHomeIndexModel
+
+<div class="page-header">
+	<h1>
+		سامانه مالی:
+		خلاصه وضعیت
+	</h1>
+</div>
+
+@Html.Partial("IndexPartials/BalanceAndTurnover", Model)
+@Html.Partial("IndexPartials/Payments", Model)
+@Html.Partial("IndexPartials/Bonuses", Model)
+@Html.Partial("IndexPartials/RefundRequests", Model)
+

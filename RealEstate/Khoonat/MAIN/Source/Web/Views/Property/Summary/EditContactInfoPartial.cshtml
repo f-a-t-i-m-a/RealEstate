@@ -1,0 +1,266 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@* 
+********************************************************************************
+**** Contact info
+*@
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">اطلاعات تماس</h3>
+    </div>
+    <div class="panel-body">
+        @if (Model.ExistingContactInfos != null && Model.ExistingContactInfos.Any())
+        {
+            <div id="contactInfoSelector">
+                <div class="row ">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <span class="icon-required"></span>
+                                اطلاعات تماس:
+                            </div>
+                            <div class="col-xs-9">
+                                @Html.DropDownListFor(m => m.ContactInfoID,
+                                    Model.ExistingContactInfos.SelectListItems(pl => StringUtils.JoinNonEmpty("، ", pl.ContactName, pl.ContactPhone1, pl.ContactPhone2, pl.ContactEmail), pl => pl.ID.ToString()),
+                                    "می خواهم اطلاعات تماس جدید وارد کنم", new {@class = "form-control"})
+                                @Html.ValidationMessageFor(m => m.PropertyType)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @foreach (var item in Model.ExistingContactInfos)
+                {
+                    <div class="existingContactInfo none dataEntryTable" data-contact-info-id="@item.ID">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="col-xs-3">
+                                        نام شخص:
+                                    </div>
+                                    <div class="col-xs-9">
+                                        @HtmlPresentationHelper.IfNotSpecified(item.ContactName)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="col-xs-3">
+                                        آدرس ایمیل:
+                                    </div>
+                                    <div class="col-xs-9">
+                                        @HtmlPresentationHelper.IfNotSpecified(HtmlPresentationHelper.LeftToRight(item.ContactEmail))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="col-xs-3">
+                                        تلفن:
+                                    </div>
+                                    <div class="col-xs-9">
+                                        @HtmlPresentationHelper.IfNotSpecified(HtmlPresentationHelper.LeftToRight(item.ContactPhone1))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="col-xs-3">
+                                        تلفن دوم:
+                                    </div>
+                                    <div class="col-xs-9">
+                                        @HtmlPresentationHelper.IfNotSpecified(HtmlPresentationHelper.LeftToRight(item.ContactPhone2))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (item.OwnerCanBeContacted)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">اطلاعات تماس با مالک</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-3">
+                                                    نام مالک:
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    @HtmlPresentationHelper.IfNotSpecified(item.OwnerName)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-3">
+                                                    ایمیل مالک:
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    @HtmlPresentationHelper.IfNotSpecified(HtmlPresentationHelper.LeftToRight(item.OwnerEmail))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-3">
+                                                    تلفن مالک:
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    @HtmlPresentationHelper.IfNotSpecified(HtmlPresentationHelper.LeftToRight(item.OwnerPhone1))
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-3">
+                                                    تلفن دوم:
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    @HtmlPresentationHelper.IfNotSpecified(HtmlPresentationHelper.LeftToRight(item.OwnerPhone2))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.ContactInfoID)
+        }
+        
+        <div id="contactInfoEditor">
+            <div id="contactDetails">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <span class="icon-required"></span>
+                                @Html.LabelFor(m => m.ContactName):
+                            </div>
+                            <div class="col-xs-9">
+                                @Html.TextBoxFor(m => m.ContactName)
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.ContactName)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                @Html.LabelFor(m => m.ContactEmail):
+                            </div>
+                            <div class="col-xs-9">
+                                @Html.TextBoxFor(m => m.ContactEmail, new {style = "direction:ltr;"})
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.ContactEmail)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <span class="icon-required"></span>
+                                @Html.LabelFor(m => m.ContactPhone1):
+                            </div>
+                            <div class="col-xs-9">
+                                @Html.TextBoxFor(m => m.ContactPhone1, new {style = "direction:ltr;"})
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.ContactPhone1)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                @Html.LabelFor(m => m.ContactPhone2):
+                            </div>
+                            <div class="col-xs-9">
+                                @Html.TextBoxFor(m => m.ContactPhone2, new {style = "direction:ltr;"})
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.ContactPhone2)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="showOnAgencyListing">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                              @Html.LabelFor(m => m.AgencyName):
+                            </div>
+                            <div class="col-xs-9">
+                              @Html.TextBoxFor(m => m.AgencyName)
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.AgencyName)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                               @Html.LabelFor(m => m.AgencyAddress):
+                            </div>
+                            <div class="col-xs-9">
+                               @Html.TextBoxFor(m => m.AgencyAddress)
+                                <div class="field-validation-container">
+                                    @Html.ValidationMessageFor(m => m.AgencyAddress)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+    </div>
+</div>
+
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function updateSelectedContactInfoDetails() {
+                           $("div.existingContactInfo").hide();
+
+                           var contactInfoId = $("#contactInfoSelector #ContactInfoID").val();
+                           if (contactInfoId) {
+                               $("#contactInfoEditor").hide();
+                               $('div.existingContactInfo[data-contact-info-id="' + contactInfoId + '"]').show();
+                           } else {
+                               $("#contactInfoEditor").show();
+                           }
+                       }
+
+                       $("#ContactInfoID").change(updateSelectedContactInfoDetails);
+                       $(document).ready(updateSelectedContactInfoDetails);
+                   </script>
+    )

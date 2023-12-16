@@ -1,0 +1,187 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Models.Property
+@model PropertyRentPaymentModel
+
+@this.ScriptBlock(@<script type="text/javascript"> applyDigitGrouping(); </script>)
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">مبلغ اجاره</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        <span class="icon-required"></span>
+                        @Html.LabelFor(m => m.Mortgage):
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Mortgage, "{0:0.##}", new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                            <span class="input-group-addon">@GeneralResources.Tomans</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Mortgage)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-xs-5">
+                        <span class="icon-required"></span>
+                        @Html.LabelFor(m => m.Rent):
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Rent, "{0:0.##}", new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                            <span class="input-group-addon">@GeneralResources.Tomans</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Rent)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.CheckBoxFor(m => m.MortgageAndRentConvertible)
+                @Html.LabelFor(m => m.MortgageAndRentConvertible)
+            </div>
+        </div>
+        <div id="rentConversionDetails" class="none">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.MinimumMortgage):
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.MinimumMortgage, "{0:0.##}", new { style = "direction:ltr;text-align:center;", @class = "digitGrouping" })
+                                <span class="input-group-addon">@GeneralResources.Tomans</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.MinimumMortgage)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-5">
+                            @Html.LabelFor(m => m.MinimumRent):
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.MinimumRent, "{0:0.##}", new { style = "direction:ltr;text-align:center;", @class = "digitGrouping" })
+                                <span class="input-group-addon">@GeneralResources.Tomans</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.MinimumRent)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">گزینه های پرداخت</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-8 col-md-7">
+                        @Html.LabelFor(m => m.IsDischargeGuaranteeChequeRequired)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        @foreach (var item in Html.RadioButtonListFor(m => m.IsDischargeGuaranteeChequeRequired, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-3 col-sm-5 ">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                        @Html.ValidationMessageFor(m => m.IsDischargeGuaranteeChequeRequired)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-sm-8 col-md-7">
+                        @Html.LabelFor(m => m.DiscountOnBulkPayment)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        @foreach (var item in Html.RadioButtonListFor(m => m.DiscountOnBulkPayment, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-3 col-sm-5">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                        @Html.ValidationMessageFor(m => m.DiscountOnBulkPayment)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">مدت قرارداد</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-5">
+                        @Html.LabelFor(m => m.MinimumContractDuration):
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        @Html.DropDownListFor(m => m.MinimumContractDuration, Model.MinimumContractDuration.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected)
+                        @Html.ValidationMessageFor(m => m.MinimumContractDuration)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-5">
+                        @Html.LabelFor(m => m.MaximumContractDuration):
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        @Html.DropDownListFor(m => m.MaximumContractDuration, Model.MaximumContractDuration.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new{@class="select2 form-control"})
+                       @Html.ValidationMessageFor(m => m.MaximumContractDuration)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function OnMortgageAndRentConvertibleChanged() {
+                           if (this.checked) $("#rentConversionDetails").show(400);
+                           else $("#rentConversionDetails").hide(400);
+                           $("#MinimumMortgage").attr("disabled", !this.checked);
+                           $("#MinimumRent").attr("disabled", !this.checked);
+                       }
+
+                       $("#MortgageAndRentConvertible").change(OnMortgageAndRentConvertibleChanged);
+                       $("#MortgageAndRentConvertible").trigger("change");
+
+                   </script>
+    )

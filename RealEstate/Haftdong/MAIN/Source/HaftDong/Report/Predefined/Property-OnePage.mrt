@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="1">
+      <Property Ref="2" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+        <Alias>Property</Alias>
+        <BusinessObjects isList="true" count="3">
+          <Vicinity Ref="3" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>Vicinity</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="12">
+              <value>ID,MongoDB.Bson.ObjectId</value>
+              <value>Name,System.String</value>
+              <value>Description,System.String</value>
+              <value>OfficialLinkUrl,System.String</value>
+              <value>WikiLinkUrl,System.String</value>
+              <value>Enabled,System.Boolean</value>
+              <value>Order,System.Int32</value>
+              <value>CompleteName,System.String</value>
+              <value>Type,JahanJooy.RealEstateAgency.Domain.Enums.Vicinity.VicinityType</value>
+              <value>WellKnownScope,JahanJooy.RealEstateAgency.Domain.Enums.Vicinity.VicinityType</value>
+              <value>CanContainPropertyRecords,System.Boolean</value>
+              <value>ParentID,System.Nullable`1[MongoDB.Bson.ObjectId]</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>41e32ba5cc7643dd864c9d6320339e85</Guid>
+            <Name>Vicinity</Name>
+          </Vicinity>
+          <Owner Ref="4" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>Owner</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="12">
+              <value>ID,MongoDB.Bson.ObjectId</value>
+              <value>FullName,System.String</value>
+              <value>PhoneNumber,System.String</value>
+              <value>MobileNumber,System.String</value>
+              <value>FirstName,System.String</value>
+              <value>LastName,System.String</value>
+              <value>NameOfFather,System.String</value>
+              <value>Identification,System.Nullable`1[System.Int32]</value>
+              <value>IssuedIn,System.String</value>
+              <value>SocialSecurityNumber,System.String</value>
+              <value>DateOfBirth,System.Nullable`1[System.DateTime]</value>
+              <value>Address,System.String</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>c439188aa6634131bbbf18e93c900681</Guid>
+            <Name>Owner</Name>
+          </Owner>
+          <Supplies Ref="5" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+            <Alias>Supplies</Alias>
+            <BusinessObjects isList="true" count="0" />
+            <Category />
+            <Columns isList="true" count="17">
+              <value>ID,MongoDB.Bson.ObjectId</value>
+              <value>CreationTime,System.DateTime</value>
+              <value>IntentionOfOwner,JahanJooy.RealEstateAgency.Domain.Enums.Property.IntentionOfOwner</value>
+              <value>State,JahanJooy.RealEstateAgency.Domain.Workflows.SupplyState</value>
+              <value>IsArchived,System.Boolean</value>
+              <value>PriceSpecificationType,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.SalePriceSpecificationType]</value>
+              <value>TotalPrice,System.Nullable`1[System.Decimal]</value>
+              <value>PricePerEstateArea,System.Nullable`1[System.Decimal]</value>
+              <value>PricePerUnitArea,System.Nullable`1[System.Decimal]</value>
+              <value>Mortgage,System.Nullable`1[System.Decimal]</value>
+              <value>Rent,System.Nullable`1[System.Decimal]</value>
+              <value>HasTransferableLoan,System.Boolean</value>
+              <value>TransferableLoanAmount,System.Nullable`1[System.Decimal]</value>
+              <value>MortgageAndRentConvertible,System.Boolean</value>
+              <value>AdditionalRentalComments,System.String</value>
+              <value>MinimumMortgage,System.Nullable`1[System.Decimal]</value>
+              <value>MinimumRent,System.Nullable`1[System.Decimal]</value>
+            </Columns>
+            <Dictionary isRef="1" />
+            <Guid>303cf9e697aa4bf4af08bd6426835636</Guid>
+            <Name>Supplies</Name>
+          </Supplies>
+        </BusinessObjects>
+        <Category />
+        <Columns isList="true" count="49">
+          <value>ID,MongoDB.Bson.ObjectId</value>
+          <value>PropertyType,JahanJooy.RealEstateAgency.Domain.Enums.Property.PropertyType</value>
+          <value>State,JahanJooy.RealEstateAgency.Domain.Workflows.PropertyState</value>
+          <value>LicencePlate,System.String</value>
+          <value>IsArchived,System.Boolean</value>
+          <value>CoverImageID,System.Nullable`1[MongoDB.Bson.ObjectId]</value>
+          <value>Address,System.String</value>
+          <value>EstateArea,System.Nullable`1[System.Decimal]</value>
+          <value>EstateDirection,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.EstateDirection]</value>
+          <value>PassageEdgeLength,System.Nullable`1[System.Decimal]</value>
+          <value>EstateVoucherType,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.EstateVoucherType]</value>
+          <value>TotalNumberOfUnits,System.Nullable`1[System.Int32]</value>
+          <value>BuildingAgeYears,System.Nullable`1[System.Int32]</value>
+          <value>NumberOfUnitsPerFloor,System.Nullable`1[System.Int32]</value>
+          <value>NumberFloorsAboveGround,System.Nullable`1[System.Int32]</value>
+          <value>UnitArea,System.Nullable`1[System.Decimal]</value>
+          <value>OfficeArea,System.Nullable`1[System.Decimal]</value>
+          <value>CeilingHeight,System.Nullable`1[System.Decimal]</value>
+          <value>StorageRoomArea,System.Nullable`1[System.Decimal]</value>
+          <value>UsageType,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.UsageType]</value>
+          <value>NumberOfRooms,System.Nullable`1[System.Int32]</value>
+          <value>NumberOfParkings,System.Nullable`1[System.Int32]</value>
+          <value>UnitFloorNumber,System.Nullable`1[System.Int32]</value>
+          <value>AdditionalSpecialFeatures,System.String</value>
+          <value>NumberOfMasterBedrooms,System.Nullable`1[System.Int32]</value>
+          <value>KitchenCabinetTopType,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.KitchenCabinetTopType]</value>
+          <value>KitchenCabinetBodyType,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.KitchenCabinetBodyType]</value>
+          <value>MainDaylightDirection,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.DaylightDirection]</value>
+          <value>LivingRoomFloor,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.FloorCoverType]</value>
+          <value>FaceType,System.Nullable`1[JahanJooy.RealEstateAgency.Domain.Enums.Property.BuildingFaceType]</value>
+          <value>IsDuplex,System.Nullable`1[System.Boolean]</value>
+          <value>HasIranianLavatory,System.Nullable`1[System.Boolean]</value>
+          <value>HasForeignLavatory,System.Nullable`1[System.Boolean]</value>
+          <value>HasPrivatePatio,System.Nullable`1[System.Boolean]</value>
+          <value>HasBeenReconstructed,System.Nullable`1[System.Boolean]</value>
+          <value>HasElevator,System.Nullable`1[System.Boolean]</value>
+          <value>HasGatheringHall,System.Nullable`1[System.Boolean]</value>
+          <value>HasAutomaticParkingDoor,System.Nullable`1[System.Boolean]</value>
+          <value>HasVideoEyePhone,System.Nullable`1[System.Boolean]</value>
+          <value>HasSwimmingPool,System.Nullable`1[System.Boolean]</value>
+          <value>HasSauna,System.Nullable`1[System.Boolean]</value>
+          <value>HasJacuzzi,System.Nullable`1[System.Boolean]</value>
+          <value>LastIndexingTime,System.Nullable`1[System.DateTime]</value>
+          <value>CreationTime,System.DateTime</value>
+          <value>CreatedByID,System.Nullable`1[MongoDB.Bson.ObjectId]</value>
+          <value>LastModificationTime,System.Nullable`1[System.DateTime]</value>
+          <value>LastModifiedTimeByID,System.Nullable`1[MongoDB.Bson.ObjectId]</value>
+          <value>DeletionTime,System.Nullable`1[System.DateTime]</value>
+          <value>DeletedByID,System.Nullable`1[MongoDB.Bson.ObjectId]</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Guid>d02b1c08d5b64e3dbd0b1ab6701a1203</Guid>
+        <Name>Property</Name>
+      </Property>
+    </BusinessObjects>
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="0" />
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="6" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="53">
+        <PageHeaderBand1 Ref="7" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,7.49,1.3</ClientRectangle>
+          <Components isList="true" count="1">
+            <Image1 Ref="8" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.2,0.4,0.8,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Image>iVBORw0KGgoAAAANSUhEUgAAAFkAAABKCAYAAADQSfiaAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOxAAADsQBlSsOGwAADvVJREFUeF7tXGmQFdUVvnGillKVULFSZVWqYsqq/IpGRBQ0RhATSkRknWFWHPZ9mWFAZV+HYRkCqCiIgAERUKMoiktUwGUqLBagQYGAyg4CAyMMOyffd+7t93oePcO8mfceyTCn6qvu9/r27Xu//vrcc+67/YzUWtytluQE2BUh+eJFkaEvvSV585dL3gJsE4DBQM6c1+XgsROuFYmzK0KyadhRTPO+Yh4dkFi06C+mXorsPHDEtSQxlnCSzZ+yxaQ9ZZGcl1ikPikmc7iY+qny7d5DrkXxt4SSbO7vJKYDOpr6hCV54PNi+j+TGAyYLabjaDEpg8VkDBNzZ6rsPnzMtSy+ljCSTf10SywJTh0qZtAL6PyzCQSI5jWzRuFGO6Lrp8m3uw+4FsbPEkKyadodxHoEA7lzoKxZiQfJzo0g+q402XPkuGtpfCzuJKuC6Qs95M61nQ113qc27vtJqTK8Ov3uwneMRNN1eETXS5Ot+w66Fsfe4kqy+XNnMemegkGw5yJCHUbn+z1tv+vLfUC3/jJRQslFnayLdWud3PJ7r15sSXSmT9ENMmTv0fj46LiRrFGEN8gFEawKw2d2niR0LrSdH0BCCEeGV74y0LrcjSLRPWZAsZPsMV6rz0zse3Vi6ynaGwzvSJWdB2Mf3sWF5FAUkUaSgRz64AjClEhLSp2e06Xg9U/FtIay+uOYp2aq0H9ORVClklzsk9CMidJo5AJZvn4bwrexKMNjAXVyfMgaGVb03Zmy58ejriexsZiTbO5FosFBjgR3gIoHRfhg7hNULzueni/L1m/Vc9ds2SXmsRE4ju+p5H5QXl/fueWB5UMKRvnkcdJ97rtaJ+36rnhKQu6Dao44XwdDH9ENMuW7w7EjOqYkm6bdIlxEQBThKc75y7rdp7mzrf1w9CcxbaholiFpBM4jIutSoD6PQH5uN0amrihytVl7/pNNILEAZVgW5S6pC9+r66CPHoIbjxATmeHuI7Hx0TEj2TTKgm8DsapgQMM0NL5MZwAqmIqjituNlY3b97gawrb1YDEUDUUpgUAfkhhQF8HvvYEtdbwMX/yRq6Wsmc5TLcF6/SCiARKdgYyQRFPRSP9/iIHriAnJ5n5EERm4+1QwCaaLCCKY0EebncTx7ClScvKUq6WsvbNpJ4hGh1XRJJI3xl8n9vm9F0l0nSbNprzqzi5rRbiRPK7l/aq/BDjOtmfCZdF1ZILo29vLoZ9OupqqZtUmWQe5FOce1EUgfQ3sgIM++o447rceLiOXrnK1lbXBSz620YHnNvwk8yZR4Y7ka7Mnu7PK2rwPN1g/r+Q68CnytykSOeiD+min6Lsy5PuDh12N0Vu1SDaNu1piNV1GgzSKCGj0JSAxDvzcYby0mLzE1VrWftMLYViITIDk8pwQYfjcfKgcOFrizgjbrFUbrX/X8jwXg57eLK8dFUDjaNwchndUNAbDgyVVmyatMsnmHvhgDdGgYiq5IhcRBH10GT1gn8R1miL1Bj7nag9b8akzbiBEGXUzgG4d8TgvZ/HHrnTY3v8K7uYRuDB1KyzLmxJF+whvMExxiq7XoUopeJVINg/1tL7XI7mqcxHaaUeA+ujJ0nTiK+4qYctZ+KGSaYl2Zb1zMNhF2r7iE2Ja4XFXglkWuJyLCATO4zSAfzCsnyYHiqMjOmqSzX3I5KhcEsw7zEwuGgVfApzbB4pU1wEi0ibIk/DFkWba+tSsrgZlMwvkmZVrXYmwMWqxN8OVrayLCASJZtTBwdARjYRlb/Gl7qk8i4pk80AX64MJJhq8uKokqHFRQFUJeD625QhZv2Ofu6q1hUX/1hug5ZigkOyAwe6Pw+cjnf5b+EZonQHXjAq4XijqcETf1l5OnjvvrlqxVZrkxWswSj/YPTzhE5RoVAfM8Ege1ceoo91od+WwJXVDGKaqB3FdCmXEa2vcEWuLirbg6RqP46iHZbQu7AddryrgwE5F8ylumyftRj/vrlyxVZrkRZ+sF9OsN+4kRttoB5DKgsSoO0D93Qul5cw33NWtLfria3URJuc5VXukmTajUQ/Op6tQ9xPrdqK+PCi6XQ5S9yFSL2equ3LFVmmSX17lI1lns4IaUU3oIEWi3bbVCNld/JNrgTWTBqX2nimtJi9z31h7pGAJbgyU7hFcmTmPqoA/mbXLVZLvGVx2SqA8+98i2YPnc0FY/SfmuhZYG4pwzbQaLqu3hdPxkjPnbDSh4R3OVX8cUG8s4Cc57/+ZZPWnDogUtuwPZ1v7S0rFNMl1n6x1mPWWGPprfRLiqGKixpDMUE4fe5DVc7o8XFA2dv7DiAVuz5pJQcim6TraFZNoogLUHJIBJRmgmpE2++2Drbvcnsgcps6h0I7loeSg+mKFGkWyN3iRvOxJMuatL1xLylqjp14se0NqlRwF6CqUaOxjELwlNzgmNSnjbFnGzyQ5qK5YokaRTHhpNLcg89ipM6411t5ctxXJwUSU5c2gkrENqieWqHEk89HXcAzbrAKZ++lXrjXWsma9jdgYKTQJ1iQmSiXrYIkbGHSsPNQ4kgmP6N7T5aEJi11rrF3beYolV9UOBJ0fBNbZc4aGfdcPRPYYDdE1z10A3gwdifBNa5aeOy+mxTBXjkqupIoREv5+yBy5BfVt2n1ITKepweXKQ41UsucKSGTqBPnHhm3ann4L/ymGP/WHfHElSO5SKPeN+rvMXLlW9hwoluaTkIpT0UFly0ONJDkUltntL/CIr9+xX0w6Bjx+ryTzeMC5fnSdJm1mviF5y1bJuu175eVPN9sZu4EBZStCjSRZQTLhLrxBEIrW79RNoC2X86k4p/7olyQDJG/Zf1TWfX/AznXQHweVrwg1l2QChJJgugbGxVQwSa/MdCb9eutR+rLK9h+P6TRplQgmajbJAAdCkhpyD5chmER2LpSb4dNpn2/5QVN0kwOiog3dPNR4kqMBCU4eJ49NtGHftPf+ZSf1OeFfVYKJWpIdSDAInfTmZ9r2VpOXukGOBAeUjwa1JDsgfl759U5t9y2MHh6fbAkOKhstrnqSOcC1H6vtvQiY1oggesW4rVc1yUgqrsueom39AAmLXdwSUK66uGpJRjh3U+8Z2s4BC94X0xYDXCz8bxASR3KUqWi8QBLpc9PztY2/zQWxHZ3/5TFGEtlTqxdNRCKeJC9atc6RPMQmAkENuBKAz21QsESSspBm0yd7Axy3bUfJhp1IwduNCX9fLeBmcdVU+zitu1i82ltBxMXeIFqXaAU1JMHIzJe3N+6ws2lULkM1Xab1rNwxfJ4s/nK7XRATdG604MLK9OHoP1cQDZKs/BcdOxVbpUmm3diiH+4i3AXXI6fkoVO4aCwfxWgBFfed/a4M4ZtTPaajbWNkz/ET8ujEV9DGfJm7erMUrlzrXl8LOD8aUFTpw0DwE1Zod2XIBY1hLm9RkUy7oWkPfVRCROu65IBGxRv0xSljZVfxCblj1AL9haSJb9mtaf6UbDl0TCa9tsauyQiqozKgiLhyNd232LBBusiFyhFMi5pkWh3+b0QyFY07ygtz+f+VUHTqBG2PvvKA8O2loi36uWjbHjGNc+XY6bOS/8on9qVJlufEUu8oIyO6CO0nlwtje3emnK/kak7PqkQyLalxFyjJKZrKjnalfXXR92n1uTQmINYfT5C+iz6UXzIBgcqPlJ6VAoZ0SuyzUqfXDGky4WVdchtYZxlQwVwA7hRMF3F3hv3bmSityiTT6jDaoKK5nFbXK8d4OW15YKTQapSs3bFXPv9uH9rgJt+Jbhj0+FSB5OJTZ2Xw7Hds1NGpUEYuW63tfnA8iPbUHQgSTBfhnlRu4SLOnY1OwZ5Vi2TaNQ+TaCratzA8noqmYjuMlx4gj7as6BtcO98S7JXhPtR9Hqq7dQhuPOehswq0vGd24t93jh8c0NUHoz/0wfd2lNOnTrszo7dqk0xL+mtPKIc+C0RT2XzPoiKiSQLjWj8xQaAi/WEi34TCgFaw/HO9bkrhq+qHTRZ8Mst6/pb1IuujmUyuy8Bnl3J7pkmLV28IVDDazredPIJvT5aL5y+4s6pmMSGZlvQXf9SBrSo6shMAH3WEWrsPHxfTAmqhMoPKESSYjzpf2YUym01ZKufgAmi35s6SQa99Jsu/3IZkY5zURfmW015XX02ybgbe2Yz42U9mi2EIuqxPDVQy3R1f+tQoAtt7s+X0GXu96ljMSKbd+AjiaI06nOvICXAdVFmynSlrMm4RFIdsjAsGkRqHwM8p4+SaboWSgmxuynvrtbxnLacuFdN6tLywepN+vhP1bkVm9+uBuBYjCKi6Dm8mF4X7r4ukpA+ijRUb/2PV7x3jU0Af7H/55s5UOX6iVOuvrsWUZNq1D0LR+gIliUaDg96OingtbNPeI/oLMlPgDbsOyL6S4Ndsz1+4IL/LQ7jI6AAZ3vw14RVFF+F/ORiGXJDf1fC7rtPkJrgb2g2Mm/0/YWkU4XuNDGHaRVwrVhZzkmlJTL/pMhh10IX4ow52uN0YHZSisX6zV9j/w/BmAJE6Z78Q/ruF1hMXlz933LFAmrs1zi3ykQ1yvQa/VwVzkHM+WMO0TCmtxiAXZHEhmZbkhXeej1ZFu05DUQ3HLpTSs+dc6bJWcuqMbN5zSCatKJLbh86z5DI081TqIWOivPfVTpn10ZfWxfiPeUC6nYVY+YtvdsnPuayriy/FJsH+18aQKp+JgQ+OtLiRTPvZQ3AdVIh/MKR62MGe0/HdeLkOj+6vsF8XyqyLbRLf5uegRNIeByk6s+ZICQInfxA5VFiGdXIA9K6tCo5wEfXT5EI1o4jyLK4k00yTruGogx2KTFjYYQ5WHjwi4gmNInwKbthRSk7GZpALsriTTDPNfHG0Rh0kOgFkXgJcU+NgR7D+n0WynCiNrQ+OtISQTDON+dc5IDjyleFEgteki+B8OBXc6HE5FQcfHGkJI5lmHoDr8CuanebPOYlAZBx8W0rM4uDLWUJJpplmvSzRzKjaDkwc2gywNzfkg4P/licelnCSaaZhlpiHkR22ykksWvaHgpPlZGniCKZdEZJphUvel7Evvinj5icGY+dxu9xdPbF2xUi+mqyW5ARYLckJsFqSE2C1JMfdRP4Lc7fTu6gC/gYAAAAASUVORK5CYII=</Image>
+              <Name>Image1</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+            </Image1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </PageHeaderBand1>
+        <Text2 Ref="9" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.1,2.1,2.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text2</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{TranslateEnum("PropertyType", Property.PropertyType)} - {TranslateEnum("UsageType",Property.UsageType)} ({TranslateEnum("PropertyState",Property.State)})</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text2>
+        <Text3 Ref="10" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.6,2.1,1.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text3</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.NumberOfRooms != null,Property.NumberOfRooms,"-")} خوابه</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text3>
+        <Text4 Ref="11" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>2.1,2.1,1.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text4</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{Switch(Property.UnitArea != null, "" + Property.UnitArea + " متر بنا", Property.EstateArea != null, "" + Property.EstateArea + " متر زیربنا", Property.OfficeArea != null, "" + Property.OfficeArea + " متر واحد اداری")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text4>
+        <Text6 Ref="12" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.3,2.1,1.6,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text6</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>طبقه {IIF(Property.UnitFloorNumber != null,Property.UnitFloorNumber,"-")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text6>
+        <Text7 Ref="13" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.1,2.4,2.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text7</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.MainDaylightDirection != null,TranslateEnum("DaylightDirection",Property.MainDaylightDirection),"")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text7>
+        <Text8 Ref="14" type="Text" isKey="true">
+          <Brush>LightGray</Brush>
+          <ClientRectangle>3.9,3.6,3.4,0.3</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,12,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text8</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>مشخصات آگهی</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text8>
+        <Text9 Ref="15" type="Text" isKey="true">
+          <Brush>LightGray</Brush>
+          <ClientRectangle>0.2,3.6,3.5,0.3</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,12,Bold,Point,False,178</Font>
+          <Guid>47e535af08e64126baa9edd0e19a9878</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text9</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>آدرس</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text9>
+        <Text10 Ref="16" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanGrow>True</CanGrow>
+          <ClientRectangle>0.2,4.1,3.5,1.5</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text10</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{Property.Address}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text10>
+        <Panel1 Ref="17" type="Panel" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.9,4,3.4,1.6</ClientRectangle>
+          <Components isList="true" count="2">
+            <HeaderBand1 Ref="18" type="HeaderBand" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.2,3.4,0.2</ClientRectangle>
+              <Components isList="true" count="2">
+                <Text11 Ref="19" type="Text" isKey="true">
+                  <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>2.3,0,1.1,0.2</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text11</Name>
+                  <Page isRef="6" />
+                  <Parent isRef="18" />
+                  <Text>جهت</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>Expression</Type>
+                </Text11>
+                <Text12 Ref="20" type="Text" isKey="true">
+                  <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,2.3,0.2</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text12</Name>
+                  <Page isRef="6" />
+                  <Parent isRef="18" />
+                  <Text>قیمت</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>Expression</Type>
+                </Text12>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Name>HeaderBand1</Name>
+              <Page isRef="6" />
+              <Parent isRef="17" />
+            </HeaderBand1>
+            <DataBand1 Ref="21" type="DataBand" isKey="true">
+              <Brush>Transparent</Brush>
+              <BusinessObjectGuid>303cf9e697aa4bf4af08bd6426835636</BusinessObjectGuid>
+              <ClientRectangle>0,0.8,3.4,0.2</ClientRectangle>
+              <Components isList="true" count="2">
+                <Text13 Ref="22" type="Text" isKey="true">
+                  <Border>Top;Black;1;Solid;False;4;Black</Border>
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>2.3,0,1.1,0.2</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+                  <Guid>8636f749cfbb4e2c8e65ae117a6f567c</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text13</Name>
+                  <Page isRef="6" />
+                  <Parent isRef="21" />
+                  <Text>{TranslateEnum("IntentionOfOwner",Property.Supplies.IntentionOfOwner)}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>Expression</Type>
+                </Text13>
+                <Text14 Ref="23" type="Text" isKey="true">
+                  <Border>Top;Black;1;Solid;False;4;Black</Border>
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>0,0,2.3,0.2</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+                  <Guid>9ab92657686d4e55a4e74832d616cd41</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text14</Name>
+                  <Page isRef="6" />
+                  <Parent isRef="21" />
+                  <Text>{Switch(Property.Supplies.IntentionOfOwner == JahanJooy.RealEstateAgency.Domain.Enums.Property.IntentionOfOwner.ForSale, "قیمت کل: " + Format("{0:N0}", Property.Supplies.TotalPrice) + " تومان",
+ Property.Supplies.IntentionOfOwner == JahanJooy.RealEstateAgency.Domain.Enums.Property.IntentionOfOwner.ForFullMortgage, "ودیعه: " + Format("{0:N0}", Property.Supplies.Mortgage) + " تومان",
+ Property.Supplies.IntentionOfOwner == JahanJooy.RealEstateAgency.Domain.Enums.Property.IntentionOfOwner.ForRent, "ودیعه: " + Format("{0:N0}", Property.Supplies.Mortgage) + " تومان، اجاره ماهانه: " + Format("{0:N0}", Property.Supplies.Rent + " تومان"),
+ Property.Supplies.IntentionOfOwner == JahanJooy.RealEstateAgency.Domain.Enums.Property.IntentionOfOwner.ForDailyRent, Format("{0:N0}", "اجاره روزانه: " + Property.Supplies.Rent + " تومان"))}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>Expression</Type>
+                </Text14>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <DataSourceName isNull="true" />
+              <Filters isList="true" count="0" />
+              <Name>DataBand1</Name>
+              <Page isRef="6" />
+              <Parent isRef="17" />
+              <RightToLeft>True</RightToLeft>
+              <Sort isList="true" count="0" />
+            </DataBand1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>Panel1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </Panel1>
+        <Text15 Ref="24" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.1,2.7,2.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>6eac11057e324b9588b7a22c62b97d91</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text15</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.BuildingAgeYears != null,Property.BuildingAgeYears,"-")} ساله</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text15>
+        <Text16 Ref="25" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.6,2.7,1.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>491b9d62d1a04158a5ab1160acede544</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text16</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.NumberFloorsAboveGround != null,Property.NumberFloorsAboveGround,"-")} طبقه</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text16>
+        <Text17 Ref="26" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>2.1,2.7,1.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>fa90a31d9a22451e9ae9b3e93e3bca0b</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text17</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>هر طبقه {IIF(Property.NumberOfUnitsPerFloor != null,Property.NumberOfUnitsPerFloor,"-")} واحد</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text17>
+        <Text18 Ref="27" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.3,2.7,1.6,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>7e61e1dd97264892a15bbf2a7c54aa9d</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text18</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>در کل {IIF(Property.TotalNumberOfUnits != null,Property.TotalNumberOfUnits,"-")} واحد</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text18>
+        <Text5 Ref="28" type="Text" isKey="true">
+          <Brush>LightGray</Brush>
+          <ClientRectangle>0.1,6,7.2,0.3</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,12,Bold,Point,False,178</Font>
+          <Guid>00627b62837c48a8a3d707b19b171050</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text5</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>جزئیات ملک</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text5>
+        <Text20 Ref="29" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.1,6.5,2.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>954c623285494f99ada34d89979c4c6f</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text20</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>تعداد پارکینگ: {Switch(Property.NumberOfParkings != null, Property.NumberOfParkings)}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text20>
+        <Text19 Ref="30" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>2.6,6.5,2.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>f656a94ae8a444d2805c6124ddbc6f6c</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text19</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>مساحت انباری: {IIF(Property.StorageRoomArea != null,Property.StorageRoomArea,"-")} متر</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text19>
+        <Text21 Ref="31" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>6.8,6.9,0.5,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>8a3aa8eeb0c648d5b85fc94e456a714c</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text21</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>جنس کف:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text21>
+        <Text22 Ref="32" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>4,6.9,0.9,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>67184a44b1ab45348727b6bbc3fb1fc1</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text22</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>نوع نمای ساختمان:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text22>
+        <Text23 Ref="33" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.4,6.9,1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>f608dd7a78c94e0197d4cb04f045c9cd</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text23</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>جنس بدنه کابینت ها:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text23>
+        <Text24 Ref="34" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>6.2,7.3,1.1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>8fd4e064051f4b688c29e979985b64be</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text24</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>جنس سطح کابینت ها:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text24>
+        <Text25 Ref="35" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.9,7.3,1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>067ad0884c26422791ab5cc9f515de4b</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text25</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>جهت اصلی نور واحد:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text25>
+        <Text26 Ref="36" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,7.3,2.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>51a4bb2a9de74f15bef1d3fc14a2231b</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text26</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>تعداد اتاق های مستر: {IIF(Property.NumberOfMasterBedrooms != null,Property.NumberOfMasterBedrooms,"-")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text26>
+        <Text27 Ref="37" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>6.3,7.7,1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>4bff60516a2243aea5626d480256a91e</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text27</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>واحد دوبلکس است؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text27>
+        <CheckBox1 Ref="38" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.IsDuplex}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>6,7.7,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Name>CheckBox1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox1>
+        <Text28 Ref="39" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.9,7.7,1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>ba1d2e65824c43cc9cc3b2184b0c3db2</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text28</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>بازسازی شده است؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text28>
+        <CheckBox2 Ref="40" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasBeenReconstructed}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>3.5,7.7,0.4,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>4730804dea22470884b5f162a6f8d15a</Guid>
+          <Name>CheckBox2</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox2>
+        <Text29 Ref="41" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.2,7.7,1.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>ead8acf83063439dae62a71eb96ee0fe</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text29</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>دستشویی ایرانی دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text29>
+        <CheckBox3 Ref="42" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasIranianLavatory}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>0.9,7.7,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>db503d282fd54e61a4d6171375bcd71e</Guid>
+          <Name>CheckBox3</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox3>
+        <Text30 Ref="43" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>6.1,8.1,1.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>60ed52930ace4004aec82bd049a9048f</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text30</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>دستشویی فرنگی دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text30>
+        <CheckBox4 Ref="44" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasForeignLavatory}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>5.8,8.1,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>3e9cad30b2884783b0d6f81e17105b30</Guid>
+          <Name>CheckBox4</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox4>
+        <Text31 Ref="45" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>4.1,8.1,0.8,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>f2ab25e7bdf64255bf56431e19074843</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text31</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>آسانسور دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text31>
+        <CheckBox5 Ref="46" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasElevator}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>3.8,8.1,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>c505f5e3c3554ae59780fd34edbf6f5a</Guid>
+          <Name>CheckBox5</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox5>
+        <Text32 Ref="47" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.3,8.1,1.1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>b941fc0ab8dd4b6483f00be0b9b6fa6a</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text32</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>سالن اجتماعات دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text32>
+        <CheckBox6 Ref="48" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasGatheringHall}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>1,8.1,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>f88eea56c4104df38b26f91003884d9f</Guid>
+          <Name>CheckBox6</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox6>
+        <Text33 Ref="49" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.9,8.5,1.4,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>890533197a2f41e9bd2146676a997273</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text33</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>درب پارکینگ ریموتی دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text33>
+        <CheckBox7 Ref="50" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasAutomaticParkingDoor}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>5.6,8.5,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>98080c8c89294cc69f4900f3445254c6</Guid>
+          <Name>CheckBox7</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox7>
+        <Text34 Ref="51" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.9,8.5,1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>7b5400f7e6c849c5a3b07dc4c90244b8</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text34</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>آیفون تصویری دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text34>
+        <CheckBox8 Ref="52" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasVideoEyePhone}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>3.5,8.5,0.4,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>6e3889684b2f47a1aa0a634985993c55</Guid>
+          <Name>CheckBox8</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox8>
+        <Text35 Ref="53" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.7,8.5,0.7,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>7e5fe04d4c8545d6b9ac71883d65c3c8</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text35</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>استخر دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text35>
+        <CheckBox9 Ref="54" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasSwimmingPool}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>1.4,8.5,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>73a5e167728c4c219f7b01f496bb45fc</Guid>
+          <Name>CheckBox9</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox9>
+        <Text36 Ref="55" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>6.7,8.9,0.6,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>b2b81478a07a4dfd88f20d867133c116</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text36</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>سونا دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text36>
+        <CheckBox10 Ref="56" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasSauna}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>6.4,8.9,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>ca2b88ddd2d54fa1af37154d74499034</Guid>
+          <Name>CheckBox10</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox10>
+        <Text37 Ref="57" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>4.2,8.9,0.7,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>439ad85d3f2a4a9eb809c7454f65c9e9</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text37</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>جکوزی دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text37>
+        <CheckBox11 Ref="58" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasJacuzzi}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>3.9,8.9,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>21a9853b240142c9a1818d19dae340cd</Guid>
+          <Name>CheckBox11</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox11>
+        <Text38 Ref="59" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.2,8.9,1.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>54fb7c442b9549a7a6a199a28e751660</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text38</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>پاسیوی اختصاصی دارد؟</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text38>
+        <CheckBox12 Ref="60" type="CheckBox" isKey="true">
+          <Brush>Transparent</Brush>
+          <Checked>{Property.HasPrivatePatio}</Checked>
+          <CheckStyleForFalse>Cross</CheckStyleForFalse>
+          <ClientRectangle>0.9,8.9,0.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <ContourColor>Black</ContourColor>
+          <Guid>86c32cb7dbff4fc3963d5701cd323b39</Guid>
+          <Name>CheckBox12</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <TextBrush>Black</TextBrush>
+        </CheckBox12>
+        <Text1 Ref="61" type="Text" isKey="true">
+          <Brush>LightGray</Brush>
+          <ClientRectangle>0.2,1.6,7.1,0.3</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,12,Bold,Point,False,178</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>مشخصات ملک</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text1>
+        <Text39 Ref="62" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.1,6.9,1.7,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>cdf1ff92e82d4ec78187fe4feb6a0f93</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text39</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.LivingRoomFloor != null,TranslateEnum("FloorCoverType",Property.LivingRoomFloor),"-")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text39>
+        <Text40 Ref="63" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>2.6,6.9,1.4,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>c57c31d630fc4443bc14f9e0e0720cf5</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text40</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.FaceType != null,TranslateEnum("BuildingFaceType",Property.FaceType),"-")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text40>
+        <Text41 Ref="64" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.2,6.9,1.2,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>e3b595272e3440b68f99d5d7bb6f7fdf</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text41</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.KitchenCabinetBodyType != null,TranslateEnum("KitchenCabinetBodyType",Property.KitchenCabinetBodyType),"-")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text41>
+        <Text42 Ref="65" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.1,7.3,1.1,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>824c1c047ae14271841b3401875bf3cf</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text42</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.KitchenCabinetBodyType != null,TranslateEnum("KitchenCabinetBodyType",Property.KitchenCabinetBodyType),"-")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text42>
+        <Text43 Ref="66" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>2.6,7.3,1.3,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>B Nazanin+ Bold,9.75,Bold,Point,False,178</Font>
+          <Guid>7de61941a0074c81904f4ac835e43e1e</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text43</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Text>{IIF(Property.MainDaylightDirection != null,TranslateEnum("DaylightDirection",Property.MainDaylightDirection),"-")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+          <Type>Expression</Type>
+        </Text43>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>0093e5c4a71b4039ada8a28472049b95</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11.69</PageHeight>
+      <PageWidth>8.27</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+      <Watermark Ref="67" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="68" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="14">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+    <value>JahanJooy.Stimulsoft.Common</value>
+    <value>JahanJooy.RealEstateAgency.Web</value>
+    <value>JahanJooy.RealEstateAgency.Domain</value>
+    <value>JahanJooy.Common.Util</value>
+    <value>JahanJooy.RealEstateAgency.LibraryBuffer</value>
+    <value>MongoDB.Bson</value>
+  </ReferencedAssemblies>
+  <ReportAlias>یک صفحه ای</ReportAlias>
+  <ReportChanged>2/22/2016 12:07:23 PM</ReportChanged>
+  <ReportCreated>2/16/2016 4:32:55 PM</ReportCreated>
+  <ReportFile />
+  <ReportGuid>ce05d58caf034ac3b8db184bde7a7058</ReportGuid>
+  <ReportName>یک صفحه ای</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2014.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class یک_صفحه_ای : Stimulsoft.Report.StiReport
+    {
+        public یک_صفحه_ای()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

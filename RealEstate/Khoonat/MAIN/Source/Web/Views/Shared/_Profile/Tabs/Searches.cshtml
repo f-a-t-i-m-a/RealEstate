@@ -1,0 +1,36 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Models.Shared.Profile.Tabs.ProfileTabSearchesModel
+
+<br/>
+<br/>
+
+@if (Model.Searches.Any())
+{
+	@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Searches, Model.PaginationUrlTemplate))
+}
+
+<table class="highlightActiveRow" cellpadding="5" style="text-align: center;">
+	<tr style="text-align: center; font-weight: bold">
+		<td style="width: 100px;">شناسه جستجو</td>
+		<td style="width: 200px;">تاریخ جستجو</td>
+		<td style="width: 100px;">شماره صفحه</td>
+		<td style="width: 300px;">مسیر</td>
+	</tr>
+	@foreach (var sch in Model.Searches)
+	{
+		<tr>
+			<td>@sch.ID</td>
+			<td>@sch.SearchDate.ToLocalizedDateString() @sch.SearchDate.ToLocalizedTimeString() <br/> (@((sch.SearchDate - DateTime.Now).ToLocalizedRelativeString()))</td>
+			<td>@sch.RequestedPage</td>
+			<td>@sch.SearchQuery</td>
+		</tr>
+	}
+</table>
+
+@if (Model.Searches.Any())
+{
+	@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Searches, Model.PaginationUrlTemplate))
+}
+
+

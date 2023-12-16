@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CompositionInfo xmlns="http://www.compositional.net/schema/compositionXml.1.0.xsd">
+
+  <Include assemblyName="JahanJooy.RealEstateAgency.HaftDong" manifestResourceName="JahanJooy.RealEstateAgency.HaftDong.Version.xml" />
+  <Include assemblyName="JahanJooy.RealEstateAgency.HaftDong" manifestResourceName="JahanJooy.RealEstateAgency.HaftDong.Server.Composition.Environment.xml" />
+  <Include assemblyName="JahanJooy.RealEstateAgency.HaftDong" manifestResourceName="JahanJooy.RealEstateAgency.HaftDong.Server.Composition.Main.xml" />
+  <Include assemblyName="JahanJooy.RealEstateAgency.HaftDong" manifestResourceName="JahanJooy.RealEstateAgency.HaftDong.Server.Composition.Aspects.xml" />
+
+</CompositionInfo>

@@ -1,0 +1,102 @@
+﻿<div class="container customerView" ng-show="$state.current.name === 'customers'">
+    <div class="well well-lg">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" ng-model="searchInput.DisplayName" ng-maxlength="200" placeholder="نام مشتری..."/>
+            </div>
+            <div class="col-md-4">
+                <ui-select ng-model="$parent.searchInput.IntentionOfVisit" data-placeholder="Pick a Request" title="Choose a Request" theme="bootstrap">
+                    <ui-select-match placeholder="علت مراجعه را انتخاب کنید" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="opt.id as opt in ListOptions">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" ng-model="searchInput.Email" ng-maxlength="200" placeholder="ایمیل مشتری..."/>
+            </div>
+            <div class="col-md-4">
+                <input type="text" ng-model="searchInput.PhoneNumber" ng-maxlength="200" placeholder="تلفن مشتری..."/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <label><input type="checkbox" ng-model="searchInput.IsArchived"/> آرشیو</label>
+            </div>
+            <div class="col-md-2">
+                <label><input type="checkbox" ng-model="searchInput.IsDeleted"/> حذف شده</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 text-left">
+            </div>
+            <div class="col-md-2 text-left">
+                <button class="btn btn-success btn-sm searchButton" ng-click="onSearch()" restrict-to="RealEstateAgent"><i class="fa fa-search"></i> جستجو</button>
+            </div>
+<!--            <div class="col-md-2 text-left">-->
+<!--                <jj-print-button source-type="5" endpoint="/api/web/supplies/print" show-office-type="true" filename="لیست فایل ها" search-input="searchInput" ids="ids"></jj-print-button>-->
+<!--            </div>-->
+        </div>
+    </div>
+    <div class="row" ng-show="Customers != null && Customers.length != 0">
+        <div class="col-md-12">
+            <table class="table table-hover searchResult">
+                <thead>
+                <tr>
+                    <th class="col-md-1">
+                        <input type="checkbox" ng-model="selectAllCustomer"/>
+                    </th>
+                    <th class="col-md-2">
+                        نام
+                    </th>
+                    <th class="hidden-xs col-md-2">علت مراجعه</th>
+                    <th class="col-md-2">
+                        تلفن ثابت
+                    </th>
+                    <th class="hidden-xs col-md-2">
+                        <jj-sortable-header title="'تاریخ آخرین مراجعه'" sort-column-name="'LastVisitTime'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                    </th>
+                    <th class="hidden-xs col-md-1" restrict-to="Administrator">
+                        <label>
+                            ثبت کننده
+                        </label>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="customer in Customers">
+                    <td class="col-md-1">
+                        <input type="checkbox" ng-model="customer.Selected"/>
+                    </td>
+                    <td class="col-md-2">
+                        <a ui-sref="customers.details({id:customer.ID})">{{customer.DisplayName}}</a>
+                    </td>
+                    <td class="hidden-xs col-md-2">
+                        <div >
+                            <span ng-show="customer.RequestCount > 0"><span class="badge" > {{customer.RequestCount}}</span> درخواست</span>
+                            <span ng-show="customer.PropertyCount >0"> <span class="badge" >{{customer.PropertyCount}}</span> ملک</span>
+                        </div>
+                    </td>
+                    <td class="col-md-2 persian-number">
+                        {{customer.PhoneNumber}}
+                        <span ng-show="(customer.CountPhoneNumber)-1 > 0"><span class="badge"> +{{(customer.CountPhoneNumber)-1}} شماره دیگر</span></span>
+                    </td>
+                    <td class="hidden-xs col-md-2">
+                        <jj-relative-time origin="customer.LastVisitTime" ng-show="isTwoWeeksAgo(customer)" title="{{customer.LastVisitTime | jalaali: 'dddd jYYYY/jMM/jDD'}}"></jj-relative-time>
+                        <span ng-show="!isTwoWeeksAgo(customer)">{{customer.LastVisitTime | jalaali}}</span>
+                    </td>
+                    <td class="hidden-xs col-md-1" restrict-to="Administrator">{{customer.CreatorFullName}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <jj-pagination page-number="PageNumber" number-of-pages="NumberOfPages" total-number-of-items="TotalNumberOfItems" page-size="PageSize" on-change-page-click="getDataDown(page)"></jj-pagination>
+        </div>
+    </div>
+    <div class="row" ng-show="Customers == null">
+        در حال گرفتن اطلاعات...
+    </div>
+    <div class="row" ng-show="Customers != null && Customers.length === 0">
+        مشتری ای وجود ندارد
+    </div>
+</div>
+<div ui-view autoscroll="false"></div>

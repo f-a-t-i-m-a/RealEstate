@@ -1,0 +1,185 @@
+﻿@using System.Web.Mvc.Html
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Controllers
+@using JahanJooy.RealEstate.Web.Scripts
+@using JahanJooy.RealEstate.Web.Helpers 
+@model JahanJooy.RealEstate.Web.Models.VicinityAdmin.VicinityAdminListModel
+
+@this.ScriptLibrary(JavaScriptLibraries.JQueryUI)
+@this.StyleLibrary(StyleLibraries.JQueryUiAll)
+
+<div class="pull-left">
+	@using (Html.BeginForm("SearchVicinity", "VicinityAdmin"))
+	{
+		<div class="span" style="padding: 5px;">@IconsHelper.Search16(Url)</div>
+		<div class="span">@Html.DropDownListFor(v => v.SelectedScope, Model.SelectScope, GeneralResources.AllItems)</div>
+		<div class="span" style="padding: 3px; vertical-align: bottom;">@Html.VicinitySelector(false, "VicinityID", Model.CurrentVicinity.IfNotNull(cv => (long?)cv.ID, null), includeDisabled: true)</div>
+		<input id="SearchVicinityButton" name="SearchVicinityButton" class="button hidden" type="submit" value="جستجو" />
+	}
+</div>
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", AreaRouteValue.Admin, null) &gt; 
+    همسایگی ها
+</h2>
+
+<div>
+    @Html.ValidationSummary(false)
+</div>
+
+<ol class="breadcrumb">
+	<li><a href="@Url.Action("List")">همه همسایگی ها</a></li>
+	@foreach (var hierarchy in Model.Hierarchy)
+	{
+		<li><a href="@Url.Action("List", new { parentId = hierarchy.ID })">@hierarchy.Type.Label(DomainEnumResources.ResourceManager) @hierarchy.Name</a></li>
+	}
+</ol>
+
+@if (Model.CurrentVicinity != null)
+{
+	<div class="pull-left">
+		<a href="@Url.Action("EditProperties", new {VicinityID = Model.CurrentVicinity.ID})">@IconsHelper.Edit32(Url)</a>
+		<a href="@Url.Action("EditGeography", new { VicinityID = Model.CurrentVicinity.ID })">@IconsHelper.Map32(Url)</a>
+	</div>
+}
+
+@if (Model.CurrentVicinity != null)
+{
+	<table>
+		<tr>
+			<td><strong>خلاصه:</strong></td>
+			<td>
+				<small>
+					@VicinityDisplayItem.ToString(VicinityPresentationHelper.BuildHierarchyString(Model.CurrentVicinityFromCache, false, false, true, true))
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					@VicinityDisplayItem.ToString(VicinityPresentationHelper.BuildHierarchyString(Model.CurrentVicinityFromCache, true, false, true, true))
+				</small>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>عادی:</strong></td>
+			<td><small>@VicinityDisplayItem.ToString(VicinityPresentationHelper.BuildHierarchyString(Model.CurrentVicinityFromCache))</small></td>
+		</tr>
+		<tr>
+			<td><strong>کامل:</strong></td>
+			<td><small>@VicinityDisplayItem.ToString(VicinityPresentationHelper.BuildHierarchyString(Model.CurrentVicinityFromCache, true, true, false))</small></td>
+		</tr>
+	</table>
+}
+
+<hr/>
+
+@if (!Model.AllParentsEnabled)
+{
+	<div class="textSection" style="border: 3px dotted darkgray; padding: 15px;">
+		@IconsHelper.Warning32(Url)
+		&nbsp;&nbsp;&nbsp;یکی از همسایگی های بالاتر غیرفعال شده اند؛ به همین دلیل این فهرست قابل مشاهده توسط کاربران نخواهد بود.
+	</div>
+}
+
+@if (Model.Vicinities != null && Model.Vicinities.Any())
+{
+	using (Html.BeginForm("BatchChangeVicinities", "VicinityAdmin", routeValues: new {parentID = Model.CurrentVicinity != null ? Model.CurrentVicinity.ID : (long?) null}))
+	{
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="td" style="width: 20px;">
+						<small>
+							<a href="#" style="color: #07c" class="select-btn">همه</a>
+							<br />
+							<a href="#" style="color: #07c" class="deselect-btn">هیچ</a>
+						</small>
+					</th>
+					<th style="width: 70px;">ویرایش</th>
+					<th style="width: 30px;">Geo<br />Cntr</th>
+					<th style="width: 30px;">Geo<br />Rgn</th>
+					<th style="width: 150px;">نوع</th>
+					<th style="width: 200px;">نام</th>
+					<th style="width: 200px;">سایر نامها</th>
+					<th style="width: 60px;">ملک</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			@foreach (var vicinity in Model.Vicinities)
+			{
+				<tr style="background-color: @VicinityAdminController.GetVicinityBkgColor(vicinity)">
+					<td><input class="move"  type="checkbox" name="vicinityIds" value="@vicinity.ID" /></td>
+					<td>
+						<a href="@Url.Action("EditProperties", new {VicinityID = vicinity.ID})">@IconsHelper.Edit32(Url)</a>
+						<a href="@Url.Action("EditGeography", new {VicinityID = vicinity.ID})">@IconsHelper.Map32(Url)</a>
+					</td>
+					<td>@IconsHelper.Tristate(Url, vicinity.CenterPoint != null)</td>
+					<td>@IconsHelper.Tristate(Url, vicinity.Boundary != null)</td>
+					<td data-link-url="@Url.Action("List", new {ParentID = vicinity.ID})">
+						@IconsHelper.Xlink16(Url)
+						<span class="@(vicinity.ShowTypeInTitle ? "" : "disabledText")">@vicinity.Type.Label(DomainEnumResources.ResourceManager)</span>
+					</td> 
+					<td data-link-url="@Url.Action("List", new {ParentID = vicinity.ID})">
+						@vicinity.Name
+						@if (!String.IsNullOrEmpty(vicinity.AdministrativeNotes))
+						{
+							<span title="@vicinity.AdministrativeNotes"> @IconsHelper.Note16(Url)</span>
+						}
+					</td>
+ 
+					<td>
+						@vicinity.AlternativeNames
+					</td>        
+					<td>@IconsHelper.Tristate(Url, vicinity.CanContainPropertyRecords)</td>
+				</tr>
+			}
+		</table>
+		<div style="margin-top: 20px;">
+			<input id="btnEnableVicinities" name="btnEnableVicinities" class="btn btn-primary" type="submit" value="فعال" />
+			<input id="btnDisableVicinities" name="btnDisableVicinities" class="btn btn-primary" type="submit" value="غیر فعال" />
+			<input id="btnRemoveVicinities" name="btnRemoveVicinities" class="btn btn-danger" type="submit" value="حذف" />
+			<input id="btnSelectMoveTarget" name="btnSelectMoveTarget" class="btn btn-primary" type="submit" value="جابجایی" />
+			<input id="btnSetCanContainPropertyToTrue" name="btnSetCanContainPropertyToTrue" class="btn btn-primary" type="submit" value="امکان ثبت ملک: بله" style="width: 152px;" />
+			<input id="btnSetCanContainPropertyToFalse" name="btnSetCanContainPropertyToFalse" class="btn btn-primary" type="submit" value="امکان ثبت ملک: خیر" style="width: 152px;" />
+		</div>
+	}
+}
+else
+{
+	<div class="grayed">
+		این همسایگی هیچ زیرمجموعه ای ندارد.
+	</div>
+}
+
+@section SideBar
+{
+    @Html.Action("NewVicinity", "VicinityAdmin", new { currentVicinityID = Model.CurrentVicinity.IfNotNull(v => v.ID) })
+}
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function onSelectedSearchScopeChanged() {
+                           searchScope = $("#SelectedScope").val();
+                       }
+                      
+
+                       $('a.select-btn').on('click', function (event) {
+                           event.preventDefault();
+                           $('input:checkbox.move').prop('checked', true);
+                       });
+
+                       $('a.deselect-btn').on('click', function (event) {
+                           event.preventDefault();
+                           $('input:checkbox.move').prop('checked', false);
+                       });
+
+
+                       $("#VicinityID").on("select2-selecting", function (e) {
+                           $("#VicinityID").val(e.val);
+                           $("#SearchVicinityButton").trigger("click");
+                       });
+                      
+                       $("#SelectedScope").change(onSelectedSearchScopeChanged);
+                   </script>)

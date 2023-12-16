@@ -1,0 +1,18 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.UserContactMethodVerificationInfo
+
+<div id="completeRegistrationEmailRoot">
+    <div>
+        @IconsHelper.Tick32(Url)
+        آدرس ایمیل
+        @HtmlPresentationHelper.LeftToRight(Model.ContactMethod.ContactMethodText)
+        با موفقیت فعال سازی شده و توسط سایت قابل استفاده است. متشکریم.
+    </div>
+</div>
+
+@(this.ScriptBlock(@<script>
+                        emailVerified = true;
+                        updateFooterMessage();
+                    </script>))

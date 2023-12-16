@@ -1,0 +1,63 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@*
+    ********************************************************************************
+    **** Agency Listing properties
+*@
+
+<div class="form-group">
+        <div class="col-xs-12 col-md-4">
+            <span class="icon-required"></span>
+            @Html.LabelFor(m => m.AgencyListing)
+        </div>
+        <div class="col-xs-12 col-md-8">
+            @Html.DropDownListFor(m => m.AgencyListing, Model.AgencyListing.EnumSelectList(PropertySummaryResources.ResourceManager), GeneralResources.NotSelected, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.AgencyListing)
+        </div>
+</div>
+<div class="form-group showOnNoAgencyListing none">
+        <div class="col-xs-12 col-md-7">
+            <span class="icon-required"></span>
+            @Html.LabelFor(m => m.NoAgencyListingAgencyPermitted)
+        </div>
+        <div class="col-xs-12 col-md-5">
+            @Html.DropDownListFor(m => m.NoAgencyListingAgencyPermitted, Model.NoAgencyListingAgencyPermitted.EnumSelectList(PropertySummaryResources.ResourceManager), new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.NoAgencyListingAgencyPermitted)
+        </div>
+</div>
+<div class="form-group showOnAgencyListing none">
+    <div class="col-xs-12 col-md-7">
+        <span class="icon-required"></span>
+        @Html.LabelFor(m => m.AgencyListingOtherAgencyPermitted)
+    </div>
+    <div class="col-xs-12 col-md-5">
+        @Html.DropDownListFor(m => m.AgencyListingOtherAgencyPermitted, Model.AgencyListingOtherAgencyPermitted.EnumSelectList(PropertySummaryResources.ResourceManager), new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.AgencyListingOtherAgencyPermitted)
+    </div>
+</div> 
+
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function agencyListingFunction() {
+                           if ($("#AgencyListing").val() == "AgencyListing") {
+                               $(".showOnAgencyListing").show(400);
+                               $(".showOnNoAgencyListing").hide(400);
+                           } else if ($("#AgencyListing").val() == "NoAgencyListing") {
+                               $(".showOnAgencyListing").hide(400);
+                               $(".showOnNoAgencyListing").show(400);
+                           } else {
+                               $(".showOnAgencyListing").hide(400);
+                               $(".showOnNoAgencyListing").hide(400);
+                           }
+                       }
+
+                       $(window).load(agencyListingFunction);
+                       $('#AgencyListing').change(agencyListingFunction);
+
+                   </script>
+    )

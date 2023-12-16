@@ -1,0 +1,155 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@using ServiceStack
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminSessions.AdminSessionsListModel
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>جلسات</a></li>
+}
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Sessions, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th></th>
+			<th>Key</th>
+			<th>شروع</th>
+			<th>مدت</th>
+			<th>کاربر</th>
+			<th>بازدید کننده</th>
+			<th>اطلاعات</th>
+			<th>فعالیت ها</th>
+		</tr>
+	</thead>
+	@foreach (var session in Model.Sessions)
+	{
+		<tr>
+			<td>
+				@session.ID<br/>
+				<small class="label label-default">@session.Type.ToString()</small>
+			</td>
+			<td class="lead">
+				@if (!session.GotInteractiveAck)
+				{
+					<span class="glyphicon glyphicon-transfer text-danger"></span>
+				}
+			</td>
+			<td>
+				@if (!session.PrevHttpSessionID.IsNullOrEmpty())
+				{
+					<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("HttpSessionIdFilter", session.PrevHttpSessionID))"><span dir="ltr" title="@session.PrevHttpSessionID">@session.PrevHttpSessionID.Truncate(6)</span></a>
+					<span class="glyphicon glyphicon-chevron-down"></span>
+				}
+				<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("HttpSessionIdFilter", session.HttpSessionID))"><span dir="ltr" title="@session.HttpSessionID">@session.HttpSessionID.Truncate(6)</span></a>
+			</td>
+			<td><span>@((session.Start - DateTime.Now).ToLocalizedRelativeString(1))</span></td>
+			<td>
+				@((session.End - session.Start).ToLocalizedDurationString(1))
+				<br/>
+				<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyEndReasonFilter", "true").Set("EndReasonFilter", session.EndReason.ToString()))">@(session.EndReason.IfHasValue(er => er.ToString(), "-----"))</a>
+			</td>
+			<td>@Html.Partial("CellUser", session)</td>
+			<td>@Html.Partial("CellVisitor", session)</td>
+			<td>@Html.Partial("CellClientInfo", session)</td>
+			<td>@session.ActivityLogCount <a href="@Url.Action("List", "AdminActivityLog", new {SessionIdFilter = session.ID})">@IconsHelper.Xlink16(Url)</a></td>
+		</tr>
+	}
+</table>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Sessions, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+	<p>فیلتر های پر استفاده:</p>
+	<ul>
+		<li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+		<li><a href="@Url.Action("List", new { ApplyEndReasonFilter = true, EndReasonFilter = ""})">جلسات تمام نشده</a></li>
+		<li><a href="@Url.Action("List", new { InteractiveSessionFilter = false})">جلساتی که پاسخ AJAX نگرفتیم</a></li>
+		<li><a href="@Url.Action("List", new { MinimumActivityCount = 1})">جلسات دارای فعالیت</a></li>
+	</ul>
+	 
+	<br /><hr/>
+	 
+	@using (Html.BeginForm("List", "AdminSessions", FormMethod.Get))
+	{
+		<div style="width: 200px;">
+			@Html.LabelFor(m => m.IdFilter):
+			@Html.TextBoxFor(m => m.IdFilter)
+			<br/>
+			<br/>
+
+			@Html.CheckBoxWithoutHiddenField("ApplyUserIdFilter", Model.ApplyUserIdFilter)
+			@Html.LabelFor(m => m.ApplyUserIdFilter)
+			<br/>
+			<br/>
+		
+			@Html.LabelFor(m => m.UserIdFilter):
+			@Html.TextBoxFor(m => m.UserIdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.VisitorIdFilter):
+			@Html.TextBoxFor(m => m.VisitorIdFilter)
+			<br/>
+			<br/>
+
+			@Html.CheckBoxWithoutHiddenField("ApplyEndReasonFilter", Model.ApplyEndReasonFilter)
+			@Html.LabelFor(m => m.ApplyEndReasonFilter)
+			<br/>
+			<br/>
+		
+			@Html.LabelFor(m => m.EndReasonFilter):
+			@Html.DropDownListFor(m => m.EndReasonFilter, Model.EndReasonFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control"})
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.InteractiveSessionFilter):
+			@Html.DropDownListFor(m => m.InteractiveSessionFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.NotSelected, new { @class = "form-control" })
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.HttpSessionIdFilter):
+			@Html.TextBoxFor(m => m.HttpSessionIdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.UserAgentFilter):
+			@Html.TextBoxFor(m => m.UserAgentFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.StartupUriFilter):
+			@Html.TextBoxFor(m => m.StartupUriFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.ReferrerUriFilter):
+			@Html.TextBoxFor(m => m.ReferrerUriFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.ClientAddressFilter):
+			@Html.TextBoxFor(m => m.ClientAddressFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.MinimumActivityCount):
+			@Html.TextBoxFor(m => m.MinimumActivityCount)
+			<br/>
+			<br/>
+
+
+			<button name="submit" value="btnRefresh" class="btn btn-primary btn-block" type="submit">اعمال فیلتر</button>
+		</div>
+	}
+}

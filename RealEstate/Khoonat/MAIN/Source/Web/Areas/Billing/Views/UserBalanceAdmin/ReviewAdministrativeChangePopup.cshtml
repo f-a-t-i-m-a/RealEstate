@@ -1,0 +1,59 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.UserBalanceAdmin.UserBalanceAdminReviewAdministrativeChangeModel
+
+
+@Html.Partial("ViewAdministrativeChangeDetailsPopup", Model.Change)
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">اثر تغییر</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div>
+                موفق؟
+                @IconsHelper.Tristate(Url, Model.ApplyResult.Successful)
+            </div>
+
+            @if (Model.ApplyResult.FailureReason.HasValue)
+            {
+                <div>
+                    خطا:
+                    @Model.ApplyResult.FailureReason
+                </div>
+            }
+
+            <table class="table">
+                <tr>
+                    <td>سرفصل:</td>
+                    <td>مانده نقدی</td>
+                    <td>مانده جایزه</td>
+                </tr>
+                <tr>
+                    <td>مانده فعلی:</td>
+                    <td>@BillingPresentationHelper.Balance(Model.ApplyResult.BalanceBeforeEffect.CashBalance)</td>
+                    <td>@BillingPresentationHelper.Balance(Model.ApplyResult.BalanceBeforeEffect.BonusBalance)</td>
+                </tr>
+                <tr>
+                    <td>تغییر:</td>
+                    <td>@BillingPresentationHelper.Delta(Model.ApplyResult.Effect.CashDelta)</td>
+                    <td>@BillingPresentationHelper.Delta(Model.ApplyResult.Effect.BonusDelta)</td>
+                </tr>
+                <tr>
+                    <td>مانده جدید:</td>
+                    <td>@BillingPresentationHelper.Balance(Model.ApplyResult.BalanceAfterEffect.CashBalance)</td>
+                    <td>@BillingPresentationHelper.Balance(Model.ApplyResult.BalanceAfterEffect.BonusBalance)</td>
+                </tr>
+            </table>   
+        </div> 
+    </div>
+    <div class="modal-footer">
+        @using (Html.BeginForm("ReviewAdministrativeChangePostback", "UserBalanceAdmin", new {Model.Change.ID}))
+        {
+            <button name="btnConfirm" value="btnConfirm" type="submit" class="btn btn-primary">تایید</button>
+            <button name="btnReject" value="btnReject" type="submit" class="btn btn-primary">رد</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+        }
+    </div>
+</div>

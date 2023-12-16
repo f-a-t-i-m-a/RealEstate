@@ -1,0 +1,41 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Audit
+@model AbuseFlag
+
+@{
+	var entityDetailsUrl = "";
+	switch (Model.EntityType)
+	{
+		case AbuseFlagEntityType.User:
+			entityDetailsUrl = Url.Action("Details", "AdminUsers", new {id = Model.EntityID});
+			break;
+			
+		case AbuseFlagEntityType.PropertyListing:
+			entityDetailsUrl = Url.Action("Details", "AdminProperties", new {id = Model.EntityID});
+			break;
+
+		case AbuseFlagEntityType.Agency:
+			entityDetailsUrl = Url.Action("ViewDetails", "AdminAgency", new {id = Model.EntityID});
+			break;
+	}
+}
+
+<div @if (entityDetailsUrl.HasText())
+     {
+	     @: data-link-url="@entityDetailsUrl"
+     }
+	 >
+	<span class="glyphicon glyphicon-link"></span>
+
+	@Model.EntityType 
+	<a class="pull-left" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("EntityTypeFilter", Model.EntityType.ToString()))">
+		<span class="glyphicon glyphicon-filter"></span>
+	</a>
+	<br />
+	@Model.EntityID
+	<a class="pull-left" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("EntityTypeFilter", Model.EntityType.ToString()).Set("EntityIdFilter", Model.EntityID.ToString(CultureInfo.InvariantCulture)))">
+		<span class="glyphicon glyphicon-filter"></span>
+	</a>
+</div>

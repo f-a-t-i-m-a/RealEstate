@@ -1,0 +1,52 @@
+﻿@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+@{
+    ViewBag.Title = "جزئیات و ویرایش جستجوی ذخیره شده";
+}
+
+
+<div class="page-header">
+    <h1>جزئیات و ویرایش جستجوی ذخیره شده و نحوه اطلاع رسانی</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">شرایط انتخاب شده</h3>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("SavedSearchDetailsPartials/SelectedOptions", Model)
+                </div>
+            </div>
+           
+        </div>
+        <div class="col-xs-12 col-md-9">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.ValidationSummary(false)
+
+                    @Html.Partial("SavedSearchDetailsPartials/TitleSection", Model)
+                    @Html.Partial("SavedSearchDetailsPartials/EmailSection", Model)
+                    @Html.Partial("SavedSearchDetailsPartials/SmsSection", Model)
+                    @Html.Partial("SavedSearchDetailsPartials/SmsPartsSelection", Model)
+                    @Html.Partial("SavedSearchDetailsPartials/NotificationValidityTimeEdit", Model)
+
+                    @Html.Partial("SavedSearchDetailsPartials/SectionVisibilityScripts")
+                </div>
+            </div>
+            <div class="pull-left">
+                <button name="btnSave" value="btnSave" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> ذخیره</button>
+                <a href="@Url.Action("SavedSearches")" class=" btn btn-primary" role="button"> بازگشت &nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> </a>
+            </div>
+        </div>
+    </div>
+}
+
+@section SideBar
+{
+    @Html.Partial("SavedSearchDetailsPartials/SavedSearchStatistics", Model)
+    @Html.Partial("SavedSearchDetailsPartials/HelpTips")
+}

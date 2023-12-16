@@ -1,0 +1,67 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.ScheduledTasks
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Controllers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminScheduledTasks.AdminScheduledTasksListModel
+
+<h2>
+    <a href="@Url.Action("Index", "AdminHome")">مدیریت سایت</a> &gt;
+    عملیات زمان بندی شده
+</h2>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>عملیات</th>
+            <th>نحوه اجرا</th>
+            <th>تعداد اجرا<br/>آخرین اجرا</th>
+            <th>تعداد خطا<br/>آخرین خطا</th>
+            <th>متن آخرین نتیجه / خطا</th>
+            <th>کلید<br/>پیشرفت</th>
+        </tr>
+        </thead>
+        @foreach (var task in Model.ScheduledTasks)
+        {
+            <tr>
+                <td>@task.ID</td>
+                <td>
+                    @using (Html.BeginForm("PerformOperationOnScheduledTask", "AdminScheduledTasks", new {taskKey = task.TaskKey}))
+                    {
+                        if (task.StartupMode != RecurringTaskStartupMode.Disabled)
+                        {
+                            <input id="btnRunScheduler" name="btnRunScheduler" type="submit" value="اجرا" style="width: 150px;"/>
+                            <br/>
+                        }
+                        <input id="btnDisable" name="btnDisable" type="submit" value="نحوه اجرا: غیر فعال" style="width: 150px;"/>
+                        <br/>
+                        <input id="btnSetManual" name="btnSetManual" type="submit" value="نحوه اجرا: فقط دستی" style="width: 150px;"/>
+                        <br/>
+                        <input id="btnSetAutomatic" name="btnSetAutomatic" type="submit" value="نحوه اجرا: خودکار" style="width: 150px;"/>
+                    }
+                </td>
+                <td>
+                    @task.StartupMode.Label(DomainEnumResources.ResourceManager)
+                </td>
+                <td>
+                    @task.NumberOfExecutions<br/>@((task.LastExecutionTime - DateTime.Now).ToLocalizedRelativeString(1))
+                </td>
+                <td>
+                    @task.NumberOfErrors<br/>@((task.LastErrorTime - DateTime.Now).ToLocalizedRelativeString(1))
+                </td>
+                <td>
+                    <span dir="ltr" title="@task.LastExecutionResult">@task.LastExecutionResult.IfNotEmpty(m => m.Truncate(30), "[No result message]")</span>
+                    <br/>
+                    <span dir="ltr" title="@task.LastErrorMessage">@task.LastErrorMessage.IfNotEmpty(m => m.Truncate(30), "[No errors ever]")</span>
+                </td>
+                <td>
+                    @task.TaskKey
+                    <br/>
+                    <span title="@task.TaskProgress" class="smaller">@task.TaskProgress.Truncate(20)</span>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

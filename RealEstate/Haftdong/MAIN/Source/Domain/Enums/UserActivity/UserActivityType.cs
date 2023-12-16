@@ -1,0 +1,40 @@
+﻿namespace JahanJooy.RealEstateAgency.Domain.Enums.UserActivity
+{
+    public enum UserActivityType : byte
+    {
+        Unknown = 0,
+        View = 1,
+        Print = 2,
+        Create = 11,
+        Edit = 12,
+        Delete = 13,
+        ChangeState = 16,
+        Enable = 21,
+        Disable = 22,
+        Publish = 23,
+        Unpublish = 24,
+        Approve = 31,
+        Reject = 32,
+        Reverse = 33,
+        Export = 41,
+        Import = 42,
+        Other = 99,
+        ViewDetail = 101,
+        PrintDetail = 102,
+        CreateDetail = 111,
+        EditDetail = 112,
+        DeleteDetail = 113,
+        ChangeStateOfDetail = 116,
+        EnableDetail = 121,
+        DisableDetail = 122,
+        PublishDetail = 123,
+        UnpublishDetail = 124,
+        ApproveDetail = 131,
+        RejectDetail = 132,
+        ExportDetail = 141,
+        ImportDetail = 142,
+        OtherDetail = 199,
+        Authenticate = 200,
+        Comment = 250
+    }
+}

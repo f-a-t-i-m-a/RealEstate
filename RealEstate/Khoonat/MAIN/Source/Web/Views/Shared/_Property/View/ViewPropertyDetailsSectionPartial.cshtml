@@ -1,0 +1,36 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Web.Models.Property
+@model PropertyViewDetailsSectionModel
+
+@{
+	var content = Html.Partial(Model.DetailsViewName, Model.SectionModel).ToHtmlString();
+}
+
+@if (content.HasText())
+{
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab">
+			
+			@if (Model.IsOwner || User.IsOperator)
+			{
+				<div class="pull-left">
+					<a href="@Url.Action(Model.EditAction, "Property", new {id = Model.PropertyListingID, Area = ""})">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> ویرایش
+					</a>
+				</div>
+			}
+			
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#@("acc" + Model.Identifier)" aria-expanded="true" aria-controls="@("acc" + Model.Identifier)">
+					<span class="caret"></span> @Model.Title
+				</a>
+			</h4>
+
+		</div>
+		<div id="@("acc" + Model.Identifier)" class="panel-collapse collapse" role="tabpanel">
+			<div class="panel-body">
+				@Html.Raw(content)
+			</div>
+		</div>
+	</div>
+}

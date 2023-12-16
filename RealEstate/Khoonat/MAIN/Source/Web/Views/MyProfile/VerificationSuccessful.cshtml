@@ -1,0 +1,19 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.UserContactMethodVerificationInfo
+
+<div id="verificationRoot">
+		
+        @IconsHelper.Tick32(Url)
+        
+        اعتبار سنجی
+        @Model.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+        @HtmlPresentationHelper.LeftToRight(Model.ContactMethod.ContactMethodText)
+        با موفقیت انجام شد. ممنون!
+    <br/>
+    <div >
+        <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">باشه</button>
+    </div>
+</div>

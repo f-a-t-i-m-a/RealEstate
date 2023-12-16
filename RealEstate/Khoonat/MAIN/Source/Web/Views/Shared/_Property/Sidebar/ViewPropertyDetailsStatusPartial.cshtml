@@ -1,0 +1,60 @@
+﻿@using JahanJooy.RealEstate.Core.DomainExtensions
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyViewDetailsModel
+
+@if (Model.Listing.Approved.HasValue && !Model.Listing.Approved.Value)
+{
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<h3 class="panel-title">وضعیت</h3>
+		</div>
+		<div class="panel-body">
+			<span class="glyphicon glyphicon-exclamation-sign"></span>
+			رد شده
+		</div>
+	</div>
+}
+else if (Model.Listing.IsPublished())
+{
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">وضعیت</h3>
+		</div>
+		<div class="panel-body">
+			<p>
+				<span class="glyphicon glyphicon-globe"></span>
+				عمومی
+			</p>
+			@if (!Model.Listing.Approved.HasValue)
+			{
+				<p class="text-danger">در صف تایید</p>
+			}
+			<button type="button" class="btn btn-primary btn-block" data-ajax-modal="@Url.Action("RePublish", "Property", AreaRouteValue.Main)/@Model.Listing.ID">
+				<span class="glyphicon glyphicon-time"></span>
+				تغییر مدت
+			</button>
+			<button type="button" class="btn btn-primary btn-block" data-ajax-modal="@Url.Action("UnPublish", "Property", AreaRouteValue.Main)/@Model.Listing.ID">
+				<span class="glyphicon glyphicon-remove"></span>
+				لغو آگهی
+			</button>
+		</div>
+	</div>
+}
+else
+{
+	<div class="panel panel-warning">
+		<div class="panel-heading">
+			<h3 class="panel-title">وضعیت</h3>
+		</div>
+		<div class="panel-body">
+			<p>
+				<span class="glyphicon glyphicon-user"></span>
+				خصوصی
+			</p>
+			<button type="button" class="btn btn-primary btn-block" data-ajax-modal="@Url.Action("Publish", "Property", AreaRouteValue.Main)/@Model.Listing.ID">
+				<span class="glyphicon glyphicon-globe"></span>
+				عمومی کردن
+			</button>
+		</div>
+	</div>
+}

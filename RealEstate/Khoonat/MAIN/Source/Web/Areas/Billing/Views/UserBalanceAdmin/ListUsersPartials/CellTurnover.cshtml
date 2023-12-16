@@ -1,0 +1,10 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas.Billing.Models.UserTransactionsAdmin
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Components.Dto.UserBillingBalance
+
+<a href="@Url.Action("ListTransactions", "UserTransactionsAdmin", new UserTransactionsAdminListTransactionsModel {UserIDFilter = Model.User.ID})">
+    <div class="fr" style="margin: 8px;">@IconsHelper.Xlink16(Url)</div>
+    <span class="bold">@BillingPresentationHelper.Turnover(Model.CashTurnover)</span><br />
+    <span class="small">@BillingPresentationHelper.Turnover(Model.BonusTurnover)</span>
+</a>

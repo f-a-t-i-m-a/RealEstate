@@ -1,0 +1,262 @@
+﻿<div class="container fileView" ng-show="$state.current.name === 'welcome.myfiles'">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isCollapsed = !isCollapsed">جستجو <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="isCollapsed">
+        <div class="row">
+            <div class="col-md-4">
+                <ui-select ng-model="$parent.searchInput.UsageType" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="همه کاربری ها" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allUsageTypes">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4">
+                <ui-select ng-model="$parent.searchInput.PropertyType" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="همه املاک" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allPropertyTypes">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4">
+                <ui-select ng-model="$parent.searchInput.IntentionOfOwner" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="نوع معامله" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allIntentionOfOwners">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showEstateAreaSearch">
+                <ui-select ng-model="$parent.searchInput.EstateArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="مساحت زمین" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allEstateAreaRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showUnitAreaSearch">
+                <ui-select ng-model="$parent.searchInput.UnitArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="مساحت بنا" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allUnitAreaRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showNumberOfRoomsSearch">
+                <ui-select ng-model="$parent.searchInput.NumberOfRooms" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="تعداد اتاق ها" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allNumberOfRoomRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showMortgageSearch">
+                <ui-select ng-model="$parent.searchInput.Mortgage" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="مبلغ ودیعه" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allMortgageRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showRentSearch">
+                <ui-select ng-model="$parent.searchInput.Rent" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="مبلغ اجاره ماهانه" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allRentRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showDailyRentSearch">
+                <ui-select ng-model="$parent.searchInput.Rent" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="مبلغ اجاره روزانه" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allDailyRentRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showPriceSearch">
+                <ui-select ng-model="$parent.searchInput.Price" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="قیمت کل" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allPriceRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showPricePerEstateAreaSearch">
+                <ui-select ng-model="$parent.searchInput.PricePerEstateArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="قیمت هر متر زمین" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allPricePerEstateAreaRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4" ng-show="showPricePerUnitAreaSearch">
+                <ui-select ng-model="$parent.searchInput.PricePerUnitArea" theme="bootstrap" search-enabled="false" title="" class="no-search">
+                    <ui-select-match placeholder="قیمت هر متر بنا" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in allPricePerUnitAreaRanges">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-4">
+                <jj-select-vicinity model="searchInput.Vicinity" jj-allow-clear="true"/>
+            </div>
+            <div class="col-md-2">
+                <label><input type="checkbox" ng-model="searchInput.HasPhoto"/> فایل های عکس دار</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" ng-if="showCreator" restrict-to="Administrator">
+                <label><input type="checkbox" ng-model="searchInput.HasWarning"/> فایل های ناتمام</label>
+            </div>
+            <div class="col-md-2" ng-if="showCreator" restrict-to="Administrator">
+                <label><input type="checkbox" ng-model="searchInput.IsHidden"/> فایل های مخفی</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 text-left">
+            </div>
+            <div class="col-md-2 text-left">
+                <button class="btn btn-success btn-sm searchButton" ng-click="onSearch()"><i class="fa fa-search"></i> جستجو</button>
+            </div>
+            <div class="col-md-2 text-left">
+                <jj-print-button source-type="5" endpoint="/api/haftdong/files/print" show-office-type="true" filename="لیست فایل ها" search-input="searchInput" ids="ids"></jj-print-button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row pull-left">
+            <div class="col-md-1">
+                <button class="btn btn-success btn-sm" ng-click="backToAllProperties()">
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="col-md-11">
+            </div>
+        </div>
+        <div class="row" ng-show="Supplies != null && Supplies.length != 0">
+            <table class="table table-hover searchResult">
+                <thead>
+                <tr>
+                    <th class="col-md-3">
+                        <label>
+                            <input class="had-margin" type="checkbox" ng-model="selectAllSupplies"/>
+                            <span class="had-margin">نوع ملک</span>
+                        </label>
+                    </th>
+                    <th class="col-md-1">
+                        <label>
+                            معامله
+                        </label>
+                    </th>
+                    <th class="col-md-2">
+                        <label ng-show="!showSortablePrice">
+                            قیمت
+                        </label>
+                        <span ng-show="showSortablePrice">
+                                    <jj-sortable-header title="'قیمت'" sort-column-name="'TotalPrice'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                                </span>
+                    </th>
+                    <th class="hidden-xs col-md-1">
+                        <jj-sortable-header title="'ثبت'" sort-column-name="'CreationTime'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                    </th>
+                    <th class="col-md-1">
+                        <label>
+                            تصویر
+                        </label>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat-start="supply in Supplies" ng-class="{'gray-background' : supply.Property.SourceType !== 4}">
+                    <td class="col-md-3">
+                        <input class="pull-right had-margin" type="checkbox" ng-model="supply.Selected" ng-click="resetIdsList(supply)"/>
+                        <span class="pull-right had-margin" ng-switch="supply.Property.SourceType">
+                                    <span ng-switch-when="1">
+                                        <img class="tiny-logo" ng-src="Content/images/HaftdongLogo.png" alt="هفت دنگ">
+                                    </span>
+                                    <span ng-switch-when="2">
+                                        <img class="tiny-logo" ng-src="Content/images/KhoonatLogo.png" alt="خونه ت">
+                                    </span>
+                                    <span ng-switch-when="3">
+                                        <img class="tiny-logo" ng-src="Content/images/OtherLogo.png" alt="فایل خارجی">
+                                    </span>
+                                    <span ng-switch-when="4">
+                                        <img class="tiny-logo" ng-src="Content/images/SheshdongLogo.png" alt="شش دنگ">
+                                    </span>
+                                    <span ng-switch-default></span>
+                                </span>
+                        <a ui-sref="welcome.files.details({ id: supply.Property.ID })">{{supply.Property.PropertyType | PropertyType}} - {{supply.Property.UsageType | UsageType}}</a>
+                        <span ng-show="supply.Property.ConversionWarning" class="label label-warning" restrict-to="Administrator">ناتمام</span>
+                        <span ng-show="supply.IsExpired" class="label label-danger">منقضی</span>
+                    </td>
+                    <td class="col-md-1">
+                        {{supply.IntentionOfOwner | IntentionOfOwner}}
+                        <div class="row" ng-repeat="otherSupply in supply.Property.Supplies"
+                             ng-if="showOtherSupplies">
+                            <div class="col-md-12">
+                                <span ng-if="otherSupply.ID != supply.ID" class="smallText successText">
+                                            <b>+ {{otherSupply.IntentionOfOwner | IntentionOfOwner}}</b>
+                                        </span>
+                            </div>
+                        </div>
+                        <span class="label label-info">{{supply.State | SupplyState}}</span>
+                    </td>
+                    <td class="col-md-2" ng-show="!showCallOwner(supply) && (supply.IntentionOfOwner === 2)">قیمت کل: {{computePrice(supply) | number}}</td>
+                    <td class="col-md-2" ng-show="!showCallOwner(supply) && (supply.IntentionOfOwner === 5 || supply.IntentionOfOwner === 6)">ارزش کل: {{computePrice(supply) | number}}</td>
+                    <td class="col-md-2" ng-show="!showCallOwner(supply) && supply.IntentionOfOwner === 3">ودیعه: {{supply.Mortgage | number}}</td>
+                    <td class="col-md-2" ng-show="!showCallOwner(supply) && supply.IntentionOfOwner === 1">ودیعه: {{supply.Mortgage | number}}، اجاره ماهانه: {{supply.Rent | number}}</td>
+                    <td class="col-md-2" ng-show="!showCallOwner(supply) && supply.IntentionOfOwner === 4">اجاره روزانه: {{supply.Rent | number}}</td>
+                    <td class="col-md-2 redText" ng-show="showCallOwner(supply)">تماس بگیرید</td>
+                    <td class="hidden-xs col-md-1">
+                        <jj-relative-time origin="supply.CreationTime" ng-show="isTwoWeeksAgo(supply)" title="{{supply.CreationTime | jalaali: 'dddd jYYYY/jMM/jDD'}}"></jj-relative-time>
+                        <span ng-show="!isTwoWeeksAgo(supply)">{{supply.LastModificationTime | jalaali}}</span>
+                        <span ng-if="showCreator" restrict-to="Administrator">{{supply.CreatorFullName}}</span>
+                    </td>
+                    <td class="col-md-1" rowspan="2">
+                        <img class="img-responsive img-thumbnail" ng-src="{{supply.Property.blob}}" ng-show="supply.Property.blob != null" alt="تصویر ملک">
+                    </td>
+                </tr>
+                <tr class="second-line" ng-repeat-end ng-class="{'gray-background' : supply.Property.SourceType !== 4}">
+                    <td class="col-md-12" colspan="4">
+                        آدرس: <span ng-show="supply.Address != ''" title="{{supply.Address}}">{{supply.Address | limitTo: 65}} {{supply.Address.length > 65 ? '...' : ''}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row" ng-show="Supplies == null">
+            در حال گرفتن اطلاعات...
+        </div>
+        <div class="row" ng-show="Supplies != null && Supplies.length === 0">
+            ملکی وجود ندارد
+        </div>
+        <jj-pagination page-number="PageNumber" number-of-pages="NumberOfPages" total-number-of-items="TotalNumberOfItems" page-size="PageSize" on-change-page-click="getDataDown(page)"></jj-pagination>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-1">
+                <button class="btn btn-success btn-sm" ng-click="setReloadFalse()">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="col-md-11">
+                <div class="alert alert-warning" role="alert" ng-show="Properties != null && Properties.ReachedMaxResult">10000 ملک به شما نمایش داده شده است. برای محدود کردن از زوم یا فیلترهای جستجو استفاده نمایید.</div>
+            </div>
+        </div>
+        <!-- <div ng-if="reload">-->
+        <div>
+            <jj-google-map display-class="map-large" edit-mode="false" boundary="boundary" properties="Properties"
+                           click-on-property-marker="clickOnPropertyMarker(supply)" click-on-vicinity-marker="clickOnVicinityMarker(vicinityId)"></jj-google-map>
+        </div>
+    </div>
+</div>
+</div>
+<div ui-view autoscroll="false"></div>

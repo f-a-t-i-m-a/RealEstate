@@ -1,0 +1,80 @@
+﻿@using JahanJooy.RealEstate.Domain.Permissions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Admin.Controllers
+
+<div ng-app="adminHomeApp" ng-controller="AdminHomeController" ng-strict-di="">
+	
+	<div class="alert alert-danger" role="alert" ng-show="status.IndexesWithErrors && status.IndexesWithErrors.length > 0">
+		<a class="btn btn-danger pull-left" href="@Url.Action("Index", "AdminIndex")">ایندکس ها</a>
+		<strong>ایندکس های زیر دارای خطا هستند:</strong>
+		<ul>
+			<li ng-repeat="indexId in status.IndexesWithErrors">{{indexId}}</li>
+		</ul>
+	</div>
+
+	<div class="alert alert-danger" role="alert" ng-show="status.IndexesNotCommitting && status.IndexesNotCommitting.length > 0">
+		<a class="btn btn-danger pull-left" href="@Url.Action("Index", "AdminIndex")">ایندکس ها</a>
+		<strong>ایندکس های زیر بیش از یک ساعت غیر فعال بوده اند، نتایج جستجو در آنها می تواند نا معتبر باشد:</strong>
+		<ul>
+			<li ng-repeat="indexId in status.IndexesNotCommitting">{{indexId}}</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="list-group">
+				<div class="list-group-item active">اطلاعات اصلی</div>
+				<a class="list-group-item" ng-class="{'list-group-item-danger': status.AbuseFlagsQueueSize > 0}" href="@Url.Action("List", "AdminAbuseFlags")">شکایت ها<span class="badge">{{status.AbuseFlagsQueueSize}}</span></a>
+				<a class="list-group-item" ng-class="{'list-group-item-danger': status.PropertyListingQueueSize > 0}" href="@AdminPropertiesController.DefaultList(Url)">املاک<span class="badge">{{status.PropertyListingQueueSize}}</span></a>
+				<a class="list-group-item" ng-class="{'list-group-item-danger': status.PropertyListingPhotosQueueSize > 0}" href="@AdminPropertyPhotosController.DefaultList(Url)">عکس های املاک<span class="badge">{{status.PropertyListingPhotosQueueSize}}</span></a>
+				<a class="list-group-item" href="@AdminSavedPropertySearchesController.DefaultList(Url)">جستجو های ذخیره شده</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminUsers")">کاربران</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminOutgoingSms")">پیامک های ارسالی</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminNotificationMessage")">اخطار ها</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminAgency")">مشاورین املاک</a>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="list-group">
+				<div class="list-group-item active">زیر سیستم ها</div>
+				@Html.Action("CategoryPartial", "BillingAdminHome", new { area = AreaNames.Billing })
+				@Html.Action("CategoryPartial", "AdAdminHome", new { area = AreaNames.Ad })
+				<a class="list-group-item" href="@Url.Action("List", "AdminArticleCategory", AreaRouteValue.Cms)">زیر سیستم مدیریت محتوا</a>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item active">تاریخچه</div>
+				<a class="list-group-item" href="@Url.Action("List", "AdminPropertyUpdates")">تغییرات املاک</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminActivityLog")">فعالیت کاربران</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminSessions")">جلسات</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminVisitors")">بازدید کنندگان</a>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="list-group">
+				<div class="list-group-item active">اطلاعات پایه</div>
+				@if (User.HasPermission(GeneralPermission.ConfigureServer))
+				{
+					<a class="list-group-item" href="@Url.Action("ViewAll", "AdminConfiguration")">پیکربندی</a>
+				}
+				<a class="list-group-item" href="@Url.Action("List", "VicinityAdmin", new {area = AreaNames.Main })">همسایگی ها</a>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item active">مانیتورینگ</div>
+				<a class="list-group-item" href="@Url.Action("Index", "AdminLogs")">لاگ ها</a>
+				<a class="list-group-item" href="@Url.Action("List", "AdminScheduledTasks")">عملیات زمان بندی شده</a>
+				<a class="list-group-item" href="@Url.Action("Index", "AdminOperations")">عملیات</a>
+				@if (User.HasPermission(GeneralPermission.ViewServerLog))
+				{
+					<a class="list-group-item" href="@Url.Content("~/Areas/Admin/Contents/elvue/elvue.html")">خطاهای سیستم - خلاصه</a>
+					<a class="list-group-item" href="@Url.Content("~/elmah")">خطاهای سیستم - جزئیات</a>
+				}
+				<a class="list-group-item" href="@Url.Action("Index", "AdminIndex")">ایندکس ها</a>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+

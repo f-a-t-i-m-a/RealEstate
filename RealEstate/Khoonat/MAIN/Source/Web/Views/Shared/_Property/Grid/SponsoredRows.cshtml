@@ -1,0 +1,46 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Core.Services.Billing
+@using JahanJooy.RealEstate.Web.Areas
+@model List<JahanJooy.RealEstate.Core.Services.Dto.SponsoredPropertyListingSummary>
+
+@{
+	var tarrifService = ComposerWebUtil.ComponentContext.GetComponent<ITarrifService>();
+}
+
+@if (Model != null && Model.Count > 0)
+{
+	@Html.Partial("_Property/Grid/SponsoredRowsBoundary", false)
+	
+	foreach (var listing in Model)
+	{
+		<tr class="warning" data-link-url="@Url.Action("Click", "Impression", new {id = listing.SponsoredEntityImpression.ID, guid = listing.SponsoredEntityImpression.GUID, area = AreaNames.Ad})">
+			@Html.Partial("_Property/Grid/RowCells", listing.PropertyListingSummary)
+		</tr>
+		if (listing.SponsoredPropertyListing.CustomCaption.HasText())
+		{
+			<tr class="warning" data-link-url="@Url.Action("Click", "Impression", new {id = listing.SponsoredEntityImpression.ID, guid = listing.SponsoredEntityImpression.GUID, area = AreaNames.Ad})">
+                <td colspan="7" style="border-top: 0;"><small>@listing.SponsoredPropertyListing.CustomCaption</small></td>
+			</tr>
+		}
+	}
+
+	@Html.Partial("_Property/Grid/SponsoredRowsBoundary", true)
+}
+else
+{
+	<tr class="warning" data-link-url="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)">
+		<td colspan="7">
+			<span class="label label-warning">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				&nbsp;&nbsp;&nbsp;املاک ویژه&nbsp;&nbsp;&nbsp;
+			</span>
+			&nbsp;&nbsp;&nbsp;
+			فقط با
+			@tarrifService.GetTarrif(null).PropertyListingSponsorshipTarrif.PerImpressionMinimumBid
+			ریال، ملک خودتون رو متمایز کنید!
+		</td>
+	</tr>
+}
+
+

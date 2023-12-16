@@ -1,0 +1,60 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Billing.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.PromotionalBonusAdmin.PromotionalBonusAdminBonusModel
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", new { area = AreaNames.Admin }, null)
+    &gt;
+    @Html.ActionLink("سامانه مالی", "Index", "BillingAdminHome")
+    &gt;
+    @Html.ActionLink("جوایز تبلیغاتی", "ListBonuses", "PromotionalBonusAdmin", new { area = AreaNames.Billing }, null)
+    &gt;
+    جوایز جدید
+</h2>
+
+<div style="direction: ltr;">
+    @Html.ValidationSummary(false)
+</div>
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>توضیحات:</td>
+            <td>@Html.TextAreaFor(m => m.Description, 3, 70, null)</td>
+            <td>@Html.ValidationMessageFor(m => m.Description)</td>
+        </tr>
+        <tr>
+            <td>مبلغ:</td>
+            <td>@Html.TextBoxFor(m => m.BonusAmount)</td>
+            <td>@Html.ValidationMessageFor(m => m.BonusAmount)</td>
+        </tr>
+        <tr>
+            <td>کاربر:</td>
+            <td>@Html.AdminUserSelector("TargetUserIDsCsv", 500)</td>
+            <td>@Html.ValidationMessageFor(m => m.TargetUserIDsCsv)</td>
+        </tr>
+        <tr>
+            <td colspan="3">آیا  می خواهید جایزه اضافه شده را از طریق پیامک و ایمیل  ارسال کنید ؟
+            
+                 @Html.CheckBoxFor(m => m.NotifyUser)
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td colspan="2">
+                <input id="btnContinue" class="button" type="submit" value="ثبت >>" />
+                &nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("بازگشت >>", "ListBonuses")
+            </td>
+        </tr>
+    </table>
+    
+}
+
+
+@section SideBar
+{
+}
+

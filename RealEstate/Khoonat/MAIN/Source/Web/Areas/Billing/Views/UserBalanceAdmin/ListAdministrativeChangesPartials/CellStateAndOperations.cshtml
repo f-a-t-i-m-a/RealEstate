@@ -1,0 +1,29 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model UserBalanceAdministrativeChange
+
+<strong>@Model.BillingState.Label(DomainEnumResources.ResourceManager)</strong>
+
+@if (Model.BillingState == BillingSourceEntityState.Pending)
+{
+    <br/>
+    <a href="@Url.Action("EditAdministrativeChange", new {id = Model.ID})"><span class="glyphicon glyphicon-backward"></span> ویرایش</a>
+}
+
+@if (Model.BillingState == BillingSourceEntityState.Pending)
+{
+    <br/>
+    <span data-ajax-modal="@Url.Action("Reviewadministrativechangepopup", new {id=Model.ID})">
+        <span class="glyphicon glyphicon-backward"></span>  بازبینی 
+    </span>
+}
+
+@if (Model.BillingState == BillingSourceEntityState.Applied)
+{
+    <br/>
+    <span data-ajax-modal="@Url.Action("Reverseadministrativechangepopup", new {id=Model.ID})">
+        <span class="glyphicon glyphicon-backward"></span> معکوس 
+    </span>
+}

@@ -1,0 +1,11 @@
+﻿@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Configuration
+@using JahanJooy.Common.Util.Web.Extensions
+
+@if (ApplicationEnvironmentUtil.Type != ApplicationEnvironmentType.Production)
+{
+	<div style="position: fixed; top: 14px; right:47%; z-index: 1031;">
+		<h3><span class="label label-danger">@ApplicationEnvironmentUtil.Type.Label(UtilResources.ResourceManager)</span></h3>
+	</div>	
+}
+

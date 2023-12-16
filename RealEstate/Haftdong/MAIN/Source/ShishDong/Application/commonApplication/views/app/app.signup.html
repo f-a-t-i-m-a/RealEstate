@@ -1,0 +1,69 @@
+﻿<div class="container">
+    <div class="page-header">
+        <h1>حساب کاربری جدید</h1>
+    </div>
+    <form name="frmUser" class="form-horizontal" novalidate>
+        <div class="well">
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> نام کاربری:</label>
+                <div class="col-md-4">
+                    <input type="text" dir="ltr" ng-model="user.UserName" ng-minlength="4" ng-maxlength="50"
+                            ng-required="true" ng-pattern="/^(?=.{4,50}$)(?![_.])(?!.*[_.-]{2})[a-zA-Z0-9._-]+$/"/>
+                </div>
+                <div class="col-md-5">
+                    <label class="label-info">نام کاربری تنها میتواند شامل حروف، اعداد، نقطه، - و _ باشد</label>
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> کلمه عبور:</label>
+                <div class="col-md-4 password">
+                    <input type="password" ng-model="user.Password" ng-required="true"
+                           ng-change="checkPassword()" ng-hide="eyeClick" />
+                    <input type="text" dir="ltr" ng-model="user.Password" ng-show="eyeClick" />
+                    <i class="fa fa-eye eyeicon" ng-show="showIcon"
+                       ng-mousedown="eyeClick = true" ng-mouseup="eyeClick = false" ng-mouseleave="eyeClick = false"></i>
+                </div>
+                <div class="col-md-5">
+                    <label class="label-danger" ng-show="PasswordLengthMinimumRequirement">طول کلمه ی عبور باید حداقل 6 حرف باشد</label>
+                </div>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> نام نمایشی:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="user.DisplayName" ng-required="true"/>
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i>موبایل:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="mobileNumber" ng-required="true" ng-pattern="/^09[0-3]\d{8}/" ng-minlength="11" ng-maxlength="11" />
+                </div>
+            </div>
+            <div class="row">
+                <label for="" class="col-md-2 control-label">ایمیل:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" />
+                </div>
+            </div>
+            
+            <div class="row">
+                <label for="" class="col-md-2 control-label">آدرس:</label>
+                <div class="col-md-4">
+                    <textarea ng-model="address" rows="3"></textarea>
+                </div>
+            </div>
+           
+            <div class="row">
+                <label for="" class="col-md-2 control-label"> آدرس سایت:</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="user.WebSiteUrl" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <button class="btn btn-success saveButton" ng-disabled="frmUser.$invalid" ng-click="onSaveClick()"><i class="fa fa-floppy-o"></i> ایجاد حساب</button>
+    <button class="btn btn-default" ng-click="onBackClick()">انصراف</button>
+
+</div>

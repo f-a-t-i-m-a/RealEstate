@@ -1,0 +1,59 @@
+﻿<div class="modal-header">
+    <h1 class="inline-display">{{request.IntentionOfCustomer | IntentionOfCustomer}}</h1>
+</div>
+<div class="modal-body">
+    <div class="form-horizontal" ng-show="request !== null && !request.OwnerCanBeContacted" restrict-to="VerifiedUser">
+        <div class="row">
+            <div class="col-md-6">
+                نام بنگاه: <b>{{request.AgencyContact.OrganizationName}}</b>
+            </div>
+            <div class="col-md-6">
+                نام مشاور: <b>{{request.AgencyContact.ContactName}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                تلفن مشاور: <b>
+                    <span ng-repeat="phone in request.AgencyContact.Phones"><span dir="ltr" class="persian-number">{{phone.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+            <div class="col-md-6">
+                ایمیل مشاور: <b>
+                    <span ng-repeat="email in request.AgencyContact.Emails"><span dir="ltr" class="persian-number">{{email.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                آدرس:
+            </div>
+            <div class="col-md-11">
+                <p ng-repeat="address in request.AgencyContact.Addresses">
+                    <b>{{address.NormalizedValue}}</b>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal" ng-show="request !== null && request.OwnerCanBeContacted" restrict-to="VerifiedUser">
+        <div class="row">
+            <div class="col-md-6">
+                نام مالک: <b>{{request.OwnerContact.ContactName}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                تلفن مالک: <b>
+                    <span ng-repeat="phone in request.OwnerContact.Phones"><span dir="ltr" class="persian-number">{{phone.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+            <div class="col-md-6">
+                ایمیل مالک: <b>
+                    <span ng-repeat="email in request.OwnerContact.Emails"><span dir="ltr" class="persian-number">{{email.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="onBackClick()">باشه</button>
+</div>

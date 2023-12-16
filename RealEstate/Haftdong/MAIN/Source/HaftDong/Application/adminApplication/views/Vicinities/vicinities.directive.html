@@ -1,0 +1,133 @@
+﻿<div class="container">
+    <h1 ng-show="!inEditMode">محله جدید</h1>
+    <h1 ng-show="inEditMode">ویرایش محله</h1>
+    <form name="frmNewItem" novalidate>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label class="col-md-4 control-label">نوع:</label>
+                <div class="col-md-8">
+                    <jj-select-vicinity-type model="item.Type" jj-allow-clear="true" />
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">نام:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="item.Name"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">نمایش نوع در عنوان:</label>
+                    <div class="col-md-8">
+                            <input type="checkbox" ng-model="item.ShowTypeInTitle" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">سایر نام ها:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="item.AlternativeNames"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">متن جستجو:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="item.AdditionalSearchText"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="inEditMode">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">توضیحات:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="item.Description"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="inEditMode">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">یادداشت مدیریتی:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="item.AdministrativeNotes"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="inEditMode">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">فعال:</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" ng-model="item.Enabled"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="inEditMode">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">ترتیب:</label>
+                    <div class="col-md-8">
+                        <input type="number" class="form-control" ng-model="item.Order"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">محدوده شناسایی:</label>
+                    <div class="col-md-8">
+                        <jj-select-vicinity-type model="item.WellKnownScope" jj-allow-clear="true" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">نمایش در خلاصه:</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" ng-model="item.ShowInSummary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">امکان ثبت ملک:</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" ng-model="item.CanContainPropertyRecords" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-8">
+                <button class="btn btn-success saveButton" ng-click="onSaveClick()" ng-disables="frmNewItem.$invalid" restrict-to="Administrator"><i class="fa fa-floppy-o"></i> ذخیره</button>
+                <button class="btn btn-default" ng-click="onBackClick()" restrict-to="Administrator">انصراف</button>
+            </div>
+        </div>
+    </form>
+</div>

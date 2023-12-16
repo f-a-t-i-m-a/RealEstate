@@ -1,0 +1,53 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Web.Models.UserFeedback.UserFeedbackReportSuggestionModel
+
+<div>
+	@using (Html.BeginForm("ReportSuggestionPostback", "UserFeedback"))
+	{
+
+	    <div class="col-sm-2"><span class="icon-required"></span>@Html.LabelFor(m => m.SuggestionDetails):</div>
+	    <div class="col-sm-10">@Html.TextAreaFor(m => m.SuggestionDetails, 5, 50, new {maxlength = 2000, autofocus = "autofocus", style = "height: 160px;"})</div>
+
+        <ol style="visibility:hidden;"><li>&nbsp;</li></ol>
+	        <div class="col-sm-2"> @Html.LabelFor(m => m.EffectsOnUsers):</div>
+	        <div class="col-sm-10">@Html.TextAreaFor(m => m.EffectsOnUsers, 3, 50, new {maxlength = 2000, style = "height: 80px;", placeholder = "اگر لازم می دونید، تاثیر های مثبتی که این پیشنهاد روی کار کاربران می ذاره رو شرح بدین."})</div>
+	    <ol style="visibility:hidden;"><li>&nbsp;</li></ol>
+        <div class="col-sm-2 col-md-2">@Html.LabelFor(m => m.Name):</div>
+        <div class="col-sm-10 col-md-2">@Html.TextBoxFor(m => m.Name)</div>
+        <div class="col-sm-2 col-md-2">@Html.LabelFor(m => m.PhoneNumber):</div>
+        <div class="col-sm-10 col-md-2">@Html.TextBoxFor(m => m.PhoneNumber)</div>
+        <div class="col-sm-2 col-md-2">@Html.LabelFor(m => m.EmailAddress):</div>
+        <div class="col-sm-10 col-md-2">@Html.TextBoxFor(m => m.EmailAddress)</div>
+
+        <ol style="visibility:hidden;"><li>&nbsp;</li></ol>
+	    <div>
+	        @Html.ValidationMessageFor(m => m.SuggestionDetails)
+	        @Html.ValidationMessageFor(m => m.AffectedUsers)
+	        @Html.ValidationMessageFor(m => m.EffectsOnUsers)
+	        @Html.ValidationMessageFor(m => m.Name)
+	        @Html.ValidationMessageFor(m => m.PhoneNumber)
+	        @Html.ValidationMessageFor(m => m.EmailAddress)
+	    </div>
+
+
+
+        if (!User.IsVerified)
+        {
+            <ol style="visibility:hidden;"><li>&nbsp;</li></ol>
+            <div class="col-sm-0 col-md-2"></div>
+            <div class="col-sm-12 col-md-10">@Html.Action("ViewImage", "Captcha")</div>
+        }
+
+        <text>
+            @Html.ScriptCaptchaToken()
+            @this.ScriptText(Html.ScriptCaptchaScript())
+            @Html.CaptchaErrorMessage()
+        </text>
+
+        <ol style="visibility:hidden;"><li>&nbsp;</li></ol>
+	    <div class="text-center row">
+	        <input id="btnOK" class="btn btn-success btn-lg" type="submit" value="ارسال" style="width: 150px;"/>
+	    </div>
+    }
+</div>

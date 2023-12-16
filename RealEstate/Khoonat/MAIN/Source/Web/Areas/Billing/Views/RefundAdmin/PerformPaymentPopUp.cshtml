@@ -1,0 +1,36 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.RefundAdmin.RefundAdminPerformPaymentModel
+
+@Html.Partial("ViewRequestDetailsPopup", Model.Request)
+
+@using (Html.BeginForm("PerformPayment", "RefundAdmin", new {Model.Request.ID}))
+{
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="row">
+                @Html.HiddenFor(m => m.Request.ID)
+                <div>
+                    آیا مطمئنید که می خواهید پرداخت کنید؟
+                    <br /><br />
+
+                    <input type="checkbox" id="chkAllowPerformPayment" name="chkAllowPerformPayment" />
+                    <label for="chkAllowPerformPayment">بله؛ پرداخت شود.</label>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input id="btnPerformPayment" name="btnPerformPayment" class="btn btn-primary none btn-sm" type="submit" value="پرداخت کن"  />
+            <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+        </div>
+    </div>
+}
+
+@(this.ScriptBlock(@<script type="text/javascript">
+                        $("#chkAllowPerformPayment").change(function() {
+                            if (this.checked)
+                                $("#btnPerformPayment").show();
+                            else
+                                $("#btnPerformPayment").hide();
+                        });
+                    </script>))

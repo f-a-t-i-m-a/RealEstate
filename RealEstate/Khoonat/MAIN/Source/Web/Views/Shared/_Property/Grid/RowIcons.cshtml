@@ -1,0 +1,18 @@
+﻿@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+<div style="white-space: nowrap;" data-link-ignore="ignore">
+	@if (User.IsAuthenticated)
+	{
+		<span class="fav-toggle @(Model.IsFavoritedByUser ? "favorited" : "")" data-property-id="@Model.ID">
+			<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+		</span>
+	}
+
+	@if (PropertyControllerHelper.DetermineIfUserIsOwner(Model))
+	{
+		@IconsHelper.User16(Url)
+	}
+
+</div>

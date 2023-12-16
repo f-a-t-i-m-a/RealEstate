@@ -1,0 +1,44 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+
+
+@{
+	var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+
+
+<td class="hidden-xs hidden-sm">@Html.Partial("_Property/Grid/RowIcons", Model)</td>
+<td class="hidden-xs hidden-sm">@Model.Code</td>
+
+
+@* The following 2 rows are the same (each 2 are the same). For small displays the large font is hidden. For other displays the small font is hidden.*@
+<td class="visible-xs" colspan="4">
+    @propertyPresentationHelper.BuildRegion(Model)
+    @propertyPresentationHelper.BuildTitle(Model)
+    @propertyPresentationHelper.BuildArea(Model)
+    @propertyPresentationHelper.BuildPriceAndPricePerArea(Model)
+</td>
+<td class="hidden-xs">@propertyPresentationHelper.BuildRegion(Model)</td>
+<td class="hidden-xs">@propertyPresentationHelper.BuildTitle(Model)</td>
+<td class="hidden-xs">@propertyPresentationHelper.BuildArea(Model)</td>
+<td class="hidden-xs">@propertyPresentationHelper.BuildPriceAndPricePerArea(Model)</td>
+
+<td>@Html.Partial("_Property/Grid/RowPhoto", Model)</td>
+
+<style>
+    
+    .small_font {
+        font-size: 8px;
+    }
+
+</style>
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Billing.Models.UserBalanceAdmin
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model UserBalanceAdminListUsersModel
+
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray;">
+    <a href="@Url.Action("NewAdministrativeChange", "UserBalanceAdmin")">@IconsHelper.Add16(Url) تغییر جدید</a>
+</div>
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", new {area = AreaNames.Admin}, null)
+    &gt;
+    @Html.ActionLink("سامانه مالی", "Index", "BillingAdminHome")
+    &gt;
+    مانده کاربران
+</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Balances, p => Url.Action("ListUsers", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.ID, Model.SortOrder, Model.SortDescending)">ID</a>:
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.LoginName, Model.SortOrder, Model.SortDescending)">شناسه</a><br/>
+                <span class="smaller">کد</span>
+            </th>
+            <th>نام مستعار<br/><span class="smaller">(نام کامل)</span></th>
+            <th>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.CreationDate, Model.SortOrder, Model.SortDescending)">ایجاد</a><br/>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.LastLogin, Model.SortOrder, Model.SortDescending)" class="smaller">آخرین ورود</a>
+            </th>
+            <th>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.CashBalance, Model.SortOrder, Model.SortDescending)">مانده نقدی</a><br/>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.BonusBalance, Model.SortOrder, Model.SortDescending)" class="smaller">مانده تخفیف</a>
+            </th>
+            <th>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.CashTurnover, Model.SortOrder, Model.SortDescending)">گردش نقدی</a><br/>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.BonusTurnover, Model.SortOrder, Model.SortDescending)" class="smaller">گردش تخفیف</a>
+            </th>
+            <th>
+                <a href="@Url.SetSortOrder(UserBalanceAdminListUsersOrder.LastTransactionTime, Model.SortOrder, Model.SortDescending)">آخرین تغییر</a>
+            </th>
+        </tr>
+        </thead>
+        @foreach (var balance in Model.Balances)
+        {
+            <tr>
+                <td>@Html.Partial("ListUsersPartials/CellUserID", balance)</td>
+                <td>@Html.Partial("ListUsersPartials/CellUserName", balance)</td>
+                <td>
+                    <span>@balance.User.CreationDate.ToLocalizedDateString()</span><br/><span class="small">@((balance.User.LastLogin - DateTime.Now).ToLocalizedRelativeString(1))</span></td>
+                <td>@Html.Partial("ListUsersPartials/CellBalance", balance)</td>
+                <td>@Html.Partial("ListUsersPartials/CellTurnover", balance)</td>
+                <td>@Html.Partial("ListUsersPartials/CellLastTransaction", balance)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Balances, p => Url.Action("ListUsers", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li>
+            <a href="@Url.Action("ListUsers")">همه موارد (بدون فیلتر)</a>
+        </li>
+    </ul>
+
+    <br/><hr/>
+
+    @using (Html.BeginForm("ListUsers", "UserBalanceAdmin", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.SortOrder):
+            @Html.DropDownListFor(m => m.SortOrder, Model.SortOrder.EnumSelectList(), GeneralResources.NotSelected)
+            <br/>
+            <br/>
+
+            @Html.CheckBoxWithoutHiddenField("SortDescending", Model.SortDescending)
+            @Html.LabelFor(m => m.SortDescending)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.UserIDFilter):
+            @Html.TextBoxFor(m => m.UserIDFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.UserNameFilter):
+            @Html.TextBoxFor(m => m.UserNameFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.UserContactMethodFilter):
+            @Html.TextBoxFor(m => m.UserContactMethodFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.MinCashBalance):
+            @Html.TextBoxFor(m => m.MinCashBalance)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.MaxCashBalance):
+            @Html.TextBoxFor(m => m.MaxCashBalance)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.MinCashTurnover):
+            @Html.TextBoxFor(m => m.MinCashTurnover)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.MaxCashTurnover):
+            @Html.TextBoxFor(m => m.MaxCashTurnover)
+            <br/>
+            <br/>
+
+
+            <button name="submit" value="btnRefresh" class="button" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

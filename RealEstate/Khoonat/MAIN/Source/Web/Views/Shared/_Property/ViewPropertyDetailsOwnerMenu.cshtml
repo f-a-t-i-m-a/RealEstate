@@ -1,0 +1,105 @@
+﻿@using JahanJooy.RealEstate.Core.DomainExtensions
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyViewDetailsModel
+
+
+<div class="navbar navbar-default">
+	<div class="row">
+		<div class="col-xs-2 no-wrap hide-overflow">
+			<p class="navbar-text">
+				مدیریت
+				<span class="hidden-xs hidden-sm">آگهی</span>
+				<span class="glyphicon glyphicon-circle-arrow-left"></span>
+			</p>
+		</div>
+		<div class="col-xs-10">
+			<div class="btn-group navbar-btn">
+				<a class="btn btn-primary" href="@Url.Action("EditBySummary", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">
+					<span class="glyphicon glyphicon-edit"></span>
+					ویرایش
+				</a>
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					<span class="caret"></span>
+					<span class="sr-only">ویرایش جزئیات</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li role="presentation" class="dropdown-header">ویرایش اطلاعات ملک:</li>
+					<li role="presentation" class="divider"></li>
+					<li><a href="@Url.Action("EditBySummary", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">مشخصات اصلی</a></li>
+					<li role="presentation" class="divider"></li>
+					@if (Model.Listing.PropertyType.HasUnit())
+					{
+						<li><a href="@Url.Action("EditUnit", "Property", new {id = Model.Listing.ID, Area = AreaNames.Main})">مشخصات واحد</a></li>
+					}
+					@if (Model.Listing.PropertyType.HasBuilding())
+					{
+						<li><a href="@Url.Action("EditBuilding", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">مشخصات ساختمان</a></li>
+					}
+					<li><a href="@Url.Action("EditEstate", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">مشخصات زمین</a></li>
+					@if (Model.Listing.PropertyType.HasUnit())
+					{
+						<li><a href="@Url.Action("EditLuxury", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">امکانات لوکس</a></li>
+					}
+					<li role="presentation" class="divider"></li>
+					@if (Model.Listing.IntentionOfOwner == IntentionOfOwner.ForSale)
+					{
+						<li><a href="@Url.Action("EditSalePaymentConditions", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">قیمت و شرایط فروش</a></li>
+					}
+					@if (Model.Listing.IntentionOfOwner == IntentionOfOwner.ForRent)
+					{
+						<li><a href="@Url.Action("EditRentPaymentConditions", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">مبلغ و شرایط اجاره</a></li>
+					}
+					<li><a href="@Url.Action("EditVisitAndContact", "Property", new { id = Model.Listing.ID, Area = AreaNames.Main })">اطلاعات بازدید و تماس</a></li>
+				</ul>
+			</div>
+
+			@if (Model.Listing.IsPublished())
+			{
+				<button type="button" class="btn btn-primary navbar-btn" data-ajax-modal="@Url.Action("RePublish", "Property", AreaRouteValue.Main)/@Model.Listing.ID">
+					<span class="glyphicon glyphicon-time"></span>
+					تغییر مدت
+				</button>
+				<button type="button" class="btn btn-primary navbar-btn" data-ajax-modal="@Url.Action("UnPublish", "Property", AreaRouteValue.Main)/@Model.Listing.ID">
+					<span class="glyphicon glyphicon-remove"></span>
+					لغو آگهی
+				</button>
+			}
+			else
+			{
+				<button type="button" class="btn btn-primary navbar-btn" data-ajax-modal="@Url.Action("Publish", "Property", AreaRouteValue.Main)/@Model.Listing.ID">
+					<span class="glyphicon glyphicon-globe"></span>
+					عمومی کردن
+				</button>
+			}
+
+			<button type="button" class="btn btn-primary navbar-btn" data-ajax-modal="@Url.Action("Delete", "Property", AreaRouteValue.Main)/@Model.Listing.ID">
+				<span class="glyphicon glyphicon-trash"></span>
+				حذف
+			</button>
+			
+			@if (User.IsOperator)
+			{
+				<a class="btn btn-default navbar-btn navbar-left" href="@Url.Action("Details", "AdminProperties", new { Model.Listing.ID, area = AreaNames.Admin })">
+					<span class="glyphicon glyphicon-adjust"></span>
+					واسط مدیریت
+				</a>
+			}
+
+		</div>
+	</div>
+</div>
+
+@if (Model.Listing.Approved.HasValue && !Model.Listing.Approved.Value)
+{
+	<div class="alert alert-danger">
+		<span class="glyphicon glyphicon-exclamation-sign"></span>
+		اطلاعات این ملک <strong>در بازبینی اپراتور رد شده است</strong>. لطفاً با استفاده از
+		<a class="btn btn-danger" href="@Url.Action("EditBySummary", "Property", new {id = Model.Listing.ID, Area = AreaNames.Main})">
+			<span class="glyphicon glyphicon-edit"></span>
+			ویرایش
+		</a>
+		 اشکالات یا اشتباهات آن را رفع کنید.
+		<p>اگر فکر می کنید اپراتور در این مورد اشتباه کرده، لطفاً <a class="btn btn-default btn-sm" href="@Url.Action("ContactUs", "UserFeedback", AreaRouteValue.Main)">با ما تماس بگیرید</a>.</p>
+	</div>
+}

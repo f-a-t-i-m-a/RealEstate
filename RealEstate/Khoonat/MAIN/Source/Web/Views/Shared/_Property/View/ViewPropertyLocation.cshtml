@@ -1,0 +1,13 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyLocationModel
+
+@HtmlPresentationHelper.IfNotSpecified(StringUtils.PrependIfNotEmpty("آدرس: ", Model.Address), 
+	ViewPropertyLocationResources.AddressNotSpecified)
+
+@if (!string.IsNullOrWhiteSpace(Model.AdditionalAddressInfo))
+{
+	<br/>
+	@: @string.Format(ViewPropertyLocationResources.AdditionalAddressInfo, Model.AdditionalAddressInfo)
+}

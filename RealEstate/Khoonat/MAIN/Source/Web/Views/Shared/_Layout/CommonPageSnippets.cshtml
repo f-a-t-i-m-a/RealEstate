@@ -1,0 +1,42 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+
+<div class="modal fade" id="ajaxModalContainer" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+	</div>
+</div>
+
+<div class="hidden" id="ajaxModalDefaultContent">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">در حال بارگذاری</h4>
+		</div>
+		<div class="modal-body">لطفاً چند لحظه صبر کنید...</div>
+	</div>
+</div>
+
+<div class="hidden" id="ajaxTabDefaultContent">
+	<div class="alert alert-info" style="margin: 15px;">در حال بارگذاری محتوا. لطفاً چند لحظه صبر کنید...</div>
+</div>
+
+@if (!User.IsAuthenticated)
+{
+	<div id="featureNeedsAuthentication" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">لطفاً در سیستم وارد شوید یا ثبت نام کنید</h4>
+				</div>
+				<div class="modal-body">
+					<p>این قابلیت سایت، اطلاعات رو در پروفایل کاربری تون ذخیره می کنه. برای همین قبل از اینکه بتونید ازش استفاده کنید باید در سایت ثبت نام کرده باشید و وارد شده باشید.</p>
+				</div>
+				<div class="modal-footer">
+					<a href="@Url.Action("LogOn", "Account", new { area = AreaNames.Main })" class="btn btn-primary" style="width: 120px;">ورود به سیستم</a>
+					<a href="@Url.Action("Register", "Account", new { area = AreaNames.Main })" class="btn btn-primary" style="width: 120px;">ثبت نام</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}

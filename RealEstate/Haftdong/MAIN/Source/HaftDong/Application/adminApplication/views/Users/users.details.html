@@ -1,0 +1,306 @@
+﻿<div class="container detailUserView" ng-if="$state.current.name === 'users.details'">
+<div class="page-header">
+    <h1>جزئیات کاربر</h1>
+</div>
+<div class="row">
+<div class="col-md-1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" licensed>
+                <button class="btn btn-block btn-success" ui-sref="users.details.edit" restrict-to="Administrator"><i class="fa fa-pencil"></i> ویرایش</button>
+            </div>
+            <div class="row" ng-if="!user.IsEnabled" licensed>
+                <button class="btn btn-block btn-success" ng-click="onEnableClick()"><i class="fa fa-thumbs-o-up" restrict-to="Administrator"></i> فعال</button>
+            </div>
+            <div class="row" ng-if="user.IsEnabled" licensed>
+                <button class="btn btn-block btn-success" ng-click="onEnableClick()"><i class="fa fa-thumbs-o-down" restrict-to="Administrator"></i> غیر فعال</button>
+            </div>
+            <div class="row" licensed>
+                <button class="btn btn-block btn-success" ng-click="onResetPassword()"><i class="fa fa-retweet" restrict-to="Administrator"></i> رمز جدید</button>
+            </div>
+            <div class="row" licensed>
+                <button class="btn btn-block btn-danger" ng-click="onDeleteClick()" restrict-to="Administrator"><i class="fa fa-trash-o"></i> حذف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-9">
+<div class="well">
+    <div class="row">
+        <div class="col-md-6">
+            <b>نام کاربری:</b> {{user.UserName}} <span class="dangerText" ng-show="user.DeletionTime != null">(حذف شده)</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <b>نوع عضویت:</b> {{user.Type | UserType}}
+        </div>
+        <div class="col-md-6">
+            <b>تاریخ عضویت:</b> {{user.CreationTime | jalaali}}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <b>حساب کاربری:</b> <span jj-tristate="user.IsEnabled"></span> {{user.IsEnabled | IsEnabled}}
+        </div>
+        <div class="col-md-6">
+            <b>تائید هویت:</b> <span jj-tristate="user.IsVerified"></span> {{user.IsVerified | Approval}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <b>نوع مجوز:</b> <span jj-tristate="isNotExpired"></span> {{user.LicenseType | LicenseType}}
+        </div>
+        <div class="col-md-6">
+            <b>تاریخ اتمام مجوز تا:</b> {{user.LicenseActivationTime | jalaali}}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <b>نام نمایشی:</b> {{user.DisplayName}}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <b>وب سایت:</b> {{user.WebSiteUrl}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <b>توضیحات:</b> {{user.About}}
+        </div>
+    </div>
+</div>
+<tabset>
+<tab>
+    <tab-heading><i class="fa fa-list"></i> جزئیات</tab-heading>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a ng-click="isContactCollapsed = !isContactCollapsed">اطلاعات تماس <i class="fa fa-caret-down"></i></a>
+            </h3>
+        </div>
+        <div class="panel-body" collapse="isContactCollapsed">
+            <div class="row">
+                <b>تلفن:</b>
+                <span ng-repeat="mobile in mobileNumberList" ng-if="mobileNumberList != null">
+                    <span jj-tristate="mobile.IsVerified" title="فعال سازی"></span>
+                    <span class="persian-number" dir="ltr"> {{mobile.NormalizedValue}}</span>
+                    <span jj-tristate="contact.IsActive"></span> {{mobile.IsActive | IsEnabled}}
+                    <span jj-tristate="!contact.IsDeleted"></span> {{mobile.IsDeleted | IsDeleted}}
+                </span>
+            </div>
+            <div class="row">
+                <b>ایمیل:</b>
+                <span ng-repeat="emailAddress in emailAddressList" ng-if="emailAddressList != null">
+                    <span jj-tristate="emailAddress.IsVerified" title="فعال سازی"></span>
+                    <span class="persian-number"> {{emailAddress.NormalizedValue}}</span>
+                    <span jj-tristate="contact.IsVerified"></span> {{emailAddress.IsVerified | Approval}}
+                    <span jj-tristate="!contact.IsDeleted"></span> {{emailAddress.IsDeleted | IsDeleted}}
+                </span>
+            </div>
+            <div class="row">
+                <b>آدرس:</b>
+                <span ng-repeat="address in addressList" ng-if="addressList != null">
+                    {{address.NormalizedValue}}
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a ng-click="isLoginCollapsed = !isLoginCollapsed">سایر <i class="fa fa-caret-down"></i></a>
+            </h3>
+        </div>
+        <div class="panel-body" collapse="isLoginCollapsed">
+            <div class="row">
+                <div class="col-md-6">
+                    <b>تاریخ آخرین تغییر:</b> {{user.ModificationTime | jalaali}}
+                </div>
+                <div class="col-md-6">
+                    <b>تاریخ حذف:</b> {{user.DeletionTime | jalaali}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <b>تاریخ آخرین ورود موفق:</b> {{user.LastLogin | jalaali}}
+                </div>
+                <div class="col-md-6">
+                    <b>تاریخ آخرین اقدام به ورود:</b> {{user.LastLoginAttempt | jalaali}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <b>تعداد ورودهای ناموفق:</b> {{user.FailedLoginAttempts}}
+                </div>
+            </div>
+        </div>
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-home"></i> فایل ها</tab-heading>
+    <div class="row" ng-show="Supplies.length > 0">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>نوع ملک</th>
+                <th>کاربری</th>
+                <th>متراژ</th>
+                <th>نوع معامله</th>
+                <th>قیمت</th>
+                <th>وضعیت</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="supply in Supplies">
+                <td>
+                    {{supply.Property.PropertyType | PropertyType}}
+                </td>
+                <td>
+                    {{supply.Property.UsageType | UsageType}}
+                </td>
+                <td>
+                    <span ng-show="supply.Property.EstateArea != null">زمین: {{supply.Property.EstateArea}} متر</span>
+                    <span ng-show="supply.Property.UnitArea != null">بنا: {{supply.Property.UnitArea}} متر</span>
+                </td>
+                <td>
+                    {{supply.IntentionOfOwner | IntentionOfOwner}}
+                </td>
+                <td ng-show="supply.IntentionOfOwner === 2">قیمت کل: {{computePrice(supply) | number}}</td>
+                <td ng-show="supply.IntentionOfOwner === 3">ودیعه: {{supply.Mortgage | number}}</td>
+                <td ng-show="supply.IntentionOfOwner === 1">ودیعه: {{supply.Mortgage | number}}، اجاره ماهانه: {{supply.Rent | number}}</td>
+                <td ng-show="supply.IntentionOfOwner === 4">اجاره روزانه: {{supply.Rent | number}}</td>
+                <td>{{supply.State | SupplyState}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="well" ng-show="Supplies.length == 0">
+        فایلی وجود ندارد.
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-file-text-o"></i> درخواست ها</tab-heading>
+    <div class="row" ng-show="Requests.length > 0">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>نوع ملک</th>
+                <th>کاربری</th>
+                <th>نوع معامله</th>
+                <th>بودجه</th>
+                <th>ودیعه</th>
+                <th>اجاره</th>
+                <th>تاریخ ثبت</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="request in Requests">
+                <td>
+                    <div ng-repeat="propertyID in request.PropertyTypes">
+                        {{propertyID | PropertyType}}
+                    </div>
+                </td>
+                <td>
+                    {{request.UsageType | UsageType}}
+                </td>
+                <td>
+                    {{request.IntentionOfCustomer | IntentionOfCustomer}}
+                </td>
+                <td>{{request.TotalPrice| number}}</td>
+                <td>{{request.Mortgage |number}}</td>
+                <td>{{request.Rent | number}}</td>
+                <td>{{request.CreationTime |jalaali}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="well" ng-show="Requests.length == 0">
+        درخواستی وجود ندارد.
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-file-text-o"></i> قرارداد ها</tab-heading>
+    <div class="row" ng-show="Contracts.length > 0">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th> تاریخ قرارداد</th>
+                <th>فروشنده</th>
+                <th>خریدار</th>
+                <th>نوع ملک</th>
+                <th>نوع معامله</th>
+                <th>وضعیت</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="contract in Contracts">
+                <td>
+                    {{contract.ContractDate | jalaali}}
+                </td>
+                <td>
+                    {{contract.Seller.DisplayName}}
+                </td>
+                <td>
+                    {{contract.Buyer.DisplayName}}
+                </td>
+                <td>
+                    {{contract.PropertySummary.PropertyType | PropertyType}}
+                </td>
+                <td>{{contract.SupplySummary.IntentionOfOwner| IntentionOfOwner}}</td>
+                <td>{{contract.State| ContractState}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="well" ng-show="Requests.length == 0">
+        قراردادی وجود ندارد.
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-file-text-o"></i> مشتری ها</tab-heading>
+    <div class="row" ng-show="Customers.length > 0">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>نام</th>
+                <th>علت مراجعه</th>
+                <th> تلفن ثابت</th>
+                <th>موبایل</th>
+                <th> تاریخ آخرین مراجعه</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="customer in Customers">
+                <td>
+                    {{customer.DisplayName}}
+                </td>
+                <td>
+                    <div>
+                        <span ng-show="customer.RequestCount > 0"><span class="badge"> {{customer.RequestCount}}</span> درخواست</span>
+                        <span ng-show="customer.PropertyCount >0"> <span class="badge">{{customer.PropertyCount}}</span> ملک</span>
+                    </div>
+                </td>
+                <td>
+                    {{customer.PhoneNumber}}
+                </td>
+                <td>
+                    <jj-relative-time origin="customer.LastVisitTime" ng-show="isTwoWeeksAgo(customer)" title="{{customer.LastVisitTime | jalaali: 'dddd jYYYY/jMM/jDD'}}"></jj-relative-time>
+                    <span ng-show="!isTwoWeeksAgo(customer)">{{customer.LastVisitTime | jalaali}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="well" ng-show="Requests.length == 0">
+        مشتری وجود ندارد.
+    </div>
+</tab>
+
+</tabset>
+</div>
+<div class="col-md-2">
+    <img ng-if="user.ProfilePicture.blob" ng-src="{{user.ProfilePicture.blob}}" class="img-responsive img-thumbnail" ng-click="onShowImageClick(user.ProfilePicture)" restrict-to="Administrator"/>
+    <img ng-if="!user.ProfilePicture.blob" ng-src="Content/images/Icon-user.png" class="img-responsive img-thumbnail" restrict-to="Administrator"/>
+    <button class="btn btn-success btn-block" ngf-select="upload(files)" ng-model="files" restrict-to="Administrator" licensed>تغییر تصویر</button>
+</div>
+</div>
+</div>
+<div ui-view autoscroll="false"></div>

@@ -1,0 +1,10 @@
+﻿@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.Audit.ActivityLogDisplayInfo
+
+<a href="@Url.Action("List", "AdminSessions", new {IdFilter = Model.SessionID})">
+	@IconsHelper.Xlink16(Url)
+</a>
+<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("SessionIdFilter", Model.SessionID.ToString()))">
+	@Model.SessionID
+</a>

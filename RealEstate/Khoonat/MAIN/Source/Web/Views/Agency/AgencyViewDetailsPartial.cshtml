@@ -1,0 +1,159 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Collections
+@using JahanJooy.RealEstate.Domain.Audit
+@using JahanJooy.RealEstate.Domain.Directory
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@model Agency
+
+<div class="well"> آژانس املاک</div>
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+
+    AgencyBranch mainBranch = null;
+    var branchList = new List<AgencyBranch>();
+
+    if (Model.AgencyBranches != null)
+    {
+        branchList = Model.AgencyBranches.Where(ab => !ab.DeleteTime.HasValue).OrderByDescending(ab => ab.IsMainBranch).ToList();
+        mainBranch = branchList.FirstOrDefault(ab => ab.IsMainBranch);
+
+        if (mainBranch != null)
+        {
+            branchList.Remove(mainBranch);
+        }
+    }
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">شعبه اصلی</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-2 btn-stack">
+
+                <div data-toggle="tooltip" title="گزارش استفاده ناشایست">
+                    <button class="btn btn-primary" data-ajax-modal="@Url.Action("ReportAbuse", "UserFeedback", new {entityType = AbuseFlagEntityType.Agency.ToString(), entityId = Model.ID, Area = ""})">
+                        <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                        <span class="hidden-xs hidden-sm">شکایت</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-xs-10 ">
+                <div class="propertyAttributeContainer">
+                    <div class="propertyAttribute">
+                        @PropertyViewHelper.SimpleAttribute(true, "نام آژانس", Model.GetContent().Name, additionalStyle: "background-color: white; width: 295px;")
+                        @PropertyViewHelper.SimpleAttribute(true, "کد آژانس", Model.GetContent().Code, additionalStyle: "background-color: white; width: 295px;")
+                        @PropertyViewHelper.SimpleAttribute(true, "نام مدیر آژانس", Model.GetContent().ManagerName, additionalStyle: "background-color: white; width: 295px;")
+                        @PropertyViewHelper.SimpleAttribute(true, "توضیحات آژانس", Model.GetContent().Description, additionalStyle: "background-color: white; width: 915px;")
+                        @{
+                            if (mainBranch != null)
+                            {
+                                @PropertyViewHelper.SimpleAttribute(true, "نام شعبه", mainBranch.GetContent().BranchName, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "نام مدیر", mainBranch.GetContent().BranchManagerName, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 1", mainBranch.GetContent().Phone1, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 2", mainBranch.GetContent().Phone2, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "موبایل 1", mainBranch.GetContent().CellPhone1, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "موبایل 2", mainBranch.GetContent().CellPhone2, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "ایمیل", mainBranch.GetContent().Email, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "فکس", mainBranch.GetContent().Fax, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "شماره پیامک", mainBranch.GetContent().SmsNumber, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "توضیحات", mainBranch.GetContent().Description, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "حوزه فعالیت", mainBranch.GetContent().ActivityRegion, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "محل", propertyPresentationHelper.BuildRegion(mainBranch.GetContent().VicinityID), additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "آدرس کامل", mainBranch.GetContent().FullAddress, additionalStyle: "background-color: white; width: 295px;")
+                            }
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">کاربران عضو این آژانس</h3>
+            </div>
+            <div class="panel-body">
+                <div class="propertyAttributeContainer">
+                    <div class="propertyAttribute">
+                        @if (Model.MemberUsers.SafeAny())
+                        {
+                            <ul>
+                                @foreach (var member in Model.MemberUsers.ToList())
+                                {
+                                    <li>
+                                        <a href="@Url.Action("View", "PublicProfile", new {area = AreaNames.Main, loginName = member.LoginName})">
+                                            @member.DisplayName
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>
+                                هیچ کدوم از کاربران «خونه ت» عضو این آژانس نیستند.
+                            </p>
+                        }
+                        @if (User.CoreIdentity.IsAuthenticated
+                             && !(Model.MemberUsers.Any(u => u.ID == User.CoreIdentity.UserId))
+                             && (User.CoreIdentity.AgencyId == null))
+                        {
+                            <div>
+                                اگر شما در این آژانس مشغول فعالیت هستید، می تونید
+                                <a href="#" data-ajax-modal="@Url.Action("MembershipConfirmationPopup", "Agency", new {agencyid = Model.ID, area = AreaNames.Main})">اسم خودتون رو اینجا اضافه کنید</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+@{
+
+    if (branchList.Count > 0)
+    {
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">شعبات</h3>
+            </div>
+            <div class="panel-body">
+                @foreach (var branch in branchList)
+                {
+                    if (branch != null)
+                    {
+                        <div class="propertyAttributeContainer">
+                            <div class="propertyAttribute" >
+                                @PropertyViewHelper.SimpleAttribute(true, "نام", branch.GetContent().BranchName, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "نام مدیر", branch.GetContent().BranchManagerName, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 1:", branch.GetContent().Phone1, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 2", branch.GetContent().Phone2, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "موبایل 1", branch.GetContent().CellPhone1, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "موبایل 2", branch.GetContent().CellPhone2, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "ایمیل", branch.GetContent().Email, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "فکس", branch.GetContent().Fax, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "شماره پیامک", branch.GetContent().SmsNumber, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "توضیحات", branch.GetContent().Description, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "حوزه فعالیت", branch.GetContent().ActivityRegion, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "محل", propertyPresentationHelper.BuildRegion(branch.GetContent().VicinityID), additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "آدرس کامل", branch.GetContent().FullAddress, additionalStyle: "background-color: white; width: 295px;")
+                            </div>
+                        </div>
+                        <div><hr/></div>
+                    }
+                }
+            </div>
+        </div>
+    }
+}

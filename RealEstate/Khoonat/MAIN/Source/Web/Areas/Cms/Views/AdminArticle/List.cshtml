@@ -1,0 +1,46 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Cms.Models.AdminArticle.AdminArticleListModel
+
+
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray;">
+    <a href="@Url.Action("NewArticle", "AdminArticle",  new {ArticleCategoryID = Model.ArticleCategoryID})">@IconsHelper.Add16(Url) ایجاد نوع جدید</a>
+</div>
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome", AreaRouteValue.Admin, null) 
+    &gt; 
+    @Html.ActionLink("رده نوشته", "List", "AdminArticleCategory") 
+    &gt;
+    لیست نوشته ها
+</h2>
+
+@if (Model.Articles.Any())
+{
+    <div class="tbl" style="width: 100%; text-align: center;">
+        <div class="tr" style="font-weight: bold; background-color: #ddb; border-bottom: 1px dotted #000;">
+            <span class="td">ویرایش</span>
+            <span class="td">نام</span>
+            <span class="td"> نوع نمایش</span>
+        </div>
+
+        @foreach (var article in Model.Articles)
+        {
+            <div class="tr">
+                <span>
+                    <a href="@Url.Action("Edit", new {ArticleID = article.ID})">@IconsHelper.Edit32(Url)</a>
+                </span>
+                <span class="td"> <a href="@Url.Action("ViewDetails", new {ArticleID = article.ID})">@article.Name</a> </span>
+                <span class="td"> @article.DisplayType.Label(DomainEnumResources.ResourceManager) </span>
+	           
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>
+        تا به حال هیچ  نوعی ثبت نشده است  
+    </p>
+}

@@ -1,0 +1,11 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.UserWireTransferPayment
+
+@Model.SourceBank.Label(DomainBillingEnumResources.ResourceManager)،
+@Model.SourceCardNumberLastDigits
+
+<br/>
+
+به نام:
+@Model.SourceAccountHolderName

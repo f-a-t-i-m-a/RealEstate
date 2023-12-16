@@ -1,0 +1,9 @@
+﻿@using JahanJooy.Common.Util.Text
+@model JahanJooy.RealEstate.Domain.Billing.UserBalanceAdministrativeChange
+
+@Model.Description.Truncate(30)
+@if (!string.IsNullOrWhiteSpace(Model.AdministrativeNotes))
+{
+    <br/>
+    @: یادداشت دارد
+}

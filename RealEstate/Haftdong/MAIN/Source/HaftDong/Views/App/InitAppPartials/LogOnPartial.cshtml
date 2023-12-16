@@ -1,0 +1,53 @@
+﻿<li class="dropdown paneldropdown" dropdown restrict-to="Administrator">
+    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">
+        پنل کاربری
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+    <li>
+        <a href="/adminapp" target="_self"> پنل مدیریت</a>
+    </li>
+    </ul>
+</li>
+
+<li class="dropdown logindropdown" dropdown>
+    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">
+        <span ng-hide="currentUserEmail">
+            <i class="fa fa-user"></i> کاربر مهمان
+            <span class="caret"></span>
+        </span>
+        <span ng-show="currentUserEmail">
+            <i class="fa fa-user"></i>
+            <span>{{currentUserEmail}}</span>
+            <span class="caret"></span>
+        </span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-show="currentUserEmail">
+            <a ui-sref="profile" id="myProfile">
+                <span class="hidden-sm"> صفحه شخصی</span>
+            </a>
+        </li>
+        <li ng-hide="currentUserEmail">
+            <a ng-click="showLogin()">
+                <i class="fa fa-sign-in"></i><span class="hidden-sm"> ورود</span>
+            </a>
+        </li>
+@*        <li ng-hide="currentUserEmail">*@
+@*            <a ng-click="signUp()">*@
+@*                <span class="hidden-sm"> ثبت نام</span>*@
+@*            </a>*@
+@*        </li>*@
+        <li ng-show="currentUserEmail">
+            <a ui-sref="dashboard">داشبورد</a>
+        </li>
+        <li ng-show="currentUserEmail">
+            <a ng-click="showChangePassword()">تغییر رمز</a>
+        </li>
+        <li ng-show="currentUserEmail">
+            <a ng-click="logout()">
+                <i class="fa fa-sign-out"></i><span class="hidden-sm"> خروج</span>
+            </a>
+        </li>
+    </ul>
+</li>

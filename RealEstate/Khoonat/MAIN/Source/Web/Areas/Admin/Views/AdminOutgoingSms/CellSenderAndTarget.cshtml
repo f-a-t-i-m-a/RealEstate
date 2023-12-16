@@ -1,0 +1,16 @@
+﻿@model JahanJooy.RealEstate.Domain.Messages.OutgoingSmsMessage
+
+از: 
+@if (string.IsNullOrWhiteSpace(Model.SenderNumber))
+{
+    @: تعیین نشده
+}
+else
+{
+    <span dir="ltr">@Model.SenderNumber</span>
+}
+
+<br/>
+
+به:
+<span dir="ltr">@Model.TargetNumber</span>

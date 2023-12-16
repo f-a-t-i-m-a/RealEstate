@@ -1,0 +1,135 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Collections
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Domain.Directory
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@model Agency
+           
+
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray;">
+    <a href="@Url.Action("NewAgencyBranch", "AdminAgency", new {agencyId = Model.ID})">@IconsHelper.Add16(Url) شعبه جدید</a>
+    
+</div>
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray;">
+    <a href="@Url.Action("EditAgency", "AdminAgency", new {id = Model.ID})">@IconsHelper.Edit16(Url) ویرایش</a>
+</div>
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray; color: #07c;">
+    <a href="@Url.Action("EditAgencyLogo", "AdminAgency", new {id = Model.ID})"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span>   ویرایش لوگو</a>
+</div>
+
+<div class="fl" style="margin-left: 20px; padding: 10px; border: 3px solid gray; color: #07c;">
+    @PopupHelper.AjaxModal(@<span>@IconsHelper.Delete24(Url) حذف</span>, Url.Action("DeleteAgency", "AdminAgency", new { id = Model.ID }))
+</div>
+
+    <h2>
+        @Html.ActionLink("مدیریت سایت", "Index", "AdminHome")
+        &gt;
+        @Html.ActionLink("مشاورین املاک", "List", "AdminAgency")
+        &gt;
+        مشاور املاک @Model.GetContent().Name
+    </h2>
+
+    @{
+        var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+
+        AgencyBranch mainBranch = null;
+        var branchList = new List<AgencyBranch>();
+
+        if (Model.AgencyBranches.SafeAny())
+        {
+            branchList = Model.AgencyBranches.OrderByDescending(ab => ab.IsMainBranch).ToList();
+            mainBranch = branchList.Where(ab => ab.IsMainBranch).OrderBy(ab => ab.DeleteTime).FirstOrDefault();
+
+            if (mainBranch != null)
+            {
+                branchList.Remove(mainBranch);
+            }
+
+            branchList = branchList.OrderBy(ab => ab.DeleteTime).ToList();
+        }
+    }
+
+    <br />
+    <div class="propertyAttributeContainer">
+        <div class="propertyAttribute" style="width: 970px; background-color: #ddd;">
+            @PropertyViewHelper.SimpleAttribute(true, "نام آژانس", Model.GetContent().Name, additionalStyle: "background-color: white; width: 295px;")
+            @PropertyViewHelper.SimpleAttribute(true, "کد آژانس", Model.GetContent().Code, additionalStyle: "background-color: white; width: 295px;")
+            @PropertyViewHelper.SimpleAttribute(true, "نام مدیر آژانس", Model.GetContent().ManagerName, additionalStyle: "background-color: white; width: 295px;")
+            @PropertyViewHelper.SimpleAttribute(true, "تاریخ ثبت آژانس", Model.CreationTime.ToLocalizedDateString() + " " + Model.CreationTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+            @PropertyViewHelper.SimpleAttribute(true, "تاریخ آخرین تغییر آژانس", Model.LastModificationTime.ToLocalizedDateString() + " " + Model.LastModificationTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+            @PropertyViewHelper.SimpleAttribute(true, "تاریخ حذف آژانس", Model.DeleteTime.ToLocalizedDateString() + " " + Model.DeleteTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+            @PropertyViewHelper.SimpleAttribute(true, "توضیحات آژانس", Model.GetContent().Description, additionalStyle: "background-color: white; width: 915px;")
+
+            @{
+                if (mainBranch != null)
+                {
+                    @PropertyViewHelper.SimpleAttribute(true, "نام", mainBranch.GetContent().BranchName, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "نام مدیر", mainBranch.GetContent().BranchManagerName, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 1", mainBranch.GetContent().Phone1, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 2", mainBranch.GetContent().Phone2, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "موبایل 1", mainBranch.GetContent().CellPhone1, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "موبایل 2", mainBranch.GetContent().CellPhone2, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "ایمیل", mainBranch.GetContent().Email, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "فکس", mainBranch.GetContent().Fax, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "حوزه فعالیت", mainBranch.GetContent().ActivityRegion, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "تاریخ ثبت", mainBranch.CreationTime.ToLocalizedDateString() + " " + mainBranch.CreationTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "تاریخ آخرین تغییر", mainBranch.LastModificationTime.ToLocalizedDateString() + " " + mainBranch.LastModificationTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "تاریخ حذف", mainBranch.DeleteTime.ToLocalizedDateString() + " " + mainBranch.DeleteTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "شماره پیامک", mainBranch.GetContent().SmsNumber, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "توضیحات", mainBranch.GetContent().Description, additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "محل", propertyPresentationHelper.BuildRegion(mainBranch.GetContent().VicinityID), additionalStyle: "background-color: white; width: 295px;")
+                    @PropertyViewHelper.SimpleAttribute(true, "آدرس کامل", mainBranch.GetContent().FullAddress, additionalStyle: "background-color: white; width: 295px;")
+                }
+            }
+        </div>
+    </div>
+
+    @{
+        if (branchList.Count > 0)
+        {
+            <div class="propertyAttributeContainer" style="width: 980px; background-color: #ddb;">
+                <div style="margin: 5px;"><span class="bold">شعبات:</span></div>
+
+                @foreach (var branch in branchList)
+                {
+                    if (branch != null)
+                    {
+                        <span class="fl" style="text-align: right; margin-left: 20px; @(branch.DeleteTime.HasValue ? "display: none; " : "inline;")">
+                            <a href="@Url.Action("EditAgencyBranch", "AdminAgency", new {id = branch.ID})">@IconsHelper.Edit16(Url) ویرایش</a>
+                        </span>
+                        <span class="fl" style=" color #07c; text-align right; margin-left 20px; @(branch.DeleteTime.HasValue ? "display: none; " : "inline;") ">
+                            @PopupHelper.AjaxModal(@<span>@IconsHelper.Cross16(Url) حذف</span>, Url.Action("DeleteAgencyBranch", "AdminAgency", new { id = branch.ID }))
+                        </span>
+
+                        <div class="propertyAttributeContainer">
+                            <div class="propertyAttribute" style="width: 950px; @(branch.DeleteTime.HasValue ? "background-color: salmon; " : "lightslategrey;")">
+                                @PropertyViewHelper.SimpleAttribute(true, "نام", branch.GetContent().BranchName, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "نام مدیر", branch.GetContent().BranchManagerName, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 1:", branch.GetContent().Phone1, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تلفن ثابت 2", branch.GetContent().Phone2, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "موبایل 1", branch.GetContent().CellPhone1, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "موبایل 2", branch.GetContent().CellPhone2, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "ایمیل", branch.GetContent().Email, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "فکس", branch.GetContent().Fax, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "حوزه فعالیت", branch.GetContent().ActivityRegion, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تاریخ ثبت", branch.CreationTime.ToLocalizedDateString() + " " + branch.CreationTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تاریخ آخرین تغییر", @branch.LastModificationTime.ToLocalizedDateString() + " " + branch.LastModificationTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "تاریخ حذف", branch.DeleteTime.ToLocalizedDateString() + " " + branch.DeleteTime.ToLocalizedTimeString(), additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "شماره پیامک", branch.GetContent().SmsNumber, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "توضیحات", branch.GetContent().Description, additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "محل", propertyPresentationHelper.BuildRegion(branch.GetContent().VicinityID), additionalStyle: "background-color: white; width: 295px;")
+                                @PropertyViewHelper.SimpleAttribute(true, "آدرس کامل", branch.GetContent().FullAddress, additionalStyle: "background-color: white; width: 295px;")
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+
+    }
+
+
+

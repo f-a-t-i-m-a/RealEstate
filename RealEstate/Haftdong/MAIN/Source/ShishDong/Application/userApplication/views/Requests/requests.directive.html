@@ -1,0 +1,498 @@
+﻿<div class="container" restrict-to="VerifiedUser">
+<form name="frmRequest" novalidate>
+<div class="well">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <label for="" class="col-md-4 control-label"><i class="fa fa-star text-danger"></i> کاربری:</label>
+                <div class="col-md-8">
+                    <jj-select-usage-type model="request.UsageType" jj-allow-clear="request.ID == null" jj-required="true" jj-disabled="request.ID != null"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <label for="" class="col-md-4 control-label"><i class="fa fa-star text-danger"></i> نوع معامله:</label>
+                <div class="col-md-8">
+                    <jj-select-intention-of-customer model="request.IntentionOfCustomer" jj-allow-clear="request.ID == null" jj-required="true" jj-disabled="request.ID != null"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <label for="" class="col-md-4 control-label">نوع ملک:</label>
+                <label for="" class="col-md-6 control-label gray-text" ng-show="request.UsageType == null">ابتدا کاربری را مشخص کنید ...</label>
+                <div ng-show="request.UsageType != null">
+                    <hr/>
+                    <div ng-repeat="item in propertyTypeItems">
+                        <div class="col-md-6 control-label">
+                            <label><input type="checkbox" ng-model="item.isSelected" value="item.id"> {{item.text}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <label for="" class="col-md-4 control-label"><i class="fa fa-star text-danger"></i> تاریخ اتمام عمومی بودن:</label>
+                <div class="col-md-8">
+                    <jj-jalaali-datepicker-popup jj-model="request.ExpirationTime" class="datepicker" required="true"></jj-jalaali-datepicker-popup>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" ng-show="showSalePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">بودجه</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">بودجه:</label>
+                <div class="col-md-4 input-group">
+                    <input type="text" ng-model="request.TotalPrice" jj-format="number"/>
+                    <span class="input-group-addon">تومان</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary showRentPanel" ng-show="showRentPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">اجاره</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label"> مبلغ ودیعه:</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.Mortgage" jj-format="number"/>
+                        <span class="input-group-addon">تومان</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label">اجاره:</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.Rent" jj-format="number"/>
+                        <span class="input-group-addon">تومان</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <b><input type="checkbox" ng-model="request.MortgageAndRentConvertible"/> اجاره / ودیعه قابل تبدیل هستند</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" ng-show="showFullMortgagePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">رهن کامل</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label"> مبلغ ودیعه:</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.Mortgage" jj-format="number"/>
+                        <span class="input-group-addon">تومان</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" ng-show="showDailyRentPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">اجاره روزانه</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label"> اجاره ی روزانه:</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input class="showDailyRentPanel"type="text" ng-model="request.Rent" jj-format="number"/>
+                        <span class="input-group-addon">تومان</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary estatePanel" ng-show="showEstatePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">مشخصات زمین</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label"> متراژ زمین:</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.EstateArea" jj-format="number" jj-allow-float="true"/>
+                        <span class="input-group-addon">متر مربع</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label"> نوع سند:</label>
+                <div class="col-md-8">
+                    <jj-select-estate-voucher-type model="request.EstateVoucherType" jj-allow-clear="true"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary shopPanel" ng-show="showShopPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">مشخصات واحد و ساختمان</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label">زیربنا:</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.UnitArea" jj-format="number" jj-allow-float="true"/>
+                        <span class="input-group-addon">متر مربع</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label">عمر بنا:</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.BuildingAgeYears" jj-format="number"/>
+                        <span class="input-group-addon">سال</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-4 control-label">تعداد پارکینگ ها:</label>
+                <div class="col-md-8">
+                    <input type="number" ng-model="request.NumberOfParkings"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label">دستشویی ایرانی دارد؟</label>
+                <div class="col-md-6">
+                    <input type="checkbox" ng-model="request.HasIranianLavatory"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label">دستشویی فرنگی دارد؟</label>
+                <div class="col-md-6">
+                    <input type="checkbox" ng-model="request.HasForeignLavatory"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary unitPanel" ng-show="showUnitPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">مشخصات واحد</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-6 "> زیربنا:</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.UnitArea" jj-format="number" jj-allow-float="true"/>
+                        <span class="input-group-addon">متر مربع</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-6 "> تعداد اتاق ها:</label>
+                <div class="col-md-6">
+                    <input type="number" ng-model="request.NumberOfRooms"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-6 ">تعداد پارکینگ ها:</label>
+                <div class="col-md-6">
+                    <input type="number" ng-model="request.NumberOfParkings"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <label for="" class="col-md-6">طبقه:</label>
+                <div class="col-md-6">
+                    <input type="number" ng-model="request.UnitFloorNumber"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary housePanel" ng-show="showHousePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">مشخصات ساختمان</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label">تعداد واحدها در هر طبقه:</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="number" ng-model="request.NumberOfUnitsPerFloor"/>
+                        <span class="input-group-addon">واحد</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label">تعداد واحدها در ساختمان:</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="number" ng-model="request.TotalNumberOfUnits"/>
+                        <span class="input-group-addon">واحد</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label">طبقات ساختمان:</label>
+                <div class="col-md-6">
+                    <input type="number" ng-model="request.TotalNumberOfFloors"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label">عمر بنا:</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.BuildingAgeYears" jj-format="number"/>
+                        <span class="input-group-addon">سال</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary industryPanel" ng-show="showIndustryPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">مشخصات واحد صنعتی</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label">زیربنا:</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.UnitArea" jj-format="number" jj-allow-float="true"/>
+                        <span class="input-group-addon">متر مربع</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label"> زیربنای واحد اداری:</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.OfficeArea" jj-format="number"/>
+                        <span class="input-group-addon">متر مربع</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="col-md-6 control-label"> ارتفاع سقف:</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" ng-model="request.CeilingHeight" jj-format="number" jj-allow-float="true"/>
+                        <span class="input-group-addon">متر</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary extraHousePanel" ng-show="showExtraHousePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isCollapsed = !isCollapsed">خصوصیات بیشتر (کلیک کنید) <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="isCollapsed">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.IsDublex" id="IsDublex"/>
+                        واحد دوبلکس است
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasBeenReconstructed" id="HasBeenReconstructed"/>
+                        بازسازی شده است
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasIranianLavatory" id="HasIranianLavatory"/>
+                        دستشویی ایرانی دارد
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasForeignLavatory" id="HasForeignLavatory"/>
+                        دستشویی فرنگی دارد
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasElevator" id="HasElevator"/>
+                        آسانسور دارد
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasStorageRoom" id="HasStorageRoom"/>
+                        انباری دارد
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasAutomaticParkingDoor" id="HasAutomaticParkingDoor"/>
+                        درب پارکینگ ریموتی دارد
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasVideoEyePhone" id="HasVideoEyePhone"/>
+                        آیفون تصویری دارد
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasSwimmingPool" id="HasSwimmingPool"/>
+                        استخر دارد
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasSauna" id="HasSauna"/>
+                        سونا دارد
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasJacuzzi" id="HasJacuzzi"/>
+                        جکوزی دارد
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasPrivatePatio" id="HasPrivatePatio"/>
+                        پاسیوی اختصاصی دارد
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasGatheringHall" id="HasGatheringHall"/>
+                        سالن اجتماعات دارد
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>
+                        <input type="checkbox" ng-model="request.HasMasterBedroom" id="HasMasterBedroom"/>
+                        اتاق مستر دارد
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary neighborhoodPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">موقعیت جغرافیایی</h3>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">محله:</label>
+                <div class="col-md-10">
+                    <jj-select-multiple-vicinity model="request.SelectedVicinities" jj-vicinities="vicinities"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">توضیحات:</label>
+                <div class="col-md-10">
+                    <textarea type="text" rows="3" ng-model="request.Description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary contactPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">اطلاعات تماس</h3>
+    </div>
+    <div class="panel-body">
+        <jj-contact-panel contact="request.Contact"/>
+    </div>
+</div>
+</form>
+<button class="btn btn-success saveButton" ng-disabled="frmRequest.$invalid" ng-click="onSave()"><i class="fa fa-floppy-o"></i> ذخیره</button>
+<button class="btn btn-default" ng-click="onBackClick()">انصراف</button>
+</div>

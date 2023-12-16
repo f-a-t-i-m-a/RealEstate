@@ -1,0 +1,76 @@
+﻿@using System
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Core.Impl.Templates.Email
+@functions {
+	private UserFeedbackModel _model;
+	public override void SetModel(object model)
+	{
+		_model = (UserFeedbackModel)model;
+	}
+
+}
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<table width="95%" style="width: 95%; direction: rtl; font-size: 20px;">
+			<tr><td style="background-color: #dddddd;">
+				    <table width="100%" style="width: 100%; font-size: 20px; font-weight: bold;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>بازخورد از کاربر</td>
+						    <td style="text-align: left;"><a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">خونه ت دات کام</a></td>
+					    </tr>
+				    </table>
+			    </td></tr>
+			<tr><td>
+				    <ul>
+					    <li>موضوع: @_model.Subject</li>
+					    @foreach (var item in _model.Contents)
+					    {
+						    <li>@item.Key: @item.Value</li>
+					    }
+				    </ul>
+					<hr/>
+				    <ul>
+					    @if (_model.AuthenticatedUser != null && _model.AuthenticatedUser.CoreIdentity != null && _model.AuthenticatedUser.CoreIdentity.IsAuthenticated)
+					    {
+						    <li>شماره کاربر: @_model.AuthenticatedUser.CoreIdentity.UserId</li>
+						    <li>شناسه ورود کاربر: @_model.AuthenticatedUser.CoreIdentity.LoginName</li>
+						    <li>نام کامل کاربر: @_model.AuthenticatedUser.CoreIdentity.FullName</li>
+						    <li>نام مستعار کاربر: @_model.AuthenticatedUser.CoreIdentity.DisplayName</li>
+					    }
+					    else
+					    {
+						    <li>کاربر: ناشناس</li>
+					    }
+				    </ul>
+					<hr/>
+				    <ul>
+					    @if (_model.SessionInfo != null && _model.SessionInfo.Record != null)
+					    {
+						    <li>شماره جلسه: @_model.SessionInfo.Record.ID</li>
+						    <li>شماره بازدید کننده: @_model.SessionInfo.Record.UniqueVisitorID</li>
+						    <li>شروع جلسه: @_model.SessionInfo.Record.Start.ToLocalizedDateString() @_model.SessionInfo.Record.Start.ToLongTimeString()</li>
+						    <li>مدت زمان گذشته از جلسه: @((_model.SessionInfo.Record.Start - DateTime.Now).ToLocalizedDurationString())</li>
+						    <li>مرورگر: <span dir="ltr">@_model.SessionInfo.Record.UserAgent</span></li>
+						    <li>آدرس شروع: <span dir="ltr">@_model.SessionInfo.Record.StartupUri</span></li>
+						    <li>آدرس ارجاع: <span dir="ltr">@_model.SessionInfo.Record.ReferrerUri</span></li>
+						    <li>آدرس شبکه: <span dir="ltr">@_model.SessionInfo.Record.ClientAddress</span></li>
+						    <li>پاسخ از مرورگر دریافت شده: @_model.SessionInfo.Record.GotInteractiveAck</li>
+					    }
+					    else
+					    {
+						    <li>مشخصات جلسه: نامعلوم</li>
+					    }
+				    </ul>
+			    </td></tr>
+			<tr><td style="font-size: 20px; text-align: center; background-color: #dddddd; padding: 10px">
+				    <a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">www.khoonat.com</a>
+			    </td></tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Domain.Billing.IBillingSourceEntity
+
+@if (Model.TargetUser != null)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.TargetUser.ID, area = AreaNames.Admin})"><span class="glyphicon glyphicon-link"></span></a>
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ApplyTargetUserIDFilter", "true").Set("TargetUserIDFilter", Model.TargetUser.ID.ToString(CultureInfo.InvariantCulture)))">
+        @Model.TargetUser.ID:
+        @Model.TargetUser.LoginName
+    </a>
+}
+else if (Model.TargetUserID.HasValue)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.TargetUserID, area = AreaNames.Admin})"><span class="glyphicon glyphicon-link"></span></a>
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ApplyTargetUserIDFilter", "true").Set("TargetUserIDFilter", Model.TargetUserID.Value.ToString(CultureInfo.InvariantCulture)))">
+        @Model.TargetUserID
+    </a>
+}
+else
+{
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ApplyTargetUserIDFilter", "true").Set("TargetUserIDFilter", string.Empty))">
+        نامشخص
+    </a>
+}

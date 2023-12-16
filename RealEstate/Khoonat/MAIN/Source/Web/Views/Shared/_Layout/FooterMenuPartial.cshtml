@@ -1,0 +1,24 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Controllers
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared
+
+
+
+@*<span class="vsep">|</span>
+<a href="">قوانین و مقررات</a>
+<span class="vsep">|</span>
+<a href="">رفع مسوولیت</a>
+<span class="vsep">|</span>
+<a href="">اطلاعات حقوقی</a>*@
+
+<div class="panel-body">
+    <div class="col-xs-4 col-sm-2"><a href="@Url.Action("Page", "Home", new { id = HomeController.ContentPage.About, area = AreaNames.Main })">@LayoutResources.Menu_About</a></div>
+    <div class="col-xs-4 col-sm-2"><a href="http://cafebazaar.ir/app/com.khoonat.khoonat/" target="_blank">برنامه موبایل (اندروید)</a></div>
+    <div class="col-xs-4 col-sm-2"><a href="@Url.Action("ReportIssue", "UserFeedback", AreaRouteValue.Main)">گزارش اشکال</a></div>
+    <div class="visible-xs col-xs-12" style="margin-bottom: 30px"></div>
+
+    <div class="col-xs-4 col-sm-2"><a href="@Url.Action("ReportSuggestion", "UserFeedback", AreaRouteValue.Main)">طرح پیشنهاد</a></div>
+    <div class="col-xs-4 col-sm-2"><a href="@Url.Action("ContactUs", "UserFeedback", AreaRouteValue.Main)">تماس با ما</a></div>
+    <div class="col-xs-4 col-sm-2"><a href="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)">تبلیغات در خونه&zwnj;ت</a></div>
+</div>
+

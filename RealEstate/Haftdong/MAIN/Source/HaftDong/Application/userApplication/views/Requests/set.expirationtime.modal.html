@@ -1,0 +1,19 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">انتشار درخواست</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <form name="frmSetExpirationTime" novalidate>
+            <label for="" class="col-md-4"><i class="fa fa-star text-danger"></i> تاریخ اتمام عمومی بودن درخواست: </label>
+            <div class="col-md-4">
+                <jj-jalaali-datepicker-popup jj-model="input.ExpirationTime" class="datepicker" required="true"></jj-jalaali-datepicker-popup>
+            </div>
+        </form>
+    </div>
+    <hr />
+    <jj-contact-panel contact="input.Contact" show-owner-contact="request.SourceType != 1"/>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" ng-click="onPublishClick()" ng-disabled="frmSetExpirationTime.$invalid" restrict-to="RealEstateAgent"><i class="fa fa-arrow-circle-up"></i> انتشار</button>
+    <button class="btn btn-default" ng-click="cancel()">بیخیال</button>
+</div>

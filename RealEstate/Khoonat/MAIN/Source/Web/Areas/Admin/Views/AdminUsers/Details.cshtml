@@ -1,0 +1,58 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Models.Shared.Profile
+@model ProfileModel
+
+
+@section NavbarRightExtra
+{
+	<li><a href="@Url.Action("List")">کاربران</a></li>
+	<li class="active"><a>کاربر @Model.User.Code</a></li>
+}
+
+@Html.Partial("_Profile/ProfileGeneralInfo", Model.User)
+
+<ul class="nav nav-tabs">
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.General))"><a href="@Url.Action("Details", new {activeTab = "General", page = ""})">مشخصات</a></li>
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.AllPropertyListings))"><a href="@Url.Action("Details", new {activeTab = "AllPropertyListings", page = ""})">املاک ثبت شده</a></li>
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.PublishedPropertyListings))"><a href="@Url.Action("Details", new {activeTab = "PublishedPropertyListings", page = ""})">املاک منتشر شده</a></li>
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.PublishHistory))"><a href="@Url.Action("Details", new {activeTab = "PublishHistory", page = ""})">تاریخچه انتشار</a></li>
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.Searches))"><a href="@Url.Action("Details", new {activeTab = "Searches", page = ""})">جستجو ها</a></li>
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.SecurityInfo))"><a href="@Url.Action("Details", new {activeTab = "SecurityInfo", page = ""})">اطلاعات امنیتی</a></li>
+</ul>
+
+@Html.Partial("_Profile/ProfileActiveTab", Model)
+
+@section SideBar
+{
+    <p>لینک های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("ListTransactions", "UserTransactionsAdmin", new {UserIDFilter = Model.User.ID, area = AreaNames.Billing})">تراکنش ها</a></li>
+        <li><a href="@Url.Action("List", "SponsoredPropertyAdmin", new {BilledUserIDFilter = Model.User.ID, area = AreaNames.Ad})">آگهی های ویژه املاک</a></li>
+        <li><a href="@Url.Action("List", "AdminProperties", new {OwnerUserIdFilter = Model.User.ID,ApplyOwnerUserIdFilter = true, area = AreaNames.Admin})">املاک</a></li>
+        <li><a href="@Url.Action("List", "AdminPropertyPhotos", new {UserIdFilter = Model.User.ID, ApplyUserIdFilter = true, area = AreaNames.Admin})">عکس های املاک</a></li>
+        <li><a href="@Url.Action("List", "AdminSavedPropertySearches", new {UserIdFilter = Model.User.ID, area = AreaNames.Admin})">جستجو های ذخیره شده</a></li>
+        <li><a href="@Url.Action("List", "AdminOutgoingSms", new {TargetUserIdFilter = Model.User.ID, ApplyTargetUserIdFilter = true, area = AreaNames.Admin})">پیامک های ارسالی</a></li>
+        <li><a href="@Url.Action("List", "AdminActivityLog", new {AuthenticatedUserIdFilter = Model.User.ID, ApplyAuthenticatedUserIdFilter = true, area = AreaNames.Admin})">فعالیت ها</a></li>
+        <li><a href="@Url.Action("List", "AdminSessions", new {UserIdFilter = Model.User.ID, ApplyUserIdFilter = true, area = AreaNames.Admin})">جلسات</a></li>
+        <li><a href="@Url.Action("List", "AdminVisitors", new {UserIdFilter = Model.User.ID, area = AreaNames.Admin})">بازدید کننده ها</a></li>
+    </ul>
+	
+	<hr/>
+	<p>مانده اعتبار:</p>
+	<ul>
+		<li>نقد: @BillingPresentationHelper.Balance(Model.Balance.CashBalance)</li>
+		<li>تخفیف: @BillingPresentationHelper.Balance(Model.Balance.BonusBalance)</li>
+		<li class="bold">مجموع: @BillingPresentationHelper.Balance(Model.Balance.TotalBalance)</li>
+	</ul>
+
+	<hr />
+	<p>گردش مالی:</p>
+	<ul>
+		<li>نقد: @BillingPresentationHelper.Turnover(Model.Balance.CashTurnover)</li>
+		<li>تخفیف: @BillingPresentationHelper.Turnover(Model.Balance.BonusTurnover)</li>
+		<li class="bold">مجموع: @BillingPresentationHelper.Turnover(Model.Balance.TotalTurnover)</li>
+	</ul>
+
+}

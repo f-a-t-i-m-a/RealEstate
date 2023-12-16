@@ -1,0 +1,71 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@model JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredProperty.SponsoredPropertyConfirmationPopupModel
+
+@{
+	var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">تغییر وضعیت آگهی ویژه</h4>
+	</div>
+	<div class="modal-body">
+		<p>آگهی ویژه برای ملک با مشخصات زیر موجود می باشد</p>
+
+		<table style="border-spacing: 10px; border-collapse: separate;">
+			<tr>
+				<td>شناسه:</td>
+				<td>@Model.ListingSummary.ID</td>
+			</tr>
+			<tr>
+				<td>محل:</td>
+				<td>@propertyPresentationHelper.BuildRegion(Model.ListingSummary)</td>
+			</tr>
+			<tr>
+				<td>ملک:</td>
+				<td>@propertyPresentationHelper.BuildTitle(Model.ListingSummary)</td>
+			</tr>
+			<tr>
+				<td>مساحت:</td>
+				<td>@propertyPresentationHelper.BuildArea(Model.ListingSummary)</td>
+			</tr>
+			<tr>
+				<td>قیمت:</td>
+				<td>@propertyPresentationHelper.BuildPriceAndPricePerArea(Model.ListingSummary)</td>
+			</tr>
+		</table>
+		<p>
+			@if (!Model.Enabled)
+			{
+				<strong>آیا می خواهید دیگه ویژه نباشه؟ </strong>
+			}
+			else
+			{
+				<strong>آیا می خواهید آگهی تون به صورت ویژه نمایش داده بشه؟</strong>
+			}
+		</p>
+	</div>
+	<div class="modal-footer">
+		@using (Html.BeginForm("ChangeSponsorshipMode", "SponsoredProperty", new
+		{
+			sponsoredEntityID = Model.SponsoredEntityID,
+			enabled = Model.Enabled,
+			propertyListingID = Model.ListingSummary.ID,
+			referringController = Model.ReferringController
+		}, FormMethod.Post))
+		{
+			if (!Model.Enabled)
+			{
+				<button name="btnOK" value="btnOK" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ویژه نباشه</button>
+			}
+			else
+			{
+				<button name="btnOK" value="btnOK" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ویژه باشه</button>
+			}
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		}
+	</div>
+</div>
+

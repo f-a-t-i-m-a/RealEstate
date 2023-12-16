@@ -1,0 +1,11 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Domain.Billing.UserWireTransferPayment
+
+مبلغ:
+@BillingPresentationHelper.Delta(Model.Amount)
+<br/>
+
+زمان:
+@Model.UserEnteredDate.ToLocalizedDateString()
+@Model.UserEnteredDate.ToLocalizedTimeString()

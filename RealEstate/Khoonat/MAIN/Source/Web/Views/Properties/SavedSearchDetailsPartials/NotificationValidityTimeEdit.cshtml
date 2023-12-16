@@ -1,0 +1,47 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+<div id="anyNotificationDetails" class="hidden" style="border: 2px solid orange; padding: 15px;">
+	<div>
+		قبلاً مشخص کردید که این پیغام ها تا
+		@if (Model.SavedSearch.SendNotificationsUntil.HasValue)
+		{
+			@: تاریخ
+			@Model.SavedSearch.SendNotificationsUntil.ToLocalizedDateString()
+		}
+		else
+		{
+			@: وقتی که خودتون غیر فعالشون کنین
+		}
+		ارسال بشن.
+		<br/>
+		اگه می خواید این تاریخ رو تغییر بدید، مقدار این فیلد زیر رو عوض کنید:
+		<br/>
+		<br/>
+	</div>
+
+	<div style="display: inline-block; width: 280px;">تا چه مدت زمانی این پیغام ها ارسال بشن؟</div>
+	<div style="display: inline-block; width: 240px;">
+		<select id="DaysToKeepSendingNotificatons" name="DaysToKeepSendingNotificatons">
+			@if (Model.SavedSearch.SendNotificationsUntil.HasValue)
+			{
+				<option value="" selected="selected">تا تاریخ @Model.SavedSearch.SendNotificationsUntil.ToLocalizedDateString()</option>
+			}
+			else
+			{
+				<option value="" selected="selected">تا زمانی که خودم غیر فعال شون کنم</option>
+			}
+			<option value="2">تا دو روز آینده</option>
+			<option value="4">تا چهار روز آینده</option>
+			<option value="7">تا یک هفته آینده</option>
+			<option value="14">تا دو هفته آینده</option>
+			<option value="21">تا سه هفته آینده</option>
+			<option value="30">تا یک ماه آینده</option>
+			<option value="60">تا دو ماه آینده</option>
+			<option value="90">تا سه ماه آینده</option>
+			<option value="120">تا چهار ماه آینده</option>
+			<option value="150">تا پنج ماه آینده</option>
+			<option value="180">تا شش ماه آینده</option>
+		</select>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Core.Services.Billing
+
+@{
+    var tarrifService = ComposerWebUtil.ComponentContext.GetComponent<ITarrifService>();
+}
+
+<ul class="list-group">
+	<li class="list-group-item list-group-item-info">
+		<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>&nbsp;&nbsp;نکاتی در مورد اطلاع رسانی املاک ثبت شده 
+	</li>
+	<li class="list-group-item">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		فقط املاکی که مطابق شرایطی هستن که شما مشخص کردین از این طریق براتون فرستاده میشه.
+	</li>
+	<li class="list-group-item">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		اطلاع رسانی با ایمیل هیچ هزینه ای براتون نداره.
+	</li>
+	<li class="list-group-item">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		ممکنه فردی که ملک رو ثبت کرده بخواد با هزینه خودش برای شما پیامک بزنه و اطلاع رسانی کنه. اگه اجازه این کار رو داده باشین،
+		این پیامک ها براتون ارسال میشه و هیچ هزینه ای هم نداره.
+	</li>
+	<li class="list-group-item">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		اطلاع رسانی با پیامک براتون هزینه داره و باید حسابتون رو شارژ کنید تا بتونید اونها رو دریافت کنید.
+	</li>
+	<li class="list-group-item">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		هزینه ارسال هر پیامک براتون
+		@tarrifService.GetTarrif(User.CoreIdentity.UserId).SavedPropertySearchSmsNotificationBase
+		ریال میشه.
+	</li>
+	<li class="list-group-item">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		چون پیامک هایی که فرستاده میشن فارسی هستن،
+		<strong>اگه طول پیامک بیشتر از 70 حرف باشه، هر 67 حرف یک پیامک محاسبه میشه</strong>.
+	</li>
+
+	<li class="list-group-item">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		محتویات پیامک رو خودتون انتخاب می کنید، سعی کنید حداقل اطلاعاتی که لازم دارید رو انتخاب کنید که هزینه تون به حداقل برسه.
+		همیشه می تونید اطلاعات کامل ملک ها رو با مراجعه با سایت ببینید.
+	</li>
+
+</ul>
+

@@ -1,0 +1,35 @@
+﻿@using System.Web.Optimization
+@using JahanJooy.Common.Util.Web.Extensions
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>@(ViewBag.Title == null ? "خونه ت دات کام" : ViewBag.Title + " - خونه ت")</title>
+		@if (ViewBag.MetaDescription != null)
+		{
+			<meta name="Description" content="@ViewBag.MetaDescription"/>
+		}
+		@if (ViewBag.CanonicalUrl != null)
+		{
+			<link rel="canonical" href="@ViewBag.CanonicalUrl"/>
+		}
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		@Styles.Render("~/bundles/css")
+		@this.OutputStyles()
+		@RenderSection("Styles", false)
+	</head>
+	<body>
+		@RenderBody()
+
+		@if (SessionInfo != null && !SessionInfo.IsCrawler)
+		{
+			<text>
+				@Scripts.Render("~/bundles/js")
+				@this.OutputScripts()
+				@RenderSection("Scripts", false)
+				@Html.Partial("_Layout/InteractiveSessionAckPartial")
+				@Html.Partial("_Layout/GoogleAnalyticsPartial")
+			</text>
+		}
+	</body>
+</html>

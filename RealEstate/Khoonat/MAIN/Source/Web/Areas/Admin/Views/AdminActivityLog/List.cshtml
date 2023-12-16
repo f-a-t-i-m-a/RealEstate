@@ -1,0 +1,123 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Audit
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@using JahanJooy.RealEstate.Web.Areas.Admin.Helpers.AdminAcvityLog
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminActivityLog.AdminActivityLogListModel
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") &gt; فعالیت کاربران</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Logs, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>تاریخ</th>
+            <th>جلسه</th>
+            <th>کاربر</th>
+            <th>اقدام</th>
+            <th>موجودیت</th>
+            <th>موفق؟</th>
+            <th>موجودیت جزئی</th>
+            <th>موجودیت پدر</th>
+            <th>موجودیت بازرسی</th>
+            <th>اولویت</th>
+        </tr>
+        </thead>
+        @foreach (var log in Model.Logs)
+        {
+            <tr>
+                <td>@log.ID</td>
+                <td>
+                    @log.LogDate.ToLocalizedDateString() @log.LogDate.ToLocalizedTimeString() <br/><span style="font-size: 80%">@((log.LogDate - DateTime.Now).ToLocalizedRelativeString())</span></td>
+                <td>@Html.Partial("CellSessionID", log)</td>
+                <td>@Html.Partial("CellAuthenticatedUser", log)</td>
+                <td>@Html.Partial("CellAction", log)</td>
+                <td>@Html.Partial("CellTargetEntity", log)</td>
+                <td>@IconsHelper.Tristate(Url, log.ActionSucceeded)</td>
+                <td>@Html.Partial("CellDetailEntity", log)</td>
+                <td>@Html.Partial("CellParentEntity", log)</td>
+                <td>@Html.Partial("CellAuditEntity", log)</td>
+                <td>@log.ReviewWeight</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Logs, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li>
+            <a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a>
+        </li>
+        <li>
+            <a href="@Url.Action("List", new {TargetEntityFilter = TargetEntityType.User, ActionFilter = ActivityAction.Create})">ثبت نام کاربران</a>
+        </li>
+        <li>
+            <a href="@Url.Action("List", new {TargetEntityFilter = TargetEntityType.User, ActionFilter = ActivityAction.Authenticate})">ورود کاربران به سیستم</a>
+        </li>
+        <li>
+            <a href="@Url.Action("List", new {TargetEntityFilter = TargetEntityType.PropertyListing, ActionFilter = ActivityAction.Create})">ثبت املاک</a>
+        </li>
+        <li>
+            <a href="@Url.Action("List", new {TargetEntityFilter = TargetEntityType.PropertyListing, ActionFilter = ActivityAction.Authenticate})">درستی یابی رمز ویرایش املاک</a>
+        </li>
+    </ul>
+
+    <br/><hr/>
+
+    @using (Html.BeginForm("List", "AdminActivityLog", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.SessionIdFilter):
+            @Html.TextBoxFor(m => m.SessionIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.ActionFilter):
+            @Html.DropDownListFor(m => m.ActionFilter, Model.ActionFilter.EnumSelectList(), GeneralResources.NotSelected)
+            <br/>
+            <br/>
+            @Html.CheckBoxWithoutHiddenField("ApplyAuthenticatedUserIdFilter", Model.ApplyAuthenticatedUserIdFilter)
+            @Html.LabelFor(m => m.ApplyAuthenticatedUserIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.AuthenticatedUserIdFilter):
+            @Html.TextBoxFor(m => m.AuthenticatedUserIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.TargetEntityFilter):
+            @Html.DropDownListFor(m => m.TargetEntityFilter, Model.TargetEntityFilter.EnumSelectList(), GeneralResources.NotSelected)
+            <br/>
+            <br/>
+
+            @Html.CheckBoxWithoutHiddenField("ApplyTargetEntityIdFilter", Model.ApplyTargetEntityIdFilter)
+            @Html.LabelFor(m => m.ApplyTargetEntityIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.TargetEntityIdFilter):
+            @Html.TextBoxFor(m => m.TargetEntityIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.MinimumReviewWeightFilter):
+            @Html.TextBoxFor(m => m.MinimumReviewWeightFilter)
+            <br/>
+            <br/>
+
+            <button name="submit" value="btnRefresh" class="button" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

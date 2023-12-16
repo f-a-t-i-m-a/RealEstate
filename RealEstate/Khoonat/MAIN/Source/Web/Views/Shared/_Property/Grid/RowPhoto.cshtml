@@ -1,0 +1,7 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+@if (Model.CoverPhotoId.HasValue)
+{
+	<img width="63" height="63" src="@Url.Action("GetThumbnailImage", "PropertyPhoto", new {id = Model.CoverPhotoId, area = AreaNames.Main})"/>
+}

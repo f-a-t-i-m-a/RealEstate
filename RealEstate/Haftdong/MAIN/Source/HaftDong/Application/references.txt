@@ -1,0 +1,106 @@
+﻿
+AutoMapper:
+	Project: https://github.com/AutoMapper/AutoMapper
+	Documentation: https://github.com/AutoMapper/AutoMapper/wiki
+
+
+TypeScript:
+	Homepage: http://www.typescriptlang.org/
+	Handbook: http://www.typescriptlang.org/Handbook
+
+
+DefinitelyTyped:
+	Homepage: http://definitelytyped.org/
+	Github: https://github.com/borisyankov/DefinitelyTyped
+	NuGet search: http://www.nuget.org/packages?q=Definitelytyped
+
+
+Linq.js:
+	Project homepage: http://linqjs.codeplex.com/
+
+
+Bootstrap:
+	CSS: http://getbootstrap.com/css/
+	Components: http://getbootstrap.com/components/
+	JavaScript: http://getbootstrap.com/javascript/
+
+
+FontAwesome:
+	Homepage: http://fontawesome.io/
+	Icons: http://fontawesome.io/icons/
+	Examples: http://fontawesome.io/examples/
+
+
+AngularJS:
+	Homepage: https://angularjs.org/
+	API Reference: https://docs.angularjs.org/api
+	Developer Guide: https://docs.angularjs.org/guide
+	Tutorial: https://docs.angularjs.org/tutorial
+
+
+Angular UI:
+	Homepage: http://angular-ui.github.io/
+
+	UI-Utils:
+		Homepage: http://angular-ui.github.io/ui-utils/
+
+	UI-Bootstrap:
+		Github: https://github.com/angular-ui/bootstrap
+		Reference: http://angular-ui.github.io/bootstrap/
+
+	UI-Router:
+		Project: https://github.com/angular-ui/ui-router
+		Guide: https://github.com/angular-ui/ui-router/wiki
+		API Reference: http://angular-ui.github.io/ui-router/site/#/api/ui.router
+		Quick Reference: https://github.com/angular-ui/ui-router/wiki/Quick-Reference
+
+	UI-Select:
+		Project: https://github.com/angular-ui/ui-select
+		Documentation: https://github.com/angular-ui/ui-select/wiki
+		Examples: https://github.com/angular-ui/ui-select/tree/master/examples
+
+	UI-Grid:
+		Homepage: http://ui-grid.info/
+		Github: https://github.com/angular-ui/ng-grid
+		API Documentation: http://ui-grid.info/docs/#/api
+		Tutorial: http://ui-grid.info/docs/#/tutorial
+
+
+Angular-File-Upload:
+	Github page: https://github.com/danialfarid/angular-file-upload
+
+
+Persian-DatePicker:
+	Project: https://github.com/AminRahimi/angular-bootstrap-persian-datepicker
+	Sample: http://aminrahimi.github.io/angular-bootstrap-persian-datepicker/
+
+
+jQuery:
+	Homepage: http://jquery.com/
+	API documentation: http://api.jquery.com/
+
+
+TypeLITE:
+	Homepage: http://type.litesolutions.net/
+	Tutorials: http://type.litesolutions.net/Tutorials
+	Documentation: http://type.litesolutions.net/doc
+
+
+jQuery Caret:
+	Github: https://github.com/acdvorak/jquery.caret
+
+
+Moment JS:
+	Home: http://momentjs.com/
+	Docs: http://momentjs.com/docs/
+
+
+Moment-Jalaali:
+	Github: https://github.com/jalaali/moment-jalaali
+
+
+----------------------------------------------
+==============================================
+
+Maybe useful in the future:
+https://github.com/ghiscoding/angular-validation

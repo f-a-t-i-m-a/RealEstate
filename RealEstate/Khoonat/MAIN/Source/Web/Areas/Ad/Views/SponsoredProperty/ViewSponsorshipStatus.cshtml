@@ -1,0 +1,18 @@
+﻿@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredProperty.SponsoredPropertyViewSponsorshipStatusModel
+
+<div>
+    <a href="@Url.Action("NewSponsorship", new { id = Model.PropertyListing.ID})">@IconsHelper.Add16(Url) جدید</a>
+</div>
+
+@if (Model.Sponsorships.Any())
+{
+    <ul>
+        @foreach (var sponsorship in Model.Sponsorships)
+        {
+            <li>@sponsorship.ID : @sponsorship.SponsoredEntity.BillingMethod - @sponsorship.SponsoredEntity.MaxPayPerImpression @GeneralResources.Rials</li>
+        }
+    </ul>
+}
+

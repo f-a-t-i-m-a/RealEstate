@@ -1,0 +1,113 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Controllers
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileContactMethodVerificationModel
+
+<div id="verificationRoot">
+
+    <div>
+        <strong>دقت کنید: </strong>
+        هنوز این
+        @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+        برای ارتباط سیستم با شما قابل استفاده نیست.
+        برای استفاده از این @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+        برای دریافت اطلاعات از سایت یا بازیابی کلمه عبور، باید مالکیت اون رو تایید کنید.
+        <a target="_blank"  href="@Url.Action("Page", "Home", new {id = HomeController.ContentPage.WhyVerifyContactMethod})">(چرا؟)</a>
+    </div>
+
+    @if (Model.VerificationRestarted)
+    {
+        <h3>یک رمز فعال سازی جدید برای شما ارسال شد.</h3>
+    }
+
+    @if (Model.VerificationInfo.HasOngoingVerification)
+    {
+        if (Model.VerificationInfo.ContactMethod.ContactMethodType == ContactMethodType.Phone)
+        {
+            <p>
+                یک پیامک فعال سازی توسط سیستم به شماره تلفن
+                @HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.ContactMethod.ContactMethodText)
+                فرستاده شده، که توی اون یک رمز فعال سازی وجود داره. لطفاٌ رمز رو داخل فرم زیر وارد کنید
+                و گزینه فعال سازی رو انتخاب کنید.
+            </p>
+        }
+        else
+        {
+            <p>
+                یک ایمیل فعال سازی توسط سیستم به آدرس ایمیل
+                @HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.ContactMethod.ContactMethodText)
+                فرستاده شده، که توی اون یک رمز فعال سازی وجود داره. لطفاً رمز رو داخل این فرم وارد کنید
+                و گزینه فعال سازی رو انتخاب کنید.
+            </p>
+            <p>
+                اگر ایمیل رو داخل صندوق ورودی تون نمی بینید، حتماً شاخه
+                Spam
+                یا هرزنامه ها رو هم بررسی کنید. گاهی اوقات سرویس های ایمیل، پیام ها رو به اشتباه
+                به عنوان هرزنامه طبقه بندی می کنند.
+            </p>
+        }
+
+        using (Ajax.BeginForm("PerformVerification", null, new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "verificationRoot"}, new {id = "frmVerification"}))
+        {
+            @Html.HiddenFor(m => m.ContactMethodID)
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-4 col-md-4">@Html.LabelFor(m => m.VerificationSecret):</div>
+                    <div class="col-xs-3 col-md-3">@Html.TextBoxFor(m => m.VerificationSecret, new {autofocus = "autofocus"})</div>
+                    <div class="col-xs-1 col-md-1">@IconsHelper.RequiredTwo16(Url)</div>
+                    <div class="col-xs-3 col-md-4"><button name="btnOK" value="btnOK" type="submit" class="btn btn-primary">فعال سازی</button></div>
+                </div>
+                <div >
+                    @Html.ValidationMessageFor(m => m.VerificationSecret)
+                </div>
+                <div>
+                    @Html.ScriptCaptchaToken()
+                    @Html.ScriptCaptchaScript()
+                    @Html.CaptchaErrorMessage()
+                </div>
+            </div>
+        }
+
+        <p>
+            به خاطر ملاحظات امنیتی، مدت زمان اعتبار رمز فعلی محدود بوده و شما برای اتمام فعال سازی با این رمز، تا ساعت
+            @HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.LatestVerification.ExpirationTime.ToLocalizedTimeString())
+            تاریخ
+            @HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.LatestVerification.ExpirationTime.ToLocalizedDateString())
+            فرصت دارید. در صورت انقضای این زمان، می تونید رمز فعال سازی جدیدی درخواست کنید.
+        </p>
+
+        <p>
+            در صورتی که رمز ارسالی یعد از مدتی به دست تون نرسید، می تونید رمز فعلی رو لغو کنید و فعال سازی رو از اول شروع کنید.
+        </p>
+        <p>
+            <strong>دقت کنید:</strong>
+            قبل از اینکه رمز جدید درخواست کنید، لطفاً حداقل 15 دقیقه برای دریافت پیغام فعال سازی منتظر بمونید.
+        </p>
+    }
+    else
+    {
+        <p>
+            مهلت استفاده از رمز فعال سازی قبلی که براتون فرستاده شده تموم شده. برای اینکه بتونید این
+            @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+            رو فعال کنید، باید رمز جدید بگیرید.
+        </p>
+    }
+
+    @using (Ajax.BeginForm("RestartVerification", new {id = Model.VerificationInfo.ContactMethod.ID}, new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "verificationRoot"}))
+    {
+        <div >
+            <button name="btnRestart" value="btnRestart" type="submit" class="btn btn-primary">درخواست رمز جدید</button>
+            <button id="btnCancel" type="button" class="btn btn-default" data-dismiss="modal">بمونه برای بعد...</button>
+        </div>
+    }
+
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse("#frmVerification");
+    </script>
+
+</div>

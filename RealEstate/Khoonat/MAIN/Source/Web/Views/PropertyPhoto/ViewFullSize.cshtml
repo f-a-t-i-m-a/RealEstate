@@ -1,0 +1,100 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Models.PropertyPhoto.PropertyPhotoViewFullSizeModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+
+	var propertyPhotoHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPhotoHelper>();
+	ViewBag.Title = propertyPhotoHelper.BuildFullSizePageTitle(Model.Photo, Model.Listing);
+	ViewBag.MetaDescription = propertyPhotoHelper.BuildFullSizePageDescription(Model.Photo, Model.Listing);
+}
+
+@this.ScriptLibrary(JavaScriptLibraries.JQueryOverscroll)
+
+<div style="position: absolute; top: 10px; bottom: 10px; left: 10px; right: 10px; min-width: 700px; min-height: 300px;">
+	<div style="position: absolute; right: 0; top: 0; width: 250px; height: 100%; background-color: #555; color: white; font-size: 110%; overflow-x: hidden; overflow-y: auto">
+		<div style="margin: 10px;">
+			<div>
+				<table style="width: 100%; margin: 15px 0;">
+					<tr>
+						<td><a href="@Url.Action("ViewDetails", "Property", new { ID = Model.Listing.ID })" style="color: white;">ملک @Model.Listing.Code</a></td>
+						<td style="text-align: left;">عکس @(Model.Index + 1) از @Model.Count</td>
+					</tr>
+				</table>
+			</div>
+			<div style="height: 30px;">
+				@if (Model.NextID.HasValue)
+				{
+					<a class="fl" style="display: block; background-color: white; border: black; padding: 5px; width: 90px; text-align: center;" href="@Url.Action("ViewFullSize", "PropertyPhoto", new { photoId = Model.NextID.Value })">
+						بعدی
+						@IconsHelper.GoLeft16(Url)
+					</a>
+				}
+				@if (Model.PrevID.HasValue)
+				{
+					<a class="fr" style="display: block; background-color: white; border: black; padding: 5px; width: 90px; text-align: center;" href="@Url.Action("ViewFullSize", "PropertyPhoto", new { photoId = Model.PrevID.Value })">
+						@IconsHelper.GoRight16(Url)
+						قبلی
+					</a>
+				}
+			</div>
+
+			@if (!Model.Photo.Approved.HasValue)
+			{
+				<div style="text-align: right; margin: 10px 0;">
+					<span class="field-validation-warning">
+						این عکس توی صف بازبینی توسط مسئولین سایت قرار گرفته، و به زودی در اختیار همه بازدید کننده ها قرار می گیره.
+					</span>
+				</div>
+			}
+	
+			@if (Model.Photo.Approved.HasValue && !Model.Photo.Approved.Value)
+			{
+				<div style="text-align: right; margin: 10px 0;">
+					<span class="field-validation-error">
+						این عکس موقع بازبینی توسط مسئول سایت مردود شده. در صورت تمایل اشکال رو رفع کنید تا دوباره بازبینی بشه.
+						اگر در این مورد سوالی دارید یا کمک می خواهید، <a href="@Url.Action("ContactUs", "UserFeedback")">با ما تماس بگیرید</a>.
+					</span>
+				</div>
+			}
+
+			<p>
+				<span class="bold">موضوع:</span><br />
+				@HtmlPresentationHelper.IfNotSpecified(Model.Photo.Subject.Label(DomainEnumResources.ResourceManager))
+			</p>
+			<p>
+				<span class="bold">عنوان:</span><br/>
+				@HtmlPresentationHelper.IfNotSpecified(Model.Photo.Title, "-")
+			</p>
+			<p>
+				<span class="bold">توضیحات:</span><br/>
+				@HtmlPresentationHelper.IfNotSpecified(Model.Photo.Description, "-")
+			</p>
+			<p>
+				ایجاد:
+				@((Model.Photo.CreationTime - DateTime.Now).ToLocalizedRelativeString())
+			</p>
+		</div>
+	</div>
+	<div style="background-color: #000; text-align: center; margin-right: 250px; height: 100%; direction: ltr; position: relative;">
+		<div style="position: absolute; top: 10px; bottom: 10px; left: 10px; right: 10px;">
+			<div id="fullSizePhotoContainer" style="display: inline-block; overflow: auto; max-height: 100%; max-width: 100%;">
+				<img src="@Url.Action("GetFullSizeImage", "PropertyPhoto", new { id = Model.Photo.ID})"/>
+			</div>
+		</div>
+	</div>
+</div>
+
+@this.ScriptBlock(@<script type="text/javascript">
+	                   $("#fullSizePhotoContainer").overscroll({ hoverThumbs: true });
+	                   $(window).resize(function() {
+		                   $("#fullSizePhotoContainer").removeOverscroll();
+		                   $("#fullSizePhotoContainer").overscroll({ hoverThumbs: true });
+	                   });
+                   </script>)

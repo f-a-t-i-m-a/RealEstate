@@ -1,0 +1,20 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Billing.PromotionalBonus
+
+@if (Model.CreatedByUser != null)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.CreatedByUserID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ApplyCreatedByUserIDFilter", "true").Set("CreatedByUserIDFilter", Model.CreatedByUserID.ToString()))">
+        @Model.CreatedByUserID:
+        @Model.CreatedByUser.LoginName
+    </a>
+}
+else
+{
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ApplyCreatedByUserIDFilter", "true").Set("CreatedByUserIDFilter", string.Empty))">
+        سیستم
+    </a>
+}

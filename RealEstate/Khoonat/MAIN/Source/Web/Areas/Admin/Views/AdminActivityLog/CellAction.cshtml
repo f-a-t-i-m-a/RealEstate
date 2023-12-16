@@ -1,0 +1,9 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas.Admin.Helpers.AdminAcvityLog
+@model JahanJooy.RealEstate.Core.Services.Dto.Audit.ActivityLogDisplayInfo
+
+<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ActionFilter", Model.Action.ToString()))">
+	@Html.ActivityLogAction(Model)
+</a>
+

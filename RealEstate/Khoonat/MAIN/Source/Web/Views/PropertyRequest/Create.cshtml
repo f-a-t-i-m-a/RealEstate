@@ -1,0 +1,136 @@
+﻿@using System.Collections.Concurrent
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Spatial
+@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.PropertyRequest
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Models.PropertyRequest.PropertyRequestEditModel
+
+@{
+    ViewBag.Title = "ثبت، درج و انتشار رایگان آگهی درخواست خرید یا اجاره";
+    ViewBag.MetaDescription = "فرم ثبت رایگان درخواست ملک در سایت برای خرید یا اجاره، انتشار آن. اطلاعات درخواست ثبت شده به رایگان در اختیار عموم قرار خواهد گرفت";
+}
+
+@this.StyleLibrary(StyleLibraries.JQueryCalendarsPicker)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryUI)
+
+@this.ScriptBlock(@<script type="text/javascript">applyDigitGrouping(); </script>)
+@this.ScriptBlock(@<script type="text/javascript">setupChosen(); </script>)
+
+<div class="page-header">
+    <h1>ثبت درخواست ملک </h1>
+</div>
+@*@Html.Partial("PublishValidationErrorsOnCreatePartial")*@
+@using (Html.BeginForm("Create", "PropertyRequest", FormMethod.Post, new {id = "frmProperty", @class="form-horizontal"}))
+{
+    <text>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.Partial("EditMainPropertiesPartial", Model)
+                @Html.Partial("EditAgencyListingFlagPartial", Model)
+            </div>
+        </div>
+
+
+        <tr>
+            <td>مرکز:</td>
+            <td colspan="2">@Html.TextBoxFor(m => m.CenterPointWkt, new { style = "direction:ltr;", @readonly = "readonly" })</td>
+        </tr>
+        <tr>
+            <td>محدوده:</td>
+            <td>@Html.TextBoxFor(m => m.BoundaryWkt, new { style = "direction:ltr;", @readonly = "readonly" })</td>
+            <td><span id="editBoundaryIcon">@IconsHelper.Edit16(Url)</span></td>
+        </tr>
+
+        @Html.Partial("EditLocationPartial", new EditLocationPartialModel
+                                        {
+                                            Boundary = Model.Boundary,
+                                            CenterPoint = Model.CenterPoint,
+                                            ParentBoundary = Model.ParentVicinity.IfNotNull(pv => new SpatialBoundary { Geography = pv.Boundary, Title = VicinityPresentationHelper.BuildTitle(pv) }),
+                                            BoundaryWktId = "BoundaryWkt",
+                                            CenterPointWktId = "CenterPointWkt",
+                                            ToggleBoundaryEditButtonId = "editBoundaryIcon",
+                                            AdjacentBoundariesActionUrl = Url.Action("GetSiblingBoundaries", "VicinityAdmin", new { Area = AreaNames.Main, vicinityId = Model.ID })
+                                        })
+
+
+
+
+
+
+@*        @Html.Partial("EditLocationPartial", Model)*@
+        @Html.Partial("EditBuildingAndUnitPartial", Model)
+        @Html.Partial("EditEstatePartial", Model)
+        @Html.Partial("EditAdditionalSpecsPartial", Model)
+        @Html.Partial("EditSalePricePartial", Model)
+        @Html.Partial("EditRentPricePartial", Model)
+        @Html.Partial("EditContactInfoPartial", Model)
+    </text>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                ثبت و آگهی کردن
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <strong>شما میتوانید همیشه زمان آگهی خود را تمدید کنید یا آن را از حالت عمومی خارج کنید</strong>.
+            </p>
+            <br />
+            <div class="form-group">
+                <div class="col-md-4">@Html.LabelFor(m => m.PublishDuration):</div>
+                <div class="col-md-4">@Html.DropDownListFor(m => m.PublishDuration, Model.PublishDuration.EnumSelectList(PropertyRequestEditModelResources.ResourceManager), "هیچ - فقط در دسترس خودم باشد و عمومی نشود", new { @class = "form-control" })</div>
+            </div>
+            <br />
+            <br />
+            <div class="panel panel-info" id="publishInfo">
+                <div class="panel-body">
+                    <ul>
+                        @*<li>با عمومی کردن ملک، اطلاعات اون برای همه افراد قابل دسترسی و مشاهده می شه. مسئولیت انتشار این اطلاعات به صورت عمومی به عهده شماست.</li>*@
+                        <li> کاربر گرامی مسؤولیت آگهی های عمومی املاک بر عهده ی آگهی دهنده است. از درستی اطلاعات مطمئن شوید.</li>
+                        @*<li>لطفاً قبل از عمومی کردن، از درستی اطلاعات مطمئن بشید تا بقیه کاربران به اشتباه نیفتند. اگر در موردی شک دارید، از راهنما استفاده کنید یا با ما تماس بگیرید.</li>*@
+
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-warning" id="unpublishInfo">
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-warning-sign text-warning" aria-hidden="true"></span>
+                    با این انتخاب، آگهی به صورت خصوصی برای شما ثبت شده، در جستجو ظاهر نمی شود و سایر کاربران به آن دسترسی نخواهند داشت.
+                    برای عمومی کردن درخواست خود پس از ثبت، می توانید از داخل صفحه جزئیات این کار را انجام دهید.
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button name="submit" value="btnSave" class="btn btn-primary btn-md" type="submit"> ثبت >></button>
+        </div>
+    </div>
+
+
+    this.ScriptBlock(@<script type="text/javascript">
+
+        $("#PublishDuration").change(function() {
+            if (this.value) {
+                $("#publishInfo").show(400);
+                $("#unpublishInfo").hide(400);
+            } else {
+                $("#publishInfo").hide(400);
+                $("#unpublishInfo").show(400);
+            }
+        });
+
+        $("#PublishDuration").change();
+
+    </script>);
+
+    @Html.CaptchaErrorMessage()
+    @Html.ScriptCaptchaToken()
+    this.ScriptText(Html.ScriptCaptchaScript());
+}

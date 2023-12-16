@@ -1,0 +1,99 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Core.Services.Dto.Property
+@using JahanJooy.RealEstate.Domain.Ad
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+
+@model JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredProperty.SponsoredPropertyListModel
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)">سامانه تبلیغات</a>:
+		فهرست آگهی های ملکی ویژه
+	</h1>
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>عنوان</th>
+			<th>هزینه</th>
+			<th>کد ملک</th>
+			<th>محل</th>
+			<th>نوع ملک</th>
+			<th>مساحت</th>
+			<th>عملیات</th>
+		</tr>
+	</thead>
+    @foreach (var sponsoredProperty in Model.SponsoredProperties)
+    {
+        var details = PropertyListingDetails.MakeDetails(sponsoredProperty.Listing);
+        var summary = PropertyListingSummary.Summarize(details);
+
+        <tr>
+			<td>@sponsoredProperty.SponsoredEntity.Title</td>
+            <td>
+                @if (sponsoredProperty.SponsoredEntity.BillingMethod == SponsoredEntityBillingMethod.PerImpression)
+				{
+					<span>
+						هر <strong>نمایش</strong>
+						<br />
+						حداکثر
+						@BillingPresentationHelper.Balance(sponsoredProperty.SponsoredEntity.MaxPayPerImpression)
+						@GeneralResources.Rials
+					</span>
+				}
+				else if (sponsoredProperty.SponsoredEntity.BillingMethod == SponsoredEntityBillingMethod.PerClick)
+				{
+					<span>
+						هر <strong>کلیک</strong>
+						<br />
+						حداکثر
+						@BillingPresentationHelper.Balance(@sponsoredProperty.SponsoredEntity.MaxPayPerClick)
+						@GeneralResources.Rials
+					</span>
+				}
+               
+            </td>
+			<td>
+				<a class="btn btn-default" href="@Url.Action("ViewDetails", "Property", new { id = sponsoredProperty.ListingID, area = AreaNames.Main})">
+					<span class="glyphicon glyphicon-link"></span>
+					@sponsoredProperty.Listing.Code
+				</a>
+			</td>
+            <td>@propertyPresentationHelper.BuildRegion(summary)</td>
+            <td>@propertyPresentationHelper.BuildTitle(summary)</td>
+            <td>@propertyPresentationHelper.BuildArea(summary)</td>
+            <td>
+                <a class="btn btn-primary btn-sm btn-block" href="@Url.Action("EditSponsorship", "SponsoredProperty", new {sponsoredEntityID = sponsoredProperty.SponsoredEntity.ID, propertyListingID = sponsoredProperty.ListingID})">ویرایش</a>
+				@if (sponsoredProperty.SponsoredEntity.Enabled)
+				{
+					<button class="btn btn-danger btn-sm btn-block" data-ajax-modal="@Url.Action("ConfirmationPopup", "SponsoredProperty" , new { area=AreaNames.Ad, sponsoredentityid=sponsoredProperty.SponsoredEntity.ID, enabled=false, propertylistingid=sponsoredProperty.ListingID , referringcontroller="SponsoredProperty" })">توقف نمایش</button>
+                }
+                else
+                {
+                    <button class="btn btn-success btn-sm btn-block" data-ajax-modal="@Url.Action("ConfirmationPopup", "SponsoredProperty", new { area = AreaNames.Ad, sponsoredEntityID = sponsoredProperty.SponsoredEntity.ID, enabled = true, propertyListingID = sponsoredProperty.ListingID, referringController = "SponsoredProperty" })">ادامه نمایش</button>
+                }
+            </td>
+    
+        </tr>
+    }
+</table>
+
+@if (!Model.SponsoredProperties.Any())
+{
+	<div>
+		شما هیچ کدوم از آگهی های ملکی تون رو ویژه نکرده اید.
+	</div>	
+	<div>
+		برای اطلاعات بیشتر در مورد آگهی ملکی ویژه، می تونید
+		<a href="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)">صفحه تبلیغات</a>
+		رو ببینید.
+	</div>
+}

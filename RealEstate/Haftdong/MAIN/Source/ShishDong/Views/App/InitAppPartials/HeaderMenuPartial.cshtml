@@ -1,0 +1,40 @@
+﻿@* ** Top Menu ********* *@
+<li class="dropdown" dropdown>
+    <a href="" class="dropdown-toggle fileMenu" dropdown-toggle role="button" aria-expanded="false">ملک <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li restrict-to="VerifiedUser">
+            <a ui-sref="welcome.files.new"><i class="fa fa-plus-circle"></i> جدید</a>
+        </li>
+        <li>
+            <a ui-sref="welcome.files"><i class="fa fa-search"></i> جستجو</a>
+        </li>
+        <li class="divider"></li>
+        <li restrict-to="VerifiedUser">
+            <a ui-sref="welcome.myfiles">املاک من</a>
+        </li>
+    </ul>
+</li>
+<li class="dropdown" dropdown>
+    <a href="" class="dropdown-toggle requestMenu" dropdown-toggle role="button" aria-expanded="false">درخواست <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li restrict-to="VerifiedUser">
+            <a ui-sref="welcome.requests.new"><i class="fa fa-plus-circle"></i> جدید</a>
+        </li>
+        <li>
+            <a ui-sref="welcome.requests"><i class="fa fa-search"></i> جستجو</a>
+        </li>
+        <li class="divider"></li>
+        <li restrict-to="VerifiedUser">
+            <a ui-sref="welcome.myrequests">درخواست های من</a>
+        </li>
+    </ul>
+</li>
+@*<li class="dropdown" dropdown>*@
+@*    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">آژانس ها و مشاورین املاک <span class="caret"></span></a>*@
+@*</li>*@
+@*<li class="dropdown" dropdown>*@
+@*    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">املاک VIP</a>*@
+@*</li>*@
+@*<li class="dropdown" dropdown>*@
+@*    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">عقد قرارداد</a>*@
+@*</li>*@

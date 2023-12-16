@@ -1,0 +1,200 @@
+﻿@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSaveSearchModel
+
+<div id="paidSmsDetails" class="panel panel-default none">
+	<div class="panel-heading">
+		<h3 class="panel-title">تعیین محتوای پیامک</h3>
+	</div>
+	<div class="panel-body">
+		<p>
+			اطلاعاتی که دوست دارید در مورد ملک به شما پیامک بشه اینجا مشخص کنید. هرچی پیامک طولانی تر باشه، تعداد بخش های اون
+			بیشتر میشه و هزینه بیشتری داره. هر 67 حرف از پیغامی که فرستاده میشه، توسط مخابرات به عنوان یک بخش پیامک محاسبه میشه.
+		</p>
+		
+		<div class="row"> @* Used to put checkboxes and sample SMS text side to side *@
+
+			<div class="col-xs-6">
+				<div class="form-group">
+					<div class="col-xs-12">
+						<div class="checkbox">
+							<label>
+								@Html.CheckBoxFor(m => m.SmsPartSiteName)
+								<strong>نام سایت</strong>
+								<br /><small>عبارت «خونه ت»</small>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-12">
+						<div class="checkbox">
+							<label>
+								@Html.CheckBoxFor(m => m.SmsPartListingUrl)
+								<strong>آدرس اینترنتی مشخصات ملک</strong>
+								<br /><small>مثال: http://khoonat.com/p/123456</small>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-12">
+						<div class="checkbox">
+							<label>
+								@Html.CheckBoxFor(m => m.SmsPartListingCode)
+								<strong>کد ملک در سایت</strong>
+								<br /><small>مثال: کد 123456</small>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-12">
+						<div class="checkbox">
+							<label>
+								@Html.CheckBoxFor(m => m.SmsPartPropertyType)
+								<strong>نوع ملک و کاربری</strong>
+								<br /><small>مثال: آپارتمان مسکونی</small>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-12">
+						<div class="checkbox">
+							<label>
+								@Html.CheckBoxFor(m => m.SmsPartNumberOfRooms)
+								<strong>تعداد خواب / اتاق</strong>
+								<br /><small>مثال: دو خوابه</small>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div> @* Column to the right of Sample SMS Text *@
+
+			<div class="col-xs-6">
+				<div class="panel panel-danger">
+					<div class="panel-heading">
+						<h3 class="panel-title">نمونه پیامک ارسالی</h3>
+					</div>
+					<div class="panel-body">
+						<p id="sampleSmsText">...</p>
+					</div>
+				</div>
+			</div> @* Sample SMS Text *@
+
+		</div> @* Row that is used to put checkboxes and sample SMS text side to side *@
+
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartShortGeographicRegion)
+						<strong>نام محله یا منطقه</strong>
+						<br /><small>مثال: زعفرانیه</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartLongGeographicRegion)
+						<strong>منطقه جغرافیایی کامل</strong>
+						<br /><small>مثال: زعفرانیه، منطقه یک، شهر تهران، استان تهران</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartUserEnteredAddress)
+						<strong>آدرس وارد شده توسط کاربر (در صورت وجود)</strong>
+						<br /><small>مثال: خیابان مقدس اردبیلی، کوچه اول پلاک 1</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartArea)
+						<strong>مساحت (زیربنا و زمین)</strong>
+						<br /><small>مثال: 120 متر بنا، 200 متر زمین</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartPriceOrRent)
+						<strong>قیمت فروش یا مبلغ اجاره</strong>
+						<br /><small>مثال: 750 میلیون</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartPerAreaPrice)
+						<strong>قیمت هر متر از بنا یا زمین</strong>
+						<br /><small>مثال: متری 4.7 میلیون</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartContactName)
+						<strong>نام شخص آگهی دهنده</strong>
+						<br /><small>مثال: علی محمد زاده</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartContactPhone)
+						<strong>شماره تلفن ثبت شده روی آگهی</strong>
+						<br /><small>مثال: 09122222222</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-12">
+				<div class="checkbox">
+					<label>
+						@Html.CheckBoxFor(m => m.SmsPartContactSecondPhone)
+						<strong>شماره تلفن دوم ثبت شده روی آگهی</strong>
+						<br /><small>مثال: 02122222222</small>
+					</label>
+				</div>
+			</div>
+		</div>
+
+	</div> @* Panel body *@
+</div> @* Panel *@

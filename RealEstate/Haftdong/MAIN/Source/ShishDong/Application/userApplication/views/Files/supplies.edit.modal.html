@@ -1,0 +1,145 @@
+﻿<div class="modal-header">
+    <h1>ویرایش آگهی</h1>
+</div>
+<div class="modal-body">
+<form name="frmSupply" class="modal-body" novalidate>
+    <div class="row">
+        <label for="" class="col-md-2 control-label"><i class="fa fa-star text-danger"></i> نوع معامله:</label>
+        <div class="col-md-4">
+            <jj-select-intention-of-owner model="supply.IntentionOfOwner" jj-allow-clear="true" jj-required="true"/>
+        </div>
+        <label for="" class="col-md-2 control-label" ng-show="supply.IsPublic">تاریخ اتمام انتشار:</label>
+        <div class="col-md-4" ng-show="supply.IsPublic">
+            <jj-jalaali-datepicker-popup jj-model="supply.ExpirationTime" class="datepicker"></jj-jalaali-datepicker-popup>
+        </div>
+    </div>
+    <div ng-show="showSalePanel">
+        <div class="row">
+            <label for="" class="col-md-2 control-label">شیوه تعیین قیمت:</label>
+            <div class="col-md-4">
+                <ui-select ng-model="$parent.supply.PriceSpecificationType" theme="bootstrap" search-enabled="false" title="" class="no-search" on-select="clearPrice()">
+                    <ui-select-match placeholder="لطفا انتخاب کنید" allow-clear="true" class="ui-select-match">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in priceSpecificationTypeOptions">
+                        {{opt.text}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <input type="text" ng-model="supply.Price" jj-format="number"/>
+                    <span class="input-group-addon">تومان</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="alert alert-info">قیمت کل: {{TotalCalculatedPrice | number}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <label>
+                    <b><input type="checkbox" ng-model="supply.HasTransferableLoan"/> ملک دارای وام قابل انتقال است</b>
+                </label>
+            </div>
+        </div>
+        <div class="row" ng-show="supply.HasTransferableLoan">
+            <label for="" class="col-md-2 control-label">باقیمانده از وام:</label>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" ng-model="supply.TransferableLoanAmount" jj-format="number"/>
+                    <span class="input-group-addon">تومان</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="showRentPanel">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-4 control-label">مبلغ ودیعه:</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" ng-model="supply.Mortgage" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-hide="supply.IntentionOfOwner === 3">
+                <div class="row">
+                    <label for="" class="col-md-4 control-label">اجاره:</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input class="monthly-rent" type="text" ng-model="supply.Rent" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <label>
+                    <b><input type="checkbox" ng-model="supply.MortgageAndRentConvertible"/> اجاره / ودیعه قابل تبدیل هستند</b>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-4 control-label"> حداقل مبلغ ودیعه:</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" ng-model="supply.MinimumMortgage" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-4 control-label"> حداقل اجاره:</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" ng-model="supply.MinimumRent" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="" class="col-md-2 control-label">توضیحات:</label>
+            <div class="col-md-10">
+                <textarea type="text" rows="2" ng-model="supply.AdditionalRentalComments"></textarea>
+            </div>
+        </div>
+    </div>
+    <div ng-show="showDailyRentPanel">
+        <div class="row">
+            <div class="col-md-6" ng-hide="supply.IntentionOfOwner === 3">
+                <div class="row">
+                    <label for="" class="col-md-4 control-label">اجاره ی روزانه:</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input class="daily-rent" type="text" ng-model="supply.Rent" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="" class="col-md-2 control-label">توضیحات:</label>
+            <div class="col-md-10">
+                <textarea type="text" rows="2" ng-model="supply.AdditionalRentalComments"></textarea>
+            </div>
+        </div>
+    </div>
+</form>
+    <hr />
+    <jj-contact-panel contact="supply.Contact" />
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success saveButton" ng-disabled="frmSupply.$invalid" ng-click="onSave()"><i class="fa fa-floppy-o"></i> ذخیره</button>
+    <button class="btn btn-default cancelButton" ng-click="onBackClick()">انصراف</button>
+</div>

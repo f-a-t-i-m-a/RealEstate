@@ -1,0 +1,20 @@
+﻿<ui-select multiple ng-model="$parent.model" search-enabled="true" title="Choose a List" theme="bootstrap"
+            class="searchable-ui-select" ng-required="$parent.jjRequired" ng-disabled="$parent.jjDisabled" on-select="onSelected()">
+    <ui-select-match class="ui-select-match" placeholder="عبارت مورد جستجو را بنویسید (حداقل دو حرف)">{{$item.Type | VicinityType}} {{$item.Name}}</ui-select-match>
+    <ui-select-choices class="ui-select-choices" repeat="opt in vicinities"
+                       refresh="searchVicinities($select.search)"
+                       refresh-delay="0">
+        <div ng-if="$index != $select.items.length-1">
+            <div>
+                <b>{{opt.Type | VicinityType}} {{opt.Name}}</b>
+            </div>
+            <small ng-bind-html="opt.CompleteName | highlight: $select.search"></small>
+        </div>
+        <div ng-if="$index == $select.items.length-1" ng-mouseover="fetch($select.search, $event);">
+            <div>
+                <b>{{opt.Type | VicinityType}} {{opt.Name}}</b>
+            </div>
+            <small ng-bind-html="opt.CompleteName | highlight: $select.search"></small>
+        </div>
+    </ui-select-choices>
+</ui-select>

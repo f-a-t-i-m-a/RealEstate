@@ -1,0 +1,18 @@
+﻿<div class="panel panel-default ad-panel" ng-show="relatedProperties != null && relatedProperties.length != 0">
+    <div class="panel-heading">املاک وابسته</div>
+    <div class="panel-body">
+
+        <div ng-repeat="relatedProperty in relatedProperties">
+
+            <a ui-sref="files.details({ id: relatedProperty.ID })">
+                {{relatedProperty.PropertyType | PropertyType}}
+                <span ng-if="relatedProperty.NumberOfRooms != 0"> - {{relatedProperty.NumberOfRooms}} خوابه</span>
+                <span ng-if="relatedProperty.UnitArea != 0"> - {{relatedProperty.UnitArea}} متر</span>
+                <span ng-if="relatedProperty.UnitFloorNumber != 0 && relatedProperty.UnitFloorNumber!= null"> - {{relatedProperty.UnitFloorNumber}} طبقه</span>
+            </a>
+            <span ng-show="!$last"><hr/></span>
+        </div>
+
+
+    </div>
+</div>

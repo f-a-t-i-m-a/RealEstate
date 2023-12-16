@@ -1,0 +1,24 @@
+﻿@model JahanJooy.RealEstate.Web.Models.Property.PropertyViewDetailsModel
+
+@if (Model.ListingSummary.CoverPhotoId.HasValue)
+{
+	<div class="well well-sm text-center" style="position: relative;">
+		<img class="img-rounded img-responsive center-block" src="@Url.Action("GetThumbnailImage", "PropertyPhoto", new {id = Model.ListingSummary.CoverPhotoId})" />
+		<div class="label label-primary" style="position: absolute; bottom: 10px; left: 10px;">
+			@Model.ListingSummary.NumberOfPhotos
+		</div>
+	</div>
+}
+
+@if (Model.IsOwner && Model.ListingSummary.NumberOfPhotos <= 0)
+{
+	<div class="well well-sm text-center" style="position: relative;">
+		<div>
+			اضافه کردن عکس <strong>رایگان</strong> است
+		</div>
+		<img class="img-rounded img-responsive center-block" src="@Url.Content("~/Content/images/photo-thumb-placeholder.png")" />
+		<div class="label label-danger" style="position: absolute; bottom: 10px; left: 10px;">
+			بدون عکس
+		</div>
+	</div>
+}

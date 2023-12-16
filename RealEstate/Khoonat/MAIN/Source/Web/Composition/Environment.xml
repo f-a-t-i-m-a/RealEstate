@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CompositionInfo xmlns="http://www.compositional.net/schema/compositionXml.1.0.xsd">
+
+	<UsingAssembly fullName="JahanJooy.Common.Util"/>
+
+	<RegisterComponent type="JahanJooy.Common.Util.Configuration.ApplicationRevisionInfo">
+		<ConfigurationPoint name="VersionString" contentsOfVariableName="app.version" />
+		<ConfigurationPoint name="ApiVersionString" contentsOfVariableName="api.version" />
+	</RegisterComponent>
+
+</CompositionInfo>

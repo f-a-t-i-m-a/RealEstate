@@ -1,0 +1,157 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{7013FEB2-274B-4694-B24B-AA084153BA17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{A93B051B-ACE3-4711-BD39-38C7758CFDBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryBuffer", "LibraryBuffer\LibraryBuffer.csproj", "{579652BE-2A2C-46FB-A703-D2142F47BF5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{11CFC879-1155-4175-8944-0A940734F283}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPreparationService", "TestPreparationService\TestPreparationService.csproj", "{23078F9F-568F-4F15-B01F-C65972AB6E05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportDesigner", "ReportDesigner\ReportDesigner.csproj", "{8F608DD5-A9C8-4475-9137-DF91AB39F0B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JahanJooy.Stimulsoft.Common", "JahanJooy.Stimulsoft.Common\JahanJooy.Stimulsoft.Common.csproj", "{ED5357DD-FE32-4A1D-9C3A-E0D4D7F553A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.App", "Api.App\Api.App.csproj", "{B9D8824E-34D9-4AE0-888C-4EF5537A01B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.Farapayamak", "Util.Farapayamak\Util.Farapayamak.csproj", "{C1962CE6-1D05-4A8F-9A43-295BFEFDD769}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naroon", "Naroon\Naroon.csproj", "{409CB825-3414-42F4-A649-5D39FFDB323E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.External", "Api.External\Api.External.csproj", "{A0FC2369-FE5F-48AE-A405-11376DAB99D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Web", "Api.Web\Api.Web.csproj", "{E213A20D-2729-4BA5-8907-4215FE0DBA2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShishDong", "ShishDong\ShishDong.csproj", "{53E7AC4C-03BF-4DA7-8C7B-ABCFAA4D3F96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShishDong.Api.Local", "ShishDong.Api.Local\ShishDong.Api.Local.csproj", "{2AF29512-38FD-4B8A-9ABE-8A657739036E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaftDong", "HaftDong\HaftDong.csproj", "{381A4352-39B1-4EA6-80B7-CA314504FDE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7013FEB2-274B-4694-B24B-AA084153BA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7013FEB2-274B-4694-B24B-AA084153BA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7013FEB2-274B-4694-B24B-AA084153BA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7013FEB2-274B-4694-B24B-AA084153BA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A93B051B-ACE3-4711-BD39-38C7758CFDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93B051B-ACE3-4711-BD39-38C7758CFDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93B051B-ACE3-4711-BD39-38C7758CFDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93B051B-ACE3-4711-BD39-38C7758CFDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579652BE-2A2C-46FB-A703-D2142F47BF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579652BE-2A2C-46FB-A703-D2142F47BF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579652BE-2A2C-46FB-A703-D2142F47BF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579652BE-2A2C-46FB-A703-D2142F47BF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11CFC879-1155-4175-8944-0A940734F283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11CFC879-1155-4175-8944-0A940734F283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11CFC879-1155-4175-8944-0A940734F283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11CFC879-1155-4175-8944-0A940734F283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23078F9F-568F-4F15-B01F-C65972AB6E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23078F9F-568F-4F15-B01F-C65972AB6E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23078F9F-568F-4F15-B01F-C65972AB6E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23078F9F-568F-4F15-B01F-C65972AB6E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F608DD5-A9C8-4475-9137-DF91AB39F0B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F608DD5-A9C8-4475-9137-DF91AB39F0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F608DD5-A9C8-4475-9137-DF91AB39F0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F608DD5-A9C8-4475-9137-DF91AB39F0B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED5357DD-FE32-4A1D-9C3A-E0D4D7F553A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED5357DD-FE32-4A1D-9C3A-E0D4D7F553A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED5357DD-FE32-4A1D-9C3A-E0D4D7F553A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED5357DD-FE32-4A1D-9C3A-E0D4D7F553A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9D8824E-34D9-4AE0-888C-4EF5537A01B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D8824E-34D9-4AE0-888C-4EF5537A01B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D8824E-34D9-4AE0-888C-4EF5537A01B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9D8824E-34D9-4AE0-888C-4EF5537A01B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1962CE6-1D05-4A8F-9A43-295BFEFDD769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1962CE6-1D05-4A8F-9A43-295BFEFDD769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1962CE6-1D05-4A8F-9A43-295BFEFDD769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1962CE6-1D05-4A8F-9A43-295BFEFDD769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{409CB825-3414-42F4-A649-5D39FFDB323E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{409CB825-3414-42F4-A649-5D39FFDB323E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{409CB825-3414-42F4-A649-5D39FFDB323E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{409CB825-3414-42F4-A649-5D39FFDB323E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0FC2369-FE5F-48AE-A405-11376DAB99D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0FC2369-FE5F-48AE-A405-11376DAB99D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0FC2369-FE5F-48AE-A405-11376DAB99D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0FC2369-FE5F-48AE-A405-11376DAB99D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E213A20D-2729-4BA5-8907-4215FE0DBA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E213A20D-2729-4BA5-8907-4215FE0DBA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E213A20D-2729-4BA5-8907-4215FE0DBA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E213A20D-2729-4BA5-8907-4215FE0DBA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E7AC4C-03BF-4DA7-8C7B-ABCFAA4D3F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E7AC4C-03BF-4DA7-8C7B-ABCFAA4D3F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E7AC4C-03BF-4DA7-8C7B-ABCFAA4D3F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E7AC4C-03BF-4DA7-8C7B-ABCFAA4D3F96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF29512-38FD-4B8A-9ABE-8A657739036E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF29512-38FD-4B8A-9ABE-8A657739036E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF29512-38FD-4B8A-9ABE-8A657739036E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF29512-38FD-4B8A-9ABE-8A657739036E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{381A4352-39B1-4EA6-80B7-CA314504FDE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{381A4352-39B1-4EA6-80B7-CA314504FDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{381A4352-39B1-4EA6-80B7-CA314504FDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{381A4352-39B1-4EA6-80B7-CA314504FDE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 16
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://jahanjooy.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Api.App\\Api.App.csproj
+		SccProjectName1 = Api.App
+		SccLocalPath1 = Api.App
+		SccProjectUniqueName2 = Api.External\\Api.External.csproj
+		SccProjectName2 = Api.External
+		SccLocalPath2 = Api.External
+		SccProjectUniqueName3 = Api.Web\\Api.Web.csproj
+		SccProjectName3 = Api.Web
+		SccLocalPath3 = Api.Web
+		SccProjectUniqueName4 = Domain\\Domain.csproj
+		SccProjectName4 = Domain
+		SccLocalPath4 = Domain
+		SccProjectUniqueName5 = HaftDong\\HaftDong.csproj
+		SccProjectName5 = HaftDong
+		SccLocalPath5 = HaftDong
+		SccProjectUniqueName6 = JahanJooy.Stimulsoft.Common\\JahanJooy.Stimulsoft.Common.csproj
+		SccProjectName6 = JahanJooy.Stimulsoft.Common
+		SccLocalPath6 = JahanJooy.Stimulsoft.Common
+		SccProjectUniqueName7 = LibraryBuffer\\LibraryBuffer.csproj
+		SccProjectName7 = LibraryBuffer
+		SccLocalPath7 = LibraryBuffer
+		SccProjectUniqueName8 = Naroon\\Naroon.csproj
+		SccProjectName8 = Naroon
+		SccLocalPath8 = Naroon
+		SccProjectUniqueName9 = ReportDesigner\\ReportDesigner.csproj
+		SccProjectName9 = ReportDesigner
+		SccLocalPath9 = ReportDesigner
+		SccProjectUniqueName10 = ShishDong.Api.Local\\ShishDong.Api.Local.csproj
+		SccProjectName10 = ShishDong.Api.Local
+		SccLocalPath10 = ShishDong.Api.Local
+		SccProjectUniqueName11 = ShishDong\\ShishDong.csproj
+		SccProjectName11 = ShishDong
+		SccLocalPath11 = ShishDong
+		SccProjectUniqueName12 = Test\\Test.csproj
+		SccProjectName12 = Test
+		SccLocalPath12 = Test
+		SccProjectUniqueName13 = TestPreparationService\\TestPreparationService.csproj
+		SccProjectName13 = TestPreparationService
+		SccLocalPath13 = TestPreparationService
+		SccProjectUniqueName14 = Util.Farapayamak\\Util.Farapayamak.csproj
+		SccProjectName14 = Util.Farapayamak
+		SccLocalPath14 = Util.Farapayamak
+		SccProjectUniqueName15 = Util\\Util.csproj
+		SccProjectName15 = Util
+		SccLocalPath15 = Util
+	EndGlobalSection
+EndGlobal

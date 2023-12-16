@@ -1,0 +1,7 @@
+﻿@model JahanJooy.Common.Util.Web.Model.CheckboxListItem
+
+@Html.HiddenFor(m => m.ID)
+<div>
+	@Html.CheckBoxFor(m => m.Selected)
+	@Html.LabelFor(m => m.Selected, Model.Label)
+</div>

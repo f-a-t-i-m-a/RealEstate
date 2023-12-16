@@ -1,0 +1,62 @@
+﻿@using System
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Core.Impl.Templates.Email
+@functions {
+	private AccountDisabledNotificationModel _model;
+	public override void SetModel(object model)
+	{
+		_model = (AccountDisabledNotificationModel)model;
+	}
+
+}
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<table width="95%" style="width: 95%; direction: rtl; font-size: 20px;">
+			<tr><td style="background-color: #dddddd;">
+				    <table width="100%" style="width: 100%; font-size: 20px; font-weight: bold;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>حساب شما غیر فعال شده است</td>
+						    <td style="text-align: left;"><a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">خونه ت دات کام</a></td>
+					    </tr>
+				    </table>
+			    </td></tr>
+			<tr><td>
+				    <br/>
+				    <p>
+					    کاربر گرامی، 
+					    @_model.User.FullName،
+				    </p>
+				    <p>
+					    به اطلاع می رساند که حساب کاربری شما با نام کاربری 
+					    «@(_model.User.LoginName)» 
+						در سایت خونه ت دات کام توسط سیستم یا مدیر سایت به حالت غیر فعال
+					    تنظیم شده است. این مساله به این معنی است که شما نمی توانید از حساب خود برای ورود به سایت استفاده کنید
+					    و عملیات مدیریت حساب کاربری مانند بازیابی کلمه عبور روی این حساب قابل انجام نمی باشند.
+				    </p>
+				    <p>
+					    دلیل غیر فعال شدن حساب می تواند متنوع باشد، و در صورتی که می خواهید از حساب خود استفاده کنید لطفاً با
+						استفاده از صفحه تماس در داخل سایت با مسئولین سایت تماس بگیرید و موضوع را مطرح کنید.
+				    </p>
+				    <p>
+					    از اینکه از خدمات این سایت استفاده می کنید سپاس گزاریم؛
+					    <br/>
+					    خونه ت دات کام
+				    </p>
+			    </td></tr>
+			<tr><td style="font-size: 20px; text-align: center; background-color: #dddddd; padding: 10px">
+				    <a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">www.khoonat.com</a>
+			    </td></tr>
+			<tr><td style="width: 100%; font-size: 14px;">
+				    <br/><br/>   
+				    این پیغام توسط سیستم تولید شده است و در صورتی که به آن پاسخ دهید به دست ما نخواهد رسید.
+				    اگر در خصوص این پیغام یا هر موضوع دیگری تمایل دارید با مسئولین سایت در تماس باشید، لطفاً
+				    از صفحه «تماس با ما» در سایت استفاده کنید.
+			    </td></tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.RefundAdmin.RefundAdminReviewRequestModel
+
+@Html.Partial("ViewRequestDetailsPopup", Model.Request)
+
+<div class="modal-content">
+    <div class="modal-title" >
+        <h3>تراکنش</h3> 
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <table class="table" >
+                <tr>
+                    <td>تاریخ:</td>
+                    <td> @Model.UserBillingTransaction.TransactionTime.ToLocalizedDateString()</td>
+                </tr>
+                <tr>
+                    <td> ساعت:</td>
+                    <td> @Model.UserBillingTransaction.TransactionTime.ToLocalizedTimeString()</td>
+                </tr>
+                <tr>
+                    <td>تغییر نقد:</td>
+                    <td>@BillingPresentationHelper.Delta(Model.UserBillingTransaction.CashDelta)</td>
+                </tr>
+                <tr>
+                    <td>مانده نقدی:</td>
+                    <td>@BillingPresentationHelper.Balance(Model.UserBillingTransaction.CashBalance)</td>
+                </tr>
+                <tr>
+                    <td>تغییر تخفیف:</td>
+                    <td>@BillingPresentationHelper.Delta(Model.UserBillingTransaction.BonusDelta)</td>
+                </tr>
+                <tr>
+                    <td>مانده تخفیف:</td>
+                    <td>@BillingPresentationHelper.Balance(Model.UserBillingTransaction.BonusBalance)</td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="modal-footer">
+            @using (Html.BeginForm("ReviewRefundRequestPostback", "RefundAdmin", new {Model.Request.ID}))
+            {
+                <button name="btnConfirm" value="btnConfirm" type="submit" class="btn btn-primary">تایید</button>
+                <button name="btnReject" value="btnReject" type="submit" class="btn btn-primary">رد</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+            }
+        </div>
+    </div>
+</div>

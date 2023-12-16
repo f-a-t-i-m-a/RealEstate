@@ -1,0 +1,30 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.SavedSearch.SavedPropertySearch
+
+@IconsHelper.Tristate(Url, Model.SendPaidSmsMessages || Model.SendPromotionalSmsMessages)
+@(Model.SendPaidSmsMessages ?
+		(Model.SendPromotionalSmsMessages ? "درخواستی + تبلیغاتی" : "فقط درخواستی") :
+		(Model.SendPromotionalSmsMessages ? "فقط تبلیغاتی" : ""))
+@(!Model.SendPaidSmsMessages && !Model.SendPromotionalSmsMessages ? HtmlPresentationHelper.Disabled(GeneralResources.Disabled) : new HtmlString(""))
+	
+@if (Model.SendPaidSmsMessages || Model.SendPromotionalSmsMessages)
+{
+	<br/>
+	
+	if (Model.SmsNotificationTarget != null && Model.SmsNotificationTarget.IsVerified && !Model.SmsNotificationTarget.IsDeleted)
+	{
+		<small>
+			به:
+			@HtmlPresentationHelper.LeftToRight(Model.SmsNotificationTarget.ContactMethodText)
+		</small>
+    }
+    else
+    {
+        <span class="glyphicon  glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+		<small>
+			شماره تلفن مشخص نشده
+		</small>
+	}
+}

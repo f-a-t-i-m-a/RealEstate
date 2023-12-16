@@ -1,0 +1,840 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PropertyType_Garden" xml:space="preserve">
+    <value>باغ یا باغچه</value>
+  </data>
+  <data name="PropertyType_Land" xml:space="preserve">
+    <value>زمین</value>
+  </data>
+  <data name="PropertyType_House" xml:space="preserve">
+    <value>خانه مستقل</value>
+  </data>
+  <data name="PropertyType_Apartment" xml:space="preserve">
+    <value>آپارتمان</value>
+  </data>
+  <data name="PropertyType_Penthouse" xml:space="preserve">
+    <value>پنت هاوس</value>
+  </data>
+  <data name="PropertyType_Shop" xml:space="preserve">
+    <value>مغازه</value>
+  </data>
+  <data name="PropertyType_Villa" xml:space="preserve">
+    <value>ویلا</value>
+  </data>
+  <data name="IntentionOfOwner_ForRent" xml:space="preserve">
+    <value>اجاره</value>
+  </data>
+  <data name="IntentionOfOwner_ForSale" xml:space="preserve">
+    <value>فروش</value>
+  </data>
+  <data name="PropertyStatus_Emptied" xml:space="preserve">
+    <value>خالی</value>
+  </data>
+  <data name="PropertyStatus_InConstruction" xml:space="preserve">
+    <value>در دست ساخت</value>
+  </data>
+  <data name="PropertyStatus_NoOccupantYet" xml:space="preserve">
+    <value>بدون سکنه</value>
+  </data>
+  <data name="PropertyStatus_OccupiedByOwner" xml:space="preserve">
+    <value>در دست مالک</value>
+  </data>
+  <data name="PropertyStatus_OccupiedByRenter" xml:space="preserve">
+    <value>در دست مستاجر</value>
+  </data>
+  <data name="BuildingFaceType_Brick" xml:space="preserve">
+    <value>آجر</value>
+  </data>
+  <data name="BuildingFaceType_CompositePanel" xml:space="preserve">
+    <value>پانل کامپوزیت</value>
+  </data>
+  <data name="BuildingFaceType_Concrete" xml:space="preserve">
+    <value>سیمان</value>
+  </data>
+  <data name="BuildingFaceType_Glass" xml:space="preserve">
+    <value>شیشه</value>
+  </data>
+  <data name="BuildingFaceType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="BuildingFaceType_Stone" xml:space="preserve">
+    <value>سنگ</value>
+  </data>
+  <data name="BuildingFaceType_StoneAndBrick" xml:space="preserve">
+    <value>سنگ و آجر</value>
+  </data>
+  <data name="BuildingFaceType_Wood" xml:space="preserve">
+    <value>چوب</value>
+  </data>
+  <data name="DaylightDirection_East" xml:space="preserve">
+    <value>نور شرق</value>
+  </data>
+  <data name="DaylightDirection_North" xml:space="preserve">
+    <value>نور شمال</value>
+  </data>
+  <data name="DaylightDirection_South" xml:space="preserve">
+    <value>نور جنوب</value>
+  </data>
+  <data name="DaylightDirection_ViaPatio" xml:space="preserve">
+    <value>نور فقط از نورگیر</value>
+  </data>
+  <data name="DaylightDirection_West" xml:space="preserve">
+    <value>نور غرب</value>
+  </data>
+  <data name="EstateDirection_North" xml:space="preserve">
+    <value>شمالی</value>
+  </data>
+  <data name="EstateDirection_NorthAndSouth" xml:space="preserve">
+    <value>دو کله</value>
+  </data>
+  <data name="EstateDirection_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="EstateDirection_South" xml:space="preserve">
+    <value>جنوبی</value>
+  </data>
+  <data name="EstateVoucherType_BreakDownVoucher" xml:space="preserve">
+    <value>تفکیکی</value>
+  </data>
+  <data name="EstateVoucherType_Cooperative" xml:space="preserve">
+    <value>تعاونی</value>
+  </data>
+  <data name="EstateVoucherType_Normal" xml:space="preserve">
+    <value>سند رسمی</value>
+  </data>
+  <data name="EstateVoucherType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="EstateVoucherType_Owghaf" xml:space="preserve">
+    <value>اوقافی</value>
+  </data>
+  <data name="EstateVoucherType_WithoutVoucher" xml:space="preserve">
+    <value>بدون سند رسمی</value>
+  </data>
+  <data name="FloorCoverType_Ceramic" xml:space="preserve">
+    <value>سرامیک</value>
+  </data>
+  <data name="FloorCoverType_Laminate" xml:space="preserve">
+    <value>لمینیت</value>
+  </data>
+  <data name="FloorCoverType_Moquette" xml:space="preserve">
+    <value>موکت</value>
+  </data>
+  <data name="FloorCoverType_Mosaic" xml:space="preserve">
+    <value>موزاییک</value>
+  </data>
+  <data name="FloorCoverType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="FloorCoverType_Parquet" xml:space="preserve">
+    <value>پارکت</value>
+  </data>
+  <data name="FloorCoverType_Stone" xml:space="preserve">
+    <value>سنگ</value>
+  </data>
+  <data name="SalePriceSpecificationType_PerEstateArea" xml:space="preserve">
+    <value>قیمت هر متر مربع از زمین</value>
+  </data>
+  <data name="SalePriceSpecificationType_PerUnitArea" xml:space="preserve">
+    <value>قیمت هر متر مربع از بنا</value>
+  </data>
+  <data name="SalePriceSpecificationType_Total" xml:space="preserve">
+    <value>قیمت کل</value>
+  </data>
+  <data name="UsageType_Office" xml:space="preserve">
+    <value>اداری</value>
+  </data>
+  <data name="UsageType_Residency" xml:space="preserve">
+    <value>مسکونی</value>
+  </data>
+  <data name="UsageType_Agricultural" xml:space="preserve">
+    <value>کشاورزی</value>
+  </data>
+  <data name="UsageType_Shop" xml:space="preserve">
+    <value>تجاری</value>
+  </data>
+  <data name="IntentionOfOwner_ForFullMortgage" xml:space="preserve">
+    <value>رهن کامل</value>
+  </data>
+  <data name="IntentionOfOwner_ForDailyRent" xml:space="preserve">
+    <value>اجاره روزانه</value>
+  </data>
+  <data name="PropertyType_Shed" xml:space="preserve">
+    <value>سوله</value>
+  </data>
+  <data name="PropertyType_Tenement" xml:space="preserve">
+    <value>مستغلات</value>
+  </data>
+  <data name="UsageType_Industrial" xml:space="preserve">
+    <value>صنعتی</value>
+  </data>
+  <data name="PropertyType_Suite" xml:space="preserve">
+    <value>سوئیت</value>
+  </data>
+  <data name="PropertyType_AgriculturalLand" xml:space="preserve">
+    <value>زمین زراعی</value>
+  </data>
+  <data name="PropertyType_Commercial" xml:space="preserve">
+    <value>ملک تجاری</value>
+  </data>
+  <data name="PropertyType_CommercialResidency" xml:space="preserve">
+    <value>ملک مسکونی با موقعیت تجاری</value>
+  </data>
+  <data name="PropertyType_Complex" xml:space="preserve">
+    <value>مجتمع مسکونی</value>
+  </data>
+  <data name="PropertyType_GardenTower" xml:space="preserve">
+    <value>برج باغ</value>
+  </data>
+  <data name="PropertyType_Office" xml:space="preserve">
+    <value>ملک اداری</value>
+  </data>
+  <data name="PropertyType_OfficialResidency" xml:space="preserve">
+    <value>ملک مسکونی با موقعیت اداری</value>
+  </data>
+  <data name="PropertyType_OldHouse" xml:space="preserve">
+    <value>ملک کلنگی</value>
+  </data>
+  <data name="PropertyType_Tower" xml:space="preserve">
+    <value>برج مسکونی</value>
+  </data>
+  <data name="UsageType_Mixed" xml:space="preserve">
+    <value>مختلط</value>
+  </data>
+  <data name="UsageType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="PropertyType_CityService" xml:space="preserve">
+    <value>خدمات شهری</value>
+  </data>
+  <data name="PropertyType_Factory" xml:space="preserve">
+    <value>کارخانه</value>
+  </data>
+  <data name="PropertyType_Gym" xml:space="preserve">
+    <value>سالن ورزشی</value>
+  </data>
+  <data name="PropertyType_Parking" xml:space="preserve">
+    <value>پارکینگ</value>
+  </data>
+  <data name="PropertyType_RepairShop" xml:space="preserve">
+    <value>تعمیرگاه</value>
+  </data>
+  <data name="PropertyType_StoreHouse" xml:space="preserve">
+    <value>انبار</value>
+  </data>
+  <data name="PropertyType_WorkShop" xml:space="preserve">
+    <value>کارگاه</value>
+  </data>
+  <data name="PropertyState_New" xml:space="preserve">
+    <value>جدید</value>
+  </data>
+  <data name="IntentionOfCustomer_ForBuy" xml:space="preserve">
+    <value>خرید</value>
+  </data>
+  <data name="IntentionOfCustomer_ForDailyRent" xml:space="preserve">
+    <value>اجاره روزانه</value>
+  </data>
+  <data name="IntentionOfCustomer_ForFullMortgage" xml:space="preserve">
+    <value>رهن کامل</value>
+  </data>
+  <data name="IntentionOfCustomer_ForRent" xml:space="preserve">
+    <value>اجاره</value>
+  </data>
+  <data name="UserType_Administrator" xml:space="preserve">
+    <value>ادمین</value>
+  </data>
+  <data name="UserType_AgencyAgent" xml:space="preserve">
+    <value>مشاور آژانس</value>
+  </data>
+  <data name="UserType_IndependentAgencyMember" xml:space="preserve">
+    <value>عضو آژانس مستقل</value>
+  </data>
+  <data name="UserType_IndependentAgent" xml:space="preserve">
+    <value>آژانس مستقل</value>
+  </data>
+  <data name="UserType_NormalUser" xml:space="preserve">
+    <value>کاربر عادی</value>
+  </data>
+  <data name="ContactMethodType_Email" xml:space="preserve">
+    <value>ایمیل</value>
+  </data>
+  <data name="ContactMethodType_Phone" xml:space="preserve">
+    <value>تلفن</value>
+  </data>
+  <data name="ContactMethodType_Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="ContractSubmission_Property" xml:space="preserve">
+    <value>ملک</value>
+  </data>
+  <data name="ContractSubmission_Request" xml:space="preserve">
+    <value>درخواست</value>
+  </data>
+  <data name="PropertyState_Deleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="SupplyState_New" xml:space="preserve">
+    <value>در جریان</value>
+  </data>
+  <data name="SupplyState_Reserved" xml:space="preserve">
+    <value>رزرو</value>
+  </data>
+  <data name="SupplyState_Completed" xml:space="preserve">
+    <value>فروخته شده</value>
+  </data>
+  <data name="SupplyState_Deleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="ContractState_Agreement" xml:space="preserve">
+    <value>قولنامه</value>
+  </data>
+  <data name="ContractState_Cancellation" xml:space="preserve">
+    <value>فسخ شده</value>
+  </data>
+  <data name="ContractState_Contracted" xml:space="preserve">
+    <value>بسته شده</value>
+  </data>
+  <data name="BuiltInRole_Administrator" xml:space="preserve">
+    <value>ادمین</value>
+  </data>
+  <data name="EntityType_Agency" xml:space="preserve">
+    <value>آژانس املاک</value>
+  </data>
+  <data name="EntityType_AgencyBranch" xml:space="preserve">
+    <value>شعبه آژانس</value>
+  </data>
+  <data name="EntityType_AgencyBranchContent" xml:space="preserve">
+    <value>اطلاعات شعبه آژانس</value>
+  </data>
+  <data name="EntityType_AgencyContent" xml:space="preserve">
+    <value>اطلاعات آژانس</value>
+  </data>
+  <data name="EntityType_ApplicationRole" xml:space="preserve">
+    <value>نقش</value>
+  </data>
+  <data name="EntityType_ApplicationUser" xml:space="preserve">
+    <value>کاربر</value>
+  </data>
+  <data name="EntityType_BuiltInRole" xml:space="preserve">
+    <value>نقش های داخلی</value>
+  </data>
+  <data name="EntityType_ChangeHistory" xml:space="preserve">
+    <value>تاریخچه فعالیت ها</value>
+  </data>
+  <data name="EntityType_ChangeHistoryChangeType" xml:space="preserve">
+    <value>نوع تاریخچه فعالیت ها</value>
+  </data>
+  <data name="EntityType_Contract" xml:space="preserve">
+    <value>قرارداد</value>
+  </data>
+  <data name="EntityType_Customer" xml:space="preserve">
+    <value>مشتری</value>
+  </data>
+  <data name="EntityType_CustomerContactInfo" xml:space="preserve">
+    <value>اطلاعات تماس مشتری</value>
+  </data>
+  <data name="EntityType_Index" xml:space="preserve">
+    <value>ایندکس</value>
+  </data>
+  <data name="EntityType_PhotoInfo" xml:space="preserve">
+    <value>اطلاعات تصویر</value>
+  </data>
+  <data name="EntityType_Property" xml:space="preserve">
+    <value>ملک</value>
+  </data>
+  <data name="EntityType_ReportTemplate" xml:space="preserve">
+    <value>قالب گزارش</value>
+  </data>
+  <data name="EntityType_Request" xml:space="preserve">
+    <value>درخواست</value>
+  </data>
+  <data name="EntityType_Supply" xml:space="preserve">
+    <value>آگهی</value>
+  </data>
+  <data name="EntityType_Unknown" xml:space="preserve">
+    <value>ناشناخته</value>
+  </data>
+  <data name="EntityType_UserActivity" xml:space="preserve">
+    <value>فعالیت های کاربران</value>
+  </data>
+  <data name="EntityType_UserActivityType" xml:space="preserve">
+    <value>نوع فعالیت های کاربران</value>
+  </data>
+  <data name="UserActivityType_Approve" xml:space="preserve">
+    <value>تائید</value>
+  </data>
+  <data name="UserActivityType_ApproveDetail" xml:space="preserve">
+    <value>تائید جزئیات</value>
+  </data>
+  <data name="UserActivityType_Authenticate" xml:space="preserve">
+    <value>احراز هویت</value>
+  </data>
+  <data name="UserActivityType_ChangeState" xml:space="preserve">
+    <value>تغییر وضعیت</value>
+  </data>
+  <data name="UserActivityType_ChangeStateOfDetail" xml:space="preserve">
+    <value>تغییر وضعیت جزئیات</value>
+  </data>
+  <data name="UserActivityType_Comment" xml:space="preserve">
+    <value>ثبت نظر</value>
+  </data>
+  <data name="UserActivityType_Create" xml:space="preserve">
+    <value>ایجاد</value>
+  </data>
+  <data name="UserActivityType_CreateDetail" xml:space="preserve">
+    <value>ایجاد جزئیات</value>
+  </data>
+  <data name="UserActivityType_Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="UserActivityType_DeleteDetail" xml:space="preserve">
+    <value>حذف جزئیات</value>
+  </data>
+  <data name="UserActivityType_Disable" xml:space="preserve">
+    <value>غیرفعال سازی</value>
+  </data>
+  <data name="UserActivityType_DisableDetail" xml:space="preserve">
+    <value>غیرفعال سازی جزئیات</value>
+  </data>
+  <data name="UserActivityType_Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="UserActivityType_EditDetail" xml:space="preserve">
+    <value>ویرایش جزئیات</value>
+  </data>
+  <data name="UserActivityType_Enable" xml:space="preserve">
+    <value>فعال سازی</value>
+  </data>
+  <data name="UserActivityType_EnableDetail" xml:space="preserve">
+    <value>فعال سازی جزئیات</value>
+  </data>
+  <data name="UserActivityType_Export" xml:space="preserve">
+    <value>خروج فایل</value>
+  </data>
+  <data name="UserActivityType_ExportDetail" xml:space="preserve">
+    <value>خروج فایل جزئیات</value>
+  </data>
+  <data name="UserActivityType_Import" xml:space="preserve">
+    <value>ورود فایل</value>
+  </data>
+  <data name="UserActivityType_ImportDetail" xml:space="preserve">
+    <value>ورود فایل جزئیات</value>
+  </data>
+  <data name="UserActivityType_Other" xml:space="preserve">
+    <value>سایر عملیات</value>
+  </data>
+  <data name="UserActivityType_OtherDetail" xml:space="preserve">
+    <value>سایر عملیات جزئیات</value>
+  </data>
+  <data name="UserActivityType_Print" xml:space="preserve">
+    <value>چاپ</value>
+  </data>
+  <data name="UserActivityType_PrintDetail" xml:space="preserve">
+    <value>چاپ جزئیات</value>
+  </data>
+  <data name="UserActivityType_Publish" xml:space="preserve">
+    <value>انتشار</value>
+  </data>
+  <data name="UserActivityType_PublishDetail" xml:space="preserve">
+    <value>انتشار جزئیات</value>
+  </data>
+  <data name="UserActivityType_Reject" xml:space="preserve">
+    <value>رد</value>
+  </data>
+  <data name="UserActivityType_RejectDetail" xml:space="preserve">
+    <value>رد جزئیات</value>
+  </data>
+  <data name="UserActivityType_Reverse" xml:space="preserve">
+    <value>بازگشت</value>
+  </data>
+  <data name="UserActivityType_Unknown" xml:space="preserve">
+    <value>ناشناخته</value>
+  </data>
+  <data name="UserActivityType_Unpublish" xml:space="preserve">
+    <value>عدم انتشار</value>
+  </data>
+  <data name="UserActivityType_UnpublishDetail" xml:space="preserve">
+    <value>عدم انتشار جزئیات</value>
+  </data>
+  <data name="UserActivityType_View" xml:space="preserve">
+    <value>نمایش</value>
+  </data>
+  <data name="UserActivityType_ViewDetail" xml:space="preserve">
+    <value>نمایش جزئیات</value>
+  </data>
+  <data name="SupplyCancelReason_Contracted" xml:space="preserve">
+    <value>قرارداد بسته شد</value>
+  </data>
+  <data name="SupplyCancelReason_DoneByOthers" xml:space="preserve">
+    <value>توسط بنگاه دیگری انجام شد</value>
+  </data>
+  <data name="RequestState_Compelete" xml:space="preserve">
+    <value>تکمیل شده</value>
+  </data>
+  <data name="RequestState_Deleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="RequestState_New" xml:space="preserve">
+    <value>جدید</value>
+  </data>
+  <data name="EntityType_ConfigurationDataItem" xml:space="preserve">
+    <value>داده پیکربندی</value>
+  </data>
+  <data name="EntityType_Vicinity" xml:space="preserve">
+    <value>محله</value>
+  </data>
+  <data name="VicinityType_Airport" xml:space="preserve">
+    <value>فرودگاه</value>
+  </data>
+  <data name="VicinityType_Alley" xml:space="preserve">
+    <value>کوچه</value>
+  </data>
+  <data name="VicinityType_Block" xml:space="preserve">
+    <value>بلوک</value>
+  </data>
+  <data name="VicinityType_Boulevard" xml:space="preserve">
+    <value>بلوار</value>
+  </data>
+  <data name="VicinityType_Bridge" xml:space="preserve">
+    <value>پل</value>
+  </data>
+  <data name="VicinityType_Building" xml:space="preserve">
+    <value>ساختمان</value>
+  </data>
+  <data name="VicinityType_Campus" xml:space="preserve">
+    <value>کمپ</value>
+  </data>
+  <data name="VicinityType_City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="VicinityType_CityPartition" xml:space="preserve">
+    <value>بخشی از شهر</value>
+  </data>
+  <data name="VicinityType_CityRegion" xml:space="preserve">
+    <value>منطقه</value>
+  </data>
+  <data name="VicinityType_Complex" xml:space="preserve">
+    <value>مجتمع</value>
+  </data>
+  <data name="VicinityType_Country" xml:space="preserve">
+    <value>کشور</value>
+  </data>
+  <data name="VicinityType_CountryPartition" xml:space="preserve">
+    <value>بخشی از کشور</value>
+  </data>
+  <data name="VicinityType_County" xml:space="preserve">
+    <value>شهرستان</value>
+  </data>
+  <data name="VicinityType_Crossing" xml:space="preserve">
+    <value>تقاطع</value>
+  </data>
+  <data name="VicinityType_District" xml:space="preserve">
+    <value>بخش</value>
+  </data>
+  <data name="VicinityType_Exit" xml:space="preserve">
+    <value>خروجی</value>
+  </data>
+  <data name="VicinityType_FourWay" xml:space="preserve">
+    <value>چهار راه</value>
+  </data>
+  <data name="VicinityType_HierarchyNode" xml:space="preserve">
+    <value>دسته بندی</value>
+  </data>
+  <data name="VicinityType_Highway" xml:space="preserve">
+    <value>بزرگراه</value>
+  </data>
+  <data name="VicinityType_Hill" xml:space="preserve">
+    <value>تپه</value>
+  </data>
+  <data name="VicinityType_Landmark" xml:space="preserve">
+    <value>نشانه</value>
+  </data>
+  <data name="VicinityType_Metropolis" xml:space="preserve">
+    <value>کلان شهر</value>
+  </data>
+  <data name="VicinityType_MetropolisPartition" xml:space="preserve">
+    <value>بخشی از کلان شهر</value>
+  </data>
+  <data name="VicinityType_Neighborhood" xml:space="preserve">
+    <value>محله</value>
+  </data>
+  <data name="VicinityType_Park" xml:space="preserve">
+    <value>پارک</value>
+  </data>
+  <data name="VicinityType_Phase" xml:space="preserve">
+    <value>فاز</value>
+  </data>
+  <data name="VicinityType_Premises" xml:space="preserve">
+    <value>محوطه</value>
+  </data>
+  <data name="VicinityType_Province" xml:space="preserve">
+    <value>استان</value>
+  </data>
+  <data name="VicinityType_ProvincePartition" xml:space="preserve">
+    <value>بخشی از استان</value>
+  </data>
+  <data name="VicinityType_River" xml:space="preserve">
+    <value>رودخانه</value>
+  </data>
+  <data name="VicinityType_Road" xml:space="preserve">
+    <value>جاده</value>
+  </data>
+  <data name="VicinityType_Square" xml:space="preserve">
+    <value>میدان</value>
+  </data>
+  <data name="VicinityType_State" xml:space="preserve">
+    <value>ایالت</value>
+  </data>
+  <data name="VicinityType_StatePartition" xml:space="preserve">
+    <value>بخشی از ایالت</value>
+  </data>
+  <data name="VicinityType_Station" xml:space="preserve">
+    <value>ایستگاه</value>
+  </data>
+  <data name="VicinityType_Street" xml:space="preserve">
+    <value>خیابان</value>
+  </data>
+  <data name="VicinityType_SubDistrict" xml:space="preserve">
+    <value>دهستان</value>
+  </data>
+  <data name="VicinityType_Suburb" xml:space="preserve">
+    <value>حومه</value>
+  </data>
+  <data name="VicinityType_Tee" xml:space="preserve">
+    <value>سه راه</value>
+  </data>
+  <data name="VicinityType_Tower" xml:space="preserve">
+    <value>برج</value>
+  </data>
+  <data name="VicinityType_Town" xml:space="preserve">
+    <value>شهرک</value>
+  </data>
+  <data name="VicinityType_Valley" xml:space="preserve">
+    <value>دره</value>
+  </data>
+  <data name="VicinityType_Village" xml:space="preserve">
+    <value>روستا</value>
+  </data>
+  <data name="VicinityType_Zone" xml:space="preserve">
+    <value>ناحیه</value>
+  </data>
+  <data name="LicenseType_SingleUser" xml:space="preserve">
+    <value>تک کاربره</value>
+  </data>
+  <data name="LicenseType_Trial" xml:space="preserve">
+    <value>موقت</value>
+  </data>
+  <data name="SupplyState_Canceled" xml:space="preserve">
+    <value>کنسل شده</value>
+  </data>
+  <data name="SourceType_Haftdong" xml:space="preserve">
+    <value>هفت دنگ</value>
+  </data>
+  <data name="SourceType_Khoonat" xml:space="preserve">
+    <value>خونه ت</value>
+  </data>
+  <data name="SourceType_Other" xml:space="preserve">
+    <value>فایل های خارجی</value>
+  </data>
+  <data name="UsageType_Unknown" xml:space="preserve">
+    <value>نامشخص</value>
+  </data>
+  <data name="SourceType_Sheshdong" xml:space="preserve">
+    <value>شش دنگ</value>
+  </data>
+  <data name="ApplicationType_Haftdong" xml:space="preserve">
+    <value>هفت دنگ</value>
+  </data>
+  <data name="ApplicationType_Sheshdong" xml:space="preserve">
+    <value>شش دنگ</value>
+  </data>
+  <data name="PhoneType_Cellphone" xml:space="preserve">
+    <value>تلفن موبایل</value>
+    <comment>_</comment>
+  </data>
+  <data name="PhoneType_Tellphone" xml:space="preserve">
+    <value>تلفن ثابت</value>
+    <comment>_</comment>
+  </data>
+  <data name="PhoneType_Unknown" xml:space="preserve">
+    <value>نامشخص</value>
+    <comment>_</comment>
+  </data>
+  <data name="KitchenCabinetType_FiberGlass" xml:space="preserve">
+    <value>فایبرگلاس</value>
+  </data>
+  <data name="KitchenCabinetType_Formica" xml:space="preserve">
+    <value>فورمیکا</value>
+  </data>
+  <data name="KitchenCabinetType_Hbf" xml:space="preserve">
+    <value>اچ بی اف</value>
+  </data>
+  <data name="KitchenCabinetType_Hdf" xml:space="preserve">
+    <value>اچ دی اف</value>
+  </data>
+  <data name="KitchenCabinetType_HighGlass" xml:space="preserve">
+    <value>هایگلاس</value>
+  </data>
+  <data name="KitchenCabinetType_Hpl" xml:space="preserve">
+    <value>اچ پی ال</value>
+  </data>
+  <data name="KitchenCabinetType_Mdf" xml:space="preserve">
+    <value>ام دی اف</value>
+  </data>
+  <data name="KitchenCabinetType_MdfAndStone" xml:space="preserve">
+    <value>ام دی اف و سنگ</value>
+  </data>
+  <data name="KitchenCabinetType_Metal" xml:space="preserve">
+    <value>فلزی</value>
+  </data>
+  <data name="KitchenCabinetType_MetalAndGlass" xml:space="preserve">
+    <value>فلز و شیشه</value>
+  </data>
+  <data name="KitchenCabinetType_Mixed" xml:space="preserve">
+    <value>ترکیبی</value>
+  </data>
+  <data name="KitchenCabinetType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="KitchenCabinetType_Pvc" xml:space="preserve">
+    <value>پی وی سی</value>
+  </data>
+  <data name="KitchenCabinetType_StoneAndWooden" xml:space="preserve">
+    <value>سنگ و چوب</value>
+  </data>
+  <data name="KitchenCabinetType_Wooden" xml:space="preserve">
+    <value>چوبی</value>
+  </data>
+  <data name="KitchenCabinetType_WoodenAndMetal" xml:space="preserve">
+    <value>چوبی و فلزی</value>
+  </data>
+  <data name="IntentionOfOwner_ForCooperation" xml:space="preserve">
+    <value>مشارکت در ساخت</value>
+  </data>
+  <data name="IntentionOfOwner_ForSwap" xml:space="preserve">
+    <value>معاوضه</value>
+  </data>
+  <data name="IntentionOfCustomer_ForCooperation" xml:space="preserve">
+    <value>مشارکت در ساخت</value>
+  </data>
+  <data name="IntentionOfCustomer_ForSwap" xml:space="preserve">
+    <value>معاوضه</value>
+  </data>
+</root>

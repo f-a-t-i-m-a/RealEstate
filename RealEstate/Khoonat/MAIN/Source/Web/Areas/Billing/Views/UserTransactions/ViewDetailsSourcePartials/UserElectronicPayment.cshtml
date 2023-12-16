@@ -1,0 +1,22 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.UserElectronicPayment
+
+
+<table style="width: 100%;">
+    <tr>
+        <td>درگاه الکترونیکی:</td>
+        <td>@Model.GatewayBank.Label(DomainBillingEnumResources.ResourceManager)</td>
+    </tr>
+    <tr>
+        <td>کد تراکنش بانکی:</td>
+        <td>@HtmlPresentationHelper.IfNotSpecified(Model.BankTransactionCode)</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td>کد رهگیری:</td>
+        <td>@HtmlPresentationHelper.IfNotSpecified(Model.FollowUpNumber)</td>
+    </tr>
+</table>
+

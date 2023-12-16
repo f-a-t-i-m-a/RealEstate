@@ -1,0 +1,171 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Core.DomainExtensions
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Resources.Controllers.Property
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyQuickCreateCompletedModel
+
+@{
+	ViewBag.Title = "اطلاعات ملک کد " + Model.Listing.Code + " با موفقیت ثبت شد";
+	var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="page-header">
+	<h1>
+		اطلاعات ملک با موفقیت ثبت شد
+	</h1>
+</div>
+
+@if (Model.Listing.OwnerUserID.HasValue)
+{
+	<div class="textSection" style="padding: 20px; font-size: 120%; font-weight: bold;">
+		کد خونه ت: <span style="color: red">@Model.Listing.Code</span>
+	</div>
+}
+else
+{
+	<div class="panel panel-danger">
+		<div class="panel-heading"><h3 class="panel-title">اطلاعات زیر را یادداشت کنید</h3></div>
+		<div class="panel-body">
+			<table style="width: 100%; font-size: 120%; font-weight: bold;">
+				<tr>
+					<td>کد خونه ت: <span style="color: red">@Model.Listing.Code</span></td>
+					<td>رمز برای ویرایش: <span style="color: red">@Model.ListingEditPassword</span></td>
+				</tr>
+			</table>
+		</div>	
+		<div class="panel-footer">
+			<p>
+				داشتن این رمز، شما رو به عنوان ثبت کننده این ملک شناسایی می کنه و بهتون اجازه میده اطلاعات ملک رو ویرایش کنید،
+				زمان عمومی بودن اطلاعات رو تمدید یا لغو کنید، یا اینکه اطلاعات رو حذف کنید.
+				<strong>اگر این رمز رو نداشته باشید، بعداً نمی تونید مستقیماً از داخل سایت این اطلاعات رو ویرایش کنید.</strong>
+			</p>
+		</div>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-body">
+			<p>
+				@IconsHelper.Idea32(Url)
+				به جای نگه داشتن کد و رمز املاک، می تونید
+				@Html.ActionLink("در سایت ثبت نام کنید", "Register", "Account")،
+				یا اگر قبلاً ثبت نام کرده اید،
+				@(Html.ActionLink("در سیستم وارد شوید", "LogOn", "Account")).
+				با این کار می تونید بدون وارد کردن رمز ویرایش برای هر ملک، به اطلاعات همه املاکی که ثبت کردید دسترسی
+				داشته باشید و اونها رو ویرایش کنید.
+			</p>
+		</div>
+	</div>
+}
+
+@if (Model.Listing.IsPublished())
+{
+	<div style="background-color: #9f9; margin-top: 15px;">
+		<div class="fr" style="margin: 8px;">@IconsHelper.Community32(Url)</div>
+		@if (Model.Listing.Approved.HasValue)
+		{
+			<div style="padding: 15px; font-size: 120%; font-weight: bold;">اطلاعات ملک عمومی است و در اختیار سایر کاربران قرار دارد.</div>
+		}
+		else
+		{
+			<div style="padding: 15px; font-size: 120%; font-weight: bold;">اطلاعات ملک عمومی است و پس از بازبینی توسط اپراتور در اختیار سایر کاربران قرار می گیرد.</div>
+		}
+	</div>
+}
+else
+{
+	<div style="background-color: #ff7; margin-top: 15px;">
+		<div class="fr" style="margin: 8px;">@IconsHelper.Warning32(Url)</div>
+		<div style="padding: 15px; font-size: 120%; font-weight: bold; ">اطلاعات این ملک عمومی نشده است و سایر کاربران آن را مشاهده نمی کنند.</div>
+	</div>
+
+	if (Model.PublishValidationResult.IsValid)
+	{
+		<p>
+			حداقل اطلاعات ملک برای عمومی شدن ثبت شده است و شما می تونید برای مدت دلخواه اطلاعات ملک رو عمومی کنید. قبل از این کار، لطفاً به موارد زیر دقت کنید:
+		</p>
+
+		<ul>
+			<li>با عمومی کردن ملک، اطلاعات اون برای همه افراد قابل دسترسی و مشاهده می شه. مسئولیت انتشار این اطلاعات به صورت عمومی به عهده شماست.</li>
+			<li>لطفاً قبل از عمومی کردن، از درستی اطلاعات مطمئن بشید تا بقیه کاربران به اشتباه نیفتند. اگر در موردی شک دارید، از راهنما استفاده کنید یا با ما تماس بگیرید.</li>
+			<li>اطلاعات ملک برای مدت زمان دلخواه شما عمومی می شود. هر زمانی که خواستید می تونید این مدت رو تمدید کنید، یا اطلاعات رو از حالت عمومی خارج کنید.</li>
+		</ul>
+
+		using (Html.BeginForm("PublishPostback", "Property", new {id = Model.Listing.ID}, FormMethod.Post))
+		{
+			<p>
+				مدت زمان عمومی شدن:
+				<select id="selPublishDays" name="publishDays" style="width: 100px;">
+					<option value="2">دو روز</option>
+					<option value="4">چهار روز</option>
+					<option value="7">یک هفته</option>
+					<option value="14">دو هفته</option>
+					<option value="21">سه هفته</option>
+					<option value="30">یک ماه</option>
+					<option value="60">دو ماه</option>
+					<option value="90" selected="selected">سه ماه</option>
+					<option value="120">چهار ماه</option>
+					<option value="150">پنج ماه</option>
+				</select>
+				<input id="btnPublish" class="button" style="width: 120px; color: #ff7;" type="submit" value="انتشار"/>
+			</p>
+		}
+	}
+	else
+	{
+		<p>
+			اطلاعات ملک هنوز برای عمومی شدن کامل نیست. لطفاً قبل از اینکه اطلاعات ملک رو عمومی کنید، به صفحه
+			@Html.ActionLink("ویرایش مشخصات اصلی", "EditBySummary", "Property", new {id = Model.Listing.ID}, new {@class = "linkbutton"})
+			مراجعه کرده، و این موارد رو اصلاح کنید:
+		</p>
+		<ul>
+			@foreach (var error in Model.PublishValidationResult.Errors)
+			{
+				<li>@PublishValidationErrors.ResourceManager.GetString(error.FullResourceKey)</li>
+			}
+		</ul>
+	}
+}
+<br/>
+<div class="panel panel-info">
+	<div class="panel-heading"><h2 class="panel-title">خلاصه اطلاعات ملک</h2></div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-6">
+				<table style="border-spacing: 10px; border-collapse: separate;">
+					<tr>
+						<td>محل:</td>
+						<td>@propertyPresentationHelper.BuildRegion(Model.ListingSummary)</td>
+					</tr>
+					<tr>
+						<td>ملک:</td>
+						<td>@propertyPresentationHelper.BuildTitle(Model.ListingSummary)</td>
+					</tr>
+					<tr>
+						<td>مساحت:</td>
+						<td>@propertyPresentationHelper.BuildArea(Model.ListingSummary)</td>
+					</tr>
+					<tr>
+						<td>قیمت:</td>
+						<td>@propertyPresentationHelper.BuildPriceAndPricePerArea(Model.ListingSummary)</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<span style="font-weight: bold;">اطلاعات ملک را کامل کنید!</span><br />
+				برای نمایش بهتر ملک در جستجو ها می تونید جزئیات زیادی به ملکی که ثبت کردید اضافه کنید.
+				لطفاً برای این کار به صفحه
+				@Html.ActionLink("جزئیات مشخصات ملک", "ViewDetails", "Property", new { id = Model.Listing.ID }, new { @class = "linkbutton" })
+				مراجعه کنید.
+			</div>
+		</div>
+	</div>
+	<div class="panel-footer">
+		<a class="btn btn-primary" href="@Url.Action("ViewDetails", "Property", new {id = Model.Listing.ID})">مشاهده همه جزئیات</a>
+		<a class="btn btn-primary" href="@Url.Action("EditBySummary", "Property", new {id = Model.Listing.ID})">ویرایش مشخصات اصلی</a>
+	</div>
+</div>
+
+
+
+

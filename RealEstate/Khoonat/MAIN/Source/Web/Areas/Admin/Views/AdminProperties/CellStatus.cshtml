@@ -1,0 +1,41 @@
+﻿@using JahanJooy.RealEstate.Core.DomainExtensions
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+@IconsHelper.Tristate(Url, Model.Approved)
+<br/>
+@if (Model.IsPublished())
+{
+	<span class="glyphicon glyphicon-globe"></span>
+}
+else
+{
+	<span class="glyphicon glyphicon-user"></span>
+}
+@if (Model.DeleteDate.HasValue)
+{
+	<span class="glyphicon glyphicon-trash text-danger"></span>
+}
+
+
+@if (@Model.GeographicLocationType == GeographicLocationSpecificationType.UserSpecifiedExact)
+{
+	<span class="glyphicon glyphicon-map-marker"></span>
+}
+else if (@Model.GeographicLocationType == GeographicLocationSpecificationType.InferredFromVicinity)
+{
+	<span class="glyphicon glyphicon-map-marker text-warning"></span>
+}
+else if (@Model.GeographicLocationType == GeographicLocationSpecificationType.InferredFromVicinityAndAddress)
+{
+	<span class="glyphicon glyphicon-map-marker"></span>
+}
+else if (@Model.GeographicLocationType == GeographicLocationSpecificationType.UserSpecifiedApproximate)
+{
+	<span class="glyphicon glyphicon-map-marker"></span>
+}
+else
+{
+	<span class="glyphicon glyphicon-map-marker text-danger"></span>
+}

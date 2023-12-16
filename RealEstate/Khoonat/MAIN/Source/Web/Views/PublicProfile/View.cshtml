@@ -1,0 +1,38 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Models.Shared.Profile
+@model ProfileModel
+
+@{
+	ViewBag.Title = "اطلاعات تماس و مشخصات کاربر " + Model.User.DisplayName;
+	ViewBag.MetaDescription = "اطلاعات کاربر " + Model.User.DisplayName + " کد " + Model.User.Code + " در سایت خونه ت دات کام، شامل اطلاعات تماس و مشخصات عمومی شخص یا بنگاه معاملات ملکی";
+}
+
+<h1>اطلاعات تماس و مشخصات کاربر - @Model.User.DisplayName</h1>
+
+<br/>
+<br/>
+
+@Html.Partial("_Profile/ProfileGeneralInfo", Model.User)
+
+<br />
+<ul class="nav nav-tabs">
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.General))"><a href="@Url.Action("View", new { activetab = "General", page = "", loginName = Model.User.LoginName })">مشخصات</a></li>
+	<li role="presentation" class="@("active".If(Model.ActiveTab == ProfileModel.ProfileActiveTab.PublishedPropertyListings))"><a href="@Url.Action("View", new { activeTab = "PublishedPropertyListings", page = "", loginName = Model.User.LoginName })">املاک منتشر شده</a></li>
+</ul>
+
+@Html.Partial("_Profile/ProfileActiveTab", Model)
+
+@section SideBar
+{
+	@if (User.Identity.IsAuthenticated && Model.User.ID == User.CoreIdentity.UserId)
+	{
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3 class="panel-title">پروفایل عمومی</h3></div>
+			<div class="panel-body">
+				<p>این صفحه <strong>پروفایل عمومی شما</strong> رو نشون می ده. یعنی اطلاعاتی که عموم کاربران در مورد حساب کاربری شما می بینند به این صورته.</p>
+				<p>اگر خواستید می توانید <a href="@Url.Action("View", "MyProfile", AreaRouteValue.Main)">صفحه پروفایل شخصی خودتون رو ببینید.</a></p>
+			</div>
+		</div>
+	}
+}

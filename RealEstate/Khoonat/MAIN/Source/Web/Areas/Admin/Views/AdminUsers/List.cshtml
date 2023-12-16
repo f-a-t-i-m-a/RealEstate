@@ -1,0 +1,74 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminUsers.AdminUsersListModel
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>کاربران</a></li>
+}
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Users, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>کد</th>
+				<th>شناسه</th>
+				<th>نام</th>
+				<th>نام کامل</th>
+				<th>تاریخ ایجاد</th>
+				<th>آخرین ورود</th>
+				<th>تکمیل</th>
+			</tr>
+		</thead>
+		@foreach (var user in Model.Users)
+		{
+			<tr data-link-url="@Url.Action("Details", new {id = @user.ID})"
+				class="@("warning".If(user.FailedLoginAttempts > 0)) @("danger".If(!user.IsEnabled))">
+				<td>@user.ID</td>
+				<td>@user.Code</td>
+				<td>@user.LoginName</td>
+				<td>@user.DisplayName</td>
+				<td>@user.FullName</td>
+				<td>@((user.CreationDate - DateTime.Now).ToLocalizedRelativeString(1))</td>
+				<td>@((user.LastLogin - DateTime.Now).ToLocalizedRelativeString(1))</td>
+				<td>@IconsHelper.Tristate(Url, user.IsVerified)</td>
+			</tr>
+		}
+	</table>
+</div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Users, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+
+@section SideBar
+{
+	 
+	@using (Html.BeginForm("List", "AdminUsers", FormMethod.Get))
+	{
+		<div style="width: 200px;">
+			@Html.LabelFor(m => m.ContactName):
+			@Html.TextBoxFor(m => m.ContactName)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.ContactPhone):
+			@Html.TextBoxFor(m => m.ContactPhone)
+			<br/>
+		    <br/>
+		    
+            @Html.LabelFor(m => m.ContactEmail):
+			@Html.TextBoxFor(m => m.ContactEmail)
+			<br/>
+			<br/>
+
+		    <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" type="submit">اعمال فیلتر</button>
+		</div>
+	}
+}

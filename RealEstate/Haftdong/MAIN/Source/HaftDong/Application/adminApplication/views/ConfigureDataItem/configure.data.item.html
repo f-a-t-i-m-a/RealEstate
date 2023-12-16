@@ -1,0 +1,41 @@
+﻿<div class="container">
+    <div class="page-header">
+        <h1>فهرست داده های پیکربندی</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>مقدار</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tr ng-repeat="item in items">
+                    <td>{{item.Identifier}}</td>
+                    <td>{{item.Value}}</td>
+                    <td licensed>
+                        <button class="btn btn-default btn-sm" ui-sref="configure.edit({identifier: item.Identifier})" restrict-to="Administrator">
+                            <i class="fa fa-pencil-square-o" title="ویرایش"></i>
+                        </button>
+                        <button class="btn btn-default btn-sm" ng-click="onRemoveItemClick(item.ID)"  restrict-to="Administrator" ng-disabled="item.ID == null">
+                            <i class="fa fa-remove" title="حذف"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <div class="well" ng-show="items.length == 0">
+                هیچ داده ای تعریف نشده است.
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row" licensed>
+        <div>
+            <button class="btn btn-primary" ui-sref="configure.new" restrict-to="Administrator"><i class="fa fa-plus"></i> داده جدید </button>
+        </div>
+    </div>
+</div>
+<div ui-view autoscroll="false"></div>

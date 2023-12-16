@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Label_AgencyName" xml:space="preserve">
+    <value>نام بنگاه</value>
+  </data>
+  <data name="Label_AgencyAddress" xml:space="preserve">
+    <value>آدرس بنگاه</value>
+  </data>
+  <data name="Label_CityID" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="Label_CityRegionID" xml:space="preserve">
+    <value>منطقه شهرداری</value>
+  </data>
+  <data name="Label_ContactEmail" xml:space="preserve">
+    <value>آدرس ایمیل</value>
+  </data>
+  <data name="Label_ContactName" xml:space="preserve">
+    <value>نام شخص</value>
+  </data>
+  <data name="Label_ContactPhone1" xml:space="preserve">
+    <value>تلفن</value>
+  </data>
+  <data name="Label_ContactPhone2" xml:space="preserve">
+    <value>تلفن دوم</value>
+  </data>
+  <data name="Label_EstateArea" xml:space="preserve">
+    <value>متراژ زمین</value>
+  </data>
+  <data name="Label_EstateDirection" xml:space="preserve">
+    <value>جهت زمین</value>
+  </data>
+  <data name="Label_PassageEdgeLength" xml:space="preserve">
+    <value>طول بَر به گذر اصلی</value>
+  </data>
+  <data name="Label_EstateVoucherType" xml:space="preserve">
+    <value>نوع سند</value>
+  </data>
+  <data name="Label_IntentionOfOwner" xml:space="preserve">
+    <value>جهت</value>
+  </data>
+  <data name="Label_Mortgage" xml:space="preserve">
+    <value>مبلغ ودیعه</value>
+  </data>
+  <data name="Label_NeighborhoodID" xml:space="preserve">
+    <value>محله</value>
+  </data>
+  <data name="Label_Price" xml:space="preserve">
+    <value>قیمت کل</value>
+  </data>
+  <data name="Label_PricePerEstateArea" xml:space="preserve">
+    <value>قیمت هر متر زمین</value>
+  </data>
+  <data name="Label_PricePerUnitArea" xml:space="preserve">
+    <value>قیمت هر متر زیربنا</value>
+  </data>
+  <data name="Label_PriceSpecificationType" xml:space="preserve">
+    <value>شیوه مشخص کردن قیمت</value>
+  </data>
+  <data name="Label_PropertyType" xml:space="preserve">
+    <value>نوع ملک</value>
+  </data>
+  <data name="Label_ProvinceID" xml:space="preserve">
+    <value>استان</value>
+  </data>
+  <data name="Label_Rent" xml:space="preserve">
+    <value>اجاره ماهانه</value>
+  </data>
+  <data name="Label_TotalNumberOfUnits" xml:space="preserve">
+    <value>تعداد واحدها در ساختمان</value>
+  </data>
+  <data name="Label_UnitArea" xml:space="preserve">
+    <value>زیربنا</value>
+  </data>
+  <data name="Label_UnitFloorNumber" xml:space="preserve">
+    <value>طبقه</value>
+  </data>
+  <data name="Label_AdditionalSpecialFeatures" xml:space="preserve">
+    <value>توضیحات، ویژگی ها و امتیازات واحد</value>
+  </data>
+  <data name="Label_UnitUsageType" xml:space="preserve">
+    <value>کاربری</value>
+  </data>
+  <data name="Label_BuildingAgeYears" xml:space="preserve">
+    <value>عمر بنا</value>
+  </data>
+  <data name="Label_NumberOfRooms" xml:space="preserve">
+    <value>تعداد اتاق ها</value>
+  </data>
+  <data name="Validation_Required_IntentionOfOwner" xml:space="preserve">
+    <value>بدون مشخص کردن نوع معامله ثبت ملک امکان پذیر نیست</value>
+  </data>
+  <data name="Validation_Required_PropertyType" xml:space="preserve">
+    <value>بدون مشخص کردن نوع ملک ثبت ملک امکان پذیر نیست</value>
+  </data>
+  <data name="Validation_PassageEdgeLength_Range" xml:space="preserve">
+    <value>عدد وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_PassageEdgeLength_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عدد باشد.</value>
+  </data>
+  <data name="Label_NumberOfParkings" xml:space="preserve">
+    <value>تعداد پارکینگ ها</value>
+  </data>
+  <data name="Validation_NumberOfParkings_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfParkings_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Label_Address" xml:space="preserve">
+    <value>آدرس:</value>
+  </data>
+  <data name="Label_AdditionalAddressInfo" xml:space="preserve">
+    <value>توضیحات آدرس (در صورت نیاز):</value>
+  </data>
+  <data name="Validation_EstateArea_Numeric" xml:space="preserve">
+    <value>مساحت باید به صورت یک عدد وارد شود.</value>
+  </data>
+  <data name="Validation_EstateArea_Range" xml:space="preserve">
+    <value>عدد وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_TotalNumberOfUnits_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_TotalNumberOfUnits_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_BuildingAgeYears_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_BuildingAgeYears_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_UnitArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_UnitArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfRooms_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfRooms_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_UnitFloorNumber_Numeric" xml:space="preserve">
+    <value>شماره طبقه را باید به صورت عددی وارد نمایید.</value>
+  </data>
+  <data name="Validation_UnitFloorNumber_Range" xml:space="preserve">
+    <value>عدد وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_Price_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_Price_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_PricePerEstateArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_PricePerEstateArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_PricePerUnitArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_PricePerUnitArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_Mortgage_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عدد باشد.</value>
+  </data>
+  <data name="Validation_Mortgage_Range" xml:space="preserve">
+    <value>مبلغ وارد شده خارج از محدوده قابل قبول است.</value>
+  </data>
+  <data name="Validation_Rent_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عدد باشد.</value>
+  </data>
+  <data name="Validation_Rent_Range" xml:space="preserve">
+    <value>مبلغ وارد شده خارج از محدوده قابل قبول است.</value>
+  </data>
+  <data name="Validation_ContactPhone1_PhoneNumber" xml:space="preserve">
+    <value>شماره تلفن به طور صحیح وارد نشده است.</value>
+  </data>
+  <data name="Validation_ContactPhone2_PhoneNumber" xml:space="preserve">
+    <value>شماره تلفن به طور صحیح وارد نشده است.</value>
+  </data>
+  <data name="Validation_ContactEmail_Email" xml:space="preserve">
+    <value>مقدار وارد شده باید حاوی یک آدرس ایمیل معتبر باشد.</value>
+  </data>
+  <data name="Label_MortgageAndRentConvertible" xml:space="preserve">
+    <value>اجاره / ودیعه قابل تبدیل هستند</value>
+  </data>
+  <data name="Label_MinimumMortgage" xml:space="preserve">
+    <value>حداقل مبلغ ودیعه</value>
+  </data>
+  <data name="Label_MinimumRent" xml:space="preserve">
+    <value>حداقل اجاره ماهانه</value>
+  </data>
+  <data name="Validation_MinimumMortgage_CompareToPropertyValue" xml:space="preserve">
+    <value>حداقل مبلغ ودیعه باید کمتر یا مساوی مبلغ ودیعه فوق باشد.</value>
+  </data>
+  <data name="Validation_MinimumMortgage_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عدد باشد.</value>
+  </data>
+  <data name="Validation_MinimumMortgage_Range" xml:space="preserve">
+    <value>مبلغ وارد شده خارج از محدوده قابل قبول است.</value>
+  </data>
+  <data name="Validation_MinimumRent_CompareToPropertyValue" xml:space="preserve">
+    <value>حداقل مبلغ اجاره باید کمتر یا مساوی مبلغ اجاره فوق باشد.</value>
+  </data>
+  <data name="Validation_MinimumRent_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عدد باشد.</value>
+  </data>
+  <data name="Validation_MinimumRent_Range" xml:space="preserve">
+    <value>مبلغ وارد شده خارج از محدوده قابل قبول است.</value>
+  </data>
+  <data name="Label_HasTransferableLoan" xml:space="preserve">
+    <value>ملک دارای وام قابل انتقال است</value>
+  </data>
+  <data name="Label_TransferableLoanAmount" xml:space="preserve">
+    <value>مبلغ باقی مانده از وام</value>
+  </data>
+  <data name="Validation_TransferableLoanAmount_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_TransferableLoanAmount_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Label_NumberFloorsAboveGround" xml:space="preserve">
+    <value>طبقات ساختمان</value>
+  </data>
+  <data name="Label_NumberOfUnitsPerFloor" xml:space="preserve">
+    <value>تعداد واحدها در طبقه</value>
+  </data>
+  <data name="Validation_NumberFloorsAboveGround_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberFloorsAboveGround_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfUnitsPerFloor_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfUnitsPerFloor_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Label_HasElevator" xml:space="preserve">
+    <value>آسانسور دارد</value>
+  </data>
+  <data name="Label_HasGatheringHall" xml:space="preserve">
+    <value>سالن اجتماعات دارد</value>
+  </data>
+  <data name="Label_HasAutomaticParkingDoor" xml:space="preserve">
+    <value>درب پارکینگ ریموتی دارد</value>
+  </data>
+  <data name="Label_HasSauna" xml:space="preserve">
+    <value>سونا دارد</value>
+  </data>
+  <data name="Label_HasSwimmingPool" xml:space="preserve">
+    <value>استخر دارد</value>
+  </data>
+  <data name="Label_HasVideoEyePhone" xml:space="preserve">
+    <value>آیفون تصویری دارد</value>
+  </data>
+  <data name="Label_HasJacuzzi" xml:space="preserve">
+    <value>جکوزی دارد</value>
+  </data>
+  <data name="Label_StorageRoomArea" xml:space="preserve">
+    <value>مساحت انباری ها</value>
+  </data>
+  <data name="Validation_StorageRoomArea_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_StorageRoomArea_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Label_KitchenCabinetTopType" xml:space="preserve">
+    <value>جنس سطح کابینت های آشپزخانه</value>
+  </data>
+  <data name="Label_KitchenCabinetBodyType" xml:space="preserve">
+    <value>جنس بدنه کابینت های آشپزخانه</value>
+  </data>
+  <data name="Label_MainDaylightDirection" xml:space="preserve">
+    <value>جهت اصلی نور واحد</value>
+  </data>
+  <data name="Label_LivingRoomFloor" xml:space="preserve">
+    <value>جنس کف پذیرایی</value>
+  </data>
+  <data name="Label_FaceType" xml:space="preserve">
+    <value>نوع نمای ساختمان</value>
+  </data>
+  <data name="Label_IsDuplex" xml:space="preserve">
+    <value>واحد دوبلکس است</value>
+  </data>
+  <data name="Label_HasIranianLavatory" xml:space="preserve">
+    <value>دستشویی ایرانی دارد</value>
+  </data>
+  <data name="Label_HasForeignLavatory" xml:space="preserve">
+    <value>دستشویی فرنگی دارد</value>
+  </data>
+  <data name="Label_HasPrivatePatio" xml:space="preserve">
+    <value>پاسیوی اختصاصی دارد</value>
+  </data>
+  <data name="Label_HasBeenReconstructed" xml:space="preserve">
+    <value>باز سازی شده است</value>
+  </data>
+  <data name="Label_NumberOfMasterBedrooms" xml:space="preserve">
+    <value>تعداد اتاق های مستر</value>
+  </data>
+  <data name="Validation_NumberOfMasterBedrooms_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد</value>
+  </data>
+  <data name="Validation_NumberOfMasterBedrooms_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است</value>
+  </data>
+  <data name="Label_PublishDuration" xml:space="preserve">
+    <value>مدت زمان عمومی بودن آگهی روی اینترنت</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_FiveMonths" xml:space="preserve">
+    <value>پنج ماه عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_FourDays" xml:space="preserve">
+    <value>چهار روز عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_FourMonths" xml:space="preserve">
+    <value>چهار ماه عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_OneMonth" xml:space="preserve">
+    <value>یک ماه عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_OneWeek" xml:space="preserve">
+    <value>یک هفته عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_ThreeMonths" xml:space="preserve">
+    <value>سه ماه عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_ThreeWeeks" xml:space="preserve">
+    <value>سه هفته عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_TwoDays" xml:space="preserve">
+    <value>دو روز عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_TwoMonths" xml:space="preserve">
+    <value>دو ماه عمومی باشد</value>
+  </data>
+  <data name="PropertyPublishDurationEnum_TwoWeeks" xml:space="preserve">
+    <value>دو هفته عمومی باشد</value>
+  </data>
+  <data name="Label_AgencyListing" xml:space="preserve">
+    <value>آیا این آگهی توسط واسطه ثبت می شود؟</value>
+  </data>
+  <data name="PropertyListingCreatorRoleType_AgencyListing" xml:space="preserve">
+    <value>این آگهی توسط مشاور ثبت می شود.</value>
+  </data>
+  <data name="PropertyListingCreatorRoleType_NoAgencyListing" xml:space="preserve">
+    <value>این آگهی بی واسطه است.</value>
+  </data>
+  <data name="Label_NoAgencyListing_AgencyPermitted" xml:space="preserve">
+    <value>آیا بنگاه های معاملات ملکی می توانند روی فروش یا اجاره این مورد کار کنند؟</value>
+  </data>
+  <data name="NonAgencyPropertyListingAgencyActivityAllowance_AgencyNotPermitted" xml:space="preserve">
+    <value>خیر؛ فقط قرارداد بی واسطه مورد نظر است</value>
+  </data>
+  <data name="NonAgencyPropertyListingAgencyActivityAllowance_AgencyPermitted" xml:space="preserve">
+    <value>بله؛ در صورت عقد قرارداد کمیسیون دریافت می کنند</value>
+  </data>
+  <data name="Label_AgencyListing_OtherAgencyPermitted" xml:space="preserve">
+    <value>آیا با سایر بنگاه های معاملات ملکی روی فروش یا اجاره این مورد همکاری می کنید؟</value>
+  </data>
+  <data name="AgencyPropertyListingAgencyActivityAllowance_OtherAgencyNotPermitted" xml:space="preserve">
+    <value>خیر؛ فقط مشتریان نهایی مورد نظر هستند</value>
+  </data>
+  <data name="AgencyPropertyListingAgencyActivityAllowance_OtherAgencyPermitted" xml:space="preserve">
+    <value>بله؛ در صورت عقد قرارداد کمیسیون را تقسیم می کنیم</value>
+  </data>
+  <data name="Validation_Required_AgencyListing" xml:space="preserve">
+    <value>بدون مشخص کردن نوع واسط ثبت ملک امکان پذیر نیست</value>
+  </data>
+</root>

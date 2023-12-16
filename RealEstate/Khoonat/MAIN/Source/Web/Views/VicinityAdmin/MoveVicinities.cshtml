@@ -1,0 +1,75 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Controllers
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.VicinityAdmin.VicinityAdminMoveVicinitiesModel
+
+
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", AreaRouteValue.Admin, null) &gt; 
+    <a href="@Url.Action("List", "VicinityAdmin", new {parentID = Model.ParetntID})">همسایگی</a>
+    &gt;
+    جابه جایی همسایگی ها
+</h2>
+
+<br/>
+@using (Html.BeginForm("MoveVicinities", "VicinityAdmin", Model))
+{
+    if (Model.Vicinities != null)
+    {
+        <div class="tbl highlightActiveRow" style="width: 500px">
+            <div class="tr" style="font-weight: bold; padding: 10px;">
+            
+                <div class="td" style="width: 50px;">نوع</div>
+                <div class="td" style="width: 100px;">نام</div>
+                <div class="td" style="width: 50px;">سایر نامها</div>
+                <div class="td" style="width: 20px;"></div>
+            </div>
+            @foreach (var vicinity in Model.Vicinities)
+            {
+                <div class="tr" style="background-color: @VicinityAdminController.GetVicinityBkgColor(vicinity)">
+                   
+                    <div class="td" >
+                        @vicinity.Type.Label(DomainEnumResources.ResourceManager)
+                    </div>
+                    <div class="td">
+                        
+                        @vicinity.Name
+                              
+                    </div> 
+                    <div class="td" >
+                        @vicinity.AlternativeNames
+                    </div> 
+                     <div class="td"><input class="move"  type="hidden" name="vicinityIds" value="@vicinity.ID" />
+                    </div>       
+                    
+                </div>
+            }
+        </div>
+
+        <br/>
+        <table>
+            <tr>
+                <td style="width: 110px">
+                    مقصد جابه جایی: 
+                </td>
+                <td style="width: 305px">
+                    @Html.VicinitySelector(false, "VicinityID")
+                </td>
+                <td>
+                    <input id="btnMoveVicinities" name="btnMoveVicinities" class="button" type="submit" value="جابه جا شود"/>
+                </td>
+            </tr>
+        </table>
+    }
+}
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function OnChanged() {
+                           searchScope = $("#SelectedScope").val();
+                       }
+
+                       $("#SelectedScope").change(OnChanged);
+                   </script>)

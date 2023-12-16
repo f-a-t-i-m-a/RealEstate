@@ -1,0 +1,95 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Billing.Views.Payment
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Payment.PaymentViewWireTransferPaymentsModel
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+		<a href="@Url.Action("ViewAllPayments", "Payment", AreaRouteValue.Billing)">گزارش پرداخت ها</a>:
+		پرداخت های واریزی
+	</h1>
+</div>
+
+<ul class="nav nav-tabs">
+	<li role="presentation"><a href="@Url.Action("ViewAllPayments", "Payment", AreaRouteValue.Billing)">همه پرداخت ها</a></li>
+	<li role="presentation" class="active"><a href="@Url.Action("ViewWireTransferPayments", "Payment", AreaRouteValue.Billing)">پرداخت های کارت به کارت / واریزی</a></li>
+	<li role="presentation"><a href="@Url.Action("ViewElectronicPayments", "Payment", AreaRouteValue.Billing)">پرداخت های الکترونیکی</a></li>
+</ul>
+
+@if (Model.Payments.Any())
+{
+	@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Payments, p => Url.Action("ViewWireTransferPayments", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>زمان ثبت</th>
+					<th>شناسه</th>
+					<th>مبلغ</th>
+					<th>از بانک</th>
+					<th>از حساب</th>
+					<th>زمان تقریبی پرداخت</th>
+					<th>وضعیت</th>
+					<th>جزئیات</th>
+				</tr>
+			</thead>
+			@foreach (var payment in Model.Payments.Reverse())
+			{
+				<tr>
+					<td>@payment.CreationTime.ToLocalizedDateString() ساعت @payment.CreationTime.ToLocalizedTimeString()</td>
+					<td>@payment.ID</td>
+					<td>@BillingPresentationHelper.Amount(payment.Amount)</td>
+					<td>@payment.SourceBank.Label(DomainBillingEnumResources.ResourceManager)</td>
+					<td>
+						@HtmlPresentationHelper.IfNotSpecified(payment.SourceCardNumberLastDigits, GeneralResources.Unknown)؛
+						به نام @HtmlPresentationHelper.IfNotSpecified(payment.SourceAccountHolderName, GeneralResources.Unknown)
+					</td>
+					<td>
+						@payment.UserEnteredDate.ToLocalizedDateString()
+						@payment.UserEnteredDate.ToLocalizedTimeString()
+					</td>
+					<td>
+						@IconsHelper.Tristate(Url, payment.BillingState == BillingSourceEntityState.Pending ? (bool?)null : payment.BillingState == BillingSourceEntityState.Applied)
+						@payment.BillingState.Label(PaymentViewResources.ResourceManager)
+					</td>
+					<td>
+						@if (payment.ForwardTransactionID.HasValue)
+						{
+							<span data-ajax-modal="@Url.Action("ViewDetailsPopup", "UserTransactions", new { id = payment.ForwardTransactionID })">@IconsHelper.GoLeft16(Url) جزئیات تراکنش</span>
+							if (payment.ReverseTransactionID.HasValue)
+							{
+								<br />
+								<span data-ajax-modal="@Url.Action("ViewDetailsPopup", "UserTransactions", new { id = payment.ReverseTransactionID })">@IconsHelper.GoLeft16(Url) تراکنش معکوس</span>
+							}
+						}
+						else
+						{
+							@HtmlPresentationHelper.Disabled("بدون تراکنش")
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+
+	@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Payments, p => Url.Action("ViewWireTransferPayments", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+}
+else
+{
+	<div class="tab-content" style="padding-top: 15px;">
+		<p>شما تا کنون هیچ پرداختی از طریق واریز با حساب / انتقال کارت به کارت اعلام نکرده اید.</p>
+	</div>
+}
+
+<hr />
+<a class="btn btn-warning" href="@Url.Action("NewWireTransferPayment", "Payment", AreaRouteValue.Billing)">اعلام پرداخت کارت به کارت / واریزی</a>

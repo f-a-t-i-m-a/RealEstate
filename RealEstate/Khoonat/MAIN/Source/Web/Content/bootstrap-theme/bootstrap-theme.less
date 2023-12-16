@@ -1,0 +1,64 @@
+
+@import "../bootstrap/bootstrap.less";
+@import "site-fontfaces.less";
+@import "site-variables.less";
+
+@import "site-general.less";
+@import "site-layout.less";
+@import "site-social.less";
+@import "site-icons.less";
+
+
+//
+// Add any style customizations here
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+	.form-control();
+}
+
+.detail-item {
+	.panel();
+	.panel-default();
+	padding: 10px;
+}
+
+.btn-stack > div {
+	margin-bottom: 5px;
+}
+
+.btn-stack .btn {
+	.btn-block();
+}
+
+.label {
+	display: inline-block;
+}
+.social-network-icon{
+    height:24px;
+    width:24px;
+}
+.top-buffer 
+{
+     margin-top:5px; 
+}
+
+
+@import "theming/select2-theme.less";
+@import "theming/qtip-theme.less"; // TODO: Remove
+@import "theming/fine-uploader-theme.less";
+

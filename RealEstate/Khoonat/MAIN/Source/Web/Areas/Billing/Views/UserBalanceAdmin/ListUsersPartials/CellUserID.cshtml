@@ -1,0 +1,9 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Components.Dto.UserBillingBalance
+
+<a href="@Url.Action("Details", "AdminUsers", new { id = Model.User.ID, area = AreaNames.Admin})">
+    <div class="fr" style="margin: 8px;">@IconsHelper.Xlink16(Url)</div>
+    <span class="bold">@Model.User.ID: @Model.User.LoginName</span><br />
+    <span class="small">کد: @Model.User.Code</span>
+</a>

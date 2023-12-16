@@ -1,0 +1,32 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Billing.UserBalanceAdministrativeChange
+
+ثبت:
+
+<a href="@Url.Action("Details", "AdminUsers", new {id = Model.CreatedByUserID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+<a href="@Url.Action("ListAdministrativeChanges", Request.QueryString.ToRouteValues().Set("CreatedByUserIDFilter", Model.CreatedByUserID.ToString(CultureInfo.InvariantCulture)))">
+    @Model.CreatedByUserID:
+    @Model.CreatedByUser.LoginName
+</a>
+
+<br/>
+
+بررسی:
+
+@if (Model.ReviewedByUser != null)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.ReviewedByUserID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a href="@Url.Action("ListAdministrativeChanges", Request.QueryString.ToRouteValues().Set("ApplyReviewedByUserIDFilter", "true").Set("ReviewedByUserIDFilter", Model.ReviewedByUser.ID.ToString(CultureInfo.InvariantCulture)))">
+        @Model.ReviewedByUser.ID:
+        @Model.ReviewedByUser.LoginName
+    </a>
+}
+else
+{
+    <a href="@Url.Action("ListAdministrativeChanges", Request.QueryString.ToRouteValues().Set("ApplyReviewedByUserIDFilter", "true").Set("ReviewedByUserIDFilter", string.Empty))">
+        انجام نشده
+    </a>
+}

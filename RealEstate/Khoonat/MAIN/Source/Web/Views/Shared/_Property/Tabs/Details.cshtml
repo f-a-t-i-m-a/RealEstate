@@ -1,0 +1,125 @@
+﻿@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Web.Models.Property
+@model ViewPropertyDetailsDetailsTabModel
+
+@if (Model.IsOwner)
+{
+	<div class="alert alert-info">
+		<strong>شما صاحب این رکورد هستید.</strong>
+		<br/><br/>
+		تمام 
+		<mark>خصوصیات مشخص نشده</mark>
+		ملک در این صفحه قابل مشاهده است، ولی برای سایر بازدید کنندگان تنها خصوصیاتی که
+		شما مقدار آنها را مشخص کرده باشید نمایش داده می شوند.
+	</div>
+}
+
+<div class="panel-group" id="propertyListingDetailsAccordion" role="tablist">
+
+
+	@**************************************************************@
+	@*** Unit properties ******************************************@
+	@**************************************************************@
+
+	@if (Model.Listing.PropertyType.HasUnit())
+	{
+		@Html.Partial("_Property/View/ViewPropertyDetailsSectionPartial", new PropertyViewDetailsSectionModel
+																		  {
+																			  Title = "مشخصات واحد",
+																			  Identifier = "UnitProperties",
+																			  EditAction = "EditUnit",
+																			  DetailsViewName = "_Property/View/ViewPropertyUnit",
+																			  PropertyListingID = Model.Listing.ID,
+																			  IsOwner = Model.IsOwner,
+																			  SectionModel = PropertyUnitModel.CreateFromDto(Model.Listing, Model.IsOwner)
+																		  })
+	}
+
+	@**************************************************************@
+	@*** Building properties **************************************@
+	@**************************************************************@
+
+	@if (Model.Listing.PropertyType.HasBuilding())
+	{
+		@Html.Partial("_Property/View/ViewPropertyDetailsSectionPartial", new PropertyViewDetailsSectionModel
+																		  {
+																			  Title = "مشخصات ساختمان",
+																			  Identifier = "BuildingProperties",
+																			  EditAction = "EditBuilding",
+																			  DetailsViewName = "_Property/View/ViewPropertyBuilding",
+																			  PropertyListingID = Model.Listing.ID,
+																			  IsOwner = Model.IsOwner,
+																			  SectionModel = PropertyBuildingModel.CreateFromDto(Model.Listing, Model.IsOwner)
+																		  })
+	}
+
+	@**************************************************************@
+	@*** Estate properties ****************************************@
+	@**************************************************************@
+
+	@Html.Partial("_Property/View/ViewPropertyDetailsSectionPartial", new PropertyViewDetailsSectionModel
+																	  {
+																		  Title = "مشخصات زمین",
+																		  Identifier = "EstateProperties",
+																		  EditAction = "EditEstate",
+																		  DetailsViewName = "_Property/View/ViewPropertyEstate",
+																		  PropertyListingID = Model.Listing.ID,
+																		  IsOwner = Model.IsOwner,
+																		  SectionModel = PropertyEstateModel.CreateFromDto(Model.Listing, Model.IsOwner)
+																	  })
+
+	@**************************************************************@
+	@*** Luxury properties ****************************************@
+	@**************************************************************@
+
+	@if (Model.Listing.PropertyType.HasUnit())
+	{
+		@Html.Partial("_Property/View/ViewPropertyDetailsSectionPartial", new PropertyViewDetailsSectionModel
+																		  {
+																			  Title = "امکانات لوکس",
+																			  Identifier = "LuxuryProperties",
+																			  EditAction = "EditLuxury",
+																			  DetailsViewName = "_Property/View/ViewPropertyLuxury",
+																			  PropertyListingID = Model.Listing.ID,
+																			  IsOwner = Model.IsOwner,
+																			  SectionModel = PropertyLuxuryModel.CreateFromDto(Model.Listing, Model.IsOwner)
+																		  })
+	}
+
+	@**************************************************************@
+	@*** Payment conditions for Sale ******************************@
+	@**************************************************************@
+
+	@if (Model.Listing.IntentionOfOwner == IntentionOfOwner.ForSale)
+	{
+		@Html.Partial("_Property/View/ViewPropertyDetailsSectionPartial", new PropertyViewDetailsSectionModel
+																		  {
+																			  Title = "شرایط پرداخت (فروش)",
+																			  Identifier = "SalePaymentConditions",
+																			  EditAction = "EditSalePaymentConditions",
+																			  DetailsViewName = "_Property/View/ViewPropertyPaymentConditionsForSale",
+																			  PropertyListingID = Model.Listing.ID,
+																			  IsOwner = Model.IsOwner,
+																			  SectionModel = PropertySalePaymentModel.CreateFromDto(Model.Listing, Model.IsOwner)
+																		  })
+	}
+
+	@**************************************************************@
+	@*** Payment conditions for Rent ******************************@
+	@**************************************************************@
+
+	@if (Model.Listing.IntentionOfOwner == IntentionOfOwner.ForRent)
+	{
+		@Html.Partial("_Property/View/ViewPropertyDetailsSectionPartial", new PropertyViewDetailsSectionModel
+																		  {
+																			  Title = "شرایط پرداخت (اجاره)",
+																			  Identifier = "RentPaymentConditions",
+																			  EditAction = "EditRentPaymentConditions",
+																			  DetailsViewName = "_Property/View/ViewPropertyPaymentConditionsForRent",
+																			  PropertyListingID = Model.Listing.ID,
+																			  IsOwner = Model.IsOwner,
+																			  SectionModel = PropertyRentPaymentModel.CreateFromDto(Model.Listing, Model.IsOwner)
+																		  })
+	}
+
+</div>

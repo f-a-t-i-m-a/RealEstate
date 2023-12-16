@@ -1,0 +1,240 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Spatial
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminAgency.AdminAgencyBranchModel
+
+
+<div style="direction: rtl; padding-right: 20px;">
+    @Html.ValidationSummary(false)
+</div>
+
+
+<div style="padding-right: 20px">
+        
+    @Html.HiddenFor(m => m.AgencyID) 
+    @Html.HiddenFor(m => m.BranchID)
+
+    <table class="dataEntryTable">
+        <tr>
+            <td>نام شعبه: &nbsp;&nbsp;</td>
+            <td>
+                <table>
+                    <tr>
+                        <td><div style="width: 200px; direction: rtl;">@Html.TextBoxFor(m => m.Branch.BranchName)</div></td>
+                        <td>@IconsHelper.RequiredOne16(Url)</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 400px"></td>
+        </tr>
+        <tr>
+            <td>محل: &nbsp;&nbsp;</td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div style="width: 290px; direction: ltr;">
+                                @(Model.Branch.VicinityID == 0 ? Html.VicinitySelector(false, "Branch.VicinityID") : Html.VicinitySelector("Branch.VicinityID", null, 1, Model.Branch.VicinityID.ToString(CultureInfo.InvariantCulture)))
+                            </div>
+                        </td>                           
+                        <td>@IconsHelper.RequiredOne16(Url)</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 400px"  rowspan="8">
+                <div id="mapCanvas" class="mapCanvas" style="width: 100%; height: 400px;">
+                </div>
+                <div>
+                    @Html.HiddenFor(m => m.Branch.GeographicLocation)
+                </div>
+                <div class="geographicLocationType">
+                    @Html.HiddenFor(m => m.Branch.GeographicLocationType)
+                </div>
+                                
+            </td>
+        </tr>
+          
+        <tr>
+            <td>نام مدیر شعبه: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.BranchManagerName)</div></td>
+        </tr>
+        <tr>
+            <td>تلفن ثابت 1: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.Phone1)</div></td>
+        </tr>
+        <tr>
+            <td>تلفن ثابت 2: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.Phone2)</div></td>
+        </tr>
+        <tr>
+            <td>موبایل 1: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.CellPhone1)</div></td>
+        </tr>
+        <tr>
+            <td>موبایل 2: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.CellPhone2)</div></td>
+        </tr>
+        <tr>
+            <td>ایمیل: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.Email)</div></td>
+        </tr>
+        <tr>
+            <td>فکس: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.Fax)</div></td>
+        </tr>
+        <tr>
+            <td>شماره پیامک: &nbsp;&nbsp;</td>
+            <td><div style="width: 200px; direction: ltr;">@Html.TextBoxFor(m => m.Branch.SmsNumber)</div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <div>آدرس کامل:</div>
+            </td>
+            <td>@Html.TextAreaFor(m => m.Branch.FullAddress, 3, 70, null)</td>
+        </tr>
+        <tr>
+            <td>
+                <div>حوزه فعالیت:</div>
+            </td>
+            <td>@Html.TextAreaFor(m => m.Branch.ActivityRegion, 3, 70, null)</td>
+        </tr>
+        <tr>
+            <td>
+                <div>توضیحات:</div>
+            </td>
+            <td>@Html.TextAreaFor(m => m.Branch.Description, 3, 70, null)</td>
+        </tr>
+			
+    </table>
+</div>
+
+@this.ScriptLibrary(new ScriptLibrary("https://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyDlE2V9O9FzosTGXcX6SPQatAukHsQwP6U&sensor=false&language=fa&region=IR", null))
+@(this.ScriptBlock(@<script type="text/javascript">
+
+                        $(document).ready(function() {
+                            var cursorMarker;
+                            var mapProp = {
+                                center: @((Model.Branch.GeographicLocation.ToLatLng() ?? new LatLng {Lat = 35.9, Lng = 51.5}).ToGoogleApi()),
+                                zoom: 8,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                streetViewControl: true,
+                                scaleControl: true,
+                                draggable: true,
+                            }
+                            var map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
+                            var removePoi = [
+                                {
+                                    "featureType": "poi",
+                                    "stylers": [
+                                        { "visibility": "off" }
+                                    ]
+                                }
+                            ];
+                            map.setOptions({ styles: removePoi });
+
+                            var userPointMarker = new google.maps.Marker({
+                                map: map,
+                                clickable: false,
+                            });
+
+                            function placeAgencyPointMarker(location) {
+                                cursorMarker = new google.maps.Marker({
+                                    position: location,
+                                    map: map,
+                                    clickable: false,
+                                });
+                            }
+
+                            google.maps.event.addListener(map, 'mouseover', function(event) {
+                                placeAgencyPointMarker(event.latLng);
+                                if (cursorMarker)
+                                    cursorMarker.setMap(map);
+                            });
+                            google.maps.event.addListener(map, 'mouseout', function(event) {
+                                if (cursorMarker)
+                                    cursorMarker.setVisible(false);
+                            });
+                            google.maps.event.addListener(map, 'mousemove', function(event) {
+                                if (cursorMarker)
+                                    cursorMarker.setPosition(event.latLng);
+                            });
+                            google.maps.event.addListener(map, 'click', function(event) {
+                                userPointMarker.setPosition(event.latLng);
+                                userPointMarker.setMap(map);
+
+                                $("#Branch_GeographicLocationType").val('@GeographicLocationSpecificationType.UserSpecifiedExact');
+                                $("#Branch_GeographicLocation").val(getMarkerWKT(userPointMarker));
+
+                                $.ajax({
+                                    url: '@Url.Action("FindUserPointVicinity", "Map", new {area = AreaNames.Main})',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        "userPoint": {
+                                            "Lat": event.latLng.lat(),
+                                            "Lng": event.latLng.lng()
+                                        }
+                                    })
+                                }).done(function(data) {
+                                    $("#Branch_VicinityID").val(data);
+                                    setSelectedVicinityIdOnSelect2();
+                                });
+                            });
+
+                            function setSelectedVicinityIdOnSelect2() {
+                                if ($("#Branch_VicinityID").val()) {
+                                    searchScope = null;
+                                    $.ajax({
+                                        url: '@Url.Action("Get", "VicinitySelector", new {area = AreaNames.Main})',
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data:
+                                        {
+                                            id: $("#Branch_VicinityID").val()
+                                        }
+                                    }).done(function(data) {
+                                        $("#Branch_VicinityID").select2("data", data);
+                                    });
+                                    getVicinityBounds($("#Branch_VicinityID").val(), map);
+                                }
+                            };
+
+                            
+                            if ($("#Branch_GeographicLocation").val() != null && $("#Branch_GeographicLocationType").val() == '@GeographicLocationSpecificationType.UserSpecifiedExact') {
+                                var location= @Model.Branch.GeographicLocation.ToLatLng().IfNotNull(ll => ll.ToGoogleApi(), "null"); 
+                                userPointMarker.setPosition(location);
+                                userPointMarker.setMap(map);
+                            };
+
+                            $("#Branch_VicinityID").on("select2-selecting", function(e) {
+                                getVicinityBounds(e.val, map);
+                                userPointMarker.setMap(null);
+                                $("#Branch_GeographicLocationType").val(null);
+                                $("#Branch_GeographicLocation").val(null);
+                            });
+                        });
+
+                        function getVicinityBounds(id, map) {
+                            $.ajax({
+                                url: '@Url.Action("GetVicinityBounds", "Map", new {area = AreaNames.Main})',
+                                type: 'POST',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    "vicinityID": id
+                                })
+                            }).done(function(data) {
+                                var southWest = new google.maps.LatLng(data.SouthWest.Lat, data.SouthWest.Lng);
+                                var northEast = new google.maps.LatLng(data.NorthEast.Lat, data.NorthEast.Lng);
+                                var bounds = new google.maps.LatLngBounds(southWest, northEast);
+                                map.fitBounds(bounds);
+                            });
+                        }
+                    </script>))

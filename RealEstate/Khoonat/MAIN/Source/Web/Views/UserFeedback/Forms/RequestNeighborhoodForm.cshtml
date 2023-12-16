@@ -1,0 +1,76 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@model JahanJooy.RealEstate.Web.Models.UserFeedback.UserFeedbackRequestNeighborhoodModel
+
+<div class="modal-content" id="requestNeighborhoodRoot">
+	@using (Ajax.BeginForm("RequestNeighborhoodPostback", "UserFeedback", new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "requestNeighborhoodRoot"}))
+	{
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">اصلاح اطلاعات محله ها</h4>
+		</div>
+		<div class="modal-body">
+			<p>
+				از اینکه ما رو راهنمایی می کنید و به ما کمک می کنید که سایت بهتری برای شما فراهم کنیم، سپاس گزاریم.
+				با پر کردن این فرم، اطلاعات مورد نظر شما برای مدیر سایت فرستاده می شه تا بتونه اطلاعات سایت رو اصلاح کنه:
+			</p>
+
+			<table>
+				<tr>
+					<td style="width: 100px;">@Html.LabelFor(m => m.NeighborhoodName):</td>
+					<td style="width: 150px;">@Html.TextBoxFor(m => m.NeighborhoodName, new {autofocus = "autofocus"})</td>
+					<td style="width: 50px;">&nbsp;</td>
+					<td style="width: 120px;">@Html.LabelFor(m => m.CityRegionName):</td>
+					<td style="width: 150px;">@Html.TextBoxFor(m => m.CityRegionName)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(m => m.CityName):</td>
+					<td>@Html.TextBoxFor(m => m.CityName)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(m => m.Comments):</td>
+					<td colspan="4">@Html.TextAreaFor(m => m.Comments, 2, 40, new {maxlength = 500, style = "height:80px;"})</td>
+				</tr>
+				<tr><td colspan="5"><hr /></td></tr>
+				<tr style="margin-top: 20px;"><td colspan="5" style="margin-top: 20px;">اگر دوست داشتید، اطلاعات تماستون رو اینجا وارد کنید تا اگر لازم شد بتونیم با شما تماس بگیریم.</td></tr>
+				<tr>
+					<td>@Html.LabelFor(m => m.Name):</td>
+					<td>@Html.TextBoxFor(m => m.Name)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(m => m.PhoneNumber):</td>
+					<td class="ltr">@Html.TextBoxFor(m => m.PhoneNumber)</td>
+					<td>&nbsp;</td>
+					<td>@Html.LabelFor(m => m.EmailAddress):</td>
+					<td>@Html.TextBoxFor(m => m.EmailAddress)</td>
+				</tr>
+			</table>
+
+			<div>
+				@Html.ValidationMessageFor(m => m.NeighborhoodName)
+				@Html.ValidationMessageFor(m => m.CityRegionName)
+				@Html.ValidationMessageFor(m => m.CityName)
+				@Html.ValidationMessageFor(m => m.Comments)
+				@Html.ValidationMessageFor(m => m.Name)
+				@Html.ValidationMessageFor(m => m.PhoneNumber)
+				@Html.ValidationMessageFor(m => m.EmailAddress)
+			</div>
+
+			@if (!User.IsVerified)
+			{
+				<hr/>
+				<div class="pull-left" style="margin-right: 30px;">@Html.Action("ViewImage", "Captcha")</div>
+				<p>لطفاً عدد شش رقمی نمایش داده شده در تصویر روبرو رو در فیلد کنارش وارد کنید.</p>
+				<br class="clear" />
+			}
+
+			@Html.ScriptCaptchaToken()
+			@Html.ScriptCaptchaScript()
+			@Html.CaptchaErrorMessage()
+
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success" id="btnOK" >ارسال</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		</div>
+	}
+</div>

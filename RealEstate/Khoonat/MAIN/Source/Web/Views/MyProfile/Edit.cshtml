@@ -1,0 +1,52 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileEditModel
+
+@{
+    ViewBag.Title = "ویرایش مشخصات پروفایل";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="well">ویرایش مشخصات</div>
+
+    <div class="form-horizontal" >
+        <div class="form-group">
+            <div class="col-xs-3  col-md-3">@Html.LabelFor(m => m.FullName):</div>
+            <div class="col-xs-6 col-md-4">@Html.TextBoxFor(m => m.FullName, new {autofocus = "autofocus"})</div>
+            <div class="col-xs-3  col-md-1">@Html.ValidationMessageFor(m => m.FullName)</div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12 col-md-12">@Html.CheckBoxFor(m => m.DisplayNameSameAsFullName) @Html.LabelFor(m => m.DisplayNameSameAsFullName)</div>
+        </div>
+        <div class="form-group none" id="displayNameDetails">
+            <div class="col-xs-3  col-md-3">@Html.LabelFor(m => m.DisplayName):</div>
+            <div class="col-xs-8 col-md-4">@Html.TextBoxFor(m => m.DisplayName)</div>
+            <div class="col-xs-1  col-md-1">@Html.ValidationMessageFor(m => m.DisplayName)</div>
+        </div>
+    </div>
+
+    <div class="pull-left">
+        <button name="btnSave" value="btnSave" class="btn btn-success" type="submit">ذخیره</button>
+        <a href="@Url.Action("View")" class="btn btn-default">بازگشت</a>
+    </div>
+}
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function OnDisplayNameSameAsFullNameChanged() {
+                           if (this.checked) $("#displayNameDetails").slideUp(400);
+                           else $("#displayNameDetails").slideDown(400);
+                           if (this.checked) $("#DisplayName").val($("#FullName").val());
+                       }
+
+                       $("#DisplayNameSameAsFullName").change(OnDisplayNameSameAsFullNameChanged);
+                       $("#DisplayNameSameAsFullName").trigger("change");
+
+                       $("#FullName").change(function() {
+                           if ($("#DisplayNameSameAsFullName")[0].checked)
+                               $("#DisplayName").val($(this).val());
+                       });
+
+                   </script>
+    )

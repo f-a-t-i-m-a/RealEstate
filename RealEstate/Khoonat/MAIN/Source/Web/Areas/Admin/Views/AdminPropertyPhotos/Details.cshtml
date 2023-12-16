@@ -1,0 +1,105 @@
+﻿@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Core.DomainExtensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Controllers
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Property.PropertyListingPhoto
+
+@section NavbarRightExtra
+{
+	<li><a href="@AdminPropertyPhotosController.DefaultList(Url)">عکس های املاک</a></li>
+	<li class="active"><a>عکس @Model.ID</a></li>
+}
+
+<div class="alert alert-info">
+	عکس @Model.ID از
+	@Model.PropertyListing.IntentionOfOwner.Label(DomainEnumResources.ResourceManager) @Model.PropertyListing.PropertyType.Label(DomainEnumResources.ResourceManager) - کد @Model.PropertyListing.Code - شناسه @Model.PropertyListing.ID -
+	وضعیت: @(Model.PropertyListing.IsPublic() ? "عمومی" : Model.PropertyListing.Approved.HasValue && !Model.PropertyListing.Approved.Value ? "رد شده توسط اپراتور" : Model.PropertyListing.IsPublished() ? "در انتظار تایید" : "منتشر نشده")
+</div>
+
+@if (Model.DeleteTime.HasValue)
+{
+	<div class="alert alert-danger">حذف شده در @Model.DeleteTime.Value.ToLocalizedDateString() @Model.DeleteTime.Value.ToLocalizedTimeString()</div>
+}
+
+<div style="display: inline-block;">
+	<div style="text-align: right; font-size: 110%; margin-bottom: 10px;">
+		@HtmlPresentationHelper.IfNotSpecified(PropertyPhotoHelper.BuildPhotoTitle(Model), "موضوع و عنوان مشخص نشده اند")
+	</div>
+
+	<a target="_blank" href="@Url.Action("ViewFullSize", "PropertyPhoto", new { Area = "", photoId = Model.ID })">
+		<img src="@Url.Action("GetMediumSizeImage", "PropertyPhoto", new { Area = "", id = Model.ID})"/>
+	</a>
+		
+	<p style="text-align: right;">
+		ایجاد:
+		@((Model.CreationTime - DateTime.Now).ToLocalizedRelativeString())
+	</p>
+
+	<div style="text-align: right; font-size: 110%; margin-top: 10px;">
+		<span class="bold">توضیحات:</span><br/>
+		@HtmlPresentationHelper.IfNotSpecified(Model.Description)
+	</div>
+</div>
+
+@section SideBar
+{
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h3 class="panel-title">بازبینی</h3></div>
+		<div class="panel-body">
+			@using (Html.BeginForm("ReviewAction", "AdminPropertyPhotos", new { id = Model.ID }, FormMethod.Post))
+			{
+				<h3 class="panel-title">@IconsHelper.Tristate(Url, Model.Approved) @(Model.Approved.HasValue ? (Model.Approved.Value ? "تایید شده" : "مردود") : "انجام نشده")</h3><br />
+
+				<div class="row">
+					@if (Model.Approved.HasValue)
+					{
+						<div class="col-xs-12"><button name="btnClearApproval" value="btnClearApproval" type="submit" class="btn btn-warning btn-block" style="width: 98%;">پاک کردن بازبینی</button></div>
+					}
+					else
+					{
+						<div class="col-xs-6"><button name="btnApprove" value="btnApprove" type="submit" class="btn btn-success btn-block">@IconsHelper.Tick32(Url) قبول</button></div>
+						<div class="col-xs-6"><button name="btnReject" value="btnReject" type="submit" class="btn btn-danger btn-block">@IconsHelper.Cross32(Url) مردود</button></div>
+					}
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-xs-6"><button name="btnPrevious" value="btnPrevious" type="submit" class="btn btn-default btn-block"><span class="glyphicon glyphicon-arrow-down"></span> قبلی</button></div>
+					<div class="col-xs-6"><button name="btnNext" value="btnNext" type="submit" class="btn btn-default btn-block">بعدی <span class="glyphicon glyphicon-arrow-up"></span></button></div>
+				</div>
+			}
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3 class="panel-title">حجم عکس</h3></div>
+		<div class="panel-body">
+			<ul>
+				<li>حجم دست نخورده: <span dir="ltr">@NumericStringUtils.BytesToString(Model.UntouchedLength)</span></li>
+				<li>حجم سایز بزرگ: <span dir="ltr">@NumericStringUtils.BytesToString(Model.FullSizeLength)</span></li>
+				<li>حجم سایز متوسط: <span dir="ltr">@NumericStringUtils.BytesToString(Model.MediumSizeLength)</span></li>
+				<li>حجم نشانه: <span dir="ltr">@NumericStringUtils.BytesToString(Model.ThumbnailLength)</span></li>
+				<li>حجم کل: <span dir="ltr">@NumericStringUtils.BytesToString(Model.UntouchedLength + Model.FullSizeLength + Model.MediumSizeLength + Model.ThumbnailLength)</span></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="list-group">
+		<div class="list-group-item active">لینک ها</div>
+		<a class="list-group-item" href="@Url.Action("Details", "AdminProperties", new { id = Model.PropertyListingID})"><span class="glyphicon glyphicon-link"></span> ملک (مدیریت)</a>
+		<a class="list-group-item" href="@Url.Action("ViewDetails", "Property", new { id = Model.PropertyListingID, Area = "" })"><span class="glyphicon glyphicon-link"></span> ملک (عمومی)</a>
+		<a class="list-group-item" href="@Url.Action("List", "AdminSessions", new { IdFilter = Model.CreatorSessionID })"><span class="glyphicon glyphicon-link"></span> جلسه ایجاد @Model.CreatorSessionID.SafeToString("-")</a>
+		@if (Model.CreatorUserID.HasValue)
+		{
+			<a class="list-group-item" href="@Url.Action("Details", "AdminUsers", new { id = Model.CreatorUserID.Value })"><span class="glyphicon glyphicon-link"></span> کاربر @Model.CreatorUserID.Value</a>
+		}
+		else
+		{
+			<div class="list-group-item">کاربر ناشناس</div>
+		}
+	</div>
+}

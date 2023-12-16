@@ -1,0 +1,188 @@
+﻿@using System.Globalization
+@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Core.Services.Dto.Property
+@using JahanJooy.RealEstate.Domain.Ad
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Ad.Helper
+@using JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredPropertyAdmin
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+
+@model SponsoredPropertyAdminListModel
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome", new { area = AreaNames.Admin }, null)
+    &gt;
+    @Html.ActionLink("سامانه تبلیغات", "Index", "AdAdminHome")
+    &gt;
+    لیست آگهی های ویژه املاک
+
+</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.SponsoredProperties, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="hidden">ID</th>
+                <th>کاربر</th>
+                <th>هزینه</th>
+                <th>عنوان</th>
+                <th>زمان محاسبه مجدد</th>
+                <th style="padding-top: 15px; padding-bottom: 15px;">کد ملک</th>
+                <th>ملک</th>
+                <th> کلیک / نمایش </th>
+                <th>وضعیت</th>
+                <th>ویرایش</th>
+            </tr>
+        </thead>
+        @foreach (var sponsoredProperty in Model.SponsoredProperties)
+        {
+            var details = PropertyListingDetails.MakeDetails(sponsoredProperty.Listing);
+            var summary = PropertyListingSummary.Summarize(details);
+
+            <tr>
+                <td class="hidden"> @sponsoredProperty.SponsoredEntity.ID</td>
+                <td>
+                    <a href="@Url.Action("Details", "AdminUsers", new {id = sponsoredProperty.BilledUser.ID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+                    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues())">
+                        @sponsoredProperty.SponsoredEntity.BilledUserID:
+                        @sponsoredProperty.BilledUser.LoginName
+                    </a>
+                </td>
+                <td>
+                    @if (sponsoredProperty.SponsoredEntity.BillingMethod == SponsoredEntityBillingMethod.PerImpression)
+                {
+                        <span> هر</span>
+                        <span class="bold">نمایش</span>
+                        <span> حداکثر </span>
+                        <br />
+
+                        @BillingPresentationHelper.Balance(@sponsoredProperty.SponsoredEntity.MaxPayPerImpression)
+                        <span> ریال </span>
+                    }
+                    else if (sponsoredProperty.SponsoredEntity.BillingMethod == SponsoredEntityBillingMethod.PerClick)
+                    {
+                        <span> هر</span>
+                        <span class="bold">کلیک</span>
+                        <span> حداکثر </span>
+                        <br />
+                        @BillingPresentationHelper.Balance(@sponsoredProperty.SponsoredEntity.MaxPayPerClick)
+                        <span> ریال </span>
+                    }
+                </td>
+                <td>
+                    @sponsoredProperty.SponsoredEntity.Title
+                    <br />
+                    @if (sponsoredProperty.SponsoredEntity.BlockedForLowCredit)
+                {
+                        @IconsHelper.Error16Red(Url)
+                        <span style="color: red">مسدود</span>
+                    }
+                </td>
+                <td>
+                    @((@sponsoredProperty.SponsoredEntity.NextRecalcDue - DateTime.Now).ToLocalizedRelativeString(1))
+                    <a href="@Url.Action("SetNextRecalcDue", "SponsoredPropertyAdmin", new {SponsoredEntityID = sponsoredProperty.SponsoredEntityID})" style="float: left; margin-right: 3px;">
+                        @IconsHelper.Refresh16(Url)
+                    </a>
+                </td>
+                <td>
+                    @sponsoredProperty.Listing.Code
+                    <br />
+                    <a class="bold" href="@Url.Action("Details", "AdminProperties", new { id = @sponsoredProperty.ListingID, area = AreaNames.Admin })">@IconsHelper.Xlink16(Url)</a>
+                </td>
+                <td>
+                    @propertyPresentationHelper.BuildTitle(summary)
+                    <br />
+                    @propertyPresentationHelper.BuildRegion(summary)
+                </td>
+                <td>
+                    <div style='display: inline-block;'>
+                        <a href="@Url.Action("ListClicks", "ClickAdmin", new {SponsoredEntityIDFilter = sponsoredProperty.SponsoredEntityID})" style="float: left; margin-right: 3px;">
+                            @IconsHelper.Xlink16(Url)
+                        </a>
+                        @sponsoredProperty.ClicksCount
+                        <br />
+                        <a href="@Url.Action("ListImpressions", "ImpressionAdmin", new {SponsoredEntityIDFilter = sponsoredProperty.SponsoredEntityID})" style="float: left; margin-right: 3px;">
+                            @IconsHelper.Xlink16(Url)
+                        </a>
+                        @sponsoredProperty.ImpressionsCount
+                    </div>
+                </td>
+                <td>
+                    @(sponsoredProperty.Approved.HasValue ? (sponsoredProperty.Approved.Value ? "تایید شده" : "مردود") : "انجام نشده")
+                    <br />
+                    @PopupHelper.AjaxModal(
+                @<span>@IconsHelper.GoLeft16(Url) بازبینی</span>,
+                    Url.Action("Review", new { id = sponsoredProperty.ID }))
+                </td>
+                <td>
+                    @PopupHelper.AjaxModal(
+                @<span>@IconsHelper.GoLeft16(Url) ویرایش</span>,
+                    Url.Action("Edit", new { id = sponsoredProperty.ID }))
+                </td>
+            </tr>
+        }
+    </table>
+    </div>
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.SponsoredProperties, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("List", new {ApprovalStatusFilter = SponsoredPropertyAdminListModel.SponsoredEntityApprovalStatus.NotApproved})">صف بررسی</a></li>
+        <li><a href="@Url.Action("List", new { BlockedForLowCreditFilter = false, ApprovalStatusFilter = SponsoredPropertyAdminListModel.SponsoredEntityApprovalStatus.Approved })">در حال نمایش</a></li>
+        <li><a href="@Url.Action("List", new {BlockedForLowCreditFilter = true})">مسدود ها</a></li>
+        <li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+    </ul>
+
+    <br /><hr />
+
+    @using (Html.BeginForm("List", "SponsoredPropertyAdmin", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.BilledUserIDFilter):
+            @Html.TextBoxFor(m => m.BilledUserIDFilter)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.ApprovalStatusFilter):
+            @Html.DropDownListFor(m => m.ApprovalStatusFilter, Model.ApprovalStatusFilter.EnumSelectList(), GeneralResources.NotSelected)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.BillingMethodTypeFilter):
+            @Html.DropDownListFor(m => m.BillingMethodTypeFilter, Model.BillingMethodTypeFilter.EnumSelectList(), GeneralResources.NotSelected)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.PropertyCodeFilter):
+            @Html.TextBoxFor(m => m.PropertyCodeFilter)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.PropertyTypeFilter):
+            @Html.DropDownListFor(m => m.PropertyTypeFilter, Model.PropertyTypeFilter.EnumSelectList(), GeneralResources.NotSelected)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.TitleFilter):
+            @Html.TextBoxFor(m => m.TitleFilter)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.BlockedForLowCreditFilter):
+            @Html.DropDownListFor(m => m.BlockedForLowCreditFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.AllItems)
+            <br />
+            <br />
+            <button name="submit" value="btnRefresh" class="button" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

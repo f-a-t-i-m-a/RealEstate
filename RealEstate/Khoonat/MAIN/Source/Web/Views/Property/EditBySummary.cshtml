@@ -1,0 +1,43 @@
+﻿@using JahanJooy.Common.Util.Validation
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@{
+	ViewBag.Title = "ویرایش اطلاعات اصلی ملک - کد " + Model.Code;
+}
+
+@this.StyleLibrary(StyleLibraries.JQueryCalendarsPicker)
+@this.ScriptLibrary(JavaScriptLibraries.JQueryUI)
+
+@this.ScriptBlock(@<script type="text/javascript">applyDigitGrouping();</script>)
+@this.ScriptBlock(@<script type="text/javascript">setupChosen();</script>)
+
+<div class="page-header" >
+	<h1>
+		ویرایش اطلاعات اصلی ملک - کد
+		@Model.Code
+	</h1>
+</div>
+
+@Html.Partial("PublishValidationErrorsOnEditPartial", Model.PublishValidationResult ?? ValidationResult.Success)
+
+@using (Html.BeginForm("EditBySummary", "Property", FormMethod.Post, new { id = "frmProperty", @class="form-horizontal" }))
+{
+	@Html.Partial("_Property/Edit/EditPropertySubmit", Model.ID.Value)
+
+	<text>
+		@Html.Partial("Summary/ViewMainPropertiesPartial", Model)
+        @Html.Partial("Summary/EditAgencyListingFlagPartial", Model)
+		@Html.Partial("Summary/EditLocationPartial", Model)
+		@Html.Partial("Summary/EditBuildingAndUnitPartial", Model)
+		@Html.Partial("Summary/EditEstatePartial", Model)
+		@Html.Partial("Summary/EditAdditionalSpecsPartial", Model)
+		@Html.Partial("Summary/EditSalePricePartial", Model)
+		@Html.Partial("Summary/EditRentPricePartial", Model)
+		@Html.Partial("Summary/EditContactInfoPartial", Model)
+	</text>
+	
+	@Html.Partial("_Property/Edit/EditPropertySubmit", Model.ID.Value)
+}

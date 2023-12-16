@@ -1,0 +1,17 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">عنوان تصویر: {{image.Title}}</h3>
+</div>
+<div class="modal-body">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-10">
+                <img ng-src="{{image.Blob}}" class="img-responsive img-thumbnail"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" ng-click="onDownloadImageClick(image)" restrict-to="Administrator"><i class="fa fa-download"></i> دانلود</button>
+    <button class="btn btn-danger" ng-click="onRemoveImageClick(image)" restrict-to="Administrator"><i class="fa fa-trash-o"></i> حذف</button>
+    <button class="btn btn-default" ng-click="cancel()" restrict-to="Administrator">باشه</button>
+</div>

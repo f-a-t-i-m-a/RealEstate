@@ -1,0 +1,103 @@
+﻿@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas.Admin.Controllers
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminSavedPropertySearches.AdminSavedPropertySearchesDetailsModel
+
+<h2>
+	@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") &gt; 
+	<a href="@AdminSavedPropertySearchesController.DefaultList(Url)">جستجو های ذخیره شده</a> &gt;
+	شماره @Model.SavedSearch.ID
+</h2>
+
+
+<div class="table-responsive">
+<table class="table">
+    <tr>
+        <td>شناسه</td>
+        <td>@Model.SavedSearch.ID</td>
+    </tr>
+    <tr>
+        <td>عنوان</td>
+        <td>@HtmlPresentationHelper.IfNotSpecified(Model.SavedSearch.Title)</td>
+    </tr>
+    <tr>
+        <td>شرایط</td>
+        <td>
+            @Html.Partial("CellSearchConditionsPartial", Model.CriteriaTextParts)
+        </td>
+    </tr>
+    <tr>
+        <td>کاربر</td>
+        <td>
+            @Model.SavedSearch.User.ID (کد @Model.SavedSearch.User.Code): @Model.SavedSearch.User.LoginName
+            <br />
+            نام کامل: @Model.SavedSearch.User.FullName
+        </td>
+    </tr>
+    <tr>
+        <td>جلسه ایجاد</td>
+        <td>@Model.SavedSearch.CreatorSessionID.SafeToString("-")</td>
+    </tr>
+    <tr>
+        <td>
+            زمان ایجاد
+            <br />
+            زمان حذف
+        </td>
+        <td>
+            @Model.SavedSearch.CreationTime.ToLocalizedDateString() @Model.SavedSearch.CreationTime.ToLocalizedTimeString()
+            <br />
+            <span class="text-danger">@Model.SavedSearch.DeleteTime.ToLocalizedDateString() @Model.SavedSearch.DeleteTime.ToLocalizedTimeString()</span>
+        </td>
+    </tr>
+    <tr>
+        <td>اطلاع رسانی</td>
+        <td>
+            @IconsHelper.Tristate(Url, Model.SavedSearch.SendNotificationEmails) ایمیل <br />
+            @IconsHelper.Tristate(Url, Model.SavedSearch.SendPromotionalSmsMessages) پیامک تبلیغاتی <br />
+            @IconsHelper.Tristate(Url, Model.SavedSearch.SendPaidSmsMessages) پیامک پولی <br />
+        </td>
+    </tr>
+    <tr>
+        <td>اطلاع رسانی تا</td>
+        <td>@Model.SavedSearch.SendNotificationsUntil.ToLocalizedDateString() @Model.SavedSearch.SendNotificationsUntil.ToLocalizedTimeString()</td>
+    </tr>
+    <tr>
+        <td>تعداد ارسال</td>
+        <td>
+            @Model.SavedSearch.NumberOfNotificationEmailsSent ایمیل<br />
+            @Model.SavedSearch.NumberOfPromotionalSmsMessagesSent پیامک تبلیغاتی<br />
+            @Model.SavedSearch.NumberOfPaidSmsMessagesSent پیامک پولی<br />
+        </td>
+    </tr>
+    <tr>
+        <td>مقصد ارسال</td>
+        <td>
+            ایمیل: @IconsHelper.Tristate(Url, Model.SavedSearch.EmailNotificationTarget.IfNotNull(t => t.IsVerified && !t.IsDeleted)) @HtmlPresentationHelper.IfNotSpecified(Model.SavedSearch.EmailNotificationTarget.IfNotNull(t => t.ContactMethodText))
+            <br />
+            پیامک: @IconsHelper.Tristate(Url, Model.SavedSearch.SmsNotificationTarget.IfNotNull(t => t.IsVerified && !t.IsDeleted)) @HtmlPresentationHelper.IfNotSpecified(Model.SavedSearch.SmsNotificationTarget.IfNotNull(t => t.ContactMethodText))
+        </td>
+    </tr>
+    <tr>
+        <td>وضعیت مقصد اطلاع رسانی</td>
+        <td>
+            @if (Model.HasNotificationTargetError)
+            {
+                <span class="glyphicon glyphicon-exclamation-sign text-danger"></span>
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-ok text-success"></span>
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <td>قسمت های پیامک</td>
+        <td>@Model.SavedSearch.SmsNotificationParts</td>
+    </tr>
+</table>
+    </div>

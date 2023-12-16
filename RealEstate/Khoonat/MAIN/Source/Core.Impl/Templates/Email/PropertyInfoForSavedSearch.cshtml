@@ -1,0 +1,110 @@
+﻿@using Compositional.Composer
+@using JahanJooy.RealEstate.Core.Impl.Templates.Email
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@functions {
+
+	private PropertyInfoForSavedSearchModel _model;
+	
+	[ComponentPlug]
+	public PropertyPresentationHelper PropertyPresentationHelper { get; set; }
+	
+	public override void SetModel(object model)
+	{
+		_model = (PropertyInfoForSavedSearchModel)model;
+	}
+
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title></title>
+		<style type="text/css">
+			.bold { font-weight: bold; }
+			.probTbl { width: 100%; font-size: 18px; }
+			.probTbl tr td { padding: 10px; background-color: #ddb; }
+		</style>
+	</head>
+	<body>
+		<table width="95%" style="width: 95%; direction: rtl; font-size: 20px;">
+			<tr><td style="background-color: #dddddd;">
+				    <table width="100%" style="width: 100%; font-size: 20px; font-weight: bold;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>اطلاع رسانی ثبت ملک مطابق با جستجو</td>
+						    <td style="text-align: left;"><a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">خونه ت دات کام</a></td>
+					    </tr>
+				    </table>
+			    </td></tr>
+			<tr><td>
+				    <br/>
+				    <p>
+					    کاربر گرامی، 
+					    @_model.User.FullName،
+				    </p>
+				    <p>
+					    برای جستجوی ذخیره شده شما با عنوان 
+					    @HtmlPresentationHelper.IfNotSpecified(_model.SavedSearch.Title)
+					    ،یک نتیجه جدید ثبت شده یا بروز رسانی شده است. خلاصه مشخصات ملک:
+				    </p>
+				    <table class="probTbl" cellspacing="7px">
+					    <tr>
+						    <td style="width: 100px;">کد خونه ت</td>
+						    <td>@_model.Listing.Code</td>
+					    </tr>
+					    <tr>
+						    <td style="width: 100px;">نوع ملک</td>
+						    <td>@PropertyPresentationHelper.BuildTitle(_model.ListingSummary)</td>
+					    </tr>
+					    <tr>
+						    <td>منطقه</td>
+						    <td>@PropertyPresentationHelper.BuildRegion(_model.ListingSummary)</td>
+					    </tr>
+					    <tr>
+						    <td>مساحت</td>
+						    <td>@PropertyPresentationHelper.BuildArea(_model.ListingSummary)</td>
+					    </tr>
+					    <tr>
+						    <td>نوع قرارداد و قیمت</td>
+						    <td>@PropertyPresentationHelper.BuildPriceAndPricePerArea(_model.ListingSummary)</td>
+					    </tr>
+					    <tr>
+						    <td>آدرس اینترنتی</td>
+						    <td><a href="http://khoonat.com/p/@(_model.ListingSummary.Code)">http://khoonat.com/p/@(_model.ListingSummary.Code)</a></td>
+					    </tr>
+					    <tr>
+						    <td>جزئیات</td>
+						    <td>
+							    لطفاً برای مشاهده جزئیات کامل ملک و اطلاعات تماس با مالک، به آدرس فوق در سایت مراجعه کنید یا
+							    <a href="http://khoonat.com/p/@(_model.ListingSummary.Code)">
+								    اینجا کلیک کنید
+							    </a>
+							    .
+						    </td>
+					    </tr>
+				    </table>
+				    <p style="font-size: 14px;">
+					    این ایمیل به درخواست شما برای شما ارسال شده است.
+					    درخواست ارسال این اطلاعات در قالب جستجوی ذخیره شده در حساب کاربری شما ثبت شده است.
+					    در صورتی که نمی خواهید اطلاعات املاک را به صورت ایمیل دریافت کنید، می توانید به سایت مراجعه کنید
+						و با حساب کاربری خود وارد شوید. سپس در قسمت جستجو های ذخیره شده، اطلاع رسانی از طریق ایمیل را غیر فعال کنید.
+				    </p>
+				    <p>
+					    از اینکه از خدمات این سایت استفاده می کنید سپاس گزاریم؛
+					    <br/>
+					    خونه ت دات کام
+				    </p>
+			    </td></tr>
+			<tr><td style="font-size: 20px; text-align: center; background-color: #dddddd; padding: 10px">
+				    <a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">www.khoonat.com</a>
+			    </td></tr>
+			<tr><td style="width: 100%; font-size: 14px;">
+				    <br/><br/>   
+                    این پیام را سیستم تولید کرده. چنانچه به آن پاسخ دهید به دست ما نخواهد رسید.
+                    اگر درباره این پیغام یا هر موضوع دیگری میخواهید با ما در تماس باشید، لطفاً
+                    از صفحه «تماس با ما» در سایت استفاده کنید.
+
+			    </td></tr>
+		</table>
+	</body>
+</html>

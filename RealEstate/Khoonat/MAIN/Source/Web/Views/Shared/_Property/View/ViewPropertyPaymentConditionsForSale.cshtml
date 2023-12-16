@@ -1,0 +1,61 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@using JahanJooy.RealEstate.Web.Models.Property
+@model PropertySalePaymentModel
+
+<div class="row">
+	@if (Model.PriceSpecificationType.HasValue)
+	{
+		@PropertyViewHelper.MeasuredAttribute(true, PropertySalePaymentResources.Label_Price, ViewPropertyPaymentConditionsForSaleResources.Price, NumericStringUtils.ShortNumericString(Model.Price))
+	
+		if (Model.CanSpecifyPerEstateArea)
+		{
+			@PropertyViewHelper.MeasuredAttribute(true, PropertySalePaymentResources.Label_PricePerEstateArea, ViewPropertyPaymentConditionsForSaleResources.PricePerEstateArea, NumericStringUtils.ShortNumericString(Model.PricePerEstateArea))
+		}
+		if (Model.CanSpecifyPerUnitArea)
+		{
+			@PropertyViewHelper.MeasuredAttribute(true, PropertySalePaymentResources.Label_PricePerUnitArea, ViewPropertyPaymentConditionsForSaleResources.PricePerUnitArea, NumericStringUtils.ShortNumericString(Model.PricePerUnitArea))
+		}
+	}
+	else
+	{
+		@PropertyViewHelper.SimpleAttribute(true, "", null, nullReplacement: ViewPropertyPaymentConditionsForSaleResources.PriceSpecificationTypeNotSpecified)
+	}
+	
+	@PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertySalePaymentResources.Label_PaymentPercentForContract,
+	                                    HtmlStringUtil.JoinNonEmpty(" ", ViewPropertyPaymentConditionsForSaleResources.PaymentPercentForContract.FormatIfNotNull(Model.PaymentPercentForContract),
+	                                                                ViewPropertyPaymentConditionsForSaleResources.CalculatedPaymentForContract.FormatIfNotNull(NumericStringUtils.ShortNumericString(Model.CalculatedPaymentForContract))))
+
+	@PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertySalePaymentResources.Label_PaymentPercentForDelivery,
+	                                    HtmlStringUtil.JoinNonEmpty(" ", ViewPropertyPaymentConditionsForSaleResources.PaymentPercentForDelivery.FormatIfNotNull(Model.PaymentPercentForDelivery),
+	                                                                ViewPropertyPaymentConditionsForSaleResources.CalculatedPaymentForDelivery.FormatIfNotNull(NumericStringUtils.ShortNumericString(Model.CalculatedPaymentForDelivery))))
+</div>
+
+@if (Model.HasTransferableLoan || Model.ShowAllAttributes)
+{
+	<div class="row">
+		@PropertyViewHelper.BooleanAttribute(Url, true, PropertySalePaymentResources.Label_HasTransferableLoan, Model.HasTransferableLoan)
+		@if (Model.HasTransferableLoan)
+		{
+			@PropertyViewHelper.MeasuredAttribute(true, PropertySalePaymentResources.Label_TransferableLoanAmount, ViewPropertyPaymentConditionsForSaleResources.TransferableLoanAmount, NumericStringUtils.ShortNumericString(Model.TransferableLoanAmount))
+		}
+	</div>
+}
+
+@if (Model.CanHaveDebt || Model.ShowAllAttributes)
+{
+	<div class="row">
+		@PropertyViewHelper.BooleanAttribute(Url, true, PropertySalePaymentResources.Label_CanHaveDebt, Model.CanHaveDebt)
+		@if (Model.CanHaveDebt)
+		{
+			@PropertyViewHelper.SimpleAttribute(true, PropertySalePaymentResources.Label_PaymentPercentForDebt,
+				HtmlStringUtil.JoinNonEmpty(" ", HtmlPresentationHelper.IfNotSpecified(ViewPropertyPaymentConditionsForSaleResources.PaymentPercentForDebt.FormatIfNotNull(Model.PaymentPercentForDebt)),
+					ViewPropertyPaymentConditionsForSaleResources.CalculatedMaximumDebt.FormatIfNotNull(NumericStringUtils.ShortNumericString(Model.CalculatedMaximumDebt))))
+			@PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertySalePaymentResources.Label_MinimumMonthlyPaymentForDebt, ViewPropertyPaymentConditionsForSaleResources.MinimumMonthlyPaymentForDebt, NumericStringUtils.ShortNumericString(Model.MinimumMonthlyPaymentForDebt))
+			@PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertySalePaymentResources.Label_DebtGuaranteeType, Model.DebtGuaranteeType)
+		}
+	</div>
+}

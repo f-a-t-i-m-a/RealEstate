@@ -1,0 +1,248 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.Agency.AgencyNewAgencyModel
+
+
+<div>
+    @Html.ValidationSummary(false)
+</div>
+
+<div>
+    @Html.HiddenFor(m => m.AgencyID)
+	@Html.HiddenFor(m => m.MainBranchID)
+
+    <div class="col-sm-12 col-md-4">
+        <span class="icon-required"></span> نام آژانس : 
+        @Html.TextBoxFor(m => m.Agency.Name)
+    </div>
+    <div class="col-sm-12 col-md-4">
+        نام مدیر آژانس:
+        @Html.TextBoxFor(m => m.Agency.ManagerName)
+    </div>
+    <div class="col-sm-12 col-md-4">
+        کد آژانس:
+        @Html.TextBoxFor(m => m.Agency.Code)
+    </div>
+    <div class="col-xs-12">
+        توضیحات آژانس:
+        @Html.TextAreaFor(m => m.Agency.Description, 3, 70, new { style = "height: 60px;" })
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <span class="icon-required"></span> نام شعبه:
+            @Html.TextBoxFor(m => m.MainBranch.BranchName)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <span class="icon-required"></span>
+            محل:
+            @(Model.MainBranch.VicinityID == 0 ? Html.VicinitySelector(false, "MainBranch.VicinityID") : Html.VicinitySelector(false, "MainBranch.VicinityID", null, 1, Model.MainBranch.VicinityID.ToString(CultureInfo.InvariantCulture)))
+        </div>
+    </div>
+    <div id="mapCanvas" class="mapCanvas" style="width: 100%; height: 400px;">
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.UserPointLat)
+        @Html.HiddenFor(m => m.UserPointLng)
+    </div>
+    <div class="geographicLocationType">
+        @Html.HiddenFor(m => m.GeographicLocationType)
+    </div>
+    <div>
+        <div>نام مدیر شعبه: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.BranchManagerName)</div>
+        </div>
+    </div>
+    <div>
+        <div>تلفن ثابت 1: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.Phone1)</div>
+        </div>
+    </div>
+    <div>
+        <div>تلفن ثابت 2: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.Phone2)</div>
+        </div>
+    </div>
+    <div>
+        <div>موبایل 1: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.CellPhone1)</div>
+        </div>
+    </div>
+    <div>
+        <div>موبایل 2: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.CellPhone2)</div>
+        </div>
+    </div>
+    <div>
+        <div>ایمیل: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.Email)</div>
+        </div>
+    </div>
+    <div>
+        <div>فکس: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.Fax)</div>
+        </div>
+    </div>
+    <div>
+        <div>شماره پیامک: &nbsp;&nbsp;</div>
+        <div>
+            <div class="ltr" style="width: 200px;">@Html.TextBoxFor(m => m.MainBranch.SmsNumber)</div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div>آدرس کامل:</div>
+        </div>
+        <div>@Html.TextAreaFor(m => m.MainBranch.FullAddress, 3, 70, new {style = "height: 60px;"})</div>
+    </div>
+    <div>
+        <div>
+            <div>حوزه فعالیت:</div>
+        </div>
+        <div>@Html.TextAreaFor(m => m.MainBranch.ActivityRegion, 3, 70, new {style = "height: 60px;"})</div>
+    </div>
+    <div>
+        <div>توضیحات:</div>
+        <div>@Html.TextAreaFor(m => m.MainBranch.Description, 3, 70, new {style = "height: 60px;"})</div>
+    </div>
+</div>
+
+   
+
+@this.ScriptLibrary(new ScriptLibrary("https://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyDlE2V9O9FzosTGXcX6SPQatAukHsQwP6U&sensor=false&language=fa&region=IR", null))
+@(this.ScriptBlock(@<script type="text/javascript">
+
+                        $(document).ready(function() {
+                            var cursorMarker;
+                            var userPointLat;
+                            var userPointLng;
+                            var center = new google.maps.LatLng(@(Model.UserPointLat ?? 35.9), @(Model.UserPointLng ?? 51.5));
+                            var mapProp = {
+                                center: center,
+                                zoom: 8,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                streetViewControl: true,
+                                scaleControl: true,
+                                draggable: true,
+                            }
+                            var map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
+                            var removePoi = [
+                                {
+                                    "featureType": "poi",
+                                    "stylers": [
+                                        { "visibility": "off" }
+                                    ]
+                                }
+                            ];
+                            map.setOptions({ styles: removePoi });
+
+                            var userPointMarker = new google.maps.Marker({
+                                map: map,
+                                clickable: false,
+                            });
+
+                            function placeAgencyPointMarker(location) {
+                                cursorMarker = new google.maps.Marker({
+                                    position: location,
+                                    map: map,
+                                    clickable: false,
+                                });
+                            }
+
+                            google.maps.event.addListener(map, 'mouseover', function(event) {
+                                placeAgencyPointMarker(event.latLng);
+                                cursorMarker.setMap(map);
+                            });
+                            google.maps.event.addListener(map, 'mouseout', function(event) {
+                                cursorMarker.setVisible(false);
+                            });
+                            google.maps.event.addListener(map, 'mousemove', function(event) {
+								if (cursorMarker)
+									cursorMarker.setPosition(event.latLng);
+                            });
+                            google.maps.event.addListener(map, 'click', function(event) {
+                                userPointMarker.setPosition(event.latLng);
+                                userPointMarker.setMap(map);
+                                userPointLat = event.latLng.lat();
+                                userPointLng = event.latLng.lng();
+
+                                $.ajax({
+                                    url: '@Url.Action("FindUserPointVicinity", "Map", new {area = AreaNames.Main})',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        "userPoint": {
+                                            "Lat": event.latLng.lat(),
+                                            "Lng": event.latLng.lng()
+                                        }
+                                    })
+                                }).done(function(data) {
+                                    $("#MainBranch_VicinityID").val(data);
+                                    setSelectedVicinityIdOnSelect2();
+                                    $("#GeographicLocationType").val('@GeographicLocationSpecificationType.UserSpecifiedExact');
+                                    $("#UserPointLat").val(userPointLat);
+                                    $("#UserPointLng").val(userPointLng);
+                                });
+                            });
+
+                            function setSelectedVicinityIdOnSelect2() {
+                                if ($("#MainBranch_VicinityID").val()) {
+                                    searchScope = null;
+                                    $.ajax({
+                                        url: '@Url.Action("Get", "VicinitySelector", new {area = AreaNames.Main})',
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data:
+                                        {
+                                            id: $("#MainBranch_VicinityID").val()
+                                        }
+                                    }).done(function(data) {
+                                        $("#MainBranch_VicinityID").select2("data", data);
+                                    });
+                                }
+                            };
+
+                            if ($("#UserPointLat").val() != 0 && $("#UserPointLng").val() != 0 && $("#GeographicLocationType").val() == '@GeographicLocationSpecificationType.UserSpecifiedExact') {
+                                var location = new google.maps.LatLng($("#UserPointLat").val(), $("#UserPointLng").val());
+                                userPointMarker.setPosition(location);
+                                userPointMarker.setMap(map);
+                            };
+
+                            $("#MainBranch_VicinityID").on("select2-selecting", function(e) {
+                                getVicinityBounds(e.val, map);
+                                userPointMarker.setMap(null);
+                                $("#GeographicLocationType").val(null);
+                            });
+                        });
+
+                        function getVicinityBounds(id, map) {
+                            $.ajax({
+                                url: '@Url.Action("GetVicinityBounds", "Map", new {area = AreaNames.Main})',
+                                type: 'POST',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    "vicinityID": id
+                                })
+                            }).done(function(data) {
+                                var southWest = new google.maps.LatLng(data.SouthWest.Lat, data.SouthWest.Lng);
+                                var northEast = new google.maps.LatLng(data.NorthEast.Lat, data.NorthEast.Lng);
+                                var bounds = new google.maps.LatLngBounds(southWest, northEast);
+                                map.fitBounds(bounds);
+                            });
+                        }
+                    </script>
+      ))

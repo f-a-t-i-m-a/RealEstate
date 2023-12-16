@@ -1,0 +1,118 @@
+﻿@using System.Globalization
+@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminProperties
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model AdminPropertiesListModel
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>املاک</a></li>
+}
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.PropertyListings, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>وضعیت</th>
+				<th>کد</th>
+				<th>محل</th>
+				<th>ملک</th>
+				<th>قیمت</th>
+				<th>ثبت</th>
+				<th>ID کاربر</th>
+			</tr>
+		</thead>
+		@foreach (var listing in Model.PropertyListings)
+		{
+			<tr @*style="@Html.PropertyListingStyle(listing)"*@>
+				<td class="lead">@Html.Partial("CellStatus", listing)</td>
+				<td data-link-url="@Url.Action("Details", new {id = listing.ID})"><span class="glyphicon glyphicon-link"></span> @listing.Code</td>
+				<td>@propertyPresentationHelper.BuildRegion(listing)</td>
+				<td>@propertyPresentationHelper.BuildTitle(listing)، @propertyPresentationHelper.BuildArea(listing)</td>
+				<td>@propertyPresentationHelper.BuildPriceAndPricePerArea(listing)</td>
+				<td><small>@((listing.CreationDate - DateTime.Now).ToLocalizedRelativeString(1))</small></td>
+				<td>@Html.Partial("CellOwnerUser", listing)</td>
+			</tr>
+		}
+	</table>
+</div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.PropertyListings, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("List", new {ApprovalStatusFilter = PropertyListingApprovalStatus.NotApproved, DeletedFilter = false})">صف بررسی</a></li>
+        <li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+        <li><a href="@Url.Action("List", new {PublishStatusFilter = PropertyListingPublishStatus.PublishedAndCurrent, ApprovalStatusFilter = PropertyListingApprovalStatus.Approved, DeletedFilter = false})">املاک عمومی</a></li>
+        <li><a href="@Url.Action("List", new {PublishStatusFilter = PropertyListingPublishStatus.PublishedAndPassed, ApprovalStatusFilter = PropertyListingApprovalStatus.Approved})">انتشار به پایان رسیده</a></li>
+    </ul>
+	 
+    <br /><hr/>
+	 
+    @using (Html.BeginForm("List", "AdminProperties", FormMethod.Get))
+    {
+        <div>
+            @Html.LabelFor(m => m.PropertyListingIdFilter):
+            @Html.TextBoxFor(m => m.PropertyListingIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.PropertyListingCodeFilter):
+            @Html.TextBoxFor(m => m.PropertyListingCodeFilter)
+            <br/>
+            <br/>
+
+            @Html.CheckBoxWithoutHiddenField("ApplyOwnerUserIdFilter", Model.ApplyOwnerUserIdFilter)
+            @Html.LabelFor(m => m.ApplyOwnerUserIdFilter)
+            <br/>
+            <br/>
+		
+            @Html.LabelFor(m => m.OwnerUserIdFilter):
+            @Html.TextBoxFor(m => m.OwnerUserIdFilter)
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.PublishStatusFilter):
+            @Html.DropDownListFor(m => m.PublishStatusFilter, Model.PublishStatusFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control"})
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.ApprovalStatusFilter):
+            @Html.DropDownListFor(m => m.ApprovalStatusFilter, Model.ApprovalStatusFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br/>
+            <br/>
+
+            @Html.LabelFor(m => m.DeletedFilter):
+            @Html.DropDownListFor(m => m.DeletedFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br/>
+            <br/>
+            
+            
+            @Html.LabelFor(m => m.ConnectionInfoFilter):
+            @Html.TextBoxFor(m => m.ConnectionInfoFilter)
+            <br/>
+            <br/>
+            
+            @Html.LabelFor(m => m.GeographicLocationTypeFilter):
+            @Html.DropDownListFor(m => m.GeographicLocationTypeFilter, Model.GeographicLocationTypeFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br/>
+            <br/>
+
+
+            <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

@@ -1,0 +1,39 @@
+﻿@using JahanJooy.Common.Util.Collections
+@using JahanJooy.RealEstate.Core.Services.Dto.Property
+@using JahanJooy.RealEstate.Web.Models.Shared.Profile.Tabs
+@model JahanJooy.RealEstate.Web.Models.OwnedProperties.OwnedPropertiesViewListModel
+
+<h1>فهرست املاک منتسب به جلسه کاربری</h1>
+
+<p>
+	املاکی که در اینجا نمایش داده می شوند، در این جلسه توسط شما ایجاد شده اند یا رمز مالکیت آنها را وارد کرده اید.
+	با بستن این پنجره، این فهرست خالی خواهد شد و شما برای دسترسی به این املاک باید کد و رمز مالکیت آنها را داشته باشید.
+</p>
+
+<p>
+	می توانید با منتسب کردن این املاک با پرونده کاربری خود، همیشه از طریق پروفایل خود به آنها دسترسی داشته باشید.
+</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+	using(Html.BeginForm("Acquire", "OwnedProperties"))
+	{
+		<div class="textSection" style="">
+			با انتساب این املاک، کاربر شما به عنوان صاحب رکورد ثبت می شود. در صورتی که این املاک
+			قبلاً در پرونده کاربر دیگری بوده اند، با این کار املاک به پرونده کاربری شما منتقل می شود.
+			<br/><br/>
+			<button name="submit" value="btnAcquire" class="button" style="width: 250px;" type="submit">این املاک را به پرونده من اضافه کن</button>
+		</div>
+	}
+}
+else
+{
+	<p class="textSection">
+		برای انتساب این املاک به پرونده کاربری خود، ابتدا باید
+		@Html.ActionLink("به سیستم وارد شوید", "LogOn", "Account")
+		و یا در صورتی که هنوز ثبت نام نکرده اید،
+		@Html.ActionLink("در سیستم ثبت نام کنید", "Register", "Account").
+	</p>
+}
+
+@Html.Partial("_Profile/Tabs/PropertyListings", new ProfileTabPropertyListingModel { PaginationUrlTemplate = null, PropertyListings = new PagedList<PropertyListingSummary>(Model.PropertyListingSummaries)})

@@ -1,0 +1,71 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Payment.NewElectronicPaymentModel
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+		<a href="@Url.Action("IncreaseCredit", "BillingHome", AreaRouteValue.Billing)">افزایش اعتبار</a>
+@*		<a href="@Url.Action("NewPayment", "Payment", AreaRouteValue.Billing)">پرداخت</a>:*@
+		
+	</h1>
+</div>
+
+@Html.ValidationSummary(false)
+
+@using (Html.BeginForm("NewElectronicPaymentConfirmation", "Payment", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">مبلغ و بانک مورد نظر را انتخاب کنید</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.Amount,
+                                new SelectList(new Dictionary<string, int>
+                                {
+                                    {"1000 تومان", 10000},
+                                    {"5،000 تومان", 50000},
+                                    {"10،000 تومان", 100000},
+                                    {"15،000 تومان", 150000},
+                                    {"20،000 تومان", 200000},
+                                    {"50،000 تومان", 500000},
+                                    {"100،000 تومان", 1000000},
+                                    {"200،000 تومان", 2000000},
+                                    {"500،000 تومان", 5000000},
+                                    {"1,000,000 تومان", 10000000},
+                                    {"2,000,000 تومان", 20000000}
+                                },
+                                    "Value", "Key"), new {@class = "form-control"})
+
+                            @Html.ValidationMessageFor(m => m.Amount)
+                        </div>
+                        <div class="col-md-4">
+                            <td>@Html.DropDownListFor(m => m.PaymentGatewayProvider, Model.PaymentGatewayProvider.EnumSelectList(DomainBillingEnumResources.ResourceManager), GeneralResources.NotSelected, new {@class = "form-control"})</td>
+                            @Html.ValidationMessageFor(m => m.PaymentGatewayProvider)
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">پرداخت</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">بازپرداخت تضمینی</h3></div>
+            <div class="panel-body">
+شما هر لحظه می توانید باقی مانده پول خود را پس بگیرید. برای این کار کافیه که یه درخواست بازپرداخت ثبت کنید و شماره کارتی که می خواهید باقی مونده پولتون به اون واریز بشه به ما بگید. ما با خوشحالی، تا ریال آخر باقی مونده رو به شما بر می گردونیم.
+            </div>
+        </div>
+    </div>
+</div>
+

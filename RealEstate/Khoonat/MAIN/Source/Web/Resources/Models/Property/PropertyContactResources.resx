@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Label_AbsoluteDeliveryDate" xml:space="preserve">
+    <value>موعد آماده شدن ملک</value>
+  </data>
+  <data name="Label_RenterContractEndDate" xml:space="preserve">
+    <value>تاریخ انتهای قرارداد اجاره</value>
+  </data>
+  <data name="Label_AgencyName" xml:space="preserve">
+    <value>نام آژانس معاملات ملکی</value>
+  </data>
+  <data name="Label_AgencyAddress" xml:space="preserve">
+    <value>آدرس آژانس معاملات ملکی</value>
+  </data>
+  <data name="Label_AppropriateVisitTimes" xml:space="preserve">
+    <value>زمان های مناسب برای بازدید</value>
+  </data>
+  <data name="Label_ContactEmail" xml:space="preserve">
+    <value>آدرس ایمیل</value>
+  </data>
+  <data name="Label_ContactName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Label_ContactPhone1" xml:space="preserve">
+    <value>شماره تلفن</value>
+  </data>
+  <data name="Label_ContactPhone2" xml:space="preserve">
+    <value>شماره تلفن دوم</value>
+  </data>
+  <data name="Label_DeliveryDaysAfterContract" xml:space="preserve">
+    <value>موعد آماده شدن ملک</value>
+  </data>
+  <data name="Label_DirectContactIsPossible" xml:space="preserve">
+    <value>امکان تماس مستقیم با مالک وجود دارد</value>
+  </data>
+  <data name="Label_HowToCoordinateBeforeVisit" xml:space="preserve">
+    <value>نحوه هماهنگی پیش از بازدید</value>
+  </data>
+  <data name="Label_InappropriateVisitTimes" xml:space="preserve">
+    <value>زمان های نامناسب برای بازدید</value>
+  </data>
+  <data name="Label_DeliveryDateSpecificationType" xml:space="preserve">
+    <value>زمانی که ملک آماده تحویل خواهد بود</value>
+  </data>
+  <data name="Label_OwnerEmail" xml:space="preserve">
+    <value>آدرس ایمیل مالک</value>
+  </data>
+  <data name="Label_OwnerName" xml:space="preserve">
+    <value>نام مالک</value>
+  </data>
+  <data name="Label_OwnerPhone1" xml:space="preserve">
+    <value>تلفن مالک</value>
+  </data>
+  <data name="Label_OwnerPhone2" xml:space="preserve">
+    <value>تلفن دوم مالک</value>
+  </data>
+  <data name="Label_PropertyStatus" xml:space="preserve">
+    <value>وضعیت فعلی ملک</value>
+  </data>
+  <data name="Label_ShouldCoordinateBeforeVisit" xml:space="preserve">
+    <value>پیش از بازدید، نیاز به هماهنگی می باشد.</value>
+  </data>
+  <data name="Validation_AbsoluteDeliveryDate_Date" xml:space="preserve">
+    <value>مقدار وارد شده باید یک تاریخ باشد.</value>
+  </data>
+  <data name="Validation_AbsoluteDeliveryDate_Range" xml:space="preserve">
+    <value>تاریخ وارد شده باید بین یک روز آینده الی پنج سال آینده باشد.</value>
+  </data>
+  <data name="Validation_RenterContractEndDate_Date" xml:space="preserve">
+    <value>مقدار وارد شده باید یک تاریخ باشد.</value>
+  </data>
+  <data name="Validation_RenterContractEndDate_Range" xml:space="preserve">
+    <value>تاریخ وارد شده باید بین یک روز آینده الی پنج سال آینده باشد.</value>
+  </data>
+  <data name="Validation_ContactEmail_Email" xml:space="preserve">
+    <value>مقدار وارد شده باید حاوی یک آدرس ایمیل معتبر باشد.</value>
+  </data>
+  <data name="Validation_ContactPhone1_PhoneNumber" xml:space="preserve">
+    <value>شماره تلفن به طور صحیح وارد نشده است.</value>
+  </data>
+  <data name="Validation_ContactPhone2_PhoneNumber" xml:space="preserve">
+    <value>شماره تلفن به طور صحیح وارد نشده است.</value>
+  </data>
+  <data name="Validation_DeliveryDaysAfterContract_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_DeliveryDaysAfterContract_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_OwnerEmail_Email" xml:space="preserve">
+    <value>مقدار وارد شده باید حاوی یک آدرس ایمیل معتبر باشد.</value>
+  </data>
+  <data name="Validation_OwnerPhone1_PhoneNumber" xml:space="preserve">
+    <value>شماره تلفن به طور صحیح وارد نشده است.</value>
+  </data>
+  <data name="Validation_OwnerPhone2_PhoneNumber" xml:space="preserve">
+    <value>شماره تلفن به طور صحیح وارد نشده است.</value>
+  </data>
+</root>

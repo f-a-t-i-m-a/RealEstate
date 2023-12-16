@@ -1,0 +1,50 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesBrowseModel
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<a data-toggle="collapse" href="#clpsPropertiesBrowseSavedSearches">
+				<span class="glyphicon glyphicon-floppy-open"></span>
+				<strong>جستجو های ذخیره شده</strong>
+				<span class="caret"></span>
+			</a>
+		</h3>
+	</div>
+	<div id="clpsPropertiesBrowseSavedSearches" class="panel-collapse collapse">
+		<div class="panel-body">
+
+			@if (Model.SavedSearches != null && Model.SavedSearches.Any())
+			{
+				<div class="list-group">
+					@foreach (var search in Model.SavedSearches)
+					{
+						<a href="@Url.Action("Browse", "Properties", new {q = search.PropertySearch.Query})" class=" list-group-item">
+							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+							@HtmlPresentationHelper.IfNotSpecified(search.SavedPropertySearch.Title, GeneralResources.NotSpecified)
+						</a>
+					}
+				</div>
+				<hr />
+				<p>
+					<a href="@Url.Action("SavedSearches", "Properties")"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> همه جستجو های ذخیره شده</a>
+				</p>
+			}
+			else
+			{
+				<p>
+					شما هنوز هیچ جستجوی ذخیره شده ای برای خودتون ایجاد نکرده اید.
+				</p>
+			}
+
+			<div>
+				<a href="@Url.Action("SaveSearch", "Properties", new {searchString = Model.Search.Query})" class="btn btn-primary btn-block" role="button" data-toggle="tooltip" data-placement="bottom" title="ذخیره جستجو و ارسال پیام
+                       با استفاده از این گزینه می تونید مشخصات جستجو رو توی حساب کاربری تون نگهدارید، و بعداً به سرعت به اون دسترسی داشته باشید.
+                       همینطور می تونید به سایت بگید که اگه هر ملک جدیدی توی این فهرست اضافه شد، همون لحظه با ایمیل یا پیامک به شما خبر بده">
+					<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp; ذخیره این جستجو
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

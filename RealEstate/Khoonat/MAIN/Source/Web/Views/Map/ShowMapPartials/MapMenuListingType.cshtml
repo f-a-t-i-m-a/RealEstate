@@ -1,0 +1,118 @@
+﻿@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Web.Resources.Views.Properties
+@model JahanJooy.RealEstate.Web.Models.Map.MapShowMapModel
+
+<li class="dropdown dropdown-keepopen">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">نوع آگهی<span class="caret"></span></a>
+    <div class="dropdown-menu" style="width: 350px; padding: 15px;">
+        <div style="padding: 4px;">
+            <label>
+                <input type="radio" class="radioIntentionOfOwner" name="IntentionOfOwner" checked="@(Model.SearchQuery.IntentionOfOwner.HasValue ? "" : "checked")"/>
+                &nbsp;همه
+            </label>
+        </div>
+        @if (Model.SearchQuery.IntentionOfOwner.HasValue)
+        {
+            if (Model.SearchQuery.IntentionOfOwner.Value == IntentionOfOwner.ForSale)
+            {
+                <div style="padding: 4px;">
+                    <label>
+                        <input type="radio" class="radioIntentionOfOwner" name="IntentionOfOwner" data-id="@IntentionOfOwner.ForSale" checked="checked"/>
+                        <img src="~/Content/markers/property-for-sale.png" style="vertical-align: middle;"/>
+                        @PropertiesBrowseResources.ResourceManager.GetString(IntentionOfOwner.ForSale.ToString())
+                    </label>
+                </div>
+
+                <div style="padding: 4px;">
+                    <label>
+                        <input type="radio" class="radioIntentionOfOwner" name="IntentionOfOwner" data-id="@IntentionOfOwner.ForRent" />
+                        <img src="~/Content/markers/property-for-rent.png" style="vertical-align: middle;"/>
+                        @PropertiesBrowseResources.ResourceManager.GetString(IntentionOfOwner.ForRent.ToString())
+                    </label>
+                </div>
+            }
+            else
+            {
+                <div style="padding: 4px;">
+                    <label>
+                        <input type="radio" class="radioIntentionOfOwner" name="IntentionOfOwner" data-id="@IntentionOfOwner.ForSale"  />
+                        <img src="~/Content/markers/property-for-sale.png" style="vertical-align: middle;" />
+                        @PropertiesBrowseResources.ResourceManager.GetString(IntentionOfOwner.ForSale.ToString())
+                    </label>
+                </div>
+
+                <div style="padding: 4px;">
+                    <label>
+                        <input type="radio" class="radioIntentionOfOwner" name="IntentionOfOwner" data-id="@IntentionOfOwner.ForRent" checked="checked" />
+                        <img src="~/Content/markers/property-for-rent.png" style="vertical-align: middle;" />
+                        @PropertiesBrowseResources.ResourceManager.GetString(IntentionOfOwner.ForRent.ToString())
+                    </label>
+                </div>
+            }
+        }
+        else
+        {
+            <div style="padding: 4px;">
+                <label>
+                    <input type="radio" class="radioIntentionOfOwner" name="IntentionOfOwner" data-id="@IntentionOfOwner.ForSale"  />
+                    <img src="~/Content/markers/property-for-sale.png" style="vertical-align: middle;" />
+                    @PropertiesBrowseResources.ResourceManager.GetString(IntentionOfOwner.ForSale.ToString())
+                </label>
+            </div>
+
+            <div style="padding: 4px;">
+                <label>
+                    <input type="radio" class="radioIntentionOfOwner" name="IntentionOfOwner" data-id="@IntentionOfOwner.ForRent"  />
+                    <img src="~/Content/markers/property-for-rent.png" style="vertical-align: middle;" />
+                    @PropertiesBrowseResources.ResourceManager.GetString(IntentionOfOwner.ForRent.ToString())
+                </label>
+            </div>
+        }
+        <hr/>
+        @if (Model.SearchQuery != null && Model.SearchQuery.OriginalQuery != null && Model.SearchQuery.OriginalQuery.Contains("o.nal"))
+        {
+            <div style="padding: 4px;">
+                <label>
+                    <input type="checkbox" data-tag="o.nal" checked="checked"/>
+                    فقط املاک بی واسطه
+                </label>
+            </div>
+        }
+        else
+        {
+            <div style="padding: 4px;">
+                <label>
+                    <input type="checkbox" data-tag="o.nal"/>
+                    فقط املاک بی واسطه
+                </label>
+            </div>
+        }
+        @if (Model.SearchQuery != null && Model.SearchQuery.OriginalQuery != null && Model.SearchQuery.OriginalQuery.Contains("o.aaa"))
+        {
+            <div style="padding: 4px;">
+                <label>
+                    <input type="checkbox" data-tag="o.aaa" checked="checked"/>
+                    فقط املاک قابل کار توسط بنگاه معاملات ملکی
+                </label>
+            </div>
+        }
+        else
+        {
+            <div style="padding: 4px;">
+                <label>
+                    <input type="checkbox" data-tag="o.aaa" />
+                    فقط املاک قابل کار توسط بنگاه معاملات ملکی
+                </label>
+            </div>
+        }
+
+        <hr/>
+        <div style="padding: 4px;">
+            <label>
+                <input type="checkbox" class="chbAgencyBranches" checked="checked"/>
+                <img src="~/Content/markers/agency.png" style="vertical-align: middle;"/>
+                مشاورین املاک
+            </label>
+        </div>
+    </div>
+</li> @* Dropdown: intention of owner *@

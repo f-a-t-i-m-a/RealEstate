@@ -1,0 +1,253 @@
+﻿@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.Map.MapShowMapModel
+
+<li class="dropdown dropdown-keepopen">
+<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">خصوصیات <span class="caret"></span></a>
+<div class="dropdown-menu" style="width: 400px; padding: 15px;">
+<table>
+<tr>
+    <td style="width: 150px">
+        <strong> تعداد اتاق از</strong>
+    </td>
+    <td style="width: 80px">
+        <input type="text" name="beds-Min" id="beds-Min" class="beds-Min" value="@Model.SearchQuery.NumberOfRoomsMinimum"/>
+    </td>
+    <td style="width: 15px">
+        <strong> تا</strong>
+    </td>
+    <td style="width: 80px">
+        <input type="text" name="beds-Max" id="beds-Max" class="beds-Max" value="@Model.SearchQuery.NumberOfRoomsMaximum"/>
+    </td>
+    <td style="width: 60px"></td>
+</tr>
+<tr>
+    <td colspan="5">
+        <hr/>
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>قیمت کل </strong>
+    </td>
+    <td>
+        <input type="text" name="sale-Price-Min" id="sale-Price-Min" class="digitGrouping sale-Price-Min" value="@Model.SearchQuery.SalePriceMinimum"/>
+    </td>
+    <td>
+        <strong>تا </strong>
+    </td>
+    <td>
+        <input type="text" name="sale-Price-Max" id="sale-Price-Max" class="digitGrouping sale-Price-Max" value="@Model.SearchQuery.SalePriceMaximum"/>
+    </td>
+    <td>
+        <strong>@GeneralResources.Tomans</strong>
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>قیمت هر متر بنا از </strong>
+    </td>
+    <td>
+        <input type="text" name="sale-Price-PerUnitArea-Min" id="sale-Price-PerUnitArea-Min" class="sale-Price-PerUnitArea-Min digitGrouping" value="@Model.SearchQuery.SalePricePerUnitAreaMinimum"/>
+    </td>
+    <td>
+        <strong> تا</strong>
+    </td>
+    <td>
+        <input type="text" name="sale-Price-PerUnitArea-Max" id="sale-Price-PerUnitArea-Max" class="sale-Price-PerUnitArea-Max digitGrouping" value="@Model.SearchQuery.SalePricePerUnitAreaMaximum"/>
+    </td>
+    <td>
+        <strong>@GeneralResources.Tomans</strong>
+    </td>
+
+</tr>
+<tr>
+    <td>
+        <strong> قیمت هر متر زمین از </strong>
+    </td>
+    <td>
+        <input type="text" name="sale-Price-PerEstateArea-Min" id="sale-Price-PerEstateArea-Min" class="sale-Price-PerEstateArea-Min digitGrouping" value="@Model.SearchQuery.SalePricePerEstateAreaMinimum"/>
+    </td>
+    <td>
+        <strong> تا</strong>
+    </td>
+    <td>
+        <input type="text" name="sale-Price-PerEstateArea-Max" id="sale-Price-PerEstateArea-Max" class="sale-Price-PerEstateArea-Max digitGrouping" value="@Model.SearchQuery.SalePricePerEstateAreaMaximum"/>
+    </td>
+    <td>
+        <strong>@GeneralResources.Tomans</strong>
+    </td>
+</tr>
+<tr>
+    <td colspan="5">
+        <hr/>
+    </td>
+</tr>
+<tr style="padding: 4px;">
+    <td>
+        <strong>اجاره ماهانه از </strong>
+    </td>
+    <td>
+        <input type="text" name="rent-Min" id="rent-Min" class="rent-Min digitGrouping" value="@Model.SearchQuery.RentMinimum"/>
+    </td>
+    <td>
+        <strong>تا</strong>
+    </td>
+    <td>
+        <input type="text" name="rent-Max" id="rent-Max" class="rent-Max digitGrouping" value="@Model.SearchQuery.RentMaximum"/>
+    </td>
+    <td>
+        <strong>@GeneralResources.Tomans</strong>
+    </td>
+</tr>
+<tr style="padding: 4px;">
+    <td>
+        <strong>مبلغ ودیعه از</strong>
+    </td>
+    <td>
+        <input type="text" name="rent-Mortgage-Min" id="rent-Mortgage-Min" class="rent-Mortgage-Min digitGrouping" value="@Model.SearchQuery.RentMortgageMinimum"/>
+    </td>
+    <td>
+        <strong>تا</strong>
+    </td>
+    <td>
+        <input type="text" name="rent-Mortgage-Max" id="rent-Mortgage-Max" class="rent-Mortgage-Max digitGrouping" value="@Model.SearchQuery.RentMortgageMaximum"/>
+    </td>
+    <td>
+        <strong>@GeneralResources.Tomans</strong>
+    </td>
+</tr>
+<tr>
+    <td colspan="5">
+        <hr/>
+    </td>
+</tr>
+<tr style="padding: 4px;">
+    <td>
+        <strong>مساحت بنا از </strong>
+    </td>
+    <td>
+        <input type="text" name="unit-Area-Min" id="unit-Area-Min" class="unit-Area-Min" value="@Model.SearchQuery.UnitAreaMinimum"/>
+    </td>
+    <td>
+        <strong> تا </strong>
+    </td>
+    <td>
+        <input type="text" name="unit-Area-Max" id="unit-Area-Max" class="unit-Area-Max" value="@Model.SearchQuery.UnitAreaMaximum"/>
+    </td>
+    <td>
+        <strong>@GeneralResources.SquareMeter</strong>
+    </td>
+</tr>
+<tr style="padding: 4px;">
+    <td>
+        <strong>مساحت زمین از </strong>
+    </td>
+    <td>
+        <input type="text" name="estate-Area-Min" id="estate-Area-Min" class="estate-Area-Min" value="@Model.SearchQuery.EstateAreaMinimum"/>
+    </td>
+    <td>
+        <strong>تا </strong>
+    </td>
+    <td>
+        <input type="text" name="estate-Area-Max" id="estate-Area-Max" class="estate-Area-Max" value="@Model.SearchQuery.EstateAreaMaximum"/>
+    </td>
+    <td>
+        <strong>@GeneralResources.SquareMeter</strong>
+    </td>
+</tr>
+<tr>
+    <td colspan="5">
+        <hr/>
+    </td>
+</tr>
+@if (Model.ShouldHaveParking)
+{
+    <tr style="padding: 4px;">
+        <td>
+            <label>
+                <input type="checkbox" data-tag="uo.prk" checked="checked"/>
+                دارای پارکینگ
+            </label>
+        </td>
+    </tr>
+}
+else
+{
+    <tr style="padding: 4px;">
+        <td>
+            <label>
+                <input type="checkbox" data-tag="uo.prk"/>
+                دارای پارکینگ
+            </label>
+        </td>
+    </tr>
+}
+@if (Model.ShouldHaveElevator)
+{
+    <tr style="padding: 4px;">
+        <td>
+            <label>
+                <input type="checkbox" data-tag="bo.ele" checked="checked"/>
+                دارای آسانسور
+            </label>
+        </td>
+    </tr>
+}
+else
+{
+    <tr style="padding: 4px;">
+        <td>
+            <label>
+                <input type="checkbox" data-tag="bo.ele"/>
+                دارای آسانسور
+            </label>
+        </td>
+    </tr>
+}
+@if (Model.ShouldHaveStorageRoom)
+{
+    <tr style="padding: 4px;">
+        <td>
+            <label>
+                <input type="checkbox" data-tag="uo.strg" checked="checked"/>
+                دارای انباری
+            </label>
+        </td>
+    </tr>
+}
+else
+{
+    <tr style="padding: 4px;">
+        <td>
+            <label>
+                <input type="checkbox" data-tag="uo.strg"/>
+                دارای انباری
+            </label>
+        </td>
+    </tr>
+}
+    @if (Model.ShouldHasPhotos)
+    {
+        <tr style="padding: 4px;">
+            <td  colspan="5">
+                <label>
+                    <input type="checkbox" data-tag="o.photo" checked="checked" />
+                    فقط نمایش رکورد های عکس دار
+                </label>
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr style="padding: 4px;">
+            <td colspan="5">
+                <label>
+                    <input type="checkbox" data-tag="o.photo"/>
+                    فقط نمایش رکورد های عکس دار
+                </label>
+            </td>
+        </tr>
+    }
+</table>
+</div>
+</li> @* Dropdown: specifications *@

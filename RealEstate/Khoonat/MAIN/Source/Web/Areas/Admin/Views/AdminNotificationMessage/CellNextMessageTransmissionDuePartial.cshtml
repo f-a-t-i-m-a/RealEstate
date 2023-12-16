@@ -1,0 +1,11 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Domain.Messages.NotificationMessage
+
+@if (Model.AddressedTime != null)
+{
+    <span>-</span>
+}
+else
+{
+	@((@Model.NextMessageTransmissionDue - DateTime.Now).ToLocalizedRelativeString(1))
+}

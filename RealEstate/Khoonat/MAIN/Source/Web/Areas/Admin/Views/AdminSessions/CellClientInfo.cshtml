@@ -1,0 +1,20 @@
+﻿@using JahanJooy.Common.Util.Web.Routing
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminSessions.AdminSessionsSessionModel
+
+<small class="label label-info" data-toggle="tooltip" title="@Model.UserAgent">
+	UA
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("UserAgentFilter", Model.UserAgent))"><span class="glyphicon glyphicon-filter"></span></a>
+</small>
+<small class="label label-info" data-toggle="tooltip" title="@Model.StartupUri">
+	Str
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("StartupUriFilter", Model.StartupUri))"><span class="glyphicon glyphicon-filter"></span></a>
+</small>
+<small class="label label-info" data-toggle="tooltip" title="@Model.ReferrerUri">
+	Ref
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ReferrerUriFilter", Model.ReferrerUri))"><span class="glyphicon glyphicon-filter"></span></a>
+</small>
+<small class="label label-info" data-toggle="tooltip" title="@Model.ClientAddress">
+	IP
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ClientAddressFilter", Model.ClientAddress))"><span class="glyphicon glyphicon-filter"></span></a>
+	<a target="_blank" href="http://whatismyipaddress.com/ip/@Model.ClientAddress"><span class="glyphicon glyphicon-new-window"></span></a>
+</small>

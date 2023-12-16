@@ -1,0 +1,37 @@
+﻿@using JahanJooy.RealEstate.Web.Models.Map
+@using JahanJooy.RealEstate.Web.Resources.Views.Properties
+@model MapShowMapModel
+
+<li class="dropdown dropdown-keepopen">
+	<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">نوع ملک <span class="caret"></span></a>
+	<div class="dropdown-menu" style="padding: 15px; width: 200px;">
+		<div style="padding: 4px;">
+		    <label>
+		    <input type="radio" name="PropertyType" class="radioPropertyType" checked="@(Model.SearchQuery.PropertyType.HasValue ? "" : "checked")" />
+				همه
+			</label>
+		</div>
+		@foreach (PropertiesMapSearchMenuModel type in Model.PropertyTypeMenuItems)
+    {
+    if (Model.SearchQuery.PropertyType.ToString().ToLower() == type.Label.ToLower())
+    {
+        <div style="padding: 4px;">
+		    <label>
+		        <input type="radio" name="PropertyType" class="radioPropertyType" data-id="@type.ID" checked="checked"/>
+		        @PropertiesBrowseResources.ResourceManager.GetString(type.Label)
+		    </label>
+		</div>
+            }
+            else
+            {
+                <div style="padding: 4px;">
+                    <label>
+                        <input type="radio" name="PropertyType" class="radioPropertyType" data-id="@type.ID" />
+                        @PropertiesBrowseResources.ResourceManager.GetString(type.Label)
+                    </label>
+                </div>
+            }
+
+        }
+	</div>
+</li> @* Dropdown: property type *@

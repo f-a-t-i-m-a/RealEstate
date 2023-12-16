@@ -1,0 +1,370 @@
+﻿@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Spatial
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Models.PropertyRequest.EditLocationPartialModel
+
+<div style="background-color: white; border: 1px solid #999; left: 50%; margin-left: -180px; padding: 5px; position: absolute; top: 5px; z-index: 5;">
+@*    <input id="geocodingInput" type="text" style="width: 120px;" />*@
+@*    <input id="geocodingSubmit" type="button" value="جستجو" />*@
+</div>
+
+<div id="mapCanvas" class="mapCanvas" style="width: 100%; height: 600px;">
+</div>
+<table>
+    <tr>
+        <td style="width: 160px">
+            انتخاب محدوده همسایگی:
+        </td>
+        <td style="width: 300px">
+            @Html.VicinitySelector(false, "addBoundary")
+        </td>
+        <td style="width: 100px">
+            <input id="removeAllSelectedVicinityBoundaries" type="button" value="پاک کردن" />
+        </td>
+        <td class="large hidden" id="addBoundaryNotFound" style="color: red;">
+            جوابی یافت نشد
+        </td>
+    </tr>
+</table>
+
+@this.CssBlock(@<style>
+                    .mapLabel {
+                        color: red;
+                        background-color: white;
+                        text-align: center;
+                        width: 80px;
+                        border: 2px solid black;
+                        white-space: nowrap;
+                        font-family: "Droid Arabic Naskh", Tahoma;
+                        font-size: 10px;
+                    }
+    </style>)
+
+@this.ScriptLibrary(new ScriptLibrary("https://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyDlE2V9O9FzosTGXcX6SPQatAukHsQwP6U&sensor=false&language=fa&region=IR", null))
+@this.ScriptLibrary(JavaScriptLibraries.MarkerWithLabel)
+@this.ScriptBlock(
+    @<script type="text/javascript">
+
+        var centerPointCoords;
+        var boundaryCoords;
+        var parentBoundaryCoords;
+        var adjacentBoundariesActionUrl;
+
+        var centerMarker;
+        var boundaryPolygon;
+        var geocodeMarker;
+        var geocodeRect;
+
+        var defaultMarkerOptions = {
+            draggable: true,
+            clickable: false
+        };
+
+        var defaultPolygonOptions = {
+            fillColor: '#ff0000',
+            fillOpacity: 0.1,
+            clickable: false
+        };
+
+        var parentPolygonOptions = {
+            fillColor: '#00ff00',
+            fillOpacity: 0.0,
+            clickable: false,
+            strokeColor: '#00ff00',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        };
+
+        var adjacentPolygonOptions = {
+            fillColor: '#008000',
+            fillOpacity: 0.2,
+            strokeColor: '#008000',
+            strokeOpacity: 1.0,
+            strokeWeight: 1,
+            clickable: false
+        };
+
+        var adjPolygonVicinity = [];
+        var infoMarkers = [];
+
+        function initializeServerSideMapData() {
+            centerPointCoords = @Model.CenterPoint.ToLatLng().IfNotNull(ll => ll.ToGoogleApi(), "null");
+            boundaryCoords = @Model.Boundary.ToLatLngPath().IfNotNull(llp => llp.ToGoogleApi(), "null");
+            parentBoundaryCoords = @Model.ParentBoundary.IfNotNull(b => b.Geography.ToLatLngPath().IfNotNull(llp => llp.ToGoogleApi(), "null"), "null");
+            adjacentBoundariesActionUrl = "@Html.Raw(Model.AdjacentBoundariesActionUrl)";
+        }
+
+        function setBoundaryPolygon(polygon) {
+            if (boundaryPolygon) {
+                boundaryPolygon.setMap(null);
+                boundaryPolygon = null;
+            }
+
+            boundaryPolygon = polygon;
+
+            $("#@Model.BoundaryWktId").val(getPolygonWKT(polygon));
+            google.maps.event.addListener(polygon.getPath(), 'set_at', function() {
+                $("#@Model.BoundaryWktId").val(getPolygonWKT(polygon));
+            });
+            google.maps.event.addListener(polygon.getPath(), 'insert_at', function() {
+                $("#@Model.BoundaryWktId").val(getPolygonWKT(polygon));
+            });
+
+        }
+
+        function setCenterPointMarker(marker) {
+            if (centerMarker) {
+                centerMarker.setMap(null);
+                centerMarker = null;
+            }
+
+            centerMarker = marker;
+
+            $("#@Model.CenterPointWktId").val(getMarkerWKT(marker));
+            google.maps.event.addListener(marker, 'position_changed', function() {
+                $("#@Model.CenterPointWktId").val(getMarkerWKT(marker));
+            });
+        }
+
+        function initializeMap() {
+
+//            initializeServerSideMapData();
+
+
+            var mapProp = {
+                center: @((Model.CenterPoint.ToLatLng() ?? new LatLng {Lat = 35.69, Lng = 51.5}).ToGoogleApi()),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                streetViewControl: false,
+                scaleControl: true
+            };
+            var map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
+            var geocoder = new google.maps.Geocoder();
+
+            @if (Model.Boundary != null)
+             {
+                 <text>map.fitBounds(@Model.Boundary.FindBoundingBox().ToGoogleApi());</text>
+             }
+             else if (Model.ParentBoundary != null && Model.ParentBoundary.Geography != null)
+             {
+                 <text>map.fitBounds(@Model.ParentBoundary.Geography.FindBoundingBox().ToGoogleApi());</text>
+             }
+
+            var drawingManager = new google.maps.drawing.DrawingManager({
+                drawingControlOptions: {
+                    drawingModes: [google.maps.drawing.OverlayType.MARKER, google.maps.drawing.OverlayType.POLYGON]
+                },
+                markerOptions: defaultMarkerOptions,
+                polygonOptions: defaultPolygonOptions
+            });
+            drawingManager.setMap(map);
+
+            google.maps.event.addListener(drawingManager, 'markercomplete', function(m) {
+                drawingManager.setDrawingMode(null);
+                setCenterPointMarker(m);
+            });
+
+            google.maps.event.addListener(drawingManager, 'polygoncomplete', function(p) {
+                drawingManager.setDrawingMode(null);
+                setBoundaryPolygon(p);
+            });
+
+            if (centerPointCoords) {
+                var marker = new google.maps.Marker(defaultMarkerOptions);
+                marker.setPosition(centerPointCoords);
+                marker.setMap(map);
+                setCenterPointMarker(marker);
+            }
+
+            if (boundaryCoords) {
+                var polygon = new google.maps.Polygon(defaultPolygonOptions);
+                polygon.setPaths(boundaryCoords);
+                polygon.setMap(map);
+                setBoundaryPolygon(polygon);
+            }
+
+            if (parentBoundaryCoords) {
+                var parentPolygon = new google.maps.Polygon(parentPolygonOptions);
+                parentPolygon.setPaths(parentBoundaryCoords);
+                parentPolygon.setMap(map);
+            }
+
+            $("#@Model.ToggleBoundaryEditButtonId").click(function() {
+                if (boundaryPolygon)
+                    boundaryPolygon.setEditable(!boundaryPolygon.getEditable());
+            });
+
+            function removeAllSelectedVicinityBoundaries() {
+                for (var k = 0; k < adjPolygonVicinity.length; k++) {
+                    adjPolygonVicinity[k].setMap(null);
+                }
+                adjPolygonVicinity = [];
+                for (var i = 0; i < infoMarkers.length; i++) {
+                    infoMarkers[i].setMap(null);
+                }
+                infoMarkers = [];
+            }
+
+            function runGeocoding() {
+                var address = $("#geocodingInput").val();
+                geocoder.geocode({ 'address': address }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (geocodeMarker) {
+                            geocodeMarker.setMap(null);
+                            geocodeMarker = null;
+                        }
+                        if (geocodeRect) {
+                            geocodeRect.setMap(null);
+                            geocodeRect = null;
+                        }
+
+                        if (results[0].geometry.viewport) {
+                            map.fitBounds(results[0].geometry.viewport);
+                        } else {
+                            map.setCenter(results[0].geometry.location);
+                        }
+
+                        if (results[0].geometry.bounds) {
+                            geocodeRect = new google.maps.Rectangle({
+                                map: map,
+                                bounds: results[0].geometry.bounds,
+                                strokeColor: '#000080',
+                                strokeOpacity: 0.5,
+                                strokeWeight: 1,
+                                fillColor: '#0000ff',
+                                fillOpacity: 0.05,
+                                clickable: false
+                            });
+                        } else {
+                            geocodeMarker = new google.maps.Marker({
+                                map: map,
+                                position: results[0].geometry.location,
+                                animation: google.maps.Animation.DROP,
+                                icon: {
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    scale: 10
+                                }
+                            });
+                        }
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+
+            if (adjacentBoundariesActionUrl) {
+                $.ajax({
+                    url: adjacentBoundariesActionUrl,
+                    type: 'POST',
+                    dataType: 'json'
+                }).done(function(data) {
+                    if ((data) && (data.length > 0)) {
+                        $.each(data, function(i, v) {
+                            if (!(v.Points) || v.Points.length < 1)
+                                return;
+
+                            var coords = [];
+                            var bounds = new google.maps.LatLngBounds();
+
+                            $.each(v.Points, function(i2, v2) {
+                                var coord = new google.maps.LatLng(v2.Lat, v2.Lng);
+                                coords.push(coord);
+                                bounds.extend(coord);
+                            });
+
+                            var adjPolygon = new google.maps.Polygon(adjacentPolygonOptions);
+                            adjPolygon.setPaths(coords);
+                            adjPolygon.setMap(map);
+
+                            new MarkerWithLabel({
+                                position: bounds.getCenter(),
+                                draggable: false,
+                                raiseOnDrag: false,
+                                map: map,
+                                labelContent: v.Title,
+                                labelAnchor: new google.maps.Point(40, 10),
+                                labelClass: "mapLabel",
+                                labelStyle: { opacity: 1.0 },
+                                icon: "@Url.Content("~/Content/images/placeholder.png")",
+                                visible: true
+                            });
+                        });
+                    }
+                });
+            }
+
+            $("#geocodingSubmit").click(runGeocoding);
+            $("#geocodingInput").keydown(function(e) {
+                if (e.which == 13) {
+                    runGeocoding();
+                }
+            });
+
+            $("#removeAllSelectedVicinityBoundaries").click(removeAllSelectedVicinityBoundaries);
+            $("#addBoundary").on("select2-selecting", function(e) {
+
+                $.ajax({
+                    url: '@Url.Action("GetVicinityBoundary", "VicinityAdmin", new {area = AreaNames.Main})',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "vicinityID": e.val
+                    })
+                }).done(function(data) {
+                    if (data == null) {
+                        $("#addBoundaryNotFound").show();
+                    } else {
+                        $("#addBoundaryNotFound").hide();
+                    }
+                    var coords = [];
+                    var bounds = new google.maps.LatLngBounds();
+                    $.each(data.Points, function(i2, v2) {
+                        var coord = new google.maps.LatLng(v2.Lat, v2.Lng);
+                        coords.push(coord);
+                        bounds.extend(coord);
+                    });
+
+                    var adjPolygon = new google.maps.Polygon({
+                        fillColor: '#006200',
+                        fillOpacity: 0.2,
+                        strokeColor: '#008000',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 1
+                    });
+                    adjPolygon.setPaths(coords);
+                    adjPolygon.setMap(map);
+
+                    adjPolygonVicinity.push(adjPolygon);
+
+
+                    var infomarker = new MarkerWithLabel({
+                        position: bounds.getCenter(),
+                        draggable: false,
+                        raiseOnDrag: false,
+                        map: map,
+                        labelContent: data.Title,
+                        labelAnchor: new google.maps.Point(40, 10),
+                        labelClass: "mapLabel",
+                        labelStyle: { opacity: 1.0 },
+                        icon: "@Url.Content("~/Content/images/placeholder.png")",
+                        visible: true
+                    });
+                    infoMarkers.push(infomarker);
+                });
+            });
+
+        }
+
+
+        $(window).load(function() {
+            if (google){
+                initializeMap();}
+            else
+                alert('Failed to load Google Maps');
+        });
+
+    </script>)

@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Label_ConstructionCompletionDate" xml:space="preserve">
+    <value>تاریخ اتمام ساخت</value>
+  </data>
+  <data name="Label_EndOfConstructionCertificateDate" xml:space="preserve">
+    <value>تاریخ پایان کار</value>
+  </data>
+  <data name="Label_FaceType" xml:space="preserve">
+    <value>نوع نمای ساختمان</value>
+  </data>
+  <data name="Label_HasAccessibilityFeatures" xml:space="preserve">
+    <value>امکانات دسترسی برای معلولین دارد</value>
+  </data>
+  <data name="Label_HasAutomaticParkingDoor" xml:space="preserve">
+    <value>درب پارکینگ ریموتی دارد</value>
+  </data>
+  <data name="Label_HasAutomaticStairwayLights" xml:space="preserve">
+    <value>چراغ های سنسوری راه پله دارد</value>
+  </data>
+  <data name="Label_HasBackupWaterTank" xml:space="preserve">
+    <value>منبع آب اضطراری دارد</value>
+  </data>
+  <data name="Label_HasBowerInGarden" xml:space="preserve">
+    <value>آلاچیق در فضای سبز دارد</value>
+  </data>
+  <data name="Label_HasBowerOnRoof" xml:space="preserve">
+    <value>آلاچیق در پشت بام دارد</value>
+  </data>
+  <data name="Label_HasCarWash" xml:space="preserve">
+    <value>کارواش دارد</value>
+  </data>
+  <data name="Label_HasCentralBoiler" xml:space="preserve">
+    <value>گرمایش مرکزی (موتورخانه) دارد</value>
+  </data>
+  <data name="Label_HasCentralChiller" xml:space="preserve">
+    <value>سرمایش مرکزی (چیلر) دارد</value>
+  </data>
+  <data name="Label_HasCentralInternetConnection" xml:space="preserve">
+    <value>اتصال مرکزی اینترنت دارد</value>
+  </data>
+  <data name="Label_HasCentralTelevisionAntenna" xml:space="preserve">
+    <value>آنتن مرکزی تلویزیون دارد</value>
+  </data>
+  <data name="Label_HasCentralVacuum" xml:space="preserve">
+    <value>جارو برقی مرکزی دارد</value>
+  </data>
+  <data name="Label_HasClosedCircuitCamera" xml:space="preserve">
+    <value>دوربین مدار بسته دارد</value>
+  </data>
+  <data name="Label_HasElevator" xml:space="preserve">
+    <value>آسانسور دارد</value>
+  </data>
+  <data name="Label_HasEmergencyEscape" xml:space="preserve">
+    <value>پله فرار دارد</value>
+  </data>
+  <data name="Label_HasEntranceLobby" xml:space="preserve">
+    <value>لابی ورودی ساختمان دارد</value>
+  </data>
+  <data name="Label_HasFireAlarm" xml:space="preserve">
+    <value>سیستم اعلام حریق دارد</value>
+  </data>
+  <data name="Label_HasFireInsurance" xml:space="preserve">
+    <value>بیمه آتش سوزی دارد</value>
+  </data>
+  <data name="Label_HasLightningArrester" xml:space="preserve">
+    <value>برقگیر دارد</value>
+  </data>
+  <data name="Label_HasFurnitureElevator" xml:space="preserve">
+    <value>آسانسور اثاثیه دارد</value>
+  </data>
+  <data name="Label_HasGatheringHall" xml:space="preserve">
+    <value>سالن اجتماعات دارد</value>
+  </data>
+  <data name="Label_HasGreenGarden" xml:space="preserve">
+    <value>فضای سبز دارد</value>
+  </data>
+  <data name="Label_HasGuardian" xml:space="preserve">
+    <value>نگهبان 24 ساعته دارد</value>
+  </data>
+  <data name="Label_HasGuestParking" xml:space="preserve">
+    <value>پارکینگ مهمان دارد</value>
+  </data>
+  <data name="Label_HasGym" xml:space="preserve">
+    <value>سالن دارای امکانات ورزشی دارد</value>
+  </data>
+  <data name="Label_HasJacuzzi" xml:space="preserve">
+    <value>جکوزی دارد</value>
+  </data>
+  <data name="Label_HasJanitorUnit" xml:space="preserve">
+    <value>واحد سرایداری دارد</value>
+  </data>
+  <data name="Label_HasQuakeInsurance" xml:space="preserve">
+    <value>بیمه زلزله دارد</value>
+  </data>
+  <data name="Label_HasSauna" xml:space="preserve">
+    <value>سونا دارد</value>
+  </data>
+  <data name="Label_HasSwimmingPool" xml:space="preserve">
+    <value>استخر دارد</value>
+  </data>
+  <data name="Label_HasTrashChute" xml:space="preserve">
+    <value>شوتینگ زباله دارد</value>
+  </data>
+  <data name="Label_HasVideoEyePhone" xml:space="preserve">
+    <value>آیفون تصویری دارد</value>
+  </data>
+  <data name="Label_NumberOfParkingFloors" xml:space="preserve">
+    <value>تعداد طبقات پارکینگ</value>
+  </data>
+  <data name="Label_NumberFloorsAboveGround" xml:space="preserve">
+    <value>تعداد طبقات بالای همکف</value>
+  </data>
+  <data name="Label_NumberOfUnitsPerFloor" xml:space="preserve">
+    <value>تعداد واحد ها در طبقه</value>
+  </data>
+  <data name="Label_BuildingAgeYears" xml:space="preserve">
+    <value>عمر بنا</value>
+  </data>
+  <data name="Label_HasEndOfConstructionCertificate" xml:space="preserve">
+    <value>گواهی پایان کار دارد</value>
+  </data>
+  <data name="Label_OtherFeatures" xml:space="preserve">
+    <value>سایر امکانات استاندارد</value>
+  </data>
+  <data name="Label_OtherRecreationFeatures" xml:space="preserve">
+    <value>سایر امکانات تفریحی</value>
+  </data>
+  <data name="Label_OtherSafetyFeatures" xml:space="preserve">
+    <value>سایر امکانات امنیتی</value>
+  </data>
+  <data name="Label_OtherWelfareFeatures" xml:space="preserve">
+    <value>سایر امکانات رفاهی</value>
+  </data>
+  <data name="Label_PermitDate" xml:space="preserve">
+    <value>تاریخ جواز</value>
+  </data>
+  <data name="Label_RoofCoverType" xml:space="preserve">
+    <value>نوع پوشش پشت بام</value>
+  </data>
+  <data name="Label_StructureType" xml:space="preserve">
+    <value>نوع سازه ساختمان</value>
+  </data>
+  <data name="Label_TotalNumberOfUnits" xml:space="preserve">
+    <value>تعداد کل واحدهای ساختمان</value>
+  </data>
+  <data name="Validation_ConstructionCompletionDate_Date" xml:space="preserve">
+    <value>مقدار وارد شده تاریخ صحیحی نیست.</value>
+  </data>
+  <data name="Validation_ConstructionCompletionDate_Range" xml:space="preserve">
+    <value>تاریخ انتخاب شده در محدوده قابل قبول نمی باشد.</value>
+  </data>
+  <data name="Validation_EndOfConstructionCertificateDate_Date" xml:space="preserve">
+    <value>مقدار وارد شده تاریخ صحیحی نیست.</value>
+  </data>
+  <data name="Validation_EndOfConstructionCertificateDate_Range" xml:space="preserve">
+    <value>تاریخ انتخاب شده در محدوده قابل قبول نمی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfParkingFloors_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfParkingFloors_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberFloorsAboveGround_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberFloorsAboveGround_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_NumberOfUnitsPerFloor_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_BuildingAgeYears_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_NumberOfUnitsPerFloor_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_BuildingAgeYears_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+  <data name="Validation_PermitDate_Date" xml:space="preserve">
+    <value>مقدار وارد شده تاریخ صحیحی نیست.</value>
+  </data>
+  <data name="Validation_PermitDate_Range" xml:space="preserve">
+    <value>تاریخ انتخاب شده در محدوده قابل قبول نمی باشد.</value>
+  </data>
+  <data name="Validation_TotalNumberOfUnits_Numeric" xml:space="preserve">
+    <value>مقدار وارد شده باید عددی باشد.</value>
+  </data>
+  <data name="Validation_TotalNumberOfUnits_Range" xml:space="preserve">
+    <value>مقدار وارد شده خارج از محدوده مجاز است.</value>
+  </data>
+</root>

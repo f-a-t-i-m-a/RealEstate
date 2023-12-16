@@ -1,0 +1,22 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredPropertyAdmin
+@model JahanJooy.RealEstate.Web.Areas.Ad.Models.AdAdminHome.AdAdminHomeStatisticsModel
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>تبلیغات</a></li>
+}
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="list-group">
+			<div class="list-group-item active">گزارش ها</div>
+			<a class="list-group-item @("list-group-item-danger".If(Model.SponsoredPropertiesQueueLength > 0))" href="@Url.Action("List", "SponsoredPropertyAdmin", new { ApprovalStatusFilter = SponsoredPropertyAdminListModel.SponsoredEntityApprovalStatus.NotApproved})">لیست آگهی های ویژه املاک<span class="badge">@Model.SponsoredPropertiesQueueLength</span></a>
+			<a class="list-group-item" href="@Url.Action("ListImpressions", "ImpressionAdmin")">لیست نمایش ها</a>
+			<a class="list-group-item" href="@Url.Action("ListClicks", "ClickAdmin")">لیست کلیک ها</a>
+		</div>
+	</div>
+</div>
+
+
+

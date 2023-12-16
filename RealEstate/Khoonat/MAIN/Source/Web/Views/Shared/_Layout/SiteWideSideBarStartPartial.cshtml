@@ -1,0 +1,12 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+
+@if (SessionInfo != null && SessionInfo.OwnedProperties != null && SessionInfo.OwnedProperties.Count > 0)
+{
+	<div style="border: 2px solid red; width: auto; margin-bottom: 20px; padding: 10px;">
+		<a href="@Url.Action("ViewList", "OwnedProperties", new { area = AreaNames.Main })">
+			شما به
+			@SessionInfo.OwnedProperties.Count
+			ملک در این جلسه دسترسی دارید که به هیچ کاربری منتسب نشده است.
+		</a>
+	</div>
+}

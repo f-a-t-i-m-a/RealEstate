@@ -1,0 +1,75 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Core.Impl.Templates.Email
+@using JahanJooy.RealEstate.Util.Presentation
+
+@functions {
+
+    private InactiveUserNotificationModel _model;
+	
+	public override void SetModel(object model)
+	{
+        _model = (InactiveUserNotificationModel)model;
+	}
+
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title></title>
+		<style type="text/css">
+			.bold { font-weight: bold; }
+			.probTbl { width: 100%; font-size: 18px; }
+			.probTbl tr td { padding: 10px; background-color: #ddb; }
+		</style>
+	</head>
+	<body>
+		<table width="95%" style="width: 95%; direction: rtl; font-size: 20px;">
+			<tr><td style="background-color: #dddddd;">
+				    <table width="100%" style="width: 100%; font-size: 20px; font-weight: bold;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>مدتیست که شما را ندیده ایم</td>
+						    <td style="text-align: left;"><a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">خونه ت دات کام</a></td>
+					    </tr>
+				    </table>
+			    </td></tr>
+			<tr><td>
+				    <br/>
+			        <p>
+			            
+			            کاربر گرامی، 
+			            @_model.User.FullName،
+			        </p>
+					<p>
+						شما
+						@((DateTime.Now - (_model.User.LastLogin ?? _model.User.CreationDate)).ToLocalizedDurationString())
+						است که به سایت خونه ت  دات کام سر نزده اید. جای شما در کنار صدها کاربر «خونه ت» خالیست.
+					</p>
+					<p>
+						شما توی «خونه ت» می تونید:
+						<ul>
+							<li>از اطلاعات ملک هایی که هر روز در سایت اضافه می شن، بدون محدودیت استفاده کنید؛</li>
+							<li>اطلاعات ملک خودتون رو با اسم و شماره تلفن خودتون برای هزاران بیننده آگهی کنید؛</li>
+							<li>بدون محدودیت و رایگان برای املاک خودتون عکس اضافه کنید؛</li>
+							<li>از سامانه اطلاع رسانی پیامکی یا ایمیلی استفاده کنید تا از املاک جدید خبردار بشید؛</li>
+							<li>و ...</li>
+						</ul>
+					</p>
+				    <p>
+					    به ما سر بزنید؛ منتظر شما هستیم.
+					    <br/>
+					    خونه ت دات کام
+				    </p>
+			    </td></tr>
+			<tr><td style="font-size: 20px; text-align: center; background-color: #dddddd; padding: 10px">
+				    <a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">www.khoonat.com</a>
+			    </td></tr>
+			<tr><td style="width: 100%; font-size: 14px;">
+				    <br/><br/>   
+				    این پیغام توسط سیستم تولید شده است و در صورتی که به آن پاسخ دهید به دست ما نخواهد رسید.
+				    اگر در خصوص این پیغام یا هر موضوع دیگری تمایل دارید با مسئولین سایت در تماس باشید، لطفاً
+				    از صفحه «تماس با ما» در سایت استفاده کنید.
+			    </td></tr>
+		</table>
+	</body>
+</html>

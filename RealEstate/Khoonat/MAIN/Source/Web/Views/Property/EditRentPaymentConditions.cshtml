@@ -1,0 +1,37 @@
+﻿@using JahanJooy.Common.Util.Validation
+@using JahanJooy.RealEstate.Web.Models.Property
+@model PropertyRentPaymentModel
+
+@{
+	ViewBag.Title = "ویرایش شرایط پرداخت برای اجاره - ملک کد " + Model.PropertyListingCode;
+}
+
+
+<div class="well text-center">
+    ویرایش شرایط پرداخت برای اجاره - ملک کد
+    @Model.PropertyListingCode
+</div>
+
+@Html.Partial("PublishValidationErrorsOnEditPartial", Model.PublishValidationResult ?? ValidationResult.Success)
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.PropertyListingCode)
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                @Html.Partial("_Property/Edit/EditPropertySubmit", Model.PropertyListingID)
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class=" form-horizontal">
+               @Html.Partial("_Property/Edit/EditPropertyPaymentConditionsForRent", Model)
+            </div>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("_Property/Edit/EditPropertySubmit", Model.PropertyListingID)
+        </div>
+    </div>
+}
+

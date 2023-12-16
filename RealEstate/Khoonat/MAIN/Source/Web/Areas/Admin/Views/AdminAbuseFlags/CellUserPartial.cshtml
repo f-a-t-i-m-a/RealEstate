@@ -1,0 +1,24 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Audit.AbuseFlag
+
+@if (!Model.ReportedByID.HasValue)
+{
+	<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyUserIdFilter", "true").Set("UserIdFilter", ""))">
+		<span class="glyphicon glyphicon-filter"></span>
+	</a>
+	@HtmlPresentationHelper.Disabled(GeneralResources.Anonymous)
+}
+else
+{
+	<div data-link-url="@Url.Action("Details", "AdminUsers", new {id = Model.ReportedByID.Value})">
+		<span class="glyphicon glyphicon-link"></span>
+		@Model.ReportedByID.Value
+		<br/>
+		<a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ApplyUserIdFilter", "true").Set("UserIdFilter", Model.ReportedByID.Value.ToString(CultureInfo.InvariantCulture)))">
+			<span class="glyphicon glyphicon-filter"></span>
+		</a>
+	</div>
+}

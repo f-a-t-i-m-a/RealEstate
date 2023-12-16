@@ -1,0 +1,93 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileContactMethodVerificationPromptModel
+
+<div id="verificationRoot">
+	<div style="padding: 25px; width: 650px;">
+
+		@if (Model.VerificationInfo.ContactMethodType == ContactMethodType.Email)
+		{
+			<text>
+				پیغام فعال سازی توسط سیستم به آدرس پست الکترونیکی 
+				@HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.ContactMethodText)
+				ارسال شده، که حاوی رمز فعال سازی است. لطفاٌ رمز ارسالی را در فرم زیر وارد نمایید
+				و گزینه فعال سازی را انتخاب کنید.
+				<br/><br/>
+				همچنین می توانید روی لینک موجود در ایمیل ارسال شده کلیک کنید تا عمل فعال سازی
+				به صورت خودکار صورت گیرد.
+				<br/><br/>
+				دقت فرمایید که گاهی اوقات ممکن است ایمیل ارسالی در شاخه
+				Spam
+				قرار گیرد. در صورتی که ایمیل ارسال شده را در صندوق ورودی مشاهده نمی کنید، حتماً این شاخه را نیز بررسی بفرمایید.
+			</text>
+		}
+
+		@if (Model.VerificationInfo.ContactMethodType == ContactMethodType.Phone)
+		{
+			<text>
+				پیغام فعال سازی توسط سیستم به شماره تلفن 
+				@HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.ContactMethodText)
+				ارسال شده، که حاوی رمز فعال سازی است. لطفاٌ رمز ارسالی را در فرم زیر وارد نمایید
+				و گزینه فعال سازی را انتخاب کنید.
+			</text>
+		}
+
+		<p>
+			به دلیل ملاحظات امنیتی، مدت زمان اعتبار رمز فعلی محدود بوده و شما برای اتمام فعال سازی با این رمز، تا ساعت
+			@HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.OngoingVerificationDeadline.ToLocalizedTimeString())
+			تاریخ
+			@HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.OngoingVerificationDeadline.ToLocalizedDateString())
+			فرصت دارید. در صورت انقضای این زمان، می توانید رمز فعال سازی جدیدی درخواست کنید.
+		</p>
+
+		<br/>
+
+		@using (Ajax.BeginForm("PerformVerification", new { id = Model.VerificationInfo.UserContactMethodID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "verificationRoot" }))
+		{
+			<table class="dataEntryTable">
+				<tr>
+					<td style="width: 120px;">@Html.LabelFor(m => m.VerificationSecret):</td>
+					<td style="width: 160px;">@Html.TextBoxFor(m => m.VerificationSecret, new { autofocus = "autofocus"})</td>
+					<td style="width: 15px;">@IconsHelper.RequiredTwo16(Url)</td>
+					<td style="width: 300px; text-align: left;">
+						<input id="btnOK" class="button" type="submit" value="ادامه" style="width: 140px;"/>
+						<input id="btnCancel" class="button" type="button" value="بعداً بر می گردم" style="width: 140px;" onclick="$('.qtip:visible').qtip('hide');"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">@Html.ValidationMessageFor(m => m.VerificationSecret)</td>
+				</tr>
+			</table>
+	  
+			<text>
+				@Html.ScriptCaptchaToken()
+				@Html.ScriptCaptchaScript()
+				@Html.CaptchaErrorMessage()
+			</text>
+		}
+
+		<p>
+			در صورتی که رمز ارسالی یعد از مدتی به دست شما نرسید، می توانید رمز فعلی را لغو نموده و فعال سازی را از ابتدا آغاز کنید.
+		</p>
+		<p>
+			<span class="bold">دقت کنید:</span>
+			پیش از شروع مجدد، حداقل 15 دقیقه برای دریافت پیغام حاوی رمز منتظر بمانید.
+		</p>
+
+		@using (Ajax.BeginForm("RestartVerification", new { id = Model.VerificationInfo.UserContactMethodID }, new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "verificationRoot"}))
+		{
+			<div class="clear fl" style="margin: 20px;">
+				<input id="btnRestart" class="button" style="width: 140px;" type="submit" value="از اول..."/>
+			</div>
+		}
+		
+	</div>
+
+	<script type="text/javascript">
+		$('.qtip:visible').qtip('reposition');
+		$('.qtip:visible').qtip('option', 'events.hide', function () { $('#verificationRoot').remove(); });
+	</script>
+</div>

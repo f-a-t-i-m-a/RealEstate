@@ -1,0 +1,80 @@
+﻿@using System.Drawing
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model dynamic
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+		<a href="@Url.Action("IncreaseCredit", "BillingHome", AreaRouteValue.Billing)">افزایش اعتبار</a>:
+		پرداخت
+	</h1>
+</div>
+
+<p>
+    برای پرداخت وجه و افزایش اعتبار، شما می تونید:
+</p>
+
+<ul>
+    <li>بعد از واریز وجه مورد نظرتون به حساب ما، <a href="@Url.Action("NewWireTransferPayment", "Payment", AreaRouteValue.Billing)">پرداخت رو اعلام کنید</a>.</li>
+    <li class="grayed">(به زودی) مستقیماً از داخل سایت، <a href="@Url.Action("NewElectronicPayment", "Payment", AreaRouteValue.Billing)">با درگاه پرداخت الکترونیکی پرداخت کنید</a>.</li>
+</ul>
+<br/>
+
+
+<div class="panel panel-primary">
+	<div class="panel-heading"><h3 class="panel-title">واریز به حساب</h3></div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<p>
+					اطلاعات حساب بانکی:
+				</p>
+
+				@Html.Partial("BankAccountPartial")
+
+				<a class="btn btn-danger btn-block" href="@Url.Action("NewWireTransferPayment", "Payment", AreaRouteValue.Billing)">
+					<span class="glyphicon glyphicon-hand-left"></span>
+					اعلام واریز وجه
+				</a>
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<p>
+					برای واریز به حساب، می تونید از هر کدوم از این راه ها اقدام کنید:
+					<ul>
+						<li>واریز به حساب به صورت حضوری در بانک</li>
+						<li>انتقال وجه با خود پرداز</li>
+						<li>انتقال وجه با اینترنت بانک</li>
+						<li>انتقال وجه با موبایل بانک</li>
+					</ul>
+				</p>
+
+				<p>
+					لطفاً ابتدا وجه مورد نظر خود را به حسابی که اطلاعاتش رو اینجا آوردیم واریز کنید، و بعد
+					<span class="text-danger">
+						حتماً از طریق
+						<a class="linkbutton" href="@Url.Action("NewWireTransferPayment", "Payment", AreaRouteValue.Billing)">اعلام واریز وجه</a>
+						ما رو مطلع کنید تا مبلغ رو توی حسابتون منظور کنیم.
+					</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading"><h3 class="panel-title">درگاه پرداخت الکترونیکی</h3></div>
+	<div class="panel-body">
+		<p>
+			با استفاده از درگاه پرداخت الکترونیکی، می تونید با هر کارت بانکی که عضو شبکه شتاب باشه و براش رمز دوم تنظیم کرده باشید،
+			مستقیماً از داخل سایت پرداختتون رو انجام بدید. مبلغ پرداخت شده توی هر ساعتی از شبانه روز بلافاصله توی حسابتون اضافه میشه.
+		</p>
+
+		<p>
+			متاسفانه هنوز امکان پرداخت از طریق درگاه بانکی به صورت الکترونیکی فراهم نشده.
+			ما مشغول فرآهم کردن این امکان از طریق بانک و پیاده سازی قسمت نرم افزاری این مورد هستیم، و امیدواریم به زودی این امکان فراهم بشه.
+		</p>
+	</div>
+</div>
+
+

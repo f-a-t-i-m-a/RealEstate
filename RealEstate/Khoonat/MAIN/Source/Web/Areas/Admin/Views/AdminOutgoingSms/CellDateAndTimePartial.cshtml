@@ -1,0 +1,15 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Domain.Messages.OutgoingSmsMessage
+
+ایجاد: 
+@Model.CreationDate.ToLocalizedDateString() @Model.CreationDate.ToLocalizedTimeString()
+<br/>
+@if (Model.TransmissionDate.HasValue)
+{
+    @: ارسال
+    @((Model.TransmissionDate.Value - Model.CreationDate).ToLocalizedRelativeString(1))
+}
+else
+{
+    @: ارسال نشده
+}

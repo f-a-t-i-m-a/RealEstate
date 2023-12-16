@@ -1,0 +1,43 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Core.Cache
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared
+
+@{
+	var balanceCache = ComposerWebUtil.ComponentContext.GetComponent<IUserBillingBalanceCache>();
+}
+
+@if (Request.IsAuthenticated)
+{
+	<li class="navbar-right">
+		<a href="@Url.Action("View", "MyProfile", new {area = AreaNames.Main})" class="navbar-link">
+			<span class="glyphicon glyphicon-user"></span> <strong>@User.CoreIdentity.DisplayName</strong>
+		</a>
+	</li>
+
+	if (!User.IsVerified)
+	{
+		<li>
+			<a href="@Url.Action("CompleteRegistration", "MyProfile", AreaRouteValue.Main)"><span class="text-danger">@LogOnResources.CompleteRegistration </span></a>
+		</li>
+	}
+	<li class="dropdown">
+		@Html.Action("RenderTopBarBalance", "BillingHome", new {area = AreaNames.Billing})
+	</li>
+	<li>
+		<a href="@Url.Action("LogOff", "Account", new {area = AreaNames.Main})">
+			<span class="glyphicon glyphicon-log-out"></span><span class="hidden-sm"> @LogOnResources.LogOff</span>
+		</a>
+	</li>
+}
+else
+{
+	<p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> @LogOnResources.GuestUser</p>
+
+	<li>
+		<a href="@Url.Action("LogOn", "Account", AreaRouteValue.Main, "https")"><span class="glyphicon glyphicon-log-in"></span> @LogOnResources.Login</a>
+	</li>
+	<li>
+		<a href="@Url.Action("Register", "Account", AreaRouteValue.Main, "https")">@LogOnResources.SignUp</a>
+	</li>
+}

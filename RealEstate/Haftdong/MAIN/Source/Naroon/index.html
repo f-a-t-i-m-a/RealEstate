@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>انتقال اطلاعات نارون به هفت دنگ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+        function fetch() {
+            $.ajax({
+                url: 'api/naroon/files/startfetching',
+                type: 'GET',
+                contentType: 'application/json;',
+                data: { fromDate: $('#txtFromDate').val(), toDate: $('#txtToDate').val() }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        انتقال اطلاعات نارون به هفت دنگ
+    </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input id="txtFromDate" type="text" name="fromDate" placeholder="20**-**-**"/>
+            </div>
+            <div class="col-md-2">
+                تا
+            </div>
+            <div class="col-md-4">
+                <input id="txtToDate" type="text" name="toDate" placeholder="20**-**-**"/>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-success btn-sm" onclick="fetch()"><i class="fa fa-search"></i> جستجو</button>
+            </div>
+        </div>
+    <div class="row">
+        <p>
+            Creation URL:-->
+            http://www.naroon.com/?content=webservice&filename=*****&user=jahanjooy&password=*****&datefrom=2015-*-*&dateto=2015-*-*
+        </p>
+        <p>
+            Getting XMLs URLs:
+            http://www.naroon.com/download/jahanjooy_*yourfilename*_data.xml
+            http://www.naroon.com/download/jahanjooy_*yourfilename*_subdata.xml
+        </p>
+        <p>
+            Deleting XMLS URL:
+            http://www.naroon.com/?content=webservice&user=jahanjooy&execute=finished
+        </p>
+    </div>
+</div>
+</body>
+</html>

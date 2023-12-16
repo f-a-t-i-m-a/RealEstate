@@ -1,0 +1,54 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.BillingHome.BillingHomeIndexModel
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">پرداخت های شما</h3>
+	</div>
+	<div class="panel-body">
+		<table style="border-spacing: 15px; border-collapse: separate; margin-right: 20px;">
+			<tr>
+				<td style="width: 100px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 30px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 30px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 150px;"></td>
+			</tr>
+
+			<tr>
+				@if (Model.NumberOfPendingElectronicPayments > 0 || Model.NumberOfCompletedElectronicPayments > 0 || Model.NumberOfCancelledElectronicPayments > 0)
+				{
+					<td colspan="3">
+						تعداد @(Model.NumberOfPendingElectronicPayments + Model.NumberOfCompletedElectronicPayments + Model.NumberOfCancelledElectronicPayments)
+						پرداخت الکترونیکی ثبت شده است:
+						<br />
+						<ul>
+							<li>@Model.NumberOfPendingElectronicPayments مورد در انتظار تایید</li>
+							<li>@Model.NumberOfCompletedElectronicPayments مورد تایید شده</li>
+							<li>@Model.NumberOfCancelledElectronicPayments مورد لغو شده</li>
+						</ul>
+					</td>
+					<td colspan="3">کل مبلغ پرداخت شده: @BillingPresentationHelper.Balance(Model.TotalCompletedElectronicPaymentsCashAmount) ریال</td>
+				}
+				else
+				{
+					<td colspan="6">تا کنون شما پرداخت الکترونیکی انجام نداده اید.</td>
+				}
+			</tr>
+		</table>
+	</div>
+	<div class="panel-footer">
+		<div class="row">
+			<div class="col-xs-8">
+				<a class="btn btn-warning" href="@Url.Action("NewElectronicPayment", "Payment", new {area = AreaNames.Billing})">پرداخت الکترونیکی</a>
+			</div>
+			<div class="col-xs-4 text-left">
+				<a class="btn btn-info" href="@Url.Action("ViewAllPayments", "Payment", new {area = AreaNames.Billing})">گزارش پرداخت ها</a>
+			</div>
+		</div>
+	</div>
+</div>
+

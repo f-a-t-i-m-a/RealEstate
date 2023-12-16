@@ -1,0 +1,14 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Property.PropertyListingUpdateHistory
+
+<a href="@Url.Action("List", "AdminSessions", new {IdFilter = Model.SessionID})" style="margin-right: 3px;">
+	@IconsHelper.Xlink16(Url)
+</a>
+<a style="display: inline-block;" href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("SessionIdFilter", Model.SessionID.SafeToString()))">
+	@Model.SessionID.SafeToString("-")
+</a>
+
+

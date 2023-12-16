@@ -1,0 +1,26 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">عنوان ضمیمه: {{image.Title}} <span class="label label-default" ng-show="image.cover">کاور</span></h3>
+</div>
+<div class="modal-body">
+    <label>توضیحات: {{image.Description}}</label>
+    <hr/>
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-1">
+                <button class="btn btn-default pull-right glyphicon glyphicon-chevron-right" title="قبلی" ng-show="showPrevious" ng-click="onPreviousClick(image)"></button>
+            </div>
+            <div class="col-md-10">
+                <img ng-src="{{image.Blob}}" class="img-responsive img-thumbnail"/>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-default pull-left glyphicon glyphicon-chevron-left" title="بعدی" ng-show="showNext" ng-click="onNextClick(image)"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" ng-show="!image.cover" ng-click="onChangeCoverClick(image)"  restrict-to="RealEstateAgent"><i class="fa fa-picture-o"></i> کاور</button>
+    <button class="btn btn-success" ng-click="onDownloadImageClick(image)"><i class="fa fa-download"  restrict-to="RealEstateAgent"></i> دانلود</button>
+    <button class="btn btn-danger" ng-click="onRemoveImageClick(image)"  restrict-to="RealEstateAgent"><i class="fa fa-trash-o"></i> حذف</button>
+    <button class="btn btn-default" ng-click="cancel()"  restrict-to="RealEstateAgent">باشه</button>
+</div>

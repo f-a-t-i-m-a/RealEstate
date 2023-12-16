@@ -1,0 +1,34 @@
+﻿@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminAgency.AdminAgencyReviewActionModel
+
+<div class="tr"style="width: 100%">
+    <div class="td bold" style="width: 100px" >نام:</div>
+    <div  class="td">@Model.Agency.GetContent().Name</div>
+</div>
+<div   class="tr" style="width: 100%">
+    <div class="td bold" style="width: 100px">کد:</div>
+    <div  class="td">@Model.Agency.GetContent().Code</div>
+</div>
+<div  class="tr" style="width: 100%">
+    <div class="td bold" style="width: 100px">نام مدیر:</div>
+    <div  class="td">@Model.Agency.GetContent().ManagerName</div>
+</div>
+<br/>
+<span  class="small">
+    @using (Html.BeginForm("ReviewPostBack", "AdminAgency", new {id = Model.Agency.ID}))
+    {
+        <h3 style="margin: 0;">بازبینی:</h3>
+        <br/>
+        <h3 style="margin: 0;">
+            @IconsHelper.Tristate(Url, Model.Agency.Approved)
+            @(Model.Agency.Approved.HasValue ? (Model.Agency.Approved.Value ? "تایید شده" : "مردود") : "انجام نشده")
+        </h3>
+        <br/>
+
+        <button name="btnApprove" value="btnApprove" type="submit" class="button" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;">@IconsHelper.Tick32(Url) قبول</button>
+        <button name="btnReject" value="btnReject" type="submit" class="button" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;">@IconsHelper.Cross32(Url) مردود</button>
+        <input id="btnCancel" name="btnCancel" class="button" type="button" value="بی خیال" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;" onclick=" $('.qtip:visible').qtip('hide'); " />
+    }
+
+</span>

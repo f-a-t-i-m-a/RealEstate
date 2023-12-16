@@ -1,0 +1,18 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Domain.SavedSearch.SavedSearchSmsNotificationBilling
+
+<p>
+    مربوط به پیامک های تاریخ: <br/>
+    @HtmlPresentationHelper.LeftToRight(Model.NotificationsDate.ToLocalizedDateString())
+</p>
+
+<p>
+    تعداد پیامک ها: @Model.NumberOfNotifications
+</p>
+
+<p>
+    تعداد بخش های پیامک: @Model.NumberOfNotificationParts
+</p>
+
+

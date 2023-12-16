@@ -1,0 +1,50 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Configuration
+
+<div class="row">
+    <div class="text-center">
+
+        <a href="https://telegram.me/haftdong">
+            <img src="~/Content/images/telegram_24px.png" alt="تلگرام"/>
+        </a>
+
+
+        <a href="https://www.instagram.com/haftdong">
+            <img src="~/Content/images/Instagram.png" class="social-network"/>
+        </a>
+
+    </div>
+</div>
+@*<div class="row ">
+    <div class=" text-center ">
+                <a href="https://cafebazaar.ir/app/com.khoonat.khoonat/?l=fa">
+                    <img src="~/Content/images/google-play-badge-bazar.png" alt="کافه بازار" />
+                </a>
+        <!--fatemeh-->
+         <a href="">
+                <img src="~/Content/images/google-play-badge.png" />
+            </a>
+            <a href="">
+                <img src="~/Content/images/appstore.png" alt="کافه بازار" />
+            </a>
+
+    </div>
+</div>*@
+<div class="row">
+    <div class="pull-right">
+        سایت های مشابه:
+        <a href="https://khoonat.com/">
+            خونه ت
+        </a>
+    </div>
+
+    
+    <div class="pull-left">
+        نسخه نرم افزار:
+        @(ComposerWebUtil.ComponentContext.GetComponent<ApplicationRevisionInfo>().VersionString)
+        -
+        <a href="@Url.Action("Index", "Help", new {area = ""})">
+            API.@(ComposerWebUtil.ComponentContext.GetComponent<ApplicationRevisionInfo>().ApiVersionString)
+        </a>
+    </div>
+</div>

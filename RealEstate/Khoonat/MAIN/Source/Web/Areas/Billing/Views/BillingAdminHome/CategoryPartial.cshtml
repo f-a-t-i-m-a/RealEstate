@@ -1,0 +1,4 @@
+﻿@using JahanJooy.Common.Util.Text
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.BillingAdminHome.BillingAdminHomeStatisticsModel
+
+<a class="list-group-item @("list-group-item-danger".If(Model.TotalQueueLength > 0))" href="@Url.Action("Index", "BillingAdminHome")">زیر سیستم مالی<span class="badge">@Model.TotalQueueLength</span></a>

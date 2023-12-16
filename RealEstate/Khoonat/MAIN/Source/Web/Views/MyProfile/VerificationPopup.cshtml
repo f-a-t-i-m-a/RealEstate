@@ -1,0 +1,86 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.MyProfile.MyProfileContactMethodVerificationModel
+
+
+<div class="modal-content" id="addPhoneNumberRoot">
+    <div class="modal-header">
+        <h4 class="modal-title">فعال سازی روش تماس</h4>
+    </div>
+    <div class="modal-body">
+        <p>
+            @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager):
+            @HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.ContactMethod.ContactMethodText)
+        </p>
+        <p>
+            قابل مشاهده توسط: @Model.VerificationInfo.ContactMethod.Visibility.Label(DomainEnumResources.ResourceManager)
+        </p>
+            
+        @if (!Model.VerificationInfo.ContactMethod.IsVerifiable)
+        {
+            <p>
+                چون ما نمی تونیم به این
+                @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+                پیام بفرستیم، قابلیت اعتبار سنجی خودکار براش وجود نداره.
+                اگر می خواهید این
+                @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+                به صورت تایید شده توی پروفایل تون نمایش داده بشه، لطفاً با ما تماس بگیرید.
+            </p>
+            <div class="pull-left">
+                <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">باشه</button>
+            </div>
+        }
+
+        else
+        {
+            @(Model.VerificationInfo.ValidationForVerificationStart.IsValid ?
+                  Html.Partial("ContactMethodVerificationPartials/ContactPopupVerificationPartial", Model) :
+                  Html.Partial("ContactMethodVerificationPartials/UnableToVerifyPartial", Model))
+        }
+
+    </div>
+</div>
+
+
+
+@**@
+@*<div id="addPhoneNumberRoot">*@
+@*    <div style="padding: 20px;">*@
+@**@
+@*        <h2>فعال سازی روش تماس</h2>*@
+@**@
+@*        <div style="margin-top: 20px;">*@
+@*            <table>*@
+@*                <tr>*@
+@*                    <td style="width: 150px;">@Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager):</td>*@
+@*                    <td>@HtmlPresentationHelper.LeftToRight(Model.VerificationInfo.ContactMethod.ContactMethodText)</td>*@
+@*                </tr>*@
+@*                <tr><td>قابل مشاهده توسط:</td><td>@Model.VerificationInfo.ContactMethod.Visibility.Label(DomainEnumResources.ResourceManager)</td></tr>*@
+@*            </table>*@
+@*            <br />*@
+@*        </div>*@
+@**@
+@*        @if (!Model.VerificationInfo.ContactMethod.IsVerifiable)*@
+@*        {*@
+@*            <p>*@
+@*                چون ما نمی تونیم به این *@
+@*                @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)*@
+@*                پیام بفرستیم، قابلیت اعتبار سنجی خودکار براش وجود نداره.*@
+@*                اگر می خواهید این *@
+@*                @Model.VerificationInfo.ContactMethod.ContactMethodType.Label(DomainEnumResources.ResourceManager)*@
+@*                به صورت تایید شده توی پروفایل تون نمایش داده بشه، لطفاً با ما تماس بگیرید.*@
+@*            </p>*@
+@*            <div class="clear fl">*@
+@*                <input id="btnCancel" class="button" type="button" value="باشه" style="width: 120px;" onclick=" $('.qtip:visible').qtip('hide'); " />*@
+@*            </div>*@
+@*        }*@
+@*        else*@
+@*        {*@
+@*            @(Model.VerificationInfo.ValidationForVerificationStart.IsValid ?*@
+@*                  Html.Partial("ContactMethodVerificationPartials/ContactPopupVerificationPartial", Model) :*@
+@*                  Html.Partial("ContactMethodVerificationPartials/UnableToVerifyPartial", Model))*@
+@*        }*@
+@**@
+@*    </div>*@
+@*</div>*@

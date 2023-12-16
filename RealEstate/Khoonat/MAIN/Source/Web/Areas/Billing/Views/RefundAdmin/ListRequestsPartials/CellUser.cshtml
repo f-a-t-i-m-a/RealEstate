@@ -1,0 +1,54 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Billing.UserRefundRequest
+
+<div>
+    کاربر:
+    @Html.Partial("_GridCellPartials/BillingSourceTargetUser", Model)
+</div>
+
+<div>
+    بررسی:
+    @if (Model.ReviewedByUser != null)
+    {
+        <a href="@Url.Action("Details", "AdminUsers", new {id = Model.ReviewedByUserID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+        <a href="@Url.Action("ListRequests", Request.QueryString.ToRouteValues().Set("ApplyReviewedByUserIDFilter", "true").Set("ReviewedByUserIDFilter", Model.ReviewedByUser.ID.ToString(CultureInfo.InvariantCulture)))">
+            @Model.ReviewedByUser.ID:
+            @Model.ReviewedByUser.LoginName
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("ListRequests", Request.QueryString.ToRouteValues().Set("ApplyReviewedByUserIDFilter", "true").Set("ReviewedByUserIDFilter", string.Empty))">
+            انجام نشده
+        </a>
+    }
+
+</div>
+<div>
+    پرداخت کننده :
+    @if (Model.ClearedByUser != null)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.ClearedByUser.ID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ClearedByUserIDFilter", "true").Set("ClearedByUserIDFilter", Model.ClearedByUser.ID.ToString(CultureInfo.InvariantCulture)))">
+        @Model.ClearedByUser.ID:
+        @Model.ClearedByUser.LoginName
+    </a>
+}
+else if (Model.ClearedByUserID.HasValue)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.TargetUserID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ApplyClearedByUserIDFilter", "true").Set("ClearedByUserIDFilter", Model.ClearedByUserID.Value.ToString(CultureInfo.InvariantCulture)))">
+        @Model.ClearedByUserID
+    </a>
+}
+else
+{
+    <a href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("ApplyClearedByUserIDFilter", "true").Set("ClearedByUserIDFilter", string.Empty))">
+        نامشخص
+    </a>
+}
+
+</div>

@@ -1,0 +1,26 @@
+﻿@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Configuration
+@using JahanJooy.Common.Util.Web.Extensions
+
+@if (ApplicationEnvironmentUtil.Type != ApplicationEnvironmentType.Production)
+{
+    <div style="position: fixed; top: 14px; right: 47%; z-index: 1031;">
+        <h3><span class="label label-info">@ApplicationEnvironmentUtil.Type.Label(UtilResources.ResourceManager)</span></h3>
+    </div>
+
+    <style>
+        #layout-main-navbar {
+            background-color: #cce6ff;
+            border-bottom: 5px solid #003366;
+        }
+
+        .loading-dot {
+            background: #cce6ff;
+            top: 50px;
+            width: 5px;
+            height: 5px;
+        }
+
+    </style>
+}
+

@@ -1,0 +1,24 @@
+﻿@model JahanJooy.RealEstate.Domain.Audit.AbuseFlag
+
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">گزارش به مدیر سایت</h4>
+	</div>
+	<div class="modal-body">
+		<p>
+			گزارش استفاده ناشایست ثبت شد و بررسی خواهد شد. از اینکه از امکانات سایت به شکل مسئولانه استفاده می کنید
+			و ما را در بهینه کردن اطلاعات آن یاری می کنید سپاس گزاریم.
+		</p>
+
+		<p>
+			در صورت نیاز به پیگیری، شماره گزارش شما
+			@Model.ID
+			می باشد.
+		</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-success" data-dismiss="modal">باشه</button>
+	</div>
+</div>
+

@@ -1,0 +1,20 @@
+﻿@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminConfiguration.AdminConfigurationItemModel
+
+<h2>تغییر مقادیر پیکربندی</h2>
+
+@using (Html.BeginForm("EditConfigurationConfirmed", "AdminConfiguration"))
+{
+    @Html.HiddenFor(m => m.Key)
+    <table style="width: 560px;">
+        <tr>
+            <td style="width: 100px;">کلید:</td>
+            <td style="text-align: left;"><span dir="ltr">@Model.Key</span></td>
+        </tr>
+        <tr>
+            <td>مقدار:</td>
+            <td style="direction: ltr;">@Html.TextBoxFor(m => m.Value, new { style = "direction: ltr;"})</td>
+        </tr>
+    </table>
+
+    <input type="submit" value="بروز رسانی"/>
+}

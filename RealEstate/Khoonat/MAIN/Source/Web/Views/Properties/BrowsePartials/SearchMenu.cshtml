@@ -1,0 +1,89 @@
+﻿@using JahanJooy.RealEstate.Web.Models.Properties
+@using JahanJooy.RealEstate.Web.Resources.Views.Properties
+@model PropertiesBrowseModel
+
+	<div class="nav nav-pills" style="margin-top: 20px">
+        <div role="presentation" class="dropdown col-xs-12 col-sm-3 col-md-2" style="margin-bottom: 20px">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                ترتیب:
+                <strong>
+                    @(Model.Search.SortOrder.HasValue ? PropertiesBrowseResources.ResourceManager.GetString(Model.Search.SortOrder.Value.ToString()) : PropertiesBrowseResources.Unspecified)
+                </strong><span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" role="menu">
+                @foreach (PropertiesSearchMenuModel order in Model.SortMenuItems)
+                {
+                    <div class="col-xs-12">
+                        <a href="@Url.Action("Browse", new {q = order.Query})" rel="nofollow">
+                            @PropertiesBrowseResources.ResourceManager.GetString(order.Label)
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+	    <div role="presentation" class="dropdown col-xs-12 col-sm-3 col-md-2" style="margin-bottom: 20px">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                نوع ملک:
+                <strong>
+                    @(Model.Search.PropertyType.HasValue ? PropertiesBrowseResources.ResourceManager.GetString(Model.Search.PropertyType.Value.ToString()) : PropertiesBrowseResources.All)
+                </strong>
+                <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" role="menu">
+                @foreach (PropertiesSearchMenuModel type in Model.PropertyTypeMenuItems)
+                {
+                    <div class="col-xs-12">
+                        <a href="@Url.Action("Browse", new {q = type.Query})" rel="nofollow">
+                            @PropertiesBrowseResources.ResourceManager.GetString(type.Label)
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+	    
+        <div role="presentation" class="dropdown col-xs-12 col-sm-3 col-md-2" style="margin-bottom: 20px">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                نوع قرارداد:
+                <strong>@(Model.Search.IntentionOfOwner.HasValue ? PropertiesBrowseResources.ResourceManager.GetString(Model.Search.IntentionOfOwner.Value.ToString()) : PropertiesBrowseResources.All)</strong>
+                <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" role="menu">
+                @foreach (PropertiesSearchMenuModel intention in Model.IntentionMenuItems)
+                {
+                    <div class="col-xs-12">
+                        <a href="@Url.Action("Browse", new {q = intention.Query})" rel="nofollow">
+                            @PropertiesBrowseResources.ResourceManager.GetString(intention.Label)
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+	    
+        <div role="presentation" class="dropdown col-xs-12 col-sm-3 col-md-2" style="margin-bottom: 20px">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                منطقه:
+                <strong>@(Model.LocationText ?? "همه مناطق")</strong>
+                <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" role="menu">
+                <a href="#"
+                   data-ajax-modal="@Url.Action("searchpartial", new {q = Model.Search.Query})">
+                    انتخاب...
+                </a>
+
+                @foreach (PropertiesSearchMenuModel location in Model.LocationMenuItems)
+                {
+                    <div class="col-xs-12">
+                        <a href="@Url.Action("Browse", new {q = location.Query})" rel="nofollow">
+                            @location.Label
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+	</div>

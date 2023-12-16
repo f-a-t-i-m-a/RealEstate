@@ -1,0 +1,85 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.UserFeedback.UserFeedbackReportAbuseModel
+
+
+<div id="reportAbuseRoot" class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">گزارش به مدیر سایت</h4>
+	</div>
+	@using (Ajax.BeginForm("ReportAbusePostback", "UserFeedback", new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "reportAbuseRoot"}))
+	{
+
+		<div class="modal-body">
+			@Html.HiddenFor(m => m.EntityType)
+			@Html.HiddenFor(m => m.EntityID)
+
+			<p>
+				@Html.LabelFor(m => m.Reason):
+			</p>
+			<table>
+				<tr>
+					<td style="width: 280px;">@Html.DropDownListFor(m => m.Reason, Model.Reason.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new { autofocus = "autofocus", @class="form-control" })</td>
+					<td>&nbsp;</td>
+					<td style="width: 300px;">
+						<div class="reasonHelpText none" id="helpNeedsModeratorAttention">به دلیلی غیر از موارد مشخص شده نیازمند توجه مدیر سایت است، که توضیح آن را ارائه می کنم.</div>
+						<div class="reasonHelpText none" id="helpHasIncorrectOrMisleadingInformation">قسمتی از اطلاعات ارائه شده در آن به وضوح نادرست است و باید اصلاح شود، یا نوع ارائه اطلاعات به گونه ای است که ممکن است استفاده کننده را به اشتباه بیندازد.</div>
+						<div class="reasonHelpText none" id="helpIsOffensive">در متون ارائه شده، الفاظ یا اصطلاحاتی استفاده شده که توسط عموم جامعه به عنوان توهین، تحقیر، تبعیض نژادی، گرایش سیاسی یا مانند اینها تلقی می شود.</div>
+						<div class="reasonHelpText none" id="helpIsAbusiveOrHasSecurityRisk">می تواند به شکل یک حمله امنیتی به بازدید کننده استفاده شده، یا ثبت کننده قصد سوء استفاده یا کلاه برداری از این طریق را دارد.</div>
+						<div class="reasonHelpText none" id="helpIsSpam">اطلاعات کلاً نادرست است و تنها برای ارائه لینک یا تبلیغات نامربوط به موضوع سایت این اطلاعات در سایت درج شده است.</div>
+					</td>
+				</tr>
+			</table>
+
+			<div>
+				@Html.ValidationMessageFor(m => m.Reason)
+			</div>
+
+			<div>
+				<p>@Html.LabelFor(m => m.Comments):</p>
+				@Html.TextAreaFor(m => m.Comments, 5, 40, new { maxlength = 500 })
+			</div>
+
+			@if (!User.IsVerified)
+			{
+				<p>لطفاً عدد شش رقمی نمایش داده شده در تصویر زیر را در فیلد کنار آن وارد کنید.</p>
+				@Html.Action("ViewImage", "Captcha")
+			}
+
+			@Html.ScriptCaptchaToken()
+			@Html.ScriptCaptchaScript()
+			@Html.CaptchaErrorMessage()
+		</div>
+		<div class="modal-footer">
+			<button name="btnOK" value="btnOK" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> ثبت گزارش</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		</div>
+	}
+	
+	<script type="text/javascript">
+
+	$("#Reason").change(function () {
+		$(".reasonHelpText").hide(400);
+
+		if (this.value == "NeedsModeratorAttention") {
+			$("#helpNeedsModeratorAttention").show(400);
+		} else if (this.value == "HasIncorrectOrMisleadingInformation") {
+			$("#helpHasIncorrectOrMisleadingInformation").show(400);
+		} else if (this.value == "IsOffensive") {
+			$("#helpIsOffensive").show(400);
+		} else if (this.value == "IsAbusiveOrHasSecurityRisk") {
+			$("#helpIsAbusiveOrHasSecurityRisk").show(400);
+		} else if (this.value == "IsSpam") {
+			$("#helpIsSpam").show(400);
+		}
+	});
+
+	$("#Reason").change();
+
+	</script>
+</div>
+
+	
+

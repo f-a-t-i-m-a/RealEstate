@@ -1,0 +1,277 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.PropertyRequest.PropertyRequestEditModel
+
+@*
+    ********************************************************************************
+    **** Additional specs for Building and Unit properties
+*@
+
+
+<div class="none displayPerType showForHouse showForVilla showForApartment showForPenthouse">
+    <div class="panel panel-primary">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" href="#additionalSpecs" aria-expanded="false" aria-controls="additionalSpecs">
+                    خصوصیات بیشتر
+                    (کلیک کنید)
+                    <span class="caret"></span>
+                </a>
+            </h4>
+        </div>
+        <div id="additionalSpecs" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-10">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-4">
+                                @Html.LabelFor(m => m.LivingRoomFloor):
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                @Html.DropDownListFor(m => m.LivingRoomFloor, Model.LivingRoomFloor.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.SelectOne, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.LivingRoomFloor)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-10">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-4">
+                                @Html.LabelFor(m => m.FaceType):
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                @Html.DropDownListFor(m => m.FaceType, Model.FaceType.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.SelectOne, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.FaceType)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-10">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-4">
+                                @Html.LabelFor(m => m.KitchenCabinetBodyType):
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                @Html.DropDownListFor(m => m.KitchenCabinetBodyType, Model.KitchenCabinetBodyType.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.SelectOne, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.KitchenCabinetBodyType)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-10">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-4">
+                                @Html.LabelFor(m => m.KitchenCabinetTopType):
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                @Html.DropDownListFor(m => m.KitchenCabinetTopType, Model.KitchenCabinetTopType.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.SelectOne, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.KitchenCabinetTopType)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-10">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-4">
+                                @Html.LabelFor(m => m.MainDaylightDirection):
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                @Html.DropDownListFor(m => m.MainDaylightDirection, Model.MainDaylightDirection.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.SelectOne, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.MainDaylightDirection)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.IsDuplex)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.IsDuplex, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">
+                                    @item.Input@item.Label
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasPrivatePatio)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasPrivatePatio, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">
+                                    @item.Input@item.Label
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasIranianLavatory)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasIranianLavatory, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">
+                                    @item.Input@item.Label
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasElevator)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasElevator, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">
+                                    @item.Input@item.Label
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasForeignLavatory)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasForeignLavatory, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">
+                                    @item.Input@item.Label
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasGatheringHall)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasGatheringHall, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">@item.Input@item.Label</div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasSwimmingPool)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasSwimmingPool, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">
+                                    @item.Input
+                                    @item.Label
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasAutomaticParkingDoor)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasAutomaticParkingDoor, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">@item.Input @item.Label</div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasSauna)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasSauna, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">@item.Input @item.Label</div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasVideoEyePhone)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasVideoEyePhone, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">@item.Input @item.Label</div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasJacuzzi)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasJacuzzi, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">@item.Input @item.Label</div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-5">
+                                @Html.LabelFor(m => m.HasBeenReconstructed)@GeneralResources.QuestionMark
+                            </div>
+                            @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasBeenReconstructed, SelectHtmlExtensions.BuildBooleanList()))
+                            {
+                                <div class="col-xs-2">@item.Input @item.Label</div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-5">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                @Html.LabelFor(m => m.NumberOfMasterBedrooms):
+                            </div>
+                            <div class="col-xs-3">
+                                @Html.TextBoxFor(m => m.NumberOfMasterBedrooms, new { maxlength = 2, style = "direction:ltr;text-align:center;" })
+                                @Html.ValidationMessageFor(m => m.NumberOfMasterBedrooms)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingSummary
+
+@{
+	var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">حذف اطلاعات ملک</h4>
+	</div>
+	<div class="modal-body">
+		<p>ملک ثبت شده با مشخصات زیر حذف خواهد شد:</p>
+		<table style="border-spacing: 10px; border-collapse: separate;">
+			<tr>
+				<td>شناسه:</td>
+				<td>@Model.ID</td>
+			</tr>
+			<tr>
+				<td>محل:</td>
+				<td>@propertyPresentationHelper.BuildRegion(Model)</td>
+			</tr>
+			<tr>
+				<td>ملک:</td>
+				<td>@propertyPresentationHelper.BuildTitle(Model)</td>
+			</tr>
+			<tr>
+				<td>مساحت:</td>
+				<td>@propertyPresentationHelper.BuildArea(Model)</td>
+			</tr>
+			<tr>
+				<td>قیمت:</td>
+				<td>@propertyPresentationHelper.BuildPriceAndPricePerArea(Model)</td>
+			</tr>
+		</table>
+		<p>
+			پس از حذف، اطلاعات قابل بازگشت نخواهد بود.
+			<strong>آیا اطمینان دارید</strong> که ملک فوق حذف شود؟
+		</p>
+
+	</div>
+	<div class="modal-footer">
+		@using (Html.BeginForm("DeletePostback", "Property", new { id = Model.ID }, FormMethod.Post))
+		{
+			<button name="btnOK" value="btnOK" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> بله؛ حذف شود</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		}
+	</div>
+</div>
+
+

@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A93B051B-ACE3-4711-BD39-38C7758CFDBD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JahanJooy.RealEstateAgency.Util</RootNamespace>
+    <AssemblyName>JahanJooy.RealEstateAgency.Util</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AntiXssLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AppsOn.Automation.LibraryBuffer">
+      <HintPath>..\NonNugetLibraries\AppsOn.Automation.LibraryBuffer\AppsOn.Automation.LibraryBuffer.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.Identity.MongoDB, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.Identity.MongoDB.2.0.8\lib\net45\AspNet.Identity.MongoDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Compositional.Composer">
+      <HintPath>D:\TFSRoot\JahanJooy\RealEstateAgency\MAIN\Source\NonNugetLibraries\Compositional.Composer\Compositional.Composer.dll</HintPath>
+    </Reference>
+    <Reference Include="Compositional.Composer.Implementation, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL">
+      <HintPath>..\NonNugetLibraries\Compositional.Composer.Implementation\Compositional.Composer.Implementation.dll</HintPath>
+    </Reference>
+    <Reference Include="Compositional.Composer.Web">
+      <HintPath>..\NonNugetLibraries\Compositional.Composer.Web\Compositional.Composer.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.2.3.1\lib\net45\Elasticsearch.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.0.4\lib\net45\ImageResizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JahanJooy.Common.Util, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NonNugetLibraries\JahanJooy.Common.Util\JahanJooy.Common.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.2.4\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.2.4\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.2.4\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.GridFS, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.GridFS.2.2.4\lib\net45\MongoDB.Driver.GridFS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.2.3.1\lib\net45\Nest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PhoneNumbers, Version=7.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\libphonenumber-csharp.7.2.5\lib\PhoneNumbers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\NonNugetLibraries\ServiceStack.Cracked\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base">
+      <HintPath>..\NonNugetLibraries\Stimulsoft\Stimulsoft.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report">
+      <HintPath>..\NonNugetLibraries\Stimulsoft\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TypeLite, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.4.0\lib\net4\TypeLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TypeLite.Net4, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.4.0\lib\net4\TypeLite.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attachments\PhotoGridStore.cs" />
+    <Compile Include="Attachments\AttachmentStoreEntityType.cs" />
+    <Compile Include="Attachments\PhotoStoreSize.cs" />
+    <Compile Include="CacheMongo\Components\AutoLoadCacheMongo.cs" />
+    <Compile Include="CacheMongo\Components\AutoLoadItemCacheMongo.cs" />
+    <Compile Include="CacheMongo\ICacheMongo.cs" />
+    <Compile Include="CacheMongo\ICacheItemLoaderMongo.cs" />
+    <Compile Include="CacheMongo\ICacheKeyMapperMongo.cs" />
+    <Compile Include="CacheMongo\ICacheLoaderMongo.cs" />
+    <Compile Include="CacheMongo\ICacheValueCopierMongo.cs" />
+    <Compile Include="CacheMongo\IWritableCacheMongo.cs" />
+    <Compile Include="Configuration\ApplicationSettingsLoader.cs" />
+    <Compile Include="DataAccess\DbManager.cs" />
+    <Compile Include="DataAccess\ElasticManager.cs" />
+    <Compile Include="DomainExtensions\OutgoingSmsMessageExtensions.cs" />
+    <Compile Include="Enums\AuthenticationValidationErrors.cs" />
+    <Compile Include="Enums\ConfigureDataItemValidationErrors.cs" />
+    <Compile Include="Enums\ContractValidationErrors.cs" />
+    <Compile Include="Enums\CustomerValidationErrors.cs" />
+    <Compile Include="Enums\GeneralValidationErrors.cs" />
+    <Compile Include="Enums\PropertyValidationErrors.cs" />
+    <Compile Include="Enums\ReportTemplateValidationErrors.cs" />
+    <Compile Include="Enums\RequestValidationErrors.cs" />
+    <Compile Include="Enums\SupplyValidationErrors.cs" />
+    <Compile Include="Enums\UserValidationError.cs" />
+    <Compile Include="Enums\VicinityValidationErrors.cs" />
+    <Compile Include="Identity\ApplicationAuthorizeAttribute.cs" />
+    <Compile Include="Indexing\ContractSearchIndexMapper.cs" />
+    <Compile Include="Indexing\ContractIndexMapper.cs" />
+    <Compile Include="Indexing\CustomerSearchIndexMapper.cs" />
+    <Compile Include="Indexing\ISearchIndexMapper.cs" />
+    <Compile Include="Indexing\PropertySearchIndexMapper.cs" />
+    <Compile Include="Indexing\RequestSearchIndexMapper.cs" />
+    <Compile Include="Indexing\SupplyIndexMapper.cs" />
+    <Compile Include="Indexing\IIndexMapper.cs" />
+    <Compile Include="Indexing\CustomerIndexMapper.cs" />
+    <Compile Include="Indexing\UserSearchIndexMapper.cs" />
+    <Compile Include="Indexing\UserIndexMapper.cs" />
+    <Compile Include="Indexing\RequestIndexMapper.cs" />
+    <Compile Include="Indexing\PropertyIndexMapper.cs" />
+    <Compile Include="Interfaces\IPropertyValidatorForSave.cs" />
+    <Compile Include="Interfaces\ISupplyValidatorForSave.cs" />
+    <Compile Include="Log4Net\ApplicationStaticLogs.cs" />
+    <Compile Include="Map\GeographyUtils.cs" />
+    <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Account\ChangePasswordInputModel.cs" />
+    <Compile Include="Models\Account\CompeleteRegistrationOutput.cs" />
+    <Compile Include="Models\Account\GetAccountPermissionsOutput.cs" />
+    <Compile Include="Models\Base\ContactInfoSummary.cs" />
+    <Compile Include="Models\Base\NewContactMethodCollectionInput.cs" />
+    <Compile Include="Models\Base\SupplyContactInfoSummary.cs" />
+    <Compile Include="Models\Base\AddressInfoSummary.cs" />
+    <Compile Include="Models\Base\ContactMethodCollectionSummary.cs" />
+    <Compile Include="Models\Base\EmailInfoSummary.cs" />
+    <Compile Include="Models\Base\NewContactInfoInput.cs" />
+    <Compile Include="Models\Base\PhoneInfoSummary.cs" />
+    <Compile Include="Models\Base\PhotoInfoSummary.cs" />
+    <Compile Include="Models\Base\SearchResultSummary.cs" />
+    <Compile Include="Models\Base\SortDirectionType.cs" />
+    <Compile Include="Models\ChangeHistories\ChangeHistorySortColumn.cs" />
+    <Compile Include="Models\ConfigureDataItem\AddNewInput.cs" />
+    <Compile Include="Models\ConfigureDataItem\ConfigureDataItemSummary.cs" />
+    <Compile Include="Models\ConfigureDataItem\GetAllOutput.cs" />
+    <Compile Include="Models\ConfigureDataItem\GetOutput.cs" />
+    <Compile Include="Models\ConfigureDataItem\UpdateInput.cs" />
+    <Compile Include="Models\Contracts\ContractDetails.cs" />
+    <Compile Include="Models\Contracts\ContractSortColumn.cs" />
+    <Compile Include="Models\Contracts\ContractSummary.cs" />
+    <Compile Include="Models\Contracts\NewContractInput.cs" />
+    <Compile Include="Models\Contracts\PrintContractInput.cs" />
+    <Compile Include="Models\Contracts\PrintContractsInput.cs" />
+    <Compile Include="Models\Contracts\SearchContractInput.cs" />
+    <Compile Include="Models\Contracts\SearchContractOutput.cs" />
+    <Compile Include="Models\Contracts\UpdateContractInput.cs" />
+    <Compile Include="Models\Customers\CustomerDetails.cs" />
+    <Compile Include="Models\Customers\CustomerSortColumn.cs" />
+    <Compile Include="Models\Customers\CustomerSummary.cs" />
+    <Compile Include="Models\Customers\GetCustomerInput.cs" />
+    <Compile Include="Models\Customers\NewCustomerInput.cs" />
+    <Compile Include="Models\Customers\SearchCustomerInput.cs" />
+    <Compile Include="Models\Customers\SearchCustomerOutput.cs" />
+    <Compile Include="Models\Customers\UpdateCustomerInput.cs" />
+    <Compile Include="Models\Dashboard\DashboardOutput.cs" />
+    <Compile Include="Models\Dashboard\QuickSearchInput.cs" />
+    <Compile Include="Models\Dashboard\QuickSearchOutput.cs" />
+    <Compile Include="Models\Dashboard\DashboardSortColumn.cs" />
+    <Compile Include="Models\Logs\AppendToDebugAppenderInput.cs" />
+    <Compile Include="Models\Logs\ChangeDebugModeInput.cs" />
+    <Compile Include="Models\Logs\GetAllOutput.cs" />
+    <Compile Include="Models\Logs\LogFilesOutput.cs" />
+    <Compile Include="Models\Logs\LoggersOutput.cs" />
+    <Compile Include="Models\Logs\ViewLogInput.cs" />
+    <Compile Include="Models\Map\GeoSearchResult.cs" />
+    <Compile Include="Models\Map\GeoSearchVicinityResult.cs" />
+    <Compile Include="Models\Properties\NewPropertyInput.cs" />
+    <Compile Include="Models\Properties\PrintPropertiesInput.cs" />
+    <Compile Include="Models\Properties\PrintPropertyInput.cs" />
+    <Compile Include="Models\Properties\PropertyContactInfoSummaryForPublic.cs" />
+    <Compile Include="Models\Properties\PropertyDetails.cs" />
+    <Compile Include="Models\Properties\PropertySortColumn.cs" />
+    <Compile Include="Models\Properties\PropertyContactInfoSummary.cs" />
+    <Compile Include="Models\Properties\PropertySummary.cs" />
+    <Compile Include="Models\Properties\SearchPropertyInput.cs" />
+    <Compile Include="Models\Properties\SearchPropertyOutput.cs" />
+    <Compile Include="Models\Properties\PublishPropertyInput.cs" />
+    <Compile Include="Models\Properties\UpdatePropertyInput.cs" />
+    <Compile Include="Models\Report\AddParameterInput.cs" />
+    <Compile Include="Models\Report\NewReportTemplateInput.cs" />
+    <Compile Include="Models\Report\ParametersOutput.cs" />
+    <Compile Include="Models\Report\ParameterValue.cs" />
+    <Compile Include="Models\Report\RemoveParameterInput.cs" />
+    <Compile Include="Models\Report\ReportListOutput.cs" />
+    <Compile Include="Models\Report\ReportPrintInput.cs" />
+    <Compile Include="Models\Report\ReportTemplateParameterOutput.cs" />
+    <Compile Include="Models\Report\ReportTemplateParameterSummary.cs" />
+    <Compile Include="Models\Report\ReportTemplateSummary.cs" />
+    <Compile Include="Models\Report\SearchReportTemplateInput.cs" />
+    <Compile Include="Models\Report\SetParametersInput.cs" />
+    <Compile Include="Models\Report\UpdateReportTemplateInput.cs" />
+    <Compile Include="Models\Requests\GetRequestInput.cs" />
+    <Compile Include="Models\Requests\NewRequestInput.cs" />
+    <Compile Include="Models\Requests\PrintRequestInput.cs" />
+    <Compile Include="Models\Requests\PrintRequestsInput.cs" />
+    <Compile Include="Models\Requests\RequestContactInfoSummaryForPublic.cs" />
+    <Compile Include="Models\Requests\RequestContactInfoSummary.cs" />
+    <Compile Include="Models\Requests\PublishRequestInput.cs" />
+    <Compile Include="Models\Requests\RequestDetails.cs" />
+    <Compile Include="Models\Requests\RequestSortColumn.cs" />
+    <Compile Include="Models\Requests\RequestSummary.cs" />
+    <Compile Include="Models\Requests\SearchRequestInput.cs" />
+    <Compile Include="Models\Requests\SearchRequestOutput.cs" />
+    <Compile Include="Models\Requests\UpdateRequestInput.cs" />
+    <Compile Include="Models\Shared\ApiValidationError.cs" />
+    <Compile Include="Models\Shared\ApiValidationResult.cs" />
+    <Compile Include="Models\Supplies\CompleteSupplyInput.cs" />
+    <Compile Include="Models\Supplies\NewSupplyInput.cs" />
+    <Compile Include="Models\Supplies\PrintSuppliesInput.cs" />
+    <Compile Include="Models\Supplies\PrintSupplyInput.cs" />
+    <Compile Include="Models\Supplies\PublishSupplyInput.cs" />
+    <Compile Include="Models\Supplies\SearchFileInput.cs" />
+    <Compile Include="Models\Supplies\SearchFileOutput.cs" />
+    <Compile Include="Models\Supplies\SupplyDetails.cs" />
+    <Compile Include="Models\Supplies\SupplySortColumn.cs" />
+    <Compile Include="Models\Supplies\SupplySummary.cs" />
+    <Compile Include="Models\Supplies\UpdateSupplyInput.cs" />
+    <Compile Include="Models\UserActivities\SearchInput.cs" />
+    <Compile Include="Models\UserActivities\SearchOutput.cs" />
+    <Compile Include="Models\UserActivities\UserActivityDetails.cs" />
+    <Compile Include="Models\UserActivities\UserActivitySortColumn.cs" />
+    <Compile Include="Models\UserActivities\UserActivitySummary.cs" />
+    <Compile Include="Models\Users\ApplicationUserDetails.cs" />
+    <Compile Include="Models\Users\ApplicationUserSortColumn.cs" />
+    <Compile Include="Models\Users\ApplicationUserSummary.cs" />
+    <Compile Include="Models\Users\ApproveApplicationUserInput.cs" />
+    <Compile Include="Models\Users\NewApplicationUserInput.cs" />
+    <Compile Include="Models\Users\NewSecretForUserApplicationInput.cs" />
+    <Compile Include="Models\Users\AccountForgotPasswordInput.cs" />
+    <Compile Include="Models\Users\ResetPasswordInput.cs" />
+    <Compile Include="Models\Users\SearchApplicationUserInput.cs" />
+    <Compile Include="Models\Users\SearchApplicationUserOutput.cs" />
+    <Compile Include="Models\Users\SignupInput.cs" />
+    <Compile Include="Models\Users\UpdateApplicationUserInput.cs" />
+    <Compile Include="Models\Users\UserApplicationVerifiedContactMethodInput.cs" />
+    <Compile Include="Models\Vicinities\ListOfVicinityInput.cs" />
+    <Compile Include="Models\Vicinities\MoveVicinitiesInput.cs" />
+    <Compile Include="Models\Vicinities\NewVicinityInput.cs" />
+    <Compile Include="Models\Vicinities\SearchVicinityByPointInput.cs" />
+    <Compile Include="Models\Vicinities\SearchVicinityInput.cs" />
+    <Compile Include="Models\Vicinities\SearchVicinityOutput.cs" />
+    <Compile Include="Models\Vicinities\UpdateVicinityInput.cs" />
+    <Compile Include="Models\Vicinities\VicinityListOutput.cs" />
+    <Compile Include="Models\Vicinities\VicinitySummary.cs" />
+    <Compile Include="Notification\EmailNotificationUtils.cs" />
+    <Compile Include="Notification\Email\DevelopmentEmailTransmitter.cs" />
+    <Compile Include="Notification\Email\SmtpEmailTransmitter.cs" />
+    <Compile Include="Notification\IEmailTransmitter.cs" />
+    <Compile Include="Notification\ISmsTransmitter.cs" />
+    <Compile Include="Notification\SmsMessageUtil.cs" />
+    <Compile Include="Notification\SmsNotificationUtils.cs" />
+    <Compile Include="Notification\Sms\DevelopmentSmsTransmitter.cs" />
+    <Compile Include="Notification\Sms\FarapayamakSenderLine.cs" />
+    <Compile Include="Notification\Sms\FarapayamakSenderLinesCache.cs" />
+    <Compile Include="Notification\Sms\FarapayamakSenderLineStatus.cs" />
+    <Compile Include="Notification\Sms\SmsTransmissionException.cs" />
+    <Compile Include="Owin\JJOwinRequestScopeContextExtentions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ApplicationImplemented\ContractReport.cs" />
+    <Compile Include="Report\ApplicationImplemented\PropertyReport.cs" />
+    <Compile Include="Report\ApplicationImplemented\RequestReport.cs" />
+    <Compile Include="Report\ApplicationImplemented\SupplyReport.cs" />
+    <Compile Include="Report\Functions\StiLocalizationFunctions.cs" />
+    <Compile Include="Report\GeneralReport.cs" />
+    <Compile Include="Report\ReportRepository.cs" />
+    <Compile Include="Report\StiRealEstateUtils.cs" />
+    <Compile Include="Resources\EmailResources.Designer.cs">
+      <DependentUpon>EmailResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\EnumTranslatorUtil.cs" />
+    <Compile Include="Resources\NormalizerUtil.cs" />
+    <Compile Include="Resources\NumberUtil.cs" />
+    <Compile Include="Resources\StaticEnumResources.Designer.cs">
+      <DependentUpon>StaticEnumResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\StaticEnumResourcesMetadata.cs" />
+    <Compile Include="Security\PasswordHashUtil.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Templates\Email\PasswordRecoveryCompletionNotificationModel.cs" />
+    <Compile Include="Templates\Email\PasswordResetModel.cs" />
+    <Compile Include="Templates\Email\PasswordRecoveryBySmsStartNotificationModel.cs" />
+    <Compile Include="Templates\Email\ContactMethodVerificationModel.cs" />
+    <Compile Include="Templates\EmbeddedResourceRazorTemplate.cs" />
+    <Compile Include="Templates\IRazorTemplate.cs" />
+    <Compile Include="Templates\RazorTemplateRunner.cs" />
+    <Compile Include="Templates\TemplateBase.cs" />
+    <Compile Include="UserActivityLog\OwinRequestScopeContextExtensions.cs" />
+    <Compile Include="UserActivityLog\SkipUserActivityLoggingAttribute.cs" />
+    <Compile Include="UserActivityLog\UserActivityAttribute.cs" />
+    <Compile Include="UserActivityLog\UserActivityLogFilter.cs" />
+    <Compile Include="UserActivityLog\UserActivityLoggerMiddleware.cs" />
+    <Compile Include="UserActivityLog\UserActivityLogUtils.cs" />
+    <Compile Include="UserActivityLog\UserActivityOwinEntry.cs" />
+    <Compile Include="Utils\Base\AsyncHelpers.cs" />
+    <Compile Include="Utils\DashboardUtil.cs" />
+    <Compile Include="Utils\AccountUtil.cs" />
+    <Compile Include="Utils\ContactMethods\LocalContactMethodUtil.cs" />
+    <Compile Include="Utils\ContactMethods\LocalAddressUtil.cs" />
+    <Compile Include="Utils\ContactMethods\LocalEmailUtil.cs" />
+    <Compile Include="Utils\ContactMethods\LocalPhoneNumberUtil.cs" />
+    <Compile Include="Utils\VicinityUtil.cs" />
+    <Compile Include="Utils\CustomerUtil.cs" />
+    <Compile Include="Utils\Map\GeographicClusterCalculator.cs" />
+    <Compile Include="Utils\PropertyUtil.cs" />
+    <Compile Include="Utils\RequestUtil.cs" />
+    <Compile Include="Utils\FileUtil.cs" />
+    <Compile Include="Utils\SupplyUtil.cs" />
+    <Compile Include="Utils\UserUtil.cs" />
+    <Compile Include="VicinityCache\IVicinityCache.cs" />
+    <Compile Include="VicinityCache\VicinityCache.cs" />
+    <Compile Include="VicinityCache\VicinityCacheIndexMap.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="ExternalData\KhoonatImagesScript.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExternalData\KhoonatPropertiesScript.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\ErrorImages\imageCouldNotBeRetrieved.png" />
+    <EmbeddedResource Include="Content\ErrorImages\thumbnailCouldNotBeRetrieved.png" />
+    <Content Include="Scripts\MongoDump.txt" />
+    <Content Include="Scripts\TypeLite.Net4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypeLite.Net4.d.ts</LastGenOutput>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Resources\EmailResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\Email\HaftdongContactMethodVerification.cshtml" />
+    <Content Include="Scripts\set-field-script.js" />
+    <Content Include="Scripts\rename-attribute-script.js" />
+    <Content Include="Scripts\remove-attribute-script.js" />
+    <Content Include="Scripts\migrationscript.js" />
+    <Content Include="Scripts\startupscript-command.txt" />
+    <Content Include="Scripts\startupscript.js" />
+    <None Include="Scripts\Manager.ttinclude" />
+    <EmbeddedResource Include="Templates\Email\SheshdongContactMethodVerification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\HaftdongPasswordRecoveryBySmsStartNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\HaftdongPasswordReset.cshtml" />
+    <EmbeddedResource Include="Templates\Email\HaftdongPasswordRecoveryCompletionNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\SheshdongPasswordReset.cshtml" />
+    <EmbeddedResource Include="Templates\Email\SheshdongPasswordRecoveryCompletionNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\SheshdongPasswordRecoveryBySmsStartNotification.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{7013feb2-274b-4694-b24b-aa084153ba17}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JahanJooy.Stimulsoft.Common\JahanJooy.Stimulsoft.Common.csproj">
+      <Project>{ED5357DD-FE32-4A1D-9C3A-E0D4D7F553A8}</Project>
+      <Name>JahanJooy.Stimulsoft.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\StaticEnumResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StaticEnumResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\TypeLite.Net4.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

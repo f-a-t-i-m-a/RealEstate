@@ -1,0 +1,598 @@
+﻿<div class="container detailFileView" ng-if="$state.current.name === 'welcome.files.details'">
+<div class="page-header">
+    <h1>
+        جزئیات ملک: {{property.PropertyType | PropertyType}} - {{property.UsageType | UsageType}}
+        <span ng-if="property.IsArchived">-(آرشیو شده)</span>
+        <span ng-switch="property.SourceType">
+            <span ng-switch-when="1">
+                <img class="small-logo" ng-src="Content/images/HaftdongLogo.png" alt="هفت دنگ">
+            </span>
+            <span ng-switch-when="2">
+                <img class="small-logo" ng-src="Content/images/KhoonatLogo.png" alt="خونه ت">
+            </span>
+            <span ng-switch-when="3">
+                <img class="small-logo" ng-src="Content/images/OtherLogo.png" alt="فایل خارجی">
+            </span>
+            <span ng-switch-when="4">
+                <img class="small-logo" ng-src="Content/images/SheshdongLogo.png" alt="شش دنگ">
+            </span>
+            <span ng-switch-default></span>
+        </span>
+    </h1>
+</div>
+<div class="row">
+<div class="col-md-1">
+    <div class="row right-button">
+        <div class="col-md-12">
+            <div class="row" authorized-to="property.CreatedByID">
+                <button class="btn btn-block btn-success editButton" ui-sref="welcome.files.details.edit"><i class="fa fa-pencil"></i> ویرایش</button>
+            </div>
+            <div class="row" authorized-to="property.CreatedByID" ng-if="property.State == 1">
+                <button class="btn btn-block btn-danger deleteButton" ng-click="onDeleteClick()"><i class="fa fa-trash-o"></i> حذف</button>
+            </div>
+            <div class="row" ng-if="property.ConversionWarning" authorized-to="property.CreatedByID">
+                <button class="btn btn-block btn-info sourceButton" ng-click="onSourceClick()"><i class="fa fa-file-code-o"></i> منبع</button>
+            </div>
+            <div class="row">
+                <jj-print-button source-type="41" endpoint="/api/haftdong/files/details/{{property.ID}}/print" filename="ملک {{property.ID}}"></jj-print-button>
+            </div>
+            <div class="row">
+                <button class="btn btn-block btn-default backButton" ng-click="onBackToListClick()"><i class="fa fa-arrow-left"></i> بازگشت</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-9">
+<tabset>
+<tab>
+<tab-heading><i class="fa fa-home"></i> ملک</tab-heading>
+<div class="well content">
+    <div class="row">
+        <div class="col-md-3" >
+            {{property.PropertyType | PropertyType}} - {{property.UsageType | UsageType}}
+            <span ng-show="property.ConversionWarning" class="label label-warning" restrict-to="Administrator">ناتمام</span>
+        </div>
+        <div class="col-md-3" ng-show="property.NumberOfRooms != 0 && property.NumberOfRooms != null" show="property.NumberOfRooms != 0 && property.NumberOfRooms != null">
+            {{property.NumberOfRooms}} خوابه
+        </div>
+        <div class="col-md-3" ng-show="property.EstateArea != 0 && property.EstateArea != null" show="property.EstateArea != 0 && property.EstateArea != null">
+            {{property.EstateArea | number}} متر زیر بنا
+        </div>
+        <div class="col-md-3" ng-show="property.UnitArea != 0 && property.UnitArea != null" show="property.UnitArea != 0 && property.UnitArea != null">
+            {{property.UnitArea | number}} متر بنا
+        </div>
+        <div class="col-md-3" ng-show="property.OfficeArea != 0 && property.OfficeArea != null" show="property.OfficeArea != 0 && property.OfficeArea != null">
+            {{property.OfficeArea | number}} متر واحد اداری
+        </div>
+        <div class="col-md-3" show="property.UnitFloorNumber">
+            طبقه {{property.UnitFloorNumber}}
+        </div>
+        <div class="col-md-3" show="property.MainDaylightDirection">
+            {{property.MainDaylightDirection | DaylightDirection}}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-3" show="property.BuildingAgeYears">
+            {{property.BuildingAgeYears}} ساله
+        </div>
+        <div class="col-md-3" show="property.TotalNumberOfFloors">
+            {{property.TotalNumberOfFloors}} طبقه
+        </div>
+        <div class="col-md-3" show="property.TotalNumberOfFloors">
+            هر طبقه {{property.TotalNumberOfFloors}} واحد
+        </div>
+        <div class="col-md-3" show="property.TotalNumberOfUnits">
+            در کل {{property.TotalNumberOfUnits}} واحد
+        </div>
+    </div>
+</div>
+<div class="well content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <table class="table table-hover supplyTable">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            <label>
+                                نوع معامله
+                            </label>
+                        </th>
+                        <th class="col-md-2">
+                            <label ng-show="!showSortablePrice">
+                                قیمت
+                            </label>
+                            <span ng-show="showSortablePrice">
+                                        <jj-sortable-header title="'قیمت'" sort-column-name="'TotalPrice'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                                    </span>
+                        </th>
+                        <th class="hidden-xs col-md-1">
+                            <label>
+                                وضعیت
+                            </label>
+                        </th>
+                        <th class="hidden-xs col-md-2">
+                            <jj-sortable-header title="'ثبت'" sort-column-name="'CreationTime'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                        </th>
+                        <th class="col-md-2">
+                            <label>
+                                اطلاعات تماس
+                            </label>
+                        </th>
+                        <th class="col-md-1">
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat-start="supply in property.Supplies">
+                        <td class="col-md-1">
+                            <a ng-click="onSupplyDetailClick(supply)">{{supply.IntentionOfOwner | IntentionOfOwner}}</a>
+                            <div class="dangerText" ng-if="supply.IsArchived"> (آرشیو شده)</div>
+                        </td>
+                        <td class="col-md-2" ng-show="supply.IntentionOfOwner === 2">قیمت کل: {{computePrice(supply) | number}}</td>
+                        <td class="col-md-2" ng-show="supply.IntentionOfOwner === 5 || supply.IntentionOfOwner === 6">ارزش کل: {{computePrice(supply) | number}}</td>
+                        <td class="col-md-2" ng-show="supply.IntentionOfOwner === 3">ودیعه: {{supply.Mortgage | number}}</td>
+                        <td class="col-md-2" ng-show="supply.IntentionOfOwner === 1">
+                            <div>ودیعه: {{supply.Mortgage | number}}</div>
+                            <div>اجاره ماهانه: {{supply.Rent | number}}</div>
+                        </td>
+                        <td class="col-md-2" ng-show="supply.IntentionOfOwner === 4">اجاره روزانه: {{supply.Rent | number}}</td>
+                        <td class="hidden-xs col-md-1" ng-class="{'dangerText' : supply.State == 250}">{{supply.State | SupplyState}}</td>
+                        <td class="hidden-xs col-md-2">
+                            <jj-relative-time origin="supply.CreationTime" ng-show="isTwoWeeksAgo(supply)"
+                                              title="{{supply.CreationTime | jalaali: 'dddd jYYYY/jMM/jDD'}}"></jj-relative-time>
+                            <span ng-show="!isTwoWeeksAgo(supply)">{{supply.CreationTime | jalaali}}</span>
+                        </td>
+                        <td class="col-md-2" restrict-to="VerifiedUser">
+                            <button class="btn btn-default contactOwnerButton" ng-if="supply.ContactToOwner" ng-click="onSupplyDetailClick(supply)">تماس با مالک</button>
+                            <button class="btn btn-default contactAgencyButton" ng-if="supply.ContactToAgency" ng-click="onSupplyDetailClick(supply)">تماس با بنگاه</button>
+                        </td>
+                        <td class="col-md-1" ng-if="supply.State == 1" authorized-to="supply.CreatedByID">
+                            <div class="btn-group btn-block" dropdown>
+                                <button type="button" class="btn btn-default dropdown-toggle supplyMenu" dropdown-toggle>
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a class="editSupplyButton" ng-click="onEditSupplyClick(supply)"><i class="fa fa-pencil"></i> ویرایش</a>
+                                    </li>
+                                    <li>
+                                        <a class="deleteSupplyButton" ng-click="onDeleteSupplyClick(supply.ID)"><i class="fa fa-trash-o"></i> حذف</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="second-line" ng-repeat-end ng-if="supply.IntentionOfOwner === 5">
+                        <td class="col-md-12" colspan="4">
+                            <span title="{{supply.SwapText}}">{{supply.SwapText | limitTo: 65}} {{supply.SwapText.length > 65 ? '...' : ''}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="well content">
+    <div class="row">
+        <div class="col-md-3" show="property.FaceType">
+            نما: {{property.FaceType | BuildingFaceType}}
+        </div>
+        <div class="col-md-3" show="property.LivingRoomFloor">
+            کف: {{property.LivingRoomFloor | FloorCoverType}}
+        </div>
+        <div class="col-md-6" show="property.KitchenCabinetType">
+            کابینت: {{property.KitchenCabinetType | KitchenCabinetType}}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-3" show="property.NumberOfParkings != null && property.NumberOfParkings != 0">
+            <span jj-tristate="property.NumberOfParkings != null && property.NumberOfParkings != 0"></span> پارکینگ
+        </div>
+        <div class="col-md-3" show="property.HasIranianLavatory">
+            <span jj-tristate="property.HasIranianLavatory"></span> سرویس ایرانی
+        </div>
+        <div class="col-md-3" show="property.HasSwimmingPool">
+            <span jj-tristate="property.HasSwimmingPool"></span> استخر
+        </div>
+        <div class="col-md-3" show="property.HasGatheringHall">
+            <span jj-tristate="property.HasGatheringHall"></span> سالن اجتماعات
+        </div>
+        <div class="col-md-3" show="property.StorageRoomArea != null && property.StorageRoomArea != 0">
+            <span jj-tristate="property.StorageRoomArea != null && property.StorageRoomArea != 0"></span> انباری
+        </div>
+        <div class="col-md-3" show="property.HasForeignLavatory">
+            <span jj-tristate="property.HasForeignLavatory"></span> سرویس فرنگی
+        </div>
+        <div class="col-md-3" show="property.HasJacuzzi">
+            <span jj-tristate="property.HasJacuzzi"></span> جکوزی
+        </div>
+        <div class="col-md-3" show="property.HasVideoEyePhone">
+            <span jj-tristate="property.HasVideoEyePhone"></span> آیفن تصویری
+        </div>
+        <div class="col-md-3" show="property.HasAutomaticParkingDoor">
+            <span jj-tristate="property.HasAutomaticParkingDoor"></span> درب ریموتی
+        </div>
+        <div class="col-md-3" show="property.HasElevator">
+            <span jj-tristate="property.HasElevator"></span> آسانسور
+        </div>
+        <div class="col-md-3" show="property.HasSauna">
+            <span jj-tristate="property.HasSauna"></span> سونا
+        </div>
+        <div class="col-md-3" show="property.HasBeenReconstructed">
+            <span jj-tristate="property.HasBeenReconstructed"></span> بازسازی شده
+        </div>
+        <div class="col-md-3" show="property.HasPrivatePatio">
+            <span jj-tristate="property.HasPrivatePatio"></span> پاسیو
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-3" show="property.CreationTime">
+            تاریخ ثبت:
+            <jj-relative-time origin="property.CreationTime" ng-show="isTwoWeeksAgo(property.CreationTime)" title="{{property.CreationTime | jalaali: 'dddd jYYYY/jMM/jDD'}}"></jj-relative-time>
+            <span ng-show="!isTwoWeeksAgo(property.CreationTime)">{{property.CreationTime | jalaali}}</span>
+        </div>
+        <div class="col-md-3" show="property.LastModificationTime">
+            تاریخ ویرایش:
+            <jj-relative-time origin="property.LastModificationTime" ng-show="isTwoWeeksAgo(property.LastModificationTime)" title="{{property.LastModificationTime | jalaali: 'dddd jYYYY/jMM/jDD'}}"></jj-relative-time>
+            <span ng-show="!isTwoWeeksAgo(property.LastModificationTime)">{{property.LastModificationTime | jalaali}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" show="property.LicencePlate">
+            پلاک ثبتی: {{property.LicencePlate}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" show="property.Vicinity.CompleteName">
+            <div>محله: {{property.Vicinity.CompleteName}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" show="property.Address">
+            <div>آدرس: {{property.Address}}</div>
+        </div>
+    </div>
+</div>
+<div class="well content" ng-show="property.SourceType === 2">
+    <div class="row">
+        <div class="col-md-4" show="property.SourceType">
+            منبع: {{property.SourceType | SourceType}}
+        </div>
+        <div class="col-md-4" show="property.PropertyStatus">
+            وضعیت: {{property.PropertyStatus | PropertyStatus}}
+        </div>
+        <div class="col-md-4" show="property.PropertyStatus">
+            تاریخ آخرین بازیابی: {{property.LastFetchTime | jalaali}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            این آگهی توسط واسط ثبت شده است؟ <span jj-tristate="property.IsAgencyListing"></span>
+        </div>
+        <div class="col-md-6">
+            سایر بنگاه ها اجازه دسترسی دارند؟ <span jj-tristate="property.IsAgencyActivityAllowed"></span>
+        </div>
+    </div>
+</div>
+</tab>
+<tab>
+<tab-heading><i class="fa fa-list"></i> جزئیات</tab-heading>
+<div class="panel panel-default" ng-show="showEstatePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isEstateCollapsed = !isEstateCollapsed">مشخصات زمین <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isEstateCollapsed">
+        <div class="row">
+            <div class="col-md-4" show="property.EstateArea">
+                <b>متراژ زمین:</b> {{property.EstateArea}} متر مربع
+            </div>
+            <div class="col-md-4" show="property.EstateDirection">
+                <b>جهت زمین:</b> {{property.EstateDirection | EstateDirection}}
+            </div>
+            <div class="col-md-4" show="property.PassageEdgeLength">
+                <b>طول بر به گذر اصلی:</b> {{property.PassageEdgeLength}} متر
+            </div>
+            <div class="col-md-4" show="property.EstateVoucherType">
+                <b>نوع سند:</b> {{property.EstateVoucherType | EstateVoucherType}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showUnitPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isUnitCollapsed = !isUnitCollapsed">مشخصات واحد <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isUnitCollapsed">
+        <div class="row">
+            <div class="col-md-4" show="property.UnitArea">
+                <b>زیربنا:</b> {{property.UnitArea}} متر مربع
+            </div>
+            <div class="col-md-4" show="property.NumberOfRooms">
+                <b>تعداد اتاق ها:</b> {{property.NumberOfRooms}}
+            </div>
+            <div class="col-md-4" show="property.NumberOfParkings">
+                <b>تعداد پارکینگ ها:</b> {{property.NumberOfParkings}}
+            </div>
+            <div class="col-md-4" show="property.StorageRoomArea">
+                <b>مساحت انباری ها:</b> {{property.StorageRoomArea}} متر مربع
+            </div>
+            <div class="col-md-4" show="property.UnitFloorNumber">
+                <b>طبقه:</b> {{property.UnitFloorNumber}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showHousePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isHouseCollapsed = !isHouseCollapsed">مشخصات ساختمان <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isHouseCollapsed">
+        <div class="row">
+            <div class="col-md-4" show="property.NumberOfUnitsPerFloor">
+                <b>تعداد واحدها در هر طبقه:</b> {{property.NumberOfUnitsPerFloor}} واحد
+            </div>
+            <div class="col-md-4" show="property.TotalNumberOfUnits">
+                <b>تعداد واحدها در ساختمان:</b> {{property.TotalNumberOfUnits}} واحد
+            </div>
+            <div class="col-md-4" show="property.TotalNumberOfFloors">
+                <b>طبقات ساختمان:</b> {{property.TotalNumberOfFloors}} طبقه
+            </div>
+            <div class="col-md-4" show="property.BuildingAgeYears">
+                <b>عمر بنا:</b> {{property.BuildingAgeYears}} سال
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showIndustryPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isIndustryCollapsed = !isIndustryCollapsed">مشخصات واحد صنعتی <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isIndustryCollapsed">
+        <div class="row">
+            <div class="col-md-4" show="property.UnitArea">
+                <b>زیربنا:</b> {{property.UnitArea}} متر مربع
+            </div>
+            <div class="col-md-4" show="property.OfficeArea">
+                <b>زیربنای واحد اداری:</b> {{property.OfficeArea}} متر مربع
+            </div>
+            <div class="col-md-4" show="property.CeilingHeight">
+                <b>ارتفاع سقف:</b> {{property.CeilingHeight}} متر
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showExtraHousePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isExtraHouseCollapsed = !isExtraHouseCollapsed">خصوصیات بیشتر <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isExtraHouseCollapsed">
+        <div class="row">
+            <div class="col-md-4" show="property.LivingRoomFloor">
+                <b>جنس کف:</b> {{property.LivingRoomFloor | FloorCoverType}}
+            </div>
+            <div class="col-md-4" show="property.FaceType">
+                <b>نوع نمای ساختمان:</b> {{property.FaceType | BuildingFaceType}}
+            </div>
+            <div class="col-md-4" show="property.KitchenCabinetType">
+                <b>جنس کابینت ها:</b> {{property.KitchenCabinetType | KitchenCabinetType}}
+            </div>
+            <div class="col-md-4" show="property.MainDaylightDirection">
+                <b>جهت اصلی نور واحد:</b> {{property.MainDaylightDirection | DaylightDirection}}
+            </div>
+            <div class="col-md-4" show="property.NumberOfMasterBedrooms">
+                <b>تعداد اتاق های مستر:</b> {{property.NumberOfMasterBedrooms}}
+            </div>
+            <div class="col-md-4" show="property.IsDuplex">
+                <span jj-tristate="property.IsDuplex"></span> <b>واحد دوبلکس است؟</b> {{property.IsDuplex | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasBeenReconstructed">
+                <span jj-tristate="property.HasBeenReconstructed"></span> <b>بازسازی شده است؟</b> {{property.HasBeenReconstructed | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasIranianLavatory">
+                <span jj-tristate="property.HasIranianLavatory"></span> <b>دستشویی ایرانی دارد؟</b> {{property.HasIranianLavatory | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasForeignLavatory">
+                <span jj-tristate="property.HasForeignLavatory"></span> <b>دستشویی فرنگی دارد؟</b> {{property.HasForeignLavatory | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasElevator">
+                <span jj-tristate="property.HasElevator"></span> <b>آسانسور دارد؟</b> {{property.HasElevator | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasGatheringHall">
+                <span jj-tristate="property.HasGatheringHall"></span> <b>سالن اجتماعات دارد؟</b> {{property.HasGatheringHall | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasAutomaticParkingDoor">
+                <span jj-tristate="property.HasAutomaticParkingDoor"></span> <b>درب پارکینگ ریموتی دارد؟</b> {{property.HasAutomaticParkingDoor | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasVideoEyePhone">
+                <span jj-tristate="property.HasVideoEyePhone"></span> <b>آیفون تصویری دارد؟</b> {{property.HasVideoEyePhone | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasSwimmingPool">
+                <span jj-tristate="property.HasSwimmingPool"></span> <b>استخر دارد؟</b> {{property.HasSwimmingPool | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasSauna">
+                <span jj-tristate="property.HasSauna"></span> <b>سونا دارد؟</b> {{property.HasSauna | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasJacuzzi">
+                <span jj-tristate="property.HasJacuzzi"></span> <b>جکوزی دارد؟</b> {{property.HasJacuzzi | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasPrivatePatio">
+                <span jj-tristate="property.HasPrivatePatio"></span> <b>پاسیوی اختصاصی دارد؟</b> {{property.HasPrivatePatio | Boolean}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showShopPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isShopCollapsed = !isShopCollapsed">مشخصات واحد و ساختمان <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isShopCollapsed">
+        <div class="row">
+            <div class="col-md-4" show="property.UnitArea">
+                <b>زیربنا:</b> {{property.UnitArea}}متر مربع
+            </div>
+            <div class="col-md-4" show="property.BuildingAgeYears">
+                <b>عمر بنا:</b> {{property.BuildingAgeYears}} سال
+            </div>
+            <div class="col-md-4" show="property.NumberOfParkings">
+                <b>تعداد پارکینگ ها:</b> {{property.NumberOfParkings}}
+            </div>
+            <div class="col-md-4" show="property.HasIranianLavatory">
+                <span jj-tristate="property.HasIranianLavatory"></span> <b>دستشویی ایرانی دارد؟</b> {{property.HasIranianLavatory | Boolean}}
+            </div>
+            <div class="col-md-4" show="property.HasForeignLavatory">
+                <span jj-tristate="property.HasForeignLavatory"></span> <b>دستشویی فرنگی دارد؟</b> {{property.HasForeignLavatory | Boolean}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showSalePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isSaleCollapsed = !isSaleCollapsed">قیمت فروش <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isSaleCollapsed">
+        <div class="row">
+            <div class="col-md-4" ng-show="property.TotalPrice != null">
+                قیمت کل: {{property.TotalPrice | number}} تومان
+            </div>
+            <div class="col-md-4" ng-show="property.PricePerEstateArea != null">
+                قیمت هر متر زمین: {{property.PricePerEstateArea | number}} تومان
+            </div>
+            <div class="col-md-4" ng-show="property.PricePerUnitArea != null">
+                قیمت هر متر بنا: {{property.PricePerUnitArea | number}} تومان
+            </div>
+            <div class="col-md-4">
+                <span jj-tristate="property.HasTransferableLoan"></span> <b>ملک دارای وام قابل انتقال است؟</b> {{property.HasTransferableLoan | Boolean}}
+            </div>
+            <div class="col-md-4">
+                <b>مبلغ باقی مانده از وام:</b> {{property.TransferableLoanAmount}} تومان
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showRentPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isRentCollapsed = !isRentCollapsed">اجاره بها <i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isRentCollapsed">
+        <div class="row">
+            <div class="col-md-4">
+                <b>مبلغ ودیعه:</b> {{property.Mortgage}} تومان
+            </div>
+            <div class="col-md-4" ng-hide="property.IntentionOfOwner === 3">
+                <b>اجاره:</b> {{property.Rent}} تومان
+            </div>
+            <div class="col-md-4">
+                <span jj-tristate="property.MortgageAndRentConvertible"></span> <b>اجاره / ودیعه قابل تبدیل هستند؟</b> {{property.MortgageAndRentConvertible | Boolean}}
+            </div>
+            <div class="col-md-4">
+                <b>حداقل مبلغ ودیعه:</b> {{property.MinimumMortgage}} تومان
+            </div>
+            <div class="col-md-4">
+                <b>حداقل اجاره ماهانه:</b> {{property.MinimumRent}} تومان
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="showDailyRentPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a ng-click="isDailyRentCollapsed = !isDailyRentCollapsed">اجاره بها<i class="fa fa-caret-down"></i></a>
+        </h3>
+    </div>
+    <div class="panel-body" collapse="!isDailyRentCollapsed">
+        <div class="row">
+            <div class="col-md-4">
+                <b>اجاره ی روزانه:</b> {{property.Rent}} تومان
+            </div>
+        </div>
+    </div>
+</div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-picture-o"></i> عکس</tab-heading>
+    <div class="row">
+        <ul class="row" style="list-style: none">
+            <li class="col-md-2" ng-repeat="image in notDeletedImages">
+                <div class="row">
+                    <img ng-src="{{image.blob}}" class="img-responsive img-thumbnail" ng-class="{'cover': image.cover}" ng-click="onShowImageClick(image)"/>
+                </div>
+                <div class="row">
+                    <a ng-click="onShowImageClick(image)">{{image.Title}}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="well" ng-show="notDeletedImages.length == 0">
+            هیچ تصویری به این ملک اضافه نشده است.
+        </div>
+    </div>
+    <button class="btn btn-default" ng-click="toggleNewImage()" authorized-to="property.CreatedByID">تصویر جدید</button>
+    <hr>
+    <div collapse="isCollapsed">
+        <div class="well well-lg">
+            <form name="frmImage" class="form-horizontal" novalidate>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="" class="col-md-4 control-label">نام:</label>
+                        <div class="col-md-8">
+                            <span class="glyphicon glyphicon-ok" ng-show="image.cover"></span>
+                            <input type="text" class="form-control" ng-model="newImage.title" placeholder="نام" ng-maxlength="200"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="" class="col-md-4 control-label">توضیحات:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" ng-model="newImage.description" placeholder="توضیحات" ng-maxlength="50"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <button class="btn btn-primary btn-block" ngf-select="true" ng-model="files">{{files.name || "انتخاب فایل"}}</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary btn-block" ng-click="upload(files)" ng-disabled="frmImage.$invalid || !files">بارگذاری</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</tab>
+<tab>
+    <tab-heading><i class="fa fa-map-marker"></i> نقشه</tab-heading>
+    <img class="img-responsive" src="{{mapStr}}" ng-click="changeMapToDynamic()" ng-show="showStaticMap">
+    <jj-google-map property="property" vicinity="property.Vicinity" visibility="!showStaticMap"
+                   display-class="map-medium" edit-mode="false"></jj-google-map>
+</tab>
+</tabset>
+</div>
+<div class="col-md-2">
+    <jj-related-properties property-id="PropertyID"></jj-related-properties>
+</div>
+</div>
+</div>
+<div ui-view autoscroll="false"></div>

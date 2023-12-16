@@ -1,0 +1,22 @@
+﻿
+@model Int64
+
+
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">ویرایش فعال شد</h4>
+	</div>
+	<div class="modal-body">
+		<p>
+			برای مشاهده امکانات ویرایش اطلاعات ملک، لطفاً مجدداً این صفحه را بازیابی کنید.
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a class="btn btn-success" href="@Url.Action("ViewDetails", "Property", new { id = Model})">باشه</a>
+	</div>
+</div>
+
+
+
+

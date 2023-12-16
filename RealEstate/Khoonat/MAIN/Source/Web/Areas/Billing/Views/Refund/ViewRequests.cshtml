@@ -1,0 +1,104 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Refund.RefundViewRequestModel
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+		درخواست های بازپرداخت
+	</h1>
+</div>
+
+@if (!Model.Requests.Any())
+{
+    <p>
+        شما با استفاده از درخواست بازپرداخت می تونید تمام یا قسمتی از مبلغ باقی مانده نقدی اعتبارتون رو دریافت کنید.
+        کافیه که شماره کارت بانکی خودتون که عضو شبکه شتاب باشه به ما بدید و ما این مبلغ رو براتون واریز می کنیم.
+    </p>
+
+    <p>
+        در خصوص درخواست بازپرداخت لطفاً به این نکات توجه داشته باشین:
+        <ul>
+            <li>با درخواست بازپرداخت، همه باقی مانده اعتبار تخفیف شما از بین میره.</li>
+            <li>اگر موقع افزایش اعتبار حسابتون، بانک مبلغی رو به عنوان کارمزد کسر کرده باشه، اون هزینه از مبلغ پرداخت شده به شما کم میشه.</li>
+            <li>اگر برای پرداخت مبلغ به شما کارمزدی از طرف بانک دریافت بشه، اون مبلغ رو از مبلغ پرداخت شده کم می کنیم.</li>
+        </ul>
+    </p>
+
+    <p>
+        دقت کنید که
+        <strong>هیچ گونه کارمزد یا کسر مبلغی</strong>
+        از طرف ما وجود نداره، و ما فقط هزینه های بانکی رو که خودمون پرداخت می کنیم از این مبلغ کم می کنیم.
+    </p>
+	
+	<p>
+		شما تا کنون درخواست بازپرداخت ثبت نکرده اید.<br/>
+	</p>
+}
+else
+{
+	<table class="table table-hover">
+		<thead>
+			<tr style="font-weight: bold;">
+				<th>زمان ثبت</th>
+				<th>مبلغ</th>
+				<th>به بانک</th>
+				<th>به حساب</th>
+				<th>وضعیت</th>
+				<th>جزئیات</th>
+			</tr>
+		</thead>
+
+		@foreach (var request in Model.Requests)
+		{
+			<tr>
+				<td>
+					تاریخ @request.CreationTime.ToLocalizedDateString()
+					<br />
+					ساعت @request.CreationTime.ToLocalizedTimeString()
+				</td>
+				<td>@BillingPresentationHelper.Amount(request.RequestedAmount) ریال</td>
+				<td>@request.TargetBank.Label(DomainBillingEnumResources.ResourceManager)</td>
+				<td>
+					کارت @HtmlPresentationHelper.IfNotSpecified(request.TargetCardNumber, GeneralResources.Unknown)؛
+					<br />
+					شبا @HtmlPresentationHelper.IfNotSpecified(request.TargetShebaNumber, GeneralResources.Unknown)؛
+					<br />
+					به نام @HtmlPresentationHelper.IfNotSpecified(request.TargetAccountHolderName, GeneralResources.Unknown)
+				</td>
+
+				<td>
+					@IconsHelper.Tristate(Url, request.BillingState == BillingSourceEntityState.Pending ? (bool?)null : request.BillingState == BillingSourceEntityState.Applied)
+					@*@request.BillingState.Label(PaymentViewResources.ResourceManager)*@
+				</td>
+				<td>
+					@if (request.ForwardTransactionID.HasValue)
+					{
+						<span class="btn btn-info btn-sm" data-ajax-modal="@Url.Action("ViewDetailsPopup", "UserTransactions", new { id = request.ForwardTransactionID })">جزئیات تراکنش</span>
+						if (request.ReverseTransactionID.HasValue)
+						{
+							<br />
+							<span class="btn btn-info btn-sm" data-ajax-modal="@Url.Action("ViewDetailsPopup", "UserTransactions", new { id = request.ReverseTransactionID })">تراکنش معکوس</span>
+						}
+					}
+					else
+					{
+						@HtmlPresentationHelper.Disabled("بدون تراکنش")
+					}
+				</td>
+			</tr>
+		}
+		
+	</table>
+}
+
+<a class="btn btn-primary" href="@Url.Action("NewRequest", "Refund")">ثبت درخواست بازپرداخت</a>
+
+  
+
+

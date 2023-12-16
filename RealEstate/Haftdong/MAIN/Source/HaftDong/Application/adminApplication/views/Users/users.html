@@ -1,0 +1,100 @@
+﻿<div class="container userView" ng-show="$state.current.name === 'users'">
+    <div class="page-header">
+        <h1>فهرست کاربران</h1>
+    </div>
+    <div class="well well-lg">
+        <div class="row">
+            <div class="col-md-3">
+                <jj-select-user-type model="searchInput.Type" jj-allow-clear="true"/>
+            </div>
+            <div class="col-md-3">
+                <input type="text" placeholder="نام کاربری..." ng-model="searchInput.UserName"/>
+            </div>
+            <div class="col-md-3">
+                <input type="text" placeholder="نام نمایشی..." ng-model="searchInput.DisplayName"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text" placeholder="اطلاعات تماس..." ng-model="searchInput.ContactMethods" />
+            </div>
+            <div class="col-md-2">
+                <label><input type="checkbox" ng-model="searchInput.InActive" /> بدون مجوز</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-success btn-sm pull-left" ng-click="onSearch()"><i class="fa fa-search"></i> جستجو</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="Users != null && Users.length != 0">
+        <div class="col-md-12">
+            <div class="row">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            <input type="checkbox" ng-model="selectAllUser"/>
+                        </th>
+                        <th class="hidden-xs col-md-1">
+                            <label>
+                                تصویر
+                            </label>
+                        </th>
+                        <th class="col-md-2">
+                            <label>
+                                نام کاربری
+                            </label>
+                        </th>
+                        <th class="col-md-2">
+                            <label>
+                                نام
+                            </label>
+                        </th>
+                        <th class="col-md-1">
+                            <label>
+                                نوع عضویت
+                            </label>
+                        </th>
+                        <th class="hidden-xs col-md-2">
+                            <jj-sortable-header title="'تاریخ عضویت'" sort-column-name="'CreationTime'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                        </th>
+                        <th class="col-md-1">
+                            <label>
+                                نوع مجوز
+                            </label>
+                        </th>
+                        <th class="hidden-xs col-md-2">
+                            <jj-sortable-header title="'تاریخ اتمام مجوز تا'" sort-column-name="'LicenseActivationTime'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in Users">
+                        <td class="col-md-1">
+                            <input type="checkbox" ng-model="user.Selected"/>
+                        </td>
+                        <td class="hidden-xs col-md-1"><img ng-show="user.blob !=null" ng-src="{{user.blob}}" class="img-responsive img-thumbnail"/></td>
+                        <td class="col-md-2">
+                            <a ui-sref="users.details({ id: user.Id })">{{user.UserName}}</a>
+                        </td>
+                        <td class="col-md-2">{{user.DisplayName}}</td>
+                        <td class="col-md-1">{{user.Type | UserType}}</td>
+                        <td class="hidden-xs col-md-2">{{user.ModificationTime | jalaali}}</td>
+                        <td class="col-md-1">{{user.LicenseType | LicenseType}}</td>
+                        <td class="hidden-xs col-md-2">{{user.LicenseActivationTime | jalaali}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <jj-pagination page-number="PageNumber" number-of-pages="NumberOfPages" total-number-of-items="TotalNumberOfItems" page-size="PageSize" on-change-page-click="getDataDown(page)"></jj-pagination>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div ui-view autoscroll="false"></div>

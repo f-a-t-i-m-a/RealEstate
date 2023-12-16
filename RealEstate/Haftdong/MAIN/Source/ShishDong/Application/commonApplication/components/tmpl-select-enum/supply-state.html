@@ -1,0 +1,8 @@
+﻿<ui-select ng-model="$parent.model" theme="bootstrap" search-enabled="false" title="وضعیت آگهی" class="no-search" ng-required="$parent.jjRequired" ng-disabled="$parent.jjDisabled">
+    <ui-select-match class="ui-select-match" placeholder="وضعیت آگهی را انتخاب کنید" allow-clear="{{ !!jjAllowClear }}">
+        {{$select.selected.text}}
+    </ui-select-match>
+    <ui-select-choices class="ui-select-choices" repeat="opt.id as opt in supplyStateOptions">
+        {{opt.text}}
+    </ui-select-choices>
+</ui-select>

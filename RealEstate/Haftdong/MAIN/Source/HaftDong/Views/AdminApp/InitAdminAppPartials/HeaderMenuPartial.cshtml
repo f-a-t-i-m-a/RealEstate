@@ -1,0 +1,32 @@
+﻿
+@* ** Top Menu ********* *@
+
+<li class="dropdown" dropdown restrict-to="Administrator">
+    <a href="" class="dropdown-toggle userMenu" dropdown-toggle role="button" aria-expanded="false">مشاور <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a ui-sref="dashboard">داشبورد</a>
+        </li>
+        <li class="divider"></li>
+        <li licensed>
+            <a ui-sref="users.new"><i class="fa fa-plus-circle"></i> مشاور جدید</a>
+        </li>
+        <li><a ui-sref="users">فهرست مشاوران</a></li>
+    </ul>
+</li>
+
+<li class="dropdown" dropdown restrict-to="Administrator">
+    <a href="" class="dropdown-toggle userActivityMenu" dropdown-toggle role="button" aria-expanded="false">گزارش ها <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a ui-sref="useractivities">فعالیت های کاربران</a></li>
+    </ul>
+</li>
+
+<li class="dropdown" dropdown restrict-to="Administrator">
+    <a href="" class="dropdown-toggle managementMenu" dropdown-toggle role="button" aria-expanded="false">مدیریت <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a ui-sref="log">لاگ ها</a></li>
+        <li><a ui-sref="configure">پیکربندی ها</a></li>
+        <li><a ui-sref="vicinities({id: '0'})">محله ها</a></li>
+    </ul>
+</li>

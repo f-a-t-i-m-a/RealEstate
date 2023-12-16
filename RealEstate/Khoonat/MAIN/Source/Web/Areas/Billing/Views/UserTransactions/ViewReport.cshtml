@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.UserTransactions.UserTransactionsViewReportModel
+
+<div class="page-header">
+	<h1>
+		@Html.ActionLink("سامانه مالی", "Index", "BillingHome", new { area = AreaNames.Billing }, null):
+		گزارش تراکنش ها
+	</h1>
+</div>
+
+
+@if (Model.Transactions.Any())
+{
+	@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Transactions, p => Url.Action("ViewReport", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th><strong>تاریخ و ساعت</strong></th>
+				<th><strong>تغییر</strong></th>
+				<th><strong>مانده حساب</strong></th>
+				<th><strong>موضوع</strong></th>
+			</tr>
+		</thead>
+		@foreach (var tx in Model.Transactions)
+		{
+			<tr data-ajax-modal="@Url.Action("ViewDetailsPopup", new {id = tx.ID})">
+				<td>@tx.TransactionTime.ToLocalizedDateString()؛ @tx.TransactionTime.ToLocalizedTimeString()</td>
+				<td>@BillingPresentationHelper.Delta(tx.CashDelta + tx.BonusDelta)</td>
+				<td>= @BillingPresentationHelper.Balance(tx.CashBalance + tx.BonusBalance)</td>
+				<td>
+					@tx.SourceType.Label(DomainEnumResources.ResourceManager)
+					@if (tx.IsPartial)
+					{
+						<span class="smaller">(در حال تکمیل)</span>
+					}
+				</td>
+			</tr>
+		}
+	</table>
+
+	@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Transactions, p => Url.Action("ViewReport", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+}
+else
+{
+	<p>شما تا کنون هیچ تراکنش مالی نداشته اید.</p>
+}
+
+<hr/>
+<a class="btn btn-primary" href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">
+	<span class="glyphicon glyphicon-hand-left"></span>
+	خلاصه اطلاعات مالی
+</a>
+

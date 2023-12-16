@@ -1,0 +1,59 @@
+﻿<div class="container logView">
+    <div class="page-header">
+        <h1>فهرست لاگ ها</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="well">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>نمایش</th>
+                            <th>نام</th>
+                            <th>سایز</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="log in logFiles">
+                        <td>
+                            <button class="btn btn-default btn-sm" ng-click="viewLogFile(log)">
+                                <i class="fa fa-external-link"></i>
+                            </button>
+                        </td>
+                        <td>{{log.Name}}</td>
+                        <td>{{log.Size | number}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="well">
+                <table class="table table-hover fixTable">
+                    <thead>
+                        <tr>
+                            <th class="col-md-6">نام</th>
+                            <th class="col-md-3">سطح</th>
+                            <th class="col-md-3">Debug Appender</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="logger in loggers">
+                        <td class="col-md-6">{{logger.Name}}</td>
+                        <td class="col-md-3">
+                            <div class="btn-group">
+                                <label class="btn btn-success" ng-model="logger.IsDebugEnabled" btn-radio="false" ng-click="changeDebugLevel(logger, false)">INFO</label>
+                                <label class="btn btn-success" ng-model="logger.IsDebugEnabled" ng-show="logger.IsDebugEnabled == false" btn-radio="true" ng-click="changeDebugLevel(logger, true)">DEBUG</label>
+                                <label class="btn btn-danger" ng-model="logger.IsDebugEnabled" ng-show="logger.IsDebugEnabled == true" btn-radio="true" ng-click="changeDebugLevel(logger, true)">DEBUG</label>
+                            </div>
+                        </td>
+                        <td class="col-md-3">
+                            <div class="btn-group">
+                                <label class="btn btn-success" ng-model="logger.AssociatedToDebugAppender" btn-radio="false" uncheckable ng-click="appendDebugAppender(logger, false)">Off</label>
+                                <label class="btn btn-success" ng-model="logger.AssociatedToDebugAppender" ng-show="logger.AssociatedToDebugAppender == false" btn-radio="true" uncheckable ng-click="appendDebugAppender(logger, true)">On</label>
+                                <label class="btn btn-danger" ng-model="logger.AssociatedToDebugAppender" ng-show="logger.AssociatedToDebugAppender == true" btn-radio="true" uncheckable ng-click="appendDebugAppender(logger, true)">On</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

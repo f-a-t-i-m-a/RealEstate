@@ -1,0 +1,45 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.BillingHome.BillingHomeIndexModel
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">تخفیف ها</h3>
+	</div>
+	<div class="panel-body">
+		<table style="border-spacing: 15px; border-collapse: separate; margin-right: 20px;">
+			<tr>
+				<td style="width: 100px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 30px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 30px;"></td>
+				<td style="width: 220px;"></td>
+				<td style="width: 150px;"></td>
+			</tr>
+			<tr>
+				<td colspan="3">تعداد کارت تخفیف ثبت شده: @NumericStringUtils.FullyTextualNumber(Model.NumberOfClaimedPromotionalCoupons) عدد</td>
+				<td colspan="3">جمع مبلغ: @BillingPresentationHelper.Balance(Model.TotalClaimedPromotionalCouponAmount) ریال</td>
+			</tr>
+			<tr>
+				<td colspan="3">موارد تخفیف از طرف سایت: @NumericStringUtils.FullyTextualNumber(Model.NumberOfRewardedPromotionalBonuses) مورد</td>
+				<td colspan="3">جمع مبلغ: @BillingPresentationHelper.Balance(Model.TotalRewardedPromotionalBonusAmount) ریال</td>
+			</tr>
+		</table>
+	</div>
+	<div class="panel-footer">
+		<div class="row">
+			<div class="col-xs-4">
+				<a class="btn btn-warning" href="@Url.Action("ClaimCoupon", "PromotionalBonusCoupon", AreaRouteValue.Billing)">ثبت کارت تخفیف</a>
+			</div>
+			<div class="col-xs-8 text-left">
+				<a class="btn btn-info" href="@Url.Action("ViewClaimedCoupons", "PromotionalBonusCoupon", AreaRouteValue.Billing)">کارت های ثبت شده</a>
+				<a class="btn btn-info" href="@Url.Action("ViewRewardedBonuses", "PromotionalBonusCoupon", AreaRouteValue.Billing)">تخفیف های موردی</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

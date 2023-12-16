@@ -1,0 +1,25 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Domain.Messages.NotificationMessage
+
+@if (Model.TargetUser != null)
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.TargetUser.ID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a class="pull-left" href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("TargetUserIDFilter", Model.TargetUser.ID.ToString(CultureInfo.InvariantCulture)))">
+        <span class="glyphicon glyphicon-filter">
+            @Model.TargetUser.ID:
+            @Model.TargetUser.LoginName
+        </span>
+    </a>
+}
+else
+{
+    <a href="@Url.Action("Details", "AdminUsers", new {id = Model.TargetUserID, area = AreaNames.Admin})">@IconsHelper.Xlink16(Url)</a>
+    <a class="pull-left" href="@Url.RouteUrl(Request.QueryString.ToRouteValues().Set("TargetUserIDFilter", Model.TargetUserID.ToString(CultureInfo.InvariantCulture)))">
+        <span class="glyphicon glyphicon-filter">
+            @Model.TargetUserID
+        </span>
+    </a>
+}

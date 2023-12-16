@@ -1,0 +1,99 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Application.DomainModel
+@*@model JahanJooy.RealEstate.Domain.Directory.Agency*@
+@model JahanJooy.RealEstate.Web.Models.Agency.AgencyEditAgencyLogo
+@{
+    ViewBag.Title = "AgencyLogoPartial";
+}
+
+@if (Model.LogoStoreItemID.HasValue)
+{
+    <div>
+        <div class="logoPanel">
+            <img class="img-responsive center-block img-rounded" src="@Url.Action("GetAgencyLogo", "AdminAgency", new {id =Model.AgencyID, ts = DateTime.Now.Ticks})" />
+        </div>
+    </div>
+    <div>
+        <div class="logoThumbnailPanel">
+            <img class="img" src="@Url.Action("GetThumbnailLogo", "AdminAgency", new { id = Model.AgencyID, ts = DateTime.Now.Ticks })" />
+        </div>
+</div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-6">
+            <div id="thumbnailGallery" style="height: 100px; white-space: nowrap; overflow: hidden; margin: 0 38px; direction: rtl; text-align: right;">
+                <div class="logoThumbnail " data-logo-thumbnail-id="@Model.LogoStoreItemID">
+                    <img class="img" src="@Url.Action("GetThumbnailLogo", "AdminAgency", new { id = Model.AgencyID, ts = DateTime.Now.Ticks })" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            
+@*                        <div class="clickable" id="uploadThumbnailBtn">*@
+@*                            <div style="direction: rtl; background-color: #039; border: 1px solid black; color: white; padding: 5px;">*@
+@*                                <span class="glyphicon glyphicon-upload"></span>*@
+@*                                اضافه کردن لوگو در سایز کوچک*@
+@*                            </div>*@
+@*                        </div>*@
+@*                        <div id="uploadThumbnail">*@
+@*                        </div>*@
+@*                        <div id="hiddenUploadThumbnailBtn">*@
+@*                        </div>*@
+        </div>
+
+    </div>
+
+}
+
+
+@*@this.ScriptBlock(@<script type="text/javascript">*@
+@*    $("#uploadThumbnail").fineUploader({*@
+@*        button: $("#hiddenUploadThumbnailBtn"),*@
+@*        maxConnections: 2,*@
+@*        request: {*@
+@*            endpoint: "@Url.Action("UploadThumbnailLogo", "AdminAgency", new { id = Model.ID })"*@
+@*                           },*@
+@*                           validation: {*@
+@*                               allowedExtensions: ['jpe', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff'],*@
+@*                               sizeLimit: 8388608*@
+@*                           },*@
+@*                           text: {*@
+@*                               uploadButton: "اضافه کردن عکس جدید",*@
+@*                               cancelButton: "بی خیال",*@
+@*                               retry: "تلاش مجدد",*@
+@*                               failUpload: "در ارسال یا پردازش این تصویر خطا پیش آمد",*@
+@*                               dragZone: "برای اضافه کردن عکس، می توانید فایل را اینجا بیندازید",*@
+@*                               dropProcessing: "در حال پردازش درخواست...",*@
+@*                               formatProgress: "در حال ارسال: {percent} درصد از {total_size} ارسال شده...",*@
+@*                               waitingForResponse: "در حال پردازش تصویر..."*@
+@*                           },*@
+@*                           messages: {*@
+@*                               typeError: "نوع فایل انتخاب شده تصویر نیست، یا توسط سیستم پشتیبانی نمی شود.",*@
+@*                               sizeError: "فایل انتخاب شده بزرگ تر از حداکثر حجم قابل ارسال است.",*@
+@*                               noFilesError: "فایلی برای ارسال وجود ندارد.",*@
+@*                               onLeave: "تصاویر در حال ارسال به سرویس دهنده می باشند. اگر از این صفحه خارج شوید ارسال لغو خواهد شد."*@
+@*                           },*@
+@*                           dragAndDrop: {*@
+@*                               hideDropzones: false,*@
+@*                               disableDefaultDropzone: true*@
+@*                           }*@
+@*                       }).on('complete', function(event, id, name, response) {*@
+@*                           if (response.success == true) {*@
+@*                               var itemElement = $(this).fineUploader('getItemByFileId', id);*@
+@*                               window.setTimeout(function() { $(itemElement).fadeOut(2000); }, 4000);*@
+@*                               $.ajax({*@
+@*                                url: "@Url.Action("ViewLogo", "AdminAgency")" ,*@
+@*                                type: 'POST'*@
+@*                            }).done(function(html) {*@
+@*                                $("#galleryItemDetails").html(html);*@
+@*                            });*@
+@*        }*@
+@*    });*@
+@**@
+@*    $("#uploadThumbnailBtn").click(function () {*@
+@*        $("#hiddenUploadThumbnailBtn input").click();*@
+@*    });*@
+@**@
+@*    $(".thumbnailGallery").click();*@
+@*    </script>)*@
+

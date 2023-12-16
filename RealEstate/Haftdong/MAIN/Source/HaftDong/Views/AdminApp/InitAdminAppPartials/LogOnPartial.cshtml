@@ -1,0 +1,43 @@
+﻿<li class="dropdown paneldropdown" dropdown>
+    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">
+        پنل مدیریت
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a href="/app" target="_self">پنل کاربری</a>
+        </li>
+    </ul>
+</li>
+
+<li class="dropdown logindropdown" dropdown>
+    <a href="" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">
+        <span ng-hide="currentUserEmail">
+            <i class="fa fa-user"></i> کاربر مهمان
+            <span class="caret"></span>
+        </span>
+        <span ng-show="currentUserEmail">
+            <i class="fa fa-user"></i>
+            <span>{{currentUserEmail}}</span>
+            <span class="caret"></span>
+        </span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-hide="currentUserEmail">
+            <a ng-click="showLogin()">
+                <i class="fa fa-sign-in"></i><span class="hidden-sm"> ورود</span>
+            </a>
+        </li>
+        <li ng-show="currentUserEmail">
+            <a ui-sref="dashboard">داشبورد</a>
+        </li>
+        <li ng-show="currentUserEmail">
+            <a ng-click="showChangePassword()">تغییر رمز</a>
+        </li>
+        <li ng-show="currentUserEmail">
+            <a ng-click="logout()">
+                <i class="fa fa-sign-out"></i><span class="hidden-sm"> خروج</span>
+            </a>
+        </li>
+    </ul>
+</li>

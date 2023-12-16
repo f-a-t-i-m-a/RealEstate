@@ -1,0 +1,159 @@
+﻿<div class="row">
+    <div class="col-md-12 form-group">
+        <div class="row">
+            <div class="col-md-2 radio">
+                <label>
+                    <input type="radio" name="contactType" value="currentUser" ng-model="contactType">
+                    <b>به نام من</b>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 radio">
+                <label>
+                    <input type="radio" name="contactType" value="newOwnerContact" ng-model="contactType">
+                    <b>به نام مالک</b>
+                </label>
+            </div>
+            <div class="col-md-10" ng-show="showOwnerPanel">
+                <div class="row">
+                    <label for="" class="col-md-2 control-label">نام مالک:</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="contact.OwnerContact.ContactName" tabindex="1" auto-next/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div ng-repeat="phone in contact.OwnerContact.Phones">
+                            <div class="row">
+                                <label for="" ng-show="$index == 0" class="col-md-4 control-label"><i class="fa fa-star text-danger"></i> تلفن مالک: </label>
+                                <label for="" ng-show="$index != 0" class="col-md-4 control-label"></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="text-left" ng-model="phone.Value" ng-pattern="/^\+?\d+$/" ng-minlength="7" ng-maxlength="15" placeholder="شماره تلفن" tabindex="3" auto-next/>
+                                </div>
+                                <div class="col-md-1" ng-show="$index == 0">
+                                    <button class="btn btn-success btn-sm addOwnerPhoneNumberButton" ng-click="onAddOwnerPhoneNumbers()" tabindex="4">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-1" ng-show="$index != 0">
+                                    <button class="btn btn-default btn-sm deleteOwnerPhoneNumber" ng-click="onDeleteOwnerPhoneNumber($index)" restrict-to="RealEstateAgent">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div ng-repeat="email in contact.OwnerContact.Emails">
+                            <div class="row">
+                                <label for="" ng-show="$index == 0" class="col-md-4 control-label">ایمیل مالک: </label>
+                                <label for="" ng-show="$index != 0" class="col-md-4 control-label"></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="text-left" ng-model="email.Value" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="آدرس ایمیل" tabindex="5" auto-next/>
+                                </div>
+                                <div class="col-md-1" ng-show="$index == 0">
+                                    <button class="btn btn-success btn-sm addOwnerEmailButton" ng-click="onAddOwnerEmails()" tabindex="6">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-1" ng-show="$index != 0">
+                                    <button class="btn btn-default btn-sm deleteOwnerEmail" ng-click="onDeleteOwnerEmail($index)" restrict-to="RealEstateAgent">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 radio">
+                <label>
+                    <input type="radio" name="contactType" value="newAgencyContact" ng-model="contactType">
+                    <b>به نام آژانس</b>
+                </label>
+            </div>
+            <div class="col-md-10" ng-show="showAgencyPanel">
+                <div class="row">
+                    <label for="" class="col-md-2 control-label">نام بنگاه:</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="contact.AgencyContact.OrganizationName" tabindex="1" auto-next/>
+                    </div>
+                    <label for="" class="col-md-2 control-label">نام مشاور:</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="contact.AgencyContact.ContactName" tabindex="2" auto-next/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div ng-repeat="phone in contact.AgencyContact.Phones">
+                            <div class="row">
+                                <label for="" ng-show="$index == 0" class="col-md-4 control-label"><i class="fa fa-star text-danger"></i> تلفن مشاور: </label>
+                                <label for="" ng-show="$index != 0" class="col-md-4 control-label"></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="text-left" ng-model="phone.Value" ng-pattern="/^\+?\d+$/" ng-minlength="7" ng-maxlength="15" placeholder="شماره تلفن" tabindex="3" auto-next/>
+                                </div>
+                                <div class="col-md-1" ng-show="$index == 0">
+                                    <button class="btn btn-success btn-sm addPhoneAgencyNumberButton" ng-click="onAddAgencyPhoneNumbers()" tabindex="4">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-1" ng-show="$index != 0">
+                                    <button class="btn btn-default btn-sm deleteAgencyPhoneNumber" ng-click="onDeleteAgencyPhoneNumber($index)" restrict-to="RealEstateAgent">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div ng-repeat="email in contact.AgencyContact.Emails">
+                            <div class="row">
+                                <label for="" ng-show="$index == 0" class="col-md-4 control-label">ایمیل مشاور: </label>
+                                <label for="" ng-show="$index != 0" class="col-md-4 control-label"></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="text-left" ng-model="email.Value" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="آدرس ایمیل" tabindex="5" auto-next/>
+                                </div>
+                                <div class="col-md-1" ng-show="$index == 0">
+                                    <button class="btn btn-success btn-sm addAgencyEmailButton" ng-click="onAddAgencyEmails()" tabindex="6">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-1" ng-show="$index != 0">
+                                    <button class="btn btn-default btn-sm deleteAgencyEmail" ng-click="onDeleteAgencyEmail($index)" restrict-to="RealEstateAgent">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-repeat="address in contact.AgencyContact.Addresses">
+                            <div class="row">
+                                <label for="" ng-show="$index == 0" class="col-md-2 control-label">آدرس: </label>
+                                <label for="" ng-show="$index != 0" class="col-md-2 control-label"></label>
+                                <div class="col-md-9">
+                                    <input type="text" ng-model="address.Value" tabindex="7" auto-next/>
+                                </div>
+                                <div class="col-md-1" ng-show="$index == 0">
+                                    <button class="btn btn-success btn-sm addAgencyAddressButton" ng-click="onAddAgencyAddresses()" tabindex="4">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-1" ng-show="$index != 0">
+                                    <button class="btn btn-default btn-sm deleteAgencyAddress" ng-click="onDeleteAgencyAddress($index)" restrict-to="RealEstateAgent">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

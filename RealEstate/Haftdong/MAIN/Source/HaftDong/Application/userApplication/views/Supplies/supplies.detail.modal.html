@@ -1,0 +1,187 @@
+﻿<div class="modal-header">
+    <h1 class="inline-display">{{supply.IntentionOfOwner | IntentionOfOwner}}</h1>
+    <h4 ng-show="supply.Property.SourceType === 2" class="inline-display">
+        (تاریخ آخرین بازیابی: {{supply.LastFetchTime | jalaali}})
+    </h4>
+</div>
+<div class="modal-body">
+    <div ng-show="supply.IntentionOfOwner === 5">
+        <div class="row">
+            <div class="col-md-12">
+                معاوضه با:
+                <a ng-show="supply.Request !== null && supply.Request !== undefined" ui-sref="requests.details({id:supply.Request.ID})">
+                    <strong>(مشاهده جزئیات درخواست ملک)</strong>
+                </a>
+                <span ng-show="supply.SwapAdditionalComments !== null && supply.SwapAdditionalComments !== undefined"><strong>{{supply.SwapAdditionalComments}}</strong></span>
+            </div>
+        </div>
+        <div ng-show="supply.Request !== null && supply.Request !== undefined">
+            <div class="row">
+                <div class="col-md-6">
+                    <span ng-repeat="propertyType in supply.Request.PropertyTypes">
+                        <strong>{{propertyType | PropertyType}} </strong> <span ng-hide="$index==supply.Request.PropertyTypes.length-1">-</span>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    کاربری {{supply.Request.UsageType | UsageType}}
+                </div>
+            </div>
+            <hr/>
+            <div class="row" ng-show="supply.Request.IntentionOfCustomer == 2
+                 || supply.Request.IntentionOfCustomer == 5">
+                <div class="col-md-4" ng-show="supply.Request.TotalPrice != 0">
+                    ارزش کل: {{supply.Request.TotalPrice | number}} تومان
+                </div>
+            </div>
+            <div class="row" ng-show="supply.Request.IntentionOfCustomer == 1">
+                <div class="col-md-4">
+                    ودیعه: {{supply.Request.Mortgage | number}} تومان
+                </div>
+                <div class="col-md-4">
+                    اجاره: {{supply.Request.Rent | number}} تومان
+                </div>
+            </div>
+            <div class="row" ng-show="supply.Request.IntentionOfCustomer == 3">
+                <div class="col-md-4">
+                    ودیعه: {{supply.Request.Mortgage | number}} تومان
+                </div>
+            </div>
+            <div class="row" ng-show="supply.Request.IntentionOfCustomer == 4">
+                <div class="col-md-4">
+                    اجاره ی روزانه: {{supply.Request.Rent | number}} تومان
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    محدوده: <div ng-repeat="vicinity in supply.Request.Vicinities">{{vicinity}}{{$last ? '' : ', '}}</div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+    <div class="form-horizontal" ng-show="supply.IntentionOfOwner === 2 || supply.IntentionOfOwner === 5 || supply.IntentionOfOwner === 6">
+        <div class="row">
+            <div class="col-md-6" ng-show="supply.TotalPrice != null">
+                قیمت کل: <b>{{supply.TotalPrice | number}}</b> تومان
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" ng-show="supply.PricePerEstateArea != null">
+                قیمت هر متر زمین: <b>{{supply.PricePerEstateArea | number}}</b> تومان
+            </div>
+            <div class="col-md-6" ng-show="supply.PricePerUnitArea != null">
+                قیمت هر متر بنا: <b>{{supply.PricePerUnitArea | number}}</b> تومان
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span jj-tristate="supply.HasTransferableLoan"></span> ملک دارای وام قابل انتقال است؟ <b>{{supply.HasTransferableLoan | Boolean}}</b>
+            </div>
+            <div class="col-md-6">
+                مبلغ باقی مانده از وام: <b>{{supply.TransferableLoanAmount | number}}</b> تومان
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal" ng-show="supply.IntentionOfOwner === 1 || supply.IntentionOfOwner === 3">
+        <div class="row">
+            <div class="col-md-6">
+                مبلغ ودیعه: <b>{{supply.Mortgage | number}}</b> تومان
+            </div>
+            <div class="col-md-6" ng-hide="supply.IntentionOfOwner === 3">
+                اجاره: <b>{{supply.Rent | number}}</b> تومان
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span jj-tristate="supply.MortgageAndRentConvertible"></span> اجاره / ودیعه قابل تبدیل هستند؟ <b>{{supply.MortgageAndRentConvertible | Boolean}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                حداقل مبلغ ودیعه: <b>{{supply.MinimumMortgage | number}}</b> تومان
+            </div>
+            <div class="col-md-6">
+                حداقل اجاره ماهانه: <b>{{supply.MinimumRent | number}}</b> تومان
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" ng-show="supply.AdditionalRentalComments != null
+                     && supply.AdditionalRentalComments != ''">
+                توضیحات: <b>{{supply.AdditionalRentalComments}}</b>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal" ng-show="supply.IntentionOfOwner === 4">
+        <div class="row">
+            <div class="col-md-6">
+                اجاره ی روزانه: <b>{{supply.Rent | number}}</b> تومان
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" ng-show="supply.AdditionalRentalComments != null
+                     && supply.AdditionalRentalComments != ''">
+                توضیحات: <b>{{supply.AdditionalRentalComments}}</b>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal" ng-show="supply !== null && !supply.Contact.OwnerCanBeContacted && supply.Contact.AgencyContact !== null && supply.Contact.AgencyContact !== undefined">
+        <hr/>
+        <div class="smallText redText" ng-if="!supply.IsPublic">این آگهی عمومی نیست و اطلاعات تماس آن جایی نمایش داده نمی شود</div>
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    نام بنگاه: <b>{{supply.Contact.AgencyContact.OrganizationName}}</b>
+                </div>
+                <div class="col-md-6">
+                    نام مشاور: <b>{{supply.Contact.AgencyContact.ContactName}}</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    تلفن مشاور: <b>
+                        <span ng-repeat="phone in supply.Contact.AgencyContact.Phones"><span dir="ltr" class="persian-number">{{phone.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                    </b>
+                </div>
+                <div class="col-md-6">
+                    ایمیل مشاور: <b>
+                        <span ng-repeat="email in supply.Contact.AgencyContact.Emails"><span dir="ltr" class="persian-number">{{email.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                    </b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    آدرس:
+                </div>
+                <div class="col-md-11">
+                    <p ng-repeat="address in supply.Contact.AgencyContact.Addresses">
+                        <b>{{address.NormalizedValue}}</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="supply != null && supply.Contact.OwnerCanBeContacted && supply.Contact.OwnerContact != null && supply.Contact.OwnerContact != undefined">
+        <hr/>
+        <div class="smallText redText" ng-if="!supply.IsPublic">این آگهی عمومی نیست و اطلاعات تماس آن جایی نمایش داده نمی شود</div>
+        <div class="row">
+            <div class="col-md-6">
+                نام مالک: <b>{{supply.Contact.OwnerContact.ContactName}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                تلفن مالک: <b>
+                    <span ng-repeat="phone in supply.Contact.OwnerContact.Phones"><span dir="ltr" class="persian-number">{{phone.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+            <div class="col-md-6">
+                ایمیل مالک: <b>
+                    <span ng-repeat="email in supply.Contact.OwnerContact.Emails"><span dir="ltr" class="persian-number">{{email.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="onBackClick()" restrict-to="RealEstateAgent">باشه</button>
+</div>

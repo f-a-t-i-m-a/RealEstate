@@ -1,0 +1,22 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Models.Agency.AgencyNewAgencyModel
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("List", "Agency", AreaRouteValue.Main)">مشاورین املاک</a>:
+		ثبت اطلاعات مشاورین املاک
+	</h1>
+</div>
+
+@using (Html.BeginForm("NewAgency", "Agency"))
+{
+    <div>
+	    @Html.Partial("_Agency/AgencyPartial")
+    </div>
+	<hr/>
+    <div>
+        <button id="btnContinue" class="btn btn-primary btn-lg" type="submit">
+			<span class="glyphicon glyphicon-save"></span> ثبت اطلاعات
+        </button>
+    </div>
+}

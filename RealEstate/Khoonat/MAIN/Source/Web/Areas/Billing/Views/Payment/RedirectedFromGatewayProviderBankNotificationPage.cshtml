@@ -1,0 +1,37 @@
+﻿@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Payment.RedirectedFromGatewayProviderBankModel
+
+
+<div class="page-header">
+    <h1>
+        <a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+        <a href="@Url.Action("IncreaseCredit", "BillingHome", AreaRouteValue.Billing)">افزایش اعتبار</a>:
+        اطلاع از افزایش اعتبار
+    </h1>
+</div>
+@using (Html.BeginForm("Index", "Home", AreaRouteValue.Main, FormMethod.Get))
+{
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">  افزایش اعتبار شما انجام شده است</h3>
+        </div>
+        <br/>
+        <div class="panel-body">
+            اطلاع!
+        </div>
+        <div class="panel-body">
+            <p>
+                @if (Model.BillingStateIsAppliedError)
+                {
+                    <div>تراکنشی با این شناسه در گذشته انجام شده است. اگر با کلید back یا refresh به این صفحه آمده اید می توانید این خطا را نادیده بگیرید.</div>
+                }
+            </p>
+        </div>
+
+        <div class="panel-footer">
+            <button name="submit" value="btnSave" class="btn btn-primary btn-md" type="submit"> صفحه اصلی </button>
+        </div>
+    </div>
+}

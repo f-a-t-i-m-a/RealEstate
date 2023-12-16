@@ -1,0 +1,27 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <label for="" class="col-md-2 control-label">محله:</label>
+                <div class="col-md-10">
+                    <ui-select ng-model="$parent.parentID" search-enabled="true" title="Choose a List" theme="bootstrap">
+                        <ui-select-match placeholder="عبارت مورد جستجو را بنویسید (حداقل دو حرف)">{{$select.selected.Type | VicinityType}} {{$select.selected.Name}}</ui-select-match>
+                        <ui-select-choices repeat="opt.ID as opt in vicinities"
+                                           refresh="searchVicinities($select.search)"
+                                           refresh-delay="0">
+                            <div><b>{{opt.Type | VicinityType}} {{opt.Name}}</b></div>
+                            <small ng-bind-html="opt.CompleteName | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success saveButton" ng-click="onSave()" ng-disabled="" id="okSave" restrict-to="Administrator"><i class="fa fa-floppy-o"></i> ذخیره</button>
+    <button class="btn btn-default" ng-click="cancel()" restrict-to="Administrator">بی خیال</button>
+</div>

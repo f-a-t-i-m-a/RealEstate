@@ -1,0 +1,52 @@
+﻿@using JahanJooy.RealEstate.Web.Models.UserFeedback
+
+@{
+	ViewBag.Title = "تماس با ما";
+	ViewBag.MetaDescription = "توضیحات در مورد نحوه تماس با مسئولین و برنامه نویسان سایت خونه ت دات کام، سایت بانک اطلاعات رایگان املاک";
+}
+
+<div class="page-header">
+	<h1>تماس با ما</h1>
+</div>
+
+<p>
+	برای ارتباط با مسئولین سایت می تونید از راه های زیر استفاده کنید:
+</p>
+<ul>
+	<li>پر کردن فرم زیر</li>
+	<li>ارسال ایمیل به آدرس <span dir="ltr"><strong>feedback@khoonat.com</strong></span></li>
+	<li>ارسال پیام کوتاه به شماره: <span dir="ltr"><strong>3000 700 800 70 80</strong></span></li>
+</ul>
+
+<br/>
+<br/>
+
+<div class="panel panel-primary">
+	<div class="panel-heading"><h2 class="panel-title">فرم تماس</h2></div>
+	<div class="panel-body">
+		<p>شما می توانید با پرکردن و ارسال فرم زیر، مستقیماً برای مسئولین سایت یک ایمیل ارسال کنید:</p>
+		@Html.Partial("Forms/GeneralContactForm", new UserFeedbackGeneralContactFormModel())
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading"><h2 class="panel-title">تماس تلفنی؟</h2></div>
+    <div class="panel-body">
+
+        <p>اگر برای تبادل نظر نیاز به صحبت شفاهی است، می تونید از روش های زیر استفاده کنید، از شنیدن صدای شما خوشحال میشیم:</p>
+        <ul>
+            <li>پیامکی شامل کلمه «تماس» یا «tamas» رو به شماره <span dir="ltr"><strong>3000 700 800 70 80</strong></span> بفرستید تا ما با شما تماس بگیریم</li>
+            <li>با شماره تلفن های <span dir="ltr"><strong>+98 21 2641 2612</strong></span> یا <span dir="ltr"><strong>+98 912 146 9920</strong></span> تماس بگیرید</li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <p>آدرس: میرداماد. خیابان شمس تبریزی. پلاک 36 واحد 15</p>
+    </div>
+</div>
+
+
+
+
+	

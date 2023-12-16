@@ -1,0 +1,32 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Resources.Controllers.Account
+@model JahanJooy.RealEstate.Core.Services.Dto.UserContactMethodVerificationInfo
+
+<div id="verificationRoot">
+	<div style="padding: 25px; width: 390px;">
+		
+		<p>
+			اعتبار سنجی این
+			@Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+			به دلیل زیر ممکن نیست:
+		</p>
+		
+		<ul>
+			@foreach (var err in Model.ValidationForVerificationStart.Errors)
+			{
+				<li>@AccountValidationErrors.ResourceManager.GetString(err.ErrorKey)</li>
+			}
+		</ul>
+
+		<div style="text-align: center; margin: 20px;">
+			<input id="btnDismiss" class="button" type="button" value="باشه" style="width: 120px;" onclick="$('.qtip:visible').qtip('hide');"/>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$('.qtip:visible').qtip('reposition');
+		$('.qtip:visible').qtip('option', 'events.hide', function () { $('#verificationRoot').remove(); });
+	</script>
+</div>
+

@@ -1,0 +1,22 @@
+﻿
+
+** Commands used in Package Manager Console for creating and running migrations:
+*********************************************************************************
+
+Enable-Migrations -ProjectName Core.Impl -StartUpProjectName Web
+Add-Migration -ProjectName Core.Impl -StartUpProjectName Web <MigrationName>
+Update-Database -ProjectName Core.Impl -StartUpProjectName Web -Script
+
+
+
+** For updating and merging into the last migration
+*********************************************************************************
+
+1. Run Add-Migration with some random name, to scaffold a temp file.
+2. Run Update-Database to generate the update script
+3. Edit the update script to update the last row of [__MigrationHistory] table, instead of inserting a record into it.
+4. Run the edited query on the database.
+5. Delete the temporarily scaffolded Migration class
+6. Restore the database to the point before the latest migration (or point to another database which is in that state)
+    Eg. For merging into InitialCreate, point the connection string to an empty or non-existant database name
+7. Run Add-Migration again, with the name of last migration (which you want to merge into), with -Force parameter

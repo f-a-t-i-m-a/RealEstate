@@ -1,0 +1,84 @@
+﻿@using JahanJooy.Common.Util.Text
+@model JahanJooy.RealEstate.Web.Models.Shared.PaginationLinksModel
+
+
+
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <nav>
+            <ul class="pagination">
+                @if (Model.CurrentPageNumber <= 1)
+                {
+                    <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
+                }
+                else
+                {
+                    <li><a data-pagenum="@Model.UrlFunction(Model.CurrentPageNumber - 1)@Model.UrlFunction(Model.CurrentPageNumber - 1)" rel="prev" href="#"><span aria-hidden="true">&laquo;</span></a></li>
+                }
+               
+               
+                @if (Model.CurrentPageNumber > 3)
+                {
+                    <li><a data-pagenum="@Model.UrlFunction(1)"  href="#" rel="prev">1</a></li>
+                }
+                @if (Model.CurrentPageNumber > 4)
+                {
+                    <li><span>...</span></li>
+                }
+               
+                @for (int page = Math.Max(1, Model.CurrentPageNumber - 2); page <= Math.Min(Model.TotalNumberOfPages, Model.CurrentPageNumber + 2); page++)
+                {
+                    if (page == Model.CurrentPageNumber)
+                    {
+                        <li class="active">
+                            <span>
+                                صفحه @Model.CurrentPageNumber
+                                <span class="hidden-xs hidden-sm">
+                                    @if (Model.IndexOfFirstRecord.HasValue && Model.IndexOfLastRecord.HasValue)
+                                    {
+                                        @: ، سطر @Model.IndexOfFirstRecord.Value تا @Model.IndexOfLastRecord.Value
+                                        if (Model.TotalNumberOfRecords.HasValue)
+                                        {
+                                            @: از @Model.TotalNumberOfRecords
+                                        }
+                                    }
+                                </span>
+                            </span>
+                        </li>
+                    }
+                    else
+                    {
+                        if (page < Model.CurrentPageNumber)
+                        {
+                            <li><a rel="prev" data-pagenum="@Model.UrlFunction(page)" href="#">@page</a></li>
+                        }
+                        else
+                        {
+                            <li><a rel="next" data-pagenum="@Model.UrlFunction(page)" href="#">@page</a></li>
+                        }
+                    }
+                }
+                @if (Model.CurrentPageNumber < Model.TotalNumberOfPages - 3)
+                {
+                    <li><span>...</span></li>
+                }
+
+                @if (Model.CurrentPageNumber < Model.TotalNumberOfPages - 2)
+                {
+                    <li><a rel="next" data-pagenum="@Model.UrlFunction(Model.TotalNumberOfPages)" href="#">@Model.TotalNumberOfPages</a></li>
+                }
+                @if (Model.CurrentPageNumber >= Model.TotalNumberOfPages)
+                {
+                    <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
+                }
+                else
+                {
+                    <li><a rel="next" data-pagenum="@Model.UrlFunction(Model.CurrentPageNumber + 1)" href="#"><span aria-hidden="true">&raquo;</span></a></li>
+                }
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+

@@ -1,0 +1,1039 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{381A4352-39B1-4EA6-80B7-CA314504FDE7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JahanJooy.RealEstateAgency.HaftDong</RootNamespace>
+    <AssemblyName>JahanJooy.RealEstateAgency.HaftDong</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxMin, Version=5.14.5506.26196, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxMin.5.14.5506.26202\lib\net40\AjaxMin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AppsOn.Automation.LibraryBuffer">
+      <HintPath>..\NonNugetLibraries\AppsOn.Automation.LibraryBuffer\AppsOn.Automation.LibraryBuffer.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.Identity.MongoDB, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.Identity.MongoDB.2.0.8\lib\net45\AspNet.Identity.MongoDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BundleTransformer.Core, Version=1.9.69.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+      <HintPath>..\packages\BundleTransformer.Core.1.9.69\lib\net40\BundleTransformer.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BundleTransformer.Less, Version=1.9.69.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+      <HintPath>..\packages\BundleTransformer.Less.1.9.69\lib\net40\BundleTransformer.Less.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BundleTransformer.MicrosoftAjax, Version=1.9.52.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+      <HintPath>..\packages\BundleTransformer.MicrosoftAjax.1.9.52\lib\net40\BundleTransformer.MicrosoftAjax.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BundleTransformer.TypeScript, Version=1.9.69.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+      <HintPath>..\packages\BundleTransformer.TypeScript.1.9.69\lib\net40\BundleTransformer.TypeScript.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Compositional.Composer, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NonNugetLibraries\Compositional.Composer\Compositional.Composer.dll</HintPath>
+    </Reference>
+    <Reference Include="Compositional.Composer.Implementation, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NonNugetLibraries\Compositional.Composer.Implementation\Compositional.Composer.Implementation.dll</HintPath>
+    </Reference>
+    <Reference Include="Compositional.Composer.Web">
+      <HintPath>..\NonNugetLibraries\Compositional.Composer.Web\Compositional.Composer.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.2.3.1\lib\net45\Elasticsearch.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentScheduler, Version=3.1.46.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JahanJooy.Common.Util">
+      <HintPath>..\NonNugetLibraries\JahanJooy.Common.Util\JahanJooy.Common.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.5.0\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Msie, Version=1.5.0.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Msie.1.5.0\lib\net40\JavaScriptEngineSwitcher.Msie.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Spatial, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.Spatial.3.0.3\lib\net40\Lucene.Net.Contrib.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.2.4\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.2.4\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.2.4\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MsieJavaScriptEngine, Version=1.7.0.0, Culture=neutral, PublicKeyToken=a3a2846a37ac0d3e, processorArchitecture=MSIL">
+      <HintPath>..\packages\MsieJavaScriptEngine.1.7.0\lib\net40\MsieJavaScriptEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.2.3.1\lib\net45\Nest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\NonNugetLibraries\ServiceStack.Cracked\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Spatial4n.Core, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9f9456e1ca16d45e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spatial4n.Core.0.3\lib\net40\Spatial4n.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="TypeLite, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.4.0\lib\net4\TypeLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TypeLite.Net4, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.4.0\lib\net4\TypeLite.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
+    <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
+    <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\Models\HelpPageApiModel.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ImageSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\InvalidSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
+    <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdminAppController.cs" />
+    <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\ScheduledTaskRegistry.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Config\StimulConfig.cs" />
+    <Compile Include="Server\Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Server\Config\AutoMapperConfig.cs" />
+    <Compile Include="Server\Config\BundleConfig.cs" />
+    <Compile Include="Server\Config\CompositionConfig.cs" />
+    <Compile Include="Server\Config\FilterConfig.cs" />
+    <Compile Include="Server\Config\FormatterConfig.cs" />
+    <Compile Include="Server\Config\Log4NetConfig.cs" />
+    <Compile Include="Server\Config\RouteConfig.cs" />
+    <Compile Include="Server\Config\Startup.cs" />
+    <Compile Include="Server\Config\WebApiConfig.cs" />
+    <Compile Include="Server\Formatters\ServiceStackTextFormatter.cs" />
+    <Compile Include="Server\Globalization\GlobalizationUtil.cs" />
+    <Compile Include="Server\Logging\UnhandledExceptionLogger.cs" />
+    <Compile Include="Server\Logging\UnhandledExceptionLoggingUtils.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.directive.html" />
+    <Content Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.edit.html" />
+    <Content Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.html" />
+    <Content Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.new.html" />
+    <Content Include="Application\adminApplication\views\Log\log.html" />
+    <Content Include="Application\adminApplication\views\Users\user.reset.password.modal.html" />
+    <Content Include="Application\adminApplication\views\Users\user.image.modal.html" />
+    <Content Include="Application\adminApplication\views\Users\user.activities.html" />
+    <Content Include="Application\adminApplication\views\Users\user.activities.details.html" />
+    <Content Include="Application\adminApplication\views\Users\users.details.html" />
+    <Content Include="Application\adminApplication\views\Users\users.edit.html" />
+    <Content Include="Application\adminApplication\views\Vicinities\vicinity.map.modal.html" />
+    <Content Include="Application\adminApplication\views\Vicinities\vicinity.move.modal.html" />
+    <Content Include="Application\adminApplication\views\Vicinities\vicinities.directive.html" />
+    <Content Include="Application\adminApplication\views\Vicinities\vicinities.edit.html" />
+    <Content Include="Application\adminApplication\views\Vicinities\vicinities.new.html" />
+    <Content Include="Application\adminApplication\views\Vicinities\vicinities.html" />
+    <Content Include="Application\commonApplication\components\contact\contact-panel.html" />
+    <Content Include="Application\commonApplication\components\customer\customer-panel.html" />
+    <Content Include="Application\commonApplication\components\google-map\map.html" />
+    <Content Include="Application\commonApplication\components\tmpl-directives\related-properties.html" />
+    <Content Include="Application\commonApplication\components\tmpl-directives\sortable-header.html" />
+    <Content Include="Application\commonApplication\components\tmpl-directives\pagination.html" />
+    <Content Include="Application\commonApplication\components\tmpl-print-button\print-button.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-data\vicinities.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-data\vicinity.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\application-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\request-state.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\source-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\vicinity-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\user-activity-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\entity-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\intention-of-customer.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\contract-state.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\supply-state.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\property-state.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\property-type-checkboxes.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\user-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\license-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\unit-usage-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\sale-price-specification-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\property-publish-duration-enum.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\property-listing-creator-role-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\non-agency-property-listing-agency-activity-allowance.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\kitchen-cabinet-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\floor-cover-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\estate-voucher-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\estate-direction.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\daylight-direction.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-data\customer.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\intention-of-owner.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\building-face-type.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\agency-property-listing-agency-activity-allowance.html" />
+    <Content Include="Application\commonApplication\components\tmpl-select-enum\property-type.html" />
+    <Content Include="Application\commonApplication\jj\ecma-extensions\msajax-string.js" />
+    <Content Include="Application\commonApplication\views\app\app.reset.password.html" />
+    <Content Include="Application\commonApplication\views\app\app.forgotPassword.html" />
+    <Content Include="Application\commonApplication\views\app\app.signup.html" />
+    <Content Include="Application\references.txt" />
+    <Content Include="Application\adminApplication\views\Dashboard\dashboard.html" />
+    <Content Include="Application\commonApplication\views\app\app.accessdenied.html" />
+    <Content Include="Application\commonApplication\views\app\app.auth.changepassword.html" />
+    <Content Include="Application\commonApplication\views\app\app.auth.login.html" />
+    <Content Include="Application\commonApplication\views\app\app.messagebox.confirm.html" />
+    <Content Include="Application\commonApplication\views\app\app.welcome.html" />
+    <Content Include="Application\adminApplication\views\Users\users.directive.html" />
+    <Content Include="Application\adminApplication\views\Users\users.html" />
+    <Content Include="Application\adminApplication\views\Users\users.new.html" />
+    <Content Include="Application\userApplication\views\Contracts\contracts.details.html" />
+    <Content Include="Application\userApplication\views\Contracts\contracts.directive.html" />
+    <Content Include="Application\userApplication\views\Contracts\contracts.edit.html" />
+    <Content Include="Application\userApplication\views\Contracts\contracts.html" />
+    <Content Include="Application\userApplication\views\Contracts\contracts.new.html" />
+    <Content Include="Application\userApplication\views\Customers\customers.details.html" />
+    <Content Include="Application\userApplication\views\Customers\customers.directive.html" />
+    <Content Include="Application\userApplication\views\Customers\customers.edit.html" />
+    <Content Include="Application\userApplication\views\Customers\customers.html" />
+    <Content Include="Application\userApplication\views\Customers\customers.new.html" />
+    <Content Include="Application\userApplication\views\Dashboard\dashboard.html" />
+    <Content Include="Application\userApplication\views\Operations\operations.html" />
+    <Content Include="Application\userApplication\views\Profile\my.public.supplies.html" />
+    <Content Include="Application\userApplication\views\Profile\my.public.requests.html" />
+    <Content Include="Application\userApplication\views\Profile\myprofile.html" />
+    <Content Include="Application\userApplication\views\Profile\my.supplies.html" />
+    <Content Include="Application\userApplication\views\Profile\my.requests.html" />
+    <Content Include="Application\userApplication\views\Properties\properties.details.html" />
+    <Content Include="Application\userApplication\views\Properties\properties.directive.html" />
+    <Content Include="Application\userApplication\views\Properties\properties.edit.html" />
+    <Content Include="Application\userApplication\views\Properties\properties.new.html" />
+    <Content Include="Application\userApplication\views\Properties\set.expirationtime.modal.html" />
+    <Content Include="Application\userApplication\views\Properties\property.image.modal.html" />
+    <Content Include="Application\userApplication\views\Properties\contact.info.modal.html" />
+    <Content Include="Application\userApplication\views\Requests\requests.details.html" />
+    <Content Include="Application\userApplication\views\Requests\requests.directive.html" />
+    <Content Include="Application\userApplication\views\Requests\requests.edit.html" />
+    <Content Include="Application\userApplication\views\Requests\requests.html" />
+    <Content Include="Application\userApplication\views\Requests\requests.new.html" />
+    <Content Include="Application\userApplication\views\Requests\set.expirationtime.modal.html" />
+    <Content Include="Application\userApplication\views\Supplies\supplies.detail.modal.html" />
+    <Content Include="Application\userApplication\views\Supplies\supplies.directive.modal.html" />
+    <Content Include="Application\userApplication\views\Supplies\supplies.edit.modal.html" />
+    <Content Include="Application\userApplication\views\Supplies\supplies.html" />
+    <Content Include="Application\userApplication\views\Supplies\supplies.new.modal.html" />
+    <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Application\adminApplication\views\Log\view.log.modal.html" />
+    <Content Include="Content\angular-toastr.css" />
+    <Content Include="Content\angular-toastr.min.css" />
+    <Content Include="Content\bootstrap-rtl\~readme.txt" />
+    <Content Include="Content\bootstrap-theme\font-awesome.css" />
+    <Content Include="Content\bootstrap-theme\font-awesome.min.css" />
+    <Content Include="Content\bootstrap-theme\thirdparty\select.css" />
+    <Content Include="Content\bootstrap-theme\thirdparty\select.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\appstore.png" />
+    <Content Include="Content\images\forgot.png" />
+    <Content Include="Content\images\google-play-badge-bazar.png" />
+    <Content Include="Content\images\google-play-badge.png" />
+    <Content Include="Content\images\HaftdongLogo.png" />
+    <Content Include="Content\images\header-logo-1.png" />
+    <Content Include="Content\images\header-logo.png" />
+    <Content Include="Content\images\Icon-user.png" />
+    <Content Include="Content\images\Instagram.png" />
+    <Content Include="Content\images\KhoonatLogo.png" />
+    <Content Include="Content\images\NaroonLogo.png" />
+    <Content Include="Content\images\OtherLogo.png" />
+    <Content Include="Content\images\SheshdongLogo.png" />
+    <Content Include="Content\images\telegram_24px.png" />
+    <Content Include="Content\Markers\item-group.png" />
+    <Content Include="Content\Markers\property-for-daily-rent.png" />
+    <Content Include="Content\Markers\property-for-full-mortgage.png" />
+    <Content Include="Content\Markers\property-for-rent.png" />
+    <Content Include="Content\Markers\property-for-sale.png" />
+    <Content Include="Content\nv.d3.css" />
+    <Content Include="Content\nv.d3.min.css" />
+    <Content Include="Content\select.css" />
+    <Content Include="Content\select.min.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Content\ui-grid.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\ui-grid.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-bootstrap-persian-datepicker\persian-datepicker-tpls.js" />
+    <Content Include="Scripts\angular-bootstrap-persian-datepicker\persiandate.js" />
+    <Content Include="Scripts\angular-bootstrap-persian-datepicker\sample\app.js" />
+    <Content Include="Scripts\angular-bootstrap-persian-datepicker\sample\index.html" />
+    <Content Include="Scripts\angular-bootstrap-persian-datepicker\sample\MainController.js" />
+    <Content Include="Scripts\angular-bootstrap-persian-datepicker\source.txt" />
+    <Content Include="Scripts\angular-google-maps.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-nvd3.js" />
+    <Content Include="Scripts\angular-nvd3.min.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-simple-logger.js" />
+    <Content Include="Scripts\angular-simple-logger.min.js" />
+    <Content Include="Scripts\angular-toastr.js" />
+    <Content Include="Scripts\angular-toastr.min.js" />
+    <Content Include="Scripts\angular-toastr.tpls.js" />
+    <Content Include="Scripts\angular-toastr.tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\angular-ui\ui-utils-ieshiv.js" />
+    <Content Include="Scripts\angular-ui\ui-utils-ieshiv.min.js" />
+    <Content Include="Scripts\angular-ui\ui-utils.js" />
+    <Content Include="Scripts\angular-ui\ui-utils.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\AngularUI\ui-router.js" />
+    <Content Include="Scripts\AngularUI\ui-router.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\HelpPage\Views\Web.config" />
+    <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\EnumTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\d3\d3.js" />
+    <Content Include="Scripts\d3\d3.min.js" />
+    <Content Include="Scripts\d3\LICENSE" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Log4net.config" />
+    <Content Include="Log4net.Debug.config" />
+    <Content Include="Log4net.Release.config" />
+    <Content Include="Content\bootstrap-rtl\alerts-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\badges-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\bootstrap-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\button-groups-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\carousel-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\close-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\dropdowns-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\forms-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\grid-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\input-groups-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\list-group-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\media-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\gradients-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\grid-framework-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\grid-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\pagination-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\modals-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\navbar-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\navs-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\normalize-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\pager-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\pagination-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\panels-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\popovers-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\progress-bars-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\responsive-embed-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\tables-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\type-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\utilities-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\variables-rtl.less" />
+    <Content Include="Content\bootstrap-theme\app-fontfaces.less" />
+    <Content Include="Content\bootstrap-theme\app-forms.less" />
+    <Content Include="Content\bootstrap-theme\app-general.less" />
+    <Content Include="Content\bootstrap-theme\app-icons.less" />
+    <Content Include="Content\bootstrap-theme\app-layout.less" />
+    <Content Include="Content\bootstrap-theme\app-variables.less" />
+    <Content Include="Content\bootstrap-theme\bootstrap-theme.less" />
+    <Content Include="Content\fonts\DroidKufi-Bold-iefix.eot" />
+    <Content Include="Content\fonts\DroidKufi-Bold.eot" />
+    <Content Include="Content\fonts\DroidKufi-Bold.ttf" />
+    <Content Include="Content\fonts\DroidKufi-Bold.woff" />
+    <Content Include="Content\fonts\DroidKufi-Bold.woff2" />
+    <Content Include="Content\fonts\DroidKufi-Regular-iefix.eot" />
+    <Content Include="Content\fonts\DroidKufi-Regular.eot" />
+    <Content Include="Content\fonts\DroidKufi-Regular.ttf" />
+    <Content Include="Content\fonts\DroidKufi-Regular.woff" />
+    <Content Include="Content\fonts\DroidKufi-Regular.woff2" />
+    <Content Include="Content\fonts\DroidNaskh-Bold-iefix.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.ttf" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.woff" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.woff2" />
+    <Content Include="Content\fonts\DroidNaskh-Regular-iefix.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.ttf" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.woff" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.woff2" />
+    <Content Include="Application\Web.config" />
+    <Content Include="Content\fonts\ui-grid.woff" />
+    <Content Include="Content\fonts\ui-grid.ttf" />
+    <Content Include="Content\fonts\ui-grid.eot" />
+    <None Include="Properties\PublishProfiles\Deploy.pubxml" />
+    <Content Include="Report\Predefined\Property-OnePage.mrt" />
+    <Content Include="Report\Predefined\SuppiesList-01.mrt" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\FileAPI.flash.swf" />
+    <Content Include="Scripts\FileAPI.js" />
+    <Content Include="Scripts\FileAPI.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Scripts\jquery.caret-1.5.2.js" />
+    <None Include="Scripts\linq-vsdoc.js" />
+    <Content Include="Scripts\linq.js" />
+    <Content Include="Scripts\linq.min.js" />
+    <Content Include="Scripts\lodash.js" />
+    <Content Include="Scripts\lodash.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-jalaali.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ng-file-upload-all.js" />
+    <Content Include="Scripts\ng-file-upload-all.min.js" />
+    <Content Include="Scripts\ng-file-upload-shim.js" />
+    <Content Include="Scripts\ng-file-upload-shim.min.js" />
+    <Content Include="Scripts\ng-file-upload.js" />
+    <Content Include="Scripts\ng-file-upload.min.js" />
+    <Content Include="Scripts\nv.d3.js" />
+    <Content Include="Scripts\nv.d3.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <EmbeddedResource Include="Server\Composition\Aspects.xml" />
+    <EmbeddedResource Include="Server\Composition\Environment.xml" />
+    <EmbeddedResource Include="Server\Composition\Main.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Version.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="Scripts\select.js" />
+    <Content Include="Scripts\select.min.js" />
+    <Content Include="Scripts\TypeLite.Net4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypeLite.Net4.d.ts</LastGenOutput>
+    </Content>
+    <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Scripts\ui-grid.js" />
+    <Content Include="Scripts\ui-grid.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <EmbeddedResource Include="Server\Composition\Notification.Debug.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Server\Composition\Notification.Release.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Scripts\Manager.ttinclude" />
+    <Content Include="Views\App\InitApp.cshtml" />
+    <Content Include="Views\App\InitAppPartials\EnvironmentNotification.cshtml" />
+    <Content Include="Views\App\InitAppPartials\FooterCopyrightPartial.cshtml" />
+    <Content Include="Views\App\InitAppPartials\HeaderMenuPartial.cshtml" />
+    <Content Include="Views\App\InitAppPartials\LogOnPartial.cshtml" />
+    <Content Include="Views\App\TranslationsJs.cshtml" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\AdminApp\InitAdminApp.cshtml" />
+    <Content Include="Views\AdminApp\InitAdminAppPartials\EnvironmentNotification.cshtml" />
+    <Content Include="Views\AdminApp\InitAdminAppPartials\FooterCopyrightPartial.cshtml" />
+    <Content Include="Views\AdminApp\InitAdminAppPartials\HeaderMenuPartial.cshtml" />
+    <Content Include="Views\AdminApp\InitAdminAppPartials\LogOnPartial.cshtml" />
+    <Content Include="Views\AdminApp\TranslationsJs.cshtml" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Application\adminApplication\base\configuredataitem.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\base\app.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\base\log.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\base\vicinity.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\base\useractivity.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\base\user.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.directive.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.edit.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.new.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\ConfigureDataItem\configure.data.item.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Log\log.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Log\view.log.modal.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\user.reset.password.modal.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\user.image.modal.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\user.activities.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\user.activities.details.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\users.details.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\users.edit.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Vicinities\vicinity.map.modal.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Vicinities\vicinity.move.modal.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Vicinities\vicinities.directive.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Vicinities\vicinities.edit.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Vicinities\vicinities.new.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Vicinities\vicinities.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\api\api.report.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\app\app.messagebox.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\contact-panel.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\customer-panel.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\google-map.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\related-properties.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\print-button.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\report-template-cache.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\searchable-inputs.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\translations\localization-errors.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.reset.password.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.forgotPassword.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.signup.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\base\dashboard.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Dashboard\dashboard.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\api\api.account.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\app\app.auth.service.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\app\app.auth.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\app\app.errorhandler.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\app\app.http.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\app\app.init.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\base\api.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\base\components.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\base\app.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\base\jj.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\bootstrap-helpers.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\dropdowns.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\sortable-header.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\pagination.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\enum-filters.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\components\global-variables.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\directives\jj-format.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\directives\jj-jalaali-datepicker-popup.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\directives\jj-relative-time.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\directives\jj-tristate.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\ecma-extensions\string-extensions.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\filters\boolean-filter.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\filters\jalaali-filter.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\localization\localizationManager.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\utils\common.download.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\jj\utils\common.enum.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.auth.changepassword.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.auth.login.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.messagebox.confirm.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.navbar.ts" />
+    <TypeScriptCompile Include="Application\commonApplication\views\app\app.welcome.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\users.directive.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\users.new.ts" />
+    <TypeScriptCompile Include="Application\adminApplication\views\Users\users.ts" />
+    <TypeScriptCompile Include="Application\userApplication\base\app.ts" />
+    <TypeScriptCompile Include="Application\userApplication\base\contract.ts" />
+    <TypeScriptCompile Include="Application\userApplication\base\customer.ts" />
+    <TypeScriptCompile Include="Application\userApplication\base\dashboard.ts" />
+    <TypeScriptCompile Include="Application\userApplication\base\file.ts" />
+    <TypeScriptCompile Include="Application\userApplication\base\operation.ts" />
+    <TypeScriptCompile Include="Application\userApplication\base\request.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Contracts\contracts.details.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Contracts\contracts.directive.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Contracts\contracts.edit.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Contracts\contracts.new.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Contracts\contracts.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Customers\customers.details.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Customers\customers.directive.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Customers\customers.edit.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Customers\customers.new.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Customers\customers.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Dashboard\dashboard.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Operations\operations.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Profile\my.public.supplies.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Profile\my.public.requests.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Profile\myprofile.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Profile\my.supplies.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Profile\my.requests.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Properties\properties.details.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Properties\properties.directive.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Properties\properties.edit.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Properties\properties.new.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Properties\set.expirationtime.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Properties\property.image.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Properties\contact.info.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Requests\requests.details.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Requests\requests.directive.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Requests\requests.edit.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Requests\requests.new.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Requests\requests.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Requests\set.expirationtime.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Supplies\supplies.detail.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Supplies\supplies.directive.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Supplies\supplies.edit.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Supplies\supplies.new.modal.ts" />
+    <TypeScriptCompile Include="Application\userApplication\views\Supplies\supplies.ts" />
+    <TypeScriptCompile Include="Scripts\Enums.ts">
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\TypeLite.Net4.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\typings\angular-file-upload\angular-file-upload.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular-ui-router\angular-ui-router.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap.paginator\bootstrap.paginator.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\d3\d3.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\d3\plugins\d3.superformula.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\google.maps.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery,caret.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\lib-addition.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\linq\linq.3.0.3-Beta4.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\linq\linq.jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment\moment-jalaali.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment\moment-node.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment\moment.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\ng-file-upload\ng-file-upload.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Web\Api.Web.csproj">
+      <Project>{e213a20d-2729-4ba5-8907-4215fe0dba2f}</Project>
+      <Name>Api.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Api.App\Api.App.csproj">
+      <Project>{b9d8824e-34d9-4ae0-888c-4ef5537a01b3}</Project>
+      <Name>Api.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Api.External\Api.External.csproj">
+      <Project>{a0fc2369-fe5f-48ae-a405-11376dab99d0}</Project>
+      <Name>Api.External</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{7013FEB2-274B-4694-B24B-AA084153BA17}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JahanJooy.Stimulsoft.Common\JahanJooy.Stimulsoft.Common.csproj">
+      <Project>{ed5357dd-fe32-4a1d-9c3a-e0d4d7f553a8}</Project>
+      <Name>JahanJooy.Stimulsoft.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryBuffer\LibraryBuffer.csproj">
+      <Project>{579652be-2a2c-46fb-a703-d2142f47bf5a}</Project>
+      <Name>LibraryBuffer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util.Farapayamak\Util.Farapayamak.csproj">
+      <Project>{c1962ce6-1d05-4a8f-9a43-295bfefdd769}</Project>
+      <Name>Util.Farapayamak</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{a93b051b-ace3-4711-bd39-38c7758cfdbd}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60514</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60515/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

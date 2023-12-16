@@ -1,0 +1,212 @@
+﻿<div class="container myProfileView">
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">مشخصات</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <b>نام کاربری:</b> {{user.UserName}} <span ng-show="user.DeletionTime != null">حذف شده</span>
+                </div>
+                <div class="col-md-3">
+                    <b>نوع عضویت:</b> {{user.Type | UserType}}
+                </div>
+                <div class="col-md-3">
+                    <b>تاریخ عضویت:</b> {{user.CreationTime | jalaali}}
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <b>حساب کاربری:</b> <span jj-tristate="user.IsEnabled"></span> {{user.IsEnabled | IsEnabled}}
+                </div>
+                <div class="col-md-3">
+                    <b>تائید هویت:</b> <span jj-tristate="user.IsVerified"></span> {{user.IsVerified | Approval}}
+                </div>
+                <div class="col-md-3">
+                    <b>نوع مجوز:</b> <span jj-tristate="isNotExpired"></span> {{user.LicenseType | LicenseType}}
+                </div>
+                <div class="col-md-3">
+                    <b>تاریخ اتمام مجوز تا:</b> {{user.LicenseActivationTime | jalaali}}
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <b>نام نمایشی:</b> {{user.DisplayName}}
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-6">
+                        <b>تلفن همراه:</b>
+                        <span ng-repeat="mobile in mobileNumberList" ng-if="mobileNumberList != null">
+                            <span jj-tristate="mobile.IsVerified" title="فعال سازی"></span>
+                            <span class="persian-number" dir="ltr"> {{mobile.ContactMethodText}}</span>
+                            <button class="btn  btn-danger btn-sm" ng-click="onDeleteMobileNumber(mobile.ID)"  authorized-to="user.CreatedByID" ><i class="fa fa-trash-o"></i></button>
+                        </span>
+                </div>
+                <div class="col-md-6">
+                    <b>آدرس ایمیل:</b>
+                    <span ng-repeat="emailAddress in emailAddressList" ng-if="emailAddressList != null">
+                            <span jj-tristate="emailAddress.IsVerified" title="فعال سازی"></span>
+                            <span class="persian-number" dir="ltr"> {{emailAddress.ContactMethodText}}</span>
+                            <button class="btn  btn-danger btn-sm" ng-click="onDeleteEmailAddress(emailAddress.ID)" authorized-to="user.CreatedByID"><i class="fa fa-trash-o"></i></button>
+                        </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <b>وب سایت:</b> {{user.WebSiteUrl}}
+                </div>
+                <div class="col-md-6">
+                    <b>توضیحات:</b> {{user.About}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <b>آدرس:</b> {{user.Contact.Addresses[0].NormalizedValue}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-if="showMobilePanel">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">تلفن همراه</h3>
+        </div>
+        <div class="panel-body">
+            <div ng-repete="contactMethod in user.Contact.Phones">
+                <div ng-if="showAddMobilePanel ">
+                    <p>
+                        پیشنهاد میکنیم حتما شماره موبایل خود را وارد کنید تا اگر اطلاعات حسابتان را از دست دادید بتوانید آن را بازیابی کنید. همچنین بتوانید از خدمات پیامکی ما استفاده کنید.
+                    </p>
+                    <div class="row">
+                        <form name="AddNewMobileNumber">
+                            <label for="" class="col-md-1 control-label">موبایل:</label>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="user.MobileNumber" ng-required="true" ng-pattern="/^09[0-3]\d{8}/" ng-minlength="11" ng-maxlength="11"/>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-success addNewMobileNumber" ng-disabled="AddNewMobileNumber.$invalid" ng-click="onAddNewMobileNumber()" restrict-to="RealEstateAgent"><i class="fa fa-floppy-o"></i> ثبت و فعال سازی</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div ng-show="showMobileVerificationPanel">
+                    <div>
+                        <p>
+                            قبل از اینکه بتوانیم از شماره تلفن {{contactMethod.ContactMethodText}}
+                            برای ارتباط با شما استفاده کنیم، باید مالکیت آن را تایید کنید.
+                        </p>
+                        <div ng-if="!restartEmailAddressVerificationDiv">
+                            <p>
+                                یک پیامک فعال سازی توسط سیستم به شماره {{contactMethod.ContactMethodText}} فرستاده شده است ، که در آن یک رمز فعال سازی وجود دارد. لطفاٌ رمز را داخل فرم زیر وارد کنید و گزینه فعال سازی را انتخاب کنید.
+                            </p>
+                            <div class="row">
+                                <form name="frmConfirmMobileVerificationSecret">
+                                    <div class="col-md-2">رمز اعتبار سنجی:</div>
+                                    <div class="col-md-2">
+                                        <input type="text" ng-model="user.MobileVerificationSecret" ng-required="true"/>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-success completeRegistrationVerifyMobileNumberButton" ng-disabled="frmConfirmMobileVerificationSecret.$invalid" ng-click="onCompleteRegistrationVerifyMobileNumber()" restrict-to="RealEstateAgent"><i class="fa fa-floppy-o"></i> فعال سازی</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <p>
+                                در صورتی که رمز ارسالی بعد از مدتی به دستتان نرسید، می توانید رمز فعلی را لغو کنید و فعال سازی را از اول شروع نمایید.
+                                <button class="btn btn-default restartMobileVerification" ng-disabled="frmAddNewEmail.$invalid" ng-click="onRestartMobileVerification()" restrict-to="RealEstateAgent"><i class="fa fa-floppy-o"></i> درخواست رمز جدید</button>
+                            </p>
+                            <p>
+                                <strong>دقت کنید:</strong>
+                                قبل از اینکه رمز جدید درخواست کنید، لطفاً حداقل 15 دقیقه برای دریافت پیغام فعال سازی منتظر بمانید.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="expiredMobileContactMethodVerificationDiv">
+                    مهلت استفاده از رمز فعال سازی قبلی که برایتان فرستاده شده بود، تمام شده است. برای اینکه بتوانید شماره
+                    {{contactMethod.ContactMethodText}}
+                    را فعال کنید، باید رمز جدید بگیرید
+                    <button class="btn btn-default" ng-click="onRestartMobileVerification()" restrict-to="RealEstateAgent"><i class="fa fa-floppy-o"></i> درخواست رمز جدید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" ng-if="showEmailPanel && user.IsVerified">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a ng-click="isCollapsed = !isCollapsed">جزئیات بیشتر (کلیک کنید) <i class="fa fa-caret-down"></i></a>
+            </h3>
+        </div>
+        <div class="panel-body" collapse="isCollapsed">
+            <div ng-repete="contactMethod in user.ContactMethods">
+                <div ng-if="showAddEmailAddressPanel ">
+                    <p>
+                        پیشنهاد میکنیم حتما آدرس ایمیلتان را وارد کنید تا اگر اطلاعات حسابتان را از دست دادید بتوانید آن را بازیابی کنید
+                    </p>
+                    <div class="row">
+                        <form name="frmAddNewEmail">
+                            <label for="" class="col-md-1 control-label">ایمیل:</label>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="user.EmailAddress" ng-required="true" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"/>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-success addNewEmailButton" ng-disabled="frmAddNewEmail.$invalid" ng-click="onAddNewEmail()" restrict-to="RealEstateAgent"><i class="fa fa-floppy-o"></i> ثبت و فعال سازی</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div ng-show="showEmailVerificationPanel">
+                    <div>
+                        <p>
+                            قبل از اینکه بتوانیم از آدرس ایمیل {{contactMethod.ContactMethodText}}
+                            برای ارتباط با شما استفاده کنیم، باید مالکیت اون را تایید کنید.
+                        </p>
+                        <div ng-if="!restartEmailAddressVerificationDiv">
+                            <p>
+                                یک ایمیل فعال سازی توسط سیستم به آدرس {{contactMethod.ContactMethodText}} فرستاده شده، که در آن یک رمز فعال سازی وجود داره. لطفاٌ رمز را داخل فرم زیر وارد کنید و گزینه فعال سازی را انتخاب کنید.
+                            </p>
+
+                            <div class="row">
+                                <form name="frmConfirmEmailVerificationSecret">
+                                    <div class="col-md-2">رمز اعتبار سنجی:</div>
+                                    <div class="col-md-2">
+                                        <input type="text" ng-model="user.EmailVerificationSecret" ng-required="true"/>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-success completeRegistrationVerifyEmailAddressButton" restrict-to="RealEstateAgent" ng-disabled="frmConfirmEmailVerificationSecret.$invalid" ng-click="onCompleteRegistrationVerifyEmailAddress()"><i class="fa fa-floppy-o"></i> فعال سازی</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <p>
+                                در صورتی که رمز ارسالی بعد از مدتی به دستتان نرسید، می توانید رمز فعلی را لغو کنید و فعال سازی را از اول شروع نمایید.
+                                <button class="btn btn-default restartEmailAddressVerification" restrict-to="RealEstateAgent" ng-disabled="frmRestartEmailAddressVerification.$invalid" ng-click="onRestartEmailAddressVerification()"><i class="fa fa-floppy-o"></i> درخواست رمز جدید</button>
+                            </p>
+                            <p>
+                                <strong>دقت کنید:</strong>
+                                قبل از اینکه رمز جدید درخواست کنید، لطفاً حداقل 15 دقیقه برای دریافت پیغام فعال سازی منتظر بمانید.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="expiredEmailContactMethodVerificationDiv">
+                    مهلت استفاده از رمز فعال سازی قبلی که برایتان فرستاده شده بود، تمام شده است. برای اینکه بتوانید آدرس ایمیل
+                    {{contactMethod.ContactMethodText}}
+                    را فعال کنید، باید رمز جدید بگیرید
+                    <button class="btn btn-default " ng-click="onRestartEmailAddressVerification()" restrict-to="RealEstateAgent"><i class="fa fa-floppy-o"></i> درخواست رمز جدید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

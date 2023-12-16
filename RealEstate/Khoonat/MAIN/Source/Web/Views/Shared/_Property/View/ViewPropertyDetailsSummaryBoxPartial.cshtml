@@ -1,0 +1,215 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util
+@using JahanJooy.RealEstate.Core.Cache
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Domain.Enums
+@using JahanJooy.Common.Util.Web.Extensions
+@model PropertyViewDetailsModel
+
+@{
+	var vicinityCache = ComposerWebUtil.ComponentContext.GetComponent<IVicinityCache>();
+}
+<div class="panel panel-primary">
+	<div class="panel-body bg-info">
+
+        <div class="row">
+            <div class="col-xs-6 col-sm-3">@PropertyViewSummaryHelper.PropertyType(Model.Listing)</div>
+
+            @if (Model.Listing.PropertyType.HasUnit() && Model.Listing.PropertyType != PropertyType.Shop)
+            {
+                @* Apartment, Villa, Building and Penthouse types *@
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.UnitUsageType(Model.Listing), "کاربری: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.UnitNumberOfRooms(Model.Listing), "تعداد اتاق: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.Area(Model.Listing), "زیربنا: ؟")</div>
+                <div class="col-xs-6 col-sm-12" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.UnitFloorNumber(Model.Listing), "طبقه ؟")</div>
+            }
+            else if (Model.Listing.PropertyType.HasUnit() && Model.Listing.PropertyType == PropertyType.Shop)
+            {
+                @* Shop *@
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.UnitUsageType(Model.Listing), "کاربری: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">&nbsp;</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.Area(Model.Listing), "زیربنا: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">&nbsp;</div>
+            }
+            else
+            {
+                @* Garden and Land types *@
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.Area(Model.Listing), "متراژ: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.EstateDirection(Model.Listing), "جهت: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px" colspan="2">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.EstateVoucherType(Model.Listing), "نوع سند: ؟")</div>
+            }
+        </div>
+
+	    <hr/>
+	    @* Second line - building/unit attributes or estate attributes *@
+        <div class="row">
+            @if (Model.Listing.PropertyType.HasBuilding() && Model.Listing.PropertyType != PropertyType.Shop)
+            {
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.BuildingAge(Model.Listing), "سن بنا: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.BuildingFloors(Model.Listing), "تعداد طبقات: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.UnitDaylightDirection(Model.Listing), "جهت نور: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@PropertyViewSummaryHelper.BuildingUnitsPerFloor(Model.Listing)</div>
+                <div class="col-xs-12 col-sm-12" style="padding-bottom: 15px">@PropertyViewSummaryHelper.BuildingTotalUnits(Model.Listing)</div>
+            }
+            else if (Model.Listing.PropertyType.HasBuilding() && Model.Listing.PropertyType == PropertyType.Shop)
+            {
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.BuildingAge(Model.Listing), "سن بنا: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">&nbsp;</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">&nbsp;</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">&nbsp;</div>
+                <div class="col-xs-12 col-sm-12" style="padding-bottom: 15px">&nbsp;</div>
+            }
+            else
+            {
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.EstatePassageEdgeLength(Model.Listing), "طول بَر: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@PropertyViewSummaryHelper.EstateSides(Model.Listing)</div>
+                <div class="col-xs-12 col-sm-6" style="padding-bottom: 15px">@PropertyViewSummaryHelper.EstatePassageWidth(Model.Listing)</div>
+            }
+        </div>
+	    <hr/>
+        @* Third line - Additional building/unit attributes or additional estate attributes *@
+        <div class="row">
+            @if (Model.Listing.PropertyType.HasUnit() && Model.Listing.PropertyType != PropertyType.Shop)
+            {
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.BuildingFaceType(Model.Listing), "نما: ؟")</div>
+                <div class="col-xs-6 col-sm-3" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.UnitLivingRoomFloor(Model.Listing), "کف: ؟")</div>
+                <div class="col-xs-12 col-sm-6" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.UnitKitchenCabinetType(Model.Listing), "کابینت: ؟")</div>
+            }
+            else if (Model.Listing.PropertyType.HasUnit() && Model.Listing.PropertyType == PropertyType.Shop)
+            {
+                <div class="col-xs-12" style="padding-bottom: 15px">&nbsp;</div>
+            }
+            else
+            {
+                <div class="col-xs-6" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.EstateSlopeAmount(Model.Listing), "شیب: ؟")</div>
+                <div class="col-xs-6" style="padding-bottom: 15px">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.EstateSurfaceType(Model.Listing), "پوشش: ؟")</div>
+            }
+        </div>
+
+
+
+
+
+
+        <hr/>
+
+        @if (Model.Listing.PropertyType.HasUnit())
+        {
+            @* True / False attributes for property types with a "unit" *@
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Unit.IfNotNull(u => u.NumberOfParkings.IfHasValue(nop => (bool?)(nop > 0)))) پارکینگ</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Unit.IfNotNull(u => u.HasIranianLavatory)) سرویس ایرانی</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasVideoEyePhone)) آیفون تصویری</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasSwimmingPool)) استخر</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasGatheringHall)) سالن اجتماعات</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Unit.IfNotNull(u => u.StorageRoomArea.IfHasValue(sra => (bool?)(sra > 0)))) انباری</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Unit.IfNotNull(u => u.HasForeignLavatory)) سرویس فرنگی</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasAutomaticParkingDoor)) درب ریموتی</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasSauna)) سونا</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Unit.IfNotNull(u => u.HasPrivateGarden)) حیاط در اختیار</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasElevator)) آسانسور</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Unit.IfNotNull(u => u.HasBeenReconstructed)) بازسازی شده</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasEntranceLobby)) لابی ورودی</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Building.IfNotNull(b => b.HasJacuzzi)) جکوزی</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Unit.IfNotNull(u => u.HasPrivatePatio)) پاسیو</div>
+            </div>
+        }
+        else if (Model.Listing.PropertyType.IsEstateSignificant())
+        {
+            @* True / False attributes for property types WITHOUT a "unit" *@
+            @* condition (IsEstateSignificant()) is always true *@
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasElectricity)) برق</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasThreePhaseElectricity)) برق سه فاز</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasSewerExtension)) انشعاب فاضلاب</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasNiches)) دارای سوله</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.IsInDeadEnd)) در بن بست</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasGasPiping)) گاز</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasIndustrialElectricity)) برق صنعتی</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasWaterWellsPrivilege)) امتیاز چاه</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.IsOnGreenPassage)) گذر مشجر</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.IsOnMainPassage)) در خیابان اصلی</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasDrinkingWater)) آب</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasCultivationWater)) آب کشاورزی</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.HasWaterWells)) چاه آب</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.IsCloseToPark)) نزدیک پارک</div>
+                <div class="col-xs-6 col-sm-2">@IconsHelper.Tristate(Url, Model.Listing.Estate.IfNotNull(e => e.IsCloseToHighway)) کنار بزرگراه</div>
+            </div>
+        }
+
+	    <hr/>
+	    <div class="row">
+	        <div class="col-xs-12 col-sm-12">برای @Model.Listing.IntentionOfOwner.Label(DomainEnumResources.ResourceManager):</div>
+	        @if (Model.Listing.IntentionOfOwner == IntentionOfOwner.ForSale)
+            {
+
+                <div class="col-xs-12 col-sm-6">قیمت کل @HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.SalePriceTotal(Model.Listing), "قیمت کل: ؟") تومان</div>
+
+                if (Model.Listing.PropertyType.HasUnit())
+                {
+	                <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-6">@HtmlPresentationHelper.IfNotNull(PropertyViewSummaryHelper.SalePricePerUnitArea(Model.Listing), "بنا متری: ؟")</div>
+                        <div class="col-xs-6">@HtmlPresentationHelper.IfNotNull(PropertyViewSummaryHelper.SalePricePerEstateArea(Model.Listing), "زمین متری: ؟")</div>
+	                </div>
+	            }
+	            else
+	            {
+	                <div class="col-xs-12 col-sm-6">@HtmlPresentationHelper.IfNotNull(PropertyViewSummaryHelper.SalePricePerEstateArea(Model.Listing), "زمین متری: ؟")</div>
+	            }
+                
+                <br/><br/>
+                <hr/>
+	            <div class="col-xs-12 col-sm-12">
+	                @PropertyViewSummaryHelper.SaleTransferableLoanTristate(Model.Listing).IfHasValue(b => IconsHelper.Tristate(Url, b))
+	                @PropertyViewSummaryHelper.SaleTransferableLoan(Model.Listing)
+	            </div>
+            }
+            else if (Model.Listing.IntentionOfOwner == IntentionOfOwner.ForRent)
+            {
+                if (Model.Listing.RentConditions != null && Model.Listing.RentConditions.Rent.HasValue && Model.Listing.RentConditions.Rent.Value == 0 && Model.Listing.RentConditions.Mortgage.HasValue && Model.Listing.RentConditions.Mortgage.Value != 0)
+                {
+                    <div class="col-xs-12 col-sm-6">@PropertyViewSummaryHelper.MortgageAndRentConvertible(Model.Listing)</div>
+                    <div class="col-xs-12 col-sm-6">@PropertyViewSummaryHelper.RentFullMortgage(Model.Listing)</div>
+                }
+                else
+                {
+                    <div class="col-xs-12 col-sm-4">@PropertyViewSummaryHelper.MortgageAndRentConvertible(Model.Listing)</div>
+	                <div class="col-xs-12 col-sm-4">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.RentMortgage(Model.Listing), "ودیعه: ؟")</div>
+	                <div class="col-xs-12 col-sm-4">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.RentMonthly(Model.Listing), "ماهانه: ؟")</div>
+	            }
+	            <br/>
+            
+            }
+
+	        <br/>
+	        <hr/>
+	        <div class="col-xs-12 col-sm-12" style="font-weight: normal;">
+	            <div class="col-xs-12 col-sm-6">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.AgencyListing(Model.Listing), "واسط: ؟")</div>
+                <div class="col-xs-12 col-sm-6">@HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.AgencyActivityAllowed(Model.Listing), "واسط: ؟")</div>
+            </div>
+	    </div>
+        <hr />
+
+
+
+	    <div>محل:</div>
+        <div>
+            <span class="bold"> @HtmlPresentationHelper.IfNotSpecified(PropertyViewSummaryHelper.Location(Model.Listing, vicinityCache), "محل : ؟")</span><br />
+        </div>
+        <div>@Html.Partial("_Property/View/ViewPropertyLocation", PropertyLocationModel.CreateFromDto(Model.Listing, Model.IsOwner))</div>
+    
+
+    </div>
+</div>

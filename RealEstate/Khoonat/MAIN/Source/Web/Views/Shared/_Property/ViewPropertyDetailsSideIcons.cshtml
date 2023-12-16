@@ -1,0 +1,83 @@
+﻿@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Audit
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyViewDetailsModel
+
+<div class="col-xs-3 col-sm-12" data-toggle="tooltip" title="اضافه / حذف ملک به / از فهرست املاک برگزیده">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button class="fav-toggle @(Model.ListingSummary.IsFavoritedByUser ? "favorited" : "") btn btn-primary" data-property-id="@Model.ListingSummary.ID">
+            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+            <span class="hidden-xs hidden-sm">نشان دار: </span>
+            <span class="favCount" data-property-id="@Model.ListingSummary.ID">@Model.ListingSummary.TimesFavorited</span>
+        </button>
+    }
+    else
+    {
+        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#featureNeedsAuthentication">
+            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+            <span class="hidden-xs hidden-sm">نشان دار: </span>
+            <span>@Model.ListingSummary.TimesFavorited</span>
+        </button>
+    }
+</div>
+
+@if (!Model.IsOwner)
+{
+    <div class="col-xs-3 col-sm-12" data-toggle="tooltip" title="فعال سازی منوی مدیریت آگهی و امکان ویرایش">
+        <button class="btn btn-primary" data-ajax-modal="@Url.Action("EnableEdit", "Property", new {id = Model.Listing.ID, Area = AreaNames.Main})">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <span class="hidden-xs hidden-sm">ویرایش</span>
+        </button>
+    </div>
+
+    <div class="col-xs-3 col-sm-12" data-toggle="tooltip" title="گزارش اشتباه در اطلاعات، ملک فروش رفته، یا دارای مشکل">
+        <button class="btn btn-primary" data-ajax-modal="@Url.Action("ReportAbuse", "UserFeedback", new {entityType = AbuseFlagEntityType.PropertyListing.ToString(), entityId = Model.Listing.ID, Area = AreaNames.Main})">
+            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+            <span class="hidden-xs hidden-sm">شکایت</span>
+        </button>
+    </div>
+}
+
+
+<div class="col-xs-3 col-sm-12 btn-group btn-block" data-toggle="tooltip" title="ارسال اطلاعات ملک به دوست با استفاده از">
+        <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+            <span class="hidden-xs hidden-sm">اشتراک گذاری</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a data-ajax-modal="@Url.Action("SharePropertyListing", "Property", new {propertyListingID = Model.Listing.ID, area = AreaNames.Main})">
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    <span> ایمیل</span> 
+                </a></li>
+            <li>
+                <a href="https://plus.google.com/share?url=https://www.khoonat.com@(Url.Action("viewdetails", "Property" , new {id=Model.ListingSummary.ID}))" onclick="javascript:window.open(this.href,
+                    '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                    <img src="https://www.gstatic.com/images/icons/gplus-16.png" alt="اشتراک گذاری" />
+                    <span> گوگل پلاس</span>
+                </a>
+                
+
+            </li>
+        </ul>
+</div>
+
+@if (Model.Listing.OwnerUserLoginName.HasText())
+{
+    <div class="col-xs-3 col-sm-12 " data-toggle="tooltip" title="مشاهده مشخصات کاربر ثبت کننده اطلاعات ملک: @Model.Listing.OwnerUserDisplayName">
+        <a class="btn btn-primary ellipsis-overflow" href="@Url.Action("View", "PublicProfile", new {loginName = Model.Listing.OwnerUserLoginName, area = AreaNames.Main})">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <span class="hidden-xs hidden-sm">@Model.Listing.OwnerUserDisplayName</span>
+        </a>
+    </div>
+}
+
+@(this.ScriptBlock(@<script>
+    $(function () {
+        //Google +1
+        $.getScript("http://apis.google.com/js/plusone.js", null, true);
+    });
+
+    </script>))

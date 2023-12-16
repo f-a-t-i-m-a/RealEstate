@@ -1,0 +1,1080 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbuseFlagReason_HasIncorrectOrMisleadingInformation" xml:space="preserve">
+    <value>دارای اطلاعات نادرست یا گمراه کننده است</value>
+  </data>
+  <data name="AbuseFlagReason_IsAbusiveOrHasSecurityRisk" xml:space="preserve">
+    <value>محل سوء استفاده یا حمله امنیتی است</value>
+  </data>
+  <data name="AbuseFlagReason_IsOffensive" xml:space="preserve">
+    <value>توهین آمیز یا برخواسته از تنفر است</value>
+  </data>
+  <data name="AbuseFlagReason_IsSpam" xml:space="preserve">
+    <value>هرزنامه است</value>
+  </data>
+  <data name="AbuseFlagReason_NeedsModeratorAttention" xml:space="preserve">
+    <value>نیار به توجه مدیر سایت دارد</value>
+  </data>
+  <data name="BuildingFaceType_CompositePanel" xml:space="preserve">
+    <value>پانل کامپوزیت</value>
+  </data>
+  <data name="BuildingFaceType_StoneAndBrick" xml:space="preserve">
+    <value>سنگ و آجر</value>
+  </data>
+  <data name="BuildingFaceType_Wood" xml:space="preserve">
+    <value>چوب</value>
+  </data>
+  <data name="BuildingFaceType_Glass" xml:space="preserve">
+    <value>شیشه</value>
+  </data>
+  <data name="BuildingFaceType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="BuildingFaceType_Brick" xml:space="preserve">
+    <value>آجر</value>
+  </data>
+  <data name="BuildingFaceType_Concrete" xml:space="preserve">
+    <value>سیمان</value>
+  </data>
+  <data name="BuildingFaceType_Stone" xml:space="preserve">
+    <value>سنگ</value>
+  </data>
+  <data name="BuildingRoofCoverType_Isogam" xml:space="preserve">
+    <value>ایزوگام</value>
+  </data>
+  <data name="BuildingRoofCoverType_Mosaic" xml:space="preserve">
+    <value>موزاییک</value>
+  </data>
+  <data name="BuildingRoofCoverType_Asphalt" xml:space="preserve">
+    <value>آسفالت</value>
+  </data>
+  <data name="BuildingRoofCoverType_GableWithTin" xml:space="preserve">
+    <value>شیب دار با حلبی</value>
+  </data>
+  <data name="BuildingRoofCoverType_GableWithArdovaz" xml:space="preserve">
+    <value>شیب دار با آردواز</value>
+  </data>
+  <data name="BuildingRoofCoverType_GableWithSandwitchPanel" xml:space="preserve">
+    <value>شیب دار با ساندویچ پانل</value>
+  </data>
+  <data name="BuildingRoofCoverType_GableWithClay" xml:space="preserve">
+    <value>شیب دار با سفال</value>
+  </data>
+  <data name="BuildingRoofCoverType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="BuildingStructureType_Concrete" xml:space="preserve">
+    <value>اسکلت بتونی</value>
+  </data>
+  <data name="BuildingStructureType_IronBeam" xml:space="preserve">
+    <value>اسکلت فلزی</value>
+  </data>
+  <data name="BuildingStructureType_LoadBearingWall" xml:space="preserve">
+    <value>دیوار باربر</value>
+  </data>
+  <data name="ContactMethodType_Email" xml:space="preserve">
+    <value>آدرس ایمیل</value>
+  </data>
+  <data name="ContactMethodType_Phone" xml:space="preserve">
+    <value>شماره تلفن</value>
+  </data>
+  <data name="ContactRole_Agency" xml:space="preserve">
+    <value>آژانس املاک</value>
+  </data>
+  <data name="ContactRole_Owner" xml:space="preserve">
+    <value>مالک</value>
+  </data>
+  <data name="ContractDuration_Daily" xml:space="preserve">
+    <value>روزانه</value>
+  </data>
+  <data name="ContractDuration_FiveYears" xml:space="preserve">
+    <value>پنج سال</value>
+  </data>
+  <data name="ContractDuration_FourYears" xml:space="preserve">
+    <value>چهار سال</value>
+  </data>
+  <data name="ContractDuration_OneMonth" xml:space="preserve">
+    <value>یک ماه</value>
+  </data>
+  <data name="ContractDuration_OneYear" xml:space="preserve">
+    <value>یک سال</value>
+  </data>
+  <data name="ContractDuration_SixMonths" xml:space="preserve">
+    <value>شش ماه</value>
+  </data>
+  <data name="ContractDuration_ThreeMonths" xml:space="preserve">
+    <value>سه ماه</value>
+  </data>
+  <data name="ContractDuration_ThreeYears" xml:space="preserve">
+    <value>سه سال</value>
+  </data>
+  <data name="ContractDuration_TwoYears" xml:space="preserve">
+    <value>دو سال</value>
+  </data>
+  <data name="CoolingSystemType_CeilingFanCoils" xml:space="preserve">
+    <value>فن کوئل سقفی</value>
+  </data>
+  <data name="CoolingSystemType_EvaporativeCooler" xml:space="preserve">
+    <value>کولر تبخیری (آبی)</value>
+  </data>
+  <data name="CoolingSystemType_FloorFanCoils" xml:space="preserve">
+    <value>فن کوئل زمینی</value>
+  </data>
+  <data name="CoolingSystemType_None" xml:space="preserve">
+    <value>ندارد</value>
+  </data>
+  <data name="CoolingSystemType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="CoolingSystemType_SingleUnitAirConditioners" xml:space="preserve">
+    <value>کولر گازی یکپارچه</value>
+  </data>
+  <data name="CoolingSystemType_SplitUnitAirConditioners" xml:space="preserve">
+    <value>کولر گازی اسپیلیت</value>
+  </data>
+  <data name="HeatingSystemType_SplitUnitAirConditioners" xml:space="preserve">
+    <value>گرمایش با اسپیلیت</value>
+  </data>
+  <data name="DaylightDirection_East" xml:space="preserve">
+    <value>نور شرق</value>
+  </data>
+  <data name="DaylightDirection_West" xml:space="preserve">
+    <value>نور غرب</value>
+  </data>
+  <data name="DaylightDirection_North" xml:space="preserve">
+    <value>نور شمال</value>
+  </data>
+  <data name="DaylightDirection_South" xml:space="preserve">
+    <value>نور جنوب</value>
+  </data>
+  <data name="DaylightDirection_ViaPatio" xml:space="preserve">
+    <value>نور فقط از نورگیر</value>
+  </data>
+  <data name="DebtGuaranteeType_Cheque" xml:space="preserve">
+    <value>چک برای هر قسط</value>
+  </data>
+  <data name="DebtGuaranteeType_ChequeAndGuaranteeCheque" xml:space="preserve">
+    <value>چک تضمین + چک برای هر قسط</value>
+  </data>
+  <data name="DebtGuaranteeType_None" xml:space="preserve">
+    <value>هیچ</value>
+  </data>
+  <data name="DebtGuaranteeType_ThirdPartyCheque" xml:space="preserve">
+    <value>چک تضمین از شخص ثالث</value>
+  </data>
+  <data name="DeliveryDateSpecificationType_Absolute" xml:space="preserve">
+    <value>در تاریخ مشخصی آماده می شود</value>
+  </data>
+  <data name="DeliveryDateSpecificationType_DaysFromContract" xml:space="preserve">
+    <value>چند روز بعد از عقد قرارداد آماده می شوند</value>
+  </data>
+  <data name="DeliveryDateSpecificationType_Immidiately" xml:space="preserve">
+    <value>همین حالا آماده است</value>
+  </data>
+  <data name="EstateDirection_North" xml:space="preserve">
+    <value>شمالی</value>
+  </data>
+  <data name="EstateDirection_NorthAndSouth" xml:space="preserve">
+    <value>دو کله</value>
+  </data>
+  <data name="EstateDirection_NotSelected" xml:space="preserve">
+    <value>----</value>
+  </data>
+  <data name="EstateDirection_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="EstateDirection_South" xml:space="preserve">
+    <value>جنوبی</value>
+  </data>
+  <data name="EstateSlopeAmount_Flat" xml:space="preserve">
+    <value>بدون شیب</value>
+  </data>
+  <data name="EstateSlopeAmount_LessThan10Percent" xml:space="preserve">
+    <value>شیب بین 5 الی 10 درصد</value>
+  </data>
+  <data name="EstateSlopeAmount_LessThan20Percent" xml:space="preserve">
+    <value>شیب بین 10 الی 20 درصد</value>
+  </data>
+  <data name="EstateSlopeAmount_LessThan5Percent" xml:space="preserve">
+    <value>شیب کمتر یا مساوی 5 درصد</value>
+  </data>
+  <data name="EstateSlopeAmount_MoreThan20Percent" xml:space="preserve">
+    <value>شیب بیشتر از 20 درصد</value>
+  </data>
+  <data name="EstateSurfaceType_Dej" xml:space="preserve">
+    <value>دج</value>
+  </data>
+  <data name="EstateSurfaceType_Clay" xml:space="preserve">
+    <value>رسی</value>
+  </data>
+  <data name="EstateSurfaceType_Rock" xml:space="preserve">
+    <value>سنگی یا صخره ای</value>
+  </data>
+  <data name="EstateSurfaceType_Grit" xml:space="preserve">
+    <value>شنی یا ماسه ای</value>
+  </data>
+  <data name="EstateSurfaceType_Soil" xml:space="preserve">
+    <value>خاک زراعی</value>
+  </data>
+  <data name="EstateSurfaceType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="EstateVoucherType_Cooperative" xml:space="preserve">
+    <value>تعاونی</value>
+  </data>
+  <data name="EstateVoucherType_Normal" xml:space="preserve">
+    <value>شش دانگ منگوله دار</value>
+  </data>
+  <data name="EstateVoucherType_BreakDownVoucher" xml:space="preserve">
+    <value>تفکیکی</value>
+  </data>
+  <data name="EstateVoucherType_Owghaf" xml:space="preserve">
+    <value>اوقافی</value>
+  </data>
+  <data name="EstateVoucherType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="EstateVoucherType_WithoutVoucher" xml:space="preserve">
+    <value>بدون سند رسمی</value>
+  </data>
+  <data name="FloorCoverType_Ceramic" xml:space="preserve">
+    <value>سرامیک</value>
+  </data>
+  <data name="FloorCoverType_Mosaic" xml:space="preserve">
+    <value>موزاییک</value>
+  </data>
+  <data name="FloorCoverType_Parquet" xml:space="preserve">
+    <value>پارکت</value>
+  </data>
+  <data name="FloorCoverType_Stone" xml:space="preserve">
+    <value>سنگ</value>
+  </data>
+  <data name="FloorCoverType_Moquette" xml:space="preserve">
+    <value>موکت</value>
+  </data>
+  <data name="FloorCoverType_Laminate" xml:space="preserve">
+    <value>لمینیت</value>
+  </data>
+  <data name="FloorCoverType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="GeographicDirection_East" xml:space="preserve">
+    <value>شرق</value>
+  </data>
+  <data name="GeographicDirection_North" xml:space="preserve">
+    <value>شمال</value>
+  </data>
+  <data name="GeographicDirection_NorthEast" xml:space="preserve">
+    <value>شمال شرقی</value>
+  </data>
+  <data name="GeographicDirection_NorthWest" xml:space="preserve">
+    <value>شمال غربی</value>
+  </data>
+  <data name="GeographicDirection_NotSelected" xml:space="preserve">
+    <value>-- انتخاب کنید --</value>
+  </data>
+  <data name="GeographicDirection_South" xml:space="preserve">
+    <value>جنوب</value>
+  </data>
+  <data name="GeographicDirection_SouthEast" xml:space="preserve">
+    <value>جنوب شرقی</value>
+  </data>
+  <data name="GeographicDirection_SouthWest" xml:space="preserve">
+    <value>جنوب غربی</value>
+  </data>
+  <data name="GeographicDirection_West" xml:space="preserve">
+    <value>غرب</value>
+  </data>
+  <data name="HeatingSystemType_CeilingFanCoils" xml:space="preserve">
+    <value>فن کوئل سقفی</value>
+  </data>
+  <data name="HeatingSystemType_ElectricHeaters" xml:space="preserve">
+    <value>بخاری برقی</value>
+  </data>
+  <data name="HeatingSystemType_FloorFanCoils" xml:space="preserve">
+    <value>فن کوئل زمینی</value>
+  </data>
+  <data name="HeatingSystemType_WallMountFanCoils" xml:space="preserve">
+    <value>فن کوئل دیواری</value>
+  </data>
+  <data name="CoolingSystemType_WallMountFanCoils" xml:space="preserve">
+    <value>فن کوئل دیواری</value>
+  </data>
+  <data name="HeatingSystemType_FloorPipes" xml:space="preserve">
+    <value>گرمایش از کف</value>
+  </data>
+  <data name="HeatingSystemType_GasBurningHeaters" xml:space="preserve">
+    <value>بخاری گازی</value>
+  </data>
+  <data name="HeatingSystemType_None" xml:space="preserve">
+    <value>ندارد</value>
+  </data>
+  <data name="HeatingSystemType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="HeatingSystemType_Radiators" xml:space="preserve">
+    <value>رادیاتور</value>
+  </data>
+  <data name="IntentionOfOwner_ForRent" xml:space="preserve">
+    <value>اجاره</value>
+  </data>
+  <data name="IntentionOfOwner_ForSale" xml:space="preserve">
+    <value>فروش</value>
+  </data>
+  <data name="IntentionOfRequester_ForBuy" xml:space="preserve">
+    <value>خرید</value>
+  </data>
+  <data name="IntentionOfRequester_ForPreBuy" xml:space="preserve">
+    <value>پیش خرید</value>
+  </data>
+  <data name="IntentionOfRequester_ForRent" xml:space="preserve">
+    <value>اجاره</value>
+  </data>
+  <data name="PriceSpecificationType_PerEstateArea" xml:space="preserve">
+    <value>قیمت هر متر مربع از زمین</value>
+  </data>
+  <data name="PriceSpecificationType_PerUnitArea" xml:space="preserve">
+    <value>قیمت هر متر مربع از بنا</value>
+  </data>
+  <data name="PriceSpecificationType_Total" xml:space="preserve">
+    <value>قیمت کل</value>
+  </data>
+  <data name="PropertyStatus_Emptied" xml:space="preserve">
+    <value>تخلیه</value>
+  </data>
+  <data name="PropertyStatus_InConstruction" xml:space="preserve">
+    <value>درحال ساخت</value>
+  </data>
+  <data name="PropertyStatus_NoOccupantYet" xml:space="preserve">
+    <value>کلید نخورده</value>
+  </data>
+  <data name="PropertyStatus_OccupiedByOwner" xml:space="preserve">
+    <value>در اختیار مالک</value>
+  </data>
+  <data name="PropertyStatus_OccupiedByRenter" xml:space="preserve">
+    <value>در اختیار مستاجر</value>
+  </data>
+  <data name="PropertyType_Apartment" xml:space="preserve">
+    <value>آپارتمان</value>
+  </data>
+  <data name="PropertyType_Garden" xml:space="preserve">
+    <value>باغ یا باغچه</value>
+  </data>
+  <data name="PropertyType_House" xml:space="preserve">
+    <value>خانه مستقل</value>
+  </data>
+  <data name="PropertyType_Land" xml:space="preserve">
+    <value>زمین</value>
+  </data>
+  <data name="PropertyType_NotSelected" xml:space="preserve">
+    <value>-- انتخاب کنید --</value>
+  </data>
+  <data name="PropertyType_Penthouse" xml:space="preserve">
+    <value>پنت هاوس</value>
+  </data>
+  <data name="PropertyType_Villa" xml:space="preserve">
+    <value>ویلا</value>
+  </data>
+  <data name="UnitUsageType_Office" xml:space="preserve">
+    <value>اداری</value>
+  </data>
+  <data name="UnitUsageType_Residency" xml:space="preserve">
+    <value>مسکونی</value>
+  </data>
+  <data name="UnitUsageType_ResidencyWithOfficeSituation" xml:space="preserve">
+    <value>موقعیت اداری</value>
+  </data>
+  <data name="UnitUsageType_Shop" xml:space="preserve">
+    <value>تجاری (مغازه)</value>
+  </data>
+  <data name="VisibilityLevel_ActivatedUsers" xml:space="preserve">
+    <value>کاربران فعال سازی شده</value>
+  </data>
+  <data name="VisibilityLevel_AllUsers" xml:space="preserve">
+    <value>کاربران ثبت نام شده</value>
+  </data>
+  <data name="VisibilityLevel_Everybody" xml:space="preserve">
+    <value>همه بازدید کنندگان</value>
+  </data>
+  <data name="VisibilityLevel_System" xml:space="preserve">
+    <value>هیچ کس (فقط سیستم)</value>
+  </data>
+  <data name="WallCoverType_Paint" xml:space="preserve">
+    <value>رنگ</value>
+  </data>
+  <data name="WallCoverType_Wallpaper" xml:space="preserve">
+    <value>کاغذ دیواری</value>
+  </data>
+  <data name="WallCoverType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="WindowType_Iron" xml:space="preserve">
+    <value>آهنی</value>
+  </data>
+  <data name="WindowType_Aluminium" xml:space="preserve">
+    <value>آلمینیومی</value>
+  </data>
+  <data name="WindowType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="WindowType_Upvc" xml:space="preserve">
+    <value>یو پی وی سی</value>
+  </data>
+  <data name="WindowType_Wooden" xml:space="preserve">
+    <value>چوبی</value>
+  </data>
+  <data name="KitchenCabinetBodyType_MetalWithMetalDoors" xml:space="preserve">
+    <value>تمام فلزی</value>
+  </data>
+  <data name="KitchenCabinetBodyType_MetalWithMdfDoors" xml:space="preserve">
+    <value>فلزی با درب ام دی اف</value>
+  </data>
+  <data name="KitchenCabinetBodyType_MetalWithWoodenDoors" xml:space="preserve">
+    <value>فلزی با درب چوبی</value>
+  </data>
+  <data name="KitchenCabinetBodyType_MdfWithMdfDoors" xml:space="preserve">
+    <value>تمام ام دی اف</value>
+  </data>
+  <data name="KitchenCabinetBodyType_WoodenWithWoodenDoors" xml:space="preserve">
+    <value>تمام چوب</value>
+  </data>
+  <data name="KitchenCabinetBodyType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="KitchenCabinetTopType_Mdf" xml:space="preserve">
+    <value>ام دی اف</value>
+  </data>
+  <data name="KitchenCabinetTopType_Stone" xml:space="preserve">
+    <value>سنگ</value>
+  </data>
+  <data name="KitchenCabinetTopType_ArtificialStone" xml:space="preserve">
+    <value>سنگ مصنوعی</value>
+  </data>
+  <data name="KitchenCabinetTopType_Korean" xml:space="preserve">
+    <value>کورین</value>
+  </data>
+  <data name="KitchenCabinetTopType_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Indoor" xml:space="preserve">
+    <value>داخل واحد</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Room" xml:space="preserve">
+    <value>داخل واحد - اتاق ها</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_LivingRoom" xml:space="preserve">
+    <value>داخل واحد - هال یا پذیرایی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_StorageRoomIndoor" xml:space="preserve">
+    <value>داخل واحد - انباری</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Patio" xml:space="preserve">
+    <value>داخل واحد - پاسیو</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Bathroom" xml:space="preserve">
+    <value>داخل واحد - حمام</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Lavatory" xml:space="preserve">
+    <value>داخل واحد - دستشویی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Kitchen" xml:space="preserve">
+    <value>داخل واحد - آشپزخانه</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_KitchenCabinet" xml:space="preserve">
+    <value>داخل واحد - آشپزخانه - کابینت ها</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_KitchenFurniture" xml:space="preserve">
+    <value>داخل واحد - آشپزخانه - تجهیزات</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Valves" xml:space="preserve">
+    <value>داخل واحد - شیرآلات</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Window" xml:space="preserve">
+    <value>داخل واحد - پنجره ها</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Closet" xml:space="preserve">
+    <value>داخل واحد - کمد ها</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Furniture" xml:space="preserve">
+    <value>داخل واحد - مبلمان</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_BuildingFacilities" xml:space="preserve">
+    <value>امکانات ساختمان</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_EntranceLobby" xml:space="preserve">
+    <value>امکانات ساختمان - لابی ورودی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Elevator" xml:space="preserve">
+    <value>امکانات ساختمان - آسانسور</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Staircase" xml:space="preserve">
+    <value>امکانات ساختمان - پاگردها</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_GatheringHall" xml:space="preserve">
+    <value>امکانات ساختمان - سالن اجتماعات</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Parking" xml:space="preserve">
+    <value>امکانات ساختمان - پارکینگ</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Basement" xml:space="preserve">
+    <value>امکانات ساختمان - زیرزمین</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_StorageRoomInBasement" xml:space="preserve">
+    <value>امکانات ساختمان - انباری ها</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Utilities" xml:space="preserve">
+    <value>امکانات ساختمان - تاسیسات</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_SwimmingPool" xml:space="preserve">
+    <value>امکانات ساختمان - استخر</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Sauna" xml:space="preserve">
+    <value>امکانات ساختمان - سونا</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Jaccuzi" xml:space="preserve">
+    <value>امکانات ساختمان - جکوزی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Gym" xml:space="preserve">
+    <value>امکانات ساختمان - سالن ورزشی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Outdoor" xml:space="preserve">
+    <value>بیرون ساختمان</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Balcony" xml:space="preserve">
+    <value>بیرون ساختمان - بالکن ها</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_View" xml:space="preserve">
+    <value>بیرون ساختمان - نمای بیرون واحد</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_BuildingFace" xml:space="preserve">
+    <value>بیرون ساختمان - نمای ساختمان</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Roof" xml:space="preserve">
+    <value>بیرون ساختمان - پشت بام</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Garden" xml:space="preserve">
+    <value>بیرون ساختمان - حیاط</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_GardenPlants" xml:space="preserve">
+    <value>بیرون ساختمان - حیاط - گل و گیاه</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Entrance" xml:space="preserve">
+    <value>اطراف ساختمان - ورودی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Passage" xml:space="preserve">
+    <value>اطراف ساحتمان - کوچه یا خیابان</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Neighborhood" xml:space="preserve">
+    <value>اطراف ساختمان - بناهای مجاور</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Construction" xml:space="preserve">
+    <value>فرآیند ساخت</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_ConstructionDigging" xml:space="preserve">
+    <value>فرآیند ساخت - گود برداری</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_ConstructionFoundation" xml:space="preserve">
+    <value>فرآیند ساخت - پی ریزی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_ConstructionSkeleton" xml:space="preserve">
+    <value>فرآیند ساخت - اسکلت ساختمان</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_ConstructionWalls" xml:space="preserve">
+    <value>فرآیند ساخت - دیوار چینی</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_ConstructionUtilities" xml:space="preserve">
+    <value>فرآیند ساخت - تاسیسات</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_EstateSurface" xml:space="preserve">
+    <value>زمین - پوشش زمین</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_EstatePlants" xml:space="preserve">
+    <value>زمین - درختان و گیاهان</value>
+  </data>
+  <data name="PropertyListingPhotoSubject_Other" xml:space="preserve">
+    <value>سایر</value>
+  </data>
+  <data name="OutgoingSmsMessageState_InQueue" xml:space="preserve">
+    <value>در صف ازسال</value>
+  </data>
+  <data name="OutgoingSmsMessageState_Transmitting" xml:space="preserve">
+    <value>در حال ارسال</value>
+  </data>
+  <data name="OutgoingSmsMessageState_AwaitingDelivery" xml:space="preserve">
+    <value>ارسال شده</value>
+  </data>
+  <data name="OutgoingSmsMessageState_ErrorInTransmission" xml:space="preserve">
+    <value>خطا در ارسال</value>
+  </data>
+  <data name="OutgoingSmsMessageState_NotDelivered" xml:space="preserve">
+    <value>نرسیده به گوشی</value>
+  </data>
+  <data name="OutgoingSmsMessageState_DeliveryUnknown" xml:space="preserve">
+    <value>دلیوری نامشخص</value>
+  </data>
+  <data name="OutgoingSmsMessageState_Delivered" xml:space="preserve">
+    <value>رسیده به گوشی</value>
+  </data>
+  <data name="NotificationSourceEntityType_None" xml:space="preserve">
+    <value>بدون مرجع</value>
+  </data>
+  <data name="NotificationSourceEntityType_User" xml:space="preserve">
+    <value>کاربر</value>
+  </data>
+  <data name="NotificationSourceEntityType_UserContactMethod" xml:space="preserve">
+    <value>روش تماس کاربر</value>
+  </data>
+  <data name="NotificationSourceEntityType_UserContactMethodVerification" xml:space="preserve">
+    <value>فعال سازی روش تماس</value>
+  </data>
+  <data name="NotificationSourceEntityType_PasswordResetRequest" xml:space="preserve">
+    <value>درخواست تنظیم مجدد کلمه عبور</value>
+  </data>
+  <data name="NotificationSourceEntityType_PropertyListing" xml:space="preserve">
+    <value>اطلاعات ملک</value>
+  </data>
+  <data name="NotificationSourceEntityType_PropertyListingPublishHistory" xml:space="preserve">
+    <value>تاریخچه تغییر اطلاعات ملک</value>
+  </data>
+  <data name="NotificationSourceEntityType_SavedPropertySearchSmsNotification" xml:space="preserve">
+    <value>پیامک ملک جهت جستجوی ذخیره شده</value>
+  </data>
+  <data name="NotificationSourceEntityType_PromotionalBonus" xml:space="preserve">
+    <value>تخفیف تعلق گرفته</value>
+  </data>
+  <data name="NotificationReason_General" xml:space="preserve">
+    <value>عمومی</value>
+  </data>
+  <data name="NotificationReason_UserRegistered" xml:space="preserve">
+    <value>ثبت نام کاربر</value>
+  </data>
+  <data name="NotificationReason_ContactMethodVerification" xml:space="preserve">
+    <value>فعال سازی روش تماس</value>
+  </data>
+  <data name="NotificationReason_PasswordResetRequest" xml:space="preserve">
+    <value>درخواست تنظیم مجدد کلمه عبور</value>
+  </data>
+  <data name="NotificationReason_LoginNameQuery" xml:space="preserve">
+    <value>درخواست نام کاربری</value>
+  </data>
+  <data name="NotificationReason_PasswordRecoveryStarted" xml:space="preserve">
+    <value>هشدار آغاز تنظیم مجدد کلمه عبور</value>
+  </data>
+  <data name="NotificationReason_NonRegisteredEmailUsedForPasswordRecovery" xml:space="preserve">
+    <value>هشدار استفاده از ایمیل نامرتبط با حساب</value>
+  </data>
+  <data name="NotificationReason_NonVerifiedEmailUsedForPasswordRecovery" xml:space="preserve">
+    <value>هشدار استفاده از ایمیل فعال نشده</value>
+  </data>
+  <data name="NotificationReason_PasswordRecoveryComplete" xml:space="preserve">
+    <value>تکمیل تنظیم مجدد کلمه عبور</value>
+  </data>
+  <data name="NotificationReason_AccountHasBeenLocked" xml:space="preserve">
+    <value>حساب کاربری قفل شده</value>
+  </data>
+  <data name="NotificationReason_AccountHasBeenDisabled" xml:space="preserve">
+    <value>حساب کاربری غیر فعال شده</value>
+  </data>
+  <data name="NotificationReason_ListingRegistered" xml:space="preserve">
+    <value>ثبت ملک</value>
+  </data>
+  <data name="NotificationReason_ListingAboutToExpire" xml:space="preserve">
+    <value>اتمام زمان انتشار ملک</value>
+  </data>
+  <data name="NotificationReason_NewSavedSearchResult" xml:space="preserve">
+    <value>نتیجه جدید برای جستجوی ذخیره شده</value>
+  </data>
+  <data name="NotificationReason_BalanceRunningLow" xml:space="preserve">
+    <value>موجودی نزدیک به اتمام</value>
+  </data>
+  <data name="NotificationReason_BalanceDepleted" xml:space="preserve">
+    <value>موجودی تمام شده</value>
+  </data>
+  <data name="NotificationReason_PaymentReceived" xml:space="preserve">
+    <value>پرداخت وجه</value>
+  </data>
+  <data name="NotificationReason_UnreadChatMessages" xml:space="preserve">
+    <value>گپ خوانده نشده</value>
+  </data>
+  <data name="NotificationReason_AdministrativeNotification" xml:space="preserve">
+    <value>پیغام مدیریتی</value>
+  </data>
+  <data name="NotificationReason_OperatorRequest" xml:space="preserve">
+    <value>درخواست اپراتور</value>
+  </data>
+  <data name="NotificationReason_Advertisement" xml:space="preserve">
+    <value>تبلیغات</value>
+  </data>
+  <data name="NotificationReason_BonusNotification" xml:space="preserve">
+    <value>اطلاع رسانی تخفیف</value>
+  </data>
+  <data name="NotificationReason_Unknown" xml:space="preserve">
+    <value>موضوع نامشخص</value>
+  </data>
+  <data name="BillingSourceEntityState_Applied" xml:space="preserve">
+    <value>اعمال شده</value>
+  </data>
+  <data name="BillingSourceEntityState_Cancelled" xml:space="preserve">
+    <value>لغو شده</value>
+  </data>
+  <data name="BillingSourceEntityState_Pending" xml:space="preserve">
+    <value>در انتظار</value>
+  </data>
+  <data name="BillingSourceEntityState_Reversed" xml:space="preserve">
+    <value>بازگردانده شده</value>
+  </data>
+  <data name="UserBillingSourceType_UserWireTransferPayment" xml:space="preserve">
+    <value>پرداخت کارت به کارت</value>
+  </data>
+  <data name="UserBillingSourceType_UserElectronicPayment" xml:space="preserve">
+    <value>پرداخت الکترونیکی</value>
+  </data>
+  <data name="UserBillingSourceType_PromotionalBonus" xml:space="preserve">
+    <value>افزایش تخفیف</value>
+  </data>
+  <data name="UserBillingSourceType_PromotionalBonusCoupon" xml:space="preserve">
+    <value>ثبت کارت تخفیف</value>
+  </data>
+  <data name="UserBillingSourceType_SavedSearchSmsNotificationBilling" xml:space="preserve">
+    <value>پیامک خبر رسانی</value>
+  </data>
+  <data name="UserBillingSourceType_SavedPropertySearchPromotionalSms" xml:space="preserve">
+    <value>پیامک تبلغاتی</value>
+  </data>
+  <data name="UserBillingSourceType_UserRefundRequest" xml:space="preserve">
+    <value>درخواست بازپرداخت</value>
+  </data>
+  <data name="UserBillingSourceType_SavedPropertySearchPromotionalSmsNotDeliveredReturn" xml:space="preserve">
+    <value>بازگشت پیامک تبلیغاتی</value>
+  </data>
+  <data name="UserBillingSourceType_UserBalanceAdministrativeChange" xml:space="preserve">
+    <value>تغییر اپراتوری</value>
+  </data>
+  <data name="PromotionalBonusReason_Misc" xml:space="preserve">
+    <value>سایر / نامشخص</value>
+  </data>
+  <data name="PromotionalBonusReason_NewAccountSignup" xml:space="preserve">
+    <value>جایزه ثبت نام</value>
+  </data>
+  <data name="PromotionalBonusReason_OperatorRequest" xml:space="preserve">
+    <value>درخواست اپراتور</value>
+  </data>
+  <data name="RecurringTaskStartupMode_Automatic" xml:space="preserve">
+    <value>خودکار</value>
+  </data>
+  <data name="RecurringTaskStartupMode_Disabled" xml:space="preserve">
+    <value>غیر فعال</value>
+  </data>
+  <data name="RecurringTaskStartupMode_Manual" xml:space="preserve">
+    <value>فقط دستی</value>
+  </data>
+  <data name="UserBillingSourceType_SponsoredEntityImpressionBilling" xml:space="preserve">
+    <value>نمایش آگهی</value>
+  </data>
+  <data name="UserBillingSourceType_" xml:space="preserve">
+    <value />
+  </data>
+  <data name="VicinityType_Airport" xml:space="preserve">
+    <value>فرودگاه</value>
+  </data>
+  <data name="VicinityType_Alley" xml:space="preserve">
+    <value>کوچه</value>
+  </data>
+  <data name="VicinityType_Block" xml:space="preserve">
+    <value>بلوک</value>
+  </data>
+  <data name="VicinityType_Bridge" xml:space="preserve">
+    <value>پل</value>
+  </data>
+  <data name="VicinityType_Building" xml:space="preserve">
+    <value>ساختمان</value>
+  </data>
+  <data name="VicinityType_Campus" xml:space="preserve">
+    <value>کمپ</value>
+  </data>
+  <data name="VicinityType_City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="VicinityType_CityPartition" xml:space="preserve">
+    <value>بخشی از شهر</value>
+  </data>
+  <data name="VicinityType_CityRegion" xml:space="preserve">
+    <value>منطقه</value>
+  </data>
+  <data name="VicinityType_Complex" xml:space="preserve">
+    <value>مجتمع</value>
+  </data>
+  <data name="VicinityType_Country" xml:space="preserve">
+    <value>کشور</value>
+  </data>
+  <data name="VicinityType_CountryPartition" xml:space="preserve">
+    <value>بخشی از کشور</value>
+  </data>
+  <data name="VicinityType_County" xml:space="preserve">
+    <value>شهرستان</value>
+  </data>
+  <data name="VicinityType_Crossing" xml:space="preserve">
+    <value>تقاطع</value>
+  </data>
+  <data name="VicinityType_District" xml:space="preserve">
+    <value>بخش</value>
+  </data>
+  <data name="VicinityType_HierarchyNode" xml:space="preserve">
+    <value>دسته بندی</value>
+  </data>
+  <data name="VicinityType_Highway" xml:space="preserve">
+    <value>بزرگراه</value>
+  </data>
+  <data name="VicinityType_Hill" xml:space="preserve">
+    <value>تپه</value>
+  </data>
+  <data name="VicinityType_Metropolis" xml:space="preserve">
+    <value>کلان شهر</value>
+  </data>
+  <data name="VicinityType_MetropolisPartition" xml:space="preserve">
+    <value>بخشی از کلان شهر</value>
+  </data>
+  <data name="VicinityType_Neighborhood" xml:space="preserve">
+    <value>محله</value>
+  </data>
+  <data name="VicinityType_Zone" xml:space="preserve">
+    <value>ناحیه</value>
+  </data>
+  <data name="VicinityType_Park" xml:space="preserve">
+    <value>پارک</value>
+  </data>
+  <data name="VicinityType_Premises" xml:space="preserve">
+    <value>محوطه</value>
+  </data>
+  <data name="VicinityType_Province" xml:space="preserve">
+    <value>استان</value>
+  </data>
+  <data name="VicinityType_ProvincePartition" xml:space="preserve">
+    <value>بخشی از استان</value>
+  </data>
+  <data name="VicinityType_River" xml:space="preserve">
+    <value>رودخانه</value>
+  </data>
+  <data name="VicinityType_Road" xml:space="preserve">
+    <value>جاده</value>
+  </data>
+  <data name="VicinityType_Square" xml:space="preserve">
+    <value>میدان</value>
+  </data>
+  <data name="VicinityType_Boulevard" xml:space="preserve">
+    <value>بلوار</value>
+  </data>
+  <data name="VicinityType_FourWay" xml:space="preserve">
+    <value>چهار راه</value>
+  </data>
+  <data name="VicinityType_Tee" xml:space="preserve">
+    <value>سه راه</value>
+  </data>
+  <data name="VicinityType_Exit" xml:space="preserve">
+    <value>خروجی</value>
+  </data>
+  <data name="VicinityType_Landmark" xml:space="preserve">
+    <value>نشانه</value>
+  </data>
+  <data name="VicinityType_State" xml:space="preserve">
+    <value>ایالت</value>
+  </data>
+  <data name="VicinityType_StatePartition" xml:space="preserve">
+    <value>بخشی از ایالت</value>
+  </data>
+  <data name="VicinityType_Station" xml:space="preserve">
+    <value>ایستگاه</value>
+  </data>
+  <data name="VicinityType_Street" xml:space="preserve">
+    <value>خیابان</value>
+  </data>
+  <data name="VicinityType_SubDistrict" xml:space="preserve">
+    <value>دهستان</value>
+  </data>
+  <data name="VicinityType_Suburb" xml:space="preserve">
+    <value>حومه</value>
+  </data>
+  <data name="VicinityType_Tower" xml:space="preserve">
+    <value>برج</value>
+  </data>
+  <data name="VicinityType_Town" xml:space="preserve">
+    <value>شهرک</value>
+  </data>
+  <data name="VicinityType_Valley" xml:space="preserve">
+    <value>دره</value>
+  </data>
+  <data name="VicinityType_Village" xml:space="preserve">
+    <value>روستا</value>
+  </data>
+  <data name="VicinityType_Phase" xml:space="preserve">
+    <value>فاز</value>
+  </data>
+  <data name="PropertyType_Shop" xml:space="preserve">
+    <value>مغازه</value>
+  </data>
+  <data name="ArticleDisplayType_FullPage" xml:space="preserve">
+    <value>کل صفحه</value>
+  </data>
+  <data name="ArticleDisplayType_PageContent" xml:space="preserve">
+    <value>محتوای صفحه</value>
+  </data>
+  <data name="ArticleDisplayType_PagePartial" xml:space="preserve">
+    <value>قسمتی از صفحه</value>
+  </data>
+  <data name="ArticleDisplayType_Tooltip" xml:space="preserve">
+    <value>تولتیپ</value>
+  </data>
+  <data name="UserBillingSourceType_SponsoredEntityClickBilling" xml:space="preserve">
+    <value>کلیک آگهی</value>
+  </data>
+  <data name="NotificationSourceEntityType_NotificationMessage" xml:space="preserve">
+    <value>اخطار</value>
+  </data>
+  <data name="NotificationSourceEntityType_SponsoredEntity" xml:space="preserve">
+    <value>آگهی</value>
+  </data>
+  <data name="NotificationSeverity_Critical" xml:space="preserve">
+    <value>بحرانی</value>
+  </data>
+  <data name="NotificationSeverity_Major" xml:space="preserve">
+    <value>زیاد</value>
+  </data>
+  <data name="NotificationSeverity_Minor" xml:space="preserve">
+    <value>کم</value>
+  </data>
+  <data name="NotificationSeverity_Normal" xml:space="preserve">
+    <value>عادی</value>
+  </data>
+  <data name="NotificationSeverity_Trivial" xml:space="preserve">
+    <value>جزئی</value>
+  </data>
+  <data name="UserType_AgencyAgent" xml:space="preserve">
+    <value>کاربر آژانس</value>
+  </data>
+  <data name="UserType_IndependentAgent" xml:space="preserve">
+    <value>مشاور مستقل</value>
+  </data>
+  <data name="UserType_NormalUser" xml:space="preserve">
+    <value>کاربر عادی</value>
+  </data>
+  <data name="UserType_IndependentAgencyMember" xml:space="preserve">
+    <value>مشاور عضو آژانس</value>
+  </data>
+</root>

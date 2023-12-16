@@ -1,0 +1,30 @@
+﻿@using JahanJooy.Common.Util.Localization
+@model JahanJooy.RealEstate.Domain.Messages.OutgoingSmsMessage
+
+ارسال: 
+@if (Model.ScheduledDate.HasValue)
+{
+    @Model.ScheduledDate.ToLocalizedDateString()
+    @:
+    @Model.ScheduledDate.ToLocalizedTimeString()
+}
+else
+{
+    @: اولین فرصت
+}
+
+
+@if (Model.ExpirationDate.HasValue)
+{
+    <br/>
+    @: حداکثر:
+    @Model.ExpirationDate.ToLocalizedDateString()
+    @:
+    @Model.ExpirationDate.ToLocalizedTimeString()
+}
+
+@if (Model.AllowTransmissionOnAnyTimeOfDay)
+{
+    <br/>
+    @:هر وقت از شبانه روز
+}

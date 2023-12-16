@@ -1,0 +1,106 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Core.DomainExtensions
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Scripts
+@model PropertyViewDetailsModel
+
+@{
+    var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+    var pageTitle = propertyPresentationHelper.BuildPageTitleString(Model.ListingSummary);
+    ViewBag.Title = pageTitle;
+    ViewBag.MetaDescription = propertyPresentationHelper.BuildPageDescription(Model.ListingSummary, Model.Listing);
+    ViewBag.CanonicalUrl = Url.Action("ViewDetails", "Property", new {id = Model.ListingSummary.ID});
+}
+
+@this.ScriptLibrary(JavaScriptLibraries.JQueryFineUploader)
+@this.StyleLibrary(StyleLibraries.JQueryFineUploader)
+
+@**************************************************************@
+@*** Title and Next/Prev links ********************************@
+@**************************************************************@
+
+@section FullRowTop
+{
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<h1>@pageTitle</h1>
+		</div>
+	</div>
+	@if (Model.PrevUrl.HasText() || Model.NextUrl.HasText() || Model.ReturnUrl.HasText())
+	{
+		<nav>
+			<ul class="pager">
+				<li class="previous @(Model.PrevUrl.IsNullOrWhitespace() ? "disabled" : "")"><a href="@Model.PrevUrl"><span aria-hidden="true">&rarr;</span> قبلی</a></li>
+				<li class="next  @(Model.NextUrl.IsNullOrWhitespace() ? "disabled" : "")"><a href="@Model.NextUrl">بعدی <span aria-hidden="true">&larr;</span></a></li>
+				@if (!Model.ReturnUrl.IsNullOrWhitespace())
+				{
+					<li><a href="@Model.ReturnUrl">&uarr; بازگشت به فهرست</a></li>
+				}
+			</ul>
+		</nav>
+	}
+
+	@* Owner menu *@
+	@if (Model.IsOwner || User.IsOperator)
+	{
+		@Html.Partial("_Property/ViewPropertyDetailsOwnerMenu", Model)
+	}
+
+	@* First row: summary box and side buttons *@
+	<div class="row">
+		
+		@* Side icons *@
+		<div class="col-xs-12 col-sm-2 btn-stack">
+			
+			@if (!Model.IsOwner && !Model.Listing.IsPublic())
+			{
+				<div class="alert alert-danger no-wrap">
+					<span class="glyphicon glyphicon-exclamation-sign"></span>
+					<strong>خصوصی</strong>
+				</div>
+			}
+			
+			@Html.Partial("_Property/ViewPropertyDetailsSideIcons", Model)
+			
+			@Html.Partial("_Property/Sidebar/PropertyCoverPhotoSidebarPartial", Model)
+		</div>
+		
+		@* Summary box *@
+        <div class="col-xs-12 col-sm-10 btn-stack">
+            @Html.Partial("_Property/View/ViewPropertyDetailsSummaryBoxPartial", Model)
+        </div>
+	</div>
+}
+
+@section FullRowBottom
+{
+	@* Second row: detail tabs *@
+	<div class="row">
+		<div class="col-xs-12 col-md-2">
+			@if (Model.IsOwner)
+			{
+				<div>
+					@Html.Partial("_Property/Sidebar/PropertySponsorshipStatusPartial", Model)
+				</div>
+			}
+			
+			@if (Model.IsOwner || User.IsOperator)
+			{
+				<div class="hidden-xs hidden-sm">
+					@Html.Partial("_Property/Sidebar/ViewPropertyDetailsStatusPartial", Model)
+				</div>
+			}
+		</div>
+		<div class="col-xs-12 col-md-10">
+			@Html.Partial("_Property/Tabs/_ViewPropertyDetailsTabs", Model)
+		</div>
+	</div>
+}
+
+
+
+

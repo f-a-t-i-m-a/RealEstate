@@ -1,0 +1,27 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesBrowseModel
+
+<div class="well well-sm">
+	<a class="btn btn-success btn-lg" href="@Url.Action("SaveSearch", "Properties", new {searchString = Model.Search.Query})"
+	   data-toggle="tooltip" title="جستجوی شما توی حساب کاربری تون نگهداری میشه، و هر موقع ملک جدیدی با این شرایط اضافه شد، سایت بهتون ایمیل یا پیامک می زنه.">
+		<h4><span class="glyphicon glyphicon-bell"></span> به من خبر بده</h4>
+	</a>
+    &nbsp;&nbsp;&nbsp;
+    <div class="clearfix visible-xs-block"></div>
+
+	به محض اینکه ملکی با این ویژگی ها پیدا شد به من
+	<strong class="text-info"><span class="glyphicon glyphicon-phone"></span> پیامک و</strong>
+    <strong class="text-info"><span class="glyphicon glyphicon-envelope"></span>ایمیل بزن</strong>
+    
+</div>
+
+@if (!User.IsAuthenticated)
+{
+	@PopupHelper.LocalModal(this, ".saveSearchLink", "#featureNeedsAuthentication")
+	this.ScriptBlock(@<script>
+                          $(".saveSearchLink").click(function(e) {
+                              e.preventDefault();
+                          });
+	</script>);
+}

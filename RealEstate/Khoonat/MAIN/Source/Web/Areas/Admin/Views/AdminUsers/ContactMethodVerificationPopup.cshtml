@@ -1,0 +1,22 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Domain.UserContactMethod
+
+<p>
+    آیا 
+    @Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+    <span class="bold"> @HtmlPresentationHelper.LeftToRight(Model.ContactMethodText)</span>
+    برای کاربر 
+    <span class="bold"> @Model.User.FullName</span>
+   
+     فعال شود ؟
+</p>
+@using (Html.BeginForm("ConfirmContactMethodVerification", "AdminUsers", new { contactMethodId = Model.ID, area = AreaNames.Admin }))
+{
+    <div style="text-align: center; margin: 40px;">
+        <input id="btnOK" name="btnOK" class="button" type="submit" value="تایید" />
+        <input id="btnCancel" class="button" type="button" value="بی خیال" style="width: 120px;" onclick=" $('.qtip:visible').qtip('hide'); " />
+    </div>
+}

@@ -1,0 +1,2447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7036CCBD-A587-4332-971E-363E49503E6E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JahanJooy.RealEstate.Web</RootNamespace>
+    <AssemblyName>JahanJooy.RealEstate.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>..\packages\AForge.2.2.4\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging">
+      <HintPath>..\packages\AForge.Imaging.2.2.4\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math">
+      <HintPath>..\packages\AForge.Math.2.2.4\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxMin">
+      <HintPath>..\packages\AjaxMin.5.11.5295.12309\lib\net40\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BundleTransformer.Core">
+      <HintPath>..\packages\BundleTransformer.Core.1.9.25\lib\net40\BundleTransformer.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BundleTransformer.Less">
+      <HintPath>..\packages\BundleTransformer.Less.1.9.29\lib\net40\BundleTransformer.Less.dll</HintPath>
+    </Reference>
+    <Reference Include="BundleTransformer.MicrosoftAjax">
+      <HintPath>..\packages\BundleTransformer.MicrosoftAjax.1.9.25\lib\net40\BundleTransformer.MicrosoftAjax.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BundleTransformer.TypeScript">
+      <HintPath>..\packages\BundleTransformer.TypeScript.1.9.27\lib\net40\BundleTransformer.TypeScript.dll</HintPath>
+    </Reference>
+    <Reference Include="Compositional.Composer, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL" />
+    <Reference Include="Compositional.Composer.Implementation, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL" />
+    <Reference Include="EFProviderWrapperToolkit">
+      <HintPath>..\packages\CommunityEFProviderWrappers.EFProviderWrapperToolkit.1.0.0\lib\net40-Client\EFProviderWrapperToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="EFTracingProvider">
+      <HintPath>..\packages\CommunityEFProviderWrappers.EFTracingProvider.1.0.0\lib\net40-Client\EFTracingProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc">
+      <HintPath>..\packages\Elmah.MVC.2.0.2\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentScheduler">
+      <HintPath>..\packages\FluentScheduler.2.0.39\lib\net40\FluentScheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.AdvancedFilters">
+      <HintPath>..\packages\ImageResizer.Plugins.AdvancedFilters.3.3.3\lib\ImageResizer.Plugins.AdvancedFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.SimpleFilters">
+      <HintPath>..\packages\ImageResizer.Plugins.SimpleFilters.3.3.3\lib\ImageResizer.Plugins.SimpleFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Watermark">
+      <HintPath>..\packages\ImageResizer.Plugins.Watermark.3.3.3\lib\ImageResizer.Plugins.Watermark.dll</HintPath>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Core">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.2.0\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Msie">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Msie.1.2.0\lib\net40\JavaScriptEngineSwitcher.Msie.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownDeep, Version=1.5.4615.26275, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MarkdownDeep.Full.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MsieJavaScriptEngine">
+      <HintPath>..\packages\MsieJavaScriptEngine.1.5.0\lib\net40\MsieJavaScriptEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\~Non-NuGET\ServiceStack.Cracked\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="sysglobl" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="TypeLite">
+      <HintPath>..\packages\TypeLite.1.0.1.0\lib\net4\TypeLite.dll</HintPath>
+    </Reference>
+    <Reference Include="TypeLite.Net4">
+      <HintPath>..\packages\TypeLite.1.0.1.0\lib\net4\TypeLite.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\Authorization\AuthorizeGeneralPermissionAttribute.cs" />
+    <Compile Include="Application\Authorization\OperatorOnlyAttribute.cs" />
+    <Compile Include="Application\Authorization\VerifiedUserOnlyAttribute.cs" />
+    <Compile Include="Application\Config\AutoMapperConfig.cs" />
+    <Compile Include="Application\Base\CustomControllerBase.cs" />
+    <Compile Include="Application\Base\WebViewPageBase.cs" />
+    <Compile Include="Application\DomainModel\ContentContainerExtensions.cs" />
+    <Compile Include="Application\Filters\ServiceContextActionFilter.cs" />
+    <Compile Include="Application\Globalization\GlobalizationUtil.cs" />
+    <Compile Include="Application\ScheduledTaskRegistry.cs" />
+    <Compile Include="Application\Security\AuthCookieContents.cs" />
+    <Compile Include="Application\Security\AuthCookieUtil.cs" />
+    <Compile Include="Application\Security\HttpSessionCache.cs" />
+    <Compile Include="Application\Security\OwnedPropertiesCookieUtil.cs" />
+    <Compile Include="Application\Security\PrincipalCache.cs" />
+    <Compile Include="Application\Session\SessionKeys.cs" />
+    <Compile Include="Application\Session\SessionStateExtensions.cs" />
+    <Compile Include="Application\Session\SessionUtil.cs" />
+    <Compile Include="Application\Config\BundleConfig.cs" />
+    <Compile Include="Application\Config\FilterConfig.cs" />
+    <Compile Include="Application\Config\Log4NetConfig.cs" />
+    <Compile Include="Application\Config\RouteConfig.cs" />
+    <Compile Include="Application\View\ViewUtils.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Application\Base\AdminControllerBase.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminAgencyControllerResources.Designer.cs">
+      <DependentUpon>AdminAgencyControllerResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Admin\Controllers\AdminAbuseFlagsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminActivityLogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminAgencyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminConfigurationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminIndexController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminLogsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminNotificationMessageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminOperationsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminOutgoingSmsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminPropertiesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminPropertyPhotosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminPropertyUpdatesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminSavedPropertySearchesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminScheduledTasksController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminSessionsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminUsersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminVisitorsController.cs" />
+    <Compile Include="Areas\Admin\Helpers\AdminAcvityLog\AdminActivityLogHtmlHelper.cs" />
+    <Compile Include="Areas\Admin\Helpers\AdminProperties\AdminPropertiesHtmlHelper.cs" />
+    <Compile Include="Areas\Admin\Models\AdminAbuseFlags\AdminAbuseFlagsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminActivityLog\AdminActivityLogListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminAgency\AdminAgencyBranchModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminAgency\AdminAgencyModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminAgency\AdminAgencyReviewActionModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminConfiguration\AdminConfigurationItemModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminConfiguration\AdminConfigurationViewAllModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminHome\AdminHomeIndexModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminIndex\AdminIndexIndexDetailsModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminIndex\AdminIndexIndexModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminLogs\AdminLogsLogFileModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminLogs\AdminLogsIndexModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminLogs\AdminLogsLoggerModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminNotificationMessage\AdminNotificationMessageListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminOperations\AdminOperationsStartRecalculateUserTransactionModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminOutgoingSms\AdminOutgoingSmsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminOutgoingSms\AdminOutgoingSmsNewAdvertisementModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminOutgoingSms\AdminOutgoingSmsNewSingleModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminProperties\AdminPropertiesListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminPropertyPhotos\AdminPropertyPhotosListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminPropertyUpdates\AdminPropertyUpdatesListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminSavedPropertySearches\AdminSavedPropertySearchesDetailsModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminSavedPropertySearches\AdminSavedPropertySearchesListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminScheduledTasks\AdminScheduledTasksListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminSessions\AdminSessionsSessionModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminUsers\AdminUsersListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminSessions\AdminSessionsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminVisitors\AdminVisitorsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AdminVisitors\AdminVisitorsVisitorModel.cs" />
+    <Compile Include="Areas\Admin\Resources\AdminActivityLog\ActivityLogActionResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ActivityLogActionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Resources\AdminActivityLog\ActivityLogEntityTypeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ActivityLogEntityTypeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Ad\AdAreaRegistration.cs" />
+    <Compile Include="Areas\Ad\Controllers\AdAdminHomeController.cs" />
+    <Compile Include="Areas\Ad\Controllers\AdHomeController.cs" />
+    <Compile Include="Areas\Ad\Controllers\ClickAdminController.cs" />
+    <Compile Include="Areas\Ad\Controllers\ImpressionAdminController.cs" />
+    <Compile Include="Areas\Ad\Controllers\ImpressionController.cs" />
+    <Compile Include="Areas\Ad\Controllers\SponsoredEntityController.cs" />
+    <Compile Include="Areas\Ad\Controllers\SponsoredPropertyController.cs" />
+    <Compile Include="Areas\Ad\Controllers\SponsoredPropertyControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SponsoredPropertyControllerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Ad\Controllers\SponsoredPropertyAdminController.cs" />
+    <Compile Include="Areas\Ad\Helper\SponsoredPropertyAdminHtmlHelper.cs" />
+    <Compile Include="Areas\Ad\Models\AdAdminHome\AdAdminHomeStatisticsModel.cs" />
+    <Compile Include="Areas\Ad\Models\ClickAdmin\ClickAdminListClicksModel.cs" />
+    <Compile Include="Areas\Ad\Models\ImpressionAdmin\ImpressionAdminListImpressionsModel.cs" />
+    <Compile Include="Areas\Ad\Models\SponsoredPropertyAdmin\SponsoredPropertyAdminListItemModel.cs" />
+    <Compile Include="Areas\Ad\Models\SponsoredPropertyAdmin\SponsoredPropertyAdminModelResources.Designer.cs">
+      <DependentUpon>SponsoredPropertyAdminModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Ad\Models\SponsoredPropertyAdmin\SponsoredPropertyAdminListModel.cs" />
+    <Compile Include="Areas\Ad\Models\SponsoredPropertyAdmin\SponsoredPropertyAdminReviewActionModel.cs" />
+    <Compile Include="Areas\Ad\Models\SponsoredProperty\SponsoredPropertyConfirmationPopupModel.cs" />
+    <Compile Include="Areas\Ad\Models\SponsoredProperty\SponsoredPropertyListModel.cs" />
+    <Compile Include="Areas\Ad\Models\SponsoredProperty\SponsoredPropertyEditSponsorshipModel.cs" />
+    <Compile Include="Areas\Ad\Models\SponsoredProperty\SponsoredPropertyModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SponsoredPropertyModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Ad\Models\SponsoredProperty\SponsoredPropertyViewSponsorshipStatusModel.cs" />
+    <Compile Include="Areas\Api\V1\ApiV1AreaRegistration.cs" />
+    <Compile Include="Areas\Api\V1\Application\ApiCallContext.cs" />
+    <Compile Include="Areas\Api\V1\Application\ApiControllerBase.cs" />
+    <Compile Include="Areas\Api\V1\Application\ApiErrorCode.cs" />
+    <Compile Include="Areas\Api\V1\Application\ApiErrorCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApiErrorCodeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Api\V1\Application\ApiLogUtils.cs" />
+    <Compile Include="Areas\Api\V1\Application\ApiResultUtils.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\ApiAuthorizeAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\ApiServiceContextActionFilter.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\AuthenticateApiUserAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\AuthorizeApiInvocationAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\SynchronizeApiCallContextAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\ValidateApiCallSignatureAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\ValidateAuthenticationTokenAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\ValidateSessionIdAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Application\Filters\LogApiInvocationAttribute.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\ApiHomeController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\DebugController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\GeoController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\MyProfileController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\PropertyController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\SearchController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\SessionController.cs" />
+    <Compile Include="Areas\Api\V1\Models\Auth\ApiAuthChangePasswordInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Auth\ApiAuthLoginInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Auth\ApiAuthLoginOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Auth\ApiAuthRegisterInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Auth\ApiAuthRegisterOutputContactMethodModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Auth\ApiAuthRegisterOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiEmptyInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Session\ApiSessionStartInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Session\ApiSessionStartOutputModel.cs" />
+    <Compile Include="Controllers\PropertyPhotoByIndexController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\TimestampController.cs" />
+    <Compile Include="Areas\Api\V1\Controllers\VicinityController.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiInputContextModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiInputModelBase.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiInputPaginationSpecModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiOutputSuccessModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Geo\ApiGeoCodeInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Geo\ApiGeoCodeOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyAddPhotoInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyAddPhotoOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyPhotoInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiSponsoredEntityModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiSponsoredPropertyListingModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiSponsoredPropertyListingSummaryModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Search\ApiSearchRunInputCriteriaModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Search\ApiSearchRunInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyCreateNewInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyCreateNewOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyUpdateInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyDeliveryModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyGeneralModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyUserAccessModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyVisitModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Search\ApiSearchRunOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\ApiInputVicinityFilterModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiOutputContextModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiOutputErrorModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\ApiFileContentModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiOutputModelBase.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiInputPaginatingModelBase.cs" />
+    <Compile Include="Areas\Api\V1\Models\Base\ApiOutputValidationErrorsModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\ApiOutputPaginationStats.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\ApiOutputUserModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\ApiOutputVicinityDetailsModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\ApiOutputVicinityModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\ApiOutputVicinitySummaryModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\Spatial\ApiGeoBox.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\Spatial\ApiGeoPath.cs" />
+    <Compile Include="Areas\Api\V1\Models\Shared\Spatial\ApiGeoPoint.cs" />
+    <Compile Include="Areas\Api\V1\Models\Debug\ApiDebugEchoInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Debug\ApiDebugEchoOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyPhotoOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetContactInfoInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetContactInfoOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetDetailsInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetDetailsOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetPhotoFilesInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetPhotoFilesOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetPhotosInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyGetPhotosOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyListSearchTagsInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertyListSearchTagsOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertySearchInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\ApiPropertySearchOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertySummaryModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyBuildingModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyContactInfoModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyDetailsModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyEstateModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyRentConditionsModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertySaleConditionsModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Property\Shared\ApiPropertyUnitModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Vicinity\ApiVicinityGetOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Vicinity\ApiVicinityBrowseInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Vicinity\ApiVicinityBrowseOutputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Vicinity\ApiVicinityGetInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Vicinity\ApiVicinitySearchInputModel.cs" />
+    <Compile Include="Areas\Api\V1\Models\Vicinity\ApiVicinitySearchOutputModel.cs" />
+    <Compile Include="Areas\AreaNames.cs" />
+    <Compile Include="Areas\AreaRouteValue.cs" />
+    <Compile Include="Areas\Billing\BillingAreaRegistration.cs" />
+    <Compile Include="Areas\Billing\Controllers\AdminUserSelectorController.cs" />
+    <Compile Include="Areas\Billing\Controllers\BillingAdminHomeController.cs" />
+    <Compile Include="Areas\Billing\Controllers\BillingHomeController.cs" />
+    <Compile Include="Areas\Billing\Controllers\PaymentAdminController.cs" />
+    <Compile Include="Areas\Billing\Controllers\PaymentController.cs" />
+    <Compile Include="Areas\Billing\Controllers\PromotionalBonusAdminController.cs" />
+    <Compile Include="Areas\Billing\Controllers\PromotionalBonusCouponAdminController.cs" />
+    <Compile Include="Areas\Billing\Controllers\PromotionalBonusCouponController.cs" />
+    <Compile Include="Areas\Billing\Controllers\RefundAdminController.cs" />
+    <Compile Include="Areas\Billing\Controllers\RefundController.cs" />
+    <Compile Include="Areas\Billing\Controllers\UserBalanceAdminController.cs" />
+    <Compile Include="Areas\Billing\Controllers\UserTransactionsAdminController.cs" />
+    <Compile Include="Areas\Billing\Controllers\UserTransactionsController.cs" />
+    <Compile Include="Areas\Billing\Helpers\BillingSourceEntityHelper.cs" />
+    <Compile Include="Areas\Billing\Helpers\SelectorHtmlHelpers.cs" />
+    <Compile Include="Areas\Billing\Models\AdminUserSelector\AdminUserSelectorConfiguration.cs" />
+    <Compile Include="Areas\Billing\Models\AdminUserSelector\AdminUserSelectorResultItemModel.cs" />
+    <Compile Include="Areas\Billing\Models\AdminUserSelector\AdminUserSelectorResultModel.cs" />
+    <Compile Include="Areas\Billing\Models\BillingAdminHome\BillingAdminHomeStatisticsModel.cs" />
+    <Compile Include="Areas\Billing\Models\BillingHome\BillingHomeIndexModel.cs" />
+    <Compile Include="Areas\Billing\Models\PaymentAdmin\PaymentAdminListWireTransfersModel.cs" />
+    <Compile Include="Areas\Billing\Models\PaymentAdmin\PaymentAdminReviewWireTransferModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\NewElectronicPaymentModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\PasargadCheckTransactionResultResponseXMLObject.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\PasargadVerifyPaymentResponseXmlObject.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\RedirectedFromGatewayProviderBankModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\NewElectronicPaymentConfirmationModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\PaymentModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Billing\Models\Payment\PaymentNewWireTransferPaymentModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\PaymentViewAllPaymentsItemModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\PaymentViewAllPaymentsModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\PaymentViewElectronicPaymentsModel.cs" />
+    <Compile Include="Areas\Billing\Models\Payment\PaymentViewWireTransferPaymentsModel.cs" />
+    <Compile Include="Areas\Billing\Models\PromotionalBonusAdmin\PromotionalBonusAdminBonusModel.cs" />
+    <Compile Include="Areas\Billing\Models\PromotionalBonusAdmin\PromotionalBonusAdminListBonusesModel.cs" />
+    <Compile Include="Areas\Billing\Models\RefundAdmin\RefundAdminPerformPaymentModel.cs" />
+    <Compile Include="Areas\Billing\Models\RefundAdmin\RefundAdminReviewRequestModel.cs" />
+    <Compile Include="Areas\Billing\Models\RefundAdmin\RefundAdminListRequestsModel.cs" />
+    <Compile Include="Areas\Billing\Models\RefundAdmin\RefundAdminModelResources.Designer.cs">
+      <DependentUpon>RefundAdminModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Billing\Models\Refund\RefundViewRequestModel.cs" />
+    <Compile Include="Areas\Billing\Models\Refund\RefundModelResources.Designer.cs">
+      <DependentUpon>RefundModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Billing\Models\Refund\RefundNewRequestModel.cs" />
+    <Compile Include="Areas\Billing\Models\UserBalanceAdmin\UserBalanceAdminAdministrativeChangeModel.cs" />
+    <Compile Include="Areas\Billing\Models\UserBalanceAdmin\UserBalanceAdminListAdministrativeChangesModel.cs" />
+    <Compile Include="Areas\Billing\Models\UserBalanceAdmin\UserBalanceAdminListUsersModel.cs" />
+    <Compile Include="Areas\Billing\Models\UserBalanceAdmin\UserBalanceAdminReviewAdministrativeChangeModel.cs" />
+    <Compile Include="Areas\Billing\Models\UserTransactionsAdmin\UserTransactionsAdminListTransactionsModel.cs" />
+    <Compile Include="Areas\Billing\Models\UserTransactions\UserTransactionsViewDetailsModel.cs" />
+    <Compile Include="Areas\Billing\Models\UserTransactions\UserTransactionsViewReportModel.cs" />
+    <Compile Include="Areas\Billing\Payment\PasargadPaymentGateway.cs" />
+    <Compile Include="Areas\Billing\Views\Payment\PaymentViewResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentViewResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Cms\CmsAreaRegistration.cs" />
+    <Compile Include="Areas\Cms\Controllers\AdminArticleCategoryController.cs" />
+    <Compile Include="Areas\Cms\Controllers\AdminArticleController.cs" />
+    <Compile Include="Areas\Cms\Models\AdminArticleCategory\AdminArticleCategoryListModel.cs" />
+    <Compile Include="Areas\Cms\Models\AdminArticleCategory\AdminArticleCategoryModel.cs" />
+    <Compile Include="Areas\Cms\Models\AdminArticle\AdminArticleListModel.cs" />
+    <Compile Include="Areas\Cms\Models\AdminArticle\AdminArticleModel.cs" />
+    <Compile Include="Areas\Cms\Models\AdminArticle\AdminArticleViewDetailsModel.cs" />
+    <Compile Include="Content\StyleLibraries.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgencyControllerResources.Designer.cs">
+      <DependentUpon>AgencyControllerResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controllers\AgencySelectorController.cs" />
+    <Compile Include="Controllers\CaptchaController.cs" />
+    <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\MyProfileController.cs" />
+    <Compile Include="Controllers\OwnedPropertiesController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
+    <Compile Include="Controllers\PropertiesController.cs" />
+    <Compile Include="Controllers\PropertyPhotoController.cs" />
+    <Compile Include="Controllers\PropertyRequestController.cs" />
+    <Compile Include="Controllers\PublicProfileController.cs" />
+    <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Controllers\VicinityAdminControllerResources.Designer.cs">
+      <DependentUpon>VicinityAdminControllerResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controllers\UserFeedbackController.cs" />
+    <Compile Include="Controllers\VicinityAdminController.cs" />
+    <Compile Include="Controllers\VicinitySelectorController.cs" />
+    <Compile Include="Controllers\VisitorController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\IconsHelper.cs" />
+    <Compile Include="Helpers\PopupHelper.cs" />
+    <Compile Include="Helpers\Properties\PropertySavedSearchHelper.cs" />
+    <Compile Include="Helpers\Properties\PropertySearchHelper.cs" />
+    <Compile Include="Helpers\PropertyPhotoHelper.cs" />
+    <Compile Include="Helpers\Property\PropertyControllerHelper.cs" />
+    <Compile Include="Helpers\Property\PropertyViewHelper.cs" />
+    <Compile Include="Helpers\SelectorHtmlHelper.cs" />
+    <Compile Include="Helpers\Sitemap\SitemapHelper.cs" />
+    <Compile Include="Helpers\TabHelper.cs" />
+    <Compile Include="Helpers\UrlHelperExtensions.cs" />
+    <Compile Include="Helpers\UserDisplayHelper.cs" />
+    <Compile Include="Models\Account\AccountChangePasswordAdministrativelyModel.cs" />
+    <Compile Include="Models\AgencySelector\AgencySelectorConfiguration.cs" />
+    <Compile Include="Models\AgencySelector\AgencySelectorResultItemModel.cs" />
+    <Compile Include="Models\AgencySelector\AgencySelectorResultModel.cs" />
+    <Compile Include="Models\Agency\AgencyEditAgencyLogo.cs" />
+    <Compile Include="Models\Agency\AgencyListModel.cs" />
+    <Compile Include="Models\Agency\AgencyListPartialModel.cs" />
+    <Compile Include="Models\Agency\AgencyNewAgencyModel.cs" />
+    <Compile Include="Models\Map\MapSearchAgencyBranchItemModel.cs" />
+    <Compile Include="Models\Map\MapSearchModel.cs" />
+    <Compile Include="Models\Map\MapSearchResultModel.cs" />
+    <Compile Include="Models\Map\MapSearchPropertyListingItemModel.cs" />
+    <Compile Include="Models\Map\MapSearchVicinityItemModel.cs" />
+    <Compile Include="Models\Map\MapShowMapModel.cs" />
+    <Compile Include="Models\Map\PropertiesMapSearchMenuModel.cs" />
+    <Compile Include="Models\PropertyRequest\EditLocationPartialModel.cs" />
+    <Compile Include="Models\PropertyRequest\PropertyRequestEditModel.cs" />
+    <Compile Include="Models\PropertyRequest\PropertyRequestEditModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyRequestEditModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PropertyRequest\PropertyRequestEditModelValidationResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyRequestEditModelValidationResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Property\PropertySharePropertyListingModel.cs" />
+    <Compile Include="Models\Property\PropertyModelResources.Designer.cs">
+      <DependentUpon>PropertyModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Property\ViewPropertyDetailsMapTabModel.cs" />
+    <Compile Include="Models\Shared\AgencyUnSubscribeFromAgencyPopupModel.cs" />
+    <Compile Include="Models\VicinityAdmin\VicinityAdminEditGeographyModel.cs" />
+    <Compile Include="Models\VicinityAdmin\VicinityAdminGeographyEditorModel.cs" />
+    <Compile Include="Models\VicinityAdmin\VicinityAdminModelResources.Designer.cs">
+      <DependentUpon>VicinityAdminModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\VicinityAdmin\VicinityAdminMoveVicinitiesModel.cs" />
+    <Compile Include="Models\VicinityAdmin\VicinityAdminNewVicinityModel.cs" />
+    <Compile Include="Models\VicinityAdmin\VicinityAdminListModel.cs" />
+    <Compile Include="Models\AdminAgency\AdminAgencyListModel.cs" />
+    <Compile Include="Models\MyProfile\MyProfileContactMethodVerificationModel.cs" />
+    <Compile Include="Models\MyProfile\MyProfileVerifyModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSavedSearchesModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSaveSearchModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSearchOptionModel.cs" />
+    <Compile Include="Models\Properties\PropertyAgencyListingSearchType.cs" />
+    <Compile Include="Models\PropertyPhoto\PropertyPhotoEditPropertiesModel.cs" />
+    <Compile Include="Models\PropertyPhoto\PropertyPhotoViewFullSizeModel.cs" />
+    <Compile Include="Models\PropertyPhoto\PropertyPhotoViewMediumSizeModel.cs" />
+    <Compile Include="Models\Property\AgencyPropertyListingAgencyActivityAllowance.cs" />
+    <Compile Include="Models\Property\NonAgencyPropertyListingAgencyActivityAllowance.cs" />
+    <Compile Include="Models\Property\PropertyListingCreatorRoleType.cs" />
+    <Compile Include="Models\Property\PropertyPublishDurationEnum.cs" />
+    <Compile Include="Models\Property\ViewPropertyDetailsContactInfoTabModel.cs" />
+    <Compile Include="Models\Property\ViewPropertyDetailsDetailsTabModel.cs" />
+    <Compile Include="Models\PropertyPhoto\PropertyPhotoTabModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSearchPartialModel.cs" />
+    <Compile Include="Models\UserFeedback\UserFeedbackGeneralContactFormModel.cs" />
+    <Compile Include="Models\UserFeedback\UserFeedbackReportAbuseModel.cs" />
+    <Compile Include="Models\Account\AccountChangePasswordModel.cs" />
+    <Compile Include="Models\Account\AccountForgotPasswordModel.cs" />
+    <Compile Include="Models\Account\AccountResetPasswordModel.cs" />
+    <Compile Include="Models\Account\AccountForgotLoginNameModel.cs" />
+    <Compile Include="Models\Account\AccountLogOnModel.cs" />
+    <Compile Include="Models\Account\AccountSignUpModel.cs" />
+    <Compile Include="Models\Home\HomeIndexModel.cs" />
+    <Compile Include="Models\MyProfile\MyProfileAddEmailModel.cs" />
+    <Compile Include="Models\MyProfile\MyProfileAddPhoneNumberModel.cs" />
+    <Compile Include="Models\OwnedProperties\OwnedPropertiesViewListModel.cs" />
+    <Compile Include="Models\Property\PropertyLocationModel.cs" />
+    <Compile Include="Models\Property\PropertySectionModelBase.cs" />
+    <Compile Include="Models\Property\PropertyViewDetailsModel.cs" />
+    <Compile Include="Models\Property\PropertyViewDetailsParamsModel.cs" />
+    <Compile Include="Models\Property\PropertyViewDetailsSectionModel.cs" />
+    <Compile Include="Models\Shared\Profile\ProfileModel.cs" />
+    <Compile Include="Models\Profile\ProfileMyPropertiesModel.cs" />
+    <Compile Include="Models\Properties\PropertiesBrowseModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSearchMenuModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSelectAreaRangeModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSelectLocationModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSelectOptionModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSelectPriceRangeModel.cs" />
+    <Compile Include="Models\Properties\PropertiesSelectRoomAndParkingCountModel.cs" />
+    <Compile Include="Models\Property\PropertyBuildingModel.cs" />
+    <Compile Include="Models\Property\PropertyContactModel.cs" />
+    <Compile Include="Models\Property\PropertyEstateModel.cs" />
+    <Compile Include="Models\Property\PropertyLuxuryModel.cs" />
+    <Compile Include="Models\Property\PropertyPublishModel.cs" />
+    <Compile Include="Models\Property\PropertyQuickCreateCompletedModel.cs" />
+    <Compile Include="Models\Property\PropertySummaryModel.cs" />
+    <Compile Include="Models\Property\PropertyRentPaymentModel.cs" />
+    <Compile Include="Models\Property\PropertyUnitModel.cs" />
+    <Compile Include="Models\Property\PropertySalePaymentModel.cs" />
+    <Compile Include="Models\Shared\PaginationLinksModel.cs" />
+    <Compile Include="Models\Shared\Profile\Tabs\ProfileTabGeneralModel.cs" />
+    <Compile Include="Models\Shared\Profile\Tabs\ProfileTabPropertyListingModel.cs" />
+    <Compile Include="Models\Shared\Profile\Tabs\ProfileTabPublishHistoryModel.cs" />
+    <Compile Include="Models\Shared\Profile\Tabs\ProfileTabSecurityInfoModel.cs" />
+    <Compile Include="Models\Shared\Profile\Tabs\ProfileTabSearchesModel.cs" />
+    <Compile Include="Models\Sitemap\SitemapIndexItemModel.cs" />
+    <Compile Include="Models\Sitemap\SitemapIndexModel.cs" />
+    <Compile Include="Models\Sitemap\SitemapItemModel.cs" />
+    <Compile Include="Models\Sitemap\SitemapModel.cs" />
+    <Compile Include="Models\UserFeedback\UserFeedbackReportIssueModel.cs" />
+    <Compile Include="Models\UserFeedback\UserFeedbackReportSuggestionModel.cs" />
+    <Compile Include="Models\UserFeedback\UserFeedbackRequestNeighborhoodModel.cs" />
+    <Compile Include="Models\VicinitySelector\VicinitySelectorConfiguration.cs" />
+    <Compile Include="Models\VicinitySelector\VicinitySelectorHierarchyItemModel.cs" />
+    <Compile Include="Models\VicinitySelector\VicinitySelectorResultItemModel.cs" />
+    <Compile Include="Models\VicinitySelector\VicinitySelectorResultModel.cs" />
+    <Compile Include="Models\Visitor\VisitorPropertiesModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Controllers\Account\AccountValidationErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountValidationErrors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Controllers\HomeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Controllers\Properties\PropertiesControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertiesControllerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Controllers\Property\PropertyControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyControllerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Controllers\Property\PublishValidationErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PublishValidationErrors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Helpers\Properties\PropertySearchTitleResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertySearchTitleResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Helpers\Property\PropertyPhotoHelperResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyPhotoHelperResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Properties\PropertiesSaveSearchResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertiesSaveSearchResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Properties\PropertiesSearchResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertiesSearchResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\PropertyPhoto\PropertyPhotoResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyPhotoResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\UserFeedback\UserFeedbackGeneralContactFormModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserFeedbackGeneralContactFormModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\UserFeedback\UserFeedbackReportAbuseModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserFeedbackReportAbuseModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Account\AccountChangePasswordResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountChangePasswordResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Account\AccountForgotResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountForgotResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Account\AccountLogOnResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountLogOnResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Account\AccountSignUpResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountSignUpResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Account\AccountVerificationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountVerificationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyProfile\MyProfileEditModel.cs" />
+    <Compile Include="Resources\Models\GeneralValidationErrorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralValidationErrorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\MyProfile\MyProfileAddContactMethodResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyProfileAddContactMethodResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\MyProfile\MyProfileEditResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyProfileEditResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\MyProfile\MyProfileVerifyContactMethodResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyProfileVerifyContactMethodResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Properties\PropertiesSelectResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertiesSelectResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertySummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertySummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertyBuildingResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyBuildingResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertyEstateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyEstateResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertyLuxuryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyLuxuryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertyRentPaymentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyRentPaymentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertySalePaymentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertySalePaymentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertyUnitResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyUnitResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Property\PropertyContactResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyContactResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\UserFeedback\UserFeedbackReportIssueModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserFeedbackReportIssueModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\UserFeedback\UserFeedbackReportSuggestionModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserFeedbackReportSuggestionModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\UserFeedback\UserFeedbackRequestNeighborhoodModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserFeedbackRequestNeighborhoodModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\NewEntry\QuickCreateRequestResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuickCreateRequestResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\NewEntry\QuickCreatePropertyResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuickCreatePropertyResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Properties\PropertiesBrowseResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertiesBrowseResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Properties\PropertiesSearchPartialResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertiesSearchPartialResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\Edit\EditPropertyPaymentConditionsForSaleResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditPropertyPaymentConditionsForSaleResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\LayoutResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LayoutResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\LogOnResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogOnResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\Edit\EditPropertyVisitAndContactResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditPropertyVisitAndContactResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyBuildingResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyBuildingResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyEstateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyEstateResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyLocationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyLocationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyLuxuryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyLuxuryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyPaymentConditionsForRentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyPaymentConditionsForRentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyPaymentConditionsForSaleResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyPaymentConditionsForSaleResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyUnitResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyUnitResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Shared\Property\View\ViewPropertyVisitAndContactResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewPropertyVisitAndContactResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Scripts\JavaScriptLibraries.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Admin\Controllers\AdminAgencyControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminAgencyControllerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Resources\AdminActivityLog\ActivityLogActionResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ActivityLogActionResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Resources\AdminActivityLog\ActivityLogEntityTypeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ActivityLogEntityTypeResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Ad\Controllers\SponsoredPropertyControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SponsoredPropertyControllerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Ad\Models\SponsoredPropertyAdmin\SponsoredPropertyAdminModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SponsoredPropertyAdminModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Ad\Models\SponsoredProperty\SponsoredPropertyModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SponsoredPropertyModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Api\V1\Application\ApiErrorCodeResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApiErrorCodeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Billing\Models\Payment\PaymentModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Billing\Models\RefundAdmin\RefundAdminModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RefundAdminModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Billing\Models\Refund\RefundModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RefundModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Billing\Views\Payment\PaymentViewResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentViewResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Composition\Main.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Composition\Notification.Debug.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Composition\Aspects.xml" />
+    <EmbeddedResource Include="Composition\Notification.Release.xml" />
+    <EmbeddedResource Include="Composition\Environment.xml" />
+    <Content Include="apple-touch-icon-precomposed.png" />
+    <Content Include="Areas\Admin\Contents\elvue\elvue.html" />
+    <Content Include="Areas\Admin\Contents\elvue\elvuecfg.js" />
+    <Content Include="Content\ads\blank.png" />
+    <Content Include="Content\bootstrap-rtl\~readme.txt" />
+    <Content Include="Content\carousel\First-Group-Farsi-Banner-280x710-2.jpg" />
+    <Content Include="Content\carousel\homepage-carousel-be-distinguished.jpg" />
+    <Content Include="Content\carousel\homepage-carousel-blank-ad.jpg" />
+    <Content Include="Content\carousel\homepage-carousel-photo-album.jpg" />
+    <Content Include="Content\carousel\homepage-carousel-saved-search.jpg" />
+    <Content Include="Content\carousel\homepage-carousel-webfestival.jpg" />
+    <Content Include="Content\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen\chosen-sprite.png" />
+    <Content Include="Content\chosen\jquery.chosen.css" />
+    <Content Include="Content\fineuploader\fineuploader-3.6.4.css" />
+    <Content Include="Content\fineuploader\loading.gif" />
+    <Content Include="Content\fineuploader\processing.gif" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\html\error.html" />
+    <Content Include="Content\icons\add-16-white.png" />
+    <Content Include="Content\icons\add-16.png" />
+    <Content Include="Content\icons\add-24-white.png" />
+    <Content Include="Content\icons\add-24.png" />
+    <Content Include="Content\icons\add-32-white.png" />
+    <Content Include="Content\icons\add-32.png" />
+    <Content Include="Content\icons\announcement-32.png" />
+    <Content Include="Content\icons\attachment-16.png" />
+    <Content Include="Content\icons\attachment-32.png" />
+    <Content Include="Content\icons\attachment-48.png" />
+    <Content Include="Content\icons\blueprint-32.png" />
+    <Content Include="Content\icons\blueprint-48.png" />
+    <Content Include="Content\icons\close-16-white.png" />
+    <Content Include="Content\icons\close-16.png" />
+    <Content Include="Content\icons\close-32-white.png" />
+    <Content Include="Content\icons\close-32.png" />
+    <Content Include="Content\icons\community-32.png" />
+    <Content Include="Content\icons\compare-32.png" />
+    <Content Include="Content\icons\compare-48.png" />
+    <Content Include="Content\icons\contactInfo-32.png" />
+    <Content Include="Content\icons\contactInfo-48.png" />
+    <Content Include="Content\icons\contactInfoBad-32-on.png" />
+    <Content Include="Content\icons\contactInfoBad-32.png" />
+    <Content Include="Content\icons\contactInfoGood-32-on.png" />
+    <Content Include="Content\icons\contactInfoGood-32.png" />
+    <Content Include="Content\icons\cross-16.png" />
+    <Content Include="Content\icons\cross-32.png" />
+    <Content Include="Content\icons\delete-24-white.png" />
+    <Content Include="Content\icons\delete-24.png" />
+    <Content Include="Content\icons\delete-32-white.png" />
+    <Content Include="Content\icons\delete-32.png" />
+    <Content Include="Content\icons\details-16.png" />
+    <Content Include="Content\icons\details-32.png" />
+    <Content Include="Content\icons\details-48.png" />
+    <Content Include="Content\icons\discussion-16.png" />
+    <Content Include="Content\icons\discussion-32.png" />
+    <Content Include="Content\icons\discussion-48.png" />
+    <Content Include="Content\icons\edit-16-white.png" />
+    <Content Include="Content\icons\edit-16.png" />
+    <Content Include="Content\icons\edit-24-white.png" />
+    <Content Include="Content\icons\edit-24.png" />
+    <Content Include="Content\icons\edit-32-white.png" />
+    <Content Include="Content\icons\edit-32.png" />
+    <Content Include="Content\icons\editHistory-32.png" />
+    <Content Include="Content\icons\editHistory-48.png" />
+    <Content Include="Content\icons\error-16-red.png" />
+    <Content Include="Content\icons\error-32-red.png" />
+    <Content Include="Content\icons\error-32.png" />
+    <Content Include="Content\icons\extender-collapsed-32-white.png" />
+    <Content Include="Content\icons\extender-collapsed-32.png" />
+    <Content Include="Content\icons\extender-extended-32-white.png" />
+    <Content Include="Content\icons\extender-extended-32.png" />
+    <Content Include="Content\icons\flag-16-yellow.png" />
+    <Content Include="Content\icons\flag-16.png" />
+    <Content Include="Content\icons\flag-32-yellow.png" />
+    <Content Include="Content\icons\flag-32.png" />
+    <Content Include="Content\icons\forbidden-16.png" />
+    <Content Include="Content\icons\forbidden-24.png" />
+    <Content Include="Content\icons\forbidden-32.png" />
+    <Content Include="Content\icons\forbidden-48.png" />
+    <Content Include="Content\icons\forbidden-64.png" />
+    <Content Include="Content\icons\forgot-32.png" />
+    <Content Include="Content\icons\forgot-64.png" />
+    <Content Include="Content\icons\godown-16-white.png" />
+    <Content Include="Content\icons\godown-16.png" />
+    <Content Include="Content\icons\godown-32-white.png" />
+    <Content Include="Content\icons\godown-32.png" />
+    <Content Include="Content\icons\goleft-16-white.png" />
+    <Content Include="Content\icons\goleft-16.png" />
+    <Content Include="Content\icons\goleft-32-white.png" />
+    <Content Include="Content\icons\goleft-32.png" />
+    <Content Include="Content\icons\goright-16-white.png" />
+    <Content Include="Content\icons\goright-16.png" />
+    <Content Include="Content\icons\goright-32-white.png" />
+    <Content Include="Content\icons\goright-32.png" />
+    <Content Include="Content\icons\goup-16-white.png" />
+    <Content Include="Content\icons\goup-16.png" />
+    <Content Include="Content\icons\goup-32-white.png" />
+    <Content Include="Content\icons\goup-32.png" />
+    <Content Include="Content\icons\idea-16-white.png" />
+    <Content Include="Content\icons\idea-16.png" />
+    <Content Include="Content\icons\idea-32-white.png" />
+    <Content Include="Content\icons\idea-32.png" />
+    <Content Include="Content\icons\idea-48-white.png" />
+    <Content Include="Content\icons\idea-48.png" />
+    <Content Include="Content\icons\idea-64-white.png" />
+    <Content Include="Content\icons\idea-64.png" />
+    <Content Include="Content\icons\map-32.png" />
+    <Content Include="Content\icons\map-48.png" />
+    <Content Include="Content\icons\note-16.png" />
+    <Content Include="Content\icons\note-32.png" />
+    <Content Include="Content\icons\note-48.png" />
+    <Content Include="Content\icons\photos-16-white.png" />
+    <Content Include="Content\icons\photos-16.png" />
+    <Content Include="Content\icons\photos-32-white.png" />
+    <Content Include="Content\icons\photos-32.png" />
+    <Content Include="Content\icons\photos-48-white.png" />
+    <Content Include="Content\icons\photos-48.png" />
+    <Content Include="Content\icons\public-24.png" />
+    <Content Include="Content\icons\public-32.png" />
+    <Content Include="Content\icons\public-48.png" />
+    <Content Include="Content\icons\public-64.png" />
+    <Content Include="Content\icons\publicForbidden-24.png" />
+    <Content Include="Content\icons\publicForbidden-32.png" />
+    <Content Include="Content\icons\publicForbidden-48.png" />
+    <Content Include="Content\icons\publicForbidden-64.png" />
+    <Content Include="Content\icons\publicTime-24.png" />
+    <Content Include="Content\icons\publicTime-32.png" />
+    <Content Include="Content\icons\publicTime-48.png" />
+    <Content Include="Content\icons\publicTime-64.png" />
+    <Content Include="Content\icons\refresh-12.png" />
+    <Content Include="Content\icons\refresh-16.png" />
+    <Content Include="Content\icons\refresh-24.png" />
+    <Content Include="Content\icons\refresh-32.png" />
+    <Content Include="Content\icons\refresh-48.png" />
+    <Content Include="Content\icons\return-16-white.png" />
+    <Content Include="Content\icons\return-16.png" />
+    <Content Include="Content\icons\return-24-white.png" />
+    <Content Include="Content\icons\return-24.png" />
+    <Content Include="Content\icons\return-32-white.png" />
+    <Content Include="Content\icons\return-32.png" />
+    <Content Include="Content\icons\return-48-white.png" />
+    <Content Include="Content\icons\return-48.png" />
+    <Content Include="Content\icons\review-32.png" />
+    <Content Include="Content\icons\review-48.png" />
+    <Content Include="Content\icons\save-16-white.png" />
+    <Content Include="Content\icons\save-16.png" />
+    <Content Include="Content\icons\save-24-white.png" />
+    <Content Include="Content\icons\save-24.png" />
+    <Content Include="Content\icons\save-32-white.png" />
+    <Content Include="Content\icons\save-32.png" />
+    <Content Include="Content\icons\send-16.png" />
+    <Content Include="Content\icons\send-32.png" />
+    <Content Include="Content\icons\send-48.png" />
+    <Content Include="Content\icons\share-16.png" />
+    <Content Include="Content\icons\share-32.png" />
+    <Content Include="Content\icons\share-48.png" />
+    <Content Include="Content\icons\star-16-blue.png" />
+    <Content Include="Content\icons\star-16-green.png" />
+    <Content Include="Content\icons\star-16-lightblue.png" />
+    <Content Include="Content\icons\star-16-lightorange.png" />
+    <Content Include="Content\icons\star-16-lightred.png" />
+    <Content Include="Content\icons\star-16-off.png" />
+    <Content Include="Content\icons\star-16-orange.png" />
+    <Content Include="Content\icons\star-16-purple.png" />
+    <Content Include="Content\icons\star-16-red.png" />
+    <Content Include="Content\icons\star-16-white.png" />
+    <Content Include="Content\icons\star-16-yellow.png" />
+    <Content Include="Content\icons\star-32-blue.png" />
+    <Content Include="Content\icons\star-32-green.png" />
+    <Content Include="Content\icons\star-32-lightblue.png" />
+    <Content Include="Content\icons\star-32-lightorange.png" />
+    <Content Include="Content\icons\star-32-lightred.png" />
+    <Content Include="Content\icons\star-32-off.png" />
+    <Content Include="Content\icons\star-32-orange.png" />
+    <Content Include="Content\icons\star-32-purple.png" />
+    <Content Include="Content\icons\star-32-red.png" />
+    <Content Include="Content\icons\star-32-white.png" />
+    <Content Include="Content\icons\star-32-yellow.png" />
+    <Content Include="Content\icons\triangle-down-12-white.png" />
+    <Content Include="Content\icons\triangle-down-12.png" />
+    <Content Include="Content\icons\triangle-left-12-white.png" />
+    <Content Include="Content\icons\triangle-left-12.png" />
+    <Content Include="Content\icons\triangle-left-16-white.png" />
+    <Content Include="Content\icons\triangle-left-16.png" />
+    <Content Include="Content\icons\login-16.png" />
+    <Content Include="Content\icons\login-32.png" />
+    <Content Include="Content\icons\police-32.png" />
+    <Content Include="Content\icons\register-16.png" />
+    <Content Include="Content\icons\register-32.png" />
+    <Content Include="Content\icons\register-48.png" />
+    <Content Include="Content\icons\register-64.png" />
+    <Content Include="Content\icons\required1-16.png" />
+    <Content Include="Content\icons\required1-32.png" />
+    <Content Include="Content\icons\required2-16.png" />
+    <Content Include="Content\icons\required2-32.png" />
+    <Content Include="Content\icons\search-16-white.png" />
+    <Content Include="Content\icons\search-16.png" />
+    <Content Include="Content\icons\search-32-white.png" />
+    <Content Include="Content\icons\search-32.png" />
+    <Content Include="Content\icons\tick-16.png" />
+    <Content Include="Content\icons\tick-32.png" />
+    <Content Include="Content\icons\unknown-16.png" />
+    <Content Include="Content\icons\unknown-32.png" />
+    <Content Include="Content\icons\user-16.png" />
+    <Content Include="Content\icons\user-32.png" />
+    <Content Include="Content\icons\voteDown-32-on.png" />
+    <Content Include="Content\icons\voteDown-32.png" />
+    <Content Include="Content\icons\voteUp-32-on.png" />
+    <Content Include="Content\icons\voteUp-32.png" />
+    <Content Include="Content\icons\warning-16.png" />
+    <Content Include="Content\icons\warning-32.png" />
+    <Content Include="Content\icons\warning-time-32.png" />
+    <Content Include="Content\icons\xlink-16.png" />
+    <Content Include="Content\icons\xlink-32.png" />
+    <Content Include="Content\images\android-64.png" />
+    <Content Include="Content\images\appstore.png" />
+    <Content Include="Content\images\arrow-small-down.png" />
+    <Content Include="Content\images\arrow-small-left.png" />
+    <Content Include="Content\images\fingerprint.png" />
+    <Content Include="Content\images\footer-smiley.png" />
+    <Content Include="Content\images\forgot.png" />
+    <Content Include="Content\images\google-play-badge-bazar.png" />
+    <Content Include="Content\images\google-play-badge.png" />
+    <Content Include="Content\images\header-logo.png" />
+    <Content Include="Content\images\icons\small\filter.png" />
+    <Content Include="Content\images\icons\small\shortcut.png" />
+    <Content Include="Content\images\Instagram.png" />
+    <Content Include="Content\images\iranwebfestival.png" />
+    <Content Include="Content\images\map-bkg.png" />
+    <Content Include="Content\images\paperplane-white.png" />
+    <Content Include="Content\images\photo-thumb-placeholder.png" />
+    <Content Include="Content\images\placeholder.png" />
+    <Content Include="Content\images\sprites.png" />
+    <Content Include="Content\images\telegram_24px.png" />
+    <Content Include="Content\images\user-generic.png" />
+    <Content Include="Content\jquery.calendars.picker-1.2.0.css" />
+    <Content Include="Content\jquery.qtip.2.2.0.css" />
+    <Content Include="Content\jquery.qtip.2.2.0.min.css" />
+    <Content Include="Content\markers\agency.png" />
+    <Content Include="Content\markers\item-group.png" />
+    <Content Include="Content\markers\m1.png" />
+    <Content Include="Content\markers\property-for-rent.png" />
+    <Content Include="Content\markers\property-for-sale.png" />
+    <Content Include="Content\overlay\bkg-bottom-white.png" />
+    <Content Include="Content\overlay\logo.png" />
+    <Content Include="Content\overlay\url.png" />
+    <Content Include="Content\select2\select2-bootstrap.css" />
+    <Content Include="Content\select2\select2-spinner.gif" />
+    <Content Include="Content\select2\select2.css" />
+    <Content Include="Content\select2\select2.png" />
+    <Content Include="Content\select2\select2x2.png" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="eNamadLogo.htm" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\jquery.autonumeric.1.9.34.js" />
+    <Content Include="Scripts\TypeLite.Net4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypeLite.Net4.d.ts</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUsers\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUsers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\CellAuthenticatedUser.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\CellSessionID.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\CellAction.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\CellTargetEntity.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\CellDetailEntity.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\CellParentEntity.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminActivityLog\CellAuditEntity.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProperties\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProperties\CellOwnerUser.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProperties\DetailsNotFound.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProperties\Details.cshtml" />
+    <Content Include="Composition.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Web.config" />
+    <Content Include="Areas\Admin\Contents\elvue\Web.config" />
+    <Content Include="Views\Shared\_Layout\AdminHeaderMenuPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSessions\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminVisitors\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSessions\CellUser.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSessions\CellVisitor.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAbuseFlags\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAbuseFlags\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAbuseFlags\CellUserPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAbuseFlags\CellSessionPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAbuseFlags\CellEntityPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPropertyUpdates\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPropertyUpdates\CellSessionPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPropertyUpdates\CellUserPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPropertyUpdates\CellOwnerUserPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSessions\CellClientInfo.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPropertyPhotos\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPropertyPhotos\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSavedPropertySearches\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSavedPropertySearches\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSavedPropertySearches\CellNotificationsPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminSavedPropertySearches\CellSearchConditionsPartial.cshtml" />
+    <Content Include="Log4net.Release.config" />
+    <Content Include="Log4net.Debug.config" />
+    <Content Include="Log4net.config" />
+    <Content Include="Areas\Admin\Views\AdminUsers\ChangePasswordAdministratively.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUsers\ChangePasswordAdministrativelySuccess.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminConfiguration\ViewAll.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminConfiguration\DeleteConfiguration.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminConfiguration\EditConfiguration.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\CellDateAndTimePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\CellTargetUser.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\CellSchedule.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\CellState.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\CellSubject.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\CellSenderAndTarget.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\CellOperatorReports.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminLogs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminLogs\DeleteLogFile.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminLogs\ArchiveLogFile.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\NewAdvertisement.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\NewAdvertisementConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOutgoingSms\NewSingle.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminScheduledTasks\List.cshtml" />
+    <Content Include="Areas\Ad\Views\AdAdminHome\Index.cshtml" />
+    <Content Include="Areas\Ad\Views\Web.config" />
+    <Content Include="Areas\Billing\Views\Web.config" />
+    <Content Include="Areas\Billing\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Ad\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListAdministrativeChanges.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListAdministrativeChangesPartials\CellOperator.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListAdministrativeChangesPartials\CellDescription.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListAdministrativeChangesPartials\CellDateAndTime.cshtml" />
+    <Content Include="Areas\Billing\Views\Shared\_GridCellPartials\BillingSourceTargetUser.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListAdministrativeChangesPartials\CellDelta.cshtml" />
+    <Content Include="Areas\Billing\Views\Shared\_GridCellPartials\BillingSourceTransactionIDs.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\NewAdministrativeChange.cshtml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\markerwithlabel.1.1.10.js" />
+    <Content Include="Scripts\markerwithlabel.1.1.10.min.js" />
+    <Content Include="Scripts\site-common\jj.modal.js" />
+    <Content Include="Scripts\site-common\jj.tabs.js" />
+    <Content Include="Scripts\site-common\khoonat.properties.js" />
+    <Content Include="Scripts\site-base\init.js" />
+    <Content Include="Views\Shared\_Selectors\_User\Selector.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingAdminHome\CategoryPartial.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingAdminHome\Index.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListAdministrativeChangesPartials\CellStateAndOperations.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ViewAdministrativeChangeDetailsPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\EditAdministrativeChange.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ReverseAdministrativeChangePopup.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ReviewAdministrativeChangePopup.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactionsAdmin\ListTransactions.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactionsAdmin\ListTransactionsPartials\CellUser.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactionsAdmin\ListTransactionsPartials\CellSource.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListUsers.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListUsersPartials\CellUserID.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListUsersPartials\CellLastTransaction.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListUsersPartials\CellUserName.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListUsersPartials\CellBalance.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\ListUsersPartials\CellTurnover.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusAdmin\ListBonuses.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusAdmin\ListBonusesPartials\CellCreator.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusAdmin\ListBonusesPartials\CellStateAndOperations.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusAdmin\NewBonus.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusAdmin\ViewBonusDetailsPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusAdmin\ReverseBonusPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingHome\RenderTopBarBalance.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingHome\Index.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingHome\IndexPartials\BalanceAndTurnover.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingHome\IndexPartials\Payments.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingHome\IndexPartials\Bonuses.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingHome\IndexPartials\RefundRequests.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewReport.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\UserBalanceAdministrativeChange.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\UserWireTransferPayment.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\UserElectronicPayment.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\PromotionalBonus.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\PromotionalBonusCoupon.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\SavedSearchSmsNotificationBilling.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\SavedPropertySearchPromotionalSms.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\UserRefundRequest.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\SavedPropertySearchPromotionalSmsNotDeliveredReturn.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\NotSupportedSourceType.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\NewPayment.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingHome\IncreaseCredit.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\NewElectronicPayment.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\BankAccountPartial.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\NewWireTransferPayment.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ListWireTransfers.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ListWireTransfersPartials\CellUser.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ListWireTransfersPartials\CellDeposit.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ListWireTransfersPartials\CellSource.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ListWireTransfersPartials\CellDateAndTime.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ListWireTransfersPartials\CellStateAndOperations.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ViewWireTransferDetailsPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ReviewWireTransferPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\ReverseWireTransferPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\ViewAllPayments.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\ViewWireTransferPayments.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\ViewElectronicPayments.cshtml" />
+    <Content Include="Areas\Billing\Views\Refund\ViewRequests.cshtml" />
+    <Content Include="Areas\Billing\Views\Refund\NewRequest.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusCoupon\ViewClaimedCoupons.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusCoupon\ClaimCoupon.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusCoupon\ViewRewardedBonuses.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredProperty\ViewSponsorshipStatus.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredProperty\NewSponsorship.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ListRequests.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ListRequestsPartials\CellRequest.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ListRequestsPartials\CellUser.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ListRequestsPartials\CellSource.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ListRequestsPartials\CellDateAndTime.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ListRequestsPartials\CellStateAndOperations.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ReviewRequestPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ViewRequestDetailsPopup.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\PerformPaymentPopUp.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\ReverseRefundRequestPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUsers\ContactMethodVerificationPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUsers\DeleteContactMethodPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\NewAgency.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\NewAgencyBranch.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\EditAgency.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\EditAgencyBranch.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredProperty\List.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredEntity\Index.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredProperty\Partials\AddOrEditSponsorship.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredProperty\EditSponsorship.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\SponsoredEntityImpressionBilling.cshtml" />
+    <Content Include="Areas\Api\V1\Views\ApiHome\Index.cshtml" />
+    <Content Include="Areas\Api\V1\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Api\V1\Views\Web.config" />
+    <Content Include="Content\fonts\DroidKufi-Bold-iefix.eot" />
+    <Content Include="Content\fonts\DroidKufi-Bold.eot" />
+    <Content Include="Content\fonts\DroidKufi-Bold.ttf" />
+    <Content Include="Content\fonts\DroidKufi-Bold.woff" />
+    <Content Include="Content\fonts\DroidKufi-Bold.woff2" />
+    <Content Include="Content\fonts\DroidKufi-Regular-iefix.eot" />
+    <Content Include="Content\fonts\DroidKufi-Regular.eot" />
+    <Content Include="Content\fonts\DroidKufi-Regular.ttf" />
+    <Content Include="Content\fonts\DroidKufi-Regular.woff" />
+    <Content Include="Content\fonts\DroidKufi-Regular.woff2" />
+    <Content Include="Content\fonts\DroidNaskh-Bold-iefix.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.ttf" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.woff" />
+    <Content Include="Content\fonts\DroidNaskh-Bold.woff2" />
+    <Content Include="Content\fonts\DroidNaskh-Regular-iefix.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.eot" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.ttf" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.woff" />
+    <Content Include="Content\fonts\DroidNaskh-Regular.woff2" />
+    <Content Include="Areas\Ad\Views\SponsoredProperty\ConfirmationPopup.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredPropertyAdmin\List.cshtml" />
+    <Content Include="Areas\Ad\Views\AdHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\ConfirmDeletingAgency.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\ConfirmDeletingAgencyBranch.cshtml" />
+    <Content Include="Areas\Cms\Views\Web.config" />
+    <Content Include="Areas\Cms\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticleCategory\NewArticleCategory.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticleCategory\List.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticle\NewArticle.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticle\List.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticle\Edit.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticle\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOperations\Index.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactions\ViewDetailsSourcePartials\SponsoredEntityClickBilling.cshtml" />
+    <Content Include="Areas\Ad\Views\ImpressionAdmin\ListImpressions.cshtml" />
+    <Content Include="Areas\Ad\Views\ClickAdmin\ListClicks.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredPropertyAdmin\Review.cshtml" />
+    <Content Include="Areas\Ad\Views\AdAdminHome\CategoryPartial.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredPropertyAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNotificationMessage\List.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNotificationMessage\CellDateAndTimePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNotificationMessage\CellTargetUserPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNotificationMessage\CellSeenTimeAndAddressedTimePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNotificationMessage\CellReasonAndSeverityPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNotificationMessage\CellNextMessageTransmissionDuePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNotificationMessage\CellSourceEntityTypeAndIDPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOperations\RecalculateUserTransactions.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\Review.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminIndex\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminIndex\IndexDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOperations\RebuildPropertyListingPhotos.cshtml" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Areas\Admin\Views\AdminProperties\CellStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\EditAgencyLogo.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAgency\AgencyLogoPartial.cshtml" />
+    <Content Include="Areas\Billing\Views\BillingAdminHome\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\PaymentAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\PromotionalBonusAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\RefundAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\UserBalanceAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\UserTransactionsAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Ad\Views\SponsoredPropertyAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Ad\Views\ImpressionAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Ad\Views\ClickAdmin\_ViewStart.cshtml" />
+    <Content Include="Areas\Ad\Views\AdAdminHome\_ViewStart.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticle\_ViewStart.cshtml" />
+    <Content Include="Areas\Cms\Views\AdminArticleCategory\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\NewElectronicPaymentConfirmation.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\RedirectedFromGatewayProviderBank.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\RedirectedFromGatewayProviderBankErrorPage.cshtml" />
+    <Content Include="Areas\Billing\Views\Payment\RedirectedFromGatewayProviderBankNotificationPage.cshtml" />
+    <None Include="BundleTransformer.Configuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Content\bootstrap-rtl\alerts-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\badges-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\bootstrap-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\button-groups-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\carousel-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\close-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\dropdowns-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\forms-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\grid-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\input-groups-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\list-group-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\media-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\gradients-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\grid-framework-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\grid-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\mixins\pagination-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\modals-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\navbar-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\navs-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\normalize-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\pager-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\pagination-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\panels-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\popovers-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\progress-bars-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\responsive-embed-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\tables-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\type-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\utilities-rtl.less" />
+    <Content Include="Content\bootstrap-rtl\variables-rtl.less" />
+    <Content Include="Content\bootstrap-theme\bootstrap-theme.less" />
+    <Content Include="Content\bootstrap-theme\site-variables.less" />
+    <Content Include="Content\bootstrap-theme\site-fontfaces.less" />
+    <Content Include="Content\bootstrap-theme\theming\qtip-theme.less" />
+    <Content Include="Content\bootstrap-theme\theming\fine-uploader-theme.less" />
+    <Content Include="Content\bootstrap-theme\theming\select2-theme.less" />
+    <Content Include="Content\bootstrap-theme\site-social.less" />
+    <Content Include="Content\bootstrap-theme\site-layout.less" />
+    <Content Include="Content\bootstrap-theme\site-general.less" />
+    <Content Include="Content\bootstrap-theme\site-icons.less" />
+    <None Include="Properties\PublishProfiles\Deploy.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Scripts\angular.min.js.map" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="google3a0ca44b2a9ca2ec.html" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.1.js" />
+    <Content Include="Scripts\jquery-ui-1.10.1.min.js" />
+    <Content Include="Scripts\jquery.calendars-fa.1.2.0.js" />
+    <Content Include="Scripts\jquery.calendars.all.1.2.0.js" />
+    <Content Include="Scripts\jquery.calendars.all.1.2.0.min.js" />
+    <Content Include="Scripts\jquery.calendars.persian-fa.1.2.0.js" />
+    <Content Include="Scripts\jquery.calendars.persian.1.2.0.js" />
+    <Content Include="Scripts\jquery.calendars.persian.1.2.0.min.js" />
+    <Content Include="Scripts\jquery.calendars.picker-fa.1.2.0.js" />
+    <Content Include="Scripts\jquery.chosen.0.9.14.js" />
+    <Content Include="Scripts\jquery.chosen.0.9.14.min.js" />
+    <Content Include="Scripts\jquery.fineuploader-3.6.4.js" />
+    <Content Include="Scripts\jquery.fineuploader-3.6.4.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.date.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.date.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.numeric.extensions.min.js" />
+    <Content Include="Scripts\jquery.numberformatter-1.2.2.js" />
+    <Content Include="Scripts\jquery.numberformatter-1.2.2.jsmin.js" />
+    <Content Include="Scripts\jquery.numberformatter-1.2.2.min.js" />
+    <Content Include="Scripts\jquery.overscroll.1.7.2.js" />
+    <Content Include="Scripts\jquery.overscroll.1.7.2.min.js" />
+    <Content Include="Scripts\jquery.qtip.2.2.0.imagesloaded.min.js" />
+    <Content Include="Scripts\jquery.qtip.2.2.0.js" />
+    <Content Include="Scripts\jquery.qtip.2.2.0.min.js" />
+    <Content Include="Scripts\jquery.qtip.unobtrusive.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.fixed.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jshashset.js" />
+    <Content Include="Scripts\jshashset.min.js" />
+    <Content Include="Scripts\jshashtable-2.1.js" />
+    <Content Include="Scripts\jshashtable-2.1.min.js" />
+    <Content Include="Scripts\khoonat.common.js" />
+    <Content Include="Scripts\MarkdownDeep License.txt" />
+    <Content Include="Scripts\MarkdownDeep Quick Reference.txt" />
+    <Content Include="Scripts\MarkdownDeepLib.min.js" />
+    <Content Include="Scripts\mdd_ajax_loader.gif" />
+    <Content Include="Scripts\mdd_gripper.png" />
+    <Content Include="Scripts\mdd_help.htm" />
+    <Content Include="Scripts\mdd_modal_background.png" />
+    <Content Include="Scripts\mdd_styles.css" />
+    <Content Include="Scripts\mdd_toolbar.png" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\select2.3.4.5.js" />
+    <Content Include="Scripts\select2.3.4.5.locale.fa.js" />
+    <Content Include="Scripts\select2.3.4.5.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.fa-IR.css" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Errors\ExceptionInAction.cshtml" />
+    <Content Include="Views\Shared\_Layout\LogOnPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="Controllers\AgencyControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AgencyControllerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\VicinityAdminControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>VicinityAdminControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\PropertyRequest\PropertyRequestEditModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyRequestEditModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\PropertyRequest\PropertyRequestEditModelValidationResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyRequestEditModelValidationResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Property\PropertyModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\VicinityAdmin\VicinityAdminModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VicinityAdminModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Controllers\Account\AccountValidationErrors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountValidationErrors.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Controllers\HomeResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Controllers\Properties\PropertiesControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertiesControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Controllers\Property\PropertyControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Controllers\Property\PublishValidationErrors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PublishValidationErrors.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Helpers\Properties\PropertySearchTitleResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertySearchTitleResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Helpers\Property\PropertyPhotoHelperResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyPhotoHelperResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Properties\PropertiesSaveSearchResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertiesSaveSearchResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Properties\PropertiesSearchResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertiesSearchResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\PropertyPhoto\PropertyPhotoResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyPhotoResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\UserFeedback\UserFeedbackGeneralContactFormModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserFeedbackGeneralContactFormModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\UserFeedback\UserFeedbackReportAbuseModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserFeedbackReportAbuseModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Account\AccountChangePasswordResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountChangePasswordResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Account\AccountForgotResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountForgotResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Account\AccountLogOnResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountLogOnResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Account\AccountSignUpResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountSignUpResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Account\AccountVerificationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountVerificationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\GeneralValidationErrorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralValidationErrorResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\MyProfile\MyProfileAddContactMethodResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyProfileAddContactMethodResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\MyProfile\MyProfileEditResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyProfileEditResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\MyProfile\MyProfileVerifyContactMethodResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyProfileVerifyContactMethodResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Properties\PropertiesSelectResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertiesSelectResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertySummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertySummaryResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertyBuildingResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyBuildingResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertyEstateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyEstateResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertyLuxuryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyLuxuryResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertyRentPaymentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyRentPaymentResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertySalePaymentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertySalePaymentResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertyUnitResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyUnitResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Property\PropertyContactResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyContactResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\UserFeedback\UserFeedbackReportIssueModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserFeedbackReportIssueModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\UserFeedback\UserFeedbackReportSuggestionModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserFeedbackReportSuggestionModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\UserFeedback\UserFeedbackRequestNeighborhoodModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserFeedbackRequestNeighborhoodModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\NewEntry\QuickCreateRequestResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QuickCreateRequestResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\NewEntry\QuickCreatePropertyResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>QuickCreatePropertyResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Properties\PropertiesBrowseResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertiesBrowseResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Properties\PropertiesSearchPartialResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertiesSearchPartialResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\Edit\EditPropertyPaymentConditionsForSaleResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditPropertyPaymentConditionsForSaleResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\LayoutResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LayoutResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\LogOnResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogOnResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\Edit\EditPropertyVisitAndContactResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditPropertyVisitAndContactResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyBuildingResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewPropertyBuildingResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyEstateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewPropertyEstateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyLocationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewPropertyLocationResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyLuxuryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewPropertyLuxuryResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyPaymentConditionsForRentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewPropertyPaymentConditionsForRentResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyPaymentConditionsForSaleResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewPropertyPaymentConditionsForSaleResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyUnitResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewPropertyUnitResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Shared\Property\View\ViewPropertyVisitAndContactResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>ViewPropertyVisitAndContactResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotLoginName.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordComplete.cshtml" />
+    <Content Include="Views\Account\LoginNameQueryComplete.cshtml" />
+    <Content Include="Views\MyProfile\View.cshtml" />
+    <Content Include="Views\Shared\_Profile\Tabs\General.cshtml" />
+    <Content Include="Views\Shared\_Profile\Tabs\PropertyListings.cshtml" />
+    <Content Include="Views\Shared\_Profile\Tabs\PublishHistory.cshtml" />
+    <Content Include="Views\Shared\_Profile\Tabs\SecurityInfo.cshtml" />
+    <Content Include="Views\Shared\_Profile\Tabs\Searches.cshtml" />
+    <Content Include="Views\Shared\_Profile\ProfileGeneralInfo.cshtml" />
+    <Content Include="Views\Shared\_Profile\ProfileActiveTab.cshtml" />
+    <Content Include="Views\MyProfile\Edit.cshtml" />
+    <Content Include="Views\PublicProfile\View.cshtml" />
+    <Content Include="Views\Property\ViewDetailsNotAllowed.cshtml" />
+    <Content Include="Views\OwnedProperties\ViewList.cshtml" />
+    <Content Include="Views\Shared\_AccessDeniedPopupPartial.cshtml" />
+    <Content Include="Views\Property\ViewDetailsNotFound.cshtml" />
+    <Content Include="Views\MyProfile\AddEmailPopup.cshtml" />
+    <Content Include="Views\MyProfile\AddPhoneNumberPopup.cshtml" />
+    <Content Include="Views\MyProfile\AddContactMethodComplete.cshtml" />
+    <Content Include="Views\MyProfile\BeforeVerification.cshtml" />
+    <Content Include="Views\MyProfile\VerificationErrors.cshtml" />
+    <Content Include="Views\MyProfile\PromptForVerification.cshtml" />
+    <Content Include="Views\MyProfile\VerificationSuccessful.cshtml" />
+    <Content Include="Views\MyProfile\AboutVerification.cshtml" />
+    <Content Include="Views\MyProfile\DeleteContactMethod.cshtml" />
+    <Content Include="Views\Captcha\ViewImage.cshtml" />
+    <Content Include="Views\Property\ViewDetailsNotAllowedPartial.cshtml" />
+    <Content Include="Views\Shared\_Errors\GlobalUnknown.cshtml" />
+    <Content Include="Views\Shared\_Errors\GlobalInternal.cshtml" />
+    <Content Include="Views\Shared\_Errors\BadRequest.cshtml" />
+    <Content Include="Views\Shared\_Errors\Unauthorized.cshtml" />
+    <Content Include="Views\Shared\_Errors\Forbidden.cshtml" />
+    <Content Include="Views\Shared\_Errors\NotFound.cshtml" />
+    <Content Include="Views\Shared\_Errors\RequestValidationError.cshtml" />
+    <EmbeddedResource Include="Version.xml" />
+    <Content Include="Views\Home\Content\About.cshtml" />
+    <Content Include="Views\Shared\_Errors\UserDisabled.cshtml" />
+    <Content Include="Views\Shared\_Errors\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\_Errors\EntityNotFound.cshtml" />
+    <Content Include="Views\UserFeedback\ContactUs.cshtml" />
+    <Content Include="Views\Property\EditBySummary.cshtml" />
+    <Content Include="Views\Property\Summary\EditMainPropertiesPartial.cshtml" />
+    <Content Include="Views\Property\Summary\EditLocationPartial.cshtml" />
+    <Content Include="Views\Property\Summary\EditBuildingAndUnitPartial.cshtml" />
+    <Content Include="Views\Property\Summary\EditEstatePartial.cshtml" />
+    <Content Include="Views\Property\Summary\EditSalePricePartial.cshtml" />
+    <Content Include="Views\Property\Summary\EditRentPricePartial.cshtml" />
+    <Content Include="Views\Property\Summary\EditContactInfoPartial.cshtml" />
+    <Content Include="Views\Property\Summary\ViewMainPropertiesPartial.cshtml" />
+    <Content Include="Views\Property\PublishValidationErrorsOnEditPartial.cshtml" />
+    <Content Include="Views\Shared\_Property\Sidebar\ViewPropertyDetailsStatusPartial.cshtml" />
+    <Content Include="Views\Shared\_Property\View\ViewPropertyDetailsSummaryBoxPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout\GoogleAnalyticsPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout\HeaderMenuPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout\SiteWideNotificationPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout\FooterMenuPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout\SiteWideSideBarStartPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout\FooterCopyrightPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout\EnvironmentNotificationPartial.cshtml" />
+    <Content Include="Views\Home\Content\WhyVerifyContactMethod.cshtml" />
+    <Content Include="Views\Account\LogOnAlreadyAuthenticated.cshtml" />
+    <Content Include="Views\Shared\_Layout\InteractiveSessionAckPartial.cshtml" />
+    <Content Include="Views\Sitemap\SitemapXmlIndex.cshtml" />
+    <Content Include="Views\Sitemap\SitemapXml.cshtml" />
+    <Content Include="Views\Properties\SelectLocation.cshtml" />
+    <Content Include="Views\Shared\_Property\View\ViewPropertyDetailsSectionPartial.cshtml" />
+    <Content Include="Views\Property\Summary\EditAdditionalSpecsPartial.cshtml" />
+    <Content Include="Views\UserFeedback\ReportAbuse.cshtml" />
+    <Content Include="Views\UserFeedback\ReportAbusePostback.cshtml" />
+    <Content Include="Views\UserFeedback\Forms\RequestNeighborhoodForm.cshtml" />
+    <Content Include="Views\UserFeedback\FeedbackSubmittedPopup.cshtml" />
+    <Content Include="Views\UserFeedback\Forms\GeneralContactForm.cshtml" />
+    <Content Include="Views\UserFeedback\ReportIssue.cshtml" />
+    <Content Include="Views\UserFeedback\ReportSuggestion.cshtml" />
+    <Content Include="Views\UserFeedback\Forms\ReportIssueForm.cshtml" />
+    <Content Include="Views\UserFeedback\Forms\ReportSuggestionForm.cshtml" />
+    <Content Include="Views\UserFeedback\FeedbackSubmitted.cshtml" />
+    <Content Include="Views\Property\PublishValidationErrorsOnCreatePartial.cshtml" />
+    <Content Include="Views\Shared\_General\AjaxContentPlaceholderPartial.cshtml" />
+    <Content Include="Views\Shared\_Property\ViewPropertyDetailsOwnerMenu.cshtml" />
+    <Content Include="Views\Shared\_Property\ViewPropertyDetailsSideIcons.cshtml" />
+    <Content Include="Views\Shared\_Property\Tabs\_ViewPropertyDetailsTabs.cshtml" />
+    <Content Include="Views\Shared\_Property\Tabs\Stats.cshtml" />
+    <Content Include="Views\Property\EnableEdit.cshtml" />
+    <Content Include="Views\Property\EnableEditSuccessful.cshtml" />
+    <Content Include="Views\Shared\_Property\Tabs\Details.cshtml" />
+    <Content Include="Views\Shared\_Property\Tabs\ContactInfo.cshtml" />
+    <Content Include="Views\Shared\_Property\Tabs\Photos.cshtml" />
+    <Content Include="Views\PropertyPhoto\EditProperties.cshtml" />
+    <Content Include="Views\PropertyPhoto\ViewMediumSize.cshtml" />
+    <Content Include="Views\PropertyPhoto\ViewFullSize.cshtml" />
+    <Content Include="Views\PropertyPhoto\Delete.cshtml" />
+    <Content Include="Views\Shared\_Property\Sidebar\PropertyCoverPhotoSidebarPartial.cshtml" />
+    <Content Include="Views\Shared\_LayoutBlank.cshtml" />
+    <Content Include="Views\Shared\_Property\Grid\RowIcons.cshtml" />
+    <Content Include="Views\Shared\_Property\Grid\RowPhoto.cshtml" />
+    <Content Include="Views\Properties\SearchPartial.cshtml" />
+    <Content Include="Views\Properties\SavedSearches.cshtml" />
+    <Content Include="Views\Shared\_Layout\CommonPageSnippets.cshtml" />
+    <Content Include="Views\Properties\SaveSearch.cshtml" />
+    <Content Include="Views\Properties\SavedSearchesPartials\CellEmailNotification.cshtml" />
+    <Content Include="Views\Properties\SavedSearchesPartials\CellSmsNotification.cshtml" />
+    <Content Include="Views\Properties\SavedSearchesPartials\CellNotificationCount.cshtml" />
+    <Content Include="Views\Properties\SavedSearchesPartials\CellSendNotificationsUntil.cshtml" />
+    <Content Include="Views\Properties\SavedSearchesPartials\CellFullSearchTitle.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetails.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\SmsPartsSelection.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\SelectedOptions.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\TitleSection.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\EmailSection.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\SmsSection.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\HelpTips.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\NotificationValidityTimeInitialSpecification.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\NotificationValidityTimeEdit.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\SectionVisibilityScripts.cshtml" />
+    <Content Include="Views\Properties\SavedSearchDetailsPartials\SavedSearchStatistics.cshtml" />
+    <Content Include="Views\Properties\DeleteSavedSearch.cshtml" />
+    <Content Include="Views\Property\Summary\EditAgencyListingFlagPartial.cshtml" />
+    <Content Include="Views\MyProfile\ContactMethodVerificationPartials\ContactPopupVerificationPartial.cshtml" />
+    <Content Include="Views\MyProfile\ContactMethodVerificationPartials\UnableToVerifyPartial.cshtml" />
+    <Content Include="Views\MyProfile\VerificationPopup.cshtml" />
+    <Content Include="Views\MyProfile\CompleteRegistration.cshtml" />
+    <Content Include="Views\MyProfile\CompleteRegistrationPartials\AddPhoneNumber.cshtml" />
+    <Content Include="Views\MyProfile\CompleteRegistrationPartials\PhoneNumberOkay.cshtml" />
+    <Content Include="Views\MyProfile\CompleteRegistrationPartials\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\MyProfile\CompleteRegistrationPartials\AddEmailAddress.cshtml" />
+    <Content Include="Views\MyProfile\CompleteRegistrationPartials\VerifyEmailAddress.cshtml" />
+    <Content Include="Views\MyProfile\CompleteRegistrationPartials\EmailAddressOkay.cshtml" />
+    <Content Include="Views\Properties\BrowsePartials\SavedSearchesPanel.cshtml" />
+    <Content Include="Views\Agency\List.cshtml" />
+    <Content Include="Views\Agency\ViewDetails.cshtml" />
+    <Content Include="Views\Shared\_Property\Sidebar\PropertySponsorshipStatusPartial.cshtml" />
+    <Content Include="Views\VicinityAdmin\List.cshtml" />
+    <Content Include="Views\VicinityAdmin\NewVicinity.cshtml" />
+    <Content Include="Views\VicinityAdmin\EditProperties.cshtml" />
+    <Content Include="Views\VicinityAdmin\EditGeography.cshtml" />
+    <Content Include="Views\VicinityAdmin\GeographyEditorPartial.cshtml" />
+    <Content Include="Views\Shared\_Selectors\_Vicinity\Selector.cshtml" />
+    <Content Include="Views\VicinityAdmin\MoveVicinities.cshtml" />
+    <Content Include="Views\PropertyRequest\Create.cshtml" />
+    <Content Include="Views\Map\ShowMap.cshtml" />
+    <Content Include="Views\Shared\_Property\ViewSponsoredProperty.cshtml" />
+    <Content Include="Views\Shared\_Property\Tabs\Map.cshtml" />
+    <Content Include="Views\Agency\NewAgency.cshtml" />
+    <Content Include="Views\Shared\_Agency\AgencyPartial.cshtml" />
+    <Content Include="Views\Shared\_Agency\BranchPartial.cshtml" />
+    <Content Include="Views\Agency\AgencyListPartial.cshtml" />
+    <Content Include="Views\Shared\_AjaxPaginationLinks.cshtml" />
+    <Content Include="Views\Agency\AgencyViewDetailsPartial.cshtml" />
+    <Content Include="Views\Agency\MembershipConfirmationPopup.cshtml" />
+    <Content Include="Views\Shared\_Selectors\_Agency\Selector.cshtml" />
+    <Content Include="Views\Agency\AddNewAgencySuccess.cshtml" />
+    <Content Include="Views\Shared\_Agency\UnsubscribeFromAgencyPopup.cshtml" />
+    <Content Include="Views\Property\SharePropertyListingPartial.cshtml" />
+    <Content Include="Views\Property\SharePropertySuccessfullyPartial.cshtml" />
+    <Content Include="Scripts\site-common\khoonat.common.js" />
+    <Content Include="Views\Properties\BrowsePartials\SearchBreadcrumb.cshtml" />
+    <Content Include="Views\Properties\BrowsePartials\AdvancedSearchPanel.cshtml" />
+    <Content Include="Views\Properties\BrowsePartials\SearchMenu.cshtml" />
+    <Content Include="Views\Properties\BrowsePartials\SaveSearchPanel.cshtml" />
+    <Content Include="Views\Map\ShowMapPartials\MapMenuPropertyType.cshtml" />
+    <Content Include="Views\Map\ShowMapPartials\MapMenuListingType.cshtml" />
+    <Content Include="Views\Map\ShowMapPartials\MapMenuSpecifications.cshtml" />
+    <Content Include="Views\Shared\_Property\Grid\TableHeader.cshtml" />
+    <Content Include="Views\Shared\_Property\Grid\RowCells.cshtml" />
+    <Content Include="Views\Shared\_Property\Grid\SponsoredRows.cshtml" />
+    <Content Include="Views\Shared\_Property\Grid\SponsoredRowsBoundary.cshtml" />
+    <Content Include="Scripts\Manager.ttinclude" />
+    <Content Include="Views\Home\HomepageSearchPartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditLocationPartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditMainPropertiesPartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditAgencyListingFlagPartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditBuildingAndUnitPartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditEstatePartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditAdditionalSpecsPartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditSalePricePartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditRentPricePartial.cshtml" />
+    <Content Include="Views\PropertyRequest\EditContactInfoPartial.cshtml" />
+    <Content Include="Views\PropertyRequest\PublishValidationErrorsOnCreatePartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Util\Common.Util.csproj">
+      <Project>{94157E4D-2F2A-4D26-B8C0-CA21D5C2B715}</Project>
+      <Name>Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Composer.Web\Composer.Web.csproj">
+      <Project>{EB1CDD2B-94B6-4418-B3F8-820E5DC4060A}</Project>
+      <Name>Composer.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{0F97DF3F-7842-414F-B2AB-7AF7D98EF5CA}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Impl\Core.Impl.csproj">
+      <Project>{5361CBD9-E144-449A-A38A-001B78952C11}</Project>
+      <Name>Core.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{C0C748B6-7385-4B21-B062-E4EAEDF62A9E}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{6804C8EC-9984-4ECD-B68E-B4E77CAD0795}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Api\V1\Models\ApiHome\" />
+    <Folder Include="Areas\Billing\Views\AdminUserSelector\" />
+    <Folder Include="Areas\Billing\Views\Shared\_Selectors\_AdminUser\" />
+    <Folder Include="Models\Shared\Agency\" />
+    <Folder Include="Resources\Models\PropertyRequest\" />
+    <Folder Include="Views\AgencySelector\" />
+    <Folder Include="Views\Property\Details\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyLocation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertyLuxury.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertyPaymentConditionsForRent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertyPaymentConditionsForSale.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertyBuilding.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertyEstate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertyUnit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertyVisitAndContact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyBuilding.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyEstate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyLuxury.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyPaymentConditionsForRent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyPaymentConditionsForSale.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyUnit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\View\ViewPropertyVisitAndContact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\ViewDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\QuickCreate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\EditUnit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\EditBuilding.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\EditEstate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\EditLuxury.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\EditSalePaymentConditions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\EditRentPaymentConditions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\EditVisitAndContact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Property\Edit\EditPropertySubmit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\CheckboxListItem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_EmptyPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Properties\Browse.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Properties\SelectOption.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\Publish.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\RePublish.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\UnPublish.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Property\QuickCreateCompleted.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PaginationLinks.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Enums.ts">
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\site-admin\Admin.General.ts" />
+    <TypeScriptCompile Include="Scripts\site-base\AutoRun.ts" />
+    <TypeScriptCompile Include="Scripts\TypeLite.Net4.d.ts">
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5312</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8000/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+</Project>

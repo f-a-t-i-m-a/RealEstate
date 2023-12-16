@@ -1,0 +1,39 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Domain.Billing.UserWireTransferPayment
+
+@using (Html.BeginForm("ReverseWireTransferConfirmed", "PaymentAdmin"))
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">اثر تغییر</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                @Html.Partial("ViewWireTransferDetailsPopup", Model)
+            </div>
+            <div class="row">
+                @Html.HiddenFor(m => m.ID)
+                <div>
+                    آیا مطمئنید که می خواهید تغییر اعمال شده را معکوس کنید؟
+                    <br /><br />
+
+                    <input type="checkbox" id="chkAllowReverse" name="chkAllowReverse" />
+                    <label for="chkAllowReverse">بله؛ امکان معکوس کردن فعال شود.</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input id="btnReverse" name="btnReverse" class="none btn btn-primary btn-sm" type="submit" value="معکوس کن" style="width: 120px;" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+        </div>
+    </div>
+}
+
+@(this.ScriptBlock(@<script type="text/javascript">
+                        $("#chkAllowReverse").change(function() {
+                            if (this.checked)
+                                $("#btnReverse").show();
+                            else
+                                $("#btnReverse").hide();
+                        });
+                    </script>))

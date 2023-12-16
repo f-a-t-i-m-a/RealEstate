@@ -1,0 +1,63 @@
+﻿<div class="modal-header">
+    <h1 class="inline-display">اطلاعات تماس</h1>
+</div>
+<div class="modal-body">
+    <div class="form-horizontal" ng-show="supply !== null && !supply.Contact.OwnerCanBeContacted && supply.Contact.AgencyContact !== null && supply.Contact.AgencyContact !== undefined">
+        <div class="smallText redText" ng-if="!supply.IsPublic">این آگهی عمومی نیست و اطلاعات تماس آن جایی نمایش داده نمی شود</div>
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    نام بنگاه: <b>{{supply.Contact.AgencyContact.OrganizationName}}</b>
+                </div>
+                <div class="col-md-6">
+                    نام مشاور: <b>{{supply.Contact.AgencyContact.ContactName}}</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    تلفن مشاور: <b>
+                        <span ng-repeat="phone in supply.Contact.AgencyContact.Phones"><span dir="ltr" class="persian-number">{{phone.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                    </b>
+                </div>
+                <div class="col-md-6">
+                    ایمیل مشاور: <b>
+                        <span ng-repeat="email in supply.Contact.AgencyContact.Emails"><span dir="ltr" class="persian-number">{{email.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                    </b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    آدرس:
+                </div>
+                <div class="col-md-11">
+                    <p ng-repeat="address in supply.Contact.AgencyContact.Addresses">
+                        <b>{{address.NormalizedValue}}</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="supply.Contact.OwnerCanBeContacted && supply.Contact.OwnerContact != null && supply.Contact.OwnerContact != undefined">
+        <div class="smallText redText" ng-if="!supply.IsPublic">این آگهی عمومی نیست و اطلاعات تماس آن جایی نمایش داده نمی شود</div>
+        <div class="row">
+            <div class="col-md-6">
+                نام مالک: <b>{{supply.Contact.OwnerContact.ContactName}}</b>
+            </div>
+        </div>
+        <div class="row" ng-show="supply.Contact.OwnerCanBeContacted && supply.Contact.OwnerContact != null">
+            <div class="col-md-6">
+                تلفن مالک: <b>
+                    <span ng-repeat="phone in supply.Contact.OwnerContact.Phones"><span dir="ltr" class="persian-number">{{phone.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+            <div class="col-md-6">
+                ایمیل مالک: <b>
+                    <span ng-repeat="email in supply.Contact.OwnerContact.Emails"><span dir="ltr" class="persian-number">{{email.NormalizedValue}}</span> {{$last ? '' : ', '}}</span>
+                </b>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="onBackClick()" restrict-to="RealEstateAgent">باشه</button>
+</div>

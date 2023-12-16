@@ -1,0 +1,29 @@
+﻿<div class="container" >
+    <div class="row" ng-show="Types != null && Types.length != 0">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>مپینگ</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="type in Types">
+                    <td>{{type}}</td>
+                    <td><a ng-click="onReIndex(type)" restrict-to="Administrator">ReIndex</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-success btn-sm" ng-click="onDeleteAndCreate()" restrict-to="Administrator">Delete & Create</button>
+            <button class="btn btn-success btn-sm" ng-click="onDeleteAndReindex()" restrict-to="Administrator">Delete & ReIndex</button>
+            <button class="btn btn-success btn-sm" ng-click="onReIndex()" restrict-to="Administrator">ReIndex All</button>
+        </div>
+    </div>
+</div>
+

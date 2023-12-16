@@ -1,0 +1,22 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstateAgency.Util.Resources
+@model Type[]
+
+@* Uncomment the following line to get JavaScript syntax highlighting in the editor, but make sure to comment it again when done editing *@
+@*<script type="text/javascript">*@
+    var JahanJooy;
+    (function (RealEstateAgency) {
+            var Common = JahanJooy.Common;
+            @foreach (var enumType in Model)
+            {
+                <text>
+                    Common.localization.addEnumTranslations("@(enumType.Name)", @(enumType.FullName), [
+                        @foreach (var enumMember in Enum.GetValues(enumType))
+                        {
+                            @: { key: @(Convert.ToInt32(enumMember)), text: "@(EnumLocalizationUtils.ToLocalizedString(enumType, enumMember, StaticEnumResources.ResourceManager))" },
+                        }
+                    ]);
+                </text>
+            }
+    })(JahanJooy || (JahanJooy = {}));
+@*</script>*@

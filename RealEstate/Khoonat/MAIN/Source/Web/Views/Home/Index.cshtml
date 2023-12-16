@@ -1,0 +1,200 @@
+﻿@using JahanJooy.Common.Util.Configuration
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Property
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Controllers
+@using JahanJooy.RealEstate.Web.Models.Properties
+@model JahanJooy.RealEstate.Web.Models.Home.HomeIndexModel
+
+@{
+    ViewBag.Title = "صفحه اول - بانک اطلاعات املاک: ثبت و جستجوی رایگان آگهی";
+    ViewBag.MetaDescription = "سایت عمومی بانک اطلاعات املاک، با امکان ثبت و درج رایگان آگهی ملک، جستجو پیشرفته و مشاهده همه جزئیات و اطلاعات تماس بدون پرداخت هیچ گونه هزینه";
+}
+
+@section FullRowTop
+{
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div style="border: 5px solid #fae49d; border-radius: 5px;">
+                <div id="homepage-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#homepage-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#homepage-carousel" data-slide-to="1"></li>
+                        <li data-target="#homepage-carousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="~/Content/carousel/homepage-carousel-saved-search.jpg" alt="با پیامک و ایمیل از املاک جدید با خبر شوید"/>
+                        </div>
+                        <div class="item">
+                            <img src="~/Content/carousel/homepage-carousel-photo-album.jpg" alt="آلبوم عکس رایگان بسازید">
+                        </div>
+                        <div class="item">
+                            <a href="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)">
+                                <img src="~/Content/carousel/homepage-carousel-blank-ad.jpg" alt="اینجا، محل تبلیغ شما است">
+                            </a>
+                        </div>
+                    </div>
+
+                    <a class="left carousel-control" href="#homepage-carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">قبلی</span>
+                    </a>
+                    <a class="right carousel-control" href="#homepage-carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">بعدی</span>
+                    </a>
+                </div>
+            </div>
+            <div class="text-left">
+                <div class="label" style="padding-top: 5px; position: relative; top: -4px; background-color: #fae49d;">
+                    <a href="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)" style="color: #f0ad4e;">تبلیغ</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div style="border: 5px solid #fae49d; border-radius: 5px;">
+                <a href="http://thefirstgroupinvestor.ae/l/iran/?LeadSource=5806A16E-501E-E511-B2E8-000C29317A1D" rel="nofollow" target="_blank">
+                    <img src="~/Content/carousel/First-Group-Farsi-Banner-280x710-2.jpg" class="img-responsive" alt="First Group"/>
+                </a>
+            </div>
+            <div class="text-left">
+                <div class="label" style="padding-top: 5px; position: relative; top: -4px; background-color: #fae49d;">
+                    <a href="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)" style="color: #f0ad4e;">تبلیغ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Request.IsSecureConnection)
+    {
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">املاک</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.Partial("HomepageSearchPartial", new PropertiesSearchPartialModel())
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-xs-12 col-sm-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">املاک</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.Partial("HomepageSearchPartial", new PropertiesSearchPartialModel())
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <iframe src="/eNamadLogo.htm" frameborder="0" scrolling="no" allowtransparency="true" style="width: 150px; height: 150px;"></iframe>
+            </div>
+        </div>
+    }
+
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+            <div class="list-group">
+                <h3 class="list-group-item active panel-title">بگردید</h3>
+                <a class="list-group-item" href="@Url.Action("ShowMap", "Map", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span> نقشه</a>
+                <a class="list-group-item" href="#" data-ajax-modal="@Url.Action("SearchPartial", "Properties", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span> جستجو در املاک</a>
+                @if (User.IsAuthenticated)
+                {
+                    <a class="list-group-item" href="@Url.Action("SavedSearches", "Properties", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span> جستجو های ذخیره شده شما</a>
+                }
+                <div class="list-group-item">
+                    <form action="@Url.Action("ViewDetailsByCode", "Property", AreaRouteValue.Main)" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="code" class="form-control" placeholder=" کد خونه ت">
+                            <span class="input-group-btn">
+								<button class="btn btn-default" type="submit">بگرد</button>
+							</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+            <div class="list-group">
+                <h3 class="list-group-item active panel-title">ببینید</h3>
+                @if (User.IsAuthenticated)
+                {
+                    <a class="list-group-item" href="@Url.Action("View", "MyProfile", new {area = AreaNames.Main, activeTab = "AllPropertyListings"})"><span class="glyphicon glyphicon-chevron-left"></span> املاکی که شما ثبت کردید</a>
+                    <a class="list-group-item" href="@Url.Action("List", "SponsoredProperty", AreaRouteValue.Ad)"><span class="glyphicon glyphicon-chevron-left"></span> آگهی های ویژه شما</a>
+                }
+                else
+                {
+                    <a class="list-group-item" href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = "srt2"})"><span class="glyphicon glyphicon-chevron-left"></span>  پر بیننده ترین املاک</a>
+                }
+                <a class="list-group-item" href="@Url.Action("Browse", "Properties", new {area = AreaNames.Main, q = ""})"><span class="glyphicon glyphicon-chevron-left"></span> جدید ترین املاک</a>
+                <a class="list-group-item" href="@Url.Action("List", "Agency", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span> دفاتر مشاورین املاک</a>
+            </div>
+        </div>
+
+        <div class="clearfix hidden-lg"></div>
+        <div class="col-xs-12 col-sm-6 col-sm-6 col-md-6 col-lg-3">
+            <div class="list-group">
+                <h3 class="list-group-item active panel-title">ثبت کنید</h3>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                   
+                        <a class="list-group-item" href="@Url.Action("LogOn", "Account", new {returnUrl = Url.Action("QuickCreate", "Property", AreaRouteValue.Main)})">
+                            <span class="glyphicon glyphicon-chevron-left"></span> ثبت / آگهی ملک <span class="badge">رایگان</span>
+                        </a>
+                    
+                }
+                else
+                {
+                    <a class="list-group-item" href="@Url.Action("QuickCreate", "Property", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span> ثبت / آگهی ملک <span class="badge">رایگان</span></a>
+                }@if (User.IsAuthenticated)
+                {
+                    <a class="list-group-item" href="@Url.Action("IncreaseCredit", "BillingHome", AreaRouteValue.Billing)"><span class="glyphicon glyphicon-chevron-left"></span> افزایش اعتبار</a>
+                }
+                else
+                {
+                    <a class="list-group-item" href="@Url.Action("Register", "Account", AreaRouteValue.Main, "https")"><span class="glyphicon glyphicon-chevron-left"></span> ثبت نام در سایت <span class="badge">رایگان</span></a>
+                }
+                @ApplicationEnvironmentUtil.DevelopmentOnly(@<a class="list-group-item" href="@Url.Action("Create", "PropertyRequest", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span>ثبت درخواست یافتن ملک<span style="color: red" class="badge">تازه</span></a>)
+                <a class="list-group-item" href="@Url.Action("NewAgency", "Agency", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span> ثبت مشاور املاک <span class="badge">رایگان</span></a>
+                <a class="list-group-item" href="@Url.Action("ReportSuggestion", "UserFeedback", AreaRouteValue.Main)"><span class="glyphicon glyphicon-chevron-left"></span> طرح پیشنهاد</a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+            <script type="text/javascript">
+                ;
+                !(function(w, d) {
+                    var ad = {
+                            user: "1472385490",
+                            width: 250,
+                            height: 250,
+                            id: 'anetwork-' + ~~(Math.random() * 999999)
+                        },
+                        h = d.head || d.getElementsByTagName('head')[0],
+                        s = location.protocol + '//static-cdn.anetwork.ir/aw/aw.js';
+                    if (typeof w.anetworkParams != 'object')
+                        w.anetworkParams = {};
+                    d.write('<div id="' +
+                        ad.id +
+                        '" style="display: inline-block;position: relative"></div>');
+                    w.anetworkParams[ad.id] = ad;
+                    d.write('<script type="text/javascript" src="' + s + '" async></scri' + 'pt>');
+                })(this, document);
+
+            </script>
+        </div>
+
+    </div>
+
+}

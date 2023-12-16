@@ -1,0 +1,50 @@
+﻿<div class="container">
+    <div class="page-header">
+        <div class="pull-left">
+            <h5 class="text-right" ng-class="{'dangerText' : isExpired}">{{activationTime}}</h5>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="dashboard">
+        <div class="row">
+            <div class="col-md-12">
+                <form ng-submit="onSearchClick()" novalidate>
+                    <div class="input-group">
+                        <input type="text" ng-model="searchText" ng-minlength="3" placeholder="عبارت مورد جستجو را بنویسید (حداقل چهار حرف)"/>
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="onSearchClick()"><i class="fa fa-search"></i></button>
+                            </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="Items != null && Items.length != 0">
+        <h2>نتایج:</h2>
+        <div class="col-md-12 persian-content">
+            <div ng-repeat="item in Items" ng-click="onDetailClick(item)">
+                <hr/>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong ng-bind-html="highlight(item.Title, searchText)"></strong>
+                    </div>
+                    <div class="col-md-8 wrapText" ng-bind-html="highlight(item.DisplayText, searchText)"></div>
+                </div>
+            </div>
+            <jj-pagination page-number="PageNumber" number-of-pages="NumberOfPages" total-number-of-items="TotalNumberOfItems" page-size="PageSize" on-change-page-click="onSearchClick(page)"></jj-pagination>
+        </div>
+    </div>
+    <div class="row" ng-show="Items === null || Items.length === 0">
+        <div class="col-md-12 persian-content">
+            برای مورد فوق نتیجه ای یافت نشد
+        </div>
+    </div>
+    <div class="row">
+        <div  ng-show="Items!= null && Items.length == 0">
+            <p>
+                برای مورد فوق نتیجه ای یافت نشد.
+            </p>
+
+        </div>
+    </div>
+</div>

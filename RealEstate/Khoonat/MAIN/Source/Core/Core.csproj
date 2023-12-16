@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C0C748B6-7385-4B21-B062-E4EAEDF62A9E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JahanJooy.RealEstate.Core</RootNamespace>
+    <AssemblyName>JahanJooy.RealEstate.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Compositional.Composer, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cache\IUserBillingBalanceCache.cs" />
+    <Compile Include="Cache\IVicinityCache.cs" />
+    <Compile Include="Components\AdConstants.cs" />
+    <Compile Include="Components\BillingContants.cs" />
+    <Compile Include="Components\Dto\CalculatedBillingEntityEffect.cs" />
+    <Compile Include="Components\Dto\UserBillingApplyResult.cs" />
+    <Compile Include="Components\Dto\UserBillingBalance.cs" />
+    <Compile Include="Components\ISponsorshipCalculatorComponent.cs" />
+    <Compile Include="Components\IUserBillingEffectCalculatorComponent.cs" />
+    <Compile Include="DomainExtensions\OutgoingSmsMessageExtensions.cs" />
+    <Compile Include="Index\IAgencyBranchIndex.cs" />
+    <Compile Include="Index\IAgencyIndex.cs" />
+    <Compile Include="Index\IEntityIndex.cs" />
+    <Compile Include="Index\IGlobalSearchEntityMapper.cs" />
+    <Compile Include="Index\IGlobalSearchIndex.cs" />
+    <Compile Include="Index\IObjectIndex.cs" />
+    <Compile Include="Index\IPropertyListingIndex.cs" />
+    <Compile Include="Index\IPropertyRequestIndex.cs" />
+    <Compile Include="Notification\IEmailTransmitter.cs" />
+    <Compile Include="Notification\ISmsTransmitter.cs" />
+    <Compile Include="ScheduledTaskKeys.cs" />
+    <Compile Include="Search\IPropertySearchQueryProcessor.cs" />
+    <Compile Include="Search\PropertySearch.cs" />
+    <Compile Include="Search\PropertySearchOption.cs" />
+    <Compile Include="Search\PropertySearchOptions.cs" />
+    <Compile Include="Search\PropertySearchQueryUtil.cs" />
+    <Compile Include="Search\PropertySearchUtil.cs" />
+    <Compile Include="Search\QueryProcessors\EnumPropertySearchQueryProcessor.cs" />
+    <Compile Include="Search\QueryProcessors\NumericArrayPropertySearchQueryProcessor.cs" />
+    <Compile Include="Search\QueryProcessors\NumericPropertySearchQueryProcessor.cs" />
+    <Compile Include="Search\QueryProcessors\OptionsPropertySearchQueryProcessor.cs" />
+    <Compile Include="Security\CorePrincipal.cs" />
+    <Compile Include="Security\CoreIdentity.cs" />
+    <Compile Include="ServiceContext.cs" />
+    <Compile Include="Services\Ad\AdValidationErrors.cs" />
+    <Compile Include="Services\Ad\ISponsoredEntityCalculationService.cs" />
+    <Compile Include="Services\Ad\ISponsoredEntityService.cs" />
+    <Compile Include="Services\Ad\ISponsoredPropertyService.cs" />
+    <Compile Include="Services\Billing\IPromotionalBonusService.cs" />
+    <Compile Include="Services\Billing\IPromotionalCouponService.cs" />
+    <Compile Include="Services\Billing\IUserBalanceService.cs" />
+    <Compile Include="Services\Billing\IUserPaymentService.cs" />
+    <Compile Include="Services\Billing\IUserRefundService.cs" />
+    <Compile Include="Services\Dto\GeoSearchResult.cs" />
+    <Compile Include="Services\Dto\GlobalSearch\GlobalSearchCriteria.cs" />
+    <Compile Include="Services\Dto\GlobalSearch\GlobalSearchIndexItem.cs" />
+    <Compile Include="Services\Dto\GlobalSearch\GlobalSearchRecordType.cs" />
+    <Compile Include="Services\Dto\GlobalSearch\GlobalSearchResult.cs" />
+    <Compile Include="Services\Dto\GlobalSearch\GlobalSearchResultCluster.cs" />
+    <Compile Include="Services\Dto\GlobalSearch\GlobalSearchResultItem.cs" />
+    <Compile Include="Services\ICmsArticleService.cs" />
+    <Compile Include="Services\Configuration\BinaryStoreSettings.cs" />
+    <Compile Include="DomainExtensions\PropertyListingExtensions.cs" />
+    <Compile Include="Services\Dto\SponsoredPropertyListingSummary.cs" />
+    <Compile Include="Services\IGeographyService.cs" />
+    <Compile Include="Services\INotificationService.cs" />
+    <Compile Include="Services\IOperationsService.cs" />
+    <Compile Include="Services\IPropertyRequestService.cs" />
+    <Compile Include="Services\IGlobalSearchService.cs" />
+    <Compile Include="Services\IUserServise.cs" />
+    <Compile Include="Services\IVicinityService.cs" />
+    <Compile Include="Services\IDirectoryService.cs" />
+    <Compile Include="Services\Dto\Audit\ActivityLogDisplayInfo.cs" />
+    <Compile Include="Services\Dto\Authentication\AuthenticationRequest.cs" />
+    <Compile Include="Services\Dto\Authentication\AuthenticationResult.cs" />
+    <Compile Include="Services\Dto\Authentication\FailedAuthenticationResult.cs" />
+    <Compile Include="Services\Dto\Authentication\PasswordAuthenticationRequest.cs" />
+    <Compile Include="Services\Dto\Authentication\SuccessfulAuthenticationResult.cs" />
+    <Compile Include="Services\Dto\Billing\SponsorshipTarrif.cs" />
+    <Compile Include="Services\Dto\EntityUpdateResult.cs" />
+    <Compile Include="Services\Dto\Property\PropertyListingDetails.cs" />
+    <Compile Include="Services\Dto\Property\PropertyListingSummary.cs" />
+    <Compile Include="Services\Dto\SearchResult.cs" />
+    <Compile Include="Services\Dto\SessionInfo.cs" />
+    <Compile Include="Services\Dto\Billing\Tarrif.cs" />
+    <Compile Include="Services\Dto\ToggleFavoriteResult.cs" />
+    <Compile Include="Services\Dto\UserContactMethodVerificationInfo.cs" />
+    <Compile Include="Services\Enums\AuthenticationValidationErrors.cs" />
+    <Compile Include="Services\Enums\GeneralValidationErrors.cs" />
+    <Compile Include="Services\Enums\PropertyValidationErrors.cs" />
+    <Compile Include="Services\IActivityLogService.cs" />
+    <Compile Include="Services\IAuthenticationService.cs" />
+    <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="Services\IEmailNotificationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IProfileService.cs" />
+    <Compile Include="Services\IPropertyPhotoService.cs" />
+    <Compile Include="Services\IPropertyService.cs" />
+    <Compile Include="Services\IRequestService.cs" />
+    <Compile Include="Services\IReviewQueueService.cs" />
+    <Compile Include="Services\ISavedSearchService.cs" />
+    <Compile Include="Services\ISmsMessageService.cs" />
+    <Compile Include="Services\ISmsNotificationService.cs" />
+    <Compile Include="Components\IUserBillingComponent.cs" />
+    <Compile Include="Services\Billing\ITarrifService.cs" />
+    <Compile Include="Services\IUserFeedbackService.cs" />
+    <Compile Include="Services\IUserManagementService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Util\Common.Util.csproj">
+      <Project>{94157E4D-2F2A-4D26-B8C0-CA21D5C2B715}</Project>
+      <Name>Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{0F97DF3F-7842-414F-B2AB-7AF7D98EF5CA}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SerializedEntities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

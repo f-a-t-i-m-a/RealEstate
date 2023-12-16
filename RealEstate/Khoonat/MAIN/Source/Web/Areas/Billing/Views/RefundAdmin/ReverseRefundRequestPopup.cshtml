@@ -1,0 +1,31 @@
+﻿@*@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Domain.Billing.UserRefundRequest
+
+@Html.Partial("ViewRequestDetailsPopup", Model)
+
+@using (Html.BeginForm("ReverseRefundRequestConfirmed", "RefundAdmin", new { Model.ID }))
+{
+    @Html.HiddenFor(m => m.ID)
+  <div>
+        آیا مطمئنید که می خواهید تغییر اعمال شده را معکوس کنید؟
+        <br /><br />
+
+        <input type="checkbox" id="chkAllowReverse" name="chkAllowReverse" />
+        <label for="chkAllowReverse">بله؛ امکان معکوس کردن فعال شود.</label>
+
+        <div style="text-align: center; margin: 40px;">
+            <input id="btnReverse" name="btnReverse" class="button hidden" type="submit" value="معکوس کن" style="width: 120px;" />
+            <input id="btnCancel" name="btnCancel" class="button" type="button" value="بی خیال" style="width: 120px;" onclick="$('.qtip:visible').qtip('hide');" />
+        </div>
+
+    </div>
+}
+
+@this.ScriptBlock(@<script type="text/javascript">
+    $("#chkAllowReverse").change(function () {
+        if (this.checked)
+            $("#btnReverse").show();
+        else
+            $("#btnReverse").hide();
+    });
+    </script>)*@

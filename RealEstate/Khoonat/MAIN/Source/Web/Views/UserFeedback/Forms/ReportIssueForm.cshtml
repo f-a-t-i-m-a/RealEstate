@@ -1,0 +1,126 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@model JahanJooy.RealEstate.Web.Models.UserFeedback.UserFeedbackReportIssueModel
+
+<div>
+	@using (Html.BeginForm("ReportIssuePostback", "UserFeedback"))
+	{
+		<table style="width: 100%">
+			<tr>
+				<td style="width: 140px;"></td>
+				<td style="width: auto;"></td>
+				<td style="width: 50px;"></td>
+				<td style="width: 140px;"></td>
+				<td style="width: auto;"></td>
+			</tr>
+
+			<tr>
+				<td>@Html.LabelFor(m => m.ErrorMessage):</td>
+				<td colspan="4">@Html.TextBoxFor(m => m.ErrorMessage, new { maxlength = 500, autofocus = "autofocus", placeholder = "اگر سیستم به شما پیغام خطای مشخصی ارائه کرده، لطفاً اینجا وارد کنید." })</td>
+			</tr>
+			<tr><td colspan="5">&nbsp;</td></tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.ErrorConditions):</td>
+				<td colspan="4">@Html.TextAreaFor(m => m.ErrorConditions, 3, 50, new { maxlength = 2000, style = "height: 60px;", placeholder = "اگر پیغام خطا نگرفتید، شرایطی که به نظرتون درست نیست و باید اصلاح بشه توضیح بدید." })</td>
+			</tr>
+
+			<tr><td colspan="5"><hr /></td></tr>
+
+			<tr>
+				<td>@Html.LabelFor(m => m.Where):</td>
+				<td colspan="4">@Html.TextBoxFor(m => m.Where, new { maxlength = 500, placeholder = "لطفاً ذکر کنید که در چه صفحه ای و کجای سایت این مشکل رو دیدید." })</td>
+			</tr>
+			<tr><td colspan="5" style="padding-top: 15px;"></td></tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.StepsToReproduce):</td>
+				<td colspan="4">@Html.TextAreaFor(m => m.StepsToReproduce, 3, 50, new { maxlength = 2000, style = "height: 60px;", placeholder = "اگر خواستید، لطفاً بنویسید که به ترتیب چه کارهایی در سایت انجام دادید که منجر به این خطا شده." })</td>
+			</tr>
+
+			<tr><td colspan="5" style="padding-top: 15px;"></td></tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Comments):</td>
+				<td colspan="4">@Html.TextAreaFor(m => m.Comments, 3, 50, new { maxlength = 2000, style = "height: 80px;", placeholder = "هر جور توضیح دیگه ای که لازم میدونید و جای دیگه ننوشتید، اینجا بنویسید." })</td>
+			</tr>
+
+			<tr><td colspan="5"><hr /></td></tr>
+
+			<tr>
+				<td>@Html.LabelFor(m => m.Browser):</td>
+				<td>@Html.TextBoxFor(m => m.Browser, new { maxlength = 500, placeholder = "از چه مرورگری استفاده می کنید؟" })</td>
+				<td>&nbsp;</td>
+				<td>@Html.LabelFor(m => m.BrowserVersion):</td>
+				<td>@Html.TextBoxFor(m => m.BrowserVersion, new { maxlength = 500, placeholder = "اگر نسخه مرورگر رو می دونید اینجا وارد کنید" })</td>
+			</tr>
+			<tr><td colspan="5" style="padding-top: 15px;"></td></tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.OperatingSystem):</td>
+				<td>@Html.TextBoxFor(m => m.OperatingSystem, new { maxlength = 500, placeholder="از چه سیستم عاملی استفاده می کنید؟"})</td>
+				<td>&nbsp;</td>
+				<td>@Html.LabelFor(m => m.OperatingSystemVersion):</td>
+				<td>@Html.TextBoxFor(m => m.OperatingSystemVersion, new { maxlength = 500, placeholder = "چه نسخه ای؟ چه سرویس پکی؟"})</td>
+			</tr>
+			<tr><td colspan="5" style="padding-top: 15px;"></td></tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.DateAndTime):</td>
+				<td colspan="4">@Html.TextBoxFor(m => m.DateAndTime, new { maxlength = 500, placeholder = "اگر مشکل مربوط به الان نیست، لطفاً اگر یادتون هست بگید که چه روزی و چه ساعتی مشکل رو دیدید." })</td>
+			</tr>
+			<tr><td colspan="5" style="padding-top: 15px;"></td></tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.LoggedOnUser):</td>
+				<td colspan="4">@Html.TextBoxFor(m => m.LoggedOnUser, new { maxlength = 500, placeholder = "اگر مشکل مربوط به الان نیست، لطفاً بگید که موقع دیدن مشکل با چه کاربری از سایت استفاده می کردید." })</td>
+			</tr>
+
+			<tr><td colspan="5"><hr /></td></tr>
+
+			<tr><td colspan="5" style="padding: 10px 0;">اگر دوست داشتید، اطلاعات تماستون رو اینجا وارد کنید تا اگر لازم شد بتونیم با شما تماس بگیریم.</td></tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Name):</td>
+				<td>@Html.TextBoxFor(m => m.Name)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.PhoneNumber):</td>
+				<td>@Html.TextBoxFor(m => m.PhoneNumber)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.EmailAddress):</td>
+				<td>@Html.TextBoxFor(m => m.EmailAddress)</td>
+			</tr>
+			<tr><td colspan="5"><hr /></td></tr>
+		</table>
+
+		<div>
+			@Html.ValidationMessageFor(m => m.ErrorMessage)
+			@Html.ValidationMessageFor(m => m.ErrorConditions)
+			@Html.ValidationMessageFor(m => m.Where)
+			@Html.ValidationMessageFor(m => m.StepsToReproduce)
+			@Html.ValidationMessageFor(m => m.Comments)
+			@Html.ValidationMessageFor(m => m.Browser)
+			@Html.ValidationMessageFor(m => m.BrowserVersion)
+			@Html.ValidationMessageFor(m => m.OperatingSystem)
+			@Html.ValidationMessageFor(m => m.OperatingSystemVersion)
+			@Html.ValidationMessageFor(m => m.DateAndTime)
+			@Html.ValidationMessageFor(m => m.LoggedOnUser)
+			@Html.ValidationMessageFor(m => m.Name)
+			@Html.ValidationMessageFor(m => m.PhoneNumber)
+			@Html.ValidationMessageFor(m => m.EmailAddress)
+		</div>
+
+		if (!User.IsVerified)
+		{
+			<div class="pull-left" style="margin-right: 30px;">@Html.Action("ViewImage", "Captcha")</div>
+			<p>لطفاً عدد شش رقمی نمایش داده شده در تصویر روبرو رو در فیلد کنارش وارد کنید.</p>
+			<br class="clear"/>
+			<hr/>
+		}
+
+		<text>
+			@Html.ScriptCaptchaToken()
+			@this.ScriptText(Html.ScriptCaptchaScript())
+			@Html.CaptchaErrorMessage()
+		</text>
+
+		<div class="text-center clear">
+			<input id="btnOK" class="btn btn-success btn-lg" type="submit" value="ارسال" style="width: 150px;"/>
+		</div>
+	}
+</div>

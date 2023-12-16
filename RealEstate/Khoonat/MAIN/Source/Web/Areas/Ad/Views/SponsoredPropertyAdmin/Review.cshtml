@@ -1,0 +1,28 @@
+﻿@using JahanJooy.RealEstate.Core.Services.Dto
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredPropertyAdmin.SponsoredPropertyAdminReviewActionModel
+
+@{
+    var sponsoredPropertyListingSummary = new SponsoredPropertyListingSummary
+    {
+        PropertyListingSummary = Model.ListingSummary,
+        SponsoredPropertyListing = Model.SponsoredPropertyListing
+    };
+}
+@Html.Partial("_Property/ViewSponsoredProperty", sponsoredPropertyListingSummary)
+<br/>
+<br/> 
+<span  class="small">
+    @using (Html.BeginForm("ReviewPostBack", "SponsoredPropertyAdmin", new {id = Model.SponsoredPropertyListing.ID}, FormMethod.Post))
+    {
+        <h3 style="margin: 0;">بازبینی:</h3>
+        <br/>
+        <h3 style="margin: 0;">@IconsHelper.Tristate(Url, Model.SponsoredPropertyListing.Approved) @(Model.SponsoredPropertyListing.Approved.HasValue ? (Model.SponsoredPropertyListing.Approved.Value ? "تایید شده" : "مردود") : "انجام نشده")</h3>
+        <br/>
+
+        <button name="btnApprove" value="btnApprove" type="submit" class="button" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;">@IconsHelper.Tick32(Url) قبول</button>
+        <button name="btnReject" value="btnReject" type="submit" class="button" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;">@IconsHelper.Cross32(Url) مردود</button>
+        <input id="btnCancel" name="btnCancel" class="button" type="button" value="بی خیال" style="width: 200px; height: 50px; background-color: white; color: black; font-weight: bold;" onclick=" $('.qtip:visible').qtip('hide'); " />
+    }
+
+</span>

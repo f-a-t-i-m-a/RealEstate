@@ -1,0 +1,56 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.UserWireTransferPayment
+
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="row">
+            شناسه:
+            @Model.ID
+            <br />
+
+            مبلغ:
+            @BillingPresentationHelper.Amount(Model.Amount)
+            <br />
+
+            تاریخ واریز:
+            @Model.UserEnteredDate.ToLocalizedDateString() @Model.UserEnteredDate.ToLocalizedTimeString()
+            <br />
+
+            کد رهگیری:
+            @Model.FollowUpNumber
+            <br />
+
+            از بانک:
+            @Model.SourceBank.Label(DomainBillingEnumResources.ResourceManager)
+            <br />
+
+            شماره کارت / حساب مبدا:
+            @Model.SourceCardNumberLastDigits
+            <br />
+
+            صاحب حساب مبدا:
+            @Model.SourceAccountHolderName
+            <br />
+
+            توضیحات کاربر:
+            @Model.UserEnteredDescription
+            <br />
+
+            تاریخ ثبت:
+            @Model.CreationTime.ToLocalizedDateString() @Model.CreationTime.ToLocalizedTimeString()
+            <br />
+
+            کاربر:
+            @Model.TargetUserID
+            <br />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div style="margin: 40px; text-align: center;">
+            <button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+        </div>
+    </div>
+</div>

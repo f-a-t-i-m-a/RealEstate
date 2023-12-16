@@ -1,0 +1,31 @@
+﻿@using JahanJooy.RealEstate.Util.Presentation
+@model JahanJooy.RealEstate.Domain.SavedSearch.SavedPropertySearch
+
+<div class="modal-content" data-partial-id="deleteSavedSearch">
+    <div class="modal-header">
+        <h4 class="modal-title"><strong>حذف جستجوی ذخیره شده</strong></h4>
+        <br />
+        <strong>عنوان: @HtmlPresentationHelper.IfNotSpecified(Model.Title)</strong>
+    </div>
+    <div class="modal-body">
+        <p>آیا مطمئنید که می خواهید این جستجوی ذخیره شده را حذف کنید؟</p>
+        @if (Model.SendNotificationEmails || Model.SendPaidSmsMessages || Model.SendPromotionalSmsMessages)
+        {
+            <p>
+                <strong>توجه کنید:</strong>
+                اطلاع رسانی از طریق پیامک / ایمیل برای این جستجو فعال شده است.
+                در صورتی که این جستجوی ذخیره شده را حذف کنید، اطلاع رسانی املاکی که از طریف
+                این جستجوی ذخیره شده انجام می گرفته متوقف خواهد شد.
+            </p>
+        }
+    </div>
+    <div class="modal-footer">
+        @using (Html.BeginForm("DeleteSavedSearchConfirmed", "Properties", new {id = Model.ID}, FormMethod.Post))
+        {
+            <div style="text-align: center; margin: 40px;">
+                <button name="btnOK" value="btnOK" type="submit" class="btn btn-danger">بله؛ حذف کن</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">نه؛ بی خیال</button>
+            </div>
+        }
+    </div>
+</div>

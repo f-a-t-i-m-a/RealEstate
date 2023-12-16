@@ -1,0 +1,116 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Helpers.Property
+@using JahanJooy.RealEstate.Web.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Models.Property
+@using JahanJooy.RealEstate.Web.Resources.Views.Shared.Property.View
+@model PropertyBuildingModel
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_TotalNumberOfUnits, ViewPropertyBuildingResources.TotalNumberOfUnits, Model.TotalNumberOfUnits),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_NumberFloorsAboveGround, ViewPropertyBuildingResources.NumberOfUnitFloors, Model.NumberFloorsAboveGround),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_NumberOfUnitsPerFloor, ViewPropertyBuildingResources.NumberOfUnitsPerFloor, Model.NumberOfUnitsPerFloor),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_NumberOfParkingFloors, ViewPropertyBuildingResources.NumberOfParkingFloors, Model.NumberOfParkingFloors),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_FaceType, Model.FaceType),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasEndOfConstructionCertificate, Model.HasEndOfConstructionCertificate),
+	PropertyViewHelper.MeasuredAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_BuildingAgeYears, ViewPropertyBuildingResources.BuildingAgeYears, Model.BuildingAgeYears),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_StructureType, Model.StructureType),
+	PropertyViewHelper.EnumAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_RoofCoverType, Model.RoofCoverType),
+	PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_PermitDate, HtmlPresentationHelper.LeftToRight(Model.PermitDate.ToLocalizedDateString())),
+	PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_ConstructionCompletionDate, HtmlPresentationHelper.LeftToRight(Model.ConstructionCompletionDate.ToLocalizedDateString())),
+	PropertyViewHelper.SimpleAttribute(Model.ShowAllAttributes, PropertyBuildingResources.Label_EndOfConstructionCertificateDate, HtmlPresentationHelper.LeftToRight(Model.EndOfConstructionCertificateDate.ToLocalizedDateString())),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasJanitorUnit, Model.HasJanitorUnit),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasEntranceLobby, Model.HasEntranceLobby))
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasElevator, Model.HasElevator),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasFurnitureElevator, Model.HasFurnitureElevator),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasCentralTelevisionAntenna, Model.HasCentralTelevisionAntenna),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasCentralInternetConnection, Model.HasCentralInternetConnection),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasGuestParking, Model.HasGuestParking),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasTrashChute, Model.HasTrashChute),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasCentralBoiler, Model.HasCentralBoiler),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasCentralChiller, Model.HasCentralChiller),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasCentralVacuum, Model.HasCentralVacuum),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasGatheringHall, Model.HasGatheringHall)
+)
+
+@if (Model.OtherFeatures.HasText() || Model.ShowAllAttributes)
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div><span class="bold">@PropertyBuildingResources.Label_OtherFeatures:</span></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.OtherFeatures)</div>
+			</div>
+		</div>
+	</div>
+}
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasAutomaticParkingDoor, Model.HasAutomaticParkingDoor),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasVideoEyePhone, Model.HasVideoEyePhone),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasCarWash, Model.HasCarWash),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasBackupWaterTank, Model.HasBackupWaterTank),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasAutomaticStairwayLights, Model.HasAutomaticStairwayLights),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasAccessibilityFeatures, Model.HasAccessibilityFeatures)
+)
+
+@if (Model.OtherWelfareFeatures.HasText() || Model.ShowAllAttributes)
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div><span class="bold">@PropertyBuildingResources.Label_OtherWelfareFeatures:</span></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.OtherWelfareFeatures)</div>
+			</div>
+		</div>
+	</div>
+}
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasGreenGarden, Model.HasGreenGarden),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasBowerInGarden, Model.HasBowerInGarden),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasBowerOnRoof, Model.HasBowerOnRoof),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasSwimmingPool, Model.HasSwimmingPool),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasSauna, Model.HasSauna),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasJacuzzi, Model.HasJacuzzi),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasGym, Model.HasGym)
+)
+
+@if (Model.OtherWelfareFeatures.HasText() || Model.ShowAllAttributes)
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div><span class="bold">@PropertyBuildingResources.Label_OtherWelfareFeatures:</span></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.OtherWelfareFeatures)</div>
+			</div>
+		</div>
+	</div>
+}
+
+@PropertyViewHelper.Container(
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasFireAlarm, Model.HasFireAlarm),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasEmergencyEscape, Model.HasEmergencyEscape),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasClosedCircuitCamera, Model.HasClosedCircuitCamera),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasGuardian, Model.HasGuardian),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasQuakeInsurance, Model.HasQuakeInsurance),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasFireInsurance, Model.HasFireInsurance),
+	PropertyViewHelper.BooleanAttribute(Url, Model.ShowAllAttributes, PropertyBuildingResources.Label_HasLightningArrester, Model.HasLightningArrester)
+)
+
+@if (Model.OtherSafetyFeatures.HasText() || Model.ShowAllAttributes)
+{
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="detail-item">
+				<div><span class="bold">@PropertyBuildingResources.Label_OtherSafetyFeatures:</span></div>
+				<div>@HtmlPresentationHelper.IfNotSpecified(Model.OtherSafetyFeatures)</div>
+			</div>
+		</div>
+	</div>
+}
+
+

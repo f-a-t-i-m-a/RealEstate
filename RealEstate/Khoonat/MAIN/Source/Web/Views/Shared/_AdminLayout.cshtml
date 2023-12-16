@@ -1,0 +1,96 @@
+﻿@using System.Web.Optimization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Application.View
+@using JahanJooy.RealEstate.Web.Areas
+<!DOCTYPE html>
+
+<html lang="fa">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>خونه ت دات کام - مدیریت</title>
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		@Styles.Render("~/bundles/css")
+		@this.OutputStyles()
+		@RenderSection("Styles", false)
+	</head>
+	<body data-action-id="@ViewUtils.GetBodyActionId()">
+		@Html.Partial("_Layout/EnvironmentNotificationPartial")
+
+		<nav id="layout-main-navbar" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#layout-main-navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="@Url.Action("Index", "Home", AreaRouteValue.Main)">
+						<img src="@Url.Content("~/Content/images/header-logo.png")" alt="صفحه نخست">
+					</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="layout-main-navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="javascript:window.location.href=window.location.href"><span class="glyphicon glyphicon-refresh"></span></a></li>
+						<li><a href="@Url.Action("Index", "AdminHome", AreaRouteValue.Admin)">مدیریت</a></li>
+						@RenderSection("NavbarRightExtra", false)
+					</ul>
+					<ul class="nav navbar-nav navbar-left">
+						@RenderSection("NavbarLeftExtra", false)
+						@Html.Partial("_Layout/AdminHeaderMenuPartial")
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div id="layout-content-root">
+
+			@if (IsSectionDefined("ContentRoot"))
+			{
+				@Html.Partial("_Layout/SiteWideNotificationPartial")
+				@RenderSection("ContentRoot")
+			}
+			else
+			{
+				<div class="container">
+					@Html.Partial("_Layout/SiteWideNotificationPartial")
+					@RenderSection("FullRowTop", false)
+					@if (IsSectionDefined("SideBar"))
+					{
+						<div class="row">
+							<div id="layout-column-main" class="col-xs-12 col-md-9">@RenderBody()</div>
+							<div id="layout-column-side" class="col-xs-12 col-md-3">@RenderSection("SideBar", false)</div>
+						</div>
+					}
+					else
+					{
+						@RenderBody()
+					}
+					@RenderSection("FullRowBottom", false)
+				</div>
+			}
+		</div>
+
+		<div id="layout-footer">
+			<div class="container small">
+				<div id="layout-footer-menu">@Html.Partial("_Layout/FooterMenuPartial")</div>
+			</div>
+		</div>
+
+		@if (SessionInfo != null && !SessionInfo.IsCrawler)
+		{
+			<text>
+				@Scripts.Render("~/bundles/js")
+				@Scripts.Render("~/bundles/js-admin")
+				@Scripts.Render("~/bundles/js-angular")
+				@this.OutputScripts()
+				@RenderSection("Scripts", false)
+				@Html.Partial("_Layout/InteractiveSessionAckPartial")
+				@Html.Partial("_Layout/CommonPageSnippets")
+			</text>
+		}
+	</body>
+</html>

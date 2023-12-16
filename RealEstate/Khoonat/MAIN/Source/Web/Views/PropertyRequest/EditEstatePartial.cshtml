@@ -1,0 +1,95 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.PropertyRequest.PropertyRequestEditModel
+
+@*
+    ********************************************************************************
+    **** Estate properties
+*@
+
+<div class="none  displayPerType showForLand  showForGarden showForHouse showForVilla  ">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">مشخصات زمین</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row" >
+                <div class="col-xs-12 col-sm-6" style="margin-inside: 10px">
+                    <div class="col-xs-4 col-sm-2">@Html.LabelFor(m => m.EstateAreaMinimum):</div>
+                    <div class="col-xs-6 col-sm-3">@Html.TextBoxFor(m => m.EstateAreaMinimum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})</div>
+                    <div class="col-xs-2 col-sm-1">@GeneralResources.SquareMeter</div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-4 col-sm-2">@Html.LabelFor(m => m.EstateAreaMaximum):</div>
+                    <div class="col-xs-6 col-sm-3">@Html.TextBoxFor(m => m.EstateAreaMaximum, new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})</div>
+                    <div class="col-xs-2 col-sm-1">@GeneralResources.SquareMeter</div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.EstateArea):
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="input-group ">
+                                @Html.TextBoxFor(m => m.EstateArea, "{0:#.##}", new {style = "direction:ltr;text-align:center;", @class = "digitGrouping"})
+                                <span class="input-group-addon">@GeneralResources.SquareMeter</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.EstateArea)
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.EstateDirection):
+                        </div>
+                        <div class="col-xs-8">
+                            @Html.DropDownListFor(m => m.EstateDirection, Model.EstateDirection.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.EstateDirection)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            @Html.LabelFor(m => m.PassageEdgeLength):
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.PassageEdgeLength, "{0:#.##}", new {maxlength = 9, style = "direction:ltr;text-align:center;"})
+                                <span class="input-group-addon">@GeneralResources.Meter</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.PassageEdgeLength)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-3">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.EstateVoucherType):
+                        </div>
+                        <div class="col-xs-9">
+                            @Html.DropDownListFor(m => m.EstateVoucherType, Model.EstateVoucherType.EnumSelectList(DomainEnumResources.ResourceManager), GeneralResources.NotSelected, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.EstateVoucherType)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

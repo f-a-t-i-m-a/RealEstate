@@ -1,0 +1,293 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Models.Property
+@model PropertyLuxuryModel
+
+
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">خصوصیات</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <div class="form-group">
+                    <div class="col-xs-7 col-sm-5">
+                        @Html.LabelFor(m => m.NumberOfMasterBedrooms):
+                    </div>
+                    <div class="col-xs-5 col-sm-4">
+                        @Html.TextBoxFor(m => m.NumberOfMasterBedrooms, new {maxlength = 2, style = "direction:ltr;text-align:center;"})
+                        @Html.ValidationMessageFor(m => m.NumberOfMasterBedrooms)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <div class="form-group">
+                    <div class="col-xs-7 col-sm-5">
+                        @Html.LabelFor(m => m.CeilingHeight):
+                    </div>
+                    <div class="col-xs-5 col-sm-4">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.CeilingHeight, "{0:0.##}", new {maxlength = 4, style = "direction:ltr;text-align:center;"})
+                            <span class="input-group-addon">متر</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CeilingHeight)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">امکانات لوکس</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                        @Html.LabelFor(m => m.HasAllSideView)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasAllSideView, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-5">
+                                @item.Input @item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                       @Html.LabelFor(m => m.HasAllSideBalcony)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                       @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasAllSideBalcony, SelectHtmlExtensions.BuildBooleanList()))
+                       {
+                            <div class="col-xs-5">
+                                @item.Input@item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                        @Html.LabelFor(m => m.HasPrivatePool)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                       @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasPrivatePool, SelectHtmlExtensions.BuildBooleanList()))
+                       {
+                            <div class="col-xs-5">
+                                @item.Input@item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                        @Html.LabelFor(m => m.HasPrivateElevator)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                       @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasPrivateElevator, SelectHtmlExtensions.BuildBooleanList()))
+                       {
+                        <div class="col-xs-5">
+                            @item.Input
+                            @item.Label
+                        </div>
+                       }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                        @Html.LabelFor(m => m.HasInUnitParking)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasInUnitParking, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-5">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                      @Html.LabelFor(m => m.HasOpenningCeiling)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                       @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasOpenningCeiling, SelectHtmlExtensions.BuildBooleanList()))
+                       {
+                        <div class="col-xs-5">
+                            @item.Input
+                            @item.Label
+                        </div>
+                       }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                       @Html.LabelFor(m => m.HasMobileWall)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                      @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasMobileWall, SelectHtmlExtensions.BuildBooleanList()))
+                      {
+                        <div class="col-xs-5">
+                            @item.Input
+                            @item.Label
+                        </div>
+                      }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                       @Html.LabelFor(m => m.HasGardenInBalcony)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasGardenInBalcony, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-5">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+       
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-6 col-sm-5">
+                        @Html.LabelFor(m => m.HasGuestSuite)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasGuestSuite, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-5">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-5">
+                        @Html.LabelFor(m => m.HasRemoteControlledCurtains)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasRemoteControlledCurtains, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-3 col-sm-5">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-5">
+                        @Html.LabelFor(m => m.HasBuildingManagementSystem)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasBuildingManagementSystem, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-3 col-sm-5">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-5">
+                        @Html.LabelFor(m => m.HasPrivateJanitorUnit)@GeneralResources.QuestionMark
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        @foreach (RadioButtonListItem item in Html.RadioButtonListFor(m => m.HasPrivateJanitorUnit, SelectHtmlExtensions.BuildBooleanList()))
+                        {
+                            <div class="col-xs-3 col-sm-5">
+                                @item.Input
+                                @item.Label
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10">
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-5">
+                        @Html.LabelFor(m => m.AdditionalLuxuryFeatures):
+                    </div>
+                    <div class="col-xs-12 col-sm-7">
+                       @Html.TextAreaFor(m => m.AdditionalLuxuryFeatures, 3, 50, new { style = "height: 60px;" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

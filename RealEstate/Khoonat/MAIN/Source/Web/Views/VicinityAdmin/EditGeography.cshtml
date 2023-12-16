@@ -1,0 +1,52 @@
+﻿@using JahanJooy.Common.Util
+@using JahanJooy.Common.Util.Spatial
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.VicinityAdmin
+@model VicinityAdminEditGeographyModel
+
+
+@section SideBar
+{
+	<h1>ویرایش اطلاعات جغرافیایی</h1>
+	@using ((Html.BeginForm("EditGeography", "VicinityAdmin", new { id = Model.ID, parentID= Model.ParentID })))
+	{
+		<table class="dataEntryTable" style="margin-top: 10px;">
+		   
+		    <tr><td colspan="3"><h4>اطلاعات جغرافیایی</h4></td></tr>
+		    <tr>
+		         <td style="visibility: hidden">@Model.ID</td>
+		    </tr>
+			<tr>
+				<td>مرکز:</td>
+				<td colspan="2">@Html.TextBoxFor(m => m.CenterPointWkt, new {style = "direction:ltr;", @readonly = "readonly"})</td>
+			</tr>
+			<tr>
+				<td>محدوده:</td>
+				<td>@Html.TextBoxFor(m => m.BoundaryWkt, new {style = "direction:ltr;", @readonly = "readonly"})</td>
+				<td><span id="editBoundaryIcon">@IconsHelper.Edit16(Url)</span></td>
+			</tr>
+			<tr><td colspan="3"><hr/></td></tr>
+			<tr>
+				<td colspan="3">
+					<input id="btnSave" class="button" type="submit" value="ذخیره >>"/>
+					&nbsp;&nbsp;&nbsp;
+					@Html.ActionLink("بازگشت >>", "List", new{ parentID=Model.ParentID})
+				</td>
+			</tr>
+		</table>
+	}
+}
+
+@Html.Partial("GeographyEditorPartial", new VicinityAdminGeographyEditorModel
+                                        {
+	                                        Boundary = Model.Boundary,
+	                                        CenterPoint = Model.CenterPoint,
+											ParentBoundary = Model.ParentVicinity.IfNotNull(pv => new SpatialBoundary { Geography = pv.Boundary, Title = VicinityPresentationHelper.BuildTitle(pv) }),
+	                                        BoundaryWktId = "BoundaryWkt",
+	                                        CenterPointWktId = "CenterPointWkt",
+	                                        ToggleBoundaryEditButtonId = "editBoundaryIcon",
+											AdjacentBoundariesActionUrl = Url.Action("GetSiblingBoundaries", "VicinityAdmin", new { Area = AreaNames.Main, vicinityId = Model.ID })
+                                        })
+

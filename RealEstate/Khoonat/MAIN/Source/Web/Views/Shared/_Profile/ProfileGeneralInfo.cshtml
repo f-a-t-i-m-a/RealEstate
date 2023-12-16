@@ -1,0 +1,60 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Application.DomainModel
+@using JahanJooy.RealEstate.Web.Areas
+@model User
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-5">
+        <div class="media">
+            <div class="media-right" >
+                <div class="thumbnail">
+                    <img src="~/Content/images/user-generic.png" >
+                    <div class="caption text-center">
+                        @if (Model.IsOperator)
+                        {
+                            <span>اپراتور</span>
+                        }
+                        else
+                        {
+                            @Model.Type.Label(DomainEnumResources.ResourceManager)
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="media-body">
+                <h1 class="media-heading">@Model.DisplayName</h1>
+                @if (Model.Agency != null)
+                {
+                    <div >
+                        <a href="@Url.Action("ViewDetails", "Agency", new {id = Model.AgencyID, area = AreaNames.Main })"> مشاورین املاک @Model.Agency.GetContent().Name</a>
+                    </div>
+                }
+                else
+                {
+                    <br/>
+                }
+                <br/>
+                <br/>
+                <div>
+                    <strong>مدت عضویت:</strong><br />
+                    @((DateTime.Now - Model.CreationDate).ToLocalizedDurationString())
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-2 hidden-xs hidden-sm"></div>
+    <div class="col-xs-12 col-md-5">
+        <div>
+            <br />
+            <br />
+            <h1 class="grayed">@Model.Code</h1>
+            <strong>آخرین ورود به سیستم:</strong><br />
+            @((Model.LastLogin - DateTime.Now).ToLocalizedRelativeString())
+        </div>
+    </div>
+</div>

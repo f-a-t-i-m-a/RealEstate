@@ -1,0 +1,50 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Core.Services.Dto.UserContactMethodVerificationInfo
+
+<div id="verificationRoot">
+	<div style="padding: 25px; width: 650px; height: 210px;">
+		
+		<span style="font-weight: bold;">
+			اعتبار سنجی
+			@Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+			<br/>
+			@HtmlPresentationHelper.LeftToRight(Model.ContactMethodText)
+		</span>
+		
+		<p>
+			برای بررسی اعتبار این
+			@Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+			یک کد تصادفی به آن ارسال خواهد شد. پس از دریافت این کد آن را در ادامه وارد کنید تا
+			سیستم بتواند از مالکیت شما نسبت به این
+			@Model.ContactMethodType.Label(DomainEnumResources.ResourceManager)
+			اطمینان حاصل کند.
+		</p>
+		
+		<p>
+			برای شروع فرآیند اعتبار سنجی، کلید شروع را انتخاب کنید.
+		</p>
+
+		@using (Ajax.BeginForm("StartVerification", new { id = Model.UserContactMethodID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "verificationRoot" }))
+		{
+			<div style="text-align: center; margin: 40px;">
+				<input id="btnOK" class="button" type="submit" value="شروع" style="width: 120px;"/>
+				<input id="btnCancel" class="button" type="button" value="بی خیال" style="width: 120px;" onclick="$('.qtip:visible').qtip('hide');"/>
+			</div>
+
+	  		<text>
+				@Html.ScriptCaptchaToken()
+				@Html.ScriptCaptchaScript()
+				@Html.CaptchaErrorMessage()
+			</text>
+		}
+
+	</div>
+	
+	<script type="text/javascript">
+		$('.qtip:visible').qtip('reposition');
+		$('.qtip:visible').qtip('option', 'events.hide', function () { $('#verificationRoot').remove(); });
+	</script>
+</div>

@@ -1,0 +1,160 @@
+﻿
+
+.field-validation-warning {
+    color: #000;
+    background-color: #ffd;
+    display: inline-block;
+    border: 1px solid #ff0;
+    padding: 4px 26px 4px 4px;
+    font-size: 12px;
+    background-image: url(icons/warning-16.png);
+    background-repeat: no-repeat;
+    background-position: 99% center;
+}
+
+.field-validation-error {
+    color: #800;
+    background-color: #fdd;
+    display: inline-block;
+    border: 1px solid #f00;
+    padding: 4px 26px 4px 4px;
+    font-size: 12px;
+    background-image: url(icons/error-16-red.png);
+    background-repeat: no-repeat;
+    background-position: 99% center;
+}
+
+.validation-summary-errors, .errorSection {
+    background-color: #fdd;
+    margin: 20px 0;
+    padding: 15px 60px 15px 15px;
+    border: 2px dashed #f55;
+    background-image: url(icons/error-32-red.png);
+    background-repeat: no-repeat;
+    background-position: 99% center;
+}
+
+.span { display: inline-block; }
+
+.ltr { direction: ltr; }
+
+.rtl { direction: rtl; }
+
+.sub {
+    vertical-align: sub;
+    font-size: 75%;
+}
+
+.sup {
+    vertical-align: super;
+    font-size: 75%;
+}
+
+.icon12 {
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+}
+
+.icon16 {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.icon24 {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.icon32 {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon48 {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+}
+
+.icon64 {
+    width: 64px;
+    height: 64px;
+    vertical-align: middle;
+}
+
+.ajaxContentPlaceholder {
+    text-align: center;
+    padding: 10px;
+    background-color: #aaa;
+}
+
+.clickableIcon {
+    opacity: 0.3;
+    -moz-opacity: 0.3;
+    cursor: pointer;
+}
+
+.clickableIcon.active {
+    opacity: 1;
+    -moz-opacity: 1;
+}
+
+.clickableIcon:hover {
+    opacity: 1;
+    -moz-opacity: 1;
+    background-color: #ff9;
+}
+
+.helpTip h4 {
+    font-size: 120%;
+    font-weight: bold;
+    text-align: center;
+    color: #ff8;
+    margin: 8px 0 0 0;
+}
+
+.mapCanvas { background-image: url('images/map-bkg.png'); }
+
+/**
+/** Calendar
+/**********************************************/
+
+select.calendars-month-year {
+    width: auto;
+    padding: 0;
+}
+
+
+/**
+/** Billing styles
+/**********************************************/
+
+.billing-delta-neg, .billing-delta-pos, .billing-balance-neg, .billing-balance-pos {
+    direction: ltr;
+    display: inline-block;
+}
+
+.billing-delta-zero, .billing-balance-zero {
+    color: #999;
+}
+
+.billing-delta-pos {
+    color: #050;
+}
+
+.billing-delta-neg {
+    color: #600;
+}
+
+.billing-balance-neg {
+    color: #a00;
+}
+
+/**
+/** Select2 style overrides
+/**********************************************/
+

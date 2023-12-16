@@ -1,0 +1,19 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@model dynamic
+
+@using (Html.BeginForm("RebuildPropertyListingPhotosPostback", "AdminOperations", new { area = AreaNames.Admin }))
+{
+	<table>
+		<tr>
+			<td>از عکس شناسه:</td>
+			<td>@Html.TextBox("fromId")</td>
+		</tr>
+		<tr>
+			<td>تا عکس شناسه:</td>
+			<td>@Html.TextBox("toId")</td>
+		</tr>
+	</table>
+
+	<div><input id="btnStart" class="button" type="submit" value="شروع >>" /></div>
+}
+

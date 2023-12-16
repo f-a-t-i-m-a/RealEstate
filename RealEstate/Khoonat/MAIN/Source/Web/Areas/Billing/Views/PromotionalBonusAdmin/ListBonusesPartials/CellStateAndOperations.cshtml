@@ -1,0 +1,16 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Domain.Billing
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model PromotionalBonus
+
+
+<span class="bold">@Model.BillingState.Label(DomainEnumResources.ResourceManager)</span>
+
+@if (Model.BillingState == BillingSourceEntityState.Applied)
+{
+    <br />
+    <span data-ajax-modal="@Url.Action("ReverseBonusPopup", new { id = Model.ID })">
+        معکوس <span class="glyphicon glyphicon-backward"></span>
+                    </span>
+}

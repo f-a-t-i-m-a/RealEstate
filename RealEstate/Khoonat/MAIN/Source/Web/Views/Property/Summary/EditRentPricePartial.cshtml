@@ -1,0 +1,132 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@* 
+********************************************************************************
+**** Rent price
+*@
+
+<div class="displayPerIntention  showForRent none">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                اجاره بها
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.Mortgage):
+                        </div>
+                        <div class="col-xs-8">
+                            <div class=" input-group">
+                                @Html.TextBoxFor(m => m.Mortgage, "{0:#.##}", new { style = "direction:ltr;", @class = "digitGrouping text-center" })
+                                <span class="input-group-addon">@GeneralResources.Tomans</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Mortgage)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group hideForMortgageOnly">
+                        <div class="col-xs-4">
+                            <span class="icon-required"></span>
+                            @Html.LabelFor(m => m.Rent):
+                        </div>
+                        <div class="col-xs-8">
+                            <div class=" input-group">
+                                @Html.TextBoxFor(m => m.Rent, "{0:#.##}", new { style = "direction:ltr;", @class = "digitGrouping text-center" })
+                                <span class="input-group-addon">@GeneralResources.Tomans</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Rent)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input type="checkbox" id="MortgageOnly" name="MortgageOnly" />
+                            <label for="MortgageOnly">رهن کامل</label>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            @Html.CheckBoxFor(m => m.MortgageAndRentConvertible)
+                            @Html.LabelFor(m => m.MortgageAndRentConvertible)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row none" id="rentConversionDetails">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            @Html.LabelFor(m => m.MinimumMortgage):
+                        </div>
+                        <div class="col-xs-8">
+                            <div class=" input-group">
+                                @Html.TextBoxFor(m => m.MinimumMortgage, "{0:#.##}", new { style = "direction:ltr;", @class = "digitGrouping text-center" })
+                                <span class="input-group-addon">@GeneralResources.Tomans</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.MinimumMortgage)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            @Html.LabelFor(m => m.MinimumRent):
+                        </div>
+                        <div class="col-xs-8">
+                            <div class=" input-group">
+                                @Html.TextBoxFor(m => m.MinimumRent, "{0:#.##}", new { style = "direction:ltr;", @class = "digitGrouping text-center" })
+                                <span class="input-group-addon">@GeneralResources.Tomans</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.MinimumRent)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       function OnMortgageAndRentConvertibleChanged() {
+                           this.checked ? $("#rentConversionDetails").fadeIn() : $("#rentConversionDetails").fadeOut();
+                           $("#MinimumMortgage").attr("disabled", !this.checked);
+                           $("#MinimumRent").attr("disabled", !this.checked);
+                       }
+
+                       function OnMortgageOnlyChanged() {
+                           this.checked ? $(".hideForMortgageOnly").fadeOut() : $(".hideForMortgageOnly").fadeIn();
+                           $("#Rent").val(this.checked ? '0' : '');
+                       }
+
+                       $(document).ready(function() {
+                           $("#MortgageAndRentConvertible").change(OnMortgageAndRentConvertibleChanged);
+                           $("#MortgageAndRentConvertible").trigger("change");
+                           $("#MortgageOnly").change(OnMortgageOnlyChanged);
+                           if ($("#Rent").val() == '0') {
+                               $("#MortgageOnly").prop('checked', true);
+                               $("#MortgageOnly").trigger('change');
+                           }
+
+                       });
+
+                   </script>
+    )

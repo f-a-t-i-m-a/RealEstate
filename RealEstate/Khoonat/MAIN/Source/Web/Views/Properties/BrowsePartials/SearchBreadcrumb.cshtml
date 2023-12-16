@@ -1,0 +1,9 @@
+﻿@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesBrowseModel
+
+<ol class="breadcrumb">
+	<li><a href="#">جستجو</a></li>
+	@foreach (var item in Model.BreadcrumbItems)
+	{
+		<li><a rel="nofollow" href="@Url.Action("Browse", new {q = Model.Search.Query})">@item.Label</a></li>
+	}
+</ol>

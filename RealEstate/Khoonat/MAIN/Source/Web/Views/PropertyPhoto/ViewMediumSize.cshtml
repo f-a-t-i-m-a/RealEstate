@@ -1,0 +1,79 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Web.Models.PropertyPhoto.PropertyPhotoViewMediumSizeModel
+
+<div class="viewPhotoRoot row" data-photo-id="@Model.Photo.ID">
+	
+    @if (!Model.Photo.Approved.HasValue)
+    {
+        <div style="margin-bottom: 10px; text-align: right;">
+            <span class="field-validation-warning">
+                این عکس توی صف بازبینی توسط مسئولین سایت قرار گرفته، و به زودی در اختیار همه بازدید کننده ها قرار می گیره.
+            </span>
+        </div>
+    }
+	
+    @if (Model.Photo.Approved.HasValue && !Model.Photo.Approved.Value)
+    {
+        <div style="margin-bottom: 10px; text-align: right;">
+            <span class="field-validation-error">
+                این عکس موقع بازبینی توسط مسئول سایت مردود شده. در صورت تمایل اشکال رو رفع کنید تا دوباره بازبینی بشه.
+                اگر در این مورد سوالی دارید یا کمک می خواهید، <a href="@Url.Action("ContactUs", "UserFeedback")">با ما تماس بگیرید</a>.
+            </span>
+        </div>
+    }
+	
+	<div class="@(Model.IsOwner || User.IsOperator ? "col-xs-10" : "col-xs-12")">
+		@if (Model.Photo.Subject.HasValue || !string.IsNullOrWhiteSpace(Model.Photo.Title) || Model.IsOwner)
+		{
+			<div style="font-size: 110%; margin-bottom: 10px; text-align: right;">
+				@HtmlPresentationHelper.IfNotSpecified(PropertyPhotoHelper.BuildPhotoTitle(Model.Photo), "موضوع و عنوان مشخص نشده اند")
+			</div>
+		}
+
+		<a class="center-block text-center" target="_blank" href="@Url.Action("ViewFullSize", "PropertyPhoto", new {photoId = Model.Photo.ID})">
+			<img class="img-responsive center-block img-rounded" src="@Url.Action("GetMediumSizeImage", "PropertyPhoto", new {id = Model.Photo.ID})" />
+		</a>
+
+		<p style="text-align: right;">
+			ایجاد:
+			@((Model.Photo.CreationTime - DateTime.Now).ToLocalizedRelativeString())
+		</p>
+
+		@if (!string.IsNullOrWhiteSpace(Model.Photo.Description) || Model.IsOwner)
+		{
+			<div style="font-size: 110%; margin-top: 10px; text-align: right;">
+				<span class="bold">توضیحات:</span><br />
+				@HtmlPresentationHelper.IfNotSpecified(Model.Photo.Description)
+			</div>
+		}
+	</div>
+
+    @if (Model.IsOwner || User.IsOperator)
+	{
+		<div class="col-xs-2">
+			<div class="deleteCmd btn btn-default btn-block btn-lg" data-ajax-modal="@Url.Action("Delete", "PropertyPhoto", new {id = Model.Photo.ID})">
+				<span class="glyphicon glyphicon-trash"></span>
+				<small class="hidden-xs hidden-sm">حذف</small>
+			</div>
+
+			<div class="editCmd btn btn-default btn-block btn-lg">
+				<span class="glyphicon glyphicon-edit"></span>
+				<small class="hidden-xs hidden-sm">تغییر</small>
+			</div>
+		</div>
+    }
+	
+    <script type="text/javascript">
+        $('.viewPhotoRoot[data-photo-id="@Model.Photo.ID"] .editCmd').click(function() {
+            $.ajax({
+                url: "@Url.Action("EditProperties", "PropertyPhoto")/@Model.Photo.ID",
+                type: 'POST'
+            }).done(function(html) {
+                $('.viewPhotoRoot[data-photo-id="@Model.Photo.ID"]').replaceWith(html);
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,486 @@
+﻿<div class="container">
+<div>
+<form name="frmContract" novalidate>
+<div class="row">
+    <div class="col-md-6 ">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label">تاریخ قرارداد:</label>
+            <jj-jalaali-datepicker-popup jj-model="contract.ContractDate" required="true" class="datepicker"></jj-jalaali-datepicker-popup>
+
+        </div>
+    </div>
+    <div class="col-md-6 ">
+        <div class="form-group">
+            <label for="" class="col-md-4 control-label"> تاریخ تحویل:</label>
+            <jj-jalaali-datepicker-popup jj-model="contract.DeliveryDate" required="true" class="datepicker"></jj-jalaali-datepicker-popup>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">اطلاعات فروشنده</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <label for="" class="col-md-3 control-label"><i class="fa fa-star text-danger"></i> فروشنده:</label>
+                    <div class="col-md-7" ng-show="contract.ID == null">
+                        <jj-select-customer model="contract.Seller" customerId="contract.Seller.ID" jj-required="true" jj-disabled="isCustomerDisabled"
+                                            jj-customers="newSeller"/>
+                    </div>
+                    <div class="col-md-7" ng-show="contract.ID != null">
+                        <a ui-sref="customers.details({id:contract.Seller.ID})">{{contract.Seller.DisplayName}}</a>
+                    </div>
+<!--                    <div class="col-md-1" ng-show="contract.ID == null">-->
+<!--                        <button type="button" class="btn btn-success newSeller" ng-click="onNewSeller()" restrict-to="RealEstateAgent">-->
+<!--                            <i class="fa fa-plus"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">اطلاعات خریدار</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <label for="" class="col-md-3 control-label"><i class="fa fa-star text-danger"></i> خریدار:</label>
+                    <div class="col-md-7" ng-show="contract.ID == null">
+                        <jj-select-customer model="contract.Buyer" customerId="contract.Buyer.ID" jj-required="true" jj-disabled="isCustomerDisabled"
+                                            jj-customers="newBuyer"/>
+                    </div>
+                    <div class="col-md-7" ng-show="contract.ID != null">
+                        <a ui-sref="customers.details({id:contract.Buyer.ID})">{{contract.Buyer.DisplayName}}</a>
+                    </div>
+<!--                    <div class="col-md-1" ng-show="contract.ID == null">-->
+<!--                        <button type="button" class="btn btn-success newBuyer" ng-click="onNewBuyer()" restrict-to="RealEstateAgent">-->
+<!--                            <i class="fa fa-plus"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Property-->
+<div ng-show="contract.ID == null && contract.Seller.ID != null && Supplies.length > 0">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">املاک موجود</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-1">
+                    </th>
+                    <th class="col-md-2">
+                        <label>
+                            نوع ملک
+                        </label>
+                    </th>
+                    <th class="col-md-1">
+                        <label>
+                            نوع معامله
+                        </label>
+                    </th>
+                    <th class="col-md-2">
+                        <label ng-show="!showSortablePrice">
+                            قیمت
+                        </label>
+                        <span ng-show="showSortablePrice">
+                                        <jj-sortable-header title="'قیمت'" sort-column-name="'TotalPrice'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                                    </span>
+                    </th>
+                    <th class="hidden-xs col-md-2">
+                        <label>
+                            مالک
+                        </label>
+                    </th>
+                    <th class="hidden-xs col-md-2">
+                        <label>
+                            آدرس
+                        </label>
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="supply in Supplies">
+                    <td class="col-md-1">
+                        <input type="radio" name="selectedSupply" ng-click="onSupplyClick(supply)">
+                    </td>
+                    <td class="col-md-2">
+                        {{supply.Property.PropertyType | PropertyType}} - {{supply.Property.UsageType | UsageType}}
+                    </td>
+                    <td class="col-md-1">{{supply.IntentionOfOwner | IntentionOfOwner}}</td>
+                    <td class="col-md-2" ng-show="supply.IntentionOfOwner === 2">قیمت کل: {{computePrice(supply) | number}}</td>
+                    <td class="col-md-2" ng-show="supply.IntentionOfOwner === 3">ودیعه: {{supply.Mortgage | number}}</td>
+                    <td class="col-md-2" ng-show="supply.IntentionOfOwner === 1">ودیعه: {{supply.Mortgage | number}}، اجاره ماهانه: {{supply.Rent | number}}</td>
+                    <td class="col-md-2" ng-show="supply.IntentionOfOwner === 4">اجاره روزانه: {{supply.Rent | number}}</td>
+                    <td class="hidden-xs col-md-2">{{supply.Property.Owner.DisplayName}}</td>
+                    <td class="hidden-xs col-md-2">{{supply.Property.Address}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-1">
+                        <input type="radio" name="selectedSupply" ng-click="onSupplyClear(supply)">
+                    </td>
+                    <td class="col-md-2">
+                        هیچکدام
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- <button class="btn btn-primary" ng-click="showPropertyPanel = true">ملک جدید</button>-->
+        </div>
+    </div>
+</div>
+<!-- Request-->
+<div ng-show="contract.ID == null && contract.Buyer.ID != null && Requests.length > 0">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعات درخواست</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-1">
+
+                    </th>
+                    <th class="col-md-2">
+                        <label>
+                            درخواست
+                        </label>
+                    </th>
+                    <th class="col-md-1">
+                        <label>
+                            مشتری
+                        </label>
+                    </th>
+                    <th class="col-md-1">
+                        <label>کاربری</label>
+                    </th>
+                    <th class="col-md-1">
+                        <label>
+                            نوع معامله
+                        </label>
+                    </th>
+                    <th class="col-md-2">
+                        <label>توضیحات</label>
+                    </th>
+                    <th class="hidden-xs col-md-1" ng-show="extendMenu">
+                        <jj-sortable-header title="'بودجه'" sort-column-name="'TotalPrice'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                    </th>
+                    <th class="hidden-xs col-md-1" ng-show="extendMenu">
+                        <jj-sortable-header title="'ودیعه'" sort-column-name="'Mortgage'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                    </th>
+                    <th class="hidden-xs col-md-1" ng-show="extendMenu">
+                        <jj-sortable-header title="'اجاره'" sort-column-name="'Rent'" sort-column="SortColumn" sort-direction="SortDirection"></jj-sortable-header>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="request in Requests">
+                    <td class="col-md-1">
+                        <input type="radio" name="selectedRequest" ng-click="onRequestClick(request)">
+                    </td>
+                    <td class="col-md-2">
+                        <a ui-sref="requests.details({id:request.ID})">
+                            درخواست
+                            <span ng-repeat="propertyType in request.PropertyTypes" style="word-wrap: break-word">
+                                            <Strong>{{propertyType | PropertyType}}</Strong> <span ng-hide="$index==request.PropertyTypes.length-1">-</span>
+                                        </span>
+                        </a>
+
+                    </td>
+                    <td class="col-md-1">
+                        <a ui-sref="customers.details({id:request.Owner.ID})">{{request.Owner.DisplayName}}</a>
+                    </td>
+                    <td>{{request.UsageType | UsageType}}</td>
+                    <td>{{request.IntentionOfCustomer |IntentionOfCustomer}}</td>
+                    <td>{{request.Description}}</td>
+                    <td ng-show="extendMenu">{{request.TotalPrice}}</td>
+                    <td ng-show="extendMenu">{{request.Mortgage}}</td>
+                    <td ng-show="extendMenu">{{request.Rent}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-1">
+                        <input type="radio" name="selectedRequest" ng-click="onRequestClear()">
+                    </td>
+                    <td class="col-md-2">
+                        هیچکدام
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+    <!--<div ng-show="showPropertyPanel">-->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعات ملک </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">کاربری:</label>
+                        <div class="col-md-7">
+                            <jj-select-usage-type model="contract.UsageType" jj-allow-clear="true" jj-required="true" jj-disabled="isPropertySelected || contract.ID != null"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">نوع ملک:</label>
+                        <div class="col-md-7">
+                            <ui-select ng-model="$parent.contract.PropertyType" theme="bootstrap" search-enabled="false" title="" class="no-search" ng-required="true"
+                                       ng-disabled="$parent.contract.UsageType == null || isPropertySelected || contract.ID != null">
+                                <ui-select-match placeholder="لطفا انتخاب کنید" allow-clear="true">{{$select.selected.text}}</ui-select-match>
+                                <ui-select-choices repeat="opt.id as opt in propertyTypeOptions">
+                                    {{opt.text}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">نوع معامله:</label>
+                        <div class="col-md-7">
+                            <jj-select-intention-of-owner model="contract.IntentionOfOwner" jj-allow-clear="true" jj-required="true" jj-disabled="isPropertySelected || contract.ID != null"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">پلاک ثبتی:</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.LicencePlate" ng-disabled="contract.ID != null"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">آدرس:</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.Address" ng-disabled="contract.ID != null"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">زیربنا :</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" ng-model="contract.ContractUnitArea" ng-disabled="disabledUnitArea" jj-format="number"/>
+                                <span class="input-group-addon">متر مربع</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">متراژ زمین:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" ng-model="contract.ContractEstateArea" jj-format="number" ng-disabled="disabledEstateArea"/>
+                                <span class="input-group-addon">متر مربع</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">دانگ:</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.Portion"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">واقـع در بخش: </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.District"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">حوزه ثبتي:</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.RegistrationZone"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">شماره سریال سند مالکیت: </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.OwnershipEvidenceSerialNumber"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">شماره صفحه دفتر اسناد رسمی:</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.NotaryPublicPageNumber"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">دفتر اسناد رسمی: </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.NotaryPublic"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label for="" class="col-md-5">دانگ پارکینگ :</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="contract.PublicSpace"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" ng-show="showSalePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">ثمن معامله</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-5">قیمت:</label>
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <input type="text" ng-model="contract.ContractTotalPrice" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" ng-show="showRentPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">ثمن معامله</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-5"> مبلغ ودیعه:</label>
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <input type="text" ng-model="contract.ContractMortgage" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-5">اجاره:</label>
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <input type="text" ng-model="contract.ContractRent" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" ng-show="showFullMortgagePanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">ثمن معامله</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-5"> مبلغ ودیعه:</label>
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <input type="text" ng-model="contract.ContractMortgage" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" ng-show="showDailyRentPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">ثمن معامله</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="" class="col-md-5"> اجاره ی روزانه:</label>
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <input type="text" ng-model="contract.ContractRent" jj-format="number"/>
+                            <span class="input-group-addon">تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div >
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">جزئیات قرارداد</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <label for="" class="col-md-2">توضیحات:</label>
+                <div class="col-md-10">
+                    <textarea type="text" rows="2" ng-model="contract.Description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<div class="row">
+    <div>
+        <button class="btn btn-success saveButton" ng-click="onSaveClick()" ng-disabled="frmContract.$invalid"><i class="fa fa-floppy-o"></i> ذخیره</button>
+        <button class="btn btn-default" ng-click="onBackClick()">انصراف</button>
+    </div>
+</div>
+</div>
+</div>

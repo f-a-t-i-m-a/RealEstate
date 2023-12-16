@@ -1,0 +1,12 @@
+﻿@using JahanJooy.RealEstate.Web.Helpers.Sitemap
+@model JahanJooy.RealEstate.Web.Models.Sitemap.SitemapIndexModel
+@{
+	Layout = null;
+	Response.ContentType = "text/xml";
+}<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	@foreach (var sitemap in Model.Sitemaps)
+	{
+		<sitemap><loc>http://www.khoonat.com/@sitemap.FileName</loc>@(SitemapHelper.LastModTag(sitemap.LastModified))</sitemap>
+	}
+</sitemapindex>

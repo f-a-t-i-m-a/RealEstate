@@ -1,0 +1,35 @@
+﻿@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminOutgoingSms.AdminOutgoingSmsNewAdvertisementModel
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome") 
+    &gt; 
+    @Html.ActionLink("پیامک های ارسالی", "List", "AdminOutgoingSms")
+    &gt;
+    @Html.ActionLink("ارسال تبلیغاتی", "NewAdvertisement", "AdminOutgoingSms")
+    &gt;
+    تایید
+</h2>
+
+@using (Html.BeginForm("NewAdvertisementConfirmed", "AdminOutgoingSms"))
+{
+    @Html.HiddenFor(m => m.MessageText)
+    @Html.HiddenFor(m => m.TargetNumbers)
+    
+    <table>
+        <tr>
+            <td>متن پیامک:</td>
+            <td><div>@Model.MessageText</div></td>
+        </tr>
+        <tr>
+            <td>شماره های مقصد:</td>
+            <td><div style="direction: ltr;"><pre>@Model.TargetNumbers</pre></div></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input id="btnSend" name="btnSend" class="button" type="submit" value="ارسال >>"/>
+                &nbsp;&nbsp;&nbsp;
+                <input id="btnReturn" name="btnReturn" class="button" type="submit" value="بازگشت و ویرایش"/>
+            </td>
+        </tr>
+    </table>
+}

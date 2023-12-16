@@ -1,0 +1,30 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Core.Components.Dto.UserBillingBalance
+
+<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">
+	<span class="hidden-sm">@BillingPresentationHelper.Balance(Model.TotalBalance) ریال</span>
+	<span class="visible-sm-inline"><span class="glyphicon glyphicon-usd"></span></span>
+	<span class="caret"></span>
+</a>
+<ul id="layout-billing-dropdown" class="dropdown-menu dropdown-menu-left" role="menu">
+    <li>
+        <a href="@Url.Action("Index", "BillingHome", new { area = AreaNames.Billing})"><span class="glyphicon glyphicon-usd"></span> خلاصه اطلاعات مالی</a>
+    </li>
+	<li class="divider"></li>
+    <li>
+        <a href="@Url.Action("NewElectronicPayment", "Payment", AreaRouteValue.Billing)"><span class="glyphicon glyphicon-credit-card"></span> افزایش اعتبار</a>
+    </li>
+    @*
+        <li>
+            <a class="disabledText" href="@Url.Action("ClaimCoupon", "PromotionalBonusCoupon", AreaRouteValue.Billing)">ثبت کارت تخفیف</a>
+        </li>
+    *@
+    <li>
+        <a href="@Url.Action("NewRequest", "Refund", AreaRouteValue.Billing)"><span class="glyphicon glyphicon-repeat"></span> درخواست بازپرداخت</a>
+    </li>
+	
+</ul>

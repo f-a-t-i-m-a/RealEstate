@@ -1,0 +1,41 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Web.Models.Property.PropertySummaryModel
+
+@*  
+********************************************************************************
+**** Main properties
+*@
+
+<div style="margin-top: 10px; font-weight: bold;">
+	<table class="dataEntryTable">
+		<tr>
+			<td style="width: 70px;">@Html.LabelFor(m => m.PropertyType):</td>
+			<td style="width: 160px;">@Model.PropertyType.Label(DomainEnumResources.ResourceManager)</td>
+			<td style="width: 15px;">@Html.HiddenFor(m => m.PropertyType)</td>
+			<td style="width: 60px;"></td>
+			<td style="width: 110px;">@Html.LabelFor(m => m.IntentionOfOwner):</td>
+			<td style="width: 160px;">@Model.IntentionOfOwner.Label(DomainEnumResources.ResourceManager)</td>
+			<td style="width: 15px;">@Html.HiddenFor(m => m.IntentionOfOwner)</td>
+		</tr>
+	</table>
+</div>
+
+@this.ScriptBlock(@<script type="text/javascript">
+
+                       $("#IntentionOfOwner").change(function () {
+                           $(".displayPerIntention.show" + this.value).show(400);
+                           $(".displayPerIntention:not(.show" + this.value + ")").hide(400);
+                        });
+
+                        $("#PropertyType").change(function () {
+
+                            $(".displayPerType.showFor" + this.value).show(400);
+                            $(".displayPerType:not(.showFor" + this.value + ")").hide(400);
+                        });
+
+                        $("#IntentionOfOwner").change();
+                        $("#PropertyType").change();
+
+                    </script>)
+

@@ -1,0 +1,72 @@
+﻿@using JahanJooy.Common.Util.Web.Captcha
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Helpers
+@model JahanJooy.RealEstate.Core.Services.Dto.Property.PropertyListingDetails
+
+<div id="enableEditRoot" class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">فعال سازی ویرایش</h4>
+	</div>
+	<div class="modal-body">
+		@if (Model.OwnerUserID.HasValue)
+		{
+			<p style="padding: 10px; border: 1px dashed darkgrey;">
+				این ملک در پروفایل کاربر
+				@Html.UserTag(Model.OwnerUserLoginName, Model.OwnerUserDisplayName)
+				ثبت شده و فقط این کاربر می تونه اطلاعات این ملک رو ویرایش کنه.
+
+				<br />
+
+				@if (!User.Identity.IsAuthenticated)
+				{
+					<text>
+						اگه شما این کاربر هستید،
+						<a class="btn btn-default btn-sm" href="@Url.Action("LogOn", "Account", new {returnUrl = Url.Action("ViewDetails", new {id = Model.ID})})">به سیستم وارد شوید</a>.
+					</text>
+				}
+			</p>
+		}
+		else
+		{
+			<p>
+				برای فعال کردن امکان ویرایش، حذف و بقیه عملیات، می تونید <mark>رمز ویرایش</mark> اطلاعات ملک رو اینجا وارد کنید:
+			</p>
+
+			using (Ajax.BeginForm("EnableEditPostback", "Property", new { }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "enableEditRoot" }))
+			{
+				<div>
+					<input type="password" name="editPassword" id="editPassword" style="width: 80px;" />
+					<input type="hidden" name="propertyListingId" id="propertyListingId" value="@Model.ID" />
+					<button name="btnAddToOwnedProperties" value="btnAddToOwnedProperties" type="submit" class="button" style="width: 100px;">ارسال</button>
+					@Html.CaptchaErrorMessage()
+					@Html.ScriptCaptchaToken()
+					@this.ScriptText(Html.ScriptCaptchaScript())
+				</div>
+			}
+
+			@Html.ValidationSummary()
+
+			<p style="margin-top: 40px;">
+				@IconsHelper.Idea32White(Url)
+				<strong>رمز ویرایش چیه؟</strong><br />
+				وقتی اطلاعات یک ملک در سایت ثبت می شه، اگه ثبت نام نکرده باشین، یک رمز تصادفی براتون ایجاد می شه و در اختیارتون قرار می گیره.
+				داشتن این رمز، معنیش اینه که شما ملک رو ثبت کردید و می تونید اون رو ویرایش کنید. دقت کنید که اگر قبل از ثبت ملک توی سایت ثبت نام
+				کرده باشید، اطلاعات ملک به پروفایل تون اضافه می شه و دیگه نیازی به رمز ویرایش نخواهید داشت.
+			</p>
+		}
+
+		<p style="margin-top: 40px;">
+			@IconsHelper.Idea32White(Url)
+			<span class="bold">نمی تونید ویرایش رو فعال کنید؟</span><br />
+			اگر که رمز ویرایش رو فراموش کرده اید، یا به هر دلیلی نمی تونید تغییرات مورد نظرتون رو اعمال کنید، می تونید
+			<a class="btn btn-default btn-sm" href="@Url.Action("ContactUs", "UserFeedback")">با ما تماس بگیرید</a>
+			تا شما رو راهنمایی کنیم یا بهتون کمک کنیم.
+		</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+	</div>
+</div>
+
+

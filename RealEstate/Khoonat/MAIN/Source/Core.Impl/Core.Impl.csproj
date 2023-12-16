@@ -1,0 +1,827 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5361CBD9-E144-449A-A38A-001B78952C11}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JahanJooy.RealEstate.Core.Impl</RootNamespace>
+    <AssemblyName>JahanJooy.RealEstate.Core.Impl</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>..\packages\AForge.2.2.4\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging">
+      <HintPath>..\packages\AForge.Imaging.2.2.4\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math">
+      <HintPath>..\packages\AForge.Math.2.2.4\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Compositional.Composer, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL" />
+    <Reference Include="Compositional.Composer.Implementation, Version=1.0.10717.3003, Culture=neutral, PublicKeyToken=6b6bb40930177b89, processorArchitecture=MSIL" />
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoAPI">
+      <HintPath>..\packages\GeoAPI.1.6.0\lib\net35\GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.AdvancedFilters">
+      <HintPath>..\packages\ImageResizer.Plugins.AdvancedFilters.3.3.3\lib\ImageResizer.Plugins.AdvancedFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.SimpleFilters">
+      <HintPath>..\packages\ImageResizer.Plugins.SimpleFilters.3.3.3\lib\ImageResizer.Plugins.SimpleFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Watermark">
+      <HintPath>..\packages\ImageResizer.Plugins.Watermark.3.3.3\lib\ImageResizer.Plugins.Watermark.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Analyzers">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Analyzers.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Core">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.FastVectorHighlighter">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.FastVectorHighlighter.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Highlighter">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Highlighter.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Memory">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Queries">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Regex">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Regex.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.SimpleFacetedSearch">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.SimpleFacetedSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Snowball">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Snowball.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Spatial">
+      <HintPath>..\packages\Lucene.Net.Contrib.Spatial.3.0.3\lib\net40\Lucene.Net.Contrib.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Spatial.NTS">
+      <HintPath>..\packages\Lucene.Net.Contrib.Spatial.NTS.3.0.3\lib\net40\Lucene.Net.Contrib.Spatial.NTS.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.SpellChecker">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Linq">
+      <HintPath>..\packages\Lucene.Net.Linq.3.3.1\lib\net40\Lucene.Net.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite">
+      <HintPath>..\packages\NetTopologySuite.1.12.0\lib\net35\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerCollections">
+      <HintPath>..\packages\NetTopologySuite.1.12.0\lib\net35\PowerCollections.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq">
+      <HintPath>..\packages\Remotion.Linq.1.13.183.0\lib\net35\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\~Non-NuGET\ServiceStack.Cracked\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Spatial4n.Core">
+      <HintPath>..\packages\Spatial4n.Core.0.3\lib\net40\Spatial4n.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Spatial4n.Core.NTS">
+      <HintPath>..\packages\Spatial4n.Core.NTS.0.3\lib\net40\Spatial4n.Core.NTS.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityLogHelpers\ActivityLogDetails.cs" />
+    <Compile Include="Cache\UserBillingBalanceCache.cs" />
+    <Compile Include="Cache\VicinityCache.cs" />
+    <Compile Include="Cache\VicinityCacheIndexMap.cs" />
+    <Compile Include="Components\BillingEffectCalculators\BillingEffectCalculationUtil.cs" />
+    <Compile Include="Components\BillingEffectCalculators\SponsoredEntityClickBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\SponsoredEntityImpressionBillingEffectCalculator.cs" />
+    <Compile Include="Components\GeographicClusterCalculator.cs" />
+    <Compile Include="Components\RootBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\PromotionalBonusBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\PromotionalBonusCouponBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\SavedPropertySearchPromotionalSmsBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\SavedPropertySearchPromotionalSmsNotDeliveredReturnBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\SavedSearchSmsNotificationBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\UserBalanceAdministrativeChangeBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\UserElectronicPaymentBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\UserRefundRequestBillingEffectCalculator.cs" />
+    <Compile Include="Components\BillingEffectCalculators\UserWireTransferPaymentBillingEffectCalculator.cs" />
+    <Compile Include="Components\SponsorshipCalculatorComponent.cs" />
+    <Compile Include="ContentSerialization\AgencyBranchContentSerializer.cs" />
+    <Compile Include="ContentSerialization\AgencyContentSerializer.cs" />
+    <Compile Include="ContentSerialization\PropertyListingContentSerializer.cs" />
+    <Compile Include="ContentSerialization\PropertyRequestContentSerializer.cs" />
+    <Compile Include="ContractImpls\ApplicationSettingsLoader.cs" />
+    <Compile Include="Data\CommonQueries\CorePrincipalExtensions.cs" />
+    <Compile Include="Data\Configurations\Ad\SponsoredEntityClickBillingConfiguration.cs" />
+    <Compile Include="Data\Configurations\Ad\SponsoredEntityClickConfiguration.cs" />
+    <Compile Include="Data\Configurations\Ad\SponsoredEntityConfiguration.cs" />
+    <Compile Include="Data\Configurations\Ad\SponsoredEntityImpressionBillingConfiguration.cs" />
+    <Compile Include="Data\Configurations\Ad\SponsoredEntityImpressionConfiguration.cs" />
+    <Compile Include="Data\Configurations\ApiUserConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\AbuseFlagConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\ActivityLogConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\LoginNameQueryConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\PasswordResetRequestConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\HttpSessionConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\UniqueVisitorConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\UserContactMethodVerificationConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\BillingSourceEntityConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\PromotionalBonusConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\PromotionalBonusCouponConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\UserBalanceAdministrativeChangeConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\UserBillingTransactionConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\UserElectronicPaymentConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\UserRefundRequestConfiguration.cs" />
+    <Compile Include="Data\Configurations\Billing\UserWireTransferPaymentConfiguration.cs" />
+    <Compile Include="Data\Configurations\Cms\ArticleCategoryConfiguration.cs" />
+    <Compile Include="Data\Configurations\Cms\ArticleConfiguration.cs" />
+    <Compile Include="Data\Configurations\Cms\ArticleRevisionConfiguration.cs" />
+    <Compile Include="Data\Configurations\Cms\ArticleSetConfiguration.cs" />
+    <Compile Include="Data\Configurations\ConfigurationDataItemConfiguration.cs" />
+    <Compile Include="Data\Configurations\Directory\AgencyBranchConfiguration.cs" />
+    <Compile Include="Data\Configurations\Directory\AgencyConfiguration.cs" />
+    <Compile Include="Data\Configurations\Messages\NotificationMessageConfiguration.cs" />
+    <Compile Include="Data\Configurations\Messages\OutgoingSmsMessageConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\BuildingConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\PropertyListingContactInfoConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\PropertyListingUpdateHistoryConfiguration.cs" />
+    <Compile Include="Data\Configurations\Audit\PropertySearchHistoryConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\PropertyRequestConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\SponsoredPropertyListingConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedPropertySearchConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedPropertySearchEmailNotificationConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedPropertySearchGeographicRegionConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedPropertySearchPromotionalSmsConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedPropertySearchPromotionalSmsNotDeliveredReturnConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedPropertySearchUpdateHistoryConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedPropertySearchSmsNotificationConfiguration.cs" />
+    <Compile Include="Data\Configurations\SavedSearch\SavedSearchSmsNotificationBillingConfiguration.cs" />
+    <Compile Include="Data\Configurations\ScheduledTaskConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\EstateConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\PropertyListingConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\PropertyListingPublishHistoryConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\PropertyListingPhotoConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\RentConditionsConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\SaleConditionsConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\UnitConfiguration.cs" />
+    <Compile Include="Data\Configurations\UserConfiguration.cs" />
+    <Compile Include="Data\Configurations\UserContactMethodConfiguration.cs" />
+    <Compile Include="Data\Configurations\Property\UserFavoritePropertyListingConfiguration.cs" />
+    <Compile Include="Data\Configurations\VicinityConfiguration.cs" />
+    <Compile Include="Data\Db.cs" />
+    <Compile Include="Data\DbInstances.cs" />
+    <Compile Include="Data\DbManager.cs" />
+    <Compile Include="Data\DbRequestBoundInstances.cs" />
+    <Compile Include="Data\ServiceInterceptor\ServiceTransactionCompositionListener.cs" />
+    <Compile Include="Data\ServiceInterceptor\ServiceTransactionInterceptor.cs" />
+    <Compile Include="Index\AgencyBranchIndex.cs" />
+    <Compile Include="Index\AgencyBranchIndexMap.cs" />
+    <Compile Include="Index\AgencyIndex.cs" />
+    <Compile Include="Index\AgencyIndexMap.cs" />
+    <Compile Include="Index\Base\EntityIndexBase.cs" />
+    <Compile Include="Index\Base\ObjectIndexBase.cs" />
+    <Compile Include="Index\GlobalSearchIndex.cs" />
+    <Compile Include="Index\GlobalSearchIndexMap.cs" />
+    <Compile Include="Index\GlobalSearch\AgencyBranchGlobalSearchMapper.cs" />
+    <Compile Include="Index\GlobalSearch\PropertyListingGlobalSearchMapper.cs" />
+    <Compile Include="Index\PropertyListingIndex.cs" />
+    <Compile Include="Index\PropertyListingIndexMap.cs" />
+    <Compile Include="Index\PropertyRequestIndex.cs" />
+    <Compile Include="Index\PropertyRequestIndexMap.cs" />
+    <Compile Include="Migrations\201211251459077_InitialCreate.cs" />
+    <Compile Include="Migrations\201211251459077_InitialCreate.Designer.cs">
+      <DependentUpon>201211251459077_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201304092216317_InitialCreate-Manual.cs" />
+    <Compile Include="Migrations\201304092216317_InitialCreate-Manual.Designer.cs">
+      <DependentUpon>201304092216317_InitialCreate-Manual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201304162223397_1.0.7.1.cs" />
+    <Compile Include="Migrations\201304162223397_1.0.7.1.Designer.cs">
+      <DependentUpon>201304162223397_1.0.7.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201305072212450_1.0.8.3.cs" />
+    <Compile Include="Migrations\201305072212450_1.0.8.3.Designer.cs">
+      <DependentUpon>201305072212450_1.0.8.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201306251841122_1.1.1.2.cs" />
+    <Compile Include="Migrations\201306251841122_1.1.1.2.Designer.cs">
+      <DependentUpon>201306251841122_1.1.1.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308011228289_1.1.2.4.cs" />
+    <Compile Include="Migrations\201308011228289_1.1.2.4.Designer.cs">
+      <DependentUpon>201308011228289_1.1.2.4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309191333015_1.1.3.1.cs" />
+    <Compile Include="Migrations\201309191333015_1.1.3.1.Designer.cs">
+      <DependentUpon>201309191333015_1.1.3.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311171200054_1.1.3.2.cs" />
+    <Compile Include="Migrations\201311171200054_1.1.3.2.Designer.cs">
+      <DependentUpon>201311171200054_1.1.3.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311291007207_1.1.3.3.cs" />
+    <Compile Include="Migrations\201311291007207_1.1.3.3.Designer.cs">
+      <DependentUpon>201311291007207_1.1.3.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403121650481_1.3.1.Billing.cs" />
+    <Compile Include="Migrations\201403121650481_1.3.1.Billing.Designer.cs">
+      <DependentUpon>201403121650481_1.3.1.Billing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404281152273_1.4.1.Sponsorship.cs" />
+    <Compile Include="Migrations\201404281152273_1.4.1.Sponsorship.Designer.cs">
+      <DependentUpon>201404281152273_1.4.1.Sponsorship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405060747588_1.4.2.CmsAndVicinity.cs" />
+    <Compile Include="Migrations\201405060747588_1.4.2.CmsAndVicinity.Designer.cs">
+      <DependentUpon>201405060747588_1.4.2.CmsAndVicinity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405060753052_1.4.3.Sponsorship.cs" />
+    <Compile Include="Migrations\201405060753052_1.4.3.Sponsorship.Designer.cs">
+      <DependentUpon>201405060753052_1.4.3.Sponsorship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405190541040_1.4.4.cs" />
+    <Compile Include="Migrations\201405190541040_1.4.4.Designer.cs">
+      <DependentUpon>201405190541040_1.4.4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405291132002_1.4.5.cs" />
+    <Compile Include="Migrations\201405291132002_1.4.5.Designer.cs">
+      <DependentUpon>201405291132002_1.4.5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408071403029_1.5.1.cs" />
+    <Compile Include="Migrations\201408071403029_1.5.1.Designer.cs">
+      <DependentUpon>201408071403029_1.5.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408090734570_1.5.2.cs" />
+    <Compile Include="Migrations\201408090734570_1.5.2.Designer.cs">
+      <DependentUpon>201408090734570_1.5.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408251012000_1.5.3.cs" />
+    <Compile Include="Migrations\201408251012000_1.5.3.Designer.cs">
+      <DependentUpon>201408251012000_1.5.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409010640000_1.5.4.cs" />
+    <Compile Include="Migrations\201409010640000_1.5.4.Designer.cs">
+      <DependentUpon>201409010640000_1.5.4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409060753536_1.5.5.EfIndexBug.cs" />
+    <Compile Include="Migrations\201409060753536_1.5.5.EfIndexBug.Designer.cs">
+      <DependentUpon>201409060753536_1.5.5.EfIndexBug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409290741237_1.5.7.cs" />
+    <Compile Include="Migrations\201409290741237_1.5.7.Designer.cs">
+      <DependentUpon>201409290741237_1.5.7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410131152057_1.5.8.AgencyContent.cs" />
+    <Compile Include="Migrations\201410131152057_1.5.8.AgencyContent.Designer.cs">
+      <DependentUpon>201410131152057_1.5.8.AgencyContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410131406012_1.5.8.AgencyContent.2.cs" />
+    <Compile Include="Migrations\201410131406012_1.5.8.AgencyContent.2.Designer.cs">
+      <DependentUpon>201410131406012_1.5.8.AgencyContent.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410180607219_1.6.1.cs" />
+    <Compile Include="Migrations\201410180607219_1.6.1.Designer.cs">
+      <DependentUpon>201410180607219_1.6.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410191058419_1.6.2.cs" />
+    <Compile Include="Migrations\201410191058419_1.6.2.Designer.cs">
+      <DependentUpon>201410191058419_1.6.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411010932133_1.6.2.2.cs" />
+    <Compile Include="Migrations\201411010932133_1.6.2.2.Designer.cs">
+      <DependentUpon>201411010932133_1.6.2.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411061136475_1.6.2.3.cs" />
+    <Compile Include="Migrations\201411061136475_1.6.2.3.Designer.cs">
+      <DependentUpon>201411061136475_1.6.2.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411131202317_1.6.3.1.cs" />
+    <Compile Include="Migrations\201411131202317_1.6.3.1.Designer.cs">
+      <DependentUpon>201411131202317_1.6.3.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411160902050_1.6.3.2.cs" />
+    <Compile Include="Migrations\201411160902050_1.6.3.2.Designer.cs">
+      <DependentUpon>201411160902050_1.6.3.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501111202565_1.7.2.1.cs" />
+    <Compile Include="Migrations\201501111202565_1.7.2.1.Designer.cs">
+      <DependentUpon>201501111202565_1.7.2.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507271034536_1.8.4.1.cs" />
+    <Compile Include="Migrations\201507271034536_1.8.4.1.Designer.cs">
+      <DependentUpon>201507271034536_1.8.4.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508171239550_1.8.4.2.cs" />
+    <Compile Include="Migrations\201508171239550_1.8.4.2.Designer.cs">
+      <DependentUpon>201508171239550_1.8.4.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610011727437_1.8.7.1.HttpSessionIndex.cs" />
+    <Compile Include="Migrations\201610011727437_1.8.7.1.HttpSessionIndex.Designer.cs">
+      <DependentUpon>201610011727437_1.8.7.1.HttpSessionIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Notification\Email\DevelopmentEmailTransmitter.cs" />
+    <Compile Include="Notification\Email\EmailTransmissionException.cs" />
+    <Compile Include="Notification\Email\SmtpEmailTransmitter.cs" />
+    <Compile Include="Notification\Sms\DevelopmentSmsTransmitter.cs" />
+    <Compile Include="Notification\Sms\FarapayamakSenderLine.cs" />
+    <Compile Include="Notification\Sms\FarapayamakSenderLinesCache.cs" />
+    <Compile Include="Notification\Sms\FarapayamakSenderLineStatus.cs" />
+    <Compile Include="Notification\Sms\FarapayamakSmsTransmitter.cs" />
+    <Compile Include="Notification\Sms\SmsTransmissionException.cs" />
+    <Compile Include="ScheduledTasks\BillSavedSearchSmsNotificationsTask.cs" />
+    <Compile Include="ScheduledTasks\CheckSmsMessageDeliveryTask.cs" />
+    <Compile Include="ContractImpls\ScheduledTaskStore.cs" />
+    <Compile Include="ScheduledTasks\BillSponsoredEntityImpressionsTask.cs" />
+    <Compile Include="ScheduledTasks\BillSponsoredEntityClicksTask.cs" />
+    <Compile Include="ScheduledTasks\FinalizePartialClickBillingsTask.cs" />
+    <Compile Include="ScheduledTasks\FinalizePartialImpressionBillingsTask.cs" />
+    <Compile Include="ScheduledTasks\Indexing\IndexAgenciesTask.cs" />
+    <Compile Include="ScheduledTasks\Indexing\IndexAgencyBranchesTask.cs" />
+    <Compile Include="ScheduledTasks\Indexing\IndexEntitiesTaskBase.cs" />
+    <Compile Include="ScheduledTasks\Indexing\IndexPropertyListingsTask.cs" />
+    <Compile Include="ScheduledTasks\Indexing\IndexPropertyRequestsTask.cs" />
+    <Compile Include="ScheduledTasks\Indexing\OptimizeAllIndexesTask.cs" />
+    <Compile Include="ScheduledTasks\RecalculateSponsoredEntitiesTask.cs" />
+    <Compile Include="ScheduledTasks\FinalizePartialSavedSearchSmsNotificationBillingsTask.cs" />
+    <Compile Include="ScheduledTasks\SendEmailToInactiveUsersTask.cs" />
+    <Compile Include="ScheduledTasks\SendNotificationMessageEmailAndSmsTask.cs" />
+    <Compile Include="ScheduledTasks\SendPublishTimeWarningEmailTask.cs" />
+    <Compile Include="ScheduledTasks\ScheduledTaskBase.cs" />
+    <Compile Include="ScheduledTasks\SendSavedPropertySearchEmailsTask.cs" />
+    <Compile Include="ScheduledTasks\SendSavedPropertySearchMessageTaskBase.cs" />
+    <Compile Include="ScheduledTasks\SendSavedPropertySearchSmsTask.cs" />
+    <Compile Include="ScheduledTasks\TransmitSmsMessagesTask.cs" />
+    <Compile Include="Security\PasswordHashUtil.cs" />
+    <Compile Include="ActivityLogHelpers\ActivityLogRulesCollection.cs" />
+    <Compile Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ExternalServices.Farapayamak.AlertsWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ExternalServices.Farapayamak.SendWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ActivityLogService.cs" />
+    <Compile Include="Services\Ad\SponsoredEntityCalculationService.cs" />
+    <Compile Include="Services\Ad\SponsoredEntityService.cs" />
+    <Compile Include="Services\Ad\SponsoredPropertyService.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\Billing\PromotionalBonusService.cs" />
+    <Compile Include="Services\Billing\PromotionalCouponService.cs" />
+    <Compile Include="Services\Billing\UserBalanceService.cs" />
+    <Compile Include="Services\Billing\UserPaymentService.cs" />
+    <Compile Include="Services\Billing\UserRefundService.cs" />
+    <Compile Include="Services\CmsArticleService.cs" />
+    <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\GlobalSearchService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\GeographyService.cs" />
+    <Compile Include="Components\OldGeographicClusterCalculator.cs" />
+    <Compile Include="Services\OperationsService.cs" />
+    <Compile Include="Services\OperationsServiceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperationsServiceResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\PropertyRequestService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\VicinityService.cs" />
+    <Compile Include="Services\DirectoryService.cs" />
+    <Compile Include="Services\EmailNotificationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PropertyPhotoService.cs" />
+    <Compile Include="Services\PropertyService.cs" />
+    <Compile Include="Services\RequestService.cs" />
+    <Compile Include="Services\Resources\EmailNotificationServiceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmailNotificationServiceResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Resources\PromotionalBonusServiceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PromotionalBonusServiceResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Resources\SavedSearchServiceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SavedSearchServiceResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\SavedSearchService.cs" />
+    <Compile Include="Services\SmsMessageService.cs" />
+    <Compile Include="Services\SmsNotificationService.cs" />
+    <Compile Include="Components\UserBillingComponent.cs" />
+    <Compile Include="Services\Billing\TarrifService.cs" />
+    <Compile Include="Services\UserFeedbackService.cs" />
+    <Compile Include="Templates\Email\AccountDisabledNotificationModel.cs" />
+    <Compile Include="Templates\Email\ContactMethodVerificationModel.cs" />
+    <Compile Include="Templates\Email\BalanceNotificationModel.cs" />
+    <Compile Include="Templates\Email\InactiveUserNotificationModel.cs" />
+    <Compile Include="Templates\Email\NotifyBonusAwardedModel.cs" />
+    <Compile Include="Templates\Email\NotifyWireTransferPaymentModel.cs" />
+    <Compile Include="Templates\Email\SharePropertyListingModel.cs" />
+    <Compile Include="Templates\Email\PropertyPublishExpirationWarningModel.cs" />
+    <Compile Include="Templates\Email\PropertyRegistrationInfoForOwnerModel.cs" />
+    <Compile Include="Templates\Email\LoginNameQueryModel.cs" />
+    <Compile Include="Templates\Email\PasswordRecoveryBySmsStartNotificationModel.cs" />
+    <Compile Include="Templates\Email\PasswordRecoveryByUnregisteredEmailNotificationModel.cs" />
+    <Compile Include="Templates\Email\PasswordRecoveryByUnverifiedEmailNotificationModel.cs" />
+    <Compile Include="Templates\Email\PasswordRecoveryCompletionNotificationModel.cs" />
+    <Compile Include="Templates\Email\PasswordResetModel.cs" />
+    <Compile Include="Templates\Email\PropertyInfoForSavedSearchModel.cs" />
+    <Compile Include="Templates\Email\UserFeedbackModel.cs" />
+    <Compile Include="Templates\EmbeddedResourceRazorTemplate.cs" />
+    <Compile Include="Templates\RazorTemplateRunner.cs" />
+    <Compile Include="Templates\IRazorTemplate.cs" />
+    <Compile Include="Templates\TemplateBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Util\Common.Util.csproj">
+      <Project>{94157E4D-2F2A-4D26-B8C0-CA21D5C2B715}</Project>
+      <Name>Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Composer.Web\Composer.Web.csproj">
+      <Project>{EB1CDD2B-94B6-4418-B3F8-820E5DC4060A}</Project>
+      <Name>Composer.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{0F97DF3F-7842-414F-B2AB-7AF7D98EF5CA}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{C0C748B6-7385-4B21-B062-E4EAEDF62A9E}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{6804C8EC-9984-4ECD-B68E-B4E77CAD0795}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="Migrations\201304092216317_InitialCreate-Manual.resx">
+      <DependentUpon>201304092216317_InitialCreate-Manual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201304162223397_1.0.7.1.resx">
+      <DependentUpon>201304162223397_1.0.7.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201305072212450_1.0.8.3.resx">
+      <DependentUpon>201305072212450_1.0.8.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201306251841122_1.1.1.2.resx">
+      <DependentUpon>201306251841122_1.1.1.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308011228289_1.1.2.4.resx">
+      <DependentUpon>201308011228289_1.1.2.4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309191333015_1.1.3.1.resx">
+      <DependentUpon>201309191333015_1.1.3.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311171200054_1.1.3.2.resx">
+      <DependentUpon>201311171200054_1.1.3.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311291007207_1.1.3.3.resx">
+      <DependentUpon>201311291007207_1.1.3.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403121650481_1.3.1.Billing.resx">
+      <DependentUpon>201403121650481_1.3.1.Billing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404281152273_1.4.1.Sponsorship.resx">
+      <DependentUpon>201404281152273_1.4.1.Sponsorship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405060747588_1.4.2.CmsAndVicinity.resx">
+      <DependentUpon>201405060747588_1.4.2.CmsAndVicinity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405060753052_1.4.3.Sponsorship.resx">
+      <DependentUpon>201405060753052_1.4.3.Sponsorship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405190541040_1.4.4.resx">
+      <DependentUpon>201405190541040_1.4.4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405291132002_1.4.5.resx">
+      <DependentUpon>201405291132002_1.4.5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408071403029_1.5.1.resx">
+      <DependentUpon>201408071403029_1.5.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408090734570_1.5.2.resx">
+      <DependentUpon>201408090734570_1.5.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408251012000_1.5.3.resx">
+      <DependentUpon>201408251012000_1.5.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409010640000_1.5.4.resx">
+      <DependentUpon>201409010640000_1.5.4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409060753536_1.5.5.EfIndexBug.resx">
+      <DependentUpon>201409060753536_1.5.5.EfIndexBug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409290741237_1.5.7.resx">
+      <DependentUpon>201409290741237_1.5.7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410131152057_1.5.8.AgencyContent.resx">
+      <DependentUpon>201410131152057_1.5.8.AgencyContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410131406012_1.5.8.AgencyContent.2.resx">
+      <DependentUpon>201410131406012_1.5.8.AgencyContent.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410180607219_1.6.1.resx">
+      <DependentUpon>201410180607219_1.6.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410191058419_1.6.2.resx">
+      <DependentUpon>201410191058419_1.6.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411010932133_1.6.2.2.resx">
+      <DependentUpon>201411010932133_1.6.2.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411061136475_1.6.2.3.resx">
+      <DependentUpon>201411061136475_1.6.2.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411131202317_1.6.3.1.resx">
+      <DependentUpon>201411131202317_1.6.3.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411160902050_1.6.3.2.resx">
+      <DependentUpon>201411160902050_1.6.3.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501111202565_1.7.2.1.resx">
+      <DependentUpon>201501111202565_1.7.2.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507271034536_1.8.4.1.resx">
+      <DependentUpon>201507271034536_1.8.4.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508171239550_1.8.4.2.resx">
+      <DependentUpon>201508171239550_1.8.4.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610011727437_1.8.7.1.HttpSessionIndex.resx">
+      <DependentUpon>201610011727437_1.8.7.1.HttpSessionIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\OperationsServiceResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OperationsServiceResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\Resources\EmailNotificationServiceResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailNotificationServiceResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\Resources\PromotionalBonusServiceResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PromotionalBonusServiceResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\Resources\SavedSearchServiceResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SavedSearchServiceResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\Email\ContactMethodVerification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\PasswordReset.cshtml" />
+    <EmbeddedResource Include="Templates\Email\LoginNameQuery.cshtml" />
+    <EmbeddedResource Include="Templates\Email\PasswordRecoveryBySmsStartNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\PasswordRecoveryByUnregisteredEmailNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\PasswordRecoveryByUnverifiedEmailNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\PasswordRecoveryCompletionNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\AccountDisabledNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\UserFeedback.cshtml" />
+    <EmbeddedResource Include="Templates\Email\PropertyInfoForSavedSearch.cshtml" />
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\actions.wsdl" />
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.AddBranchResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.AddBulk2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.AddBulkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.AddNumberResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.ArrayOfInt.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.ArrayOfLong.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.Branchs.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.GetBranchsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.GetBulkCountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.GetBulkStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.GetTodaySentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.GetTotalSentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.RemoveBranchResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.RemoveBulkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.SendMultipleSMS2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.ActionsWebSerivce.SendMultipleSMSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.AlertsWebService\alerts.wsdl" />
+    <None Include="Service References\ExternalServices.Farapayamak.AlertsWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.AlertsWebService.AlertsList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.AlertsWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.AlertsWebService.GetAlertsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.ArrayOfLong.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.ArrayOfString.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.GetCreditResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.GetDelivery2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.GetInboxCountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.getMessagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.GetMultiDeliveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.MessagesBL.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.SendSimpleSMS2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.SendSimpleSMSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\JahanJooy.RealEstate.Core.Impl.ExternalServices.Farapayamak.SendWebService.SendSmsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\send.wsdl" />
+    <EmbeddedResource Include="Templates\Email\PropertyRegistrationInfoForOwner.cshtml" />
+    <EmbeddedResource Include="Templates\Email\PropertyPublishExpirationWarning.cshtml" />
+    <EmbeddedResource Include="Templates\Email\NotifyBonusAwarded.cshtml" />
+    <EmbeddedResource Include="Templates\Email\InactiveUserNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\BalanceNotification.cshtml" />
+    <EmbeddedResource Include="Templates\Email\NotifyWireTransferPayment.cshtml" />
+    <EmbeddedResource Include="Templates\Email\SharePropertyListing.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Migrations\Reference.txt" />
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\configuration.svcinfo" />
+    <None Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\configuration91.svcinfo" />
+    <None Include="Service References\ExternalServices.Farapayamak.AlertsWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.AlertsWebService\configuration.svcinfo" />
+    <None Include="Service References\ExternalServices.Farapayamak.AlertsWebService\configuration91.svcinfo" />
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\configuration.svcinfo" />
+    <None Include="Service References\ExternalServices.Farapayamak.SendWebService\configuration91.svcinfo" />
+    <EmbeddedResource Include="Resources\ErrorImages\ThumbnailCouldNotBeRetrieved.png" />
+    <EmbeddedResource Include="Resources\ErrorImages\ImageCouldNotBeRetrieved.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201211251459077_InitialCreate.resx">
+      <DependentUpon>201211251459077_InitialCreate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\TestData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ExternalServices.Farapayamak.ActionsWebSerivce\" />
+    <WCFMetadataStorage Include="Service References\ExternalServices.Farapayamak.AlertsWebService\" />
+    <WCFMetadataStorage Include="Service References\ExternalServices.Farapayamak.SendWebService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

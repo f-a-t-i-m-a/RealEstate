@@ -1,0 +1,189 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Core.Services.Dto
+@using JahanJooy.RealEstate.Domain.Property
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredProperty
+@model SponsoredPropertyEditSponsorshipModel
+
+@Html.HiddenFor(m => m.PropertyListingID)
+
+
+@{
+	var sponsoredPropertyModel = new SponsoredPropertyListingSummary
+	                             {
+		                             PropertyListingSummary = Model.ListingSummary,
+		                             SponsoredPropertyListing = new SponsoredPropertyListing {CustomCaption = string.Empty}
+	                             };
+}
+
+<p class="small">
+	آگهی شما به این شکل نمایش داده می شه:
+</p>
+<div class="panel panel-default">
+	<div class="panel-body">
+		@Html.Partial("_Property/ViewSponsoredProperty", sponsoredPropertyModel)
+	</div>
+</div>
+
+<br/>
+
+<div>
+	<table>
+		<tr><td colspan="3"><hr /></td></tr>
+		<tr>
+			<td style="width: 210px">@Html.LabelFor(m => m.CustomCaption):</td>
+			<td style="width: 200px">@Html.TextBoxFor(m => m.CustomCaption, new {maxlength = 60})</td>
+			<td class="small">
+				<p>حداکثر 60 حرف.</p>
+				<p>اگر بخواهید، متن سطر اول آگهی رو می تونید خودتون هر طور که دوست دارید بنویسید. توضیحات شما در سطر اول ظاهر میشه، و درشت تر از بقیه نوشته ها تنظیم شده.</p>
+			</td>
+		</tr>
+		<tr><td colspan="3"><hr /></td></tr>
+		<tr>
+			<td><span class="icon-required"></span> @Html.LabelFor(m => m.BillingMethod):</td>
+			<td>@Html.DropDownListFor(m => m.BillingMethod, Model.BillingMethodSelectList, new {style = "width:200px", @class = "form-control"})</td>
+			<td class="disabledText small">
+				<p>
+					می تونید نحوه محاسبه مبلغی که برای آگهی ویژه از حسابتون کم میشه رو مشخص کنید.
+				</p>
+				<p class="none showForPerImpression">
+					پرداخت به ازای هر نمایش:
+					به ازای هر باری که آگهی ویژه شما توی نتایج جستجو ظاهر میشه، یک مبلغ جزئی از حساب شما کم میشه
+				</p>
+				<p class="none showForPerClick">
+					پرداخت به ازای هر کلیک:
+					نمایش ملک به صورت ویژه هزینه ای نداره اما به ازای هر باری که یک کاربر روی آگهی ویژه کلیک کنه تا جزئیات ملک یا اطلاعات تماس رو ببینه، یک مبلغ جزئی (ولی بیشتر از مبلغ هر نمایش) از حسابتون کم میشه
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				@Html.ValidationMessageFor(m => m.BillingMethod)
+			</td>
+		</tr>
+		<tr><td colspan="4"><hr /></td></tr>
+		<tr>
+			<td>
+				<span class="icon-required"></span>
+				<div class="showForPerImpression">@Html.LabelFor(m => m.MaxPayPerImpression):</div>
+				<div class="showForPerClick">@Html.LabelFor(m => m.MaxPayPerClick):</div>
+			</td>
+			<td>
+				<div class="showForPerImpression span" style="width: 60px;">@Html.TextBoxFor(m => m.MaxPayPerImpression, "{0:0.##}", new {maxlength = 11, style = "direction:ltr;text-align:center", @class = "digitGrouping"})</div>
+				<div class="showForPerClick span" style="width: 60px;">@Html.TextBoxFor(m => m.MaxPayPerClick, "{0:0.##}", new {maxlength = 11, style = "direction:ltr;text-align:center", @class = "digitGrouping"})</div>
+				<div class="span">&nbsp;&nbsp;&nbsp;@GeneralResources.Rials</div>
+			</td>
+			<td >
+				<p>
+					<span class="small showForPerImpression">حداقل @BillingPresentationHelper.Amount(Model.Tarrif.PerImpressionMinimumBid) @GeneralResources.Rials - </span>
+					<span class="small showForPerImpression">هزینه بالاترین موقعیت در این لحظه: @BillingPresentationHelper.Amount(Model.PerImpressionMaximumBid + Model.Tarrif.PerImpressionBidIncrement) @GeneralResources.Rials</span>
+				</p>
+				<p>
+					<span class="small showForPerClick">حداقل  @BillingPresentationHelper.Amount(Model.Tarrif.PerClickMinimumBid) @GeneralResources.Rials - </span>
+					<span class="small showForPerClick">هزینه بالاترین موقعیت در این لحظه: @BillingPresentationHelper.Amount(Model.PerClickMaximumBid + Model.Tarrif.PerClickBidIncrement) @GeneralResources.Rials </span>
+				</p>
+				<p class="small disabledText">
+					به ازای هر بار نمایش نتیجه های جستجو، یک مزایده بین آگهی های ویژه برگزار میشه و برنده های این مناقصه آگهی هایی که توی نتیجه جستجو نمایش داده میشن
+					رو مشخص می کنن. شما برای هر آگهی ویژه می تونید مشخص کنید که حداکثر هزینه ای که دوست دارید به ازای هر کلیک یا نمایش بپردازید چقدره.
+				</p>
+				<p class="small disabledText">
+					هزینه ای که از حساب شما برای هر بار نمایش یا کلیک برداشت میشه، حداقل مقداریه که شما رو از بقیه رقیب هایی که آگهی ویژه دادن جلو بندازه. اینطوری
+					شما می تونید در شرایطی که رقیبی وجود نداره، با هزینه خیلی کم تبلیغ کنید، و خودتون مشخص کنید که چقدر هزینه برای جلو افتادن از رقبا براتون می صرفه.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				@Html.ValidationMessageFor(m => m.MaxPayPerImpression)
+				@Html.ValidationMessageFor(m => m.MaxPayPerClick)
+			</td>
+		</tr>
+		<tr><td colspan="3"><hr /></td></tr>
+		<tr>
+			<td colspan="2" style="padding: 15px 0;">
+				@Html.CheckBoxFor(m => m.IgnoreSearchQuery)
+				@Html.LabelFor(m => m.IgnoreSearchQuery)
+			</td>
+			<td class="disabledText">
+				<p class="small">
+					اگر این گزینه رو خاموش کنید، آگهی ویژه شما فقط وقتی نمایش داده میشه که از نظر موقعیت جغرافیایی و سایر مشخصات
+					با جستجوی کاربر مطابقت داشته باشه.
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="padding: 0 0 30px 0;">
+				@Html.CheckBoxFor(m => m.ShowInAllPages)
+				@Html.LabelFor(m => m.ShowInAllPages)
+			</td>
+		</tr>
+		<tr class="none">
+			<td colspan="3">
+				@Html.CheckBoxFor(m => m.ShowOnMap)
+				@Html.LabelFor(m => m.ShowOnMap)
+			</td>
+		</tr>
+		<tr>
+			<td>@Html.LabelFor(m => m.DaysBeforeExpiration):</td>
+			<td>
+				@if (Model.ExpirationTime.HasValue)
+				{
+					var nullStr = " بدون تغییر _ تا" + Model.ExpirationTime.ToLocalizedDateString();
+					@Html.DropDownListFor(m => m.DaysBeforeExpiration, Model.DaysBeforeExpiration.EnumSelectList(SponsoredPropertyModelResources.ResourceManager), nullStr)
+				}
+				else
+				{
+					@Html.DropDownListFor(m => m.DaysBeforeExpiration, Model.DaysBeforeExpiration.EnumSelectList(SponsoredPropertyModelResources.ResourceManager), "تا وقتی آگهی عمومی است", new {@class = "form-control"})
+				}
+			</td>
+		</tr>
+		<tr>
+			<td><span class="icon-required"></span> @Html.LabelFor(m => m.Title):</td>
+			<td>@Html.TextBoxFor(m => m.Title, new {maxlength = 170})</td>
+			<td class="disabledText"><p class="small">می تونید یک اسم برای این آگهی ویژه انتخاب کنید که بعداً بتونید ساده تر پیداش کنید.</p></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				@Html.ValidationMessageFor(m => m.Title)
+			</td>
+		</tr>
+	</table>
+        
+</div>
+<hr/>
+ 
+              
+  
+@this.ScriptBlock(@<script type="text/javascript">
+
+	                   applyDigitGrouping();
+
+	                   $("#BillingMethod").change(function() {
+		                   if (this.value == "PerImpression") {
+			                   $(".showForPerImpression").show();
+			                   $(".showForPerClick").hide();
+		                   } else if (this.value == "PerClick") {
+			                   $(".showForPerImpression").hide();
+			                   $(".showForPerClick").show();
+		                   } else {
+			                   $(".showForPerImpression").hide();
+			                   $(".showForPerClick").hide();
+		                   }
+	                   });
+
+	                   $("#CustomCaption").keyup(function() {
+		                   if ($("#CustomCaption").val() == "")
+			                   $(".sponsored.custom-caption-row").hide();
+		                   else {
+			                   $(".sponsored.custom-caption-row").show();
+			                   $(".sponsored.custom-caption-row .custom-caption-text").text($("#CustomCaption").val());
+		                   }
+	                   });
+
+	                   $("#BillingMethod").change();
+	                   $("#CustomCaption").keyup();
+
+                   </script>
+	)

@@ -1,0 +1,565 @@
+﻿<div class="container detailContractView" ng-if="$state.current.name === 'contracts.details'">
+<div class="page-header">
+    <h1>جزئیات قرارداد: {{contract.SupplyDetails.IntentionOfOwner | IntentionOfOwner}} {{contract.SupplyDetails.PropertyDetail.PropertyType | PropertyType}}</h1>
+</div>
+<div class="row">
+<div class="col-md-1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" licensed>
+                <button class="btn btn-block btn-success editButton" ui-sref="contracts.details.edit"><i class="fa fa-pencil"></i> ویرایش</button>
+            </div>
+            <div class="row" ng-show="contract.State == 1" licensed>
+                <button class="btn btn-block btn-success closeButton" ng-click="onCloseClick()"><i class="fa fa-check"></i> بستن</button>
+            </div>
+            <div class="row" ng-show="contract.State == 1" licensed>
+                <button class="btn btn-block btn-danger cancelButton" ng-click="onCancelClick()"><i class="fa fa-ban"></i> فسخ</button>
+            </div>
+<!--            <div class="row">-->
+<!--                <jj-print-button source-type="46" endpoint="/api/web/contracts/details/{{contract.ID}}/print" filename="قرارداد {{property.ID}}"></jj-print-button>-->
+<!--            </div>-->
+            <div class="row">
+                <button class="btn btn-block btn-default backButton" ng-click="onBackToListClick()"><i class="fa fa-arrow-left"></i> بازگشت</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-9">
+<div class="content">
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعات قرارداد</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">وضعیت:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong ng-class="{'dangerText': contract.State == 200}">
+                            {{contract.State | ContractState}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">تاریخ قرارداد:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.ContractDate | jalaali}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6 col-md-5 control-label">تاریخ تحویل:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.DeliveryDate|jalaali}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">ثمن معامله </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row" ng-show="supply.IntentionOfOwner == 2">
+                <div class="col-md-4" ng-show="supply.TotalPrice != null">
+                    قیمت کل: <strong>{{contract.TotalPrice | number}} </strong>تومان
+                </div>
+                <div class="col-md-4" ng-show="supply.PricePerEstateArea != null">
+                    قیمت هر متر زمین: <strong>{{contract.PricePerEstateArea | number}} </strong>تومان
+                </div>
+                <div class="col-md-4" ng-show="supply.PricePerUnitArea != null">
+                    قیمت هر متر بنا: <strong>{{contract.PricePerUnitArea | number}}</strong> تومان
+                </div>
+            </div>
+            <div class="row" ng-show="supply.IntentionOfOwner == 3">
+                <div class="col-md-4">
+                    ودیعه: <strong>{{contract.Mortgage | number}}</strong> تومان
+                </div>
+            </div>
+            <div class="row" ng-show="supply.IntentionOfOwner == 1">
+                <div class="col-md-4">
+                    ودیعه: <strong>{{contract.Mortgage | number}}</strong> تومان
+                </div>
+                <div class="col-md-4">
+                    اجاره: <strong>{{contract.Rent | number}}</strong> تومان
+                </div>
+            </div>
+            <div class="row" ng-show="supply.IntentionOfOwner == 4">
+                <div class="col-md-4">
+                    اجاره:<strong> {{contract.Rent | number}}</strong> تومان
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعات فروشنده</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">نام:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            <a ui-sref="customers.details({id:seller.ID})">{{seller.DisplayName}}</a>
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">فرزند:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{seller.NameOfFather}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6 col-md-5 control-label">شماره شناسنامه:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{seller.Identification}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6 col-md-5 control-label">کدملی:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{seller.SocialSecurityNumber}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">تاریخ تولد:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{seller.DateOfBirth | jalaali}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">صادره از:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{seller.IssuedIn}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">تلفن:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{seller.PhoneNumber}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="col-xs-3 col-md-3 control-label">آدرس:</div>
+                    <div class="col-xs-9 col-md-9">
+                        <strong>
+                            {{seller.Address}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <a ng-click="hasDeputyForSeller = !hasDeputyForSeller">با وکالت/قيمومت/ولايت/وصايت <i class="fa fa-caret-down"></i></a>
+            <div collapse="hasDeputyForSeller">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6  col-md-5 control-label">نام:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{seller.Deputy.DisplayName}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6  col-md-5 control-label">فرزند:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{seller.Deputy.NameOfFather }}
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6 col-md-5 control-label">شماره شناسنامه:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{seller.Deputy.Identification}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6  col-md-5 control-label">تاریخ تولد:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{seller.Deputy.DateOfBirth | jalaali }}
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6 col-md-5 control-label">کدملی:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{seller.Deputy.SocialSecurityNumber}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعات خریدار</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">نام:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <a ui-sref="customers.details({id:buyer.ID})">{{buyer.DisplayName}}</a>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">فرزند:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{buyer.NameOfFather}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6 col-md-5 control-label">شماره شناسنامه:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{buyer.Identification}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6 col-md-5 control-label">کدملی:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{buyer.SocialSecurityNumber}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">تاریخ تولد:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{seller.DateOfBirth | jalaali}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">صادره از:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{buyer.IssuedIn}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">تلفن:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{buyer.PhoneNumber}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="col-xs-3 col-md-3 control-label">آدرس:</div>
+                    <div class="col-xs-9 col-md-9">
+                        <strong>
+                            {{buyer.Address}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <a ng-click="hasDeputyForBuyer = !hasDeputyForBuyer">با وکالت/قيمومت/ولايت/وصايت <i class="fa fa-caret-down"></i></a>
+            <div collapse="hasDeputyForBuyer">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6  col-md-5 control-label">نام:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{buyer.Deputy.DisplayName}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6  col-md-5 control-label">فرزند:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{buyer.Deputy.NameOfFather}}
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6 col-md-5 control-label">شماره شناسنامه:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{buyer.Deputy.Identification}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6  col-md-5 control-label">تاریخ تولد:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{buyer.Deputy.DateOfBirth | jalaali}}
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <div class="col-xs-6 col-md-5 control-label">کدملی:</div>
+                        <div class="col-xs-6 col-md-7">
+                            <strong>
+                                {{buyer.Deputy.SocialSecurityNumber}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعات ملک </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">ملک:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            <a ui-sref="files.details({ id: property.ID })">{{property.PropertyType |PropertyType}} - {{property.UsageType |UsageType}}</a>
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">نوع معامله:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{supply.IntentionOfOwner | IntentionOfOwner}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">پلاک ثبتی:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{property.LicencePlate}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">زیربنا:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.UnitArea}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="col-xs-2  col-md-2 control-label">آدرس:</div>
+                    <div class="col-xs-10 col-md-10">
+                        <strong>
+                            {{property.Address }}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">متراژ زمین:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.EstateArea}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">دانگ:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.Portion }}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">واقـع در بخش:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.District }}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">حوزه ثبتي:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.RegistrationZone}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">شماره سریال سند مالکیت:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.OwnershipEvidenceSerialNumber}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">شماره صفحه دفتر اسناد رسمی:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.NotaryPublicPageNumber}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">دفتر اسناد رسمی:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.NotaryPublic}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">دانگ پارکینگ:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{contract.PublicSpace}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="request.ID != null">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">اطلاعات درخواست </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">نوع ملک:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            <a ui-sref="requests.details({id:request.ID})">
+                                <span ng-repeat="propertyType in request.PropertyTypes">
+                                    <strong>{{propertyType | PropertyType}} </strong> <span ng-hide="$index==request.PropertyTypes.length-1">-</span>
+                                </span>
+                            </a>
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">نوع معامله:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{request.IntentionOfCustomer | IntentionOfCustomer}}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">کاربری:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{request.UsageType | UsageType}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-6  col-md-5 control-label">توضیحات:</div>
+                    <div class="col-xs-6 col-md-7">
+                        <strong>
+                            {{request.Description }}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="contract.Description != null && contract.Description != ''">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">جزئیات قرارداد </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <div class="col-xs-6  col-md-2 control-label">توضیحات:</div>
+                    <div class="col-xs-6 col-md-10">
+                        <strong>{{contract.Description}} </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-2">
+</div>
+</div>
+<div ui-view autoscroll="false"></div>

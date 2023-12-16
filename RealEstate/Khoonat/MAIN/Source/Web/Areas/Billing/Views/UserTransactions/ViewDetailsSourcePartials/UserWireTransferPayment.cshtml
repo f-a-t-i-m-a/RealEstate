@@ -1,0 +1,43 @@
+﻿@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.UserWireTransferPayment
+
+<table style="width: 100%;">
+    <tr>
+        <td class="bold">تاریخ پرداخت:</td>
+        <td>@Model.UserEnteredDate.ToLocalizedDateString()</td>
+    </tr>
+    <tr>
+        <td class="bold">ساعت پرداخت:</td>
+        <td>@Model.UserEnteredDate.ToLocalizedTimeString()</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td>بانک مبدا:</td>
+        <td>@Model.SourceBank.Label(DomainBillingEnumResources.ResourceManager)</td>
+    </tr>
+    <tr>
+        <td>شماره حساب مبدا:</td>
+        <td>@HtmlPresentationHelper.IfNotSpecified(Model.SourceCardNumberLastDigits)</td>
+    </tr>
+    <tr>
+        <td>نام صاحب حساب مبدا:</td>
+        <td>@HtmlPresentationHelper.IfNotSpecified(Model.SourceAccountHolderName)</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td>کد رهگیری:</td>
+        <td>@HtmlPresentationHelper.IfNotSpecified(Model.FollowUpNumber)</td>
+    </tr>
+</table>
+
+<hr />
+
+<p class="bold">توضیحات کاربر:</p>
+<p>@HtmlPresentationHelper.IfNotSpecified(Model.UserEnteredDescription, "توضیحات ندارد")</p>
+
+
+
+

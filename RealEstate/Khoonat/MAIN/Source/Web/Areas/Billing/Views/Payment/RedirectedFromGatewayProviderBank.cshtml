@@ -1,0 +1,38 @@
+﻿@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.Payment.RedirectedFromGatewayProviderBankModel
+
+
+<div class="page-header">
+    <h1>
+        <a href="@Url.Action("Index", "BillingHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+        <a href="@Url.Action("IncreaseCredit", "BillingHome", AreaRouteValue.Billing)">افزایش اعتبار</a>:
+        @*        <a href="@Url.Action("NewPayment", "Payment", AreaRouteValue.Billing)">پرداخت</a>:*@
+        تأیید پرداخت
+    </h1>
+</div>
+@using (Html.BeginForm("Index", "Home", AreaRouteValue.Main, FormMethod.Get))
+{
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">افزایش اعتبار</h3>
+
+        </div>
+        <div class="panel-body">
+            <p>
+                پرداخت شما با موفقیت انجام شد
+            </p>
+
+            <p>
+                @if (Model.Amount > 0) 
+                {
+                    <div>مبلغ <span>@Model.Amount.ToString("#,#") @GeneralResources.Rials </span>به اعتبار شما افزوده شد</div>
+                }
+            </p>
+        </div>
+        <div class="panel-footer">
+            <button name="submit" value="btnSave" class="btn btn-primary btn-md" type="submit"> صفحه اصلی </button>
+        </div>
+    </div>
+}

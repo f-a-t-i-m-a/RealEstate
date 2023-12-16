@@ -1,0 +1,89 @@
+﻿@using JahanJooy.RealEstate.Core.Impl.Templates.Email
+@functions {
+	private ContactMethodVerificationModel _model;
+	public override void SetModel(object model)
+	{
+		_model = (ContactMethodVerificationModel) model;
+	}
+
+}
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<table width="95%" style="width: 95%; direction: rtl; font-size: 20px;">
+			<tr><td style="background-color: #dddddd;">
+				    <table width="100%" style="width: 100%; font-size: 20px; font-weight: bold;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>فعال سازی آدرس ایمیل در مشخصات کاربر</td>
+						    <td style="text-align: left;"><a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">خونه ت دات کام</a></td>
+					    </tr>
+				    </table>
+			    </td></tr>
+			<tr><td>
+				    <table width="100%" style="width: 100%; font-size: 14px;" cellpadding="10" cellspacing="5">
+					    <tr>
+						    <td>
+							    شما این ایمیل رو به این دلیل دریافت کردید که کاربر 
+							    @_model.User.LoginName
+							    در سایت «خونه ت دات کام» - 
+							    www.khoonat.com - 
+							    آدرس ایمیل
+							    <span style="direction: ltr;">@_model.ContactMethod.ContactMethodText</span>
+							    رو به پروفایل شخصی اضافه کرده. 
+							    <br/>
+							    در صورتی که شما این کاربر نیستید یا تمایلی به اضافه شدن این آدرس
+							    به پروفایلتون ندارید، این ایمیل رو نادیده بگیرید. در صورت تکرار این پیغام می تونید با مسئولین سایت تماس
+							    بگیرید و مشکل رو مطرح کنید.
+						    </td>
+						    <td style="direction: ltr;">
+							    You are receiving this email because the user "@_model.User.LoginName" had added 
+								the email address "@_model.ContactMethod.ContactMethodText" to his / her personal profile in www.khoonat.com website.
+							    <br/>
+							    If you are not the mentioned user, or you do not want the email address to be added to your profile,
+							    simply ignore this message. If you get this message repeatedly, you may contact khoonat.com administrators
+							    for a follow up.
+						    </td>
+					    </tr>
+				    </table>
+				    
+			    </td></tr>
+			<tr><td>
+				    <br/>
+				    <p>
+					    کاربر گرامی، 
+					    @_model.User.FullName،
+				    </p>
+				    <p>
+					    برای تایید اضافه شدن آدرس ایمیل
+					    <span style="direction: ltr;">@_model.ContactMethod.ContactMethodText</span>
+					    به پروفایل کاربری تون، لطفاً رمز زیر رو داخل فرمی که در سایت به شما نمایش داده شده کپی کنید یا به صورت دستی وارد کنید:
+				    </p>
+			        <p style="background-color: #ffffaa; border: dashed 1px darkgray; padding: 10px;">
+			            رمز فعال سازی:
+			            <span style="direction: ltr;">@_model.Log.VerificationSecret</span>
+			        </p>
+			        <p>
+			               <a href="https://khoonat.com/MyProfile/VerifyEmailDirectLink?verificationSecret=@_model.Log.VerificationSecret&contactMethodID=@_model.ContactMethod.ID&contactMethodText=@_model.ContactMethod.ContactMethodText&VerifyEmailDirectLink">لینک فعال سازی</a>                  
+			        </p>
+				    <p>
+					    از اینکه از خدمات این سایت استفاده می کنید سپاس گزاریم؛
+					    <br/>
+					    خونه ت دات کام
+				    </p>
+			    </td></tr>
+			<tr><td style="font-size: 20px; text-align: center; background-color: #dddddd; padding: 10px">
+				    <a href="http://www.khoonat.com/" target="_blank" style="color: darkblue; text-decoration: none; font-size: 30px; font-weight: bold;">www.khoonat.com</a>
+			    </td></tr>
+			<tr><td style="width: 100%; font-size: 14px;">
+				    <br/><br/>   
+				    این پیغام توسط سیستم تولید شده است و در صورتی که به آن پاسخ دهید به دست ما نخواهد رسید.
+				    اگر در خصوص این پیغام یا هر موضوع دیگری تمایل دارید با مسئولین سایت در تماس باشید، لطفاً
+				    از صفحه «تماس با ما» در سایت استفاده کنید.
+			    </td></tr>
+		</table>
+	</body>
+</html>

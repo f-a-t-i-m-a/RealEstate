@@ -1,0 +1,35 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2 radio">
+                <label>
+                    <input type="radio" name="customerType" value="existingCustomer" ng-model="customerType">
+                    <b>مشتریان موجود</b>
+                </label>
+            </div>
+            <div class="col-md-5" ng-if="showAllCustomerPanel">
+                <jj-select-customer model="$parent.customer" jj-allow-clear="true" jj-required="showAllCustomerPanel" jj-customers="customers"/>
+            </div>
+            <label calss="col-md-5" ng-show="showAllCustomerPanel">
+                شماره تماس:
+                <span dir="ltr" class="persian-number">{{customer.Number}}</span>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col-md-2 radio">
+                <label>
+                    <input type="radio" name="customerType" value="newCustomer" ng-model="customerType">
+                    <b>مشتری جدید</b>
+                </label>
+            </div>
+            <div class="col-md-10" ng-if="showNewCustomerPanel">
+                <div class="row">
+                    <label for="" class="col-md-3"><i class="fa fa-star text-danger"></i> نام و نام خانوادگی :</label>
+                    <input class="col-md-3" type="text" ng-model="customer.DisplayName" tabindex="3" auto-next/>
+                    <label for="" class="col-md-2"><i class="fa fa-star text-danger"></i> شماره تماس:</label>
+                    <input type="text" class="col-md-3 text-left" ng-model="customer.Number" ng-pattern="/^\+?\d+$/" ng-minlength="7" ng-maxlength="15" tabindex="4" auto-next />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

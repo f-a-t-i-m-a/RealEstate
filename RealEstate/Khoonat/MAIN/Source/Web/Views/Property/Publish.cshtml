@@ -1,0 +1,100 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.RealEstate.Util.Presentation.Property
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Resources.Controllers.Property
+@model JahanJooy.RealEstate.Web.Models.Property.PropertyPublishModel
+
+@{
+	var propertyPresentationHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertyPresentationHelper>();
+}
+
+<div class="modal-content">
+	@using (Html.BeginForm("PublishPostback", "Property", new { id = Model.Listing.ID }, FormMethod.Post))
+	{
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">عمومی کردن آگهی</h4>
+		</div>
+		<div class="modal-body">
+			@if (Model.ValidationResult.IsValid)
+			{
+				<p>ملک با مشخصات زیر عمومی خواهد شد و در فهرست املاک سایت برای عموم قابل مشاهده خواهد بود:</p>
+				<table style="border-spacing: 10px; border-collapse: separate;">
+					<tr>
+						<td>شناسه:</td>
+						<td>@Model.Listing.ID</td>
+					</tr>
+					<tr>
+						<td>محل:</td>
+						<td>@propertyPresentationHelper.BuildRegion(Model.Listing)</td>
+					</tr>
+					<tr>
+						<td>ملک:</td>
+						<td>@propertyPresentationHelper.BuildTitle(Model.Listing)</td>
+					</tr>
+					<tr>
+						<td>مساحت:</td>
+						<td>@propertyPresentationHelper.BuildArea(Model.Listing)</td>
+					</tr>
+					<tr>
+						<td>قیمت:</td>
+						<td>@propertyPresentationHelper.BuildPriceAndPricePerArea(Model.Listing)</td>
+					</tr>
+				</table>
+
+				<p>
+					لطفاً به موارد زیر دقت کنید:
+				</p>
+				<ul>
+					<li>با عمومی کردن ملک، اطلاعات اون برای همه افراد قابل دسترسی و مشاهده می شه. مسئولیت انتشار این اطلاعات به صورت عمومی به عهده شماست..</li>
+					<li>لطفاً قبل از عمومی کردن، از درستی اطلاعات مطمئن بشید تا بقیه کاربران به اشتباه نیفتند. اگر در موردی شک دارید، از راهنما استفاده کنید یا با ما تماس بگیرید.</li>
+					<li>اطلاعات ملک برای مدت زمان دلخواه شما عمومی می شود. هر زمانی که خواستید می تونید این مدت رو تمدید کنید، یا اطلاعات رو از حالت عمومی خارج کنید.</li>
+				</ul>
+
+				<p>
+					مدت زمان انتشار:
+					<select id="selPublishDays" name="publishDays" style="width: 100px;" class="form-control">
+						<option value="2">دو روز</option>
+						<option value="4">چهار روز</option>
+						<option value="7">یک هفته</option>
+						<option value="14">دو هفته</option>
+						<option value="21">سه هفته</option>
+						<option value="30">یک ماه</option>
+						<option value="60">دو ماه</option>
+						<option value="90" selected="selected">سه ماه</option>
+						<option value="120">چهار ماه</option>
+						<option value="150">پنج ماه</option>
+					</select>
+				</p>
+			}
+			else
+			{
+				<p>
+					اطلاعات ملک هنوز برای عمومی شدن کامل نیست. لطفاً قبل از اینکه اطلاعات ملک رو عمومی کنید، به صفحه
+					@Html.ActionLink("ویرایش مشخصات اصلی", "EditBySummary", "Property", new { id = Model.Listing.ID })
+					مراجعه کرده، و این موارد رو اصلاح کنید:
+				</p>
+				<ul>
+					@foreach (var error in Model.ValidationResult.Errors)
+					{
+						<li>@PublishValidationErrors.ResourceManager.GetString(error.FullResourceKey)</li>
+					}
+				</ul>
+			}
+		</div>
+		<div class="modal-footer">
+			@if (Model.ValidationResult.IsValid)
+			{
+				<button name="btnPublish" value="btnPublish" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> عمومی بشه</button>
+			}
+			else
+			{
+				<a class="btn btn-primary" href="@Url.Action("EditBySummary", "Property", new { id = Model.Listing.ID, area = AreaNames.Main })"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>ویرایش</a>
+			}
+			<button type="button" class="btn btn-default" data-dismiss="modal">بی خیال</button>
+		</div>
+	}
+</div>
+
+
+

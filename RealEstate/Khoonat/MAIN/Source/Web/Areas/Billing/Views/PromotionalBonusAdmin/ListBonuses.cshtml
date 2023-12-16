@@ -1,0 +1,124 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Text
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Billing.Helpers
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Billing.Models.PromotionalBonusAdmin.PromotionalBonusAdminListBonusesModel
+
+<div class="well">
+    <a href="@Url.Action("NewBonus", "PromotionalBonusAdmin")"><span class="glyphicon glyphicon-plus"></span> جایزه جدید</a>
+</div>
+
+<div class="page-header">
+    <h2>
+        <a href="@Url.Action("Index", "AdminHome", new {area = AreaNames.Admin})">مدیریت سایت</a>:
+        <a href="@Url.Action("Index", "BillingAdminHome", AreaRouteValue.Billing)">سامانه مالی</a>:
+        جوایز تبلیغاتی
+    </h2>
+</div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Bonuses, p => Url.Action("ListBonuses", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+    <table class="table ">
+        <thead>
+            <tr>
+                <td >ID</td>
+                <td >ثبت کننده</td>
+                <td >دلیل و توضیح</td>
+                <td >زمان</td>
+                <td >کاربر</td>
+                <td >مبلغ</td>
+                <td >وضعیت</td>
+                <td >کد تراکنش</td>
+            </tr>
+        </thead>
+         @foreach (var bonus in Model.Bonuses)
+        {
+            <tr class="@BillingSourceEntityHelper.StateBackgroundColor(bonus)">
+                <td >
+                    <span data-ajax-modal="@Url.Action("ViewBonusDetailsPopup", new { id = bonus.ID })">
+                        <span>@IconsHelper.Xlink16(Url) @bonus.ID</span>
+                    </span>
+                </td>
+                <td >@Html.Partial("ListBonusesPartials/CellCreator", bonus)</td>
+                <td >@bonus.Reason.Label(DomainEnumResources.ResourceManager)<br />@bonus.Description.Truncate(30)</td>
+                <td >@bonus.CreationTime.ToLocalizedDateString() <br /><small>@bonus.CreationTime.ToLocalizedTimeString()</small></td>
+                <td >@Html.Partial("_GridCellPartials/BillingSourceTargetUser", bonus)</td>
+                <td >@BillingPresentationHelper.Delta(bonus.BonusAmount)</td>
+                <td >@Html.Partial("ListBonusesPartials/CellStateAndOperations", bonus)</td>
+                <td >@Html.Partial("_GridCellPartials/BillingSourceTransactionIDs", bonus)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Bonuses, p => Url.Action("ListBonuses", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+    <ul>
+        <li><a href="@Url.Action("ListBonuses")">همه موارد (بدون فیلتر)</a></li>
+    </ul>
+
+    <br /><hr />
+
+    @using (Html.BeginForm("ListBonuses", "PromotionalBonusAdmin", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.SortOrder):
+            @Html.DropDownListFor(m => m.SortOrder, Model.SortOrder.EnumSelectList(), GeneralResources.NotSelected)
+            <br />
+            <br />
+
+            @Html.CheckBoxWithoutHiddenField("SortDescending", Model.SortDescending)
+            @Html.LabelFor(m => m.SortDescending)
+            <br />
+            <br />
+
+            @Html.CheckBoxWithoutHiddenField("ApplyCreatedByUserIDFilter", Model.ApplyCreatedByUserIDFilter)
+            @Html.LabelFor(m => m.ApplyCreatedByUserIDFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.CreatedByUserIDFilter):
+            @Html.TextBoxFor(m => m.CreatedByUserIDFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.TargetUserIDFilter):
+            @Html.TextBoxFor(m => m.TargetUserIDFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.ReasonFilter):
+            @Html.DropDownListFor(m => m.ReasonFilter, Model.ReasonFilter.EnumSelectList(), GeneralResources.NotSelected, new{@class= "form-control"})
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.TextFilter):
+            @Html.TextBoxFor(m => m.TextFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.MinAmountFilter):
+            @Html.TextBoxFor(m => m.MinAmountFilter)
+            <br />
+            <br />
+
+            @Html.LabelFor(m => m.MaxAmountFilter):
+            @Html.TextBoxFor(m => m.MaxAmountFilter)
+            <br />
+            <br />
+
+            <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" style="width: 150px;" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

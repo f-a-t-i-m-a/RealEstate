@@ -1,0 +1,175 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Content
+@using JahanJooy.RealEstate.Web.Scripts
+@model JahanJooy.RealEstate.Web.Models.Agency.AgencyEditAgencyLogo
+
+@(this.ScriptLibrary(JavaScriptLibraries.JQueryFineUploader))
+@(this.StyleLibrary(StyleLibraries.JQueryFineUploader))
+
+
+<h2>
+    @Html.ActionLink("مدیریت سایت", "Index", "AdminHome")
+    &gt;
+    @Html.ActionLink("مشاورین املاک", "List", "AdminAgency")
+    &gt;
+    @Html.ActionLink("مشاور املاک " + @Model.AgencyName, "ViewDetails", new {id = Model.AgencyID})
+    &gt;
+    ویرایش
+</h2>
+        
+<div class="row">
+    <div class="col-md-6 clickable" id="uploadBtn" data-qtip-enabled="true">
+        <div style="background-color: #039; border: 1px solid black; color: white; direction: rtl; padding: 5px;">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            اضافه کردن لوگو جدید
+        </div>
+        <div id="uploadPhoto">
+        </div>
+        <div id="newUploadedPhotosContainer" style="text-align: center;"></div>
+
+        @if (Model.AgencyID != null)
+        {
+            <div class="logo" data-logo-id="@Model.LogoStoreItemID" data-agency-id="@Model.AgencyID"></div>
+        }
+       
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-sm-6" id="galleryItemDetails" class="well" style="min-height: 505px; padding: 5px; text-align: center;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="clickable" id="uploadThumbnailBtn">
+                    <div style="background-color: #039; border: 1px solid black; color: white; direction: rtl; padding: 5px;">
+                        <span class="glyphicon glyphicon-upload"></span>
+                        اضافه کردن لوگو در سایز کوچک
+                    </div>
+                </div>
+                <div id="uploadThumbnail">
+                </div>
+                <div id="hiddenUploadThumbnailBtn">
+                </div>
+            </div>
+        </div>
+        @*            <div id="galleryItemDetails" class="well" style="min-height: 505px; padding:5px; text-align:center;">*@
+        @*                *@
+        @*                $1$                @Html.Action("ViewLogo", "AdminAgency", new { area = AreaNames.Admin, id = Model.AgencyID })#1#*@
+        @*            </div>*@
+    </div>
+</div>      
+<div class="col-xs-6">
+    <div id="hiddenUploadBtn">
+    </div>
+</div>
+
+
+@(this.ScriptBlock(@<script type="text/javascript">
+                        $("#uploadPhoto").fineUploader({
+                            button: $("#hiddenUploadBtn"),
+                            maxConnections: 2,
+                            request: {
+                                endpoint: "@Url.Action("Upload", "AdminAgency", new {id = Model.AgencyID})"
+                            },
+                            validation: {
+                                allowedExtensions: ['jpe', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff'],
+                                sizeLimit: 8388608
+                            },
+                            text: {
+                                uploadButton: "اضافه کردن عکس جدید",
+                                cancelButton: "بی خیال",
+                                retry: "تلاش مجدد",
+                                failUpload: "در ارسال یا پردازش این تصویر خطا پیش آمد",
+                                dragZone: "برای اضافه کردن عکس، می توانید فایل را اینجا بیندازید",
+                                dropProcessing: "در حال پردازش درخواست...",
+                                formatProgress: "در حال ارسال: {percent} درصد از {total_size} ارسال شده...",
+                                waitingForResponse: "در حال پردازش تصویر..."
+                            },
+                            messages: {
+                                typeError: "نوع فایل انتخاب شده تصویر نیست، یا توسط سیستم پشتیبانی نمی شود.",
+                                sizeError: "فایل انتخاب شده بزرگ تر از حداکثر حجم قابل ارسال است.",
+                                noFilesError: "فایلی برای ارسال وجود ندارد.",
+                                onLeave: "تصاویر در حال ارسال به سرویس دهنده می باشند. اگر از این صفحه خارج شوید ارسال لغو خواهد شد."
+                            },
+                            dragAndDrop: {
+                                hideDropzones: false,
+                                disableDefaultDropzone: true
+                            }
+                        }).on('complete', function(event, id, name, response) {
+                            if (response.success == true) {
+                                var itemElement = $(this).fineUploader('getItemByFileId', id);
+                                window.setTimeout(function() { $(itemElement).fadeOut(2000); }, 4000);
+                                refreshLogos();
+
+                            }
+                        });
+
+                        $("#uploadBtn").click(function() {
+                            $("#hiddenUploadBtn input").click();
+                        });
+
+                        function refreshLogos() {
+                            $.ajax({
+                                url: "@Url.Action("ViewLogo", "AdminAgency", new {area = AreaNames.Admin, id = Model.AgencyID})",
+                                type: 'POST'
+                            }).done(function(html) {
+                                $("#galleryItemDetails").html(html);
+                            });
+                        }
+
+                        refreshLogos();
+
+
+//thumbnail
+                        $("#uploadThumbnail").fineUploader({
+                            button: $("#hiddenUploadThumbnailBtn"),
+                            maxConnections: 2,
+                            request: {
+                                endpoint: "@Url.Action("UploadThumbnailLogo", "AdminAgency",new {id = Model.AgencyID})"
+                            },
+                            validation: {
+                                allowedExtensions: ['jpe', 'jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff'],
+                                sizeLimit: 8388608
+                            },
+                            text: {
+                                uploadButton: "اضافه کردن عکس جدید",
+                                cancelButton: "بی خیال",
+                                retry: "تلاش مجدد",
+                                failUpload: "در ارسال یا پردازش این تصویر خطا پیش آمد",
+                                dragZone: "برای اضافه کردن عکس، می توانید فایل را اینجا بیندازید",
+                                dropProcessing: "در حال پردازش درخواست...",
+                                formatProgress: "در حال ارسال: {percent} درصد از {total_size} ارسال شده...",
+                                waitingForResponse: "در حال پردازش تصویر..."
+                            },
+                            messages: {
+                                typeError: "نوع فایل انتخاب شده تصویر نیست، یا توسط سیستم پشتیبانی نمی شود.",
+                                sizeError: "فایل انتخاب شده بزرگ تر از حداکثر حجم قابل ارسال است.",
+                                noFilesError: "فایلی برای ارسال وجود ندارد.",
+                                onLeave: "تصاویر در حال ارسال به سرویس دهنده می باشند. اگر از این صفحه خارج شوید ارسال لغو خواهد شد."
+                            },
+                            dragAndDrop: {
+                                hideDropzones: false,
+                                disableDefaultDropzone: true
+                            }
+                        }).on('complete', function(event, id, name, response) {
+                            if (response.success == true) {
+                                var itemElement = $(this).fineUploader('getItemByFileId', id);
+                                window.setTimeout(function() { $(itemElement).fadeOut(2000); }, 4000);
+                                $.ajax({
+                                    url: "@Url.Action("ViewLogo", "AdminAgency")",
+                                    type: 'POST'
+                                }).done(function(html) {
+                                    $("#galleryItemDetails").html(html);
+                                });
+                            }
+                        });
+
+                        $("#uploadThumbnailBtn").click(function() {
+                            $("#hiddenUploadThumbnailBtn input").click();
+                        });
+
+                        $(".thumbnailGallery").click();
+                    </script>))

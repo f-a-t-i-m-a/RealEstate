@@ -1,0 +1,17 @@
+﻿@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminConfiguration.AdminConfigurationItemModel
+
+مقدار قلم پیکربندی با کلید زیر حذف خواهد شد:
+<br/>
+<br/>
+
+<span dir="ltr">@Model.Key</span>
+
+<br/>
+<br/>
+
+آیا مطمئنید؟
+
+@using (Html.BeginForm("DeleteConfigurationConfirmed", "AdminConfiguration", new { key = Model.Key }))
+{
+	<input type="submit" value="بله"/>
+}

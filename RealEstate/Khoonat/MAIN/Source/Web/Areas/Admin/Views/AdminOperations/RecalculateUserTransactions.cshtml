@@ -1,0 +1,14 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Billing.Helpers
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminOperations.AdminOperationsStartRecalculateUserTransactionModel
+
+@using (Html.BeginForm("RecalculateUserTransactionsPostback", "AdminOperations", new { area = AreaNames.Admin }))
+{
+    <div>
+        <div class ="td">کاربر:</div>
+        <div class ="td">@Html.AdminUserSelector("userId")</div>
+    </div>
+    
+     <div><input id="btnStart" class="button" type="submit" value="شروع >>" /></div>
+}
+

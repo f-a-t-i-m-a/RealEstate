@@ -1,0 +1,31 @@
+﻿<div class="container">
+    <h1 ng-show="item.ID == ''">داده ی جدید</h1>
+    <h1 ng-show="item.ID != ''">ویرایش داده</h1>
+    <form name="frmNewItem" novalidate>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">نام داده :</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" ng-model="item.Identifier" required ng-maxlength="100"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">مقدار :</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" ng-model="item.Value" ng-maxlength="2000"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="btn btn-success" ng-click="onSaveClick()" ng-disables="frmNewItem.$invalid" restrict-to="Administrator"><i class="fa fa-floppy-o"></i> ذخیره</button>
+                <button class="btn btn-primary" ng-click="onBackClick()" restrict-to="Administrator">انصراف</button>
+            </div>
+        </div>
+    </form>
+</div>

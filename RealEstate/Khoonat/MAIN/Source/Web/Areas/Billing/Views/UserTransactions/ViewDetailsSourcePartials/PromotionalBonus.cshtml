@@ -1,0 +1,18 @@
+﻿@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.PromotionalBonus
+
+<p class="bold">موضوع:</p>
+<p>@Model.Reason.Label(DomainEnumResources.ResourceManager)</p>
+
+<hr/>
+
+<p class="bold">توضیحات:</p>
+<p>@Model.Description</p>
+
+<hr/>
+
+<p>
+    ایجاد شده توسط:<br/>
+    @(Model.CreatedByUser != null ? Model.CreatedByUser.DisplayName : "سیستم")
+</p>

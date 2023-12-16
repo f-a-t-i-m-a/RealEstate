@@ -1,0 +1,18 @@
+﻿@using JahanJooy.RealEstate.Util.Resources
+@model JahanJooy.RealEstate.Domain.Billing.UserBalanceAdministrativeChange
+
+<p class="bold">توضیحات:</p>
+<p>@Model.Description</p>
+
+<hr />
+
+<p>
+    <span class="bold">ایجاد شده توسط:</span><br />
+    @(Model.CreatedByUser != null ? Model.CreatedByUser.DisplayName : GeneralResources.Unknown)
+</p>
+
+<p>
+    <span class="bold">بازبینی شده توسط:</span><br />
+    @(Model.ReviewedByUser != null ? Model.ReviewedByUser.DisplayName : "هنوز بازبینی نشده")
+</p>
+

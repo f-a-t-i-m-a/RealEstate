@@ -1,0 +1,4 @@
+﻿1-in  OS shell:
+2- go to mongo/bin
+3-mongodump --db mydb --out d:/
+4-mongorestore  --db DestinationDbName dumpAddress 

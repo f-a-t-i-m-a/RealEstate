@@ -1,0 +1,49 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">ورود به سیستم...</h3>
+</div>
+<div class="modal-body">
+    <form class="form-inline" ng-submit="attemptLogin(_username, _password, _rememberMe)" name="frmLogin">
+        <div class="form-group">
+            <label for="txtUserName">نام کاربری:</label>
+            <input id="txtUserName" class="form-control" type="text" ng-model="_username" required/>
+        </div>
+        <div class="form-group password">
+            <label for="txtPassword">رمز عبور:&nbsp&nbsp&nbsp</label>
+            <input id="txtPassword" class="form-control" type="password" ng-model="_password" required minlength="6"
+                   ng-change="checkPassword()"/>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>
+                    <input type="checkbox" ng-model="_rememberMe"/>
+                    مرا به خاطر بسپار
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert" ng-show="_rememberMe">
+                    <i class="fa fa-exclamation-triangle"></i>
+                    <strong>هشدار</strong><br/>
+                    هر کسی که به کامپیوتر شما دسترسی داشته باشد می تواند از هویت شما در سیستم استفاده کند.<br/>
+                    روی کامپیوتر های عمومی از این گزینه استفاده نکنید.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="pull-left">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success" ng-disabled="frmLogin.$invalid">ورود</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-default" ng-click="cancel()">بی خیال</button>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <a class="forgotPassword smallText" ng-click="forgotPassword()"><i class="fa fa-external-link" aria-hidden="true"></i> رمز عبور خود را فراموش کرده ام</a>
+    </div>
+</div>

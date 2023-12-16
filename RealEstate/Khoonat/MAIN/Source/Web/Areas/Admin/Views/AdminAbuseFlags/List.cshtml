@@ -1,0 +1,105 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Domain.Audit
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminAbuseFlags.AdminAbuseFlagsListModel
+
+@section NavbarRightExtra
+{
+	<li class="active"><a>شکایت ها</a></li>
+}
+
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Flags, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<table class="table table-hover">
+	<thead>
+		<tr style="font-weight: bold;">
+			<th>تایید</th>
+			<th>ID</th>
+			<th>موضوع</th>
+			<th>زمان گزارش</th>
+			<th>گزارش دهنده</th>
+			<th>جلسه</th>
+			<th>موجودیت</th>
+		</tr>
+	</thead>
+	@foreach (var flag in Model.Flags)
+	{
+		<tr >
+			<td>@IconsHelper.Tristate(Url, flag.Approved)</td>
+			<td data-link-url="@Url.Action("Details", new {id = flag.ID})"><span class="glyphicon glyphicon-link"></span> @flag.ID</td>
+			<td>@flag.Reason<br/><a href="@Url.Action("List", Request.QueryString.ToRouteValues().Set("ReasonFilter", flag.Reason.ToString()))"><span class="glyphicon glyphicon-filter"></span></a></td>
+			<td>@((flag.ReportDate - DateTime.Now).ToLocalizedRelativeString(1))</td>
+			<td>@Html.Partial("CellUserPartial", flag)</td>
+			<td>@Html.Partial("CellSessionPartial", flag)</td>
+			<td>@Html.Partial("CellEntityPartial", flag)</td>
+		</tr>
+	}
+</table>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.Flags, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+	<p>فیلتر های پر استفاده:</p>
+	<ul>
+		<li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+		<li><a href="@Url.Action("List", new { EntityTypeFilter = AbuseFlagEntityType.PropertyListing})">گزارش ها برای املاک</a></li>
+		<li><a href="@Url.Action("List", new { EntityTypeFilter = AbuseFlagEntityType.User})">گزارش ها برای کاربران</a></li>
+	</ul>
+	 
+	<br /><hr/>
+	 
+	@using (Html.BeginForm("List", "AdminAbuseFlags", FormMethod.Get))
+	{
+		<div style="width: 200px;">
+			@Html.LabelFor(m => m.IdFilter):
+			@Html.TextBoxFor(m => m.IdFilter)
+			<br/>
+			<br/>
+
+			@Html.CheckBoxWithoutHiddenField("ApplyUserIdFilter", Model.ApplyUserIdFilter)
+			@Html.LabelFor(m => m.ApplyUserIdFilter)
+			<br/>
+			<br/>
+		
+			@Html.LabelFor(m => m.UserIdFilter):
+			@Html.TextBoxFor(m => m.UserIdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.SessionIdFilter):
+			@Html.TextBoxFor(m => m.SessionIdFilter)
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.ReasonFilter):
+			@Html.DropDownListFor(m => m.ReasonFilter, Model.ReasonFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control"})
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.EntityTypeFilter):
+			@Html.DropDownListFor(m => m.EntityTypeFilter, Model.EntityTypeFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+			<br/>
+			<br/>
+
+			@Html.LabelFor(m => m.EntityIdFilter):
+			@Html.TextBoxFor(m => m.EntityIdFilter)
+			<br/>
+		    <br/>
+            
+            @Html.CheckBoxWithoutHiddenField("ApprovedFilter", Model.ApprovedFilter)
+			@Html.LabelFor(m => m.ApprovedFilter)
+			<br/>
+			<br/>
+
+
+		    <button name="submit" value="btnRefresh" class="btn btn-primary" style="width: 150px;" type="submit">اعمال فیلتر</button>
+		</div>
+	}
+}

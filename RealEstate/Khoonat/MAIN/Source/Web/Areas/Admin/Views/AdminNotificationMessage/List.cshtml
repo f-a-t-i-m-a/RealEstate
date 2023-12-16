@@ -1,0 +1,89 @@
+﻿@using System.Globalization
+@using JahanJooy.Common.Util.Web.Extensions
+@using JahanJooy.Common.Util.Web.Routing
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Models.Shared
+@model JahanJooy.RealEstate.Web.Areas.Admin.Models.AdminNotificationMessage.AdminNotificationMessageListModel
+
+
+<h2>@Html.ActionLink("مدیریت سایت", "Index", "AdminHome") &gt; اخطار ها</h2>
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.NotificationMessages, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>تاریخ ایجاد</th>
+                <th>کاربر</th>
+                <th>متن</th>
+                <th>دلیل<br />فوریت</th>
+                <th>موجودیت مبدا</th>
+                <th>زمان مشاهده / اقدام</th>
+                <th>پردازش بعدی</th>
+            </tr>
+        </thead>
+        @foreach (var notification in Model.NotificationMessages)
+        {
+            <tr>
+
+                <td>@Html.Partial("CellDateAndTimePartial", notification)</td>
+                <td>@Html.Partial("CellTargetUserPartial", notification)</td>
+                <td>@notification.Text</td>
+                <td >@Html.Partial("CellReasonAndSeverityPartial", notification)</td>
+                <td >@Html.Partial("CellSourceEntityTypeAndIDPartial", notification)</td>
+                <td >@Html.Partial("CellSeenTimeAndAddressedTimePartial", notification)</td>
+                <td>@Html.Partial("CellNextMessageTransmissionDuePartial", notification)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+@Html.Partial("_PaginationLinks", PaginationLinksModel.BuildFromPagedList(Model.NotificationMessages, p => Url.Action("List", Request.QueryString.ToRouteValues().Set("page", p.ToString(CultureInfo.InvariantCulture)))))
+
+@section SideBar
+{
+    <p>فیلتر های پر استفاده:</p>
+        <ul>
+            <li><a href="@Url.Action("List")">همه موارد (بدون فیلتر)</a></li>
+        </ul>
+
+    <br /><hr />
+
+    @using (Html.BeginForm("List", "AdminNotificationMessage", FormMethod.Get))
+    {
+        <div style="width: 200px;">
+            @Html.LabelFor(m => m.TargetUserIDFilter):
+            @Html.TextBoxFor(m => m.TargetUserIDFilter)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.ReasonFilter):
+            @Html.DropDownListFor(m => m.ReasonFilter, Model.ReasonFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br/>
+            <br/>
+            @Html.LabelFor(m => m.SeverityFilter):
+            @Html.DropDownListFor(m => m.SeverityFilter, Model.SeverityFilter.EnumSelectList(), GeneralResources.NotSelected, new { @class = "form-control" })
+            <br />
+            <br />
+            @Html.LabelFor(m => m.SourceEntityTypeFilter):
+            @Html.DropDownListFor(m => m.SourceEntityTypeFilter, Model.SourceEntityTypeFilter.EnumSelectList(), GeneralResources.NotSelected, new{ @class="form-control"})
+            <br />
+            <br />
+            @Html.LabelFor(m => m.SourceEntityIDFilter):
+            @Html.TextBoxFor(m => m.SourceEntityIDFilter)
+            <br />
+            <br />
+            @Html.LabelFor(m => m.SeenTimeFilter):
+            @Html.DropDownListFor(m => m.SeenTimeFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.AllItems, new { @class = "form-control" })
+            <br />
+            <br />
+            @Html.LabelFor(m => m.AddressedTimeFilter):
+            @Html.DropDownListFor(m => m.AddressedTimeFilter, SelectHtmlExtensions.BuildBooleanList(), GeneralResources.AllItems, new { @class = "form-control" })
+            <br />
+            <br />
+            <button name="submit" value="btnRefresh" class="btn btn-primary btn-block" type="submit">اعمال فیلتر</button>
+        </div>
+    }
+}

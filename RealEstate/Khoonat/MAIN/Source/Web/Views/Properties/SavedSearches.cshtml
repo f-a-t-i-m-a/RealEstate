@@ -1,0 +1,169 @@
+﻿@using Compositional.Composer.Web
+@using JahanJooy.Common.Util.Localization
+@using JahanJooy.RealEstate.Util.Presentation
+@using JahanJooy.RealEstate.Util.Resources
+@using JahanJooy.RealEstate.Web.Helpers.Properties
+@model JahanJooy.RealEstate.Web.Models.Properties.PropertiesSavedSearchesModel
+
+@{
+    ViewBag.Title = "جستجو های ذخیره شده کاربر";
+    var propertySearchHelper = ComposerWebUtil.ComponentContext.GetComponent<PropertySearchHelper>();
+}
+
+<div class="page-header">
+    <h1>جستجو های ذخیره شده کاربر </h1>
+</div>
+
+@if (Model.ShowCreditLowWarning)
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">اعتبار حساب شما برای اطلاع رسانی املاک از طریق پیامک کافی نیست</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <span class="glyphicon  glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+                شما برای جستجو های ذخیره شده تون، گزینه اطلاع رسانی از طریق پیامک رو فعال کرده اید، اما اعتبار حساب شما تموم شده. برای ادامه ارسال پیامک های اطلاع رسانی، لطفاً حساب تون رو شارژ کنید.</p>
+        </div>
+    </div>
+}
+
+@if (Model.ShowNoEmailInProfileWarning)
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">هیچ آدرس ایمیل معتبری در پروفایل کاربری شما ثبت نشده</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <span class="glyphicon  glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+                برای دریافت ایمیل از طریق سایت، باید آدرس ایمیل خودتون رو در پروفایل کاربری ثبت کنید و اون رو فعال کنید. برای این کار لطفاً به قسمت پروفایل کاربری مراجعه کنید.</p>
+        </div>
+    </div>
+}
+
+@if (Model.ShowNoPhoneNumberInProfileWarning)
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">هیچ شماره تلفن همراه معتبری در پروفایل کاربری شما ثبت نشده.</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <span class="glyphicon  glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+                برای دریافت پیامک از طریق سایت، باید شماره تلفن خودتون رو در پروفایل کاربری ثبت کنید و اون رو فعال کنید. برای این کار لطفاً به قسمت پروفایل کاربری مراجعه کنید.</p>
+        </div>
+    </div>
+}
+@if (Model.ShowSavedSearchWithoutContactWarning)
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">شماره تلفن یا آدرس ایمیل بعضی از جستجو ها برای اطلاع رسانی مشخص نشده.</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <span class="glyphicon  glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+
+                توی بعضی از جستجو های ذخیره شده، شما گزینه اطلاع رسانی توسط ایمیل یا پیامک رو انتخاب کردید، ولی شماره تلفن یا آدرس ایمیلی برای اطلاع رسانی مشخص نکردید.
+                برای اینکه پیغام های اطلاع رسانی ارسال بشن، لطفاً مواردی که با علامت
+                <span class="glyphicon  glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+                توی جدول زیر مشخص شده اند رو برطرف کنید.
+            </p>
+        </div>
+    </div>
+}
+
+
+@if (Model.SavedSearches.Any())
+{
+    <p>
+        شما @Model.SavedSearches.Count() جستجوی ذخیره شده دارید. می تونید برای دیدن جزئیات هرکدوم، روی «ویرایش» همون سطر کلیک کنید. برای اینکه جستجو رو اجرا کنید و نتایجش رو ببینید، روی گزینه «املاک» کلیک کنید.
+    </p>
+
+
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <td>شرایط</td>
+                <td>عنوان</td>
+                <td>تاریخ ایجاد</td>
+                <td>ارسال ایمیل</td>
+                <td>ارسال پیامک</td>
+                <td>تعداد ارسال شده</td>
+                <td>اطلاع رسانی تا</td>
+                <td>عملیات</td>
+            </tr>
+            @foreach (var search in Model.SavedSearches)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Browse", "Properties", new {q = search.PropertySearch.Query})">
+                            @Html.Partial("SavedSearchesPartials/CellFullSearchTitle", search)
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("SavedSearchDetails", "Properties", new {id = search.SavedPropertySearch.ID})">
+                            @HtmlPresentationHelper.IfNotSpecified(search.SavedPropertySearch.Title, GeneralResources.NotSpecified)
+                        </a>
+                    </td>
+                    <td ><div style="margin: 20px 0;">@search.SavedPropertySearch.CreationTime.ToLocalizedDateString() @search.SavedPropertySearch.CreationTime.ToLocalizedTimeString()</div></td>
+                    <td >@Html.Partial("SavedSearchesPartials/CellEmailNotification", search.SavedPropertySearch)</td>
+                    <td >@Html.Partial("SavedSearchesPartials/CellSmsNotification", search.SavedPropertySearch)</td>
+                    <td >@Html.Partial("SavedSearchesPartials/CellNotificationCount", search.SavedPropertySearch)</td>
+                    <td >@Html.Partial("SavedSearchesPartials/CellSendNotificationsUntil", search.SavedPropertySearch)</td>
+                    <td class="btn-stack">
+                        <a href="@Url.Action("Browse", "Properties", new { q = search.PropertySearch.Query })" type="button" class="btn btn-primary btn-sm">
+                            <span class="glyphicon  glyphicon-backward " aria-hidden="true"></span> املاک
+                        </a>
+                        <a href="@Url.Action("SavedSearchDetails", "Properties", new {id = search.SavedPropertySearch.ID})" type="button" class="btn btn-primary btn-sm">
+                            <span class="glyphicon  glyphicon-backward " aria-hidden="true"></span> ویرایش
+                        </a>
+                        <button type="button" class="btn btn-primary btn-sm" data-ajax-modal="@Url.Action("DeleteSavedSearch", new {id = search.SavedPropertySearch.ID})">
+                            <span class="glyphicon  glyphicon-backward " aria-hidden="true"></span> حذف
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    <p>
+        شما هنوز هیچ جستجوی ذخیره شده ای برای خودتون ایجاد نکرده اید. می تونید راهنمای زیر رو بخونید و اولین جستجو رو برای خودتون بسازید.
+    </p>
+
+    <h3><mark>
+            جستجوی ذخیره شده چیه؟</mark>
+    </h3>
+
+    <p>
+        شما می تونید مشخصات ملک مورد علاقه خودتون رو به صورت «جستجو» به سایت معرفی کنید. اگه این کار رو بکنید غیر از اینکه می تونید
+        دفعات بعد بدون وارد کردن جزئیات جستجو نتیجه اون رو ببینید، می تونید به سایت بگید که با ثبت شدن هر ملکی که مطابق مشخصات مورد نظرتونه
+        <strong>با ایمیل یا پیامک همون لحظه به شما خبر بده</strong>.
+    </p>
+
+    <h3 ><mark>
+             چطوری جستجوی ذخیره شده ایجاد کنم؟
+         </mark>
+    </h3>
+
+    <p>
+        درست کردن یک جستجوی ذخیره شده خیلی ساده است:
+    </p>
+
+    <ul>
+        <li>
+            یک: با استفاده از <strong>فرم جستجو یا صفحه فهرست املاک</strong>، مشخصات و محدودیت های ملک مورد نظرتون رو وارد کنید تا فهرست املاکی که مورد نظرتون هست نمایش داده بشه.
+            <br />
+            (اگه فهرست خالی باشه اشکالی نداره، ممکنه هنوز ملک مورد نظر شما ثبت نشده باشه)
+        </li>
+        <li>
+            دو: <strong>گزینه «ذخیره جستجو»</strong> بالای صفحه رو انتخاب کنید.
+        </li>
+        <li>
+            سه: شرط های انتخاب شده جستجو رو <strong>تایید کنید</strong> و مشخص کنید که سایت چطوری املاک جدیدی که ثبت می شن رو به شما خبر بده.
+        </li>
+    </ul>
+}

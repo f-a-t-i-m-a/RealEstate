@@ -1,0 +1,43 @@
+﻿@using JahanJooy.RealEstate.Web.Areas
+@using JahanJooy.RealEstate.Web.Areas.Ad.Models.SponsoredProperty
+@using JahanJooy.RealEstate.Web.Helpers
+@model SponsoredPropertyEditSponsorshipModel
+
+<div class="page-header">
+	<h1>
+		<a href="@Url.Action("Index", "AdHome", AreaRouteValue.Ad)">سامانه تبلیغات</a>:
+		<a href="@Url.Action("List", "SponsoredProperty", AreaRouteValue.Ad)">املاک ویژه</a>:
+		ویرایش آگهی ملکی ویژه
+	</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+     @Html.Partial("Partials/AddOrEditSponsorship", Model)
+
+    <input id="btnEdit" class="btn btn-success" type="submit" value="ثبت تغییرات"/>
+	@: &nbsp;&nbsp;&nbsp;
+    <a class="btn btn-default" href="@Url.Action("ViewDetailsByCode", "Property", new { code = Model.PropertyListing.Code ,area=AreaRouteValue.Main})">بازگشت</a>
+}
+
+<br/>
+<br/>
+
+@section SideBar
+{
+	<div class="panel panel-info">
+		<div class="panel-heading"><h3 class="panel-title">عکس برای آگهی ویژه</h3></div>
+		<div class="panel-body">
+			<div class="pull-left">@IconsHelper.Photos48(Url)</div>
+			<p class="lead">توجه کنید</p>
+			<p>
+				اگر برای ملک تون عکس اضافه کنید، کنار آگهی ویژه نمایش داده میشه و باعث میشه
+				بیشتر جلب توجه کنه.
+			</p>
+			<p>
+				از داخل صفحه مشخصات ملک می تونید هر چند تا عکس که بخواهید اضافه کنید.
+				این امکان کاملاً رایگانه.
+			</p>
+		</div>
+	</div>
+}
